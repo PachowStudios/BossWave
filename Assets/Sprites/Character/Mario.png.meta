@@ -99,5 +99,32 @@ TextureImporter:
         height: 27
       alignment: 0
       pivot: {x: .5, y: .5}
+    - name: Mario_Turning
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 164
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Mario_Jumping
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 165
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Mario_Falling
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 166
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 

@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
 	public bool running = false;
 
 	public float moveForce = 365f;
+	public float turningSpeed = 1f;
 	public float walkingSpeed = 5f;
 	public float runningSpeed = 10f;
 	public float jumpForce = 1000f;
@@ -30,6 +31,7 @@ public class PlayerControl : MonoBehaviour
 	void Update() 
 	{
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+		anim.SetBool("Grounded", grounded);
 
 		if (Input.GetButtonDown("Jump") && grounded)
 		{
@@ -46,6 +48,11 @@ public class PlayerControl : MonoBehaviour
 			running = false;
 			anim.SetBool("Running", false);
 		}
+		
+		if (Input.GetButtonDown("Jump") && grounded)
+		{
+			jump = true;
+		}
 	}
 
 	void FixedUpdate()
@@ -53,6 +60,8 @@ public class PlayerControl : MonoBehaviour
 		float horizontal = Input.GetAxis("Horizontal");
 
 		anim.SetFloat("Speed", Mathf.Abs(horizontal));
+		anim.SetFloat("Velocity", Mathf.Abs(rigidbody2D.velocity.x));
+		anim.SetFloat("Vert_Velocity", rigidbody2D.velocity.y);
 
 		if (horizontal * rigidbody2D.velocity.x < walkingSpeed || (running && horizontal * rigidbody2D.velocity.x < runningSpeed))
 		{
@@ -72,6 +81,11 @@ public class PlayerControl : MonoBehaviour
 		{
 			Flip();
 		}
+
+		if (jump)
+		{
+			Jump();
+		}
 	}
 
 	void Flip()
@@ -81,5 +95,18 @@ public class PlayerControl : MonoBehaviour
 		Vector3 localScale = transform.localScale;
 		localScale.x *= -1;
 		transform.localScale = localScale;
+
+		if (Mathf.Abs(rigidbody2D.velocity.x) > turningSpeed)
+		{
+			anim.SetTrigger("Turn");
+		}
+	}
+
+	void Jump()
+	{
+		anim.SetTrigger("Jump");
+
+		rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+		jump = false;
 	}
 }
