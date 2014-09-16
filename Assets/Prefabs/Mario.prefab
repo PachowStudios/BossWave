@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.150080785, z: 0}
+  m_LocalPosition: {x: 0, y: -.15654929, z: 0}
   m_LocalScale: {x: .222222224, y: .222222224, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -108,7 +108,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4f96bf25fda4daa4783edb5f0c379be9, type: 2}
   m_IsTrigger: 0
   m_Radius: .0700000003
   m_Center: {x: 0, y: -.0700000003}
@@ -133,9 +133,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3d9837a9160950540a8e65de73c94eaa, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_ApplyRootMotion: 0
-  m_AnimatePhysics: 0
+  m_AnimatePhysics: 1
   m_HasTransformHierarchy: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -151,10 +151,14 @@ MonoBehaviour:
   facingRight: 1
   jump: 0
   running: 0
-  moveForce: 25
+  runningFull: 0
+  horizontal: 0
+  moveForce: 30
   turningSpeed: 1
   walkingSpeed: 5
-  runningSpeed: 10
+  runningSpeed: 8.5
+  runningFullSpeed: 10
+  runningFullTime: 1.25
   jumpForce: 350
 --- !u!212 &21200000
 SpriteRenderer:
