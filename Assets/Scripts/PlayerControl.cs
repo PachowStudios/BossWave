@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
 
 	private CharacterController2D controller;
 	private Animator anim;
+	private BoxCollider2D boxCollider;
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
 
@@ -26,14 +27,26 @@ public class PlayerControl : MonoBehaviour
 	private bool right;
 	private bool jump;
 	private bool run;
+	private bool crouch;
 
 	private bool runFull = false;
 	private float runFullTimer = 0f;
+
+	private float originalColliderHeight;
+	private float originalColliderOffset;
+	private float crouchingColliderHeight;
+	private float crouchingColliderOffset;
 
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
+		boxCollider = GetComponent<BoxCollider2D>();
+
+		originalColliderHeight = boxCollider.size.y;
+		crouchingColliderHeight = originalColliderHeight / 2;
+		originalColliderOffset = boxCollider.center.y;
+		crouchingColliderOffset = originalColliderOffset - (crouchingColliderHeight / 2);
 	}
 
 	void Update()
@@ -42,11 +55,13 @@ public class PlayerControl : MonoBehaviour
 		left = Input.GetButton("Left");
 		run = Input.GetButton("Run");
 		jump = Input.GetButton("Jump");
+		crouch = Input.GetButton("Crouch");
 
 		run = run && (right || left);
 
 		anim.SetBool("Walking", right || left);
 		anim.SetBool("Running", run);
+		anim.SetBool("Crouching", crouch);
 		
 		if (jump)
 		{
@@ -66,27 +81,42 @@ public class PlayerControl : MonoBehaviour
 			velocity.y = 0;
 		}
 
-		if (right)
+		if (crouch)
 		{
-			normalizedHorizontalSpeed = 1;
-
-			if (transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1;
-
-			if (transform.localScale.x > 0f)
-			{
-				Flip();
-			}
+			normalizedHorizontalSpeed = 0;
+			boxCollider.size = new Vector2(boxCollider.size.x, crouchingColliderHeight);
+			boxCollider.center = new Vector2(boxCollider.center.x, crouchingColliderOffset);
 		}
 		else
 		{
-			normalizedHorizontalSpeed = 0;
+			boxCollider.size = new Vector2(boxCollider.size.x, originalColliderHeight);
+			boxCollider.center = new Vector2(boxCollider.center.x, originalColliderOffset);
+		}
+
+		if (!crouch || (crouch && !controller.isGrounded))
+		{
+			if (right)
+			{
+				normalizedHorizontalSpeed = 1;
+
+				if (transform.localScale.x < 0f)
+				{
+					Flip();
+				}
+			}
+			else if (left)
+			{
+				normalizedHorizontalSpeed = -1;
+
+				if (transform.localScale.x > 0f)
+				{
+					Flip();
+				}
+			}
+			else
+			{
+				normalizedHorizontalSpeed = 0;
+			}
 		}
 
 		if (jump && controller.isGrounded)

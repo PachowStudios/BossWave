@@ -20,7 +20,7 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
@@ -124,6 +124,15 @@ TextureImporter:
         y: 166
         width: 16
         height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+    - name: Mario_Crouching
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 164
+        width: 16
+        height: 28
       alignment: 0
       pivot: {x: .5, y: .5}
   spritePackingTag: 
