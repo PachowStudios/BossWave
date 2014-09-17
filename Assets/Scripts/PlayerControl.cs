@@ -1,129 +1,103 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControl : MonoBehaviour 
+
+public class PlayerControl : MonoBehaviour
 {
-	[HideInInspector]
-	public bool facingRight = true;
-	[HideInInspector]
-	public bool jump = false;
-	[HideInInspector]
-	public bool running = false;
-	[HideInInspector]
-	public bool runningFull = false;
-	[HideInInspector]
-	public float horizontal = 0f;
+	public float gravity = -25f;
+	public float walkSpeed = 5f;
+	public float runSpeed = 8.5f;
+	public float runFullSpeed = 10f;
+	public float groundDamping = 20f;
+	public float inAirDamping = 5f;
+	public float jumpHeight = 5f;
 
-	public float moveForce = 30f;
-	public float turningSpeed = 1f;
-	public float walkingSpeed = 5f;
-	public float runningSpeed = 8.5f;
-	public float runningFullSpeed = 10f;
-	public float runningFullTime = 1.25f;
-	public float jumpForce = 350f;
+	[HideInInspector]
+	private float normalizedHorizontalSpeed = 0;
 
-	private float runningFullTimer = 0f;
-
-	private Transform groundCheck;
-	private bool grounded;
-
+	private CharacterController2D controller;
 	private Animator anim;
+	private RaycastHit2D lastControllerColliderHit;
+	private Vector3 velocity;
+
+	private bool left;
+	private bool right;
+	private bool jump;
+	private bool run;
 
 	void Awake()
 	{
-		groundCheck = transform.Find("groundCheck");
 		anim = GetComponent<Animator>();
+		controller = GetComponent<CharacterController2D>();
 	}
-	
-	// Update is called once per frame
-	void Update() 
+
+	void Update()
 	{
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-		anim.SetBool("Grounded", grounded);
-
-		horizontal = Input.GetAxisRaw("Horizontal");
-
-		if (Input.GetButtonDown("Jump") && grounded)
-		{
-			jump = true;
-		}
-
-		if (Input.GetButton("Run") && Mathf.Abs(horizontal) >= 0.1f)
-		{
-			running = true;
-			anim.SetBool("Running", true);
-		}
-		else
-		{
-			running = false;
-			anim.SetBool("Running", false);
-		}
+		right = Input.GetButton("Right");
+		left = Input.GetButton("Left");
+		jump = Input.GetButton("Jump");
+		run = Input.GetButton("Run");
 	}
 
 	void FixedUpdate()
 	{
-		anim.SetFloat("Speed", Mathf.Abs(horizontal));
-		anim.SetFloat("Velocity", Mathf.Abs(rigidbody2D.velocity.x));
-		anim.SetFloat("Vert_Velocity", rigidbody2D.velocity.y);
+		velocity = controller.velocity;
 
-		if ((horizontal * rigidbody2D.velocity.x < walkingSpeed) || 
-			(running && horizontal * rigidbody2D.velocity.x < runningSpeed) || 
-			(runningFull && horizontal * rigidbody2D.velocity.x < runningFullSpeed))
+		if (controller.isGrounded)
 		{
-			rigidbody2D.AddForce(Vector2.right * horizontal * moveForce);
+			velocity.y = 0;
 		}
 
-		if (horizontal > 0 && !facingRight)
+		if (right)
 		{
-			Flip();
-		}
-		else if (horizontal < 0 && facingRight)
-		{
-			Flip();
-		}
+			normalizedHorizontalSpeed = 1;
 
-		if (jump)
-		{
-			Jump();
-		}
-
-		if (running)
-		{
-			runningFullTimer += Time.deltaTime;
-
-			if (runningFullTimer >= runningFullTime)
+			if (transform.localScale.x < 0f)
 			{
-				runningFull = true;
-				anim.SetBool("Running_Full", runningFull);
+				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			}
+
+			if (controller.isGrounded)
+			{
+				anim.Play("Walking");
 			}
 		}
-		else if (runningFullTimer >= 0f)
+		else if (left)
 		{
-			runningFullTimer = 0f;
-			runningFull = false;
-			anim.SetBool("Running_Full", runningFull);
+			normalizedHorizontalSpeed = -1;
+
+			if (transform.localScale.x > 0f)
+			{
+				transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			}
+
+			if (controller.isGrounded)
+			{
+				anim.Play("Walking");
+			}
 		}
-	}
-
-	void Flip()
-	{
-		facingRight = !facingRight;
-
-		Vector3 localScale = transform.localScale;
-		localScale.x *= -1;
-		transform.localScale = localScale;
-
-		if (Mathf.Abs(rigidbody2D.velocity.x) > turningSpeed)
+		else
 		{
-			anim.SetTrigger("Turn");
+			normalizedHorizontalSpeed = 0;
+
+			if (controller.isGrounded)
+			{
+				anim.Play("Idle");
+			}
 		}
-	}
 
-	void Jump()
-	{
-		anim.SetTrigger("Jump");
+		if (jump && controller.isGrounded)
+		{
+			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+			anim.Play("Jumping");
+		}
 
-		rigidbody2D.AddForce(new Vector2(0f, jumpForce));
-		jump = false;
+		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
+
+		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? runSpeed : walkSpeed), Time.fixedDeltaTime * smoothedMovementFactor);
+
+		velocity.y += gravity * Time.fixedDeltaTime;
+
+		controller.move(velocity * Time.fixedDeltaTime);
 	}
 }
