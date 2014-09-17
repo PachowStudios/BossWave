@@ -92,7 +92,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3d9837a9160950540a8e65de73c94eaa, type: 2}
   m_CullingMode: 0
@@ -155,10 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -25
+  turningSpeed: 1
   walkSpeed: 5
   runSpeed: 8.5
   runFullSpeed: 10
-  groundDamping: 7.5
+  runFullTime: 1
+  groundDamping: 5
   inAirDamping: 5
   jumpHeight: 2.5
 --- !u!212 &21200000
