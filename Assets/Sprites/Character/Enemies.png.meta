@@ -3,6 +3,8 @@ guid: fd7d77880a7e2d24eb20dde7410fb3b7
 TextureImporter:
   fileIDToRecycleName:
     21300000: Enemies
+    21300002: GKoopa_Walking_0
+    21300004: GKoopa_Walking_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,6 +49,26 @@ TextureImporter:
     textureFormat: -2
     compressionQuality: 50
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: GKoopa_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 897
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GKoopa_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 897
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

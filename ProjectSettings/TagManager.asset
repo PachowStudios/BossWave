@@ -3,19 +3,21 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Enemy
+  - Obstacle
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast
   Builtin Layer 3: 
   Builtin Layer 4: Water
-  Builtin Layer 5: 
+  Builtin Layer 5: UI
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Player
-  User Layer 9: Ground
+  User Layer 9: Collider
   User Layer 10: Scenery
-  User Layer 11: 
+  User Layer 11: Enemies
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 
