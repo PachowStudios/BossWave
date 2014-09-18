@@ -54,7 +54,7 @@ public class PlayerControl : MonoBehaviour
 		right = Input.GetButton("Right");
 		left = Input.GetButton("Left");
 		run = Input.GetButton("Run");
-		jump = Input.GetButton("Jump");
+		jump = jump || Input.GetButtonDown("Jump");
 		crouch = Input.GetButton("Crouch");
 
 		run = run && (right || left);
@@ -62,11 +62,6 @@ public class PlayerControl : MonoBehaviour
 		anim.SetBool("Walking", right || left);
 		anim.SetBool("Running", run);
 		anim.SetBool("Crouching", crouch);
-		
-		if (jump)
-		{
-			anim.SetTrigger("Jump");
-		}
 	}
 
 	void FixedUpdate()
@@ -122,6 +117,7 @@ public class PlayerControl : MonoBehaviour
 		if (jump && controller.isGrounded)
 		{
 			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+			anim.SetTrigger("Jump");
 		}
 
 		if (run)
@@ -147,6 +143,8 @@ public class PlayerControl : MonoBehaviour
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 		controller.move(velocity * Time.fixedDeltaTime);
+
+		jump = false;
 	}
 
 	void Flip()
