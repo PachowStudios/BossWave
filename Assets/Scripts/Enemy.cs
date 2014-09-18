@@ -1,146 +1,95 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour 
+public abstract class Enemy : MonoBehaviour 
 {
-	public enum direction
-	{
-		left,
-		right,
-		random
-	};
-
-	public enum aiType
-	{
-		walking,
-		jumping
-	};
-
 	public float gravity = -35f;
-	public float walkSpeed = 5f;
-	public float runSpeed = 8.5f;
+	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
-	public float jumpHeight = 4f;
 	public float health = 10f;
-	public float jumpTime = 2f;
-	public aiType AI = aiType.walking;
 
-	private bool right = false;
-	private bool left = false;
-	private bool run = false;
-	private bool jump = false;
-
-	private float jumpTimer = 0f;
+	protected bool right = false;
+	protected bool left = false;
 
 	[HideInInspector]
-	private float normalizedHorizontalSpeed = 0;
-	[HideInInspector]
-	public direction startingDirection = direction.right;
+	protected float normalizedHorizontalSpeed = 0;
 
-	private CharacterController2D controller;
-	private Animator anim;
-	private RaycastHit2D lastControllerColliderHit;
-	private Vector3 velocity;
-	private Transform frontCheck;
+	protected CharacterController2D controller;
+	protected Animator anim;
+	protected RaycastHit2D lastControllerColliderHit;
+	protected Vector3 velocity;
+	protected Transform frontCheck;
 
-	void Awake()
+	protected virtual void Awake()
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.Find("frontCheck").transform;
-
-		switch(startingDirection)
-		{
-			case direction.left:
-				left = true;
-				break;
-			case direction.right:
-				right = true;
-				break;
-			case direction.random:
-				left = Random.value >= 0.5;
-				right = !left;
-				break;
-		}
 	}
 
-	void FixedUpdate()
+	protected void InitialUpdate()
 	{
 		velocity = controller.velocity;
-
-		anim.SetBool("Grounded", controller.isGrounded);
 
 		if (controller.isGrounded)
 		{
 			velocity.y = 0;
 		}
+	}
 
-		if (AI == aiType.walking || AI == aiType.jumping)
+	protected void GetMovement()
+	{
+		if (right)
 		{
-			Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
+			normalizedHorizontalSpeed = 1;
 
-			foreach (Collider2D hit in frontHits)
+			if (transform.localScale.x < 0f)
 			{
-				if (hit.tag == "Obstacle" || hit.tag == "MainCamera")
-				{
-					Flip();
-					break;
-				}
-			}
-
-			if (right)
-			{
-				normalizedHorizontalSpeed = 1;
-
-				if (transform.localScale.x < 0f)
-				{
-					Flip();
-				}
-			}
-			else if (left)
-			{
-				normalizedHorizontalSpeed = -1;
-
-				if (transform.localScale.x > 0f)
-				{
-					Flip();
-				}
-			}
-			else
-			{
-				normalizedHorizontalSpeed = 0;
+				Flip();
 			}
 		}
-
-		if (AI == aiType.jumping)
+		else if (left)
 		{
-			jumpTimer += Time.deltaTime;
+			normalizedHorizontalSpeed = -1;
 
-			if (jumpTimer >= jumpTime)
+			if (transform.localScale.x > 0f)
 			{
-				jump = true;
+				Flip();
 			}
 		}
-
-		if (jump && controller.isGrounded)
+		else
 		{
-			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
-			jumpTimer = 0f;
-			jump = false;
-			anim.SetTrigger("Jump");
+			normalizedHorizontalSpeed = 0;
 		}
+	}
 
+	protected void ApplyMovement()
+	{
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? runSpeed : walkSpeed), Time.fixedDeltaTime * smoothedMovementFactor);
+		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * moveSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 
 		controller.move(velocity * Time.fixedDeltaTime);
 	}
 
-	void Flip()
+	protected void CheckFrontCollision()
+	{
+		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
+
+		foreach (Collider2D hit in frontHits)
+		{
+			if (hit.tag == "Obstacle" || hit.tag == "MainCamera")
+			{
+				Flip();
+				break;
+			}
+		}
+	}
+
+	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 		normalizedHorizontalSpeed *= -1;

@@ -7,6 +7,10 @@ TextureImporter:
     21300004: GKoopa_Walking_1
     21300006: FGKoopa_Walking_1
     21300008: FGKoopa_Walking_0
+    21300010: KoopaBot_Walking_0
+    21300012: KoopaBot_Walking_1
+    21300014: KoopaBot_Walking_2
+    21300016: KoopaBot_Walking_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -89,6 +93,46 @@ TextureImporter:
         y: 896
         width: 17
         height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: KoopaBot_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 248
+        width: 28
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: KoopaBot_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 248
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: KoopaBot_Walking_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 248
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: KoopaBot_Walking_3
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 248
+        width: 29
+        height: 23
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
