@@ -43,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.01710653, z: 0}
+  m_LocalPosition: {x: 0, y: -2.84030008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -85,7 +85,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .680000007, y: 1.26999998}
+  m_Size: {x: 1.5, y: 2.79999995}
   m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
@@ -157,15 +157,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -25
+  gravity: -35
   turningSpeed: 1
-  walkSpeed: 5
-  runSpeed: 8.5
-  runFullSpeed: 10
+  walkSpeed: 10
+  runSpeed: 15
+  runFullSpeed: 17.5
   runFullTime: 1
   groundDamping: 6
   inAirDamping: 5
-  jumpHeight: 2.5
+  jumpHeight: 5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

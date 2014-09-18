@@ -4,11 +4,11 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-	public float gravity = -25f;
+	public float gravity = -35f;
 	public float turningSpeed = 1f;
-	public float walkSpeed = 5f;
-	public float runSpeed = 8.5f;
-	public float runFullSpeed = 10f;
+	public float walkSpeed = 10f;
+	public float runSpeed = 17.5f;
+	public float runFullSpeed = 20f;
 	public float runFullTime = 1.5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;

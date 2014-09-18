@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 		random
 	};
 
-	public float gravity = -25f;
+	public float gravity = -35f;
 	public float walkSpeed = 5f;
 	public float runSpeed = 8.5f;
 	public bool canRun = false;
