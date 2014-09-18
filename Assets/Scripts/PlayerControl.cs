@@ -23,8 +23,8 @@ public class PlayerControl : MonoBehaviour
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
 
-	private bool left;
 	private bool right;
+	private bool left;
 	private bool jump;
 	private bool run;
 	private bool crouch;

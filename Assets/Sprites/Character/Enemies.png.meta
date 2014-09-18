@@ -5,6 +5,8 @@ TextureImporter:
     21300000: Enemies
     21300002: GKoopa_Walking_0
     21300004: GKoopa_Walking_1
+    21300006: FGKoopa_Walking_1
+    21300008: FGKoopa_Walking_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -67,6 +69,26 @@ TextureImporter:
         y: 897
         width: 16
         height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FGKoopa_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 896
+        width: 22
+        height: 28
+      alignment: 9
+      pivot: {x: .593299985, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: FGKoopa_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 896
+        width: 17
+        height: 27
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

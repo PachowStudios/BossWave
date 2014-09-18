@@ -10,18 +10,28 @@ public class Enemy : MonoBehaviour
 		random
 	};
 
+	public enum aiType
+	{
+		walking,
+		jumping
+	};
+
 	public float gravity = -35f;
 	public float walkSpeed = 5f;
 	public float runSpeed = 8.5f;
-	public bool canRun = false;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 4f;
-	public bool canJump = false;
 	public float health = 10f;
+	public float jumpTime = 2f;
+	public aiType AI = aiType.walking;
 
-	private bool run;
-	private bool jump;
+	private bool right = false;
+	private bool left = false;
+	private bool run = false;
+	private bool jump = false;
+
+	private float jumpTimer = 0f;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -43,13 +53,14 @@ public class Enemy : MonoBehaviour
 		switch(startingDirection)
 		{
 			case direction.left:
-				normalizedHorizontalSpeed = -1;
+				left = true;
 				break;
 			case direction.right:
-				normalizedHorizontalSpeed = 1;
+				right = true;
 				break;
 			case direction.random:
-				normalizedHorizontalSpeed = Random.value >= 0.5 ? -1 : 1;
+				left = Random.value >= 0.5;
+				right = !left;
 				break;
 		}
 	}
@@ -58,26 +69,73 @@ public class Enemy : MonoBehaviour
 	{
 		velocity = controller.velocity;
 
+		anim.SetBool("Grounded", controller.isGrounded);
+
 		if (controller.isGrounded)
 		{
 			velocity.y = 0;
 		}
 
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
-
-		foreach(Collider2D hit in frontHits)
+		if (AI == aiType.walking || AI == aiType.jumping)
 		{
-			if (hit.tag == "Obstacle" || hit.tag == "MainCamera")
+			Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
+
+			foreach (Collider2D hit in frontHits)
 			{
-				Flip();
-				break;
+				if (hit.tag == "Obstacle" || hit.tag == "MainCamera")
+				{
+					Flip();
+					break;
+				}
 			}
+
+			if (right)
+			{
+				normalizedHorizontalSpeed = 1;
+
+				if (transform.localScale.x < 0f)
+				{
+					Flip();
+				}
+			}
+			else if (left)
+			{
+				normalizedHorizontalSpeed = -1;
+
+				if (transform.localScale.x > 0f)
+				{
+					Flip();
+				}
+			}
+			else
+			{
+				normalizedHorizontalSpeed = 0;
+			}
+		}
+
+		if (AI == aiType.jumping)
+		{
+			jumpTimer += Time.deltaTime;
+
+			if (jumpTimer >= jumpTime)
+			{
+				jump = true;
+			}
+		}
+
+		if (jump && controller.isGrounded)
+		{
+			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+			jumpTimer = 0f;
+			jump = false;
+			anim.SetTrigger("Jump");
 		}
 
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? runSpeed : walkSpeed), Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
+
 
 		controller.move(velocity * Time.fixedDeltaTime);
 	}
@@ -86,5 +144,7 @@ public class Enemy : MonoBehaviour
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 		normalizedHorizontalSpeed *= -1;
+		right = !right;
+		left = !right;
 	}
 }
