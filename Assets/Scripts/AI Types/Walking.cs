@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Walking : Enemy
 {
-	void Awake()
+	new void Awake()
 	{
 		base.Awake();
 

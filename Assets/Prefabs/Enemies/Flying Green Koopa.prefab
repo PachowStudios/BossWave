@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.11938429, y: -2.77948213, z: 0}
+  m_LocalPosition: {x: 8.19159985, y: -4.42509985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .892560005, y: 0, z: 0}
+  m_LocalPosition: {x: .892560005, y: 1.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -113,8 +113,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 1.60000002, y: 2.70000005}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 1.70000005, y: 2.79999995}
+  m_Center: {x: 0, y: 1.39999998}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -182,19 +182,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76829f0dd90425443be300b1aabd74f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db3c7a5accf67a4aa7fa05691168f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -35
-  walkSpeed: 5
-  runSpeed: 8.5
+  moveSpeed: 5
   groundDamping: 10
   inAirDamping: 5
-  jumpHeight: 4
   health: 10
-  jumpTime: 2
-  AI: 1
-  startingDirection: 1
+  jumpHeight: 4
+  jumpTime: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

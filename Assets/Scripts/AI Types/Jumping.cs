@@ -4,12 +4,12 @@ using System.Collections;
 public class Jumping : Enemy 
 {
 	public float jumpHeight = 4f;
-	public float jumpTime = 2f;
+	public float jumpTime = 1f;
 
 	private bool jump = false;
 	private float jumpTimer = 0f;
 
-	void Awake()
+	new void Awake()
 	{
 		base.Awake();
 
@@ -22,7 +22,10 @@ public class Jumping : Enemy
 
 		CheckFrontCollision();
 
-		jumpTimer += Time.deltaTime;
+		if (controller.isGrounded)
+		{
+			jumpTimer += Time.deltaTime;
+		}
 
 		if (jumpTimer >= jumpTime)
 		{
