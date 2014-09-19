@@ -23,6 +23,8 @@ public class Sentry : Enemy
 	private bool fireUp = false;
 
 	private Transform player;
+	private Collider2D sideFireCollider;
+	private Collider2D upFireCollider;
 
 	new void Awake()
 	{
@@ -33,6 +35,8 @@ public class Sentry : Enemy
 		currentFireTime = Random.Range(minFireTime, maxFireTime);
 
 		player = GameObject.Find("Player").transform;
+		sideFireCollider = transform.FindChild("sideFire").collider2D;
+		upFireCollider = transform.FindChild("upFire").collider2D;
 	}
 
 	void FixedUpdate()
@@ -77,12 +81,24 @@ public class Sentry : Enemy
 		{
 			fireTimer += Time.deltaTime;
 
+			if (anim.GetCurrentAnimatorStateInfo(0).IsName("Fire_Side"))
+			{
+				sideFireCollider.enabled = true;
+			}
+			else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Fire_Up"))
+			{
+				upFireCollider.enabled = true;
+			}
+
 			if (fireTimer >= currentFireTime)
 			{
 				fire = false;
 
 				fireTimer = 0f;
 				currentFireTime = Random.Range(minFireTime, maxFireTime);
+
+				sideFireCollider.enabled = false;
+				upFireCollider.enabled = false;
 			}
 		}
 		else
