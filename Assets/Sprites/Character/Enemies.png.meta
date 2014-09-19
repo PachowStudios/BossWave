@@ -13,6 +13,10 @@ TextureImporter:
     21300016: KoopaBot_Walking_3
     21300018: RKoopa_Walking_0
     21300020: RKoopa_Walking_1
+    21300022: Wiggler_Walking_0
+    21300024: Wiggler_Walking_2
+    21300026: Wiggler_Walking_1
+    21300028: Wiggler_Walking_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -155,6 +159,46 @@ TextureImporter:
         y: 861
         width: 16
         height: 26
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wiggler_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 366
+        width: 48
+        height: 26
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wiggler_Walking_2
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 367
+        width: 48
+        height: 24
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wiggler_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 341
+        width: 48
+        height: 25
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Wiggler_Walking_3
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 341
+        width: 48
+        height: 25
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

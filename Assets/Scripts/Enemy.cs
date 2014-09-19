@@ -81,7 +81,7 @@ public abstract class Enemy : MonoBehaviour
 
 		foreach (Collider2D hit in frontHits)
 		{
-			if (hit.tag == "Obstacle" || hit.tag == "MainCamera")
+			if (hit.tag == "Enemy" || hit.tag == "Obstacle" || hit.tag == "MainCamera")
 			{
 				Flip();
 				break;
