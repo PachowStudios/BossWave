@@ -84,6 +84,9 @@ public abstract class Enemy : MonoBehaviour
 			if (hit.tag == "Enemy" || hit.tag == "Obstacle" || hit.tag == "MainCamera")
 			{
 				Flip();
+
+				right = !right;
+				left = !right;
 				break;
 			}
 		}
@@ -92,8 +95,5 @@ public abstract class Enemy : MonoBehaviour
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-		normalizedHorizontalSpeed *= -1;
-		right = !right;
-		left = !right;
 	}
 }
