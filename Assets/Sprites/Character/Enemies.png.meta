@@ -37,6 +37,11 @@ TextureImporter:
     21300064: DinoTorch_FireSide_5
     21300066: DinoTorch_FireSide_7
     21300068: DinoTorch_FireSide_8
+    21300070: DryBones_Walking_0
+    21300072: DryBones_Walking_1
+    21300074: DryBones_Throwing_0
+    21300076: DryBones_Throwing_1
+    21300078: DryBones_Projectile
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -421,6 +426,56 @@ TextureImporter:
         height: 16
       alignment: 9
       pivot: {x: .145454541, y: .0625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DryBones_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 555
+        width: 24
+        height: 32
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DryBones_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 555
+        width: 24
+        height: 31
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DryBones_Throwing_0
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 555
+        width: 24
+        height: 32
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DryBones_Throwing_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 555
+        width: 20
+        height: 31
+      alignment: 9
+      pivot: {x: .400000006, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: DryBones_Projectile
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 575
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

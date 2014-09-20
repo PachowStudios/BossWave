@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Enemy : MonoBehaviour 
+public class Projectile : MonoBehaviour 
 {
-	public float gravity = -35f;
-	public float moveSpeed = 5f;
-	public float groundDamping = 10f;
-	public float inAirDamping = 5f;
-	public float health = 10f;
+	public float gravity = 0f;
+	public float shotSpeed = 15f;
+	public float lifetime = 3f;
 
-	protected bool right = false;
-	protected bool left = false;
+	[HideInInspector]
+	public bool right = false;
+	[HideInInspector]
+	public bool left = false;
 
 	[HideInInspector]
 	protected float normalizedHorizontalSpeed = 0;
@@ -18,23 +18,19 @@ public abstract class Enemy : MonoBehaviour
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Vector3 velocity;
-	protected Transform frontCheck;
+	
 
 	protected virtual void Awake()
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		frontCheck = transform.Find("frontCheck");
+
+		Destroy(gameObject, lifetime);
 	}
 
 	protected void InitialUpdate()
 	{
 		velocity = controller.velocity;
-
-		if (controller.isGrounded)
-		{
-			velocity.y = 0;
-		}
 	}
 
 	protected void GetMovement()
@@ -43,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 1;
 
-			if (transform.localScale.x < 0f)
+			if (transform.localScale.x < 0)
 			{
 				Flip();
 			}
@@ -65,29 +61,10 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void ApplyMovement()
 	{
-		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
-
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * moveSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
+		velocity.x = normalizedHorizontalSpeed * shotSpeed;
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 		controller.move(velocity * Time.fixedDeltaTime);
-	}
-
-	protected void CheckFrontCollision()
-	{
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
-
-		foreach (Collider2D hit in frontHits)
-		{
-			if (hit.tag == "Enemy" || hit.tag == "Obstacle" || hit.tag == "MainCamera")
-			{
-				Flip();
-
-				right = !right;
-				left = !right;
-				break;
-			}
-		}
 	}
 
 	protected void Flip()
