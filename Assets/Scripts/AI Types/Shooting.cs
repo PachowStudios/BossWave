@@ -25,8 +25,6 @@ public class Shooting : Enemy
 	{
 		InitialUpdate();
 
-		CheckFrontCollision();
-
 		anim.SetBool("Walking", right || left);
 
 		if (player.position.x > transform.position.x + followBuffer)
