@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
-	public float health = 100f;
+	public float maxHealth = 100f;
 	public float invincibilityPeriod = 2f;
 	public float gravity = -35f;
 	public float turningSpeed = 1f;
@@ -25,6 +25,8 @@ public class PlayerControl : MonoBehaviour
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
 	private ExplodeEffect explodeEffect;
+
+	private float health;
 
 	private bool right;
 	private bool left;
@@ -59,6 +61,8 @@ public class PlayerControl : MonoBehaviour
 		crouchingColliderHeight = originalColliderHeight / 2;
 		originalColliderOffset = boxCollider.center.y;
 		crouchingColliderOffset = originalColliderOffset - (crouchingColliderHeight / 2);
+
+		health = maxHealth;
 
 		lastHitTime = Time.time - invincibilityPeriod;
 	}
