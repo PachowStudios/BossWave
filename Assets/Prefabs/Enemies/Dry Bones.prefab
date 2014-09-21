@@ -219,7 +219,7 @@ MonoBehaviour:
   inAirDamping: 5
   health: 10
   projectile: {fileID: 11400002, guid: a64d4bfb187bcd34e96f61ee0b54658c, type: 2}
-  followBuffer: 1.5
+  followBuffer: 4
   detectionRange: 20
   cooldownTime: 2
 --- !u!212 &21200000

@@ -3,6 +3,8 @@ using System.Collections;
 
 public abstract class Enemy : MonoBehaviour 
 {
+	public float damage = 5f;
+	public float knockback = 3f;
 	public float gravity = -35f;
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;

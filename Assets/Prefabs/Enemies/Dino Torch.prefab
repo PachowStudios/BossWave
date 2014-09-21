@@ -60,9 +60,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 61: {fileID: 6100004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: upFire
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,9 +77,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400008}
   - 61: {fileID: 6100002}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: sideFire
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.34663606, y: -4.14729786, z: 0}
+  m_LocalPosition: {x: 7.83960009, y: -3.64630008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -181,7 +183,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100008}
   m_Enabled: 0
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 3.9000001, y: 1.60000002}
   m_Center: {x: 2.75, y: .699999988}
 --- !u!61 &6100004
@@ -192,7 +194,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100006}
   m_Enabled: 0
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 1.60000002, y: 4}
   m_Center: {x: .100000001, y: 3.5}
 --- !u!95 &9500000
@@ -265,6 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4437b7bece33a94cb746f29927e52ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  knockback: 5
   gravity: -35
   moveSpeed: 5
   groundDamping: 10
@@ -278,6 +282,44 @@ MonoBehaviour:
   minFireTime: 1
   maxFireTime: 3
   cooldownTime: 3
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549c55e699a3fd54f93377dd1a6d7ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 7.5
+  knockback: 3.5
+  gravity: 0
+  shotSpeed: 0
+  lifetime: 0
+  autoDestroy: 0
+  right: 0
+  left: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549c55e699a3fd54f93377dd1a6d7ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 7.5
+  knockback: 3.5
+  gravity: 0
+  shotSpeed: 0
+  lifetime: 0
+  autoDestroy: 0
+  right: 0
+  left: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

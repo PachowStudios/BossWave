@@ -4,6 +4,8 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+	public float health = 100f;
+	public float invincibilityPeriod = 2f;
 	public float gravity = -35f;
 	public float turningSpeed = 1f;
 	public float walkSpeed = 10f;
@@ -37,6 +39,8 @@ public class PlayerControl : MonoBehaviour
 	private float crouchingColliderHeight;
 	private float crouchingColliderOffset;
 
+	private float lastHitTime;
+
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -47,6 +51,8 @@ public class PlayerControl : MonoBehaviour
 		crouchingColliderHeight = originalColliderHeight / 2;
 		originalColliderOffset = boxCollider.center.y;
 		crouchingColliderOffset = originalColliderOffset - (crouchingColliderHeight / 2);
+
+		lastHitTime = Time.time - invincibilityPeriod;
 	}
 
 	void Update()
@@ -147,6 +153,26 @@ public class PlayerControl : MonoBehaviour
 		jump = false;
 	}
 
+	void OnTriggerEnter2D(Collider2D enemy)
+	{
+		if (enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "Projectile")
+		{
+			if (Time.time > lastHitTime + invincibilityPeriod)
+			{
+				if (health > 0f)
+				{
+					TakeDamage(enemy.gameObject);
+					lastHitTime = Time.time;
+				}
+			}
+		}
+	}
+
+	void OnTriggerStay2D(Collider2D enemy)
+	{
+		OnTriggerEnter2D(enemy);
+	}
+
 	void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -162,5 +188,34 @@ public class PlayerControl : MonoBehaviour
 		{
 			anim.SetTrigger("Turn");
 		}
+	}
+
+	void TakeDamage(GameObject enemy)
+	{
+		float damage = 0f;
+		float knockback = 0f;
+
+		if (enemy.tag == "Enemy")
+		{
+			damage = enemy.GetComponent<Enemy>().damage;
+			knockback = enemy.GetComponent<Enemy>().knockback;
+		}
+		else if (enemy.tag == "Projectile")
+		{
+			damage = enemy.GetComponent<Projectile>().damage;
+			knockback = enemy.GetComponent<Projectile>().knockback;
+		}
+
+		health -= damage;
+
+		velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
+		velocity.y = Mathf.Sqrt(knockback * -gravity);
+
+		if (transform.position.x - enemy.transform.position.x < 0)
+		{
+			velocity.x *= -1;
+		}
+
+		controller.move(velocity * Time.deltaTime);
 	}
 }

@@ -3,9 +3,12 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
+	public float damage = 5f;
+	public float knockback = 2f;
 	public float gravity = 0f;
 	public float shotSpeed = 15f;
 	public float lifetime = 3f;
+	public bool autoDestroy = true;
 
 	[HideInInspector]
 	public bool right = false;
@@ -25,7 +28,10 @@ public class Projectile : MonoBehaviour
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 
-		Destroy(gameObject, lifetime);
+		if (autoDestroy)
+		{
+			Destroy(gameObject, lifetime);
+		}
 	}
 
 	protected void InitialUpdate()
