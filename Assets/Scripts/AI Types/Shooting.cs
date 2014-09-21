@@ -32,10 +32,20 @@ public class Shooting : Enemy
 			right = true;
 			left = !right;
 		}
+		else if (player.position.x > transform.position.x &&
+				 transform.localScale.x < 0f)
+		{
+			Flip();
+		}
 		else if (player.position.x < transform.position.x - followBuffer)
 		{
 			left = true;
 			right = !left;
+		}
+		else if (player.position.x < transform.position.x &&
+				 transform.localScale.x > 0f)
+		{
+			Flip();
 		}
 		else
 		{

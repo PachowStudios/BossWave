@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
 	private BoxCollider2D boxCollider;
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
+	private ExplodeEffect explodeEffect;
 
 	private bool right;
 	private bool left;
@@ -52,6 +53,7 @@ public class PlayerControl : MonoBehaviour
 		controller = GetComponent<CharacterController2D>();
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		explodeEffect = GetComponent<ExplodeEffect>();
 
 		originalColliderHeight = boxCollider.size.y;
 		crouchingColliderHeight = originalColliderHeight / 2;
@@ -83,25 +85,28 @@ public class PlayerControl : MonoBehaviour
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
 
-		canTakeDamage = Time.time > lastHitTime + invincibilityPeriod;
-
-		if (!canTakeDamage)
+		if (health > 0f)
 		{
-			flashTimer += Time.deltaTime;
+			canTakeDamage = Time.time > lastHitTime + invincibilityPeriod;
 
-			smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
-
-			if (flashTimer > smoothFlashTime)
+			if (!canTakeDamage)
 			{
-				spriteRenderer.enabled = !spriteRenderer.enabled;
-				
-				flashTimer = 0f;
-			}	
-		}
-		else
-		{
-			spriteRenderer.enabled = true;
-			smoothFlashTime = flashTime;
+				flashTimer += Time.deltaTime;
+
+				smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
+
+				if (flashTimer > smoothFlashTime)
+				{
+					spriteRenderer.enabled = !spriteRenderer.enabled;
+
+					flashTimer = 0f;
+				}
+			}
+			else
+			{
+				spriteRenderer.enabled = true;
+				smoothFlashTime = flashTime;
+			}
 		}
 
 		if (controller.isGrounded)
@@ -189,7 +194,6 @@ public class PlayerControl : MonoBehaviour
 				if (health > 0f)
 				{
 					TakeDamage(enemy.gameObject);
-					lastHitTime = Time.time;
 				}
 			}
 		}
@@ -235,14 +239,24 @@ public class PlayerControl : MonoBehaviour
 
 		health -= damage;
 
-		velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
-		velocity.y = Mathf.Sqrt(knockback * -gravity);
-
-		if (transform.position.x - enemy.transform.position.x < 0)
+		if (health <= 0f)
 		{
-			velocity.x *= -1;
+			spriteRenderer.enabled = false;
+			explodeEffect.Explode(velocity);
+			collider2D.enabled = false;
 		}
+		else
+		{
+			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
+			velocity.y = Mathf.Sqrt(knockback * -gravity);
 
-		controller.move(velocity * Time.deltaTime);
+			if (transform.position.x - enemy.transform.position.x < 0)
+			{
+				velocity.x *= -1;
+			}
+
+			controller.move(velocity * Time.deltaTime);
+			lastHitTime = Time.time;
+		}
 	}
 }
