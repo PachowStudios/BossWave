@@ -40,12 +40,18 @@ public class PlayerControl : MonoBehaviour
 	private float crouchingColliderOffset;
 
 	private float lastHitTime;
+	private bool canTakeDamage = true;
+	private float flashTimer = 0f;
+	private float flashTime = 0.25f;
+	private float smoothFlashTime;
+	private SpriteRenderer spriteRenderer;
 
 	void Awake()
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		boxCollider = GetComponent<BoxCollider2D>();
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
 		originalColliderHeight = boxCollider.size.y;
 		crouchingColliderHeight = originalColliderHeight / 2;
@@ -76,6 +82,27 @@ public class PlayerControl : MonoBehaviour
 
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
+
+		canTakeDamage = Time.time > lastHitTime + invincibilityPeriod;
+
+		if (!canTakeDamage)
+		{
+			flashTimer += Time.deltaTime;
+
+			smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
+
+			if (flashTimer > smoothFlashTime)
+			{
+				spriteRenderer.enabled = !spriteRenderer.enabled;
+				
+				flashTimer = 0f;
+			}	
+		}
+		else
+		{
+			spriteRenderer.enabled = true;
+			smoothFlashTime = flashTime;
+		}
 
 		if (controller.isGrounded)
 		{
@@ -157,7 +184,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		if (enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "Projectile")
 		{
-			if (Time.time > lastHitTime + invincibilityPeriod)
+			if (canTakeDamage)
 			{
 				if (health > 0f)
 				{
