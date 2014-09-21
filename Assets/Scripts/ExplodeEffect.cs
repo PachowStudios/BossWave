@@ -9,13 +9,9 @@ public class ExplodeEffect : MonoBehaviour
 	private Sprite sprite;
 	private Vector2 adjustedBounds;
 
-	void Awake()
-	{
-		sprite = GetComponentInChildren<SpriteRenderer>().sprite;
-	}
-
 	public void Explode(Vector3 velocity)
 	{
+		sprite = GetComponentInChildren<SpriteRenderer>().sprite;
 		adjustedBounds = new Vector2(collider2D.bounds.size.x * 10,
 									 collider2D.bounds.size.y * 10);
 
