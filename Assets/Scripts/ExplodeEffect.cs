@@ -7,22 +7,20 @@ public class ExplodeEffect : MonoBehaviour
 	public float effectLength = 3f;
 
 	private Sprite sprite;
-	private Vector2 adjustedBounds;
+	private Vector2 colliderSize;
 
-	public void Explode(Vector3 velocity)
+	public void Explode(Vector3 velocity, Vector2 colliderSize)
 	{
 		sprite = GetComponentInChildren<SpriteRenderer>().sprite;
-		adjustedBounds = new Vector2(collider2D.bounds.size.x * 10,
-									 collider2D.bounds.size.y * 10);
 
-		for (int i = 1; i <= adjustedBounds.x; i++)
+		for (int i = 1; i <= colliderSize.x; i++)
 		{
-			for (int j = 1; j <= adjustedBounds.y; j++)
+			for (int j = 1; j <= colliderSize.y; j++)
 			{
-				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - 1, (j / 10f), 0);
-				Color pixelColor = sprite.texture.GetPixel((int)sprite.rect.x + i, (int)sprite.rect.y + j);
-
-				if (pixelColor != Color.clear)
+				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - 0.8f, (j / 10f) - 0.1f, 0);
+				Color pixelColor = sprite.texture.GetPixel((int)sprite.rect.x + i - 1, (int)sprite.rect.y + j - 1);
+				
+				if (pixelColor.a != 0f)
 				{
 					GameObject pixelInstance = Instantiate(pixelPrefab, pixelPosition, Quaternion.identity) as GameObject;
 					pixelInstance.GetComponent<SpriteRenderer>().color = pixelColor;
