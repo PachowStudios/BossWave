@@ -26,7 +26,8 @@ public class PlayerControl : MonoBehaviour
 	private Vector3 velocity;
 	private ExplodeEffect explodeEffect;
 
-	private float health;
+	[HideInInspector]
+	public float health;
 
 	private bool right;
 	private bool left;
@@ -246,8 +247,8 @@ public class PlayerControl : MonoBehaviour
 		if (health <= 0f)
 		{
 			spriteRenderer.enabled = false;
-			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x * 11,
-											   spriteRenderer.bounds.size.y * 11);
+			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x * 10,
+											   spriteRenderer.bounds.size.y * 10);
 
 			collider2D.enabled = false;
 			explodeEffect.Explode(velocity, colliderSize);

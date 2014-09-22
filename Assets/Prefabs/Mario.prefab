@@ -86,7 +86,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1.5, y: 2.79999995}
+  m_Size: {x: 1, y: 2.79999995}
   m_Center: {x: 0, y: 1.39999998}
 --- !u!95 &9500000
 Animator:
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  maxHealth: 100
   invincibilityPeriod: 2
   gravity: -35
   turningSpeed: 1
@@ -169,6 +169,7 @@ MonoBehaviour:
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 5
+  health: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
