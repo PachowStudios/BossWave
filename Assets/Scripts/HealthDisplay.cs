@@ -23,7 +23,7 @@ public class HealthDisplay : MonoBehaviour
 
 	void OnGUI()
 	{
-		healthPercent = player.health / player.maxHealth;
+		healthPercent = Mathf.Clamp(player.health / player.maxHealth, 0f, 1f);
 
 		if (healthPercent > 0.75f)
 		{

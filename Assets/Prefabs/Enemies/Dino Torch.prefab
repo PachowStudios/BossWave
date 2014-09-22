@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400008}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
@@ -293,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549c55e699a3fd54f93377dd1a6d7ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShot: 0
   damage: 7.5
   knockback: 3.5
   gravity: 0
@@ -312,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549c55e699a3fd54f93377dd1a6d7ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShot: 0
   damage: 7.5
   knockback: 3.5
   gravity: 0
@@ -320,6 +323,19 @@ MonoBehaviour:
   autoDestroy: 0
   right: 0
   left: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bc5c677d4674042a821fe47b31795a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelPrefab: {fileID: 100000, guid: 5c9cffe3de8d4ef4a8f21a3acfd4d934, type: 2}
+  effectLength: 3
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

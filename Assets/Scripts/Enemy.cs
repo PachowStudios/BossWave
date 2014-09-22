@@ -17,6 +17,9 @@ public abstract class Enemy : MonoBehaviour
 	[HideInInspector]
 	protected float normalizedHorizontalSpeed = 0;
 
+	private SpriteRenderer spriteRenderer;
+	private ExplodeEffect explodeEffect;
+
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Vector3 velocity;
@@ -24,9 +27,54 @@ public abstract class Enemy : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		explodeEffect = GetComponent<ExplodeEffect>();
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.Find("frontCheck");
+	}
+
+	void OnTriggerEnter2D(Collider2D enemy)
+	{
+		if (enemy.tag == "PlayerProjectile")
+		{
+			if (health > 0f)
+			{
+				TakeDamage(enemy.gameObject);
+			}
+		}
+	}
+
+	void TakeDamage(GameObject enemy)
+	{
+		float damage = enemy.GetComponent<Projectile>().damage;
+		float knockback = enemy.GetComponent<Projectile>().knockback;
+
+		health -= damage;
+
+		if (health <= 0f)
+		{
+			spriteRenderer.enabled = false;
+			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x * 10,
+											   spriteRenderer.bounds.size.y * 10);
+
+			collider2D.enabled = false;
+			explodeEffect.Explode(velocity, colliderSize);
+			Destroy(gameObject);
+			
+		}
+		else
+		{
+			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
+			velocity.y = Mathf.Sqrt(knockback * -gravity);
+
+			if (transform.position.x - enemy.transform.position.x < 0)
+			{
+				velocity.x *= -1;
+			}
+
+			controller.move(velocity * Time.deltaTime);
+		}
 	}
 
 	protected void InitialUpdate()

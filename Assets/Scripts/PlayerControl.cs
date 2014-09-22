@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 5f;
+	public Projectile projectile;
+	public float shootCooldown = 0.5f;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -24,7 +26,9 @@ public class PlayerControl : MonoBehaviour
 	private BoxCollider2D boxCollider;
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
+	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
+	private Transform gun;
 
 	[HideInInspector]
 	public float health;
@@ -34,9 +38,12 @@ public class PlayerControl : MonoBehaviour
 	private bool jump;
 	private bool run;
 	private bool crouch;
+	private bool shoot;
 
 	private bool runFull = false;
 	private float runFullTimer = 0f;
+
+	private float shootTimer = 0f;
 
 	private float originalColliderHeight;
 	private float originalColliderOffset;
@@ -48,7 +55,6 @@ public class PlayerControl : MonoBehaviour
 	private float flashTimer = 0f;
 	private float flashTime = 0.25f;
 	private float smoothFlashTime;
-	private SpriteRenderer spriteRenderer;
 
 	void Awake()
 	{
@@ -57,6 +63,7 @@ public class PlayerControl : MonoBehaviour
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
+		gun = transform.FindChild("Gun");
 
 		originalColliderHeight = boxCollider.size.y;
 		crouchingColliderHeight = originalColliderHeight / 2;
@@ -75,6 +82,7 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton("Run");
 		jump = jump || Input.GetButtonDown("Jump");
 		crouch = Input.GetButton("Crouch");
+		shoot = Input.GetButton("Shoot");
 
 		run = run && (right || left);
 
@@ -180,6 +188,19 @@ public class PlayerControl : MonoBehaviour
 			anim.SetBool("Running_Full", runFull);
 		}
 
+		shootTimer += Time.deltaTime;
+
+		if (shoot && shootTimer >= shootCooldown)
+		{
+			float bulletRotation = transform.localScale.x > 0 ? 0f : 180f;
+
+			Projectile projectileInstance = Instantiate(projectile, gun.position, Quaternion.Euler(new Vector3(0, 0, bulletRotation))) as Projectile;
+			projectileInstance.right = transform.localScale.x > 0f;
+			projectileInstance.left = !projectileInstance.right;
+
+			shootTimer = 0f;
+		}
+
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed), Time.fixedDeltaTime * smoothedMovementFactor);
@@ -192,7 +213,7 @@ public class PlayerControl : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D enemy)
 	{
-		if (enemy.gameObject.tag == "Enemy" || enemy.gameObject.tag == "Projectile")
+		if (enemy.tag == "Enemy" || enemy.tag == "Projectile")
 		{
 			if (canTakeDamage)
 			{
@@ -207,23 +228,6 @@ public class PlayerControl : MonoBehaviour
 	void OnTriggerStay2D(Collider2D enemy)
 	{
 		OnTriggerEnter2D(enemy);
-	}
-
-	void Flip()
-	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-		
-		if (runFullTimer > 0f)
-		{
-			runFullTimer = 0f;
-			runFull = false;
-			anim.SetBool("Running_Full", runFull);
-		}
-
-		if (Mathf.Abs(velocity.x) > turningSpeed && controller.isGrounded)
-		{
-			anim.SetTrigger("Turn");
-		}
 	}
 
 	void TakeDamage(GameObject enemy)
@@ -252,6 +256,7 @@ public class PlayerControl : MonoBehaviour
 
 			collider2D.enabled = false;
 			explodeEffect.Explode(velocity, colliderSize);
+			Destroy(gameObject);
 		}
 		else
 		{
@@ -267,4 +272,23 @@ public class PlayerControl : MonoBehaviour
 			lastHitTime = Time.time;
 		}
 	}
+
+	void Flip()
+	{
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+		if (runFullTimer > 0f)
+		{
+			runFullTimer = 0f;
+			runFull = false;
+			anim.SetBool("Running_Full", runFull);
+		}
+
+		if (Mathf.Abs(velocity.x) > turningSpeed && controller.isGrounded)
+		{
+			anim.SetTrigger("Turn");
+		}
+	}
 }
+
+

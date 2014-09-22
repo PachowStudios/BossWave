@@ -18,7 +18,7 @@ public class Shooting : Enemy
 		base.Awake();
 
 		player = GameObject.Find("Player").transform;
-		gun = transform.Find("gun");
+		gun = transform.FindChild("Gun");
 	}
 
 	void FixedUpdate()

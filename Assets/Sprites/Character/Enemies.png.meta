@@ -42,6 +42,7 @@ TextureImporter:
     21300074: DryBones_Throwing_0
     21300076: DryBones_Throwing_1
     21300078: DryBones_Projectile
+    21300080: Fireball
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -57,7 +58,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
@@ -79,11 +80,11 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 10
   alphaIsTransparency: 1
-  textureType: 8
+  textureType: 5
   buildTargetSettings:
   - buildTarget: iPhone
     maxTextureSize: 1024
-    textureFormat: -2
+    textureFormat: 13
     compressionQuality: 50
   spriteSheet:
     sprites:
@@ -474,6 +475,16 @@ TextureImporter:
         y: 575
         width: 16
         height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Fireball
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 649
+        width: 6
+        height: 7
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

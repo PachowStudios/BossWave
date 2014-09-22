@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
+	public bool playerShot = false;
 	public float damage = 5f;
 	public float knockback = 2f;
 	public float gravity = 0f;
@@ -27,6 +28,11 @@ public class Projectile : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
+
+		if (playerShot)
+		{
+			tag = "PlayerProjectile";
+		}
 
 		if (autoDestroy)
 		{
