@@ -12,12 +12,7 @@ public class Projectile : MonoBehaviour
 	public bool autoDestroy = true;
 
 	[HideInInspector]
-	public bool right = false;
-	[HideInInspector]
-	public bool left = false;
-
-	[HideInInspector]
-	protected float normalizedHorizontalSpeed = 0;
+	public Vector3 direction;
 
 	protected CharacterController2D controller;
 	protected Animator anim;
@@ -45,36 +40,11 @@ public class Projectile : MonoBehaviour
 		velocity = controller.velocity;
 	}
 
-	protected void GetMovement()
-	{
-		if (right)
-		{
-			normalizedHorizontalSpeed = 1;
-
-			if (transform.localScale.x < 0)
-			{
-				Flip();
-			}
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1;
-
-			if (transform.localScale.x > 0f)
-			{
-				Flip();
-			}
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0;
-		}
-	}
-
 	protected void ApplyMovement()
 	{
-		velocity.x = normalizedHorizontalSpeed * shotSpeed;
-		velocity.y += gravity * Time.fixedDeltaTime;
+		velocity.x = direction.x * shotSpeed;
+		direction.y += (gravity * Time.fixedDeltaTime) / 10f;
+		velocity.y = direction.y * shotSpeed;
 
 		controller.move(velocity * Time.fixedDeltaTime);
 	}

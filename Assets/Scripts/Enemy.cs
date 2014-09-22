@@ -23,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Vector3 velocity;
+	protected Transform body;
 	protected Transform frontCheck;
 
 	protected virtual void Awake()
@@ -31,7 +32,8 @@ public abstract class Enemy : MonoBehaviour
 		explodeEffect = GetComponent<ExplodeEffect>();
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		frontCheck = transform.Find("frontCheck");
+		body = transform.FindChild("Body");
+		frontCheck = transform.FindChild("frontCheck");
 	}
 
 	void OnTriggerEnter2D(Collider2D enemy)
@@ -93,7 +95,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 1;
 
-			if (transform.localScale.x < 0f)
+			if (body.localScale.x < 0f)
 			{
 				Flip();
 			}
@@ -102,7 +104,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = -1;
 
-			if (transform.localScale.x > 0f)
+			if (body.localScale.x > 0f)
 			{
 				Flip();
 			}
@@ -142,6 +144,6 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void Flip()
 	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		body.localScale = new Vector3(-body.localScale.x, body.localScale.y, body.localScale.z);
 	}
 }

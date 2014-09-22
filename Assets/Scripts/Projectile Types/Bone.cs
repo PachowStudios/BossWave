@@ -12,7 +12,6 @@ public class Bone : Projectile
 	{
 		InitialUpdate();
 		
-		GetMovement();
 		ApplyMovement();
 	}
 }

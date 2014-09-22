@@ -33,7 +33,7 @@ public class Shooting : Enemy
 			left = !right;
 		}
 		else if (player.position.x > transform.position.x &&
-				 transform.localScale.x < 0f)
+				 body.localScale.x < 0f)
 		{
 			Flip();
 		}
@@ -43,7 +43,7 @@ public class Shooting : Enemy
 			right = !left;
 		}
 		else if (player.position.x < transform.position.x &&
-				 transform.localScale.x > 0f)
+				 body.localScale.x > 0f)
 		{
 			Flip();
 		}
@@ -58,19 +58,17 @@ public class Shooting : Enemy
 		{
 			if (Mathf.Abs(player.position.x - transform.position.x) <= detectionRange)
 			{
-				if ((player.position.x < transform.position.x && transform.localScale.x > 0) ||
-					(player.position.x > transform.position.x && transform.localScale.x < 0))
-				{
-					Flip();
-				}
-
 				anim.SetTrigger("Shoot");
+
+				Vector3 gunLookPosition = player.collider2D.bounds.center;
+				gunLookPosition -= gun.transform.position;
+				float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
+				gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
 
 				float bulletRotation = transform.localScale.x > 0 ? 0f : 180f;
 
 				Projectile projectileInstance = Instantiate(projectile, gun.position, Quaternion.Euler(new Vector3(0, 0, bulletRotation))) as Projectile;
-				projectileInstance.right = transform.localScale.x > 0;
-				projectileInstance.left = !projectileInstance.right;
+				projectileInstance.direction = gun.transform.right;
 
 				cooldownTimer = 0f;
 			}

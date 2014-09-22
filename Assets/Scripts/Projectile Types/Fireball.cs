@@ -12,7 +12,6 @@ public class Fireball : Projectile
 	{
 		InitialUpdate();
 
-		GetMovement();
 		ApplyMovement();
 	}
 }

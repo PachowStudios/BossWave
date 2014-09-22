@@ -129,14 +129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e6554a61cc4aa44b6bedcde921f200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerShot: 0
   damage: 5
   knockback: 2
   gravity: -8
   shotSpeed: 15
   lifetime: 3
   autoDestroy: 1
-  right: 0
-  left: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
