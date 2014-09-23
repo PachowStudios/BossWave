@@ -12,6 +12,7 @@ public class HealthDisplay : MonoBehaviour
 
 	private Image face;
 	private Image bar;
+	private Text score;
 
 	private float healthPercent;
 
@@ -19,6 +20,7 @@ public class HealthDisplay : MonoBehaviour
 	{
 		face = transform.FindChild("Face").GetComponent<Image>();
 		bar = transform.FindChild("Bar").GetComponent<Image>();
+		score = transform.FindChild("Score").GetComponent<Text>();
 	}
 
 	void OnGUI()
@@ -43,5 +45,7 @@ public class HealthDisplay : MonoBehaviour
 		}
 
 		bar.transform.localScale = new Vector3(healthPercent, 1, 1);
+
+		score.text = player.score.ToString();
 	}
 }

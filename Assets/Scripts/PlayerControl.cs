@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour
 
 	[HideInInspector]
 	public float health;
+	[HideInInspector]
+	public float score;
 
 	private bool right;
 	private bool left;
@@ -291,6 +293,11 @@ public class PlayerControl : MonoBehaviour
 		{
 			anim.SetTrigger("Turn");
 		}
+	}
+
+	public void AddPoints(float enemyHealth, float enemyDamage)
+	{
+		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100));
 	}
 }
 

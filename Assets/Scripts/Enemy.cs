@@ -9,7 +9,10 @@ public abstract class Enemy : MonoBehaviour
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
-	public float health = 10f;
+	public float maxHealth = 10f;
+
+	[HideInInspector]
+	public float health;
 
 	protected bool right = false;
 	protected bool left = false;
@@ -24,6 +27,7 @@ public abstract class Enemy : MonoBehaviour
 	protected Animator anim;
 	protected Vector3 velocity;
 	protected Transform frontCheck;
+	protected PlayerControl playerControl;
 
 	protected virtual void Awake()
 	{
@@ -32,6 +36,9 @@ public abstract class Enemy : MonoBehaviour
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.FindChild("frontCheck");
+		playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
+
+		health = maxHealth;
 	}
 
 	void OnTriggerEnter2D(Collider2D enemy)
@@ -60,6 +67,7 @@ public abstract class Enemy : MonoBehaviour
 
 			collider2D.enabled = false;
 			explodeEffect.Explode(velocity, colliderSize);
+			playerControl.AddPoints(maxHealth, damage);
 			Destroy(gameObject);
 			
 		}
