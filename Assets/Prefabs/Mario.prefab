@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 10
   invincibilityPeriod: 2
   gravity: -35
   turningSpeed: 1
@@ -200,6 +200,7 @@ MonoBehaviour:
   projectile: {fileID: 11400002, guid: 1269834fe0ebd544785ad2c8e9cb9cf2, type: 2}
   shootCooldown: .5
   health: 0
+  score: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
