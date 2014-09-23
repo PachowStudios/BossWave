@@ -15,8 +15,6 @@ public class PlayerControl : MonoBehaviour
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 5f;
-	public Projectile projectile;
-	public float shootCooldown = 0.5f;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -28,7 +26,6 @@ public class PlayerControl : MonoBehaviour
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
-	private Transform gun;
 
 	[HideInInspector]
 	public float health;
@@ -40,12 +37,9 @@ public class PlayerControl : MonoBehaviour
 	private bool jump;
 	private bool run;
 	private bool crouch;
-	private bool shoot;
 
 	private bool runFull = false;
 	private float runFullTimer = 0f;
-
-	private float shootTimer = 0f;
 
 	private float originalColliderHeight;
 	private float originalColliderOffset;
@@ -65,7 +59,6 @@ public class PlayerControl : MonoBehaviour
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
-		gun = transform.FindChild("Gun");
 
 		originalColliderHeight = boxCollider.size.y;
 		crouchingColliderHeight = originalColliderHeight / 2;
@@ -84,7 +77,6 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton("Run");
 		jump = jump || Input.GetButtonDown("Jump");
 		crouch = Input.GetButton("Crouch");
-		shoot = Input.GetButton("Shoot");
 
 		run = run && (right || left);
 
@@ -188,23 +180,6 @@ public class PlayerControl : MonoBehaviour
 			runFullTimer = 0f;
 			runFull = false;
 			anim.SetBool("Running_Full", runFull);
-		}
-
-		Vector3 mousePosition = Input.mousePosition;
-		mousePosition.z = 10f;
-		Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-		gunLookPosition -= gun.transform.position;
-		float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
-		gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
-
-		shootTimer += Time.deltaTime;
-
-		if (shoot && shootTimer >= shootCooldown)
-		{
-			Projectile projectileInstance = Instantiate(projectile, gun.position, Quaternion.identity) as Projectile;
-			projectileInstance.direction = gun.transform.right;
-
-			shootTimer = 0f;
 		}
 
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;

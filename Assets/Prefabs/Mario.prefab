@@ -45,6 +45,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -197,8 +198,6 @@ MonoBehaviour:
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 5
-  projectile: {fileID: 11400002, guid: 1269834fe0ebd544785ad2c8e9cb9cf2, type: 2}
-  shootCooldown: .5
   health: 0
   score: 0
 --- !u!114 &11400004
@@ -213,6 +212,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelPrefab: {fileID: 100000, guid: 5c9cffe3de8d4ef4a8f21a3acfd4d934, type: 2}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 11400002, guid: 1269834fe0ebd544785ad2c8e9cb9cf2, type: 2}
+  shootCooldown: .5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
