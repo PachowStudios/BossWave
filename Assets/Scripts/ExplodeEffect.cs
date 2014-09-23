@@ -4,7 +4,6 @@ using System.Collections;
 public class ExplodeEffect : MonoBehaviour 
 {
 	public GameObject pixelPrefab;
-	public float effectLength = 3f;
 
 	private Sprite sprite;
 	private Vector2 colliderSize;
@@ -26,7 +25,6 @@ public class ExplodeEffect : MonoBehaviour
 					pixelInstance.GetComponent<SpriteRenderer>().color = pixelColor;
 					pixelInstance.rigidbody2D.AddForce(new Vector2(((velocity.x * 50f) + Random.Range(-250, 250)), 
 																   ((velocity.y * 50f) + Random.Range(-250, 250))));
-					Destroy(pixelInstance, effectLength);
 				}
 			}
 		}

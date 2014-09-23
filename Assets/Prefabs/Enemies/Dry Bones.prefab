@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pixelPrefab: {fileID: 100000, guid: 5c9cffe3de8d4ef4a8f21a3acfd4d934, type: 2}
-  effectLength: 3
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
