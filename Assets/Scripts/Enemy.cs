@@ -23,7 +23,6 @@ public abstract class Enemy : MonoBehaviour
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Vector3 velocity;
-	protected Transform body;
 	protected Transform frontCheck;
 
 	protected virtual void Awake()
@@ -32,7 +31,6 @@ public abstract class Enemy : MonoBehaviour
 		explodeEffect = GetComponent<ExplodeEffect>();
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		body = transform.FindChild("Body");
 		frontCheck = transform.FindChild("frontCheck");
 	}
 
@@ -57,8 +55,8 @@ public abstract class Enemy : MonoBehaviour
 		if (health <= 0f)
 		{
 			spriteRenderer.enabled = false;
-			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x * 10,
-											   spriteRenderer.bounds.size.y * 10);
+			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x,
+											   spriteRenderer.bounds.size.y);
 
 			collider2D.enabled = false;
 			explodeEffect.Explode(velocity, colliderSize);
@@ -95,7 +93,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 1;
 
-			if (body.localScale.x < 0f)
+			if (transform.localScale.x < 0f)
 			{
 				Flip();
 			}
@@ -104,7 +102,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = -1;
 
-			if (body.localScale.x > 0f)
+			if (transform.localScale.x > 0f)
 			{
 				Flip();
 			}
@@ -144,6 +142,6 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void Flip()
 	{
-		body.localScale = new Vector3(-body.localScale.x, body.localScale.y, body.localScale.z);
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 	}
 }

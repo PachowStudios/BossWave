@@ -33,7 +33,7 @@ public class Shooting : Enemy
 			left = !right;
 		}
 		else if (player.position.x > transform.position.x &&
-				 body.localScale.x < 0f)
+				 transform.localScale.x < 0f)
 		{
 			Flip();
 		}
@@ -43,7 +43,7 @@ public class Shooting : Enemy
 			right = !left;
 		}
 		else if (player.position.x < transform.position.x &&
-				 body.localScale.x > 0f)
+				 transform.localScale.x > 0f)
 		{
 			Flip();
 		}

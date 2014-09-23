@@ -28,7 +28,6 @@ public class PlayerControl : MonoBehaviour
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
-	private Transform body;
 	private Transform gun;
 
 	[HideInInspector]
@@ -64,7 +63,6 @@ public class PlayerControl : MonoBehaviour
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
-		body = transform.FindChild("Body");
 		gun = transform.FindChild("Gun");
 
 		originalColliderHeight = boxCollider.size.y;
@@ -147,7 +145,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				normalizedHorizontalSpeed = 1;
 
-				if (body.localScale.x < 0f)
+				if (transform.localScale.x < 0f)
 				{
 					Flip();
 				}
@@ -156,7 +154,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				normalizedHorizontalSpeed = -1;
 
-				if (body.localScale.x > 0f)
+				if (transform.localScale.x > 0f)
 				{
 					Flip();
 				}
@@ -257,8 +255,8 @@ public class PlayerControl : MonoBehaviour
 		if (health <= 0f)
 		{
 			spriteRenderer.enabled = false;
-			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x * 10,
-											   spriteRenderer.bounds.size.y * 10);
+			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x,
+											   spriteRenderer.bounds.size.y);
 
 			collider2D.enabled = false;
 			explodeEffect.Explode(velocity, colliderSize);
@@ -280,7 +278,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Flip()
 	{
-		body.localScale = new Vector3(-body.localScale.x, body.localScale.y, body.localScale.z);
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
 		if (runFullTimer > 0f)
 		{

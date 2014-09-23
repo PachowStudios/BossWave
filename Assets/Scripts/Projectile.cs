@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour 
+public abstract class Projectile : MonoBehaviour 
 {
 	public bool playerShot = false;
 	public float damage = 5f;
