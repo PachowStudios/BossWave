@@ -19,6 +19,26 @@ public class CameraFollow : MonoBehaviour
 
 		minPosition.y += camera.orthographicSize;
 		maxPosition.y -= camera.orthographicSize;
+
+		if (minPosition.x < 0.1f)
+		{
+			minPosition.x = 0f;
+		}
+
+		if (maxPosition.x < 0.1f)
+		{
+			maxPosition.x = 0f;
+		}
+
+		if (minPosition.y < 0.1f)
+		{
+			minPosition.y = 0f;
+		}
+
+		if (maxPosition.y < 0.1f)
+		{
+			minPosition.y = 0f;
+		}
 	}
 
 	void FixedUpdate()
