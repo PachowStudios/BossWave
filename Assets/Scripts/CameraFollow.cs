@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
 		minPosition.y += camera.orthographicSize;
 		maxPosition.y -= camera.orthographicSize;
 
-		if (minPosition.x < 0.1f)
+		if (minPosition.x > -0.1f)
 		{
 			minPosition.x = 0f;
 		}
@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour
 			maxPosition.x = 0f;
 		}
 
-		if (minPosition.y < 0.1f)
+		if (minPosition.y > -0.1f)
 		{
 			minPosition.y = 0f;
 		}
