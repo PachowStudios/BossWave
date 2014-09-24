@@ -26,6 +26,7 @@ public class PlayerControl : MonoBehaviour
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
+	private Gun gun;
 
 	[HideInInspector]
 	public float health;
@@ -59,6 +60,7 @@ public class PlayerControl : MonoBehaviour
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
+		gun = GetComponentInChildren<Gun>();
 
 		originalColliderHeight = boxCollider.size.y;
 		crouchingColliderHeight = originalColliderHeight / 2;
@@ -89,6 +91,11 @@ public class PlayerControl : MonoBehaviour
 	{
 		velocity = controller.velocity;
 
+		if (controller.isGrounded)
+		{
+			velocity.y = 0;
+		}
+
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
 
@@ -114,11 +121,6 @@ public class PlayerControl : MonoBehaviour
 				spriteRenderer.enabled = true;
 				smoothFlashTime = flashTime;
 			}
-		}
-
-		if (controller.isGrounded)
-		{
-			velocity.y = 0;
 		}
 
 		if (crouch)
@@ -270,9 +272,21 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
+	public void AddHealth(float amount)
+	{
+		health = Mathf.Clamp(health + amount, health, maxHealth);
+	}
+
 	public void AddPoints(float enemyHealth, float enemyDamage)
 	{
 		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100));
+	}
+
+	public void SwapWeapon(Gun newGun)
+	{
+		Transform oldTransform = gun.transform;
+		Destroy(gun.gameObject);
+		Instantiate(newGun, oldTransform.position, oldTransform.rotation);
 	}
 }
 

@@ -49,6 +49,10 @@ TagManager:
     userID: 1
     uniqueID: 2651302749
     locked: 0
+  - name: Powerup
+    userID: 5
+    uniqueID: 2151687535
+    locked: 0
   - name: Character
     userID: 3
     uniqueID: 1018039513

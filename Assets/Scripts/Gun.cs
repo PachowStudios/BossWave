@@ -4,6 +4,7 @@ using System.Collections;
 public class Gun : MonoBehaviour 
 {
 	public Projectile projectile;
+	public bool aimAtMouse = true;
 	public float shootCooldown = 0.5f;
 
 	private bool shoot;
@@ -16,6 +17,8 @@ public class Gun : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		RotateTowardsMouse();
+
 		shootTimer += Time.deltaTime;
 
 		if (shoot && shootTimer >= shootCooldown)
