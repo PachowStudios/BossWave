@@ -48,7 +48,7 @@ GameObject:
   - 212: {fileID: 21200002}
   - 114: {fileID: 11400006}
   m_Layer: 0
-  m_Name: Fireball_Thrower
+  m_Name: Fireball Thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

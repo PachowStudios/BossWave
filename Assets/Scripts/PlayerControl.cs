@@ -286,7 +286,8 @@ public class PlayerControl : MonoBehaviour
 	{
 		Transform oldTransform = gun.transform;
 		Destroy(gun.gameObject);
-		Instantiate(newGun, oldTransform.position, oldTransform.rotation);
+		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
+		gunInstance.transform.parent = transform;
 	}
 }
 

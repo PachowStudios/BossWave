@@ -15,7 +15,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 0
-  m_Name: Health
+  m_Name: Give Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.39356518, y: -1.16316581, z: 0}
+  m_LocalPosition: {x: 4.68496561, y: .431182653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,7 +68,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 90fb1b122e4c56e4f84db7894932425f, type: 2}
+  m_Controller: {fileID: 9100000, guid: ae5fb3824822021479811345252171f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -82,10 +82,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f335fa65435da0429b12320895e8889, type: 3}
+  m_Script: {fileID: 11500000, guid: ac11ecd6401521042a4e71d5b3aaf394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 10
+  newGun: {fileID: 11400000, guid: 0a102a7c82e452547b6c5c531e0adeef, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 2151687535
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: .131034374, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -41,8 +41,10 @@ TextureImporter:
     21300072: DryBones_Walking_1
     21300074: DryBones_Throwing_0
     21300076: DryBones_Throwing_1
-    21300078: DryBones_Projectile
+    21300078: Bone
     21300080: Fireball
+    21300082: SpikeBall_0
+    21300084: Spikeball_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -468,7 +470,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .400000006, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: DryBones_Projectile
+    - name: Bone
       rect:
         serializedVersion: 2
         x: 164
@@ -485,6 +487,26 @@ TextureImporter:
         y: 649
         width: 6
         height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SpikeBall_0
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 589
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spikeball_1
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 590
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
