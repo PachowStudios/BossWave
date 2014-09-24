@@ -56,17 +56,13 @@ public abstract class Enemy : MonoBehaviour
 	{
 		float damage = enemy.GetComponent<Projectile>().damage;
 		float knockback = enemy.GetComponent<Projectile>().knockback;
+		enemy.GetComponent<Projectile>().CheckDestroy();
 
 		health -= damage;
 
 		if (health <= 0f)
 		{
-			spriteRenderer.enabled = false;
-			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x,
-											   spriteRenderer.bounds.size.y);
-
-			collider2D.enabled = false;
-			explodeEffect.Explode(velocity, colliderSize);
+			explodeEffect.Explode(velocity, spriteRenderer.sprite);
 			playerControl.AddPoints(maxHealth, damage);
 			Destroy(gameObject);
 			

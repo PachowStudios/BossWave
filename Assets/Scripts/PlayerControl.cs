@@ -227,6 +227,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			damage = enemy.GetComponent<Projectile>().damage;
 			knockback = enemy.GetComponent<Projectile>().knockback;
+			enemy.GetComponent<Projectile>().CheckDestroy();
 		}
 
 		health -= damage;
@@ -234,11 +235,8 @@ public class PlayerControl : MonoBehaviour
 		if (health <= 0f)
 		{
 			spriteRenderer.enabled = false;
-			Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x,
-											   spriteRenderer.bounds.size.y);
-
 			collider2D.enabled = false;
-			explodeEffect.Explode(velocity, colliderSize);
+			explodeEffect.Explode(velocity, spriteRenderer.sprite);
 		}
 		else
 		{

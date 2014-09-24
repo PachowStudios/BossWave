@@ -5,23 +5,19 @@ public class ExplodeEffect : MonoBehaviour
 {
 	public GameObject pixelPrefab;
 
-	private Sprite sprite;
-	private Vector2 colliderSize;
-
-	public void Explode(Vector3 velocity, Vector2 colliderSize)
+	public void Explode(Vector3 velocity, Sprite sprite)
 	{
-		sprite = GetComponentInChildren<SpriteRenderer>().sprite;
-
-		for (int i = 0; i <= colliderSize.x * 10f; i++)
+		for (int i = 0; i <= sprite.bounds.size.x * 10f; i++)
 		{
-			for (int j = 0; j <= colliderSize.y * 10f; j++)
+			for (int j = 0; j <= sprite.bounds.size.y * 10f; j++)
 			{
-				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - (colliderSize.x / 2f), (j / 10f) + 0.05f, 0);
+				Vector2 positionOffest = new Vector2(sprite.bounds.extents.x - sprite.bounds.center.x,
+													 sprite.bounds.extents.y - sprite.bounds.center.y - 0.05f);
 
-				Color pixelColor;
+				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - positionOffest.x, (j / 10f) - positionOffest.y, 0);
 
-				pixelColor = sprite.texture.GetPixel((int)sprite.rect.x + i, 
-													 (int)sprite.rect.y + j);
+				Color pixelColor = sprite.texture.GetPixel((int)sprite.rect.x + i, 
+													       (int)sprite.rect.y + j);
 				
 				if (pixelColor.a != 0f)
 				{

@@ -25,12 +25,7 @@ public abstract class Powerup : MonoBehaviour
 
 	protected virtual void Pickup()
 	{
-		spriteRenderer.enabled = false;
-		Vector2 colliderSize = new Vector2(spriteRenderer.bounds.size.x,
-										   spriteRenderer.bounds.size.y);
-
-		collider2D.enabled = false;
-		explodeEffect.Explode(Vector3.zero, colliderSize);
+		explodeEffect.Explode(Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
 	}
 }
