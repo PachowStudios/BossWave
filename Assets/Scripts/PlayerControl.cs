@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
+	[HideInInspector]
+	public float speedMultiplier = 1f;
 
 	private CharacterController2D controller;
 	private Animator anim;
@@ -187,7 +189,7 @@ public class PlayerControl : MonoBehaviour
 
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed), Time.fixedDeltaTime * smoothedMovementFactor);
+		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed) * speedMultiplier, Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 		controller.move(velocity * Time.fixedDeltaTime);
@@ -288,6 +290,17 @@ public class PlayerControl : MonoBehaviour
 		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
 		gunInstance.transform.parent = transform;
 		gun = gunInstance;
+	}
+
+	public void ResetSpeed(float delay)
+	{
+		StartCoroutine(ResetSpeedCoroutine(delay));
+	}
+
+	private IEnumerator ResetSpeedCoroutine(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		speedMultiplier = 1f;
 	}
 }
 

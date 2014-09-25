@@ -8,10 +8,10 @@ public class Gun : MonoBehaviour
 		Common,
 		Uncommon,
 		Rare,
-		VeryRare,
-		Legendary,
-		Godly,
-		Boss,
+		//VeryRare,
+		//Legendary,
+		//Godly,
+		//Boss,
 		NUM_TYPES
 	};
 
