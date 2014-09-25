@@ -26,7 +26,8 @@ public class PlayerControl : MonoBehaviour
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
-	private Gun gun;
+	[HideInInspector]
+	public Gun gun;
 
 	[HideInInspector]
 	public float health;
@@ -280,12 +281,13 @@ public class PlayerControl : MonoBehaviour
 		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100));
 	}
 
-	public void SwapWeapon(Gun newGun)
+	public void SwapGun(Gun newGun)
 	{
 		Transform oldTransform = gun.transform;
 		Destroy(gun.gameObject);
 		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
 		gunInstance.transform.parent = transform;
+		gun = gunInstance;
 	}
 }
 

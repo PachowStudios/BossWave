@@ -45,6 +45,7 @@ TextureImporter:
     21300080: Fireball
     21300082: SpikeBall_0
     21300084: Spikeball_1
+    21300086: BigFireball
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -507,6 +508,16 @@ TextureImporter:
         y: 590
         width: 14
         height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BigFireball
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 416
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

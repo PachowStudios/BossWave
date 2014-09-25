@@ -85,7 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac11ecd6401521042a4e71d5b3aaf394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGun: {fileID: 11400000, guid: 0a102a7c82e452547b6c5c531e0adeef, type: 2}
+  guns:
+  - {fileID: 11400000, guid: d62a5a727c03eab42a080bdf437e8bed, type: 2}
+  - {fileID: 11400000, guid: 0a102a7c82e452547b6c5c531e0adeef, type: 2}
+  - {fileID: 11400000, guid: cb2e9c3eaff3b7c439880fb11638baf5, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Spikeball Thrower
+  m_Name: Big Fireball Thrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,11 +40,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Spikeball Thrower
-  projectile: {fileID: 11400002, guid: 6ed7986041308b54e967b77dc060c665, type: 2}
+  gunName: Big Fireball Thrower
+  projectile: {fileID: 11400002, guid: a2aac087148781045a414efd7f794b32, type: 2}
   aimAtMouse: 1
-  shootCooldown: .5
-  rarity: 1
+  shootCooldown: .600000024
+  rarity: 2
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

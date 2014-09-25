@@ -40,9 +40,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunName: Fireball Thrower
   projectile: {fileID: 11400002, guid: 1269834fe0ebd544785ad2c8e9cb9cf2, type: 2}
   aimAtMouse: 1
   shootCooldown: .5
+  rarity: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

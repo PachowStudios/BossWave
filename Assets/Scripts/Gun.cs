@@ -3,9 +3,23 @@ using System.Collections;
 
 public class Gun : MonoBehaviour 
 {
+	public enum RarityLevel
+	{
+		Common,
+		Uncommon,
+		Rare,
+		VeryRare,
+		Legendary,
+		Godly,
+		Boss,
+		NUM_TYPES
+	};
+
+	public string gunName;
 	public Projectile projectile;
 	public bool aimAtMouse = true;
 	public float shootCooldown = 0.5f;
+	public RarityLevel rarity = RarityLevel.Common;
 
 	private bool shoot;
 	private float shootTimer = 0f;
