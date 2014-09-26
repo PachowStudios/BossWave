@@ -186,12 +186,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50397f0ecf1ea6b488ffdfccae0776cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
   damage: 5
   knockback: 3
   gravity: -35
-  moveSpeed: 5
+  moveSpeed: 7.5
   groundDamping: 10
   inAirDamping: 5
+  maxHealth: 10
   health: 10
 --- !u!114 &11400004
 MonoBehaviour:

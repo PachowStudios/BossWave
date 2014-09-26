@@ -272,7 +272,7 @@ MonoBehaviour:
   damage: 5
   knockback: 5
   gravity: -35
-  moveSpeed: 5
+  moveSpeed: 7.5
   groundDamping: 10
   inAirDamping: 5
   maxHealth: 10
