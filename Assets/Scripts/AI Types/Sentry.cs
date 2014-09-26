@@ -37,6 +37,9 @@ public class Sentry : Enemy
 		player = GameObject.Find("Player").transform;
 		sideFireCollider = transform.FindChild("sideFire").collider2D;
 		upFireCollider = transform.FindChild("upFire").collider2D;
+
+		right = player.position.x > transform.position.x;
+		left = !right;
 	}
 
 	void FixedUpdate()

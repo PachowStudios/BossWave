@@ -3,6 +3,17 @@ using System.Collections;
 
 public abstract class Enemy : MonoBehaviour 
 {
+	public enum Difficulty
+	{
+		Easy,
+		Normal,
+		Difficult,
+		Brutal,
+		Insane,
+		Boss
+	};
+
+	public Difficulty difficulty = Difficulty.Easy;
 	public float damage = 5f;
 	public float knockback = 3f;
 	public float gravity = -35f;

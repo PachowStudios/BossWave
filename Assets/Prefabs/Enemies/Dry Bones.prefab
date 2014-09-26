@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.69165754, y: -4.09916925, z: 0}
+  m_LocalPosition: {x: -7.84060764, y: -4.42682123, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -214,12 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da8102142bb53c4d9f1da5e97c5cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 2
   damage: 5
   knockback: 3
   gravity: -35
   moveSpeed: 5
   groundDamping: 10
   inAirDamping: 5
+  maxHealth: 10
   health: 10
   projectile: {fileID: 11400002, guid: a64d4bfb187bcd34e96f61ee0b54658c, type: 2}
   followBuffer: 13

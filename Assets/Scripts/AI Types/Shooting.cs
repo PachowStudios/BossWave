@@ -62,6 +62,7 @@ public class Shooting : Enemy
 
 				Vector3 gunLookPosition = player.collider2D.bounds.center;
 				gunLookPosition -= gun.transform.position;
+				gunLookPosition.y += (Mathf.Abs(projectile.gravity) / 2f) * (Mathf.Abs(player.position.x - transform.position.x) / projectile.shotSpeed);
 				float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
 				gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
 

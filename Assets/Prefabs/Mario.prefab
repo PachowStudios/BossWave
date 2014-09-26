@@ -116,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 1, y: 2.79999995}
+  m_Size: {x: 1.29999995, y: 2.79999995}
   m_Center: {x: 0, y: 1.39999998}
 --- !u!95 &9500000
 Animator:
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Bits: 512
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
@@ -199,6 +199,7 @@ MonoBehaviour:
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 5
+  speedMultiplier: 1
   gun: {fileID: 0}
   health: 0
   score: 0

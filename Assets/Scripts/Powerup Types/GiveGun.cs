@@ -18,10 +18,10 @@ public class GiveGun : Powerup
 
 	protected override void Pickup()
 	{
-		int newRarity = Random.Range((int)player.gun.rarity - 1,
-									 (int)player.gun.rarity + 2);
-		newRarity = (int)Mathf.Clamp(newRarity, newRarity,
-									 (int)Gun.RarityLevel.NUM_TYPES);
+		int newRarity = Mathf.RoundToInt(Random.Range((int)player.gun.rarity - 1f,
+													  (int)player.gun.rarity + 2f));
+		newRarity = Mathf.Clamp(newRarity, newRarity,
+							    (int)Gun.RarityLevel.NUM_TYPES);
 
 		List<Gun> possibleGuns = new List<Gun>();
 
@@ -35,9 +35,9 @@ public class GiveGun : Powerup
 
 		if (possibleGuns.Count > 0)
 		{
-			Gun newGun = possibleGuns[(int)Random.Range(0, possibleGuns.Count - 1)];
+			int newGun = Mathf.RoundToInt(Random.Range(0f, possibleGuns.Count - 1f));
 
-			player.SwapGun(newGun);
+			player.SwapGun(possibleGuns[newGun]);
 		}
 
 		base.Pickup();
