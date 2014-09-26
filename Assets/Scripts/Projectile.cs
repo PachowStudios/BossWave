@@ -37,6 +37,19 @@ public abstract class Projectile : MonoBehaviour
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D trigger)
+	{
+		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
+		{
+			CheckDestroy();
+		}
+	}
+
+	void OnTriggerStay2D(Collider2D trigger)
+	{
+		OnTriggerEnter2D(trigger);
+	}
+
 	protected void InitialUpdate()
 	{
 		velocity = controller.velocity;

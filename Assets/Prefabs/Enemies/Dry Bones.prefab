@@ -225,7 +225,8 @@ MonoBehaviour:
   health: 10
   projectile: {fileID: 11400002, guid: a64d4bfb187bcd34e96f61ee0b54658c, type: 2}
   followBuffer: 13
-  detectionRange: 13
+  minDetectionRange: 5
+  maxDetectionRange: 12
   cooldownTime: 2
 --- !u!114 &11400004
 MonoBehaviour:

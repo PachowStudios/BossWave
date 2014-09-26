@@ -4,11 +4,12 @@ using System.Collections;
 public class Shooting : Enemy
 {
 	public Projectile projectile;
-	public float followBuffer = 1.5f;
-	public float detectionRange = 20f;
+	public float minDetectionRange = 10f;
+	public float maxDetectionRange = 15f;
 	public float cooldownTime = 2f;
 
 	private float cooldownTimer = 0f;
+	private float detectionRange;
 
 	private Transform player;
 	private Transform gun;
@@ -19,6 +20,8 @@ public class Shooting : Enemy
 
 		player = GameObject.Find("Player").transform;
 		gun = transform.FindChild("Gun");
+
+		detectionRange = Random.Range(minDetectionRange, maxDetectionRange);
 	}
 
 	void FixedUpdate()
@@ -27,7 +30,7 @@ public class Shooting : Enemy
 
 		anim.SetBool("Walking", right || left);
 
-		if (player.position.x > transform.position.x + followBuffer)
+		if (player.position.x > transform.position.x + detectionRange)
 		{
 			right = true;
 			left = !right;
@@ -37,7 +40,7 @@ public class Shooting : Enemy
 		{
 			Flip();
 		}
-		else if (player.position.x < transform.position.x - followBuffer)
+		else if (player.position.x < transform.position.x - detectionRange)
 		{
 			left = true;
 			right = !left;
