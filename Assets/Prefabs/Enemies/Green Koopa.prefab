@@ -187,14 +187,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 0
+  maxHealth: 10
   damage: 5
   knockback: 3
+  flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
+  flashLength: .100000001
   gravity: -35
-  moveSpeed: 7.5
+  moveSpeed: 5
   groundDamping: 10
   inAirDamping: 5
-  maxHealth: 10
-  health: 10
+  health: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

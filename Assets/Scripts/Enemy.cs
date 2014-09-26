@@ -14,13 +14,15 @@ public abstract class Enemy : MonoBehaviour
 	};
 
 	public Difficulty difficulty = Difficulty.Easy;
+	public float maxHealth = 10f;
 	public float damage = 5f;
 	public float knockback = 3f;
+	public Color flashColor = new Color(1f, 0.47f, 0.47f, 1f);
+	public float flashLength = 0.1f;
 	public float gravity = -35f;
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
-	public float maxHealth = 10f;
 
 	[HideInInspector]
 	public float health;
@@ -88,7 +90,13 @@ public abstract class Enemy : MonoBehaviour
 				velocity.x *= -1;
 			}
 
-			controller.move(velocity * Time.deltaTime);
+			if (velocity.x > 0 || velocity.y > 0)
+			{
+				controller.move(velocity * Time.deltaTime);
+			}
+
+			spriteRenderer.color = flashColor;
+			Invoke("ResetColor", flashLength);
 		}
 	}
 
@@ -158,5 +166,10 @@ public abstract class Enemy : MonoBehaviour
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	void ResetColor()
+	{
+		spriteRenderer.color = Color.white;
 	}
 }

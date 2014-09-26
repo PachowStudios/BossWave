@@ -215,13 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 2
+  maxHealth: 10
   damage: 5
   knockback: 3
+  flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
+  flashLength: .100000001
   gravity: -35
   moveSpeed: 7.5
   groundDamping: 10
   inAirDamping: 5
-  maxHealth: 10
   health: 10
   projectile: {fileID: 11400002, guid: a64d4bfb187bcd34e96f61ee0b54658c, type: 2}
   minDetectionRange: 5
