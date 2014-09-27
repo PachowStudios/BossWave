@@ -62,6 +62,7 @@ public class PopupMessage : MonoBehaviour
 					text.text = "";
 					messages.Dequeue();
 					messageTimer = 0f;
+					currentLetter = 0;
 				}
 			}
 

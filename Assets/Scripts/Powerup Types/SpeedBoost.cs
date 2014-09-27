@@ -21,6 +21,8 @@ public class SpeedBoost : Powerup
 		player.speedMultiplier = speedMultiplier;
 		player.ResetSpeed(duration);
 
+		popupMessage.AddMessage("You gained a " + (int)duration + " second speed boost!");
+
 		base.Pickup();
 	}
 

@@ -23,7 +23,7 @@ public abstract class Powerup : MonoBehaviour
 
 		if (autoDestroy)
 		{
-			Invoke("Pickup", Random.Range(minLifetime, maxLifetime));
+			Invoke("AutoDestroy", Random.Range(minLifetime, maxLifetime));
 		}
 	}
 
@@ -36,6 +36,12 @@ public abstract class Powerup : MonoBehaviour
 	}
 
 	protected virtual void Pickup()
+	{
+		explodeEffect.Explode(Vector3.zero, spriteRenderer.sprite);
+		Destroy(gameObject);
+	}
+
+	private void AutoDestroy()
 	{
 		explodeEffect.Explode(Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
