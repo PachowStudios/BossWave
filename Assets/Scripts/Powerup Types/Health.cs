@@ -3,11 +3,18 @@ using System.Collections;
 
 public class Health : Powerup
 {
-	public float healthAmount;
+	public float minHealth = 5f;
+	public float maxHealth = 100f;
+
+	private float healthAmount;
 
 	new void Awake()
 	{
 		base.Awake();
+
+		healthAmount = Random.Range(minHealth, maxHealth) * Random.Range(1f, 10f);
+		healthAmount /= 10;
+		healthAmount = Mathf.Clamp(healthAmount, minHealth, maxHealth);
 	}
 
 	new void OnTriggerEnter2D(Collider2D trigger)
