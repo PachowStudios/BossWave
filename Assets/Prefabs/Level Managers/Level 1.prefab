@@ -114,6 +114,13 @@ MonoBehaviour:
   - {fileID: 11400002, guid: 3521c620716cd344888e0477030574ab, type: 2}
   - {fileID: 11400002, guid: ee94e9bb7554c6c4ab421ca6868fa5ed, type: 2}
   - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
+  powerups:
+  - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+  - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
+  - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  minPowerupTime: 15
+  maxPowerupTime: 25
+  powerupBuffer: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

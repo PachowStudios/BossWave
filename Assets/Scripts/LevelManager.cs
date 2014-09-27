@@ -15,15 +15,27 @@ public class LevelManager : MonoBehaviour
 
 	public List<Wave> waves;
 	public List<Enemy> enemies;
+	public List<Powerup> powerups;
+	public float minPowerupTime = 15f;
+	public float maxPowerupTime = 25f;
+	public float powerupBuffer = 5f;
 
 	private int currentWave = 0;
 	private float waveTimer = 0f;
 
 	private List<GameObject> spawners;
+	private Transform powerupSpawner;
+	private float powerupTimer = 0f;
+	private float powerupTime;
+	private float powerupRange;
+
 
 	void Awake()
 	{
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
+		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
+		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
+		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 	}
 
 	void FixedUpdate()
@@ -34,6 +46,19 @@ public class LevelManager : MonoBehaviour
 		{
 			StartCoroutine(SpawnWave(currentWave));
 			currentWave++;
+		}
+
+		powerupTimer += Time.deltaTime;
+
+		if (powerups.Count > 0 && powerupTimer >= powerupTime)
+		{
+			Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
+			int powerupToSpawn = Mathf.RoundToInt(Random.Range(0f, powerups.Count - 1));
+
+			Instantiate(powerups[powerupToSpawn], powerupSpawnPoint, Quaternion.identity);
+
+			powerupTimer = 0f;
+			powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		}
 	}
 

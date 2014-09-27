@@ -9,6 +9,7 @@ TagManager:
   - PlayerProjectile
   - LevelManager
   - Spawner
+  - PowerupSpawner
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
