@@ -23,8 +23,8 @@ public class ExplodeEffect : MonoBehaviour
 				{
 					GameObject pixelInstance = Instantiate(pixelPrefab, pixelPosition, Quaternion.identity) as GameObject;
 					pixelInstance.GetComponent<SpriteRenderer>().color = pixelColor;
-					pixelInstance.rigidbody2D.AddForce(new Vector2(((velocity.x * 10f) + Random.Range(-250, 250)), 
-																   ((velocity.y * 10f) + Random.Range(-250, 300))));
+					pixelInstance.rigidbody2D.AddForce(new Vector2(((velocity.x * 10f) + Random.Range(-250, 250)) * 2.5f, 
+																   ((velocity.y * 10f) + Random.Range(-250, 300)) * 2.5f));
 				}
 			}
 		}

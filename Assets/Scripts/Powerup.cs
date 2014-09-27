@@ -3,6 +3,10 @@ using System.Collections;
 
 public abstract class Powerup : MonoBehaviour 
 {
+	public bool autoDestroy = true;
+	public float minLifetime = 10f;
+	public float maxLifetime = 15f;
+
 	protected PlayerControl player;
 
 	private SpriteRenderer spriteRenderer;
@@ -13,6 +17,11 @@ public abstract class Powerup : MonoBehaviour
 		player = GameObject.Find("Player").GetComponent<PlayerControl>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
+
+		if (autoDestroy)
+		{
+			Invoke("Pickup", Random.Range(minLifetime, maxLifetime));
+		}
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D trigger)
