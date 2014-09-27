@@ -4,6 +4,8 @@ using System.Collections;
 public class FadeEffect : MonoBehaviour 
 {
 	public float lifetime = 4f;
+	public float startTime = 1f;
+	public bool fadeIn = false;
 
 	private float fadeTimer = 0f;
 
@@ -12,21 +14,40 @@ public class FadeEffect : MonoBehaviour
 	void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
+
+		if (fadeIn)
+		{
+			Color newColor = spriteRenderer.color;
+			newColor.a = 0f;
+			spriteRenderer.color = newColor;
+		}
 	}
 
 	void FixedUpdate()
 	{
-		fadeTimer += Time.deltaTime;
-
-		if (fadeTimer >= lifetime - 1f)
+		if (fadeIn)
 		{
-			Color newColor = spriteRenderer.color;
-			newColor.a = Mathf.Lerp(newColor.a, 0f, 0.025f);
-			spriteRenderer.color = newColor;
-
-			if (fadeTimer >= lifetime)
+			if (spriteRenderer.color.a < 1f)
 			{
-				Destroy(gameObject);
+				Color newColor = spriteRenderer.color;
+				newColor.a = Mathf.Lerp(newColor.a, 1f, 0.025f);
+				spriteRenderer.color = newColor;
+			}
+		}
+		else
+		{
+			fadeTimer += Time.deltaTime;
+
+			if (fadeTimer >= lifetime - startTime)
+			{
+				Color newColor = spriteRenderer.color;
+				newColor.a = Mathf.Lerp(newColor.a, 0f, 0.025f);
+				spriteRenderer.color = newColor;
+
+				if (fadeTimer >= lifetime)
+				{
+					Destroy(gameObject);
+				}
 			}
 		}
 	}

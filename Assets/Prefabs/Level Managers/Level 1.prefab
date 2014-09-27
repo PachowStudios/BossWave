@@ -118,8 +118,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
-  minPowerupTime: 15
-  maxPowerupTime: 25
+  minPowerupTime: 10
+  maxPowerupTime: 20
   powerupBuffer: 5
 --- !u!1001 &100100000
 Prefab:
