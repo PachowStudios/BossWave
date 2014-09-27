@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 0
-  maxHealth: 10
+  maxHealth: 15
   damage: 5
   knockback: 3
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}

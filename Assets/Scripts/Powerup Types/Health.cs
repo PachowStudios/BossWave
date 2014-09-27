@@ -14,7 +14,7 @@ public class Health : Powerup
 
 		healthAmount = Random.Range(minHealth, maxHealth) * Random.Range(1f, 10f);
 		healthAmount /= 10;
-		healthAmount = Mathf.Clamp(healthAmount, minHealth, maxHealth);
+		healthAmount = Mathf.RoundToInt(Mathf.Clamp(healthAmount, minHealth, maxHealth));
 	}
 
 	new void OnTriggerEnter2D(Collider2D trigger)
@@ -25,6 +25,7 @@ public class Health : Powerup
 	protected override void Pickup()
 	{
 		player.AddHealth(healthAmount);
+		popupMessage.AddMessage("You gained " + (int)healthAmount + " health!");
 
 		base.Pickup();
 	}

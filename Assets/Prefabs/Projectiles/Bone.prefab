@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 0
-  damage: 5
+  damage: 10
   knockback: 2
   gravity: -8
   shotSpeed: 15

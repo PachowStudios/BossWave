@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
-  maxHealth: 10
+  maxHealth: 25
   damage: 5
   knockback: 5
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 0
-  damage: 7.5
+  damage: 10
   knockback: 3.5
   gravity: 0
   shotSpeed: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 0
-  damage: 7.5
+  damage: 10
   knockback: 3.5
   gravity: 0
   shotSpeed: 0
