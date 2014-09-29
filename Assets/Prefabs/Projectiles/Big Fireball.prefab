@@ -131,10 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 1
-  damage: 15
+  damage: 20
   knockback: 4
   gravity: 0
-  shotSpeed: 10
+  shotSpeed: 15
   lifetime: 5
   autoDestroy: 1
   destroyOnCollision: 1

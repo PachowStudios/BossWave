@@ -43,7 +43,7 @@ MonoBehaviour:
   gunName: Big Fireball Thrower
   projectile: {fileID: 11400002, guid: a2aac087148781045a414efd7f794b32, type: 2}
   aimAtMouse: 1
-  shootCooldown: .600000024
+  shootCooldown: .400000006
   rarity: 2
 --- !u!212 &21200000
 SpriteRenderer:

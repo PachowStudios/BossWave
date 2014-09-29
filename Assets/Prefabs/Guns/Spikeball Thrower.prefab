@@ -43,7 +43,7 @@ MonoBehaviour:
   gunName: Spikeball Thrower
   projectile: {fileID: 11400002, guid: 6ed7986041308b54e967b77dc060c665, type: 2}
   aimAtMouse: 1
-  shootCooldown: .5
+  shootCooldown: .25
   rarity: 1
 --- !u!212 &21200000
 SpriteRenderer:

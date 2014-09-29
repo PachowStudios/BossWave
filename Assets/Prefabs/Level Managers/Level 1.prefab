@@ -35,7 +35,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 993848d8db3150e4b89529bc4fc6a216, type: 3}
   m_PlayOnAwake: 1
@@ -99,15 +99,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - startTime: 1
-    amount: 5
+  - startTime: 2
+    amount: 10
+    spawnDelay: 1
     difficulty: 0
-  - startTime: 10
+  - startTime: 15
     amount: 7
+    spawnDelay: 1
     difficulty: 1
-  - startTime: 20
+  - startTime: 29
+    amount: 12
+    spawnDelay: 1
+    difficulty: 0
+  - startTime: 43
     amount: 5
+    spawnDelay: 2
+    difficulty: 0
+  - startTime: 53
+    amount: 5
+    spawnDelay: .400000006
+    difficulty: 1
+  - startTime: 57
+    amount: 4
+    spawnDelay: .150000006
     difficulty: 2
+  - startTime: 57
+    amount: 10
+    spawnDelay: 1
+    difficulty: 1
   enemies:
   - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
   - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}
@@ -118,8 +137,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
-  minPowerupTime: 10
-  maxPowerupTime: 20
+  minPowerupTime: 5
+  maxPowerupTime: 15
   powerupBuffer: 5
 --- !u!1001 &100100000
 Prefab:

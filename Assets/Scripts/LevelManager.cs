@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
 	{
 		public float startTime;
 		public float amount;
+		public float spawnDelay;
 		public Enemy.Difficulty difficulty;
 	}
 
@@ -83,7 +84,7 @@ public class LevelManager : MonoBehaviour
 
 				Instantiate(possibleEnemies[enemyToSpawn], spawners[spawnerToUse].transform.position, Quaternion.identity);
 
-				yield return new WaitForSeconds(0.5f);
+				yield return new WaitForSeconds(waves[wave].spawnDelay);
 			}
 		}
 	}
