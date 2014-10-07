@@ -228,6 +228,7 @@ MonoBehaviour:
   projectile: {fileID: 11400002, guid: 72332548640256d44aa7ca0e9eddfd52, type: 2}
   minFlyHeigt: 5
   maxFlyHeight: 7.5
+  flyHeightBuffer: 3
   minDetectionRange: 5
   maxDetectionRange: 8
   minBombTime: 1.5

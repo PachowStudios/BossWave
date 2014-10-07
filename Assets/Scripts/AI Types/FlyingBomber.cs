@@ -6,6 +6,7 @@ public class FlyingBomber : Enemy
 	public Projectile projectile;
 	public float minFlyHeigt = 5f;
 	public float maxFlyHeight = 7.5f;
+	public float flyHeightBuffer = 2f;
 	public float minDetectionRange = 5f;
 	public float maxDetectionRange = 8f;
 	public float minBombTime = 1.5f;
@@ -32,6 +33,7 @@ public class FlyingBomber : Enemy
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 
 		defaultGravity = gravity;
+		flyHeightBuffer /= 5f;
 		flyHeight = Random.Range(minFlyHeigt, maxFlyHeight) + groundLevel.position.y;
 		detectionRange = Random.Range(minDetectionRange, maxDetectionRange);
 		currentBombTime = Random.Range(minBombTime, maxBombTime);
@@ -43,14 +45,23 @@ public class FlyingBomber : Enemy
 
 		CheckFrontCollision();
 
-		if (transform.position.y >= flyHeight)
+		if (transform.position.y >= flyHeight + flyHeightBuffer)
 		{
 			gravity = defaultGravity;
+
+			if (velocity.y > 0)
+			{
+				velocity.y -= -defaultGravity * Time.fixedDeltaTime;
+			}
 		}
-		else
+		else if (transform.position.y <= flyHeight - flyHeightBuffer)
 		{
-			gravity = 0;
-			velocity.y = 0;
+			gravity = -defaultGravity;
+
+			if (velocity.y < 0)
+			{
+				velocity.y += -defaultGravity * Time.fixedDeltaTime;
+			}
 		}
 
 		bombTimer += Time.deltaTime;

@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
-		music.Play();
+		//music.Play();
 	}
 
 	void FixedUpdate()
