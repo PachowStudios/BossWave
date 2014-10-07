@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Follow : Enemy
 {
-	public float followBuffer = 1.5f;
+	public float followBuffer = 5f;
 
 	private Transform player;
 

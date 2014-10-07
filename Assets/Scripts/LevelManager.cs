@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
 	private int currentWave = 0;
 	private float waveTimer = 0f;
 
+	private AudioSource music;
 	private List<GameObject> spawners;
 	private Transform powerupSpawner;
 	private float powerupTimer = 0f;
@@ -33,10 +34,13 @@ public class LevelManager : MonoBehaviour
 
 	void Awake()
 	{
+		music = GetComponent<AudioSource>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
+
+		music.Play();
 	}
 
 	void FixedUpdate()

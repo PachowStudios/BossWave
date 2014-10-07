@@ -46,6 +46,11 @@ TextureImporter:
     21300082: SpikeBall_0
     21300084: Spikeball_1
     21300086: BigFireball
+    21300088: Lakitu_Flying_0
+    21300090: Lakitu_Flying_1
+    21300092: Lakitu_Attacking_0
+    21300094: Lakitu_Attacking_1
+    21300096: Lakitu_Attacking_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -520,6 +525,56 @@ TextureImporter:
         height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lakitu_Flying_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 184
+        width: 26
+        height: 36
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lakitu_Flying_1
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 185
+        width: 24
+        height: 35
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lakitu_Attacking_0
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 143
+        width: 24
+        height: 32
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lakitu_Attacking_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 142
+        width: 28
+        height: 34
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Lakitu_Attacking_2
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 142
+        width: 28
+        height: 34
+      alignment: 7
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
