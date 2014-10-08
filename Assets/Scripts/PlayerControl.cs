@@ -259,7 +259,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			spriteRenderer.enabled = false;
 			collider2D.enabled = false;
-			explodeEffect.Explode(velocity, spriteRenderer.sprite);
+			explodeEffect.Explode(velocity, spriteRenderer.sprite, true);
 		}
 		else
 		{
