@@ -46,6 +46,6 @@ public class HealthDisplay : MonoBehaviour
 
 		bar.transform.localScale = new Vector3(healthPercent, 1, 1);
 
-		score.text = player.score.ToString();
+		score.text = player.score.ToString() + (player.combo > 1 ? "x" + player.combo.ToString() : "");
 	}
 }

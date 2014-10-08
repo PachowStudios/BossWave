@@ -63,7 +63,6 @@ public class PlayerControl : MonoBehaviour
 	private float currentMaxCombo = 1f;
 	private float comboTimer = 0f;
 	private float killChain = 0f;
-	private float nextCombo = 0f;
 
 	void Awake()
 	{
@@ -117,8 +116,8 @@ public class PlayerControl : MonoBehaviour
 
 			if (comboTimer >= Mathf.Clamp(comboDecreaseTime - (0.25f * (currentMaxCombo - combo)), comboDecreaseTime * 0.25f, comboDecreaseTime))
 			{
-				killChain = nextCombo - (combo * 2f) - 1f;
 				combo--;
+				killChain = combo == 1 ? 0f : GetNextCombo() - combo;
 				comboTimer = 0f;
 			}
 		}
@@ -308,14 +307,8 @@ public class PlayerControl : MonoBehaviour
 	{
 		killChain++;
 		comboTimer = 0f;
-		nextCombo = comboStartKills - 1f;
 
-		for (int i = 1; i <= combo; i++)
-		{
-			nextCombo += i;
-		}
-
-		if (killChain >= nextCombo)
+		if (killChain >= GetNextCombo())
 		{
 			combo++;
 			currentMaxCombo = combo;
@@ -342,6 +335,18 @@ public class PlayerControl : MonoBehaviour
 	{
 		yield return new WaitForSeconds(delay);
 		speedMultiplier = 1f;
+	}
+
+	private float GetNextCombo()
+	{
+		float nextCombo = comboStartKills - 1f;
+
+		for (int i = 1; i <= combo; i++)
+		{
+			nextCombo += i;
+		}
+
+		return nextCombo;
 	}
 }
 
