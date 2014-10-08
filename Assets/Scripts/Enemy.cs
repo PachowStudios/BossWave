@@ -76,7 +76,7 @@ public abstract class Enemy : MonoBehaviour
 		if (health <= 0f)
 		{
 			explodeEffect.Explode(velocity, spriteRenderer.sprite);
-			playerControl.AddPoints(maxHealth, damage);
+			playerControl.AddPointsFromEnemy(maxHealth, damage);
 			Destroy(gameObject);
 			
 		}

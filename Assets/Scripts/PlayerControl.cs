@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 5f;
+	public float comboStartKills = 3f;
+	public float comboDecreaseTime = 1f;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -34,7 +36,9 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public float health;
 	[HideInInspector]
-	public float score;
+	public float score = 0f;
+	[HideInInspector]
+	public float combo = 1f;
 
 	private bool right;
 	private bool left;
@@ -55,6 +59,11 @@ public class PlayerControl : MonoBehaviour
 	private float flashTimer = 0f;
 	private float flashTime = 0.25f;
 	private float smoothFlashTime;
+
+	private float currentMaxCombo = 1f;
+	private float comboTimer = 0f;
+	private float killChain = 0f;
+	private float nextCombo = 0f;
 
 	void Awake()
 	{
@@ -96,11 +105,23 @@ public class PlayerControl : MonoBehaviour
 
 		if (controller.isGrounded)
 		{
-			velocity.y = 0;
+			velocity.y = 0f;
 		}
 
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
+
+		if (combo > 1)
+		{
+			comboTimer += Time.deltaTime;
+
+			if (comboTimer >= Mathf.Clamp(comboDecreaseTime - (0.25f * (currentMaxCombo - combo)), comboDecreaseTime * 0.25f, comboDecreaseTime))
+			{
+				killChain = nextCombo - (combo * 2f) - 1f;
+				combo--;
+				comboTimer = 0f;
+			}
+		}
 
 		if (health > 0f)
 		{
@@ -128,7 +149,7 @@ public class PlayerControl : MonoBehaviour
 
 		if (crouch)
 		{
-			normalizedHorizontalSpeed = 0;
+			normalizedHorizontalSpeed = 0f;
 			boxCollider.size = new Vector2(boxCollider.size.x, crouchingColliderHeight);
 			boxCollider.center = new Vector2(boxCollider.center.x, crouchingColliderOffset);
 		}
@@ -142,7 +163,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			if (right)
 			{
-				normalizedHorizontalSpeed = 1;
+				normalizedHorizontalSpeed = 1f;
 
 				if (transform.localScale.x < 0f)
 				{
@@ -151,7 +172,7 @@ public class PlayerControl : MonoBehaviour
 			}
 			else if (left)
 			{
-				normalizedHorizontalSpeed = -1;
+				normalizedHorizontalSpeed = -1f;
 
 				if (transform.localScale.x > 0f)
 				{
@@ -160,7 +181,7 @@ public class PlayerControl : MonoBehaviour
 			}
 			else
 			{
-				normalizedHorizontalSpeed = 0;
+				normalizedHorizontalSpeed = 0f;
 			}
 		}
 
@@ -278,9 +299,29 @@ public class PlayerControl : MonoBehaviour
 		health = Mathf.Clamp(health + amount, health, maxHealth);
 	}
 
-	public void AddPoints(float enemyHealth, float enemyDamage)
+	public void AddPoints(float points)
 	{
-		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100));
+		score += points * combo;
+	}
+
+	public void AddPointsFromEnemy(float enemyHealth, float enemyDamage)
+	{
+		killChain++;
+		comboTimer = 0f;
+		nextCombo = comboStartKills - 1f;
+
+		for (int i = 1; i <= combo; i++)
+		{
+			nextCombo += i;
+		}
+
+		if (killChain >= nextCombo)
+		{
+			combo++;
+			currentMaxCombo = combo;
+		}
+
+		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
 	}
 
 	public void SwapGun(Gun newGun)
