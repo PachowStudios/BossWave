@@ -42,7 +42,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -119,11 +119,11 @@ MonoBehaviour:
     amount: 5
     spawnDelay: .400000006
     difficulty: 1
-  - startTime: 57
+  - startTime: 56
     amount: 4
     spawnDelay: .150000006
     difficulty: 2
-  - startTime: 57
+  - startTime: 56
     amount: 10
     spawnDelay: 1
     difficulty: 1
@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 11400002, guid: 3521c620716cd344888e0477030574ab, type: 2}
   - {fileID: 11400002, guid: ee94e9bb7554c6c4ab421ca6868fa5ed, type: 2}
   - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
+  - {fileID: 11400002, guid: ba68351ce86ddb34d907af73ad128a50, type: 2}
   powerups:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}

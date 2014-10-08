@@ -22,7 +22,8 @@ public class LevelManager : MonoBehaviour
 	public float powerupBuffer = 5f;
 
 	private int currentWave = 0;
-	private float waveTimer = 0f;
+	private float waveTimer;
+	private float musicStartTime;
 
 	private AudioSource music;
 	private List<GameObject> spawners;
@@ -40,14 +41,16 @@ public class LevelManager : MonoBehaviour
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
-		//music.Play();
+		music.Play();
+		musicStartTime = Time.time;
+		waveTimer = musicStartTime;
 	}
 
 	void FixedUpdate()
 	{
 		waveTimer += Time.deltaTime;
 
-		if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
+		if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime + musicStartTime)
 		{
 			StartCoroutine(SpawnWave(currentWave));
 			currentWave++;
