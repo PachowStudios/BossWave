@@ -38,7 +38,7 @@ public class FadeEffect : MonoBehaviour
 		{
 			fadeTimer += Time.deltaTime;
 
-			if (fadeTimer >= lifetime - startTime)
+			if (fadeTimer >= startTime)
 			{
 				Color newColor = spriteRenderer.color;
 				newColor.a = Mathf.Lerp(newColor.a, 0f, 0.025f);
