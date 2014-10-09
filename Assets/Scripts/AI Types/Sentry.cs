@@ -34,7 +34,7 @@ public class Sentry : Enemy
 		currentMoveTime = Random.Range(minMoveTime, maxMoveTime);
 		currentFireTime = Random.Range(minFireTime, maxFireTime);
 
-		player = GameObject.Find("Player").transform;
+		player = playerControl.transform;
 		sideFireCollider = transform.FindChild("sideFire").collider2D;
 		upFireCollider = transform.FindChild("upFire").collider2D;
 

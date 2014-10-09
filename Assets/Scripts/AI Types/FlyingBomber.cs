@@ -28,7 +28,7 @@ public class FlyingBomber : Enemy
 
 		right = true;
 
-		player = GameObject.Find("Player").transform;
+		player = playerControl.transform;
 		gun = transform.FindChild("Gun");
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 

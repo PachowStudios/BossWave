@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
 
 	void Awake()
 	{
-		player = GameObject.Find("Player").transform;
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 
 		minPosition.x += camera.orthographicSize * camera.aspect;
 		maxPosition.x -= camera.orthographicSize * camera.aspect;

@@ -39,6 +39,8 @@ public class PlayerControl : MonoBehaviour
 	public float score = 0f;
 	[HideInInspector]
 	public float combo = 1f;
+	[HideInInspector]
+	public bool continuouslyRunning = false;
 
 	private bool right;
 	private bool left;
@@ -89,11 +91,11 @@ public class PlayerControl : MonoBehaviour
 		left = Input.GetButton("Left");
 		run = Input.GetButton("Run");
 		jump = jump || Input.GetButtonDown("Jump");
-		crouch = Input.GetButton("Crouch");
+		crouch = Input.GetButton("Crouch") && !continuouslyRunning;
 
-		run = run && (right || left);
+		run = run && (right || left) || continuouslyRunning;
 
-		anim.SetBool("Walking", right || left);
+		anim.SetBool("Walking", right || left || continuouslyRunning);
 		anim.SetBool("Running", run);
 		anim.SetBool("Crouching", crouch);
 	}
@@ -173,7 +175,11 @@ public class PlayerControl : MonoBehaviour
 			{
 				normalizedHorizontalSpeed = -1f;
 
-				if (transform.localScale.x > 0f)
+				if (transform.localScale.x > 0f && !continuouslyRunning)
+				{
+					Flip();
+				}
+				else if (transform.localScale.x < 0f && continuouslyRunning)
 				{
 					Flip();
 				}
@@ -194,7 +200,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			runFullTimer += Time.deltaTime;
 
-			if (runFullTimer >= runFullTime)
+			if (runFullTimer >= runFullTime || continuouslyRunning)
 			{
 				runFull = true;
 				anim.SetBool("Running_Full", runFull);

@@ -14,18 +14,31 @@ public class LevelManager : MonoBehaviour
 		public Enemy.Difficulty difficulty;
 	}
 
+	[System.Serializable]
+	public struct BossWave
+	{
+		public Enemy boss;
+		public float startTime;
+		public float introLength;
+	}
+
+	public AudioSource mainMusic;
+	public AudioSource bossMusic;
+
 	public List<Wave> waves;
+	public BossWave bossWave;
 	public List<Enemy> enemies;
 	public List<Powerup> powerups;
 	public float minPowerupTime = 15f;
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
 
+	private bool bossWaveActive = false;
 	private int currentWave = 0;
 	private float waveTimer;
 	private float musicStartTime;
 
-	private AudioSource music;
+	private PlayerControl playerControl;
 	private List<GameObject> spawners;
 	private Transform powerupSpawner;
 	private float powerupTimer = 0f;
@@ -35,13 +48,13 @@ public class LevelManager : MonoBehaviour
 
 	void Awake()
 	{
-		music = GetComponent<AudioSource>();
+		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
-		music.Play();
+		mainMusic.Play();
 		musicStartTime = Time.time;
 		waveTimer = musicStartTime;
 	}
@@ -50,23 +63,38 @@ public class LevelManager : MonoBehaviour
 	{
 		waveTimer += Time.deltaTime;
 
-		if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime + musicStartTime)
+		if (waveTimer >= bossWave.startTime)
 		{
-			StartCoroutine(SpawnWave(currentWave));
-			currentWave++;
+			bossWaveActive = true;
 		}
 
-		powerupTimer += Time.deltaTime;
-
-		if (powerups.Count > 0 && powerupTimer >= powerupTime)
+		if (bossWaveActive)
 		{
-			Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
-			int powerupToSpawn = Mathf.RoundToInt(Random.Range(0f, powerups.Count - 1));
+			if (waveTimer >= bossWave.startTime + bossWave.introLength)
+			{
+				playerControl.continuouslyRunning = true;
+			}
+		}
+		else
+		{
+			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime + musicStartTime)
+			{
+				StartCoroutine(SpawnWave(currentWave));
+				currentWave++;
+			}
 
-			Instantiate(powerups[powerupToSpawn], powerupSpawnPoint, Quaternion.identity);
+			powerupTimer += Time.deltaTime;
 
-			powerupTimer = 0f;
-			powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
+			if (powerups.Count > 0 && powerupTimer >= powerupTime)
+			{
+				Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
+				int powerupToSpawn = Mathf.RoundToInt(Random.Range(0f, powerups.Count - 1));
+
+				Instantiate(powerups[powerupToSpawn], powerupSpawnPoint, Quaternion.identity);
+
+				powerupTimer = 0f;
+				powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
+			}
 		}
 	}
 

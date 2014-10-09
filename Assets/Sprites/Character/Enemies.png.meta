@@ -51,6 +51,8 @@ TextureImporter:
     21300092: Lakitu_Attacking_0
     21300094: Lakitu_Attacking_1
     21300096: Lakitu_Attacking_2
+    21300098: BossBoo_Attack
+    21300100: BossBoo_Idle
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -573,6 +575,26 @@ TextureImporter:
         y: 142
         width: 28
         height: 34
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BossBoo_Attack
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 340
+        width: 67
+        height: 64
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: BossBoo_Idle
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 339
+        width: 67
+        height: 64
       alignment: 7
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

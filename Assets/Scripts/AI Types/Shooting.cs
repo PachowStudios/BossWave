@@ -18,7 +18,7 @@ public class Shooting : Enemy
 	{
 		base.Awake();
 
-		player = GameObject.Find("Player").transform;
+		player = playerControl.transform;
 		gun = transform.FindChild("Gun");
 
 		detectionRange = Random.Range(minDetectionRange, maxDetectionRange);

@@ -49,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.FindChild("frontCheck");
-		playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
+		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 
 		health = maxHealth;
 	}

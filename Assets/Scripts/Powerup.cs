@@ -15,7 +15,7 @@ public abstract class Powerup : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		player = GameObject.Find("Player").GetComponent<PlayerControl>();
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		popupMessage = GameObject.Find("Popup Message").GetComponent<PopupMessage>();
 
 		spriteRenderer = GetComponent<SpriteRenderer>();

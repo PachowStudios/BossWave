@@ -11,7 +11,7 @@ public class Follow : Enemy
 	{
 		base.Awake();
 
-		player = GameObject.Find("Player").transform;
+		player = playerControl.transform;
 	}
 
 	void FixedUpdate()

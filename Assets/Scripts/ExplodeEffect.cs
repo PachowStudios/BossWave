@@ -14,7 +14,8 @@ public class ExplodeEffect : MonoBehaviour
 				Vector2 positionOffest = new Vector2(sprite.bounds.extents.x - sprite.bounds.center.x,
 													 sprite.bounds.extents.y - sprite.bounds.center.y - 0.05f);
 
-				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - positionOffest.x, (j / 10f) - positionOffest.y, 0);
+				Vector3 pixelPosition = transform.TransformPoint((i / 10f) - positionOffest.x, 
+																 (j / 10f) - positionOffest.y, 0);
 
 				Color pixelColor = sprite.texture.GetPixel((int)sprite.rect.x + i, 
 													       (int)sprite.rect.y + j);
