@@ -21,6 +21,9 @@ public class Gun : MonoBehaviour
 	public float shootCooldown = 0.5f;
 	public RarityLevel rarity = RarityLevel.Common;
 
+	[HideInInspector]
+	public bool disableInput = false;
+
 	private bool shoot;
 	private float shootTimer = 0f;
 
@@ -31,16 +34,19 @@ public class Gun : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		RotateTowardsMouse();
-
-		shootTimer += Time.deltaTime;
-
-		if (shoot && shootTimer >= shootCooldown)
+		if (!disableInput)
 		{
-			Projectile projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity) as Projectile;
-			projectileInstance.direction = transform.right;
+			RotateTowardsMouse();
 
-			shootTimer = 0f;
+			shootTimer += Time.deltaTime;
+
+			if (shoot && shootTimer >= shootCooldown)
+			{
+				Projectile projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity) as Projectile;
+				projectileInstance.direction = transform.right;
+
+				shootTimer = 0f;
+			}
 		}
 	}
 

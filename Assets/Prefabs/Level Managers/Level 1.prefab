@@ -101,7 +101,7 @@ MonoBehaviour:
   mainMusic: {fileID: 8200000}
   bossMusic: {fileID: 0}
   waves:
-  - startTime: 2
+  - startTime: 10
     amount: 10
     spawnDelay: 1
     difficulty: 0
@@ -133,6 +133,9 @@ MonoBehaviour:
     boss: {fileID: 0}
     startTime: 0
     introLength: 5
+    cameraMoveSpeed: 17.5
+    playerWaitPoint: {fileID: 0}
+    scrollPoint: {fileID: 0}
   enemies:
   - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
   - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}

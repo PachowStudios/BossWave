@@ -12,6 +12,11 @@ TagManager:
   - PowerupSpawner
   - GroundLevel
   - BossSpawner
+  - Scrolling
+  - WorldBoundaries
+  - CameraWrapper
+  - ArenaCenter
+  - InfiniteScroll
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

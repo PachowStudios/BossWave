@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
 		public Enemy boss;
 		public float startTime;
 		public float introLength;
+		public float cameraMoveSpeed;
+		public Transform playerWaitPoint;
+		public Transform scrollPoint;
 	}
 
 	public AudioSource mainMusic;
@@ -34,11 +37,18 @@ public class LevelManager : MonoBehaviour
 	public float powerupBuffer = 5f;
 
 	private bool bossWaveActive = false;
+	private bool bossWaveIntroComplete = false;
+	private bool bossWaveInitialized = false;
+	private bool bossWavePlayerMoved = false;
 	private int currentWave = 0;
 	private float waveTimer;
 	private float musicStartTime;
 
+	private CameraFollow mainCamera;
+	private Transform cameraWrapper;
+	private Transform worldBoundaries;
 	private PlayerControl playerControl;
+	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
 	private Transform powerupSpawner;
 	private float powerupTimer = 0f;
@@ -48,7 +58,11 @@ public class LevelManager : MonoBehaviour
 
 	void Awake()
 	{
+		mainCamera = Camera.main.GetComponent<CameraFollow>();
+		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
+		worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
 		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
@@ -70,9 +84,43 @@ public class LevelManager : MonoBehaviour
 
 		if (bossWaveActive)
 		{
-			if (waveTimer >= bossWave.startTime + bossWave.introLength)
+			if (!bossWaveIntroComplete)
 			{
-				playerControl.continuouslyRunning = true;
+				if (!bossWaveInitialized)
+				{
+					mainCamera.FollowObject(cameraWrapper, true, true);
+					worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
+					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
+
+					bossWaveInitialized = true;
+				}
+
+				if (waveTimer >= bossWave.startTime + bossWave.introLength)
+				{
+					if (!bossWavePlayerMoved)
+					{
+						playerControl.continuouslyRunning = true;
+						playerControl.GoToPoint(bossWave.scrollPoint.position);
+
+						bossWavePlayerMoved = true;
+					}
+
+					if (cameraWrapper.position.x < bossWave.scrollPoint.position.x)
+					{
+						cameraWrapper.position += new Vector3(bossWave.cameraMoveSpeed * Time.deltaTime, 0);
+					}
+					else
+					{
+						playerControl.cancelGoTo = true;
+
+						foreach(GameObject element in scrollingElements)
+						{
+							element.GetComponent<ScrollInfinite>().loop = true;
+						}
+
+						bossWaveIntroComplete = true;
+					}
+				}
 			}
 		}
 		else

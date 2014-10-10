@@ -47,6 +47,7 @@ public class PlayerControl : MonoBehaviour
 	private bool jump;
 	private bool run;
 	private bool crouch;
+	private bool disableInput = false;
 
 	private bool runFull = false;
 	private float runFullTimer = 0f;
@@ -65,6 +66,13 @@ public class PlayerControl : MonoBehaviour
 	private float currentMaxCombo = 1f;
 	private float comboTimer = 0f;
 	private float killChain = 0f;
+
+	[HideInInspector]
+	public bool cancelGoTo = false;
+	private bool useTargetPoint = false;
+	private bool reEnableAfterMove = true;
+	private bool inertiaAfterMove = false;
+	private Vector3 targetPoint;
 
 	void Awake()
 	{
@@ -87,13 +95,16 @@ public class PlayerControl : MonoBehaviour
 
 	void Update()
 	{
-		right = Input.GetButton("Right");
-		left = Input.GetButton("Left");
-		run = Input.GetButton("Run");
-		jump = jump || Input.GetButtonDown("Jump");
-		crouch = Input.GetButton("Crouch") && !continuouslyRunning;
+		if (!disableInput)
+		{
+			right = Input.GetButton("Right");
+			left = Input.GetButton("Left");
+			run = Input.GetButton("Run");
+			jump = jump || Input.GetButtonDown("Jump");
+			crouch = Input.GetButton("Crouch") && !continuouslyRunning;
+		}
 
-		run = run && (right || left) || continuouslyRunning;
+		run = (run && (right || left)) || continuouslyRunning;
 
 		anim.SetBool("Walking", right || left || continuouslyRunning);
 		anim.SetBool("Running", run);
@@ -111,6 +122,39 @@ public class PlayerControl : MonoBehaviour
 
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
+
+		if (useTargetPoint && disableInput)
+		{
+			if (transform.position.x < targetPoint.x && !left)
+			{
+				right = true;
+			}
+			else if (transform.position.x > targetPoint.x && !right)
+			{
+				left = true;
+			}
+			else
+			{
+				cancelGoTo = true;	
+			}
+
+			if (cancelGoTo)
+			{
+				ResetInput();
+
+				useTargetPoint = false;
+
+				if (!inertiaAfterMove)
+				{
+					velocity.x = 0f;
+				}
+
+				if (reEnableAfterMove)
+				{
+					EnableInput();
+				}
+			}
+		}
 
 		if (combo > 1)
 		{
@@ -215,7 +259,9 @@ public class PlayerControl : MonoBehaviour
 
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed) * speedMultiplier, Time.fixedDeltaTime * smoothedMovementFactor);
+		velocity.x = Mathf.Lerp(velocity.x,
+								normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed) * speedMultiplier,
+								Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 		controller.move(velocity * Time.fixedDeltaTime);
@@ -335,6 +381,35 @@ public class PlayerControl : MonoBehaviour
 	public void ResetSpeed(float delay)
 	{
 		StartCoroutine(ResetSpeedCoroutine(delay));
+	}
+
+	public void GoToPoint(Vector3 point, bool autoEnableInput = true, bool inertia = false)
+	{
+		targetPoint = point;
+		useTargetPoint = true;
+		cancelGoTo = false;
+		reEnableAfterMove = autoEnableInput;
+		inertiaAfterMove = inertia;
+		DisableInput();
+	}
+
+	public void DisableInput()
+	{
+		disableInput = true;
+		gun.disableInput = true;
+		ResetInput();
+	}
+
+	public void EnableInput()
+	{
+		ResetInput();
+		disableInput = false;
+		gun.disableInput = false;
+	}
+
+	private void ResetInput()
+	{
+		left = right = run = jump = crouch = false;
 	}
 
 	private IEnumerator ResetSpeedCoroutine(float delay)

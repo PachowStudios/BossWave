@@ -3,61 +3,40 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour 
 {
-	public Vector2 margin = new Vector2(1f, 1f);
+	public Vector2 margin = new Vector2(70f, 70f);
 	public Vector2 smooth = new Vector2(8f, 8f);
-	public Vector2 minPosition;
-	public Vector2 maxPosition;
+	public Transform follow;
 
-	private Transform player;
+	public Vector2 marginUnits;
 
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag("Player").transform;
-
-		minPosition.x += camera.orthographicSize * camera.aspect;
-		maxPosition.x -= camera.orthographicSize * camera.aspect;
-
-		minPosition.y += camera.orthographicSize;
-		maxPosition.y -= camera.orthographicSize;
-
-		if (minPosition.x > -0.1f)
-		{
-			minPosition.x = 0f;
-		}
-
-		if (maxPosition.x < 0.1f)
-		{
-			maxPosition.x = 0f;
-		}
-
-		if (minPosition.y > -0.1f)
-		{
-			minPosition.y = 0f;
-		}
-
-		if (maxPosition.y < 0.1f)
-		{
-			minPosition.y = 0f;
-		}
+		marginUnits = new Vector2(camera.orthographicSize * camera.aspect * (margin.x / 100f),
+								  camera.orthographicSize * (margin.y / 100f));
 	}
 
 	void FixedUpdate()
 	{
 		Vector2 targetPosition = transform.position;
 
-		if (Mathf.Abs(transform.position.x - player.position.x) > margin.x)
+		if (Mathf.Abs(transform.position.x - follow.position.x) > marginUnits.x)
 		{
-			targetPosition.x = Mathf.Lerp(transform.position.x, player.position.x, smooth.x * Time.deltaTime);
+			targetPosition.x = Mathf.Lerp(transform.position.x, follow.position.x, smooth.x * Time.deltaTime);
 		}
 
-		if (Mathf.Abs(transform.position.y - player.position.y) > margin.y)
+		if (Mathf.Abs(transform.position.y - follow.position.y) > marginUnits.y)
 		{
-			targetPosition.y = Mathf.Lerp(transform.position.y, player.position.y, smooth.y * Time.deltaTime);
+			targetPosition.y = Mathf.Lerp(transform.position.y, follow.position.y, smooth.y * Time.deltaTime);
 		}
-
-		targetPosition.x = Mathf.Clamp(targetPosition.x, minPosition.x, maxPosition.x);
-		targetPosition.y = Mathf.Clamp(targetPosition.y, minPosition.y, maxPosition.y);
 
 		transform.position = new Vector3(targetPosition.x, targetPosition.y, transform.position.z);
+	}
+
+	public void FollowObject(Transform target, bool explicitX = false, bool explicitY = false)
+	{
+		follow = target;
+
+		marginUnits.x = explicitX ? 0.01f : camera.orthographicSize * camera.aspect * (margin.x / 100f);
+		marginUnits.y = explicitY ? 0.01f : camera.orthographicSize * (margin.y / 100f);
 	}
 }

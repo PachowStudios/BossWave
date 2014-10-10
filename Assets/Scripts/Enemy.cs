@@ -152,7 +152,7 @@ public abstract class Enemy : MonoBehaviour
 
 		foreach (Collider2D hit in frontHits)
 		{
-			if (hit.tag == "Obstacle")
+			if (hit.tag == "Obstacle" || hit.tag == "WorldBoundaries")
 			{
 				Flip();
 
