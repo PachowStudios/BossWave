@@ -407,6 +407,11 @@ public class PlayerControl : MonoBehaviour
 		gun.disableInput = false;
 	}
 
+	public bool IsInputEnabled()
+	{
+		return disableInput;
+	}
+
 	private void ResetInput()
 	{
 		left = right = run = jump = crouch = false;

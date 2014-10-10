@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
 	private Transform worldBoundaries;
+	private Cutscene cutscene;
 	private PlayerControl playerControl;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
@@ -61,6 +62,7 @@ public class LevelManager : MonoBehaviour
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
 		worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
+		cutscene = GameObject.FindGameObjectWithTag("UI").GetComponent<Cutscene>();
 		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
@@ -88,6 +90,7 @@ public class LevelManager : MonoBehaviour
 			{
 				if (!bossWaveInitialized)
 				{
+					cutscene.StartCutscene();
 					mainCamera.FollowObject(cameraWrapper, true, true);
 					worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
 					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
@@ -111,6 +114,7 @@ public class LevelManager : MonoBehaviour
 					}
 					else
 					{
+						cutscene.EndCutscene();
 						playerControl.cancelGoTo = true;
 
 						foreach(GameObject element in scrollingElements)

@@ -131,7 +131,7 @@ MonoBehaviour:
     difficulty: 1
   bossWave:
     boss: {fileID: 0}
-    startTime: 0
+    startTime: 1
     introLength: 5
     cameraMoveSpeed: 17.5
     playerWaitPoint: {fileID: 0}
