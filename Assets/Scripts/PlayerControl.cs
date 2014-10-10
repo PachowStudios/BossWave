@@ -407,7 +407,7 @@ public class PlayerControl : MonoBehaviour
 		gun.disableInput = false;
 	}
 
-	public bool IsInputEnabled()
+	public bool IsInputDisabled()
 	{
 		return disableInput;
 	}
