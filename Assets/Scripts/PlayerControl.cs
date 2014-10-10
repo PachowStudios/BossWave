@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour
 	public float runSpeed = 17.5f;
 	public float runFullSpeed = 20f;
 	public float runFullTime = 1.5f;
+	public float continuousRunSpeed = 10f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 5f;
@@ -260,7 +261,10 @@ public class PlayerControl : MonoBehaviour
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x,
-								normalizedHorizontalSpeed * (run ? (runFull ? runFullSpeed : runSpeed) : walkSpeed) * speedMultiplier,
+			normalizedHorizontalSpeed * (run ? (runFull ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed 
+																								  : runFullSpeed) 
+														: runSpeed) 
+											 : walkSpeed) * speedMultiplier,
 								Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 
