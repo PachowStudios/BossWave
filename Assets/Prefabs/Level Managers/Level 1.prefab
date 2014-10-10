@@ -130,10 +130,11 @@ MonoBehaviour:
     spawnDelay: 1
     difficulty: 1
   bossWave:
-    boss: {fileID: 0}
+    boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
     startTime: 1
-    introLength: 5
+    introLength: 5.5
     cameraMoveSpeed: 17.5
+    bossSpawner: {fileID: 0}
     playerWaitPoint: {fileID: 0}
     scrollPoint: {fileID: 0}
   enemies:

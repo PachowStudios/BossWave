@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 		public float startTime;
 		public float introLength;
 		public float cameraMoveSpeed;
+		public Transform bossSpawner;
 		public Transform playerWaitPoint;
 		public Transform scrollPoint;
 	}
@@ -35,7 +36,7 @@ public class LevelManager : MonoBehaviour
 	public float minPowerupTime = 15f;
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
-
+	
 	private bool bossWaveActive = false;
 	private bool bossWaveIntroComplete = false;
 	private bool bossWaveInitialized = false;
@@ -91,6 +92,7 @@ public class LevelManager : MonoBehaviour
 				if (!bossWaveInitialized)
 				{
 					cutscene.StartCutscene();
+					Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity);
 					mainCamera.FollowObject(cameraWrapper, true, true);
 					worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
 					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
