@@ -10,11 +10,15 @@ public class BossBoo : Enemy
 	public float maxSwoopTime = 5f;
 	public float minSwoopDistance = 10f;
 	public float maxSwoopDistance = 12f;
-	public float swoopSpeedMultiplier = 1.5f;
+	public float swoopSpeedMultiplier = 3f;
+	public float smashRange = 4f;
+	public float smashTime = 2f;
+	public float smashGravity = -50f;
 
 	private float defaultGravity;
 	private float flyHeight;
 	private float swoopTimer = 0f;
+	private float smashTimer = 0f;
 	private float currentSwoopTime;
 	private float currentSwoopDistance;
 	private float startingY;
@@ -24,6 +28,7 @@ public class BossBoo : Enemy
 	private float swoopGravity;
 	private bool swooping = false;
 	private bool swoopReturn = false;
+	private bool smashing = false;
 
 	private Transform player;
 	private Transform groundLevel;
@@ -52,7 +57,7 @@ public class BossBoo : Enemy
 
 		invincible = !swooping || swoopReturn;
 
-		if (!swooping)
+		if (!swooping && !smashing)
 		{
 			if (transform.position.y >= flyHeight + flyHeightBuffer)
 			{
@@ -84,64 +89,92 @@ public class BossBoo : Enemy
 			}
 		}
 
-		swoopTimer += Time.deltaTime;
+		smashTimer += Time.deltaTime;
 
-		if (swoopTimer >= currentSwoopTime)
+		if (!swooping && Mathf.Abs(transform.position.x - player.position.x) < smashRange)
 		{
-			if (!swooping && velocity.y < 0f)
+			if (smashTimer >= smashTime)
 			{
-				swooping = true;
+				smashing = true;
 				anim.SetBool("Attacking", true);
-				currentSwoopDistance = Random.Range(minSwoopDistance, maxSwoopDistance);
-				targetX = startingX + currentSwoopDistance;
-				moveSpeed *= swoopSpeedMultiplier;
-				startingY = transform.position.y;
-				startingHeight = Mathf.Abs(startingY - groundLevel.position.y);
-				float secondsToTarget = currentSwoopDistance / (moveSpeed * swoopSpeedMultiplier);
-				swoopGravity = -(startingHeight / secondsToTarget);
 			}
+		}
 
-			if (swooping)
+		if (smashing)
+		{
+			if (transform.position.y > groundLevel.position.y)
 			{
-				if (transform.position.x < targetX && !swoopReturn)
-				{
-					right = true;
-					left = !right;
-					gravity = Mathf.Lerp(gravity, swoopGravity, 0.5f);
-				}
-				else if (transform.position.x < targetX + currentSwoopDistance && !swoopReturn)
-				{
-					right = true;
-					left = !right;
-					gravity = Mathf.Lerp(gravity, -swoopGravity, 0.5f);
-				}
-				else if (transform.position.x > targetX + currentSwoopDistance && !swoopReturn)
-				{
-					swoopReturn = true;
-					anim.SetBool("Attacking", false);
-				}
-				else if (transform.position.x > startingX && swoopReturn)
-				{
-					left = true;
-					right = !left;
+				gravity = Mathf.Lerp(gravity, smashGravity, 0.5f);
+			}
+			else
+			{
+				smashing = false;
+				anim.SetBool("Attacking", false);
+				smashTimer = 0f;
+			}
+		}
 
-					if (transform.position.y < startingY + startingHeight)
+		if (!smashing)
+		{
+			swoopTimer += Time.deltaTime;
+
+			if (swoopTimer >= currentSwoopTime)
+			{
+				if (!swooping && velocity.y < 0f)
+				{
+					swooping = true;
+					anim.SetBool("Attacking", true);
+					currentSwoopDistance = Random.Range(minSwoopDistance, maxSwoopDistance);
+					targetX = startingX + currentSwoopDistance;
+					moveSpeed *= swoopSpeedMultiplier;
+					startingY = transform.position.y;
+					startingHeight = Mathf.Abs(startingY - groundLevel.position.y);
+					float secondsToTarget = currentSwoopDistance / (moveSpeed * swoopSpeedMultiplier);
+					swoopGravity = -(startingHeight / secondsToTarget);
+				}
+
+				if (swooping)
+				{
+					if (transform.position.x < targetX && !swoopReturn)
 					{
+						right = true;
+						left = !right;
+						gravity = Mathf.Lerp(gravity, swoopGravity, 0.5f);
+					}
+					else if (transform.position.x < targetX + currentSwoopDistance && !swoopReturn)
+					{
+						right = true;
+						left = !right;
 						gravity = Mathf.Lerp(gravity, -swoopGravity, 0.5f);
 					}
-					else
+					else if (transform.position.x > targetX + currentSwoopDistance && !swoopReturn)
 					{
-						gravity = Mathf.Lerp(gravity, swoopGravity * 2f, 0.5f);
+						swoopReturn = true;
+						anim.SetBool("Attacking", false);
 					}
-				}
-				else if (transform.position.x < startingX && swoopReturn)
-				{
-					right = left = false;
-					swoopReturn = false;
-					swooping = false;
-					swoopTimer = 0f;
-					moveSpeed /= swoopSpeedMultiplier;
-					currentSwoopTime = Random.Range(minSwoopTime, maxSwoopTime) * 2f;
+					else if (transform.position.x > startingX && swoopReturn)
+					{
+						left = true;
+						right = !left;
+
+						if (transform.position.y < startingY + startingHeight)
+						{
+							gravity = Mathf.Lerp(gravity, -swoopGravity, 0.5f);
+						}
+						else
+						{
+							gravity = Mathf.Lerp(gravity, swoopGravity * 2f, 0.5f);
+						}
+					}
+					else if (transform.position.x < startingX && swoopReturn)
+					{
+						right = left = false;
+						swoopReturn = false;
+						swooping = false;
+						swoopTimer = 0f;
+						moveSpeed /= swoopSpeedMultiplier;
+						currentSwoopTime = Random.Range(minSwoopTime, maxSwoopTime) * 2f;
+					}
 				}
 			}
 		}

@@ -206,6 +206,9 @@ MonoBehaviour:
   minSwoopDistance: 10
   maxSwoopDistance: 12
   swoopSpeedMultiplier: 3
+  smashRange: 4
+  smashTime: 2
+  smashGravity: -50
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
