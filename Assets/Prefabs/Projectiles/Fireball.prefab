@@ -94,6 +94,7 @@ MonoBehaviour:
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
+  ignoreTag: 
   slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2

@@ -29,6 +29,7 @@ public abstract class Enemy : MonoBehaviour
 
 	protected bool right = false;
 	protected bool left = false;
+	protected bool invincible = false;
 
 	[HideInInspector]
 	protected float normalizedHorizontalSpeed = 0;
@@ -71,32 +72,35 @@ public abstract class Enemy : MonoBehaviour
 		float knockback = enemy.GetComponent<Projectile>().knockback;
 		enemy.GetComponent<Projectile>().CheckDestroy();
 
-		health -= damage;
-
-		if (health <= 0f)
+		if (!invincible)
 		{
-			explodeEffect.Explode(velocity, spriteRenderer.sprite);
-			playerControl.AddPointsFromEnemy(maxHealth, damage);
-			Destroy(gameObject);
-			
-		}
-		else
-		{
-			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
-			velocity.y = Mathf.Sqrt(knockback * -gravity);
+			health -= damage;
 
-			if (transform.position.x - enemy.transform.position.x < 0)
+			if (health <= 0f)
 			{
-				velocity.x *= -1;
-			}
+				explodeEffect.Explode(velocity, spriteRenderer.sprite);
+				playerControl.AddPointsFromEnemy(maxHealth, damage);
+				Destroy(gameObject);
 
-			if (velocity.x > 0 || velocity.y > 0)
+			}
+			else
 			{
-				controller.move(velocity * Time.deltaTime);
-			}
+				velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
+				velocity.y = Mathf.Sqrt(knockback * -gravity);
 
-			spriteRenderer.color = flashColor;
-			Invoke("ResetColor", flashLength);
+				if (transform.position.x - enemy.transform.position.x < 0)
+				{
+					velocity.x *= -1;
+				}
+
+				if (velocity.x > 0 || velocity.y > 0)
+				{
+					controller.move(velocity * Time.deltaTime);
+				}
+
+				spriteRenderer.color = flashColor;
+				Invoke("ResetColor", flashLength);
+			}
 		}
 	}
 

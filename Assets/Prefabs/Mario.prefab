@@ -152,6 +152,7 @@ MonoBehaviour:
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 4096
+  ignoreTag: 
   slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
@@ -196,6 +197,7 @@ MonoBehaviour:
   runSpeed: 15
   runFullSpeed: 17.5
   runFullTime: 1
+  continuousRunSpeed: 10
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 5
@@ -207,6 +209,7 @@ MonoBehaviour:
   score: 0
   combo: 1
   continuouslyRunning: 0
+  cancelGoTo: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -235,6 +238,7 @@ MonoBehaviour:
   aimAtMouse: 1
   shootCooldown: .150000006
   rarity: 0
+  disableInput: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

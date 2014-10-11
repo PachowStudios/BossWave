@@ -97,6 +97,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	private LayerMask oneWayPlatformMask = 0;
 
+	public string ignoreTag = "none";
 
 	/// <summary>
 	/// the max slope angle that the CC2D can climb
@@ -198,21 +199,21 @@ public class CharacterController2D : MonoBehaviour
 
 	public void OnTriggerEnter2D( Collider2D col )
 	{
-		if( onTriggerEnterEvent != null )
+		if( onTriggerEnterEvent != null)
 			onTriggerEnterEvent( col );
 	}
 
 
 	public void OnTriggerStay2D( Collider2D col )
 	{
-		if( onTriggerStayEvent != null )
+		if (onTriggerStayEvent != null)
 			onTriggerStayEvent( col );
 	}
 
 
 	public void OnTriggerExit2D( Collider2D col )
 	{
-		if( onTriggerExitEvent != null )
+		if (onTriggerExitEvent != null)
 			onTriggerExitEvent( col );
 	}
 
@@ -418,7 +419,7 @@ public class CharacterController2D : MonoBehaviour
 			else
 				_raycastHit = Physics2D.Raycast( ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask );
 
-			if( _raycastHit )
+			if( _raycastHit && _raycastHit.collider.tag != ignoreTag)
 			{
 				// the bottom ray can hit slopes but no other ray can so we have special handling for those cases
 				if( i == 0 && handleHorizontalSlope( ref deltaMovement, Vector2.Angle( _raycastHit.normal, Vector2.up ) ) )
@@ -517,7 +518,7 @@ public class CharacterController2D : MonoBehaviour
 
 			DrawRay( ray, rayDirection * rayDistance, Color.red );
 			_raycastHit = Physics2D.Raycast( ray, rayDirection, rayDistance, mask );
-			if( _raycastHit )
+			if( _raycastHit && _raycastHit.collider.tag != ignoreTag)
 			{
 				// set our new deltaMovement and recalculate the rayDistance taking it into account
 				deltaMovement.y = _raycastHit.point.y - ray.y;
