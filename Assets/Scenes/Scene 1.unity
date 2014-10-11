@@ -2567,6 +2567,7 @@ MonoBehaviour:
   runSpeed: 15
   runFullSpeed: 17.5
   runFullTime: 1
+  continuousRunSpeed: 10
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 5
