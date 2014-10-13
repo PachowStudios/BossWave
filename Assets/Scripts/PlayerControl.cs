@@ -98,11 +98,19 @@ public class PlayerControl : MonoBehaviour
 	{
 		if (!disableInput)
 		{
-			right = Input.GetButton("Right");
-			left = Input.GetButton("Left");
-			run = Input.GetButton("Run");
-			jump = jump || Input.GetButtonDown("Jump");
-			crouch = Input.GetButton("Crouch") && !continuouslyRunning;
+			#if MOBILE_INPUT
+			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
+			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
+			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
+			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
+			crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f;
+			#else
+			right = CrossPlatformInputManager.GetButton("Right");
+			left = CrossPlatformInputManager.GetButton("Left");
+			run = CrossPlatformInputManager.GetButton("Run");
+			jump = jump || CrossPlatformInputManager.GetButtonDown("Jump");
+			crouch = CrossPlatformInputManager.GetButton("Crouch") && !continuouslyRunning;
+			#endif
 		}
 
 		run = (run && (right || left)) || continuouslyRunning;
@@ -239,6 +247,8 @@ public class PlayerControl : MonoBehaviour
 		{
 			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
 			anim.SetTrigger("Jump");
+
+			jump = false;
 		}
 
 		if (run)
@@ -268,9 +278,7 @@ public class PlayerControl : MonoBehaviour
 								Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 
-		controller.move(velocity * Time.fixedDeltaTime);
-
-		jump = false;
+		controller.move(velocity * Time.fixedDeltaTime);		
 	}
 
 	void OnTriggerEnter2D(Collider2D enemy)

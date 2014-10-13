@@ -29,7 +29,11 @@ public class Gun : MonoBehaviour
 
 	void Update()
 	{
-		shoot = Input.GetButton("Shoot");
+		#if MOBILE_INPUT
+		shoot = CrossPlatformInputManager.GetAxis("GunRotation") != 0f;
+		#else
+		shoot = CrossPlatformInputManager.GetButton("Shoot");
+		#endif
 	}
 
 	void FixedUpdate()
@@ -52,11 +56,15 @@ public class Gun : MonoBehaviour
 
 	void RotateTowardsMouse()
 	{
+		#if MOBILE_INPUT
+		transform.rotation = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation"));
+		#else
 		Vector3 mousePosition = Input.mousePosition;
 		mousePosition.z = 10f;
 		Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 		gunLookPosition -= transform.position;
 		float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
+		#endif
 	}
 }
