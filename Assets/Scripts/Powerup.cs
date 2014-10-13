@@ -10,16 +10,16 @@ public abstract class Powerup : MonoBehaviour
 	protected PlayerControl player;
 	protected PopupMessage popupMessage;
 
-	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
+	private SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		popupMessage = GameObject.Find("Popup Message").GetComponent<PopupMessage>();
 
-		spriteRenderer = GetComponent<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		if (autoDestroy)
 		{

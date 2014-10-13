@@ -103,7 +103,7 @@ public class PlayerControl : MonoBehaviour
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
 			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
 			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
-			crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f;
+			crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f && !continuouslyRunning;
 			#else
 			right = CrossPlatformInputManager.GetButton("Right");
 			left = CrossPlatformInputManager.GetButton("Left");
@@ -323,7 +323,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			spriteRenderer.enabled = false;
 			collider2D.enabled = false;
-			explodeEffect.Explode(velocity, spriteRenderer.sprite, true);
+			explodeEffect.Explode(velocity, spriteRenderer.sprite);
 		}
 		else
 		{

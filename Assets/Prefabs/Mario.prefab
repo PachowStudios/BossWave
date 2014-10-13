@@ -221,7 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63bc5c677d4674042a821fe47b31795a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelPrefab: {fileID: 100000, guid: 5c9cffe3de8d4ef4a8f21a3acfd4d934, type: 2}
+  explosionPrefab: {fileID: 11400000, guid: 30b0be472223e304f9c048f159c43fa0, type: 2}
+  pixelsPerUnit: 10
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

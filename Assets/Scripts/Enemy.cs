@@ -68,9 +68,10 @@ public abstract class Enemy : MonoBehaviour
 
 	void TakeDamage(GameObject enemy)
 	{
-		float damage = enemy.GetComponent<Projectile>().damage;
-		float knockback = enemy.GetComponent<Projectile>().knockback;
-		enemy.GetComponent<Projectile>().CheckDestroy();
+		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
+		float damage = enemyProjectile.damage;
+		float knockback = enemyProjectile.knockback;
+		enemyProjectile.CheckDestroy();
 
 		if (!invincible)
 		{
@@ -78,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
 
 			if (health <= 0f)
 			{
-				explodeEffect.Explode(velocity, spriteRenderer.sprite);
+				explodeEffect.Explode(enemyProjectile.velocity, spriteRenderer.sprite);
 				playerControl.AddPointsFromEnemy(maxHealth, damage);
 				Destroy(gameObject);
 

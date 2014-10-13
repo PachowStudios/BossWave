@@ -14,17 +14,18 @@ public abstract class Projectile : MonoBehaviour
 
 	[HideInInspector]
 	public Vector3 direction;
+	[HideInInspector]
+	public Vector3 velocity;
 
 	private CharacterController2D controller;
-	private SpriteRenderer spriteRenderer;
 	private ExplodeEffect explodeEffect;
-	private Vector3 velocity;
+	private SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
 		explodeEffect = GetComponent<ExplodeEffect>();
+		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		if (playerShot)
 		{
