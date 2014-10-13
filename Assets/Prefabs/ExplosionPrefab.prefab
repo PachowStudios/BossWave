@@ -1078,8 +1078,8 @@ ParticleSystem:
     plane3: {fileID: 0}
     plane4: {fileID: 0}
     plane5: {fileID: 0}
-    dampen: .200000003
-    bounce: .300000012
+    dampen: .00999999978
+    bounce: .400000006
     energyLossOnCollision: 0
     minKillSpeed: 0
     particleRadius: .00999999978

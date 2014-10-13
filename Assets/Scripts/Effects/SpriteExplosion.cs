@@ -9,6 +9,13 @@ public class SpriteExplosion : MonoBehaviour
 	public string sortingLayer = "Foreground";
 	public int sortingOrder = 1;
 
+	LevelManager levelManager;
+
+	void Awake()
+	{
+		levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+	}
+
 	public void Explode(Vector3 velocity, Sprite sprite)
 	{
 		StartCoroutine(DoExplode(velocity, sprite));
@@ -22,6 +29,7 @@ public class SpriteExplosion : MonoBehaviour
 		partSystem.renderer.sortingLayerName = sortingLayer;
 		partSystem.renderer.sortingOrder = sortingOrder;
 		currentParticle.size = 1f / pixelsPerUnit;
+		Vector3 randomTranslate = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
 
 		for (int i = 0; i < sprite.bounds.size.x * 10f; i++)
 		{
@@ -42,9 +50,9 @@ public class SpriteExplosion : MonoBehaviour
 					currentParticle.rotation = 0f;
 					currentParticle.color = particleColor;
 					currentParticle.startLifetime = currentParticle.lifetime = lifetime;
-					currentParticle.velocity = new Vector2(velocity.x + Random.Range(-5f, 5f),
-														   velocity.y + Random.Range(-5f, 6f));
-
+					currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraMoveSpeed : velocity.x) + Random.Range(-1f, 1f),
+														   velocity.y + Random.Range(-1f, 1f));
+					currentParticle.velocity += randomTranslate;
 					particles.Add(currentParticle);
 				}
 			}

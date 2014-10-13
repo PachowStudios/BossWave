@@ -37,11 +37,13 @@ public class LevelManager : MonoBehaviour
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
 
+	[HideInInspector]
+	public bool bossWavePlayerMoved = false;
+
 	private Enemy bossInstance;
 	private bool bossWaveActive = false;
 	private bool bossWaveIntroComplete = false;
 	private bool bossWaveInitialized = false;
-	private bool bossWavePlayerMoved = false;
 	private int currentWave = 0;
 	private float waveTimer;
 	private float musicStartTime;
