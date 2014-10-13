@@ -197,6 +197,7 @@ MonoBehaviour:
   moveSpeed: 8
   groundDamping: 10
   inAirDamping: 5
+  timeWarpAtDeath: 1
   health: 0
   minFlyHeight: 3
   maxFlyHeight: 5

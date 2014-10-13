@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Enemy : MonoBehaviour 
+public abstract class Enemy : MonoBehaviour
 {
 	public enum Difficulty
 	{
@@ -23,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
+	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
 	public float health;
@@ -66,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
-	void TakeDamage(GameObject enemy)
+	private void TakeDamage(GameObject enemy)
 	{
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;
@@ -79,10 +80,20 @@ public abstract class Enemy : MonoBehaviour
 
 			if (health <= 0f)
 			{
-				explodeEffect.Explode(enemyProjectile.velocity, spriteRenderer.sprite);
+				explodeEffect.Explode(velocity, spriteRenderer.sprite);
 				playerControl.AddPointsFromEnemy(maxHealth, damage);
-				Destroy(gameObject);
 
+				if (timeWarpAtDeath)
+				{
+					spriteRenderer.enabled = false;
+					collider2D.enabled = false;
+					StartCoroutine(TimeWarp.Warp(0.15f, 1f));
+					Destroy(gameObject, 1f);
+				}
+				else
+				{
+					Destroy(gameObject);
+				}
 			}
 			else
 			{
@@ -173,7 +184,7 @@ public abstract class Enemy : MonoBehaviour
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 	}
 
-	void ResetColor()
+	private void ResetColor()
 	{
 		spriteRenderer.color = Color.white;
 	}

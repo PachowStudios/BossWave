@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.1881418, y: -4.11661053, z: 0}
+  m_LocalPosition: {x: -9.30917072, y: -3.99126792, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -197,6 +197,7 @@ MonoBehaviour:
   moveSpeed: 5
   groundDamping: 10
   inAirDamping: 5
+  timeWarpAtDeath: 0
   health: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -210,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 11400000, guid: 30b0be472223e304f9c048f159c43fa0, type: 2}
-  lifetime: 4
   pixelsPerUnit: 10
 --- !u!212 &21200000
 SpriteRenderer:

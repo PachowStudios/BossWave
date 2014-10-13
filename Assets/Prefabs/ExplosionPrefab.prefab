@@ -287,7 +287,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
       minMaxState: 0
-    gravityModifier: 1
+    gravityModifier: 1.5
     inheritVelocity: 0
     maxNumParticles: 1000
   ShapeModule:
@@ -1078,8 +1078,8 @@ ParticleSystem:
     plane3: {fileID: 0}
     plane4: {fileID: 0}
     plane5: {fileID: 0}
-    dampen: .00999999978
-    bounce: .400000006
+    dampen: 0
+    bounce: .200000003
     energyLossOnCollision: 0
     minKillSpeed: 0
     particleRadius: .00999999978
