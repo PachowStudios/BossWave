@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c70618e413ff04ebf46329bca21268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  margin: {x: 70, y: 100}
+  margin: {x: 100, y: 100}
   smooth: {x: 1.5, y: 1.5}
   follow: {fileID: 0}
   marginUnits: {x: 0, y: 0}

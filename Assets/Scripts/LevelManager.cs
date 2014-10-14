@@ -46,7 +46,6 @@ public class LevelManager : MonoBehaviour
 	private bool bossWaveInitialized = false;
 	private int currentWave = 0;
 	private float waveTimer;
-	private float musicStartTime;
 
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
@@ -74,14 +73,14 @@ public class LevelManager : MonoBehaviour
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		mainMusic.Play();
-		musicStartTime = Time.time;
-		waveTimer = musicStartTime;
+		waveTimer = mainMusic.time;
 	}
 
 	void FixedUpdate()
 	{
-		waveTimer += Time.deltaTime;
+		waveTimer = mainMusic.time;
 
 		if (waveTimer >= bossWave.startTime)
 		{
@@ -136,7 +135,7 @@ public class LevelManager : MonoBehaviour
 		}
 		else
 		{
-			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime + musicStartTime)
+			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
 			{
 				StartCoroutine(SpawnWave(currentWave));
 				currentWave++;

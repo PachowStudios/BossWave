@@ -42,7 +42,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   mainMusic: {fileID: 8200000}
   bossMusic: {fileID: 0}
   waves:
-  - startTime: 10
+  - startTime: 2
     amount: 10
     spawnDelay: 1
     difficulty: 0
@@ -129,10 +129,46 @@ MonoBehaviour:
     amount: 10
     spawnDelay: 1
     difficulty: 1
+  - startTime: 69
+    amount: 4
+    spawnDelay: .150000006
+    difficulty: 2
+  - startTime: 70
+    amount: 10
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 83
+    amount: 10
+    spawnDelay: .150000006
+    difficulty: 0
+  - startTime: 97
+    amount: 4
+    spawnDelay: .150000006
+    difficulty: 1
+  - startTime: 98
+    amount: 5
+    spawnDelay: 2
+    difficulty: 0
+  - startTime: 99
+    amount: 5
+    spawnDelay: 2
+    difficulty: 2
+  - startTime: 110
+    amount: 7
+    spawnDelay: 2
+    difficulty: 0
+  - startTime: 125
+    amount: 10
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 139
+    amount: 10
+    spawnDelay: .5
+    difficulty: 2
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1
-    introLength: 5.5
+    startTime: 151
+    introLength: 14
     cameraMoveSpeed: 17.5
     bossSpawner: {fileID: 0}
     playerWaitPoint: {fileID: 0}
