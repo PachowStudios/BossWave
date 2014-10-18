@@ -85,7 +85,7 @@ public abstract class Enemy : MonoBehaviour
 				{
 					spriteRenderer.enabled = false;
 					collider2D.enabled = false;
-					TimeWarpEffect.Warp(0.15f, 1f);
+					TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
 				}
 
 				Destroy(gameObject);

@@ -4,131 +4,70 @@ using System.Collections;
 public class TimeWarpEffect : MonoBehaviour
 {
 	static private TimeWarpEffect instance;
+	static private AudioSource[] allSounds;
 
 	void Awake()
 	{
 		instance = this;
+		allSounds = null;
 	}
 
-	public static void Warp(float timeScale, float length, AudioSource[] sounds = null)
+	public static void Warp(float timeScale, float length, float fadeTime, AudioSource[] sounds = null)
 	{
-		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.WarpCoroutine(timeScale, length, sounds));
+		allSounds = sounds;
+
+		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
+														"to", timeScale,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateValues",
+														"oncomplete", "RevertWarp",
+														"oncompleteparams", iTween.Hash("length", length, "fadeTime", fadeTime), 
+														"ignoretimescale", true));
 	}
 
-	public static void StartWarp(float timeScale, AudioSource[] sounds = null)
+	public static void StartWarp(float timeScale, float fadeTime, AudioSource[] sounds = null)
 	{
-		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.StartWarpCoroutine(timeScale, sounds));
+		allSounds = sounds;
+		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
+														"to", timeScale,
+													    "time", fadeTime,
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateValues",
+														"ignoretimescale", true));
 	}
 
-	public static void EndWarp(AudioSource[] sounds = null)
+	public static void EndWarp(float fadeTime, AudioSource[] sounds = null)
 	{
-		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.EndWarpCoroutine(sounds));
+		allSounds = sounds;
+		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
+														"to", 1f,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateValues",
+														"ignoretimescale", true));
 	}
 
-	private IEnumerator WarpCoroutine(float timeScale, float length, AudioSource[] sounds)
+	private void RevertWarp(Hashtable vals)
 	{
-		float startTime = Time.realtimeSinceStartup;
-
-		while (Time.timeScale > timeScale + 0.01f)
-		{
-			Time.timeScale = Mathf.Lerp(Time.timeScale, timeScale, 0.2f);
-
-			if (sounds != null)
-			{
-				foreach (AudioSource sound in sounds)
-				{
-					sound.pitch = Time.timeScale;
-				}
-			}
-
-			yield return new WaitForSeconds(0.01f * Time.timeScale);
-		}
-
-		Time.timeScale = timeScale;
-
-		yield return new WaitForSeconds((length - ((Time.realtimeSinceStartup - startTime) * 2f)) * Time.timeScale);
-
-		while (Time.timeScale < 0.99f)
-		{
-			Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.2f);
-
-			if (sounds != null)
-			{
-				foreach (AudioSource sound in sounds)
-				{
-					sound.pitch = Time.timeScale;
-				}
-			}
-
-			yield return new WaitForSeconds(0.01f * Time.timeScale);
-		}
-
-		Time.timeScale = 1f;
-
-		if (sounds != null)
-		{
-			foreach (AudioSource sound in sounds)
-			{
-				sound.pitch = 1f;
-			}
-		}
+		iTween.ValueTo(instance.gameObject, iTween.Hash("delay", vals["length"],
+														"from", Time.timeScale,
+														"to", 1f,
+														"time", vals["fadeTime"],
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateValues",
+														"ignoretimescale", true));
 	}
 
-	private IEnumerator StartWarpCoroutine(float timeScale, AudioSource[] sounds)
+	private void UpdateValues(float newValue)
 	{
-		while (Time.timeScale > timeScale + 0.01f)
+		Time.timeScale = newValue;
+
+		if (allSounds != null)
 		{
-			Time.timeScale = Mathf.Lerp(Time.timeScale, timeScale, 0.2f);
-
-			if (sounds != null)
+			foreach (AudioSource sound in allSounds)
 			{
-				foreach (AudioSource sound in sounds)
-				{
-					sound.pitch = Time.timeScale;
-				}
-			}
-
-			yield return new WaitForSeconds(0.01f * Time.timeScale);
-		}
-
-		Time.timeScale = timeScale;
-
-		if (sounds != null)
-		{
-			foreach (AudioSource sound in sounds)
-			{
-				sound.pitch = timeScale;
-			}
-		}
-	}
-
-	private IEnumerator EndWarpCoroutine(AudioSource[] sounds)
-	{
-		while (Time.timeScale < 0.99f)
-		{
-			Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.2f);
-
-			if (sounds != null)
-			{
-				foreach (AudioSource sound in sounds)
-				{
-					sound.pitch = Time.timeScale;
-				}
-			}
-
-			yield return new WaitForSeconds(0.01f * Time.deltaTime);
-		}
-
-		Time.timeScale = 1f;
-
-		if (sounds != null)
-		{
-			foreach (AudioSource sound in sounds)
-			{
-				sound.pitch = 1f;
+				sound.pitch = newValue;
 			}
 		}
 	}

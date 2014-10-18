@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Pause : MonoBehaviour 
 {
-	public float pauseOverlayDuration = 0.3f;
+	public float fadeTime = 0.3f;
 
 	private bool paused = false;
 	private AudioSource[] sounds;
@@ -27,27 +27,27 @@ public class Pause : MonoBehaviour
 				paused = true;
 				iTween.ValueTo(gameObject, iTween.Hash("from", 0f, 
 													   "to", 1f, 
-													   "time", pauseOverlayDuration,
+													   "time", fadeTime,
  													   "easetype", iTween.EaseType.easeOutQuint,
-													   "onupdate", "updateOverlayAlpha", 
+													   "onupdate", "UpdateOverlayAlpha", 
 													   "ignoretimescale", true));
-				TimeWarpEffect.StartWarp(0f, sounds);
+				TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
 			}
 			else
 			{
 				paused = false;
-				TimeWarpEffect.EndWarp(sounds);
+				TimeWarpEffect.EndWarp(fadeTime, sounds);
 				iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
 													   "to", 0f,
-													   "time", pauseOverlayDuration,
+													   "time", fadeTime,
 													   "easetype", iTween.EaseType.easeOutQuint,
-													   "onupdate", "updateOverlayAlpha",
+													   "onupdate", "UpdateOverlayAlpha",
 													   "ignoretimescale", true));
 			}
 		}
 	}
 
-	private void updateOverlayAlpha(float newValue)
+	private void UpdateOverlayAlpha(float newValue)
 	{
 		pauseScreen.alpha = newValue;
 	}
