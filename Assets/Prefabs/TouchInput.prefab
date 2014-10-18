@@ -81,6 +81,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400010}
+  - 114: {fileID: 11400012}
+  m_Layer: 0
+  m_Name: Pause Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -94,6 +110,7 @@ Transform:
   - {fileID: 400006}
   - {fileID: 400004}
   - {fileID: 400008}
+  - {fileID: 400010}
   - {fileID: 400002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,7 +125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -145,6 +162,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 2
+--- !u!4 &400010
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400000}
+  m_RootOrder: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -173,15 +202,15 @@ MonoBehaviour:
   visible: 1
   isActivated: 1
   showDebugRadius: 1
-  selected: 0
+  selected: 1
   useFixedUpdate: 0
   isUseGuiLayout: 1
-  dynamicJoystick: 0
+  dynamicJoystick: 1
   area: 7
   joyAnchor: 7
   joystickPositionOffset: {x: 100, y: -300}
-  zoneRadius: 100
-  touchSize: 30
+  zoneRadius: 150
+  touchSize: 45
   deadZone: 20
   restrictArea: 1
   resetFingerExit: 0
@@ -310,6 +339,8 @@ MonoBehaviour:
   verticalAxisName: Vertical
   gunJoystick: {fileID: 11400010}
   gunAxisName: GunRotation
+  pauseButton: {fileID: 11400012}
+  pauseButtonName: Pause
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,15 +356,15 @@ MonoBehaviour:
   visible: 1
   isActivated: 1
   showDebugRadius: 1
-  selected: 1
+  selected: 0
   useFixedUpdate: 0
   isUseGuiLayout: 1
-  dynamicJoystick: 0
-  area: 0
+  dynamicJoystick: 1
+  area: 8
   joyAnchor: 9
   joystickPositionOffset: {x: -100, y: -300}
-  zoneRadius: 100
-  touchSize: 30
+  zoneRadius: 150
+  touchSize: 45
   deadZone: 20
   restrictArea: 1
   resetFingerExit: 0
@@ -385,6 +416,45 @@ MonoBehaviour:
   showInteraction: 1
   showAppearance: 0
   showPosition: 1
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfd900d0d8ef89448e7c0307eb56849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enable: 1
+  isActivated: 1
+  showDebugArea: 1
+  selected: 0
+  isUseGuiLayout: 1
+  buttonState: 3
+  anchor: 2
+  offset: {x: -50, y: 50}
+  scale: {x: 10, y: 10}
+  isSwipeIn: 0
+  isSwipeOut: 0
+  interaction: 1
+  useBroadcast: 0
+  receiverGameObject: {fileID: 0}
+  messageMode: 0
+  useSpecificalMethod: 0
+  downMethodName: 
+  pressMethodName: 
+  upMethodName: 
+  guiDepth: 0
+  normalTexture: {fileID: 2800000, guid: 78a2fcfe94df56e44ab57a852c74d9dd, type: 3}
+  buttonNormalColor: {r: 1, g: 1, b: 1, a: 1}
+  activeTexture: {fileID: 2800000, guid: 67bb2b66cecfe0e4e8a4ee12d793dd64, type: 3}
+  buttonActiveColor: {r: 1, g: 1, b: 1, a: 1}
+  showInspectorProperties: 1
+  showInspectorPosition: 1
+  showInspectorEvent: 1
+  showInspectorTexture: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

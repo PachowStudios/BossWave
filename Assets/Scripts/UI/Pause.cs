@@ -5,10 +5,10 @@ using System.Collections;
 public class Pause : MonoBehaviour 
 {
 	public float fadeTime = 0.3f;
+	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
 	private AudioSource[] sounds;
-
 	private CanvasGroup pauseScreen;
 
 	void Awake()
@@ -18,7 +18,11 @@ public class Pause : MonoBehaviour
 
 	void Update()
 	{
+		#if MOBILE_INPUT
+		if (CrossPlatformInputManager.GetButton("Pause"))
+		#else
 		if (CrossPlatformInputManager.GetButtonDown("Pause"))
+		#endif
 		{
 			sounds = FindObjectsOfType<AudioSource>();
 
@@ -32,6 +36,13 @@ public class Pause : MonoBehaviour
 													   "onupdate", "UpdateOverlayAlpha", 
 													   "ignoretimescale", true));
 				TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
+
+				#if MOBILE_INPUT
+				foreach (EasyJoystick joystick in JoysticksToDisable)
+				{
+					joystick.enable = false;
+				}
+				#endif
 			}
 			else
 			{
@@ -43,6 +54,12 @@ public class Pause : MonoBehaviour
 													   "easetype", iTween.EaseType.easeOutQuint,
 													   "onupdate", "UpdateOverlayAlpha",
 													   "ignoretimescale", true));
+				#if MOBILE_INPUT
+				foreach (EasyJoystick joystick in JoysticksToDisable)
+				{
+					joystick.enable = true;
+				}
+				#endif
 			}
 		}
 	}

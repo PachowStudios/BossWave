@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: f0b78f0720a6df24093ec856fc8e49ba
+guid: 78a2fcfe94df56e44ab57a852c74d9dd
 TextureImporter:
   fileIDToRecycleName:
-    21300000: MessageBox
+    21300000: Pause Unpressed
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -37,7 +37,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 3, y: 3, z: 3, w: 3}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 10
   alphaIsTransparency: 1
   textureType: 8
