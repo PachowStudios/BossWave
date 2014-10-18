@@ -18,13 +18,11 @@ public abstract class Projectile : MonoBehaviour
 	public Vector3 velocity;
 
 	private CharacterController2D controller;
-	private ExplodeEffect explodeEffect;
 	private SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
-		explodeEffect = GetComponent<ExplodeEffect>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		if (playerShot)
@@ -74,7 +72,7 @@ public abstract class Projectile : MonoBehaviour
 	{
 		if (destroyOnCollision)
 		{
-			explodeEffect.Explode(velocity, spriteRenderer.sprite);
+			ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
 			Destroy(gameObject);
 		}
 	}

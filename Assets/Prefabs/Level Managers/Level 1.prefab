@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Level 1
   m_TagString: LevelManager
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMusic: {fileID: 8200000}
-  bossMusic: {fileID: 0}
   waves:
   - startTime: 2
     amount: 10
@@ -167,7 +167,7 @@ MonoBehaviour:
     difficulty: 2
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 151
+    startTime: 154
     introLength: 14
     cameraMoveSpeed: 17.5
     bossSpawner: {fileID: 0}
@@ -188,6 +188,17 @@ MonoBehaviour:
   maxPowerupTime: 15
   powerupBuffer: 5
   bossWavePlayerMoved: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876bd141ba78a7947a8f8e538952749c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

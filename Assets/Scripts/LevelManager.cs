@@ -27,7 +27,6 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public AudioSource mainMusic;
-	public AudioSource bossMusic;
 
 	public List<Wave> waves;
 	public BossWave bossWave;
@@ -59,6 +58,8 @@ public class LevelManager : MonoBehaviour
 	private float powerupTime;
 	private float powerupRange;
 
+	private bool paused = false;
+
 
 	void Awake()
 	{
@@ -76,6 +77,23 @@ public class LevelManager : MonoBehaviour
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
+	}
+
+	void Update()
+	{
+		if (CrossPlatformInputManager.GetButtonDown("Pause"))
+		{
+			if (!paused)
+			{
+				paused = true;
+				TimeWarpEffect.StartWarp(0f, mainMusic);
+			}
+			else
+			{
+				paused = false;
+				TimeWarpEffect.EndWarp(mainMusic);
+			}
+		}
 	}
 
 	void FixedUpdate()

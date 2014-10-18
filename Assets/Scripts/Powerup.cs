@@ -10,7 +10,6 @@ public abstract class Powerup : MonoBehaviour
 	protected PlayerControl player;
 	protected PopupMessage popupMessage;
 
-	private ExplodeEffect explodeEffect;
 	private SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
@@ -18,7 +17,6 @@ public abstract class Powerup : MonoBehaviour
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		popupMessage = GameObject.Find("Popup Message").GetComponent<PopupMessage>();
 
-		explodeEffect = GetComponent<ExplodeEffect>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		if (autoDestroy)
@@ -37,13 +35,13 @@ public abstract class Powerup : MonoBehaviour
 
 	protected virtual void Pickup()
 	{
-		explodeEffect.Explode(Vector3.zero, spriteRenderer.sprite);
+		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
 	}
 
 	private void AutoDestroy()
 	{
-		explodeEffect.Explode(Vector3.zero, spriteRenderer.sprite);
+		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
 	}
 }

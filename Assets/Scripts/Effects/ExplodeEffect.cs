@@ -3,16 +3,23 @@ using System.Collections;
 
 public class ExplodeEffect : MonoBehaviour 
 {
+	static private ExplodeEffect instance;
+
 	public SpriteExplosion explosionPrefab;
 	public float pixelsPerUnit = 10f;
 
-	private SpriteExplosion explosionInstance;
+	private static SpriteExplosion explosionInstance;
 
-	public void Explode(Vector3 velocity, Sprite sprite)
+	void Awake()
 	{
-		explosionInstance = Instantiate(explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
+		instance = this;
+	}
+
+	public static void Explode(Transform transform, Vector3 velocity, Sprite sprite)
+	{
+		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
 		explosionInstance.transform.localScale = transform.localScale;
-		explosionInstance.pixelsPerUnit = pixelsPerUnit;
+		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
 		explosionInstance.Explode(velocity, sprite);
 	}
 }

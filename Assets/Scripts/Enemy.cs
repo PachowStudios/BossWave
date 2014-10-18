@@ -36,7 +36,6 @@ public abstract class Enemy : MonoBehaviour
 	protected float normalizedHorizontalSpeed = 0;
 
 	private SpriteRenderer spriteRenderer;
-	private ExplodeEffect explodeEffect;
 
 	protected CharacterController2D controller;
 	protected Animator anim;
@@ -47,7 +46,6 @@ public abstract class Enemy : MonoBehaviour
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		explodeEffect = GetComponent<ExplodeEffect>();
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.FindChild("frontCheck");
@@ -80,20 +78,17 @@ public abstract class Enemy : MonoBehaviour
 
 			if (health <= 0f)
 			{
-				explodeEffect.Explode(velocity, spriteRenderer.sprite);
+				ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
 				playerControl.AddPointsFromEnemy(maxHealth, damage);
 
 				if (timeWarpAtDeath)
 				{
 					spriteRenderer.enabled = false;
 					collider2D.enabled = false;
-					StartCoroutine(TimeWarp.Warp(0.15f, 1f));
-					Destroy(gameObject, 1f);
+					TimeWarpEffect.Warp(0.15f, 1f);
 				}
-				else
-				{
-					Destroy(gameObject);
-				}
+
+				Destroy(gameObject);
 			}
 			else
 			{

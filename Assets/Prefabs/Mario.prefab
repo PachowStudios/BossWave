@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400004}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
@@ -189,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 75
+  maxHealth: 150
   invincibilityPeriod: 2
   gravity: -35
   turningSpeed: 1
@@ -210,19 +209,6 @@ MonoBehaviour:
   combo: 1
   continuouslyRunning: 0
   cancelGoTo: 0
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bc5c677d4674042a821fe47b31795a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 11400000, guid: 30b0be472223e304f9c048f159c43fa0, type: 2}
-  pixelsPerUnit: 10
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

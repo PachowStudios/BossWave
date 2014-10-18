@@ -30,7 +30,6 @@ public class PlayerControl : MonoBehaviour
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
-	private ExplodeEffect explodeEffect;
 	[HideInInspector]
 	public Gun gun;
 
@@ -81,7 +80,6 @@ public class PlayerControl : MonoBehaviour
 		controller = GetComponent<CharacterController2D>();
 		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-		explodeEffect = GetComponent<ExplodeEffect>();
 		gun = GetComponentInChildren<Gun>();
 
 		originalColliderHeight = boxCollider.size.y;
@@ -323,7 +321,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			spriteRenderer.enabled = false;
 			collider2D.enabled = false;
-			explodeEffect.Explode(velocity, spriteRenderer.sprite);
+			ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
 		}
 		else
 		{
