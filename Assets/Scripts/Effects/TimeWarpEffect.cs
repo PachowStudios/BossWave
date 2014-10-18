@@ -10,25 +10,25 @@ public class TimeWarpEffect : MonoBehaviour
 		instance = this;
 	}
 
-	public static void Warp(float timeScale, float length, AudioSource music = null)
+	public static void Warp(float timeScale, float length, AudioSource[] sounds = null)
 	{
 		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.WarpCoroutine(timeScale, length, music));
+		instance.StartCoroutine(instance.WarpCoroutine(timeScale, length, sounds));
 	}
 
-	public static void StartWarp(float timeScale, AudioSource music = null)
+	public static void StartWarp(float timeScale, AudioSource[] sounds = null)
 	{
 		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.StartWarpCoroutine(timeScale, music));
+		instance.StartCoroutine(instance.StartWarpCoroutine(timeScale, sounds));
 	}
 
-	public static void EndWarp(AudioSource music = null)
+	public static void EndWarp(AudioSource[] sounds = null)
 	{
 		instance.StopAllCoroutines();
-		instance.StartCoroutine(instance.EndWarpCoroutine(music));
+		instance.StartCoroutine(instance.EndWarpCoroutine(sounds));
 	}
 
-	private IEnumerator WarpCoroutine(float timeScale, float length, AudioSource music)
+	private IEnumerator WarpCoroutine(float timeScale, float length, AudioSource[] sounds)
 	{
 		float startTime = Time.realtimeSinceStartup;
 
@@ -36,9 +36,12 @@ public class TimeWarpEffect : MonoBehaviour
 		{
 			Time.timeScale = Mathf.Lerp(Time.timeScale, timeScale, 0.2f);
 
-			if (music != null)
+			if (sounds != null)
 			{
-				music.pitch = Time.timeScale;
+				foreach (AudioSource sound in sounds)
+				{
+					sound.pitch = Time.timeScale;
+				}
 			}
 
 			yield return new WaitForSeconds(0.01f * Time.timeScale);
@@ -52,50 +55,81 @@ public class TimeWarpEffect : MonoBehaviour
 		{
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.2f);
 
-			if (music != null)
+			if (sounds != null)
 			{
-				music.pitch = Time.timeScale;
+				foreach (AudioSource sound in sounds)
+				{
+					sound.pitch = Time.timeScale;
+				}
 			}
 
 			yield return new WaitForSeconds(0.01f * Time.timeScale);
 		}
 
 		Time.timeScale = 1f;
+
+		if (sounds != null)
+		{
+			foreach (AudioSource sound in sounds)
+			{
+				sound.pitch = 1f;
+			}
+		}
 	}
 
-	private IEnumerator StartWarpCoroutine(float timeScale, AudioSource music)
+	private IEnumerator StartWarpCoroutine(float timeScale, AudioSource[] sounds)
 	{
 		while (Time.timeScale > timeScale + 0.01f)
 		{
 			Time.timeScale = Mathf.Lerp(Time.timeScale, timeScale, 0.2f);
 
-			if (music != null)
+			if (sounds != null)
 			{
-				music.pitch = Time.timeScale;
+				foreach (AudioSource sound in sounds)
+				{
+					sound.pitch = Time.timeScale;
+				}
 			}
 
 			yield return new WaitForSeconds(0.01f * Time.timeScale);
 		}
 
 		Time.timeScale = timeScale;
-		music.pitch = timeScale;
+
+		if (sounds != null)
+		{
+			foreach (AudioSource sound in sounds)
+			{
+				sound.pitch = timeScale;
+			}
+		}
 	}
 
-	private IEnumerator EndWarpCoroutine(AudioSource music)
+	private IEnumerator EndWarpCoroutine(AudioSource[] sounds)
 	{
 		while (Time.timeScale < 0.99f)
 		{
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.2f);
 
-			if (music != null)
+			if (sounds != null)
 			{
-				music.pitch = Time.timeScale;
+				foreach (AudioSource sound in sounds)
+				{
+					sound.pitch = Time.timeScale;
+				}
 			}
 
 			yield return new WaitForSeconds(0.01f * Time.deltaTime);
 		}
 
 		Time.timeScale = 1f;
-		music.pitch = 1f;
+
+		if (sounds != null)
+		{
+			foreach (AudioSource sound in sounds)
+			{
+				sound.pitch = 1f;
+			}
+		}
 	}
 }

@@ -6,10 +6,10 @@ using System.Linq;
 
 public class Cutscene : MonoBehaviour
 {
-	private bool cutsceneActive = false;
+	private static bool cutsceneActive = false;
 
-	private PlayerControl player;
-	private Animator anim;
+	private static PlayerControl player;
+	private static Animator anim;
 
 	void Awake()
 	{
@@ -17,7 +17,7 @@ public class Cutscene : MonoBehaviour
 		anim = GetComponent<Animator>();
 	}
 
-	public void StartCutscene(bool disableInput = false)
+	public static void StartCutscene(bool disableInput = false)
 	{
 		if (!cutsceneActive)
 		{
@@ -35,7 +35,7 @@ public class Cutscene : MonoBehaviour
 		}
 	}
 
-	public void EndCutscene(bool enableInput = false)
+	public static void EndCutscene(bool enableInput = false)
 	{
 		if (cutsceneActive)
 		{

@@ -49,7 +49,6 @@ public class LevelManager : MonoBehaviour
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
 	private Transform worldBoundaries;
-	private Cutscene cutscene;
 	private PlayerControl playerControl;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
@@ -58,15 +57,11 @@ public class LevelManager : MonoBehaviour
 	private float powerupTime;
 	private float powerupRange;
 
-	private bool paused = false;
-
-
 	void Awake()
 	{
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
 		worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
-		cutscene = GameObject.FindGameObjectWithTag("UI").GetComponent<Cutscene>();
 		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
@@ -77,23 +72,6 @@ public class LevelManager : MonoBehaviour
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
-	}
-
-	void Update()
-	{
-		if (CrossPlatformInputManager.GetButtonDown("Pause"))
-		{
-			if (!paused)
-			{
-				paused = true;
-				TimeWarpEffect.StartWarp(0f, mainMusic);
-			}
-			else
-			{
-				paused = false;
-				TimeWarpEffect.EndWarp(mainMusic);
-			}
-		}
 	}
 
 	void FixedUpdate()
@@ -111,7 +89,7 @@ public class LevelManager : MonoBehaviour
 			{
 				if (!bossWaveInitialized)
 				{
-					cutscene.StartCutscene();
+					Cutscene.StartCutscene();
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, true, true);
 					worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
@@ -136,7 +114,7 @@ public class LevelManager : MonoBehaviour
 					}
 					else
 					{
-						cutscene.EndCutscene();
+						Cutscene.EndCutscene();
 						playerControl.cancelGoTo = true;
 						bossInstance.GetComponent<Enemy>().enabled = true;
 						bossInstance.GetComponent<Collider2D>().enabled = true;
