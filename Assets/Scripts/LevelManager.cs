@@ -23,7 +23,6 @@ public class LevelManager : MonoBehaviour
 		public float cameraMoveSpeed;
 		public Transform bossSpawner;
 		public Transform playerWaitPoint;
-		public Transform scrollPoint;
 	}
 
 	public AudioSource mainMusic;
@@ -103,29 +102,20 @@ public class LevelManager : MonoBehaviour
 					if (!bossWavePlayerMoved)
 					{
 						playerControl.continuouslyRunning = true;
-						playerControl.GoToPoint(bossWave.scrollPoint.position);
 
 						bossWavePlayerMoved = true;
 					}
 
-					if (cameraWrapper.position.x < bossWave.scrollPoint.position.x)
-					{
-						cameraWrapper.position += new Vector3(bossWave.cameraMoveSpeed * Time.deltaTime, 0);
-					}
-					else
-					{
-						Cutscene.EndCutscene();
-						playerControl.cancelGoTo = true;
-						bossInstance.GetComponent<Enemy>().enabled = true;
-						bossInstance.GetComponent<Collider2D>().enabled = true;
+					Cutscene.EndCutscene(true);
+					bossInstance.GetComponent<Enemy>().enabled = true;
+					bossInstance.GetComponent<Collider2D>().enabled = true;
 
-						foreach(GameObject element in scrollingElements)
-						{
-							element.GetComponent<ScrollInfinite>().loop = true;
-						}
-
-						bossWaveIntroComplete = true;
+					foreach(GameObject element in scrollingElements)
+					{
+						element.GetComponent<ScrollInfinite>().scroll = true;
 					}
+
+					bossWaveIntroComplete = true;
 				}
 			}
 		}

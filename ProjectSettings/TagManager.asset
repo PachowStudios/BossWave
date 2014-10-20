@@ -16,7 +16,7 @@ TagManager:
   - WorldBoundaries
   - CameraWrapper
   - ArenaCenter
-  - InfiniteScroll
+  - 
   - UI
   - 
   Builtin Layer 0: Default

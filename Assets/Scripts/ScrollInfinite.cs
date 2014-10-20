@@ -6,7 +6,8 @@ using System.Linq;
 public class ScrollInfinite : MonoBehaviour 
 {
 	public float speed = 17.5f;
-	public bool loop = false;
+	public bool scroll = false;
+	public bool loop = true;
 
 	private List<Transform> layers = new List<Transform>();
 
@@ -27,7 +28,7 @@ public class ScrollInfinite : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (loop)
+		if (scroll)
 		{
 			transform.Translate(new Vector2(-speed, 0) * Time.deltaTime);
 
@@ -39,15 +40,23 @@ public class ScrollInfinite : MonoBehaviour
 				{
 					if (!firstChild.renderer.IsVisibleFrom(Camera.main))
 					{
-						Transform lastChild = layers.LastOrDefault();
-						Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
+						if (loop)
+						{
+							Transform lastChild = layers.LastOrDefault();
+							Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
 
-						firstChild.position = new Vector3(lastChild.position.x + lastSize.x,
-														  firstChild.position.y,
-														  firstChild.position.z);
+							firstChild.position = new Vector3(lastChild.position.x + lastSize.x,
+															  firstChild.position.y,
+															  firstChild.position.z);
 
-						layers.Remove(firstChild);
-						layers.Add(firstChild);
+							layers.Remove(firstChild);
+							layers.Add(firstChild);
+						}
+						else
+						{
+							layers.Remove(firstChild);
+							Destroy(firstChild.gameObject);
+						}
 					}
 				}
 			}

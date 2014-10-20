@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400006}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Boss Spawner
   m_TagString: BossSpawner
@@ -75,21 +76,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400010}
-  m_Layer: 0
-  m_Name: Infinite Scroll
-  m_TagString: InfiniteScroll
-  m_Icon: {fileID: 120240766, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -104,7 +90,6 @@ Transform:
   - {fileID: 400002}
   - {fileID: 400006}
   - {fileID: 400008}
-  - {fileID: 400010}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400002
@@ -138,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.2000008, y: -3.23900008, z: 0}
+  m_LocalPosition: {x: -10, y: 11.5340004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -155,18 +140,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 3
---- !u!4 &400010
-Transform:
+--- !u!114 &11400000
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 51.2000008, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400000}
-  m_RootOrder: 4
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2ef3b15c32eb43108261a87963b8937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathName: Boss Intro
+  pathColor: {r: .741176486, g: .309803933, b: .674509823, a: 1}
+  nodes:
+  - {x: -10, y: 11.5340004, z: 0}
+  - {x: -7.07491732, y: 8.93567562, z: 0}
+  - {x: -13.0259476, y: 7.34697247, z: 0}
+  - {x: -5.76367283, y: 3.94091845, z: 0}
+  - {x: -14.2867594, y: 2.20173001, z: 0}
+  - {x: -5.66280699, y: -.00518929958, z: 0}
+  - {x: -14.9423819, y: -2.98303246, z: 0}
+  - {x: -10, y: -3.19141388, z: 0}
+  nodeCount: 8
+  initialized: 1
+  initialName: New Path 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

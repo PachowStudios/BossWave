@@ -67,8 +67,7 @@ public class PlayerControl : MonoBehaviour
 	private float comboTimer = 0f;
 	private float killChain = 0f;
 
-	[HideInInspector]
-	public bool cancelGoTo = false;
+	private bool cancelGoTo = false;
 	private bool useTargetPoint = false;
 	private bool reEnableAfterMove = true;
 	private bool inertiaAfterMove = false;
@@ -401,6 +400,11 @@ public class PlayerControl : MonoBehaviour
 		reEnableAfterMove = autoEnableInput;
 		inertiaAfterMove = inertia;
 		DisableInput();
+	}
+
+	public void CancelGoTo()
+	{
+		cancelGoTo = true;
 	}
 
 	public void DisableInput()
