@@ -27,6 +27,15 @@ public class Gun : MonoBehaviour
 	private bool shoot;
 	private float shootTimer = 0f;
 
+	private Transform firePoint;
+	private Animator anim;
+
+	void Awake()
+	{
+		firePoint = transform.FindChild("FirePoint");
+		anim = GetComponentInParent<Animator>();
+	}
+
 	void Update()
 	{
 		#if MOBILE_INPUT
@@ -46,7 +55,7 @@ public class Gun : MonoBehaviour
 
 			if (shoot && shootTimer >= shootCooldown)
 			{
-				Projectile projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity) as Projectile;
+				Projectile projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
 				projectileInstance.direction = transform.right;
 
 				shootTimer = 0f;
@@ -57,14 +66,19 @@ public class Gun : MonoBehaviour
 	void RotateTowardsMouse()
 	{
 		#if MOBILE_INPUT
-		transform.rotation = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation"));
+		Vector3 newEuler = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation")).eulerAngles;
 		#else
 		Vector3 mousePosition = Input.mousePosition;
 		mousePosition.z = 10f;
 		Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 		gunLookPosition -= transform.position;
 		float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
+		Vector3 newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
 		#endif
+
+		newEuler.z = newEuler.z < 180f ? Mathf.Clamp(newEuler.z, 0f, 90f) : Mathf.Clamp(newEuler.z, 270f, 360f);
+		transform.rotation = Quaternion.Euler(newEuler);
+
+		anim.SetFloat("Gun Angle", transform.rotation.eulerAngles.z);
 	}
 }

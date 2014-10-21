@@ -6,6 +6,12 @@ TextureImporter:
     21300002: Head
     21300004: Head_Idle
     21300006: Head_Jumping
+    21300008: Head_Turning
+    21300010: Head_Walking_0
+    21300012: Head_Walking_1
+    21300014: Head_Walking_2
+    21300016: Head_Walking_3
+    21300018: Head_Falling
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -21,7 +27,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
@@ -43,7 +49,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 10
   alphaIsTransparency: 1
-  textureType: 8
+  textureType: 5
   buildTargetSettings: []
   spriteSheet:
     sprites:
@@ -58,6 +64,66 @@ TextureImporter:
       pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Head_Jumping
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 8
+        width: 12
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Turning
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 9
+        width: 12
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Walking_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 24
+        width: 12
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Walking_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 24
+        width: 13
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Walking_2
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 24
+        width: 12
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Walking_3
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 24
+        width: 13
+        height: 12
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Head_Falling
       rect:
         serializedVersion: 2
         x: 36

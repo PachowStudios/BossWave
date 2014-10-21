@@ -100,13 +100,13 @@ public class PlayerControl : MonoBehaviour
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
 			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
 			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
-			crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f && !continuouslyRunning;
+			//crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f && !continuouslyRunning;
 			#else
 			right = CrossPlatformInputManager.GetButton("Right");
 			left = CrossPlatformInputManager.GetButton("Left");
 			run = CrossPlatformInputManager.GetButton("Run");
 			jump = jump || CrossPlatformInputManager.GetButtonDown("Jump");
-			crouch = CrossPlatformInputManager.GetButton("Crouch") && !continuouslyRunning;
+			//crouch = CrossPlatformInputManager.GetButton("Crouch") && !continuouslyRunning;
 			#endif
 		}
 
@@ -114,7 +114,7 @@ public class PlayerControl : MonoBehaviour
 
 		anim.SetBool("Walking", right || left || continuouslyRunning);
 		anim.SetBool("Running", run);
-		anim.SetBool("Crouching", crouch);
+		//anim.SetBool("Crouching", crouch);
 	}
 
 	void FixedUpdate()
