@@ -11,9 +11,24 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Spikeball Thrower
+  m_Name: Midnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,10 +39,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .350120008, y: 1.12600005, z: 0}
+  m_LocalPosition: {x: -7.57900572, y: -1.23334897, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400002}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.29999995, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 400000}
   m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -40,11 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Spikeball Thrower
-  projectile: {fileID: 11400002, guid: 6ed7986041308b54e967b77dc060c665, type: 2}
+  gunName: Midnight
+  projectile: {fileID: 11400002, guid: 391b2cc98a59968479b61896de0b0839, type: 2}
   aimAtMouse: 1
-  shootCooldown: .25
-  rarity: 1
+  shootCooldown: .100000001
+  rarity: 3
+  disableInput: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -63,9 +92,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 4273737757
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300004, guid: 03f487a42a49c2d4aa24e6c961457770, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

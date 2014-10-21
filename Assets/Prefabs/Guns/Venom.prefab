@@ -11,9 +11,24 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Big Fireball Thrower
+  m_Name: Venom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,10 +39,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .350120008, y: 1.12600005, z: 0}
+  m_LocalPosition: {x: -10.7761822, y: -.684486032, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400002}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.60000002, y: .150000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 400000}
   m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -40,11 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Big Fireball Thrower
-  projectile: {fileID: 11400002, guid: a2aac087148781045a414efd7f794b32, type: 2}
+  gunName: Venom
+  projectile: {fileID: 11400002, guid: 1b860a96f0cd0b8458cb139c9bfa6a5e, type: 2}
   aimAtMouse: 1
-  shootCooldown: .400000006
-  rarity: 2
+  shootCooldown: .200000003
+  rarity: 1
+  disableInput: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -63,9 +92,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 4273737757
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300002, guid: 03f487a42a49c2d4aa24e6c961457770, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

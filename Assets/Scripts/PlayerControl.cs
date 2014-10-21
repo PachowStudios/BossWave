@@ -26,7 +26,6 @@ public class PlayerControl : MonoBehaviour
 
 	private CharacterController2D controller;
 	private Animator anim;
-	private BoxCollider2D boxCollider;
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
 	private SpriteRenderer spriteRenderer;
@@ -46,7 +45,6 @@ public class PlayerControl : MonoBehaviour
 	private bool left;
 	private bool jump;
 	private bool run;
-	private bool crouch;
 	private bool disableInput = false;
 
 	private bool runFull = false;
@@ -77,7 +75,6 @@ public class PlayerControl : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		boxCollider = GetComponent<BoxCollider2D>();
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		gun = GetComponentInChildren<Gun>();
 
@@ -120,6 +117,7 @@ public class PlayerControl : MonoBehaviour
 
 		anim.SetBool("Grounded", controller.isGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
+		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
 
 		if (useTargetPoint && disableInput)
 		{
@@ -400,7 +398,7 @@ public class PlayerControl : MonoBehaviour
 
 	private void ResetInput()
 	{
-		left = right = run = jump = crouch = false;
+		left = right = run = jump = false;
 	}
 
 	private IEnumerator ResetSpeedCoroutine(float delay)

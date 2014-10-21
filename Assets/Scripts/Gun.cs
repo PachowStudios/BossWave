@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
 		Common,
 		Uncommon,
 		Rare,
-		//VeryRare,
+		VeryRare,
 		//Legendary,
 		//Godly,
 		//Boss,
@@ -28,7 +28,6 @@ public class Gun : MonoBehaviour
 	private float shootTimer = 0f;
 
 	private Transform firePoint;
-	private Animator anim;
 
 	public bool FacingRight
 	{
@@ -41,7 +40,6 @@ public class Gun : MonoBehaviour
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
-		anim = GetComponentInParent<Animator>();
 	}
 
 	void Update()
@@ -95,8 +93,6 @@ public class Gun : MonoBehaviour
 
 		transform.localScale = newScale;
 		transform.rotation = Quaternion.Euler(newEuler);
-
-		anim.SetFloat("Gun Angle", transform.rotation.eulerAngles.z);
 
 		return shotDirection;
 	}

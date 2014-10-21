@@ -15,7 +15,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 11
-  m_Name: Fireball
+  m_Name: Dark Shot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.09520006, y: -3.20519996, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.50738192, y: -3.02392721, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: .5, y: .5}
-  m_Center: {x: .0500000007, y: -.100000001}
+  m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -131,13 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 1
-  damage: 5
-  knockback: 0
+  damage: 8
+  knockback: 1
   gravity: 0
-  shotSpeed: 25
+  shotSpeed: 35
   lifetime: 3
   autoDestroy: 1
-  destroyOnCollision: 1
+  destroyOnCollision: 0
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
@@ -158,10 +158,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 4273737757
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300080, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300002, guid: be206b1be9c7dd449854b5003f4f8345, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
