@@ -30,6 +30,14 @@ public class Gun : MonoBehaviour
 	private Transform firePoint;
 	private Animator anim;
 
+	public bool FacingRight
+	{
+		get
+		{
+			return transform.rotation.eulerAngles.y == 0f;
+		}
+	}
+
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
@@ -49,21 +57,21 @@ public class Gun : MonoBehaviour
 	{
 		if (!disableInput)
 		{
-			RotateTowardsMouse();
+			Vector3 shotDirection = RotateTowardsMouse();
 
 			shootTimer += Time.deltaTime;
 
 			if (shoot && shootTimer >= shootCooldown)
 			{
 				Projectile projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-				projectileInstance.direction = transform.right;
+				projectileInstance.direction = shotDirection;
 
 				shootTimer = 0f;
 			}
 		}
 	}
 
-	void RotateTowardsMouse()
+	private Vector3 RotateTowardsMouse()
 	{
 		#if MOBILE_INPUT
 		Vector3 newEuler = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation")).eulerAngles;
@@ -76,9 +84,20 @@ public class Gun : MonoBehaviour
 		Vector3 newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
 		#endif
 
-		newEuler.z = newEuler.z < 180f ? Mathf.Clamp(newEuler.z, 0f, 90f) : Mathf.Clamp(newEuler.z, 270f, 360f);
+		Transform originalTransform = transform;
+		originalTransform.rotation = Quaternion.Euler(newEuler);
+		Vector3 shotDirection = originalTransform.right;
+
+		newEuler.y = newEuler.z > 90f && newEuler.z < 270f ? 180f : 0f;
+
+		Vector3 newScale = transform.localScale;
+		newScale.y = newEuler.y == 180f ? -1f : 1f;
+
+		transform.localScale = newScale;
 		transform.rotation = Quaternion.Euler(newEuler);
 
 		anim.SetFloat("Gun Angle", transform.rotation.eulerAngles.z);
+
+		return shotDirection;
 	}
 }

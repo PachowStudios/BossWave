@@ -81,11 +81,6 @@ public class PlayerControl : MonoBehaviour
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		gun = GetComponentInChildren<Gun>();
 
-		originalColliderHeight = boxCollider.size.y;
-		crouchingColliderHeight = originalColliderHeight / 2;
-		originalColliderOffset = boxCollider.center.y;
-		crouchingColliderOffset = originalColliderOffset - (crouchingColliderHeight / 2);
-
 		health = maxHealth;
 
 		lastHitTime = Time.time - invincibilityPeriod;
@@ -100,13 +95,11 @@ public class PlayerControl : MonoBehaviour
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
 			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
 			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
-			//crouch = CrossPlatformInputManager.GetAxis("Vertical") < -0.6f && !continuouslyRunning;
 			#else
 			right = CrossPlatformInputManager.GetButton("Right");
 			left = CrossPlatformInputManager.GetButton("Left");
 			run = CrossPlatformInputManager.GetButton("Run");
 			jump = jump || CrossPlatformInputManager.GetButtonDown("Jump");
-			//crouch = CrossPlatformInputManager.GetButton("Crouch") && !continuouslyRunning;
 			#endif
 		}
 
@@ -114,7 +107,6 @@ public class PlayerControl : MonoBehaviour
 
 		anim.SetBool("Walking", right || left || continuouslyRunning);
 		anim.SetBool("Running", run);
-		//anim.SetBool("Crouching", crouch);
 	}
 
 	void FixedUpdate()
@@ -198,46 +190,26 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 
-		if (crouch)
+		if (right)
 		{
-			normalizedHorizontalSpeed = 0f;
-			boxCollider.size = new Vector2(boxCollider.size.x, crouchingColliderHeight);
-			boxCollider.center = new Vector2(boxCollider.center.x, crouchingColliderOffset);
+			normalizedHorizontalSpeed = 1f;
+		}
+		else if (left)
+		{
+			normalizedHorizontalSpeed = -1f;
 		}
 		else
 		{
-			boxCollider.size = new Vector2(boxCollider.size.x, originalColliderHeight);
-			boxCollider.center = new Vector2(boxCollider.center.x, originalColliderOffset);
+			normalizedHorizontalSpeed = 0f;
 		}
 
-		if (!crouch || (crouch && !controller.isGrounded))
+		if (gun.FacingRight && transform.localScale.x < 0f)
 		{
-			if (right)
-			{
-				normalizedHorizontalSpeed = 1f;
-
-				if (transform.localScale.x < 0f)
-				{
-					Flip();
-				}
-			}
-			else if (left)
-			{
-				normalizedHorizontalSpeed = -1f;
-
-				if (transform.localScale.x > 0f && !continuouslyRunning)
-				{
-					Flip();
-				}
-				else if (transform.localScale.x < 0f && continuouslyRunning)
-				{
-					Flip();
-				}
-			}
-			else
-			{
-				normalizedHorizontalSpeed = 0f;
-			}
+			Flip();
+		}
+		else if (!gun.FacingRight && transform.localScale.x > 0f)
+		{
+			Flip();
 		}
 
 		if (jump && controller.isGrounded)
