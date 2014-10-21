@@ -260,7 +260,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!1 &61715695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1154,7 @@ Transform:
   - {fileID: 1450290222}
   - {fileID: 1635039007}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
 --- !u!61 &329264790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1214,7 +1214,6 @@ MonoBehaviour:
   maxHealth: 150
   invincibilityPeriod: 2
   gravity: -35
-  turningSpeed: 1
   walkSpeed: 10
   runSpeed: 15
   runFullSpeed: 17.5
@@ -1370,11 +1369,11 @@ Prefab:
       objectReference: {fileID: 1145998294}
     - target: {fileID: 11400000, guid: 6e1c59e01d6ec974e8ffd50923d166a1, type: 2}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8200000, guid: 6e1c59e01d6ec974e8ffd50923d166a1, type: 2}
       propertyPath: Mute
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e1c59e01d6ec974e8ffd50923d166a1, type: 2}
@@ -1413,7 +1412,7 @@ Transform:
   - {fileID: 272269106}
   - {fileID: 1716367544}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!114 &529944277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,7 +1523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &653628703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,7 +1772,7 @@ Transform:
   - {fileID: 1796485585}
   - {fileID: 1145998294}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!1 &737457714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,7 +1988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!82 &897096782
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2004,7 +2003,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -2056,7 +2055,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 427769054}
   m_GameObject: {fileID: 897096780}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
@@ -2869,7 +2868,7 @@ Transform:
   - {fileID: 1423182924}
   - {fileID: 218963820}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1342752342
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,7 +4550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1 &2072799447
 GameObject:
   m_ObjectHideFlags: 0

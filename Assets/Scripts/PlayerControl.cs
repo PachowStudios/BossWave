@@ -7,7 +7,6 @@ public class PlayerControl : MonoBehaviour
 	public float maxHealth = 100f;
 	public float invincibilityPeriod = 2f;
 	public float gravity = -35f;
-	public float turningSpeed = 1f;
 	public float walkSpeed = 10f;
 	public float runSpeed = 17.5f;
 	public float runFullSpeed = 20f;
@@ -316,11 +315,6 @@ public class PlayerControl : MonoBehaviour
 			runFullTimer = 0f;
 			runFull = false;
 			anim.SetBool("Running_Full", runFull);
-		}
-
-		if (Mathf.Abs(velocity.x) > turningSpeed && controller.isGrounded)
-		{
-			anim.SetTrigger("Turn");
 		}
 	}
 
