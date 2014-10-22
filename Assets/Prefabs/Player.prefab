@@ -303,10 +303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 10
   invincibilityPeriod: 2
   gravity: -35
-  turningSpeed: 1
   walkSpeed: 10
   runSpeed: 15
   runFullSpeed: 17.5

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PlayerControl : MonoBehaviour
 	private Animator anim;
 	private RaycastHit2D lastControllerColliderHit;
 	private Vector3 velocity;
-	private SpriteRenderer spriteRenderer;
+	private List<SpriteRenderer> spriteRenderers;
 	[HideInInspector]
 	public Gun gun;
 
@@ -74,7 +75,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
 		gun = GetComponentInChildren<Gun>();
 
 		health = maxHealth;
@@ -175,14 +176,14 @@ public class PlayerControl : MonoBehaviour
 
 				if (flashTimer > smoothFlashTime)
 				{
-					spriteRenderer.enabled = !spriteRenderer.enabled;
+					SetRenderersEnabled(alternate: true);
 
 					flashTimer = 0f;
 				}
 			}
 			else
 			{
-				spriteRenderer.enabled = true;
+				SetRenderersEnabled(true);
 				smoothFlashTime = flashTime;
 			}
 		}
@@ -287,9 +288,14 @@ public class PlayerControl : MonoBehaviour
 
 		if (health <= 0f)
 		{
-			spriteRenderer.enabled = false;
+			SetRenderersEnabled(false);
 			collider2D.enabled = false;
-			ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
+
+			foreach (SpriteRenderer sprite in spriteRenderers)
+			{
+				sprite.transform.localScale = transform.localScale;
+				ExplodeEffect.Explode(sprite.transform, velocity, sprite.sprite);
+			}
 		}
 		else
 		{
@@ -400,6 +406,21 @@ public class PlayerControl : MonoBehaviour
 	{
 		yield return new WaitForSeconds(delay);
 		speedMultiplier = 1f;
+	}
+
+	private void SetRenderersEnabled(bool enabled = true, bool alternate = false)
+	{
+		foreach (SpriteRenderer sprite in spriteRenderers)
+		{
+			if (alternate)
+			{
+				sprite.enabled = !sprite.enabled;
+			}
+			else
+			{
+				sprite.enabled = enabled;
+			}
+		}
 	}
 
 	private float GetNextCombo()
