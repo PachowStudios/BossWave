@@ -7,7 +7,7 @@ PlayerSettings:
   AndroidProfiler: 0
   defaultScreenOrientation: 3
   targetDevice: 2
-  targetGlesGraphics: -1
+  targetGlesGraphics: 1
   targetResolution: 0
   accelerometerFrequency: 60
   companyName: Pachow Studios
@@ -47,7 +47,7 @@ PlayerSettings:
   forceSingleInstance: 0
   resizableWindow: 0
   useMacAppStoreValidation: 0
-  gpuSkinning: 0
+  gpuSkinning: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
   xboxEnableKinect: 0
@@ -111,6 +111,9 @@ PlayerSettings:
     m_StaticBatching: 1
     m_DynamicBatching: 1
   - m_BuildTarget: Android
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
+  - m_BuildTarget: BlackBerry
     m_StaticBatching: 1
     m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default

@@ -740,7 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79eea284c33d24a4b8568e4947941de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 1
+  fadeTime: .699999988
   borderBuffer: -32
   distortionAmount: .200000003
   gamma: {x: 1, y: 2.20000005}

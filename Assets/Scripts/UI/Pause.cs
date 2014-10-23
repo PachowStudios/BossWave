@@ -13,6 +13,7 @@ public class Pause : MonoBehaviour
 	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
+	private bool canPause = true;
 	private AudioSource[] sounds;
 
 	private Vector2 scanlines;
@@ -32,9 +33,9 @@ public class Pause : MonoBehaviour
 		}
 
 		#if MOBILE_INPUT
-		if (CrossPlatformInputManager.GetButton("Pause"))
+		if (CrossPlatformInputManager.GetButton("Pause") && canPause)
 		#else
-		if (CrossPlatformInputManager.GetButtonDown("Pause"))
+		if (CrossPlatformInputManager.GetButtonDown("Pause") && canPause)
 		#endif
 		{
 			sounds = FindObjectsOfType<AudioSource>();
@@ -42,11 +43,13 @@ public class Pause : MonoBehaviour
 			if (!paused)
 			{
 				paused = true;
+				canPause = false;
 				iTween.ValueTo(gameObject, iTween.Hash("from", 0f, 
 													   "to", 1f, 
 													   "time", fadeTime,
  													   "easetype", iTween.EaseType.easeOutQuint,
 													   "onupdate", "UpdateOverlayAlpha", 
+													   "oncomplete", "EnablePausing",
 													   "ignoretimescale", true));
 				iTween.ValueTo(gameObject, iTween.Hash("from", borderBuffer,
 													   "to", 0f,
@@ -84,12 +87,14 @@ public class Pause : MonoBehaviour
 			else
 			{
 				paused = false;
+				canPause = false;
 				TimeWarpEffect.EndWarp(fadeTime, sounds);
 				iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
 													   "to", 0f,
 													   "time", fadeTime,
 													   "easetype", iTween.EaseType.easeOutQuint,
 													   "onupdate", "UpdateOverlayAlpha",
+													   "oncomplete", "EnablePausing",
 													   "ignoretimescale", true));
 				iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
 													   "to", borderBuffer,
@@ -124,6 +129,11 @@ public class Pause : MonoBehaviour
 				#endif
 			}
 		}
+	}
+
+	private void EnablePausing()
+	{
+		canPause = true;
 	}
 
 	private void UpdateOverlayAlpha(float newValue)
