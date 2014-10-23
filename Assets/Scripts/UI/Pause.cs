@@ -7,7 +7,6 @@ public class Pause : MonoBehaviour
 	public float fadeTime = 0.3f;
 	public float borderBuffer = -50f;
 	public float distortionAmount = 0.2f;
-	public Vector2 scanlines = new Vector2(671f, 768f);
 	public Vector2 gamma = new Vector2(1f, 2.2f);
 	public CanvasGroup fadeOverlays;
 	public Image crtBorder;
@@ -16,10 +15,12 @@ public class Pause : MonoBehaviour
 	private bool paused = false;
 	private AudioSource[] sounds;
 
+	private Vector2 scanlines;
 	private CRT crtShader;
 
 	void Awake()
 	{
+		scanlines = new Vector2(Screen.height, Screen.height + 100f);
 		crtShader = Camera.main.GetComponent<CRT>();
 	}
 
