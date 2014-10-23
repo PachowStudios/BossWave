@@ -351,11 +351,13 @@ public class PlayerControl : MonoBehaviour
 	public void SwapGun(Gun newGun)
 	{
 		Transform oldTransform = gun.transform;
+		spriteRenderers.Remove(gun.GetComponent<SpriteRenderer>());
 		Destroy(gun.gameObject);
 		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
 		gunInstance.transform.parent = transform;
 		gunInstance.transform.localScale = oldTransform.localScale;
 		gun = gunInstance;
+		spriteRenderers.Add(gun.GetComponent<SpriteRenderer>());
 	}
 
 	public void ResetSpeed(float delay)

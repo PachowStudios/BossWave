@@ -746,7 +746,7 @@ MonoBehaviour:
   scanlines: {x: 671, y: 768}
   gamma: {x: 1, y: 2.20000005}
   fadeOverlays: {fileID: 22500006}
-  CRTBorder: {fileID: 11400036}
+  crtBorder: {fileID: 11400036}
   JoysticksToDisable:
   - {fileID: 0}
   - {fileID: 0}

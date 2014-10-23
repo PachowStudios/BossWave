@@ -10,7 +10,7 @@ public class Pause : MonoBehaviour
 	public Vector2 scanlines = new Vector2(671f, 768f);
 	public Vector2 gamma = new Vector2(1f, 2.2f);
 	public CanvasGroup fadeOverlays;
-	public Image CRTBorder;
+	public Image crtBorder;
 	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
@@ -132,8 +132,8 @@ public class Pause : MonoBehaviour
 
 	private void UpdateCRTBorder(float newValue)
 	{
-		CRTBorder.rectTransform.offsetMin = new Vector2(newValue, newValue);
-		CRTBorder.rectTransform.offsetMax = new Vector2(-newValue, -newValue);
+		crtBorder.rectTransform.offsetMin = new Vector2(newValue, newValue);
+		crtBorder.rectTransform.offsetMax = new Vector2(-newValue, -newValue);
 	}
 
 	private void UpdateCRTShader(float newValue)
@@ -154,10 +154,12 @@ public class Pause : MonoBehaviour
 	private void EnableCRTShader()
 	{
 		crtShader.enabled = true;
+		crtBorder.fillCenter = true;
 	}
 
 	private void DisableCRTShader()
 	{
 		crtShader.enabled = false;
+		crtBorder.fillCenter = false;
 	}
 }
