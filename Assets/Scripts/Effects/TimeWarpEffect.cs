@@ -15,7 +15,6 @@ public class TimeWarpEffect : MonoBehaviour
 	public static void Warp(float timeScale, float length, float fadeTime, AudioSource[] sounds = null)
 	{
 		allSounds = sounds;
-
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
 														"to", timeScale,
 														"time", fadeTime,
@@ -43,7 +42,7 @@ public class TimeWarpEffect : MonoBehaviour
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
 														"to", 1f,
 														"time", fadeTime,
-														"easetype", iTween.EaseType.easeOutQuint,
+														"easetype", iTween.EaseType.easeInSine,
 														"onupdate", "UpdateValues",
 														"ignoretimescale", true));
 	}
