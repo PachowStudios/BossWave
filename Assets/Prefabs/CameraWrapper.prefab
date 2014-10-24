@@ -742,11 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: .699999988
-  borderBuffer: -32
-  distortionAmount: .200000003
-  gamma: {x: 1, y: 2.20000005}
   fadeOverlays: {fileID: 22500006}
-  crtBorder: {fileID: 11400036}
   JoysticksToDisable:
   - {fileID: 0}
   - {fileID: 0}
@@ -842,7 +838,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100006}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0da8daaf1d21e474bafa968f8f6c9f1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f4e0bc6ff27fd14a8465e9457ce96ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   intensityMultiplier: 5

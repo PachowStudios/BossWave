@@ -6,11 +6,13 @@ public class CRTEffect : MonoBehaviour
 {
 	public float borderBuffer = -32f;
 	public float distortionAmount = 0.2f;
+	public float noiseIntensity = 3.5f;
 	public Vector2 gamma = new Vector2(1f, 2.2f);
 	public Image crtBorder;
 
 	private static Vector2 scanlines;
 	private static CRT crtShader;
+	private static NoiseAndGrain noiseShader;
 
 	private static CRTEffect instance;
 
@@ -20,6 +22,8 @@ public class CRTEffect : MonoBehaviour
 
 		scanlines = new Vector2(Screen.height, Screen.height + 100f);
 		crtShader = Camera.main.GetComponent<CRT>();
+		noiseShader = Camera.main.GetComponent<NoiseAndGrain>();
+		noiseShader.intensityMultiplier = noiseIntensity;
 	}
 
 	public static void StartCRT(float fadeTime)
@@ -105,12 +109,14 @@ public class CRTEffect : MonoBehaviour
 	private void EnableCRTShader()
 	{
 		crtShader.enabled = true;
+		noiseShader.enabled = true;
 		crtBorder.fillCenter = true;
 	}
 
 	private void DisableCRTShader()
 	{
 		crtShader.enabled = false;
+		noiseShader.enabled = false;
 		crtBorder.fillCenter = false;
 	}
 }
