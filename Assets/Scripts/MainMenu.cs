@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class MainMenu : MonoBehaviour 
 {
+	public EventSystem eventSystem;
 	public Slider volumeSlider;
 
 	public float startDelay = 1f;
@@ -29,6 +31,11 @@ public class MainMenu : MonoBehaviour
 	public void GoToNode(int node)
 	{
 		menu.gameObject.MoveTo(menuPath.nodes[node], nodeMoveSpeed, 0f, EaseType.easeOutQuint);
+	}
+
+	public void SelectObject(GameObject gameObject)
+	{
+		eventSystem.SetSelectedGameObject(gameObject, new BaseEventData(eventSystem));
 	}
 
 	public void LoadLevel(string levelName)
