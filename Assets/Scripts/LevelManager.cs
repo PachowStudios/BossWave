@@ -58,6 +58,8 @@ public class LevelManager : MonoBehaviour
 
 	void Awake()
 	{
+		LoadPrefs();
+
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
 		worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
@@ -142,7 +144,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator SpawnWave(int wave)
+	private IEnumerator SpawnWave(int wave)
 	{
 		List<Enemy> possibleEnemies = new List<Enemy>();
 
@@ -165,6 +167,14 @@ public class LevelManager : MonoBehaviour
 
 				yield return new WaitForSeconds(waves[wave].spawnDelay);
 			}
+		}
+	}
+
+	private void LoadPrefs()
+	{
+		if (PlayerPrefs.HasKey("Settings/Volume"))
+		{
+			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
 		}
 	}
 }

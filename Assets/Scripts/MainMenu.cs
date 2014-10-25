@@ -4,18 +4,53 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour 
 {
-	public CanvasGroup menu;
+	public Slider volumeSlider;
+
 	public float startDelay = 1f;
 	public float fadeTime = 1.5f;
+	public float nodeMoveSpeed = 2f;
+
+	private CanvasGroup menu;
+	private iTweenPath menuPath;
+
+	void Awake()
+	{
+		LoadPrefs();
+
+		menu = GetComponent<CanvasGroup>();
+		menuPath = GetComponent<iTweenPath>();
+	}
 
 	void Start()
 	{
 		StartCoroutine(ShowMenu());
 	}
 
+	public void GoToNode(int node)
+	{
+		menu.gameObject.MoveTo(menuPath.nodes[node], nodeMoveSpeed, 0f, EaseType.easeOutQuint);
+	}
+
 	public void LoadLevel(string levelName)
 	{
 		StartCoroutine(HideMenu(levelName));
+	}
+
+	public void SetVolume(float newVolume)
+	{
+		newVolume = Mathf.Abs(newVolume);
+
+		PlayerPrefs.SetFloat("Settings/Volume", newVolume);
+		AudioListener.volume = newVolume;
+	}
+
+	private void LoadPrefs()
+	{
+		if (PlayerPrefs.HasKey("Settings/Volume"))
+		{
+			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
+			volumeSlider.value = -AudioListener.volume;
+		}
 	}
 
 	private IEnumerator ShowMenu()
