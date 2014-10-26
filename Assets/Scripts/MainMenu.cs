@@ -65,12 +65,23 @@ public class MainMenu : MonoBehaviour
 		AudioListener.volume = newVolume;
 	}
 
+	public void SetFullscreen(bool active)
+	{
+		PlayerPrefs.SetInt("Settings/Fullscreen", active ? 1 : 0);
+		Screen.fullScreen = active;
+	}
+
 	private void LoadPrefs()
 	{
 		if (PlayerPrefs.HasKey("Settings/Volume"))
 		{
 			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
 			volumeSlider.value = -AudioListener.volume;
+		}
+
+		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
+		{
+			Screen.fullScreen = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
 		}
 	}
 
