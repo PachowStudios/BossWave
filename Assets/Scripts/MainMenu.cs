@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class MainMenu : MonoBehaviour 
 {
@@ -14,6 +16,7 @@ public class MainMenu : MonoBehaviour
 
 	private CanvasGroup menu;
 	private iTweenPath menuPath;
+	private List<Vector3> originalPath;
 
 	void Awake()
 	{
@@ -21,11 +24,22 @@ public class MainMenu : MonoBehaviour
 
 		menu = GetComponent<CanvasGroup>();
 		menuPath = GetComponent<iTweenPath>();
+		originalPath = new List<Vector3>(menuPath.nodes);
+
+		UpdatePathResolution(Camera.main.aspect);
 	}
 
 	void Start()
 	{
 		StartCoroutine(ShowMenu());
+	}
+
+	public void UpdatePathResolution(float aspect)
+	{
+		for (int i = 0; i < menuPath.nodeCount; i++)
+		{
+			menuPath.nodes[i] = new Vector3(originalPath[i].x * aspect, originalPath[i].y, originalPath[i].z);
+		}
 	}
 
 	public void GoToNode(int node)

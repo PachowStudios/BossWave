@@ -62,7 +62,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 1.20000005, y: 1.20000005, z: 1}
+        value: {x: 1.10000002, y: 1.10000002, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 808527048
@@ -107,7 +107,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1.20000005
+        value: 1.10000002
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -121,7 +121,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1.20000005
+        value: 1.10000002
         inSlope: 0
         outSlope: 0
         tangentMode: 10
@@ -165,7 +165,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 1.14999998, y: 1.14999998, z: 1}
+        value: {x: 1.04999995, y: 1.04999995, z: 1}
         inSlope: {x: -.149999976, y: 0, z: 0}
         outSlope: {x: -.149999976, y: 0, z: 0}
         tangentMode: 0
@@ -210,7 +210,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1.14999998
+        value: 1.04999995
         inSlope: -.149999976
         outSlope: -.149999976
         tangentMode: 10
@@ -224,7 +224,7 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 1.14999998
+        value: 1.04999995
         inSlope: -.149999976
         outSlope: -.149999976
         tangentMode: 10
@@ -495,24 +495,24 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110237160}
-      second: []
-    data:
-      first: {fileID: 110244652}
-      second: []
-    data:
-      first: {fileID: 110282961}
-      second: []
-    data:
-      first: {fileID: 110200000}
-      second: []
-    data:
       first: {fileID: 0}
       second:
       - {fileID: 110100000}
       - {fileID: 110182961}
       - {fileID: 110144652}
       - {fileID: 110137160}
+    data:
+      first: {fileID: 110200000}
+      second: []
+    data:
+      first: {fileID: 110282961}
+      second: []
+    data:
+      first: {fileID: 110244652}
+      second: []
+    data:
+      first: {fileID: 110237160}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

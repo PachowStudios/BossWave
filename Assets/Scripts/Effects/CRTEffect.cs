@@ -59,30 +59,36 @@ public class CRTEffect : MonoBehaviour
 	public static void EndCRT(float fadeTime)
 	{
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", 0f,
-											   "to", instance.borderBuffer,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutCirc,
-											   "onupdate", "UpdateCRTBorder",
-											   "ignoretimescale", true));
+														"to", instance.borderBuffer,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeOutCirc,
+														"onupdate", "UpdateCRTBorder",
+														"ignoretimescale", true));
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", scanlines.y,
-											   "to", scanlines.x,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeInSine,
-											   "onupdate", "UpdateCRTScanlines",
-											   "ignoretimescale", true));
+														"to", scanlines.x,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeInSine,
+														"onupdate", "UpdateCRTScanlines",
+														"ignoretimescale", true));
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.gamma.y,
-											   "to", instance.gamma.x,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdateCRTGamma",
-											   "ignoretimescale", true));
+														"to", instance.gamma.x,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateCRTGamma",
+														"ignoretimescale", true));
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.distortionAmount,
-											   "to", 0f,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdateCRTShader",
-											   "oncomplete", "DisableCRTShader",
-											   "ignoretimescale", true));
+														"to", 0f,
+														"time", fadeTime,
+														"easetype", iTween.EaseType.easeOutQuint,
+														"onupdate", "UpdateCRTShader",
+														"oncomplete", "DisableCRTShader",
+														"ignoretimescale", true));
+	}
+
+	public static void UpdateResolution(int height)
+	{
+		scanlines = new Vector2(Screen.height, Screen.height + 100f);
+		crtShader.TextureSize = scanlines.y;
 	}
 
 	private void UpdateCRTBorder(float newValue)
