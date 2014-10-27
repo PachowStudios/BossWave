@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
 
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
-	private Transform worldBoundaries;
+	//private Transform worldBoundaries;
 	private PlayerControl playerControl;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
 
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
-		worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
+		//worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
 		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour
 					Cutscene.StartCutscene();
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, true, true);
-					worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
+					//worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
 					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
 
 					bossWaveInitialized = true;
