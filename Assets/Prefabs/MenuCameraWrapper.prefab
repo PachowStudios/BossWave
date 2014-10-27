@@ -1090,7 +1090,7 @@ MonoBehaviour:
   eventSystem: {fileID: 0}
   volumeSlider: {fileID: 11400026}
   fullscreenToggle: {fileID: 11400068}
-  startDelay: 10
+  startDelay: 1
   fadeTime: 2
   nodeMoveSpeed: 2
 --- !u!114 &11400022

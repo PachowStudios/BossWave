@@ -87,7 +87,7 @@ public class CRTEffect : MonoBehaviour
 
 	public static void UpdateResolution(int height)
 	{
-		scanlines = new Vector2(Screen.height, Screen.height + 100f);
+		scanlines = new Vector2(height, height + 100f);
 		crtShader.TextureSize = scanlines.y;
 	}
 
