@@ -11,8 +11,12 @@ public class ImmersiveModeEnabler : MonoBehaviour {
 
 	void Awake()
 	{
-		if(!Application.isEditor)
+		DontDestroyOnLoad(gameObject);
+
+		if (!Application.isEditor)
+		{
 			HideNavigationBar();
+		}
 	}
 	
 	void HideNavigationBar()

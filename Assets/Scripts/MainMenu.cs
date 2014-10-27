@@ -8,22 +8,34 @@ using System.Linq;
 public class MainMenu : MonoBehaviour 
 {
 	public EventSystem eventSystem;
-	public Slider volumeSlider;
-	public Toggle fullscreenToggle;
 
 	public float startDelay = 1f;
 	public float fadeTime = 1.5f;
 	public float nodeMoveSpeed = 2f;
+
+	private Slider volumeSlider;
+
+	#if !MOBILE_INPUT
+	private Toggle fullscreenToggle;
+	private ResolutionSelector resolutionSelector;
+	#endif
 
 	private CanvasGroup menu;
 	private RectTransform rectTransform;
 
 	void Awake()
 	{
-		LoadPrefs();
+		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
+
+		#if !MOBILE_INPUT
+		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
+		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
+		#endif
 
 		menu = GetComponent<CanvasGroup>();
 		rectTransform = GetComponent<RectTransform>();
+
+		LoadPrefs();
 	}
 
 	void Start()
@@ -66,10 +78,18 @@ public class MainMenu : MonoBehaviour
 		AudioListener.volume = newVolume;
 	}
 
-	public void SetFullscreen()
+	public void ApplySettings()
 	{
+		#if !MOBILE_INPUT
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
+		resolutionSelector.SetResolution();
+		#endif
+	}
+
+	public void ResetPrefs()
+	{
+		PlayerPrefs.DeleteAll();
 	}
 
 	private void LoadPrefs()
@@ -80,11 +100,13 @@ public class MainMenu : MonoBehaviour
 			volumeSlider.value = -AudioListener.volume;
 		}
 
+		#if !MOBILE_INPUT
 		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
 		{
 			Screen.fullScreen = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
 			fullscreenToggle.isOn = Screen.fullScreen;
 		}
+		#endif
 	}
 
 	private IEnumerator ShowMenu()

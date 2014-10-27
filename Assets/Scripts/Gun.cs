@@ -26,7 +26,10 @@ public class Gun : MonoBehaviour
 
 	private bool shoot;
 	private float shootTimer = 0f;
+
+	#if !MOBILE_INPUT
 	private bool useMouse = true;
+	#endif
 
 	private Transform firePoint;
 

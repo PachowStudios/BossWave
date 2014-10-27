@@ -14,6 +14,8 @@ public class MobileControlToggle : MonoBehaviour
 	// This define is set or unset by a menu item that is included with
 	// the Cross Platform Input package.
 
+	public bool enableOnMobile = true;
+
 	#if !UNITY_EDITOR
 	void OnEnable()
 	{
@@ -44,9 +46,9 @@ public class MobileControlToggle : MonoBehaviour
 	private void CheckEnableControlRig()
 	{
 		#if MOBILE_INPUT
-		EnableControlRig(true);
+		EnableControlRig(enableOnMobile);
 		#else
-        EnableControlRig(false);
+        EnableControlRig(!enableOnMobile);
 		#endif
 
 	}
