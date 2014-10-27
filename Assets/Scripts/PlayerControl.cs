@@ -87,14 +87,13 @@ public class PlayerControl : MonoBehaviour
 	{
 		if (!disableInput)
 		{
-			#if MOBILE_INPUT
 			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
+
+			#if MOBILE_INPUT
 			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
 			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
 			#else
-			right = CrossPlatformInputManager.GetButton("Right");
-			left = CrossPlatformInputManager.GetButton("Left");
 			run = CrossPlatformInputManager.GetButton("Run");
 			jump = jump || CrossPlatformInputManager.GetButtonDown("Jump");
 			#endif

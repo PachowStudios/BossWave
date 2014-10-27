@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
 
 	private bool shoot;
 	private float shootTimer = 0f;
+	private bool useMouse = true;
 
 	private Transform firePoint;
 
@@ -47,7 +48,27 @@ public class Gun : MonoBehaviour
 		#if MOBILE_INPUT
 		shoot = CrossPlatformInputManager.GetAxis("GunRotation") != 0f;
 		#else
-		shoot = CrossPlatformInputManager.GetButton("Shoot");
+		bool xboxInput = CrossPlatformInputManager.GetAxis("XboxGunX") != 0f || CrossPlatformInputManager.GetAxis("XboxGunY") != 0f;
+		bool mouseInput = CrossPlatformInputManager.GetButton("Shoot");
+
+		if (useMouse)
+		{
+			if (xboxInput)
+			{
+				useMouse = false;
+			}
+
+			shoot = mouseInput;
+		}
+		else
+		{
+			if (mouseInput)
+			{
+				useMouse = true;
+			}
+
+			shoot = xboxInput;
+		}
 		#endif
 	}
 
@@ -71,15 +92,24 @@ public class Gun : MonoBehaviour
 
 	private Vector3 RotateTowardsMouse()
 	{
+		Vector3 newEuler;
+
 		#if MOBILE_INPUT
-		Vector3 newEuler = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation")).eulerAngles;
+		newEuler = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation")).eulerAngles;
 		#else
-		Vector3 mousePosition = Input.mousePosition;
-		mousePosition.z = 10f;
-		Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-		gunLookPosition -= transform.position;
-		float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
-		Vector3 newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
+		if (useMouse)
+		{
+			Vector3 mousePosition = Input.mousePosition;
+			mousePosition.z = 10f;
+			Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+			gunLookPosition -= transform.position;
+			float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
+			newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
+		}
+		else
+		{
+			newEuler = Quaternion.Euler(0, 0, Mathf.Atan2(CrossPlatformInputManager.GetAxis("XboxGunY"), CrossPlatformInputManager.GetAxis("XboxGunX")) * Mathf.Rad2Deg).eulerAngles;
+		}
 		#endif
 
 		Transform originalTransform = transform;
