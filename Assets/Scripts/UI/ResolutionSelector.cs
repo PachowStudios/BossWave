@@ -11,12 +11,8 @@ public class ResolutionSelector : MonoBehaviour
 	private List<Resolution> resolutions;
 	private int selected = 0;
 
-	private MainMenu mainMenu;
-
 	void Awake()
 	{
-		mainMenu = GetComponentInParent<MainMenu>();
-
 		resolutions = Screen.resolutions.ToList<Resolution>();
 
 		if (PlayerPrefs.HasKey("Settings/ResolutionWidth") && PlayerPrefs.HasKey("Settings/ResolutionHeight"))
@@ -68,7 +64,6 @@ public class ResolutionSelector : MonoBehaviour
 	public void SetResolution()
 	{
 		Screen.SetResolution(resolutions[selected].width, resolutions[selected].height, Screen.fullScreen);
-		mainMenu.UpdatePathResolution((float)resolutions[selected].width / (float)resolutions[selected].height);
 		CRTEffect.UpdateResolution(resolutions[selected].height);
 	}
 

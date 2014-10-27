@@ -15,18 +15,14 @@ public class MainMenu : MonoBehaviour
 	public float nodeMoveSpeed = 2f;
 
 	private CanvasGroup menu;
-	private iTweenPath menuPath;
-	private List<Vector3> originalPath;
+	private RectTransform rectTransform;
 
 	void Awake()
 	{
 		LoadPrefs();
 
 		menu = GetComponent<CanvasGroup>();
-		menuPath = GetComponent<iTweenPath>();
-		originalPath = new List<Vector3>(menuPath.nodes);
-
-		UpdatePathResolution(Camera.main.aspect);
+		rectTransform = GetComponent<RectTransform>();
 	}
 
 	void Start()
@@ -34,17 +30,21 @@ public class MainMenu : MonoBehaviour
 		StartCoroutine(ShowMenu());
 	}
 
-	public void UpdatePathResolution(float aspect)
+	public void GoToNode(string node)
 	{
-		for (int i = 0; i < menuPath.nodeCount; i++)
-		{
-			menuPath.nodes[i] = new Vector3(originalPath[i].x * aspect, originalPath[i].y, originalPath[i].z);
-		}
-	}
+		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.x,
+											   "to", -transform.FindChild(node).GetComponent<RectTransform>().anchoredPosition.x,
+											   "time", nodeMoveSpeed,
+											   "easetype", iTween.EaseType.easeOutQuint,
+											   "onupdate", "GoToUpdateX",
+											   "ignoretimescale", true));
 
-	public void GoToNode(int node)
-	{
-		menu.gameObject.MoveTo(menuPath.nodes[node], nodeMoveSpeed, 0f, EaseType.easeOutQuint);
+		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
+											   "to", -transform.FindChild(node).GetComponent<RectTransform>().anchoredPosition.y,
+											   "time", nodeMoveSpeed,
+											   "easetype", iTween.EaseType.easeOutQuint,
+											   "onupdate", "GoToUpdateY",
+											   "ignoretimescale", true));
 	}
 
 	public void SelectObject(GameObject gameObject)
@@ -122,5 +122,15 @@ public class MainMenu : MonoBehaviour
 	private void UpdateMenuAlpha(float newValue)
 	{
 		menu.alpha = newValue;
+	}
+
+	private void GoToUpdateX(float newValue)
+	{
+		rectTransform.anchoredPosition = new Vector2(newValue, rectTransform.anchoredPosition.y);
+	}
+
+	private void GoToUpdateY(float newValue)
+	{
+		rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, newValue);
 	}
 }
