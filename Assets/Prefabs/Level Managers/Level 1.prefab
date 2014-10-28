@@ -42,7 +42,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -166,11 +166,13 @@ MonoBehaviour:
     difficulty: 2
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 158
+    startTime: 1
     introLength: 8.69999981
+    totalLength: 30
     cameraMoveSpeed: 17.5
     bossSpawner: {fileID: 0}
     playerWaitPoint: {fileID: 0}
+    progressBar: {fileID: 0}
   enemies:
   - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
   - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}

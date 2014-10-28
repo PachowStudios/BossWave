@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,11 @@ public class LevelManager : MonoBehaviour
 		public Enemy boss;
 		public float startTime;
 		public float introLength;
+		public float totalLength;
 		public float cameraMoveSpeed;
 		public Transform bossSpawner;
 		public Transform playerWaitPoint;
+		public Scrollbar progressBar;
 	}
 
 	public AudioSource mainMusic;
@@ -101,12 +104,8 @@ public class LevelManager : MonoBehaviour
 
 				if (waveTimer >= bossWave.startTime + bossWave.introLength)
 				{
-					if (!bossWavePlayerMoved)
-					{
-						playerControl.continuouslyRunning = true;
-
-						bossWavePlayerMoved = true;
-					}
+					playerControl.continuouslyRunning = true;
+					bossWavePlayerMoved = true;
 
 					Cutscene.EndCutscene(true);
 					bossInstance.GetComponent<Enemy>().enabled = true;
@@ -116,6 +115,14 @@ public class LevelManager : MonoBehaviour
 					{
 						element.GetComponent<ScrollInfinite>().scroll = true;
 					}
+
+					bossWave.progressBar.GetComponent<Animator>().SetTrigger("Show");
+
+					iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
+														   "to", 1f,
+														   "time", bossWave.totalLength,
+														   "easetype", iTween.EaseType.linear,
+														   "onupdate", "BossWaveProgressBarUpdate"));
 
 					bossWaveIntroComplete = true;
 				}
@@ -168,6 +175,11 @@ public class LevelManager : MonoBehaviour
 				yield return new WaitForSeconds(waves[wave].spawnDelay);
 			}
 		}
+	}
+
+	private void BossWaveProgressBarUpdate(float newValue)
+	{
+		bossWave.progressBar.value = newValue;
 	}
 
 	private void LoadPrefs()
