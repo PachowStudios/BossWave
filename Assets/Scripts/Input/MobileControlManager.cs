@@ -11,26 +11,25 @@ public class MobileControlManager : MonoBehaviour
 	public EasyButton pauseButton;
 	public string pauseButtonName = "Pause";
 
-	private CrossPlatformInputManager.VirtualAxis horizontalAxis;
-	private CrossPlatformInputManager.VirtualAxis verticalAxis;
-	private CrossPlatformInputManager.VirtualAxis gunAxis;
-
 	private bool tripleTapLastFrame = false;
 	private bool tripleTap = false;
 
 	void OnEnable()
 	{
-		horizontalAxis = new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
-		verticalAxis = new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
-		gunAxis = new CrossPlatformInputManager.VirtualAxis(gunAxisName);
-		new CrossPlatformInputManager.VirtualButton(pauseButtonName);
+		if (CrossPlatformInputManager.VirtualAxisReference(horizontalAxisName) == null)
+		{
+			new CrossPlatformInputManager.VirtualAxis(horizontalAxisName);
+			new CrossPlatformInputManager.VirtualAxis(verticalAxisName);
+			new CrossPlatformInputManager.VirtualAxis(gunAxisName);
+			new CrossPlatformInputManager.VirtualButton(pauseButtonName);
+		}
 	}
 
 	void Update()
 	{
-		horizontalAxis.Update(moveJoystick.JoystickAxis.x);
-		verticalAxis.Update(moveJoystick.JoystickAxis.y);
-		gunAxis.Update(Mathf.Atan2(gunJoystick.JoystickAxis.y, gunJoystick.JoystickAxis.x) * Mathf.Rad2Deg);
+		CrossPlatformInputManager.SetAxis(horizontalAxisName, moveJoystick.JoystickAxis.x);
+		CrossPlatformInputManager.SetAxis(verticalAxisName, moveJoystick.JoystickAxis.y);
+		CrossPlatformInputManager.SetAxis(gunAxisName, Mathf.Atan2(gunJoystick.JoystickAxis.y, gunJoystick.JoystickAxis.x) * Mathf.Rad2Deg);
 
 		tripleTap = Input.touchCount >= 3;
 

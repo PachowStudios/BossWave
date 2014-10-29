@@ -68,6 +68,8 @@ public class GameMenu : MonoBehaviour
 			SelectObject(gameOverSelect);
 			CRTEffect.StartCRT(fadeTime);
 			Fade(0f, 1f, "UpdateGameOverAlpha", false);
+
+			SetJoysticks(false);
 		}
 	}
 
@@ -79,8 +81,12 @@ public class GameMenu : MonoBehaviour
 
 	private IEnumerator LoadLevelCoroutine(string levelName)
 	{
-		yield return new WaitForSeconds(loadTime);
-		Application.LoadLevel(levelName);
+		AsyncOperation async = Application.LoadLevelAsync(levelName);
+		async.allowSceneActivation = false;
+
+		yield return new WaitForSeconds(loadTime - (loadTime * 0.05f));
+
+		async.allowSceneActivation = true;
 	}
 
 	public void SelectObject(Selectable selectable)

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
 	public EventSystem eventSystem;
 
 	public float startDelay = 1f;
-	public float fadeTime = 1.5f;
+	public float fadeTime = 2f;
 	public float nodeMoveSpeed = 2f;
 
 	private Slider volumeSlider;
@@ -123,19 +123,16 @@ public class MainMenu : MonoBehaviour
 
 	private IEnumerator HideMenu(string levelName = "none")
 	{
-		CRTEffect.EndCRT(fadeTime);
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-											   "to", 0f,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdateMenuAlpha",
-											   "ignoretimescale", true));
-
-		yield return new WaitForSeconds(fadeTime);
-
 		if (levelName != "none" && levelName != "Exit")
-		{	
-			Application.LoadLevel(levelName);
+		{
+			CRTEffect.AnimateScanlines(fadeTime, 0f, iTween.EaseType.easeOutSine);
+
+			AsyncOperation async = Application.LoadLevelAsync(levelName);
+			async.allowSceneActivation = false;
+
+			yield return new WaitForSeconds(fadeTime);
+
+			async.allowSceneActivation = true;
 		}
 		else if (levelName == "Exit")
 		{

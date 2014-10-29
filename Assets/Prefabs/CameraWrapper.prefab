@@ -562,7 +562,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 9.99074936
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -961,6 +961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 0}
   fadeTime: .699999988
+  loadTime: 2
   pauseOverlay: {fileID: 22500010}
   gameOverOverlay: {fileID: 22500012}
   gameOverSelect: {fileID: 11400058}
