@@ -17,7 +17,6 @@ public class Gun : MonoBehaviour
 
 	public string gunName;
 	public Projectile projectile;
-	public bool aimAtMouse = true;
 	public float shootCooldown = 0.5f;
 	public RarityLevel rarity = RarityLevel.Common;
 

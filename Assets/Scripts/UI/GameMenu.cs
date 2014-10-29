@@ -61,14 +61,20 @@ public class GameMenu : MonoBehaviour
 			gameOver = true;
 			canPause = false;
 
+			SelectObject(gameOverSelect);
 			CRTEffect.StartCRT(fadeTime);
 			Fade(0f, 1f, "UpdateGameOverAlpha", false);
 		}
 	}
 
-	public void SelectObject(GameObject gameObject)
+	public void LoadLevel(string levelName)
 	{
-		eventSystem.SetSelectedGameObject(gameObject, new BaseEventData(eventSystem));
+		Application.LoadLevel(levelName);
+	}
+
+	public void SelectObject(Selectable selectable)
+	{
+		eventSystem.SetSelectedGameObject(selectable.gameObject, new BaseEventData(eventSystem));
 	}
 
 	private void Fade(float from, float to, string updateMethod, bool setPause)
@@ -79,7 +85,7 @@ public class GameMenu : MonoBehaviour
 											   "easetype", iTween.EaseType.easeOutQuint,
 											   "onupdate", updateMethod,
 											   "oncomplete", "EnablePausing",
-											   "oncompleteparams", iTween.Hash("enabled", setPause),
+											   "oncompleteparams", setPause,
 											   "ignoretimescale", true));
 	}
 
@@ -101,10 +107,14 @@ public class GameMenu : MonoBehaviour
 	private void UpdatePauseAlpha(float newValue)
 	{
 		pauseOverlay.alpha = newValue;
+		pauseOverlay.interactable = newValue == 1f;
+		pauseOverlay.blocksRaycasts = newValue == 1f;
 	}
 
 	private void UpdateGameOverAlpha(float newValue)
 	{
 		gameOverOverlay.alpha = newValue;
+		gameOverOverlay.interactable = newValue == 1f;
+		gameOverOverlay.blocksRaycasts = newValue == 1f;
 	}
 }

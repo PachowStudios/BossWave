@@ -81,9 +81,9 @@ public class MainMenu : MonoBehaviour
 	public void ApplySettings()
 	{
 		#if !MOBILE_INPUT
+		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
-		resolutionSelector.SetResolution();
 		#endif
 	}
 

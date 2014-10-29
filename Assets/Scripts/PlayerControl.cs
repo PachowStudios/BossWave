@@ -289,6 +289,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			SetRenderersEnabled(false);
 			collider2D.enabled = false;
+			DisableInput();
 
 			foreach (SpriteRenderer sprite in spriteRenderers)
 			{
