@@ -28,6 +28,8 @@ public class LevelManager : MonoBehaviour
 		public Scrollbar progressBar;
 	}
 
+	public bool spawnEnemies = true;
+	public bool spawnPowerups = true;
 	public float fadeInTime = 2f;
 	public AudioSource mainMusic;
 	public List<Wave> waves;
@@ -139,7 +141,7 @@ public class LevelManager : MonoBehaviour
 		}
 		else if (playerControl.health > 0f)
 		{
-			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
+			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime && spawnEnemies)
 			{
 				StartCoroutine(SpawnWave(currentWave));
 				currentWave++;
@@ -147,7 +149,7 @@ public class LevelManager : MonoBehaviour
 
 			powerupTimer += Time.deltaTime;
 
-			if (powerups.Count > 0 && powerupTimer >= powerupTime)
+			if (powerups.Count > 0 && powerupTimer >= powerupTime && spawnPowerups)
 			{
 				Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
 				int powerupToSpawn = Mathf.RoundToInt(Random.Range(0f, powerups.Count - 1));

@@ -8,9 +8,11 @@ public class GameMenu : MonoBehaviour
 	public EventSystem eventSystem;
 	public float fadeTime = 0.7f;
 	public float loadTime = 2f;
+	public float nodeMoveSpeed = 2f;
 	public CanvasGroup pauseOverlay;
 	public CanvasGroup gameOverOverlay;
 	public Selectable gameOverSelect;
+	public Selectable pauseSelect;
 	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
@@ -18,14 +20,32 @@ public class GameMenu : MonoBehaviour
 	private bool gameOver = false;
 	private AudioSource[] sounds;
 
+	private Slider volumeSlider;
+
+	#if	!MOBILE_INPUT
+	private Toggle fullscreenToggle;
+	private ResolutionSelector resolutionSelector;
+	#endif
+
 	private PlayerControl player;
+	private RectTransform rectTransform;
 
 	void Awake()
 	{
+		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
+
+		#if !MOBILE_INPUT
+		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
+		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
+		#endif
+
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+		rectTransform = GetComponent<RectTransform>();
 
 		pauseOverlay.interactable = false;
 		gameOverOverlay.interactable = false;
+
+		LoadPrefs();
 	}
 
 	void Update()
@@ -42,6 +62,7 @@ public class GameMenu : MonoBehaviour
 			{
 				paused = true;
 				canPause = false;
+				SelectObject(pauseSelect);
 				TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
 				CRTEffect.StartCRT(fadeTime);
 				Fade(0f, 1f, "UpdatePauseAlpha", true);
@@ -52,6 +73,7 @@ public class GameMenu : MonoBehaviour
 			{
 				paused = false;
 				canPause = false;
+				GoToNode("Pause Menu");
 				TimeWarpEffect.EndWarp(fadeTime, sounds);
 				CRTEffect.EndCRT(fadeTime);
 				Fade(1f, 0f, "UpdatePauseAlpha", true);
@@ -92,9 +114,60 @@ public class GameMenu : MonoBehaviour
 		async.allowSceneActivation = true;
 	}
 
+	public void GoToNode(string node)
+	{
+		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.x,
+											   "to", -transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition.x,
+											   "time", nodeMoveSpeed,
+											   "easetype", iTween.EaseType.easeOutQuint,
+											   "onupdate", "GoToUpdateX",
+											   "ignoretimescale", true));
+
+		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
+											   "to", -transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition.y,
+											   "time", nodeMoveSpeed,
+											   "easetype", iTween.EaseType.easeOutQuint,
+											   "onupdate", "GoToUpdateY",
+											   "ignoretimescale", true));
+	}
+
 	public void SelectObject(Selectable selectable)
 	{
 		eventSystem.SetSelectedGameObject(selectable.gameObject, new BaseEventData(eventSystem));
+	}
+
+	public void SetVolume(float newVolume)
+	{
+		newVolume = Mathf.Abs(newVolume);
+
+		PlayerPrefs.SetFloat("Settings/Volume", newVolume);
+		AudioListener.volume = newVolume;
+	}
+
+	public void ApplySettings()
+	{
+		#if !MOBILE_INPUT
+		resolutionSelector.SetResolution();
+		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
+		Screen.fullScreen = fullscreenToggle.isOn;
+		#endif
+	}
+
+	private void LoadPrefs()
+	{
+		if (PlayerPrefs.HasKey("Settings/Volume"))
+		{
+			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
+			volumeSlider.value = -AudioListener.volume;
+		}
+
+		#if !MOBILE_INPUT
+		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
+		{
+			Screen.fullScreen = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
+			fullscreenToggle.isOn = Screen.fullScreen;
+		}
+		#endif
 	}
 
 	private void Fade(float from, float to, string updateMethod, bool setPause)
@@ -136,5 +209,15 @@ public class GameMenu : MonoBehaviour
 		gameOverOverlay.alpha = newValue;
 		gameOverOverlay.interactable = newValue == 1f;
 		gameOverOverlay.blocksRaycasts = newValue == 1f;
+	}
+
+	private void GoToUpdateX(float newValue)
+	{
+		rectTransform.anchoredPosition = new Vector2(newValue, rectTransform.anchoredPosition.y);
+	}
+
+	private void GoToUpdateY(float newValue)
+	{
+		rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, newValue);
 	}
 }
