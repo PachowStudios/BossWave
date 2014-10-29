@@ -14,6 +14,11 @@ public class iTweenPath : MonoBehaviour
 	public string initialName = "";
 	
 	void OnEnable(){
+		if (paths.ContainsKey(pathName.ToLower()))
+		{
+			paths.Remove(pathName.ToLower());
+		}
+
 		paths.Add(pathName.ToLower(), this);
 	}
 	
