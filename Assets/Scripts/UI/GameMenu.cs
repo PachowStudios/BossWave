@@ -7,6 +7,7 @@ public class GameMenu : MonoBehaviour
 {
 	public EventSystem eventSystem;
 	public float fadeTime = 0.7f;
+	public float loadTime = 2f;
 	public CanvasGroup pauseOverlay;
 	public CanvasGroup gameOverOverlay;
 	public Selectable gameOverSelect;
@@ -22,6 +23,9 @@ public class GameMenu : MonoBehaviour
 	void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+
+		pauseOverlay.interactable = false;
+		gameOverOverlay.interactable = false;
 	}
 
 	void Update()
@@ -69,6 +73,13 @@ public class GameMenu : MonoBehaviour
 
 	public void LoadLevel(string levelName)
 	{
+		CRTEffect.AnimateScanlines(loadTime, 0f, iTween.EaseType.easeOutSine);
+		StartCoroutine(LoadLevelCoroutine(levelName));
+	}
+
+	private IEnumerator LoadLevelCoroutine(string levelName)
+	{
+		yield return new WaitForSeconds(loadTime);
 		Application.LoadLevel(levelName);
 	}
 

@@ -78,6 +78,11 @@ public class LevelManager : MonoBehaviour
 		waveTimer = mainMusic.time;
 	}
 
+	void Start()
+	{
+		CRTEffect.EndCRT(2f, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+	}
+
 	void FixedUpdate()
 	{
 		waveTimer = mainMusic.time;

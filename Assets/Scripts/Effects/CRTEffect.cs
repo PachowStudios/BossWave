@@ -10,7 +10,7 @@ public class CRTEffect : MonoBehaviour
 	public Vector2 gamma = new Vector2(1f, 2.2f);
 	public Image crtBorder;
 
-	private static Vector2 scanlines;
+	private static Vector2 defaultScanlines;
 	private static CRT crtShader;
 	private static NoiseAndGrain noiseShader;
 
@@ -20,14 +20,16 @@ public class CRTEffect : MonoBehaviour
 	{
 		instance = this;
 
-		scanlines = new Vector2(Screen.height, Screen.height + 100f);
+		defaultScanlines = new Vector2(Screen.height, Screen.height + 100f);
 		crtShader = Camera.main.GetComponent<CRT>();
 		noiseShader = Camera.main.GetComponent<NoiseAndGrain>();
 		noiseShader.intensityMultiplier = noiseIntensity;
 	}
 
-	public static void StartCRT(float fadeTime)
+	public static void StartCRT(float fadeTime, float scanlinesStart = -1f, float scanlinesEnd = -1f, iTween.EaseType easeType = iTween.EaseType.easeOutSine)
 	{
+		Vector2 scanlines = (scanlinesStart == -1 || scanlinesEnd == -1) ? defaultScanlines : new Vector2(scanlinesStart, scanlinesEnd);
+
 		instance.EnableCRTShader();
 		
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.borderBuffer,
@@ -39,7 +41,7 @@ public class CRTEffect : MonoBehaviour
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", scanlines.x,
 														"to", scanlines.y,
 														"time", fadeTime,
-														"easetype", iTween.EaseType.easeOutSine,
+														"easetype", easeType,
 														"onupdate", "UpdateCRTScanlines",
 														"ignoretimescale", true));
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.gamma.x,
@@ -56,8 +58,15 @@ public class CRTEffect : MonoBehaviour
 														"ignoretimescale", true));
 	}
 
-	public static void EndCRT(float fadeTime)
+	public static void EndCRT(float fadeTime, float scanlinesStart = -1f, float scanlinesEnd = -1f, iTween.EaseType easeType = iTween.EaseType.easeInSine)
 	{
+		Vector2 scanlines = (scanlinesStart == -1 || scanlinesEnd == -1) ? defaultScanlines : new Vector2(scanlinesStart, scanlinesEnd);
+
+		if (!crtShader.enabled)
+		{
+			instance.EnableCRTShader();
+		}
+
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", 0f,
 														"to", instance.borderBuffer,
 														"time", fadeTime,
@@ -67,7 +76,7 @@ public class CRTEffect : MonoBehaviour
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", scanlines.y,
 														"to", scanlines.x,
 														"time", fadeTime,
-														"easetype", iTween.EaseType.easeInSine,
+														"easetype", easeType,
 														"onupdate", "UpdateCRTScanlines",
 														"ignoretimescale", true));
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.gamma.y,
@@ -85,10 +94,20 @@ public class CRTEffect : MonoBehaviour
 														"ignoretimescale", true));
 	}
 
+	public static void AnimateScanlines(float fadeTime, float scanlinesEnd, iTween.EaseType easeType)
+	{
+		iTween.ValueTo(instance.gameObject, iTween.Hash("from", crtShader.TextureSize,
+														"to", scanlinesEnd,
+														"time", fadeTime,
+														"easetype", easeType,
+														"onupdate", "UpdateCRTScanlines",
+														"ignoretimescale", true));
+	}
+
 	public static void UpdateResolution(int height)
 	{
-		scanlines = new Vector2(height, height + 100f);
-		crtShader.TextureSize = scanlines.y;
+		defaultScanlines = new Vector2(height, height + 100f);
+		crtShader.TextureSize = defaultScanlines.y;
 	}
 
 	private void UpdateCRTBorder(float newValue)
@@ -112,14 +131,14 @@ public class CRTEffect : MonoBehaviour
 		crtShader.OutputGamma = newValue;
 	}
 
-	private void EnableCRTShader()
+	public void EnableCRTShader()
 	{
 		crtShader.enabled = true;
 		noiseShader.enabled = true;
 		crtBorder.fillCenter = true;
 	}
 
-	private void DisableCRTShader()
+	public void DisableCRTShader()
 	{
 		crtShader.enabled = false;
 		noiseShader.enabled = false;
