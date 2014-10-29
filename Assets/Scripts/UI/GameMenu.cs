@@ -75,6 +75,9 @@ public class GameMenu : MonoBehaviour
 
 	public void LoadLevel(string levelName)
 	{
+		sounds = FindObjectsOfType<AudioSource>();
+
+		TimeWarpEffect.StartWarp(0f, loadTime, sounds, iTween.EaseType.easeOutSine);
 		CRTEffect.AnimateScanlines(loadTime, 0f, iTween.EaseType.easeOutSine);
 		StartCoroutine(LoadLevelCoroutine(levelName));
 	}
@@ -84,7 +87,7 @@ public class GameMenu : MonoBehaviour
 		AsyncOperation async = Application.LoadLevelAsync(levelName);
 		async.allowSceneActivation = false;
 
-		yield return new WaitForSeconds(loadTime - (loadTime * 0.05f));
+		yield return StartCoroutine(Extensions.WaitForRealSeconds(loadTime - (loadTime * 0.05f)));
 
 		async.allowSceneActivation = true;
 	}

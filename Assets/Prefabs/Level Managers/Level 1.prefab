@@ -37,12 +37,12 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 063a0336f6e53604fba64c499045cdaa, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 74b7f95718679d64a96ae7d2b7554128, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
   - startTime: 2

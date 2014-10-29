@@ -28,8 +28,8 @@ public class LevelManager : MonoBehaviour
 		public Scrollbar progressBar;
 	}
 
+	public float fadeInTime = 2f;
 	public AudioSource mainMusic;
-
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<Enemy> enemies;
@@ -74,13 +74,18 @@ public class LevelManager : MonoBehaviour
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
-		mainMusic.Play();
-		waveTimer = mainMusic.time;
 	}
 
 	void Start()
 	{
-		CRTEffect.EndCRT(2f, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+		mainMusic.time = 22.526f;
+		mainMusic.pitch = 0f;
+		mainMusic.Play();
+		waveTimer = mainMusic.time;
+
+		Time.timeScale = 0f;
+		TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
+		CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
 	}
 
 	void FixedUpdate()
@@ -133,7 +138,7 @@ public class LevelManager : MonoBehaviour
 				}
 			}
 		}
-		else
+		else if (playerControl.health > 0f)
 		{
 			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
 			{
@@ -153,6 +158,10 @@ public class LevelManager : MonoBehaviour
 				powerupTimer = 0f;
 				powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 			}
+		}
+		else
+		{
+			StopAllCoroutines();
 		}
 	}
 

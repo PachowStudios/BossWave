@@ -25,24 +25,24 @@ public class TimeWarpEffect : MonoBehaviour
 														"ignoretimescale", true));
 	}
 
-	public static void StartWarp(float timeScale, float fadeTime, AudioSource[] sounds = null)
+	public static void StartWarp(float timeScale, float fadeTime, AudioSource[] sounds = null, iTween.EaseType easeType = iTween.EaseType.easeOutQuint)
 	{
 		allSounds = sounds;
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
 														"to", timeScale,
 													    "time", fadeTime,
-														"easetype", iTween.EaseType.easeOutQuint,
+														"easetype", easeType,
 														"onupdate", "UpdateValues",
 														"ignoretimescale", true));
 	}
 
-	public static void EndWarp(float fadeTime, AudioSource[] sounds = null)
+	public static void EndWarp(float fadeTime, AudioSource[] sounds = null, iTween.EaseType easeType = iTween.EaseType.easeInSine)
 	{
 		allSounds = sounds;
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", Time.timeScale,
 														"to", 1f,
 														"time", fadeTime,
-														"easetype", iTween.EaseType.easeInSine,
+														"easetype", easeType,
 														"onupdate", "UpdateValues",
 														"ignoretimescale", true));
 	}

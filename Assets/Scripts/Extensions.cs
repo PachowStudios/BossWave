@@ -28,4 +28,14 @@ public static class Extensions
 
 		return null;
 	}
+
+	public static IEnumerator WaitForRealSeconds(float time)
+	{
+		float start = Time.realtimeSinceStartup;
+
+		while (Time.realtimeSinceStartup < start + time)
+		{
+			yield return null;
+		}
+	}
 }
