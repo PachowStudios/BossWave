@@ -78,7 +78,6 @@ public class LevelManager : MonoBehaviour
 
 	void Start()
 	{
-		mainMusic.time = 22.526f;
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
 		waveTimer = mainMusic.time;

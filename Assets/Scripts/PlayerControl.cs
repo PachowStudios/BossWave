@@ -47,6 +47,10 @@ public class PlayerControl : MonoBehaviour
 	private bool run;
 	private bool disableInput = false;
 
+	#if MOBILE_INPUT
+	private bool lastJump;
+	#endif
+
 	private bool runFull = false;
 	private float runFullTimer = 0f;
 
@@ -92,10 +96,12 @@ public class PlayerControl : MonoBehaviour
 
 			#if MOBILE_INPUT
 			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
-			jump = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
+			bool jumpInput = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
+			jump = jump || (jumpInput && !lastJump);
+			lastJump = jumpInput;
 			#else
 			run = CrossPlatformInputManager.GetButton("Run");
-			jump = jump || CrossPlatformInputManager.GetButtonDown("Jump");
+			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && controller.isGrounded);
 			#endif
 		}
 
