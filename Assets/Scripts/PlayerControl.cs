@@ -208,11 +208,15 @@ public class PlayerControl : MonoBehaviour
 
 		if (gun.NoInput)
 		{
+			if (continuouslyRunning && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
 			if (right && transform.localScale.x < 0f)
 			{
 				Flip();
 			}
-			else if (left && transform.localScale.x > 0f)
+			else if (left && !continuouslyRunning && transform.localScale.x > 0f)
 			{
 				Flip();
 			}
