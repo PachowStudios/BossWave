@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
 	public float fadeTime = 2f;
 	public float nodeMoveSpeed = 2f;
 
+	public Image logo;
+
 	private Slider volumeSlider;
 
 	#if !MOBILE_INPUT
@@ -114,13 +116,15 @@ public class MainMenu : MonoBehaviour
 	private IEnumerator ShowMenu()
 	{
 		yield return new WaitForSeconds(startDelay);
+
+		logo.GetComponent<Animator>().SetTrigger("Start");
 		CRTEffect.StartCRT(fadeTime);
 		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
 											   "to", 1f,
 											   "time", fadeTime,
 											   "easetype", iTween.EaseType.easeOutQuint,
 											   "onupdate", "UpdateMenuAlpha",
-											   "ignoretimescale", true));		
+											   "ignoretimescale", true));
 	}
 
 	private IEnumerator HideMenu(string levelName = "none")

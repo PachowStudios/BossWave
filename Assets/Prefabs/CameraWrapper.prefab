@@ -308,6 +308,7 @@ GameObject:
   - 224: {fileID: 22400028}
   - 222: {fileID: 22200022}
   - 114: {fileID: 11400036}
+  - 225: {fileID: 22500006}
   m_Layer: 5
   m_Name: CRT Border
   m_TagString: Untagged
@@ -3495,7 +3496,7 @@ RectTransform:
   m_Children:
   - {fileID: 22400006}
   m_Father: {fileID: 22400010}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -50, y: -25}
@@ -3562,12 +3563,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 22400028}
   - {fileID: 22400012}
   - {fileID: 22400002}
   - {fileID: 22400020}
   - {fileID: 22400036}
   - {fileID: 22400040}
+  - {fileID: 22400028}
   m_Father: {fileID: 400006}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -3590,7 +3591,7 @@ RectTransform:
   - {fileID: 22400008}
   - {fileID: 22400000}
   m_Father: {fileID: 22400010}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3660,7 +3661,7 @@ RectTransform:
   - {fileID: 22400018}
   - {fileID: 22400016}
   m_Father: {fileID: 22400010}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3732,7 +3733,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22400010}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3802,7 +3803,7 @@ RectTransform:
   m_Children:
   - {fileID: 22400034}
   m_Father: {fileID: 22400010}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 650}
@@ -3842,7 +3843,7 @@ RectTransform:
   - {fileID: 22400038}
   - {fileID: 22400022}
   m_Father: {fileID: 22400010}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -4606,6 +4607,15 @@ CanvasGroup:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
   m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+--- !u!225 &22500006
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100034}
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
 --- !u!225 &22500008

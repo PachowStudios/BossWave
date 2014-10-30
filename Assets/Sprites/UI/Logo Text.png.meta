@@ -1,0 +1,268 @@
+fileFormatVersion: 2
+guid: 4263e609a2d17954e9ba209c97701fa9
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Logo Text
+    21300002: Logo Text_0
+    21300004: Logo Text_1
+    21300006: Logo Text_2
+    21300008: Logo Text_3
+    21300010: Logo Text_4
+    21300012: Logo Text_5
+    21300014: Logo Text_6
+    21300016: Logo Text_7
+    21300018: Logo Text_8
+    21300020: Logo Text_9
+    21300022: Logo Text_10
+    21300024: Logo Text_11
+    21300026: Logo Text_12
+    21300028: Logo Text_13
+    21300030: Logo Text_14
+    21300032: Logo Text_15
+    21300034: Logo Text_16
+    21300036: Logo Text_17
+    21300038: Logo Text_18
+    21300040: Logo Text_19
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Logo Text_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 456
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 432
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 408
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 360
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 312
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 264
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 216
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 168
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Logo Text_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 180
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
