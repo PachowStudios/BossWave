@@ -9,7 +9,7 @@ PlayerSettings:
   targetDevice: 2
   targetGlesGraphics: 1
   targetResolution: 0
-  accelerometerFrequency: 60
+  accelerometerFrequency: 0
   companyName: Pachow Studios
   productName: Boss Wave
   defaultCursor: {fileID: 0}
@@ -116,6 +116,9 @@ PlayerSettings:
   - m_BuildTarget: BlackBerry
     m_StaticBatching: 1
     m_DynamicBatching: 1
+  - m_BuildTarget: Windows Store Apps
+    m_StaticBatching: 1
+    m_DynamicBatching: 1
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   XboxTitleId: 
@@ -163,28 +166,29 @@ PlayerSettings:
     2: CROSS_PLATFORM_INPUT
     4: CROSS_PLATFORM_INPUT
     7: CROSS_PLATFORM_INPUT
+    14: CROSS_PLATFORM_INPUT
     15: CROSS_PLATFORM_INPUT
     16: CROSS_PLATFORM_INPUT
-  metroPackageName: Mario Survival
+  metroPackageName: BossWave
   metroPackageLogo: 
   metroPackageLogo140: 
   metroPackageLogo180: 
   metroPackageLogo240: 
-  metroPackageVersion: 
-  metroCertificatePath: 
-  metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Mario Survival
+  metroPackageVersion: 1.0.0.0
+  metroCertificatePath: Assets/MetroTestCertificate.pfx
+  metroCertificatePassword: "dMOGZGKC[\x19\x18"
+  metroCertificateSubject: Pachow Studios
+  metroCertificateIssuer: Pachow Studios
+  metroCertificateNotAfter: 80bbb2420c13d101
+  metroApplicationDescription: Boss Wave
   metroStoreTileLogo80: 
   metroStoreTileLogo: 
   metroStoreTileLogo140: 
   metroStoreTileLogo180: 
-  metroStoreTileWideLogo80: 
-  metroStoreTileWideLogo: 
-  metroStoreTileWideLogo140: 
-  metroStoreTileWideLogo180: 
+  metroStoreTileWideLogo80: Assets/Sprites/Application Icon/Windows Store/Wide Tile/248x120.png
+  metroStoreTileWideLogo: Assets/Sprites/Application Icon/Windows Store/Wide Tile/310x150.png
+  metroStoreTileWideLogo140: Assets/Sprites/Application Icon/Windows Store/Wide Tile/434x210.png
+  metroStoreTileWideLogo180: Assets/Sprites/Application Icon/Windows Store/Wide Tile/558x270.png
   metroStoreTileSmallLogo80: 
   metroStoreTileSmallLogo: 
   metroStoreTileSmallLogo140: 
@@ -193,13 +197,13 @@ PlayerSettings:
   metroStoreSmallTile: 
   metroStoreSmallTile140: 
   metroStoreSmallTile180: 
-  metroStoreLargeTile80: 
-  metroStoreLargeTile: 
-  metroStoreLargeTile140: 
-  metroStoreLargeTile180: 
-  metroStoreSplashScreenImage: 
-  metroStoreSplashScreenImage140: 
-  metroStoreSplashScreenImage180: 
+  metroStoreLargeTile80: Assets/Sprites/Application Icon/Windows Store/Large Tile/248x248.png
+  metroStoreLargeTile: Assets/Sprites/Application Icon/Windows Store/Large Tile/310x310.png
+  metroStoreLargeTile140: Assets/Sprites/Application Icon/Windows Store/Large Tile/434x434.png
+  metroStoreLargeTile180: Assets/Sprites/Application Icon/Windows Store/Large Tile/558x558.png
+  metroStoreSplashScreenImage: Assets/Sprites/Application Icon/Windows Store/Splash/600x320.png
+  metroStoreSplashScreenImage140: Assets/Sprites/Application Icon/Windows Store/Splash/868x420.png
+  metroStoreSplashScreenImage180: Assets/Sprites/Application Icon/Windows Store/Splash/1116x540.png
   metroPhoneAppIcon: 
   metroPhoneAppIcon140: 
   metroPhoneAppIcon240: 
@@ -215,18 +219,31 @@ PlayerSettings:
   metroPhoneSplashScreenImage: 
   metroPhoneSplashScreenImage140: 
   metroPhoneSplashScreenImage240: 
-  metroTileShortName: 
+  metroTileShortName: Boss Wave
   metroCommandLineArgsFile: 
-  metroTileShowName: 1
+  metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
   metroWideTileShowName: 0
-  metroDefaultTileSize: 1
+  metroDefaultTileSize: 2
   metroTileForegroundText: 1
-  metroTileBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
-  metroSplashScreenUseBackgroundColor: 0
-  metroCapabilities: {}
+  metroTileBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  metroSplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  metroSplashScreenUseBackgroundColor: 1
+  metroCapabilities:
+    EnterpriseAuthentication: 0
+    InternetClient: 1
+    InternetClientServer: 1
+    Location: 0
+    Microphone: 0
+    MusicLibrary: 0
+    PicturesLibrary: 0
+    PrivateNetworkClientServer: 1
+    Proximity: 0
+    RemovableStorage: 0
+    SharedUserCertificates: 0
+    VideosLibrary: 0
+    WebCam: 0
   metroUnprocessedPlugins: []
   metroCompilationOverrides: 1
   blackberryDeviceAddress: 
