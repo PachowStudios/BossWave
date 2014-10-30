@@ -206,13 +206,27 @@ public class PlayerControl : MonoBehaviour
 			normalizedHorizontalSpeed = 0f;
 		}
 
-		if (gun.FacingRight && transform.localScale.x < 0f)
+		if (gun.NoInput)
 		{
-			Flip();
+			if (right && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+			else if (left && transform.localScale.x > 0f)
+			{
+				Flip();
+			}
 		}
-		else if (!gun.FacingRight && transform.localScale.x > 0f)
+		else
 		{
-			Flip();
+			if (gun.FacingRight && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+			else if (!gun.FacingRight && transform.localScale.x > 0f)
+			{
+				Flip();
+			}
 		}
 
 		if (jump && controller.isGrounded)

@@ -40,6 +40,14 @@ public class Gun : MonoBehaviour
 		}
 	}
 
+	public bool NoInput
+	{
+		get
+		{
+			return !shoot;
+		}
+	}
+
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
@@ -101,12 +109,19 @@ public class Gun : MonoBehaviour
 		#else
 		if (useMouse)
 		{
-			Vector3 mousePosition = Input.mousePosition;
-			mousePosition.z = 10f;
-			Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-			gunLookPosition -= transform.position;
-			float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
-			newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
+			if (shoot)
+			{
+				Vector3 mousePosition = Input.mousePosition;
+				mousePosition.z = 10f;
+				Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+				gunLookPosition -= transform.position;
+				float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
+				newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
+			}
+			else
+			{
+				newEuler = Vector3.zero;
+			}
 		}
 		else
 		{
