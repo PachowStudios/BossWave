@@ -11,8 +11,8 @@ public class GameMenu : MonoBehaviour
 	public float nodeMoveSpeed = 2f;
 	public CanvasGroup pauseOverlay;
 	public CanvasGroup gameOverOverlay;
-	public Selectable gameOverSelect;
 	public Selectable pauseSelect;
+	public Selectable gameOverSelect;
 	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
@@ -43,7 +43,11 @@ public class GameMenu : MonoBehaviour
 		rectTransform = GetComponent<RectTransform>();
 
 		pauseOverlay.interactable = false;
-		gameOverOverlay.interactable = false;
+
+		if (gameOverOverlay != null)
+		{
+			gameOverOverlay.interactable = false;
+		}
 
 		LoadPrefs();
 	}
