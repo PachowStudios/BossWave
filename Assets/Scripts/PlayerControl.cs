@@ -46,6 +46,7 @@ public class PlayerControl : MonoBehaviour
 	private bool jump;
 	private bool run;
 	private bool disableInput = false;
+	private bool inPortal = false;
 
 	#if MOBILE_INPUT
 	private bool lastJump;
@@ -53,11 +54,6 @@ public class PlayerControl : MonoBehaviour
 
 	private bool runFull = false;
 	private float runFullTimer = 0f;
-
-	private float originalColliderHeight;
-	private float originalColliderOffset;
-	private float crouchingColliderHeight;
-	private float crouchingColliderOffset;
 
 	private float lastHitTime;
 	private bool canTakeDamage = true;
@@ -235,8 +231,11 @@ public class PlayerControl : MonoBehaviour
 
 		if (jump && controller.isGrounded)
 		{
-			velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
-			anim.SetTrigger("Jump");
+			if (!inPortal)
+			{
+				velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+				anim.SetTrigger("Jump");
+			}
 
 			jump = false;
 		}
@@ -283,11 +282,24 @@ public class PlayerControl : MonoBehaviour
 				}
 			}
 		}
+
+		if (enemy.tag == "Portal")
+		{
+			inPortal = true;
+		}
 	}
 
 	void OnTriggerStay2D(Collider2D enemy)
 	{
 		OnTriggerEnter2D(enemy);
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.tag == "Portal")
+		{
+			inPortal = false;
+		}
 	}
 
 	void TakeDamage(GameObject enemy)

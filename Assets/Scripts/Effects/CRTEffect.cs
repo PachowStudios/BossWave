@@ -4,6 +4,7 @@ using System.Collections;
 
 public class CRTEffect : MonoBehaviour 
 {
+	public float defaultFade = 0.7f;
 	public float borderBuffer = -32f;
 	public float distortionAmount = 0.2f;
 	public float noiseIntensity = 3.5f;
@@ -96,12 +97,19 @@ public class CRTEffect : MonoBehaviour
 
 	public static void AnimateScanlines(float fadeTime, float scanlinesEnd, iTween.EaseType easeType)
 	{
-		iTween.ValueTo(instance.gameObject, iTween.Hash("from", crtShader.TextureSize,
-														"to", scanlinesEnd,
-														"time", fadeTime,
-														"easetype", easeType,
-														"onupdate", "UpdateCRTScanlines",
-														"ignoretimescale", true));
+		if (!crtShader.enabled)
+		{
+			StartCRT(fadeTime, defaultScanlines.x, scanlinesEnd, easeType);
+		}
+		else
+		{
+			iTween.ValueTo(instance.gameObject, iTween.Hash("from", crtShader.TextureSize,
+															"to", scanlinesEnd,
+															"time", fadeTime,
+															"easetype", easeType,
+															"onupdate", "UpdateCRTScanlines",
+															"ignoretimescale", true));
+		}
 	}
 
 	public static void UpdateResolution(int height)
