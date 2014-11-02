@@ -260,10 +260,10 @@ public class PlayerControl : MonoBehaviour
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x,
-			normalizedHorizontalSpeed * (run ? (runFull ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed 
-																								  : runFullSpeed) 
-														: runSpeed) 
-											 : walkSpeed) * speedMultiplier,
+								normalizedHorizontalSpeed * (run ? (runFull ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed 
+																													  : runFullSpeed) 
+																			: runSpeed) 
+																 : walkSpeed) * speedMultiplier,
 								Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
 

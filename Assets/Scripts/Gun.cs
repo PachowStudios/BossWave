@@ -44,6 +44,7 @@ public class Gun : MonoBehaviour
 	{
 		get
 		{
+			RotateTowardsMouse();
 			return !shoot;
 		}
 	}
