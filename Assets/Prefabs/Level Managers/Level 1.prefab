@@ -42,7 +42,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
     difficulty: 2
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1
+    startTime: 154
     introLength: 8.69999981
     totalLength: 30
     cameraMoveSpeed: 17.5
