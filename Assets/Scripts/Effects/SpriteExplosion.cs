@@ -13,7 +13,14 @@ public class SpriteExplosion : MonoBehaviour
 
 	void Awake()
 	{
-		levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+		if (GameObject.FindGameObjectWithTag("LevelManager") != null)
+		{
+			levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
+		}
+		else
+		{
+			levelManager = null;
+		}
 	}
 
 	public void Explode(Vector3 velocity, Sprite sprite)
@@ -50,8 +57,18 @@ public class SpriteExplosion : MonoBehaviour
 					currentParticle.rotation = 0f;
 					currentParticle.color = particleColor;
 					currentParticle.startLifetime = currentParticle.lifetime = lifetime;
-					currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraMoveSpeed : velocity.x) + Random.Range(-10f, 10f),
-														   velocity.y + Random.Range(-10f, 10f));
+
+					if (levelManager != null)
+					{
+						currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraMoveSpeed : velocity.x) + Random.Range(-10f, 10f),
+															   velocity.y + Random.Range(-10f, 10f));
+					}
+					else
+					{
+						currentParticle.velocity = new Vector2(velocity.x + Random.Range(-10f, 10f),
+															   velocity.y + Random.Range(-10f, 10f));
+					}
+
 					currentParticle.velocity += randomTranslate;
 					particles.Add(currentParticle);
 				}
