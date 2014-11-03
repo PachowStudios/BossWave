@@ -17,7 +17,7 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.067 seconds
+- Completed reload, in  0.038 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
@@ -25,27 +25,35 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
-UnloadTime: 5.012005 ms
-System memory in use before: 11.4 MB.
+UnloadTime: 5.007909 ms
+System memory in use before: 11.3 MB.
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 System memory in use after: 11.2 MB.
 
 Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 652.
-Total: 0.768579 ms (FindLiveObjects: 0.019602 ms CreateObjectMapping: 0.009069 ms MarkObjects: 0.244880 ms  DeleteObjects: 0.059391 ms)
+Total: 0.791985 ms (FindLiveObjects: 0.025746 ms CreateObjectMapping: 0.009362 ms MarkObjects: 0.249269 ms  DeleteObjects: 0.064365 ms)
 
-UnloadTime: 1.843479 ms
+UnloadTime: 1.860448 ms
 System memory in use before: 42.9 MB.
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 System memory in use after: 42.9 MB.
 
 Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1189.
-Total: 1.067878 ms (FindLiveObjects: 0.038326 ms CreateObjectMapping: 0.013750 ms MarkObjects: 0.593915 ms  DeleteObjects: 0.018431 ms)
+Total: 1.108252 ms (FindLiveObjects: 0.035986 ms CreateObjectMapping: 0.013458 ms MarkObjects: 0.632827 ms  DeleteObjects: 0.016091 ms)
 
-UnloadTime: 6.096267 ms
-System memory in use before: 43.3 MB.
+UnloadTime: 2.547986 ms
+System memory in use before: 43.0 MB.
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 43.3 MB.
+System memory in use after: 43.0 MB.
 
 Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 1191.
-Total: 2.296376 ms (FindLiveObjects: 0.072264 ms CreateObjectMapping: 0.031304 ms MarkObjects: 1.163840 ms  DeleteObjects: 0.013750 ms)
+Total: 1.197486 ms (FindLiveObjects: 0.037741 ms CreateObjectMapping: 0.013458 ms MarkObjects: 0.726742 ms  DeleteObjects: 0.005851 ms)
+
+UnloadTime: 2.957876 ms
+System memory in use before: 43.0 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 43.0 MB.
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 1193.
+Total: 1.396140 ms (FindLiveObjects: 0.035986 ms CreateObjectMapping: 0.016091 ms MarkObjects: 0.834115 ms  DeleteObjects: 0.006436 ms)
 

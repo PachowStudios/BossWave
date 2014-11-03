@@ -12,6 +12,7 @@ public class HealthDisplay : MonoBehaviour
 	public Sprite health25;
 
 	private float healthPercent;
+	private Vector3 healthVelocity = Vector3.zero;
 
 	private Image face;
 	private Image bar;
@@ -49,7 +50,7 @@ public class HealthDisplay : MonoBehaviour
 			face.sprite = health25;
 		}
 
-		bar.transform.localScale = new Vector3(healthPercent, 1, 1);
+		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1, 1), ref healthVelocity, 0.5f);
 
 		score.text = player.score.ToString().PadLeft(9, '0');
 	}
