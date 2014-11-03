@@ -4,23 +4,26 @@ using System.Collections;
 
 public class HealthDisplay : MonoBehaviour
 {
-	public PlayerControl player;
 	public Sprite healthFull;
 	public Sprite health75;
 	public Sprite health50;
 	public Sprite health25;
 
+	private float healthPercent;
+
 	private Image face;
 	private Image bar;
 	private Text score;
 
-	private float healthPercent;
+	private PlayerControl player;
 
 	void Awake()
 	{
 		face = transform.FindChild("Face").GetComponent<Image>();
 		bar = transform.FindChild("Bar").GetComponent<Image>();
 		score = transform.FindChild("Score").GetComponent<Text>();
+
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 	}
 
 	void OnGUI()
