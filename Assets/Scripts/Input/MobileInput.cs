@@ -28,12 +28,18 @@ public class MobileInput : VirtualInput
         {
             AddButton(name);
         }
+
         virtualButtons[name].Pressed();
     }
 
 
     public override void SetButtonUp(string name)
     {
+		if (!virtualButtons.ContainsKey(name))
+		{
+			AddButton(name);
+		}
+
         virtualButtons[name].Released();
     }
 

@@ -39,7 +39,6 @@ public class MobileControlToggle : MonoBehaviour
 	private void Update()
 	{
 		CheckEnableControlRig();
-
 	}
 	#endif
 
@@ -50,7 +49,6 @@ public class MobileControlToggle : MonoBehaviour
 		#else
         EnableControlRig(!enableOnMobile);
 		#endif
-
 	}
 
 	private void EnableControlRig(bool enabled)

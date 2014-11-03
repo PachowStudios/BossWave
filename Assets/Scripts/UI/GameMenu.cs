@@ -6,6 +6,7 @@ using System.Collections;
 public class GameMenu : MonoBehaviour 
 {
 	public EventSystem eventSystem;
+	public ScaleWidthCamera cameraScale;
 	public float fadeTime = 0.7f;
 	public float loadTime = 2f;
 	public float nodeMoveSpeed = 2f;
@@ -21,6 +22,7 @@ public class GameMenu : MonoBehaviour
 	private AudioSource[] sounds;
 
 	private Slider volumeSlider;
+	private Slider fovSlider;
 
 	#if	!MOBILE_INPUT
 	private Toggle fullscreenToggle;
@@ -33,6 +35,7 @@ public class GameMenu : MonoBehaviour
 	void Awake()
 	{
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
+		fovSlider = transform.FindSubChild("FOV").GetComponent<Slider>();
 
 		#if !MOBILE_INPUT
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
@@ -148,6 +151,14 @@ public class GameMenu : MonoBehaviour
 		AudioListener.volume = newVolume;
 	}
 
+	public void SetFOV(float newFOV)
+	{
+		newFOV = Mathf.Abs(newFOV);
+
+		PlayerPrefs.SetFloat("Settings/FOV", newFOV);
+		cameraScale.FOV = newFOV;
+	}
+
 	public void ApplySettings()
 	{
 		#if !MOBILE_INPUT
@@ -163,6 +174,12 @@ public class GameMenu : MonoBehaviour
 		{
 			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
 			volumeSlider.value = -AudioListener.volume;
+		}
+
+		if (PlayerPrefs.HasKey("Settings/FOV"))
+		{
+			cameraScale.FOV = PlayerPrefs.GetFloat("Settings/FOV");
+			fovSlider.value = cameraScale.FOV;
 		}
 
 		#if !MOBILE_INPUT

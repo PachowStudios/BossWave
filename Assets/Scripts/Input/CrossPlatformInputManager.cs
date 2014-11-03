@@ -220,7 +220,7 @@ public static class CrossPlatformInputManager
         {
             this.name = name;
             matchWithInputManager = matchToInputSettings;
-            //  RegisterVirtualButton(this);
+            RegisterVirtualButton(this);
         }
 
 

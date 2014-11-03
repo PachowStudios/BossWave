@@ -8,6 +8,7 @@ using System.Linq;
 public class MainMenu : MonoBehaviour 
 {
 	public EventSystem eventSystem;
+	public ScaleWidthCamera cameraScale;
 
 	public float startDelay = 1f;
 	public float fadeTime = 2f;
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
 	public Image logo;
 
 	private Slider volumeSlider;
+	private Slider fovSlider;
 
 	#if !MOBILE_INPUT
 	private Toggle fullscreenToggle;
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour
 	void Awake()
 	{
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
+		fovSlider = transform.FindSubChild("FOV").GetComponent<Slider>();
 
 		#if !MOBILE_INPUT
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
@@ -82,6 +85,12 @@ public class MainMenu : MonoBehaviour
 		AudioListener.volume = newVolume;
 	}
 
+	public void SetFOV(float newFOV)
+	{
+		PlayerPrefs.SetFloat("Settings/FOV", newFOV);
+		cameraScale.FOV = newFOV;
+	}
+
 	public void ApplySettings()
 	{
 		#if !MOBILE_INPUT
@@ -102,6 +111,12 @@ public class MainMenu : MonoBehaviour
 		{
 			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
 			volumeSlider.value = -AudioListener.volume;
+		}
+
+		if (PlayerPrefs.HasKey("Settings/FOV"))
+		{
+			cameraScale.FOV = PlayerPrefs.GetFloat("Settings/FOV");
+			fovSlider.value = cameraScale.FOV;
 		}
 
 		#if !MOBILE_INPUT

@@ -4,13 +4,13 @@ using System.Collections;
 [ExecuteInEditMode]
 public class ScaleWidthCamera : MonoBehaviour 
 {
-	public int targetWidth = 1920;
-	public float pixelsToUnits = 10f;
+	public float targetWidth = 1920;
+	public float FOV = 42f;
 
-	void Update()
+	void OnGUI()
 	{
-		int height = Mathf.RoundToInt(targetWidth / (float)Screen.width * Screen.height);
+		float height = (targetWidth / Screen.width) * Screen.height;
 
-		camera.orthographicSize = height / pixelsToUnits / 2f;
+		camera.orthographicSize = (height / FOV) / 2f;
 	}
 }
