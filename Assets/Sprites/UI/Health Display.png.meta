@@ -55,20 +55,20 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 17
-        width: 53
+        width: 73
         height: 20
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: HealthDisplay_Bar
       rect:
         serializedVersion: 2
-        x: 55
+        x: 74
         y: 19
-        width: 30
+        width: 2
         height: 7
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 4
+      pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: HealthDisplay_Face_0
       rect:
@@ -76,7 +76,7 @@ TextureImporter:
         x: 2
         y: 0
         width: 16
-        height: 14
+        height: 16
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -86,7 +86,7 @@ TextureImporter:
         x: 20
         y: 0
         width: 16
-        height: 14
+        height: 16
       alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
