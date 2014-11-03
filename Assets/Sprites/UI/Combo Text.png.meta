@@ -151,7 +151,7 @@ TextureImporter:
         y: 243
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_0
@@ -161,7 +161,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_0
@@ -171,7 +171,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_0
@@ -181,7 +181,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_0
@@ -191,7 +191,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_0
@@ -201,7 +201,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_0
@@ -211,7 +211,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_0
@@ -221,7 +221,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_0
@@ -231,7 +231,7 @@ TextureImporter:
         y: 243
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_0
@@ -241,7 +241,7 @@ TextureImporter:
         y: 243
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_1
@@ -251,7 +251,7 @@ TextureImporter:
         y: 216
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_1
@@ -261,7 +261,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_1
@@ -271,7 +271,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_1
@@ -281,7 +281,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_1
@@ -291,7 +291,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_1
@@ -301,7 +301,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_1
@@ -311,7 +311,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_1
@@ -321,7 +321,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_1
@@ -331,7 +331,7 @@ TextureImporter:
         y: 216
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_1
@@ -341,7 +341,7 @@ TextureImporter:
         y: 216
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_2
@@ -351,7 +351,7 @@ TextureImporter:
         y: 189
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_2
@@ -361,7 +361,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_2
@@ -371,7 +371,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_2
@@ -381,7 +381,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_2
@@ -391,7 +391,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_2
@@ -401,7 +401,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_2
@@ -411,7 +411,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_2
@@ -421,7 +421,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_2
@@ -431,7 +431,7 @@ TextureImporter:
         y: 189
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_2
@@ -441,7 +441,7 @@ TextureImporter:
         y: 189
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_3
@@ -451,8 +451,8 @@ TextureImporter:
         y: 162
         width: 23
         height: 24
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 3
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_3
       rect:
@@ -461,7 +461,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_3
@@ -471,7 +471,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_3
@@ -481,7 +481,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_3
@@ -491,7 +491,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_3
@@ -501,7 +501,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_3
@@ -511,7 +511,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_3
@@ -521,7 +521,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_3
@@ -531,7 +531,7 @@ TextureImporter:
         y: 162
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_3
@@ -541,7 +541,7 @@ TextureImporter:
         y: 162
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_4
@@ -551,7 +551,7 @@ TextureImporter:
         y: 135
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_4
@@ -561,7 +561,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_4
@@ -571,7 +571,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_4
@@ -581,7 +581,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_4
@@ -591,7 +591,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_4
@@ -601,7 +601,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_4
@@ -611,7 +611,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_4
@@ -621,7 +621,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_4
@@ -631,7 +631,7 @@ TextureImporter:
         y: 135
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_4
@@ -641,7 +641,7 @@ TextureImporter:
         y: 135
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_5
@@ -651,7 +651,7 @@ TextureImporter:
         y: 108
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_5
@@ -661,7 +661,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_5
@@ -671,7 +671,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_5
@@ -681,7 +681,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_5
@@ -691,7 +691,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_5
@@ -701,7 +701,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_5
@@ -711,7 +711,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_5
@@ -721,7 +721,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_5
@@ -731,7 +731,7 @@ TextureImporter:
         y: 108
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_5
@@ -741,7 +741,7 @@ TextureImporter:
         y: 108
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_6
@@ -751,7 +751,7 @@ TextureImporter:
         y: 81
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_6
@@ -761,7 +761,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_6
@@ -771,7 +771,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_6
@@ -781,7 +781,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_6
@@ -791,7 +791,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_6
@@ -801,7 +801,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_6
@@ -811,7 +811,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_6
@@ -821,7 +821,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_6
@@ -831,7 +831,7 @@ TextureImporter:
         y: 81
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_6
@@ -841,7 +841,7 @@ TextureImporter:
         y: 81
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_7
@@ -851,7 +851,7 @@ TextureImporter:
         y: 54
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_7
@@ -861,7 +861,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_7
@@ -871,7 +871,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_7
@@ -881,7 +881,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_7
@@ -891,7 +891,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_7
@@ -901,7 +901,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_7
@@ -911,7 +911,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_7
@@ -921,7 +921,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_7
@@ -931,7 +931,7 @@ TextureImporter:
         y: 54
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_7
@@ -941,7 +941,7 @@ TextureImporter:
         y: 54
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_8
@@ -951,7 +951,7 @@ TextureImporter:
         y: 27
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_8
@@ -961,7 +961,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_8
@@ -971,7 +971,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_8
@@ -981,7 +981,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_8
@@ -991,7 +991,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_8
@@ -1001,7 +1001,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_8
@@ -1011,7 +1011,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_8
@@ -1021,7 +1021,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_8
@@ -1031,7 +1031,7 @@ TextureImporter:
         y: 27
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_8
@@ -1041,7 +1041,7 @@ TextureImporter:
         y: 27
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_9
@@ -1051,7 +1051,7 @@ TextureImporter:
         y: 0
         width: 23
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_9
@@ -1061,7 +1061,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_9
@@ -1071,7 +1071,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_9
@@ -1081,7 +1081,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_9
@@ -1091,7 +1091,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_9
@@ -1101,7 +1101,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_9
@@ -1111,7 +1111,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_9
@@ -1121,7 +1121,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_9
@@ -1131,7 +1131,7 @@ TextureImporter:
         y: 0
         width: 37
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_9
@@ -1141,7 +1141,7 @@ TextureImporter:
         y: 0
         width: 47
         height: 24
-      alignment: 6
+      alignment: 3
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
