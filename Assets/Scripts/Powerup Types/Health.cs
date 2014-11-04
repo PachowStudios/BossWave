@@ -5,6 +5,7 @@ public class Health : Powerup
 {
 	public float minHealth = 5f;
 	public float maxHealth = 100f;
+	public Sprite popupImage;
 
 	private float healthAmount;
 
@@ -25,7 +26,7 @@ public class Health : Powerup
 	protected override void Pickup()
 	{
 		player.AddHealth(healthAmount);
-		popupMessage.AddMessage("You gained " + (int)healthAmount + " health!");
+		PopupMessage.CreatePopup(player.popupMessagePoint.position, popupImage, ((int)healthAmount).ToString());
 
 		base.Pickup();
 	}

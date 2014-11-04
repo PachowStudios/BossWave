@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
 	private float normalizedHorizontalSpeed = 0;
 	[HideInInspector]
 	public float speedMultiplier = 1f;
+	[HideInInspector]
+	public Transform popupMessagePoint;
 
 	private CharacterController2D controller;
 	private Animator anim;
@@ -73,6 +75,8 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
+		popupMessagePoint = transform.FindChild("Popup Message");
+
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();

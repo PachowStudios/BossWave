@@ -90,6 +90,7 @@ MonoBehaviour:
   maxLifetime: 15
   minHealth: 5
   maxHealth: 100
+  popupImage: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

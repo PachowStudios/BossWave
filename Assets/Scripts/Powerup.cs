@@ -8,14 +8,12 @@ public abstract class Powerup : MonoBehaviour
 	public float maxLifetime = 15f;
 
 	protected PlayerControl player;
-	protected PopupMessage popupMessage;
 
 	private SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-		popupMessage = GameObject.Find("Popup Message").GetComponent<PopupMessage>();
 
 		spriteRenderer = GetComponent<SpriteRenderer>();
 

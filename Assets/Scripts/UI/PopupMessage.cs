@@ -5,76 +5,38 @@ using System.Collections.Generic;
 
 public class PopupMessage : MonoBehaviour
 {
-	public float messageTime = 3f;
-	public float characterTypeDelay = 0.05f;
+	public PopupMessageInstance popupPrefab;
+	public float textBuffer = 5f;
+	public float time = 1f;
+	public float distance = 100f;
 
-	private Queue<string> messages = new Queue<string>();
-	private int currentLetter = 0;
-	private float characterTimer = 0f;
-	private float messageTimer = 0f;
-
-	private Image image;
-	private Text text;
-	private Animator anim;
+	private static PopupMessage instance;
 
 	void Awake()
 	{
-		image = GetComponent<Image>();
-		text = GetComponentInChildren<Text>();
-		anim = GetComponent<Animator>();
+		instance = this;
 	}
 
-	void OnGUI()
+	public static void CreatePopup(Vector3 newPosition, Sprite newImage, string newText)
 	{
-		Color textColor = text.color;
-		textColor.a = image.color.a;
-		text.color = textColor;
+		newPosition.z = instance.transform.position.z;
 
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Hide"))
-		{
-			text.text = "";
+		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
+		popupInstance.transform.parent = instance.transform;
+		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
+		Image instanceImage = popupInstance.GetComponentInChildren<Image>();
+		Text instanceText = popupInstance.GetComponentInChildren<Text>();
 
-			if (messages.Count > 0)
-			{
-				anim.SetTrigger("Show");
-			}
-		}
+		instanceImage.sprite = newImage;
+		instanceText.text = newText;
 
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Show"))
-		{
-			if (messages.Count > 0 && text.text.Length < messages.Peek().Length)
-			{
-				characterTimer += Time.deltaTime;
+		float imageWidth = instanceRect.sizeDelta.y * (newImage.bounds.size.x / newImage.bounds.size.y);
 
-				if (characterTimer >= characterTypeDelay)
-				{
-					text.text += messages.Peek()[currentLetter];
-					currentLetter++;
-					characterTimer = 0f;
-				}
-			}
-			else
-			{
-				messageTimer += Time.deltaTime;
+		instanceText.rectTransform.offsetMin = new Vector2(imageWidth + instance.textBuffer, 0);
+		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
 
-				if (messageTimer >= messageTime)
-				{
-					text.text = "";
-					messages.Dequeue();
-					messageTimer = 0f;
-					currentLetter = 0;
-				}
-			}
+		instanceRect.sizeDelta = new Vector2(imageWidth + instance.textBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
 
-			if (messages.Count <= 0)
-			{
-				anim.SetTrigger("Hide");
-			}
-		}
-	}
-
-	public void AddMessage(string message)
-	{
-		messages.Enqueue(message);
+		popupInstance.Animate(instance.time, instance.distance);
 	}
 }

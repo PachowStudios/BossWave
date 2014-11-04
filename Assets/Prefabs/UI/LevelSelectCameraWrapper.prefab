@@ -1808,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWidth: 1920
-  FOV: 54.0499992
+  FOV: 48
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1

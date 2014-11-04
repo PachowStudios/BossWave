@@ -5,6 +5,7 @@ public class SpeedBoost : Powerup
 {
 	public float speedMultiplier = 1.5f;
 	public float duration = 5f;
+	public Sprite popupImage;
 
 	new void Awake()
 	{
@@ -21,7 +22,7 @@ public class SpeedBoost : Powerup
 		player.speedMultiplier = speedMultiplier;
 		player.ResetSpeed(duration);
 
-		popupMessage.AddMessage("You gained a " + (int)duration + " second speed boost!");
+		PopupMessage.CreatePopup(player.popupMessagePoint.position, popupImage, ((int)duration).ToString());
 
 		base.Pickup();
 	}

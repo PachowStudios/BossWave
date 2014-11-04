@@ -39,22 +39,9 @@ public class GiveGun : Powerup
 
 			player.SwapGun(possibleGuns[newGun]);
 
-			string rarityName = "";
-
-			switch (possibleGuns[newGun].rarity)
-			{
-				case Gun.RarityLevel.Common:
-					rarityName = "Common";
-					break;
-				case Gun.RarityLevel.Uncommon:
-					rarityName = "Uncommon";
-					break;
-				case Gun.RarityLevel.Rare:
-					rarityName = "Rare";
-					break;
-			}
-
-			popupMessage.AddMessage("You got a " + rarityName + " " + possibleGuns[newGun].gunName + "!");
+			PopupMessage.CreatePopup(player.popupMessagePoint.position, 
+									 possibleGuns[newGun].GetComponent<SpriteRenderer>().sprite, 
+									 possibleGuns[newGun].gunName);
 		}
 
 		base.Pickup();
