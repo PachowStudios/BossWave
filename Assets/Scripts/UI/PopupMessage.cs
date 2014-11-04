@@ -8,7 +8,7 @@ public class PopupMessage : MonoBehaviour
 	public PopupMessageInstance popupPrefab;
 	public float textBuffer = 5f;
 	public float time = 1f;
-	public float distance = 100f;
+	public float distance = 50f;
 
 	private static PopupMessage instance;
 

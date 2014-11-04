@@ -17,35 +17,107 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.049 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
-UnloadTime: 5.091877 ms
-System memory in use before: 11.4 MB.
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 5.085733 ms
+System memory in use before: 11.7 MB.
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 11.2 MB.
+System memory in use after: 11.5 MB.
 
-Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 652.
-Total: 0.801347 ms (FindLiveObjects: 0.035986 ms CreateObjectMapping: 0.009362 ms MarkObjects: 0.271211 ms  DeleteObjects: 0.061439 ms)
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 668.
+Total: 0.812757 ms (FindLiveObjects: 0.024868 ms CreateObjectMapping: 0.009069 ms MarkObjects: 0.250731 ms  DeleteObjects: 0.065242 ms)
 
-UnloadTime: 1.852256 ms
-System memory in use before: 42.9 MB.
+UnloadTime: 1.697487 ms
+System memory in use before: 11.6 MB.
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 42.9 MB.
+System memory in use after: 11.4 MB.
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1189.
-Total: 1.111470 ms (FindLiveObjects: 0.038326 ms CreateObjectMapping: 0.014335 ms MarkObjects: 0.623465 ms  DeleteObjects: 0.015213 ms)
+Unloading 56 unused Assets to reduce memory usage. Loaded Objects now: 584.
+Total: 0.825923 ms (FindLiveObjects: 0.018724 ms CreateObjectMapping: 0.009362 ms MarkObjects: 0.282036 ms  DeleteObjects: 0.131948 ms)
 
-UnloadTime: 3.313347 ms
-System memory in use before: 43.2 MB.
+UnloadTime: 1.697487 ms
+System memory in use before: 11.6 MB.
 Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 43.2 MB.
+System memory in use after: 11.5 MB.
 
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 1191.
-Total: 1.334116 ms (FindLiveObjects: 0.038911 ms CreateObjectMapping: 0.016091 ms MarkObjects: 0.808661 ms  DeleteObjects: 0.007314 ms)
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 672.
+Total: 0.857813 ms (FindLiveObjects: 0.021942 ms CreateObjectMapping: 0.009654 ms MarkObjects: 0.273552 ms  DeleteObjects: 0.078701 ms)
+
+UnloadTime: 1.712700 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.4 MB.
+
+Unloading 56 unused Assets to reduce memory usage. Loaded Objects now: 588.
+Total: 0.840551 ms (FindLiveObjects: 0.019602 ms CreateObjectMapping: 0.010239 ms MarkObjects: 0.296957 ms  DeleteObjects: 0.132826 ms)
+
+UnloadTime: 1.768289 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.6 MB.
+
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 676.
+Total: 0.779112 ms (FindLiveObjects: 0.019309 ms CreateObjectMapping: 0.009947 ms MarkObjects: 0.288765 ms  DeleteObjects: 0.060269 ms)
+
+UnloadTime: 1.735813 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.6 MB.
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 678.
+Total: 0.727912 ms (FindLiveObjects: 0.020479 ms CreateObjectMapping: 0.011995 ms MarkObjects: 0.307782 ms  DeleteObjects: 0.004388 ms)
+
+UnloadTime: 1.689588 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.4 MB.
+
+Unloading 56 unused Assets to reduce memory usage. Loaded Objects now: 594.
+Total: 0.901113 ms (FindLiveObjects: 0.021942 ms CreateObjectMapping: 0.010532 ms MarkObjects: 0.309830 ms  DeleteObjects: 0.165009 ms)
+
+UnloadTime: 1.920717 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.6 MB.
+
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 682.
+Total: 0.780867 ms (FindLiveObjects: 0.020479 ms CreateObjectMapping: 0.011117 ms MarkObjects: 0.306612 ms  DeleteObjects: 0.058513 ms)
+
+UnloadTime: 1.871273 ms
+System memory in use before: 11.6 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.4 MB.
+
+Unloading 56 unused Assets to reduce memory usage. Loaded Objects now: 598.
+Total: 0.896432 ms (FindLiveObjects: 0.021357 ms CreateObjectMapping: 0.011117 ms MarkObjects: 0.336747 ms  DeleteObjects: 0.139263 ms)
+
+UnloadTime: 1.748687 ms
+System memory in use before: 11.7 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 11.6 MB.
+
+Unloading 26 unused Assets to reduce memory usage. Loaded Objects now: 686.
+Total: 0.766824 ms (FindLiveObjects: 0.018431 ms CreateObjectMapping: 0.011117 ms MarkObjects: 0.308953 ms  DeleteObjects: 0.057051 ms)
+
+UnloadTime: 1.829143 ms
+System memory in use before: 43.0 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 43.0 MB.
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1222.
+Total: 1.141313 ms (FindLiveObjects: 0.037741 ms CreateObjectMapping: 0.016676 ms MarkObjects: 0.679053 ms  DeleteObjects: 0.015798 ms)
+
+UnloadTime: 2.779701 ms
+System memory in use before: 43.1 MB.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 43.1 MB.
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 1224.
+Total: 1.406380 ms (FindLiveObjects: 0.037156 ms CreateObjectMapping: 0.018139 ms MarkObjects: 0.869516 ms  DeleteObjects: 0.007314 ms)
 

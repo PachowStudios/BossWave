@@ -40,6 +40,8 @@ public class MainMenu : MonoBehaviour
 		menu = GetComponent<CanvasGroup>();
 		rectTransform = GetComponent<RectTransform>();
 
+		menu.interactable = false;
+
 		LoadPrefs();
 	}
 
@@ -164,6 +166,8 @@ public class MainMenu : MonoBehaviour
 	private void UpdateMenuAlpha(float newValue)
 	{
 		menu.alpha = newValue;
+		menu.interactable = newValue == 1f;
+		menu.blocksRaycasts = newValue == 1f;
 	}
 
 	private void GoToUpdateX(float newValue)
