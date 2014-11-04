@@ -2442,7 +2442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 207499786}
-  cameraScale: {fileID: 1825459231}
   startDelay: 1
   fadeTime: 2
   nodeMoveSpeed: 2
@@ -3439,7 +3438,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
       propertyPath: orthographic size
-      value: 11.2436972
+      value: 9.98515224
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
@@ -5044,7 +5043,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 11.2436972
+  orthographic size: 9.98515224
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5069,7 +5068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWidth: 1920
-  FOV: 48
 --- !u!1 &1875642252
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,9 +5,10 @@ using System.Collections;
 public class ScaleWidthCamera : MonoBehaviour 
 {
 	public float targetWidth = 1920;
-	public float FOV = 42f;
 
-	void OnGUI()
+	public static float FOV = 42f;
+
+	void OnPreRender()
 	{
 		float height = (targetWidth / Screen.width) * Screen.height;
 

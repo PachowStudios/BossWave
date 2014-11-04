@@ -6,7 +6,7 @@ using System.Collections;
 public class GameMenu : MonoBehaviour 
 {
 	public EventSystem eventSystem;
-	public ScaleWidthCamera cameraScale;
+
 	public float fadeTime = 0.7f;
 	public float loadTime = 2f;
 	public float nodeMoveSpeed = 2f;
@@ -145,22 +145,19 @@ public class GameMenu : MonoBehaviour
 
 	public void SetVolume(float newVolume)
 	{
-		newVolume = Mathf.Abs(newVolume);
-
-		PlayerPrefs.SetFloat("Settings/Volume", newVolume);
-		AudioListener.volume = newVolume;
+		AudioListener.volume = Mathf.Abs(newVolume);
 	}
 
 	public void SetFOV(float newFOV)
 	{
-		newFOV = Mathf.Abs(newFOV);
-
-		PlayerPrefs.SetFloat("Settings/FOV", newFOV);
-		cameraScale.FOV = newFOV;
+		ScaleWidthCamera.FOV = newFOV;
 	}
 
 	public void ApplySettings()
 	{
+		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
+		PlayerPrefs.SetFloat("Settings/FOV", fovSlider.value);
+
 		#if !MOBILE_INPUT
 		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
@@ -172,21 +169,21 @@ public class GameMenu : MonoBehaviour
 	{
 		if (PlayerPrefs.HasKey("Settings/Volume"))
 		{
-			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
-			volumeSlider.value = -AudioListener.volume;
+			volumeSlider.value = PlayerPrefs.GetFloat("Settings/Volume");
+			AudioListener.volume = Mathf.Abs(volumeSlider.value);
 		}
 
 		if (PlayerPrefs.HasKey("Settings/FOV"))
 		{
-			cameraScale.FOV = PlayerPrefs.GetFloat("Settings/FOV");
-			fovSlider.value = cameraScale.FOV;
+			fovSlider.value = PlayerPrefs.GetFloat("Settings/FOV");
+			ScaleWidthCamera.FOV = fovSlider.value;
 		}
 
 		#if !MOBILE_INPUT
 		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
 		{
-			Screen.fullScreen = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
-			fullscreenToggle.isOn = Screen.fullScreen;
+			fullscreenToggle.isOn = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
+			Screen.fullScreen = fullscreenToggle.isOn;
 		}
 		#endif
 	}

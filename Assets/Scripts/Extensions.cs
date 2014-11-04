@@ -9,7 +9,7 @@ public static class Extensions
 		return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
 	}
 
-	public static Transform FindSubChild(this Transform parent, string name)
+	public static Transform FindSubChild(this Transform parent, string name, bool confirmEnabled = true)
 	{
 		if (parent.name.Equals(name))
 		{
@@ -22,7 +22,17 @@ public static class Extensions
 
 			if (result != null)
 			{
-				return result;
+				if (confirmEnabled)
+				{
+					if (result.gameObject.activeInHierarchy)
+					{
+						return result;
+					}
+				}
+				else
+				{
+					return result;
+				}
 			}
 		}
 
