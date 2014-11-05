@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class PopupMessage : MonoBehaviour
 {
 	public PopupMessageInstance popupPrefab;
-	public Sprite defaultImage;
 	public float textBuffer = 5f;
 	public float time = 1f;
 	public float distance = 50f;
@@ -28,15 +27,27 @@ public class PopupMessage : MonoBehaviour
 		Image instanceImage = popupInstance.GetComponentInChildren<Image>();
 		Text instanceText = popupInstance.GetComponentInChildren<Text>();
 
-		instanceImage.sprite = (newImage == null) ? instance.defaultImage : newImage;
-		instanceText.text = newText;
+		float imageWidth;
+		float textBuffer;
 
-		float imageWidth = instanceRect.sizeDelta.y * (instanceImage.sprite.bounds.size.x / instanceImage.sprite.bounds.size.y);
+		if (newImage != null)
+		{
+			instanceImage.sprite = newImage;
+			imageWidth = instanceRect.sizeDelta.y * (instanceImage.sprite.bounds.size.x / instanceImage.sprite.bounds.size.y);
+			textBuffer = instance.textBuffer;
+		}
+		else
+		{
+			imageWidth = 0f;
+			textBuffer = 0f;
+		}
+
+		instanceText.text = newText;
 
 		instanceText.rectTransform.offsetMin = new Vector2(imageWidth + instance.textBuffer, 0);
 		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
 
-		instanceRect.sizeDelta = new Vector2(imageWidth + instance.textBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
+		instanceRect.sizeDelta = new Vector2(imageWidth + textBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
 
 		popupInstance.Animate(instance.time, instance.distance);
 	}

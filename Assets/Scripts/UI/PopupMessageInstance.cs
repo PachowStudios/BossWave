@@ -31,9 +31,9 @@ public class PopupMessageInstance : MonoBehaviour
 											   "to", 0f,
 											   "time", time * 0.25f,
 											   "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha",
-											   "oncomplete", "Destroy",
-											   "oncompleteparams", gameObject));
+											   "onupdate", "UpdateAlpha"));
+
+		Destroy(gameObject, time);
 	}
 
 	private void UpdateAlpha(float newValue)
