@@ -26,7 +26,7 @@ public class Health : Powerup
 	protected override void Pickup()
 	{
 		player.AddHealth(healthAmount);
-		PopupMessage.CreatePopup(player.popupMessagePoint.position, popupImage, ((int)healthAmount).ToString());
+		PopupMessage.CreatePopup(player.popupMessagePoint.position, ((int)healthAmount).ToString(), popupImage);
 
 		base.Pickup();
 	}

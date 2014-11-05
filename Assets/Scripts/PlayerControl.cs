@@ -39,7 +39,7 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public float score = 0f;
 	[HideInInspector]
-	public float combo = 1f;
+	public int combo = 1;
 	[HideInInspector]
 	public bool continuouslyRunning = false;
 
@@ -75,7 +75,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
-		popupMessagePoint = transform.FindChild("Popup Message");
+		popupMessagePoint = transform.FindChild("popupMessage");
 
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
@@ -369,12 +369,15 @@ public class PlayerControl : MonoBehaviour
 		health = Mathf.Clamp(health + amount, health, maxHealth);
 	}
 
-	public void AddPoints(float points)
+	public int AddPoints(float points)
 	{
-		score += points * combo;
+		int newPoints = Mathf.RoundToInt(points * combo);
+		score += newPoints;
+
+		return newPoints;
 	}
 
-	public void AddPointsFromEnemy(float enemyHealth, float enemyDamage)
+	public int AddPointsFromEnemy(float enemyHealth, float enemyDamage)
 	{
 		killChain++;
 		comboTimer = 0f;
@@ -385,7 +388,10 @@ public class PlayerControl : MonoBehaviour
 			currentMaxCombo = combo;
 		}
 
-		score += Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
+		int newPoints = Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
+		score += newPoints;
+
+		return newPoints;
 	}
 
 	public void SwapGun(Gun newGun)

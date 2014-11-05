@@ -3440,6 +3440,10 @@ Prefab:
       propertyPath: orthographic size
       value: 9.98515224
       objectReference: {fileID: 0}
+    - target: {fileID: 22400062, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
   m_RootGameObject: {fileID: 1229284137}
@@ -3522,7 +3526,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_HandleRect: {fileID: 1480752737}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: .800000012
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4282,7 +4286,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -99.9999695}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1500, y: 1000}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1545486367

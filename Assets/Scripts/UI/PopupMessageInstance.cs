@@ -20,18 +20,20 @@ public class PopupMessageInstance : MonoBehaviour
 										       "easetype", iTween.EaseType.easeInQuad,
 											   "onupdate", "UpdateAlpha"));
 
-		iTween.ValueTo(gameObject, iTween.Hash("delay", time * 0.75f,
-											   "from", 1f,
-											   "to", 0f,
-											   "time", time * 0.25f,
-											   "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha"));
-
 		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
 											   "to", rectTransform.anchoredPosition.y + distance,
 											   "time", time * 0.25f,
 											   "easetype", iTween.EaseType.easeOutBack,
 											   "onupdate", "UpdatePosition"));
+
+		iTween.ValueTo(gameObject, iTween.Hash("delay", time * 0.75f,
+											   "from", 1f,
+											   "to", 0f,
+											   "time", time * 0.25f,
+											   "easetype", iTween.EaseType.easeInQuad,
+											   "onupdate", "UpdateAlpha",
+											   "oncomplete", "Destroy",
+											   "oncompleteparams", gameObject));
 	}
 
 	private void UpdateAlpha(float newValue)

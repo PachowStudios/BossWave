@@ -40,8 +40,8 @@ public class GiveGun : Powerup
 			player.SwapGun(possibleGuns[newGun]);
 
 			PopupMessage.CreatePopup(player.popupMessagePoint.position, 
-									 possibleGuns[newGun].GetComponent<SpriteRenderer>().sprite, 
-									 possibleGuns[newGun].gunName);
+									 possibleGuns[newGun].gunName,
+									 possibleGuns[newGun].GetComponent<SpriteRenderer>().sprite);
 		}
 
 		base.Pickup();

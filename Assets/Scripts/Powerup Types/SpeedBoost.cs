@@ -22,7 +22,7 @@ public class SpeedBoost : Powerup
 		player.speedMultiplier = speedMultiplier;
 		player.ResetSpeed(duration);
 
-		PopupMessage.CreatePopup(player.popupMessagePoint.position, popupImage, ((int)duration).ToString());
+		PopupMessage.CreatePopup(player.popupMessagePoint.position, ((int)duration).ToString(), popupImage);
 
 		base.Pickup();
 	}

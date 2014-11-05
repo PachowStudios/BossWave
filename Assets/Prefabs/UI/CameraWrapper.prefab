@@ -1737,6 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupPrefab: {fileID: 11400006, guid: d0476cedc0136804e91fc1a7dbec822f, type: 2}
+  defaultImage: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
   textBuffer: 5
   time: 1
   distance: 50
@@ -1948,7 +1949,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 11400154}
-  cameraScale: {fileID: 11400040}
   fadeTime: .699999988
   loadTime: 2
   nodeMoveSpeed: 2
@@ -2081,7 +2081,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWidth: 1920
-  FOV: 54.0499992
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
