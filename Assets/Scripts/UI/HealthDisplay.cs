@@ -5,7 +5,7 @@ using System.Linq;
 
 public class HealthDisplay : MonoBehaviour
 {
-	public int scoreDigits = 9;
+	public int scoreDigits = 12;
 	public Sprite healthFull;
 	public Sprite health75;
 	public Sprite health50;
@@ -52,6 +52,6 @@ public class HealthDisplay : MonoBehaviour
 
 		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1, 1), ref healthVelocity, 0.5f);
 
-		score.text = player.score.ToString().PadLeft(9, '0');
+		score.text = player.score.ToString().PadLeft(scoreDigits, '0');
 	}
 }
