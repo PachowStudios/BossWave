@@ -1358,7 +1358,7 @@ GameObject:
   - 114: {fileID: 11400190}
   - 114: {fileID: 11400188}
   m_Layer: 5
-  m_Name: Microchip Count
+  m_Name: Microchips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1888,6 +1888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDigits: 12
+  scoreDamping: 1
+  healthDamping: .5
   healthFull: {fileID: 21300006, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
   health75: {fileID: 21300008, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
   health50: {fileID: 21300010, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}

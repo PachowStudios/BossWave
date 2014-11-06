@@ -5,6 +5,8 @@ using System.Linq;
 
 public class PlayerControl : MonoBehaviour
 {
+	public static PlayerControl instance;
+
 	public float maxHealth = 100f;
 	public float invincibilityPeriod = 2f;
 	public float gravity = -35f;
@@ -37,9 +39,11 @@ public class PlayerControl : MonoBehaviour
 	[HideInInspector]
 	public float health;
 	[HideInInspector]
-	public float score = 0f;
+	public int score = 0;
 	[HideInInspector]
 	public int combo = 1;
+	[HideInInspector]
+	public int microchips = 0;
 	[HideInInspector]
 	public bool continuouslyRunning = false;
 
@@ -75,6 +79,8 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
+		instance = this;
+
 		popupMessagePoint = transform.FindChild("popupMessage");
 
 		anim = GetComponent<Animator>();
