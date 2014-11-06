@@ -114,10 +114,7 @@ public class Gun : MonoBehaviour
 			{
 				Vector3 mousePosition = Input.mousePosition;
 				mousePosition.z = 10f;
-				Vector3 gunLookPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-				gunLookPosition -= transform.position;
-				float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
-				newEuler = Quaternion.AngleAxis(gunAngle, Vector3.forward).eulerAngles;
+				newEuler = new Vector3(0f, 0f, transform.LookAt2D(Camera.main.ScreenToWorldPoint(mousePosition)));
 			}
 			else
 			{
@@ -126,7 +123,7 @@ public class Gun : MonoBehaviour
 		}
 		else
 		{
-			newEuler = Quaternion.Euler(0, 0, Mathf.Atan2(CrossPlatformInputManager.GetAxis("XboxGunY"), CrossPlatformInputManager.GetAxis("XboxGunX")) * Mathf.Rad2Deg).eulerAngles;
+			newEuler = Quaternion.Euler(0f, 0f, Mathf.Atan2(CrossPlatformInputManager.GetAxis("XboxGunY"), CrossPlatformInputManager.GetAxis("XboxGunX")) * Mathf.Rad2Deg).eulerAngles;
 		}
 		#endif
 
