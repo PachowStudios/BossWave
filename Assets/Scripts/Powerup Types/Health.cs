@@ -18,11 +18,6 @@ public class Health : Powerup
 		healthAmount = Mathf.RoundToInt(Mathf.Clamp(healthAmount, minHealth, maxHealth));
 	}
 
-	new void OnTriggerEnter2D(Collider2D trigger)
-	{
-		base.OnTriggerEnter2D(trigger);
-	}
-
 	protected override void Pickup()
 	{
 		player.AddHealth(healthAmount);

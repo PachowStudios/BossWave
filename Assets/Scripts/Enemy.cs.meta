@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: 76829f0dd90425443be300b1aabd74f8
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - microchipPrefab: {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

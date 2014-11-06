@@ -11,11 +11,6 @@ public class GiveGun : Powerup
 		base.Awake();
 	}
 
-	new void OnTriggerEnter2D(Collider2D trigger)
-	{
-		base.OnTriggerEnter2D(trigger);
-	}
-
 	protected override void Pickup()
 	{
 		int newRarity = Mathf.RoundToInt(Random.Range((int)player.gun.rarity - 1f,

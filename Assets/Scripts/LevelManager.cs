@@ -6,6 +6,8 @@ using System.Linq;
 
 public class LevelManager : MonoBehaviour 
 {
+	private static LevelManager instance;
+
 	[System.Serializable]
 	public struct Wave
 	{
@@ -30,12 +32,14 @@ public class LevelManager : MonoBehaviour
 
 	public bool spawnEnemies = true;
 	public bool spawnPowerups = true;
+	public bool introCRT = true;
 	public float fadeInTime = 2f;
 	public AudioSource mainMusic;
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<Enemy> enemies;
 	public List<Powerup> powerups;
+	public Microchip microchip;
 	public float minPowerupTime = 15f;
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
@@ -52,7 +56,6 @@ public class LevelManager : MonoBehaviour
 
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
-	//private Transform worldBoundaries;
 	private PlayerControl playerControl;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
@@ -63,11 +66,10 @@ public class LevelManager : MonoBehaviour
 
 	void Awake()
 	{
-		LoadPrefs();
+		instance = this;
 
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
-		//worldBoundaries = GameObject.FindGameObjectWithTag("WorldBoundaries").transform;
 		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
@@ -84,9 +86,16 @@ public class LevelManager : MonoBehaviour
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
 
-		Time.timeScale = 0f;
-		TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
-		CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+		if (introCRT)
+		{
+			Time.timeScale = 0f;
+			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
+			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+		}
+		else
+		{
+			mainMusic.pitch = 1f;
+		}
 	}
 
 	void FixedUpdate()
@@ -107,7 +116,6 @@ public class LevelManager : MonoBehaviour
 					Cutscene.StartCutscene();
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, true, true);
-					//worldBoundaries.localScale = new Vector3(Camera.main.aspect, worldBoundaries.localScale.y, worldBoundaries.localScale.z);
 					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
 
 					bossWaveInitialized = true;
@@ -166,6 +174,16 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	public static void SpawnMicrochip(Vector3 position, bool randomVelocity = true)
+	{
+		Microchip microchipInstance = Instantiate(instance.microchip, position, Quaternion.identity) as Microchip;
+		
+		if (randomVelocity)
+		{
+			microchipInstance.Scatter();
+		}
+	}
+
 	private IEnumerator SpawnWave(int wave)
 	{
 		List<Enemy> possibleEnemies = new List<Enemy>();
@@ -195,13 +213,5 @@ public class LevelManager : MonoBehaviour
 	private void BossWaveProgressBarUpdate(float newValue)
 	{
 		bossWave.progressBar.value = newValue;
-	}
-
-	private void LoadPrefs()
-	{
-		if (PlayerPrefs.HasKey("Settings/Volume"))
-		{
-			AudioListener.volume = PlayerPrefs.GetFloat("Settings/Volume");
-		}
 	}
 }

@@ -1888,7 +1888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDigits: 12
-  scoreDamping: 1
+  microchipsDigits: 5
+  textDamping: 1
   healthDamping: .5
   healthFull: {fileID: 21300006, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
   health75: {fileID: 21300008, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}

@@ -16,6 +16,8 @@ public abstract class Enemy : MonoBehaviour
 	public Difficulty difficulty = Difficulty.Easy;
 	public float maxHealth = 10f;
 	public float damage = 5f;
+	[Range(0f, 100f)]
+	public float microchipChance = 25f;
 	public float knockback = 3f;
 	public Color flashColor = new Color(1f, 0.47f, 0.47f, 1f);
 	public float flashLength = 0.1f;
@@ -83,6 +85,11 @@ public abstract class Enemy : MonoBehaviour
 				ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
 				int pointsAdded = playerControl.AddPointsFromEnemy(maxHealth, damage);
 				PopupMessage.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
+
+				if (Random.Range(0f, 100f) <= microchipChance)
+				{
+					LevelManager.SpawnMicrochip(transform.position);
+				}
 
 				if (timeWarpAtDeath)
 				{

@@ -241,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnEnemies: 1
   spawnPowerups: 1
+  introCRT: 1
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
@@ -328,6 +329,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  microchip: {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   minPowerupTime: 5
   maxPowerupTime: 15
   powerupBuffer: 5

@@ -39,6 +39,42 @@ public static class Extensions
 		return null;
 	}
 
+	public static float LookAt2D(this Transform parent, Vector3 target)
+	{
+		Vector3 targetPosition = target - parent.position;
+		float angle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
+
+		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
+	}
+
+	public static void AddExplosionForce(this Rigidbody2D parent, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier = 0f)
+	{
+		Vector3 dir = (parent.transform.position - explosionPosition);
+		float wearoff = 1 - (dir.magnitude / explosionRadius);
+		Vector3 baseForce = dir.normalized * explosionForce * wearoff;
+		parent.AddForce(baseForce);
+
+		if (upliftModifier != 0f)
+		{
+			float upliftWearoff = 1 - upliftModifier / explosionRadius;
+			Vector3 upliftForce = Vector2.up * explosionForce * upliftWearoff;
+			parent.AddForce(upliftForce);
+		}
+	}
+
+	public static int RandomSign()
+	{
+		return (Random.value < 0.5) ? -1 : 1;
+	}
+
+	public static float ConvertRange(float num, float oldMin, float oldMax, float newMin, float newMax)
+	{
+		float oldRange = oldMax - oldMin;
+		float newRange = newMax - newMin;
+
+		return (((num - oldMin) * newRange) / oldRange) + newMin;
+	}
+
 	public static IEnumerator WaitForRealSeconds(float time)
 	{
 		float start = Time.realtimeSinceStartup;

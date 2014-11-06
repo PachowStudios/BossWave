@@ -375,9 +375,9 @@ public class PlayerControl : MonoBehaviour
 		health = Mathf.Clamp(health + amount, health, maxHealth);
 	}
 
-	public int AddPoints(float points)
+	public int AddPoints(int points)
 	{
-		int newPoints = Mathf.RoundToInt(points * combo);
+		int newPoints = points * combo;
 		score += newPoints;
 
 		return newPoints;
@@ -398,6 +398,11 @@ public class PlayerControl : MonoBehaviour
 		score += newPoints;
 
 		return newPoints;
+	}
+
+	public void AddMicrochips(int newMicrochips)
+	{
+		microchips += newMicrochips;
 	}
 
 	public void SwapGun(Gun newGun)

@@ -9,7 +9,7 @@ public abstract class Powerup : MonoBehaviour
 
 	protected PlayerControl player;
 
-	private SpriteRenderer spriteRenderer;
+	protected SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
