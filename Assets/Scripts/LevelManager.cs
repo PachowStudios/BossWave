@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
 	public BossWave bossWave;
 	public List<Enemy> enemies;
 	public List<Powerup> powerups;
-	public Microchip microchip;
+	public List<Microchip> microchips;
 	public float minPowerupTime = 15f;
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
@@ -160,7 +160,7 @@ public class LevelManager : MonoBehaviour
 			if (powerups.Count > 0 && powerupTimer >= powerupTime && spawnPowerups)
 			{
 				Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
-				int powerupToSpawn = Mathf.RoundToInt(Random.Range(0f, powerups.Count - 1));
+				int powerupToSpawn = Random.Range(0, powerups.Count);
 
 				Instantiate(powerups[powerupToSpawn], powerupSpawnPoint, Quaternion.identity);
 
@@ -174,9 +174,11 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public static void SpawnMicrochip(Vector3 position, bool randomVelocity = true)
+	public static void SpawnMicrochip(Vector3 position, Microchip.Size size = Microchip.Size.Small, bool randomVelocity = true)
 	{
-		Microchip microchipInstance = Instantiate(instance.microchip, position, Quaternion.identity) as Microchip;
+		Microchip microchipToSpawn = instance.microchips[(int)size];
+
+		Microchip microchipInstance = Instantiate(microchipToSpawn, position, Quaternion.identity) as Microchip;
 		
 		if (randomVelocity)
 		{

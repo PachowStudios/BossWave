@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Microchip : Powerup
 {
+	public enum Size
+	{
+		Small,
+		Medium,
+		Large
+	};
+
 	public int minValue = 1;
 	public int maxValue = 10;
 	private int microchipValue = 0;
@@ -72,8 +79,7 @@ public class Microchip : Powerup
 
 	public void Scatter()
 	{
-		rigidbody2D.AddForce(new Vector2(scatterSpeed.x, scatterSpeed.y),
-							 ForceMode2D.Impulse);
+		rigidbody2D.AddForce(new Vector2(scatterSpeed.x, scatterSpeed.y), ForceMode2D.Impulse);
 		gameObject.PunchRotation(new Vector3(0f, 0f, shakeAmount), shakeTime, 0f);
 	}
 }

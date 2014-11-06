@@ -239,9 +239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: 0
-  spawnPowerups: 0
-  introCRT: 0
+  spawnEnemies: 1
+  spawnPowerups: 1
+  introCRT: 1
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
@@ -329,7 +329,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
-  microchip: {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
+  microchips:
+  - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
+  - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}
+  - {fileID: 11400000, guid: 3795d2f4c176e6543b4a7638d533e561, type: 2}
   minPowerupTime: 5
   maxPowerupTime: 15
   powerupBuffer: 5

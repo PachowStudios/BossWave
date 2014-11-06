@@ -18,6 +18,10 @@ public abstract class Enemy : MonoBehaviour
 	public float damage = 5f;
 	[Range(0f, 100f)]
 	public float microchipChance = 25f;
+	public int minMicrochips = 1;
+	public int maxMicrochips = 3;
+	public Microchip.Size smallestMicrochip;
+	public Microchip.Size biggestMicrochip;
 	public float knockback = 3f;
 	public Color flashColor = new Color(1f, 0.47f, 0.47f, 1f);
 	public float flashLength = 0.1f;
@@ -88,7 +92,13 @@ public abstract class Enemy : MonoBehaviour
 
 				if (Random.Range(0f, 100f) <= microchipChance)
 				{
-					LevelManager.SpawnMicrochip(transform.position);
+					int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
+
+					for (int i = 0; i < microchipsToSpawn; i++)
+					{
+						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
+						LevelManager.SpawnMicrochip(transform.position, microchipSize);
+					}
 				}
 
 				if (timeWarpAtDeath)
