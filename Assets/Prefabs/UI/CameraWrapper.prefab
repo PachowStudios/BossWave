@@ -1887,7 +1887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e917188e72b510d43b3dd004894ae6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreDigits: 12
+  scoreDigits: 9
   microchipsDigits: 5
   textDamping: 1
   healthDamping: .5
@@ -1920,7 +1920,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: .75
-  m_Text: 000000000000
+  m_Text: 000000000
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4568,7 +4568,7 @@ RectTransform:
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2.74000001, y: 2.74000001, z: 1}
   m_Children: []
   m_Father: {fileID: 22400012}
   m_RootOrder: 3

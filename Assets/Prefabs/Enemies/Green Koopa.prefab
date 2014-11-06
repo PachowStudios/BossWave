@@ -217,7 +217,7 @@ MonoBehaviour:
   difficulty: 0
   maxHealth: 15
   damage: 5
-  microchipChance: 100
+  microchipChance: 25
   knockback: 3
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001

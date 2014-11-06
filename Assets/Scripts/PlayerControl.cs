@@ -20,6 +20,8 @@ public class PlayerControl : MonoBehaviour
 	public float jumpHeight = 5f;
 	public float comboStartKills = 3f;
 	public float comboDecreaseTime = 1f;
+	public int maxScore = 999999999;
+	public int maxMicrochips = 99999;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -378,7 +380,7 @@ public class PlayerControl : MonoBehaviour
 	public int AddPoints(int points)
 	{
 		int newPoints = points * combo;
-		score += newPoints;
+		score = Mathf.Clamp(score + newPoints, 0, maxScore);
 
 		return newPoints;
 	}
@@ -395,14 +397,14 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		int newPoints = Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
-		score += newPoints;
+		score = Mathf.Clamp(score + newPoints, 0, maxScore);
 
 		return newPoints;
 	}
 
 	public void AddMicrochips(int newMicrochips)
 	{
-		microchips += newMicrochips;
+		microchips = Mathf.Clamp(microchips + newMicrochips, 0, maxMicrochips);
 	}
 
 	public void SwapGun(Gun newGun)
