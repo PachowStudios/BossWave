@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: 4
+  m_Radius: 5
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100000
 BoxCollider2D:
@@ -106,7 +106,7 @@ MonoBehaviour:
   minShake: 25
   maxShake: 100
   shakeTime: 1.5
-  magnetForce: 30
+  magnetForce: 35
   magnetUplift: 11
   lookDamping: 3
 --- !u!212 &21200000

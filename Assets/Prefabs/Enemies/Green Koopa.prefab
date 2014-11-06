@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.2726097, y: -3.60499144, z: 0}
+  m_LocalPosition: {x: -7.93535805, y: -3.33198833, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -217,7 +217,7 @@ MonoBehaviour:
   difficulty: 0
   maxHealth: 15
   damage: 5
-  microchipChance: 25
+  microchipChance: 100
   knockback: 3
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
