@@ -149,1000 +149,1000 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 243
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_0
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_0
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_0
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_0
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_0
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_0
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_0
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 243
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_0
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 243
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_1
       rect:
         serializedVersion: 2
         x: 0
         y: 216
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_1
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_1
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_1
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_1
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_1
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_1
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_1
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_1
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 216
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_1
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 216
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_2
       rect:
         serializedVersion: 2
         x: 0
         y: 189
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_2
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_2
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_2
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_2
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_2
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_2
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_2
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 189
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_2
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 189
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_3
       rect:
         serializedVersion: 2
         x: 0
         y: 162
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
+      alignment: 0
       pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_3
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_3
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_3
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_3
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_3
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_3
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_3
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_3
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 162
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_3
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 162
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_4
       rect:
         serializedVersion: 2
         x: 0
         y: 135
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_4
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_4
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_4
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_4
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_4
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_4
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_4
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_4
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 135
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_4
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 135
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_5
       rect:
         serializedVersion: 2
         x: 0
         y: 108
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_5
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_5
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_5
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_5
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_5
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_5
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_5
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_5
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 108
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_5
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 108
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_6
       rect:
         serializedVersion: 2
         x: 0
         y: 81
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_6
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_6
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_6
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_6
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_6
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_6
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_6
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_6
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 81
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_6
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 81
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_7
       rect:
         serializedVersion: 2
         x: 0
         y: 54
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_7
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_7
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_7
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_7
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_7
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_7
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_7
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_7
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 54
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_7
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 54
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_8
       rect:
         serializedVersion: 2
         x: 0
         y: 27
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_8
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_8
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_8
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_8
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_8
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_8
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_8
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_8
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 27
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_8
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 27
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x1_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 23
+        width: 25
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x2_9
       rect:
         serializedVersion: 2
-        x: 26
+        x: 28
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x3_9
       rect:
         serializedVersion: 2
-        x: 66
+        x: 70
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x4_9
       rect:
         serializedVersion: 2
-        x: 106
+        x: 112
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x5_9
       rect:
         serializedVersion: 2
-        x: 146
+        x: 154
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x6_9
       rect:
         serializedVersion: 2
-        x: 186
+        x: 196
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x7_9
       rect:
         serializedVersion: 2
-        x: 226
+        x: 238
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x8_9
       rect:
         serializedVersion: 2
-        x: 266
+        x: 280
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x9_9
       rect:
         serializedVersion: 2
-        x: 306
+        x: 322
         y: 0
-        width: 37
+        width: 39
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Combo_x10_9
       rect:
         serializedVersion: 2
-        x: 346
+        x: 364
         y: 0
-        width: 47
+        width: 49
         height: 24
-      alignment: 3
-      pivot: {x: 0, y: 0}
+      alignment: 0
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
