@@ -8,6 +8,8 @@ public class PopupSwapGun : MonoBehaviour
 
 	public PopupSwapGunInstance popupPrefab;
 
+	private static PopupSwapGunInstance currentPopup = null;
+
 	void Awake()
 	{
 		instance = this;
@@ -15,9 +17,15 @@ public class PopupSwapGun : MonoBehaviour
 
 	public static void CreatePopup(Vector3 newPosition, Gun newGunPrefab)
 	{
+		if (currentPopup != null)
+		{
+			currentPopup.DisappearNoSelection();
+		}
+
 		newPosition.z = instance.transform.position.z;
 
 		PopupSwapGunInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
+		currentPopup = popupInstance;
 		popupInstance.transform.parent = instance.transform;
 		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
 		popupInstance.newGunPrefab = newGunPrefab;
