@@ -188,6 +188,7 @@ GameObject:
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400192}
   m_Layer: 5
   m_Name: UI
   m_TagString: UI
@@ -4083,6 +4084,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: .75
   m_Text: 00000
+--- !u!114 &11400192
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f6a34aab77f31408a110ae7337ba45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPrefab: {fileID: 11400000, guid: c9b3aa5519244174585e0ecc3f5078ae, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

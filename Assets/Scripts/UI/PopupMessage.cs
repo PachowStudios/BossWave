@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 public class PopupMessage : MonoBehaviour
 {
+	private static PopupMessage instance;
+
 	public PopupMessageInstance popupPrefab;
 	public float textBuffer = 5f;
 	public float time = 1f;
 	public float distance = 50f;
-
-	private static PopupMessage instance;
 
 	void Awake()
 	{
@@ -23,6 +23,7 @@ public class PopupMessage : MonoBehaviour
 
 		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
 		popupInstance.transform.parent = instance.transform;
+
 		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
 		Image instanceImage = popupInstance.GetComponentInChildren<Image>();
 		Text instanceText = popupInstance.GetComponentInChildren<Text>();

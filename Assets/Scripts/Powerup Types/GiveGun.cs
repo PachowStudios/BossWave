@@ -32,11 +32,13 @@ public class GiveGun : Powerup
 		{
 			int newGun = Mathf.RoundToInt(Random.Range(0f, possibleGuns.Count - 1f));
 
-			player.SwapGun(possibleGuns[newGun]);
+			PopupSwapGun.CreatePopup(PlayerControl.instance.popupMessagePoint.position, possibleGuns[newGun]);
 
-			PopupMessage.CreatePopup(player.popupMessagePoint.position, 
-									 possibleGuns[newGun].gunName,
-									 possibleGuns[newGun].GetComponent<SpriteRenderer>().sprite);
+			//player.SwapGun(possibleGuns[newGun]);
+
+			//PopupMessage.CreatePopup(player.popupMessagePoint.position, 
+			//						 possibleGuns[newGun].gunName,
+			//						 possibleGuns[newGun].GetComponent<SpriteRenderer>().sprite);
 		}
 
 		base.Pickup();
