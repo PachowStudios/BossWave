@@ -49,6 +49,14 @@ public class Gun : MonoBehaviour
 		}
 	}
 
+	public float FireRate
+	{
+		get
+		{
+			return Mathf.Round((1f / shootCooldown) * 10f) / 10f;
+		}
+	}
+
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");

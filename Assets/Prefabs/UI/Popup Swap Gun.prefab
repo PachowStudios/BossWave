@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLimit: 5
+  swapAfterTime: 1
   appearTime: .25
   disappearTime: .400000006
   disappearScale: 1.5

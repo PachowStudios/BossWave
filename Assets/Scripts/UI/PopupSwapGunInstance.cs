@@ -64,7 +64,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 		if (timer > 0)
 		{
 			timer -= Time.fixedDeltaTime;
-			timerText.text = timer.ToString("F2");
+			timerText.text = timer.ToString("F1");
 		}
 		else if (!selectionMade)
 		{

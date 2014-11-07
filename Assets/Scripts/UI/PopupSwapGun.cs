@@ -39,11 +39,11 @@ public class PopupSwapGun : MonoBehaviour
 		newGun.sprite = newGunPrefab.GetComponent<SpriteRenderer>().sprite;
 
 		oldStats.text = PlayerControl.instance.gun.projectile.damage + "\n" +
-						PlayerControl.instance.gun.projectile.shotSpeed + "\n" +
+						PlayerControl.instance.gun.FireRate + "\n" +
 						PlayerControl.instance.gun.projectile.knockback;
 
 		newStats.text = newGunPrefab.projectile.damage + "\n" +
-						newGunPrefab.projectile.shotSpeed + "\n" +
+						newGunPrefab.FireRate + "\n" +
 						newGunPrefab.projectile.knockback;
 	}
 }
