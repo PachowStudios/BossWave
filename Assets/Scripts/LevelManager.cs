@@ -182,7 +182,7 @@ public class LevelManager : MonoBehaviour
 		
 		if (randomVelocity)
 		{
-			microchipInstance.Scatter();
+			microchipInstance.GetComponent<Scatter>().DoScatter();
 		}
 	}
 

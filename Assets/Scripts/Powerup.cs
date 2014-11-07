@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public abstract class Powerup : MonoBehaviour 
 {
 	public bool autoDestroy = true;
@@ -11,11 +12,15 @@ public abstract class Powerup : MonoBehaviour
 
 	protected SpriteRenderer spriteRenderer;
 
+	private BoxCollider2D pickupCollider;
+
 	protected virtual void Awake()
 	{
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 
 		spriteRenderer = GetComponent<SpriteRenderer>();
+
+		pickupCollider = GetComponent<BoxCollider2D>();
 
 		if (autoDestroy)
 		{
@@ -25,10 +30,15 @@ public abstract class Powerup : MonoBehaviour
 
 	protected virtual void OnTriggerEnter2D(Collider2D trigger)
 	{
-		if (trigger.tag == "Player")
+		if (trigger.tag == "Player" && pickupCollider.bounds.Intersects(trigger.bounds))
 		{
 			Pickup();
 		}
+	}
+
+	protected virtual void OnTriggerStay2D(Collider2D trigger)
+	{
+		OnTriggerEnter2D(trigger);
 	}
 
 	protected virtual void Pickup()
