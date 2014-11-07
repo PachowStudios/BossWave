@@ -124,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f29bb0e2ddad540b46a10e5d4cc7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1
+  distance: 1
+  followPlayer: 0
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1

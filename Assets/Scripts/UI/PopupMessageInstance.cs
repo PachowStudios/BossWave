@@ -3,16 +3,43 @@ using System.Collections;
 
 public class PopupMessageInstance : MonoBehaviour 
 {
-	private RectTransform rectTransform;
+	public float time = 1f;
+	public float distance = 1f;
+
+	[HideInInspector]
+	public bool followPlayer = false;
+
+	private Vector3 startingPosition;
+	private float yOffset = 0f;
+
 	private CanvasGroup canvasGroup;
 
 	void Awake()
 	{
-		rectTransform = GetComponent<RectTransform>();
+		startingPosition = transform.position;
+
 		canvasGroup = GetComponent<CanvasGroup>();
 	}
 
-	public void Animate(float time, float distance)
+	void Start()
+	{
+		Appear();
+	}
+
+	void FixedUpdate()
+	{
+		if (followPlayer)
+		{
+			transform.position = PlayerControl.instance.popupMessagePoint.position + new Vector3(0f, yOffset, 0f);
+		}
+
+		else
+		{
+			transform.position = startingPosition + new Vector3(0f, yOffset, 0f);
+		}
+	}
+
+	public void Appear()
 	{
 		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
 											   "to", 1f,
@@ -20,8 +47,8 @@ public class PopupMessageInstance : MonoBehaviour
 										       "easetype", iTween.EaseType.easeInQuad,
 											   "onupdate", "UpdateAlpha"));
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
-											   "to", rectTransform.anchoredPosition.y + distance,
+		iTween.ValueTo(gameObject, iTween.Hash("from", -distance,
+											   "to", 0f,
 											   "time", time * 0.25f,
 											   "easetype", iTween.EaseType.easeOutBack,
 											   "onupdate", "UpdatePosition"));
@@ -43,6 +70,6 @@ public class PopupMessageInstance : MonoBehaviour
 
 	private void UpdatePosition(float newValue)
 	{
-		rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, newValue);
+		yOffset = newValue;
 	}
 }

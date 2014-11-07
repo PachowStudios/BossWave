@@ -20,11 +20,12 @@ public class PopupSwapGun : MonoBehaviour
 		PopupSwapGunInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
 		popupInstance.transform.parent = instance.transform;
 		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
+		popupInstance.newGunPrefab = newGunPrefab;
 
-		Image oldGun = popupInstance.transform.FindChild("Old Gun").GetComponent<Image>();
-		Image newGun = popupInstance.transform.FindChild("New Gun").GetComponent<Image>();
-		Text oldStats = popupInstance.transform.FindChild("Old Stats").GetComponent<Text>();
-		Text newStats = popupInstance.transform.FindChild("New Stats").GetComponent<Text>();
+		Image oldGun = popupInstance.transform.FindSubChild("Old Gun").GetComponent<Image>();
+		Image newGun = popupInstance.transform.FindSubChild("New Gun").GetComponent<Image>();
+		Text oldStats = popupInstance.transform.FindSubChild("Old Stats").GetComponent<Text>();
+		Text newStats = popupInstance.transform.FindSubChild("New Stats").GetComponent<Text>();
 
 		oldGun.sprite = PlayerControl.instance.gun.GetComponent<SpriteRenderer>().sprite;
 		newGun.sprite = newGunPrefab.GetComponent<SpriteRenderer>().sprite;

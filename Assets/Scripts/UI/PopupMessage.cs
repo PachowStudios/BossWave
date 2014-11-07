@@ -9,20 +9,19 @@ public class PopupMessage : MonoBehaviour
 
 	public PopupMessageInstance popupPrefab;
 	public float textBuffer = 5f;
-	public float time = 1f;
-	public float distance = 50f;
 
 	void Awake()
 	{
 		instance = this;
 	}
 
-	public static void CreatePopup(Vector3 newPosition, string newText, Sprite newImage = null)
+	public static void CreatePopup(Vector3 newPosition, string newText, Sprite newImage = null, bool followPlayer = false)
 	{
 		newPosition.z = instance.transform.position.z;
 
 		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
 		popupInstance.transform.parent = instance.transform;
+		popupInstance.followPlayer = followPlayer;
 
 		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
 		Image instanceImage = popupInstance.GetComponentInChildren<Image>();
@@ -49,7 +48,5 @@ public class PopupMessage : MonoBehaviour
 		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
 
 		instanceRect.sizeDelta = new Vector2(imageWidth + textBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
-
-		popupInstance.Animate(instance.time, instance.distance);
 	}
 }
