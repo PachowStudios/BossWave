@@ -29,7 +29,6 @@ public class GameMenu : MonoBehaviour
 	private ResolutionSelector resolutionSelector;
 	#endif
 
-	private PlayerControl player;
 	private RectTransform rectTransform;
 
 	void Awake()
@@ -42,7 +41,6 @@ public class GameMenu : MonoBehaviour
 		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
 		#endif
 
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		rectTransform = GetComponent<RectTransform>();
 
 		pauseOverlay.interactable = false;
@@ -89,7 +87,7 @@ public class GameMenu : MonoBehaviour
 			}
 		}
 
-		if (!gameOver && player.health <= 0f)
+		if (!gameOver && PlayerControl.instance.health <= 0f)
 		{
 			gameOver = true;
 			canPause = false;

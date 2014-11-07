@@ -30,14 +30,12 @@ public class BossBoo : Enemy
 	private bool swoopReturn = false;
 	private bool smashing = false;
 
-	private Transform player;
 	private Transform groundLevel;
 
 	new void Awake()
 	{
 		base.Awake();
 
-		player = playerControl.transform;
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 
 		defaultGravity = gravity;
@@ -91,7 +89,7 @@ public class BossBoo : Enemy
 
 		smashTimer += Time.deltaTime;
 
-		if (!swooping && Mathf.Abs(transform.position.x - player.position.x) < smashRange)
+		if (!swooping && Mathf.Abs(transform.position.x - PlayerControl.instance.transform.position.x) < smashRange)
 		{
 			if (smashTimer >= smashTime)
 			{

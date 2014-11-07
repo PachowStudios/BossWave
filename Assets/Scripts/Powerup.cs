@@ -8,16 +8,12 @@ public abstract class Powerup : MonoBehaviour
 	public float minLifetime = 10f;
 	public float maxLifetime = 15f;
 
-	protected PlayerControl player;
-
 	protected SpriteRenderer spriteRenderer;
 
 	private BoxCollider2D pickupCollider;
 
 	protected virtual void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
-
 		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		pickupCollider = GetComponent<BoxCollider2D>();

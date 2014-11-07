@@ -56,7 +56,6 @@ public class LevelManager : MonoBehaviour
 
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
-	private PlayerControl playerControl;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
 	private Transform powerupSpawner;
@@ -70,7 +69,6 @@ public class LevelManager : MonoBehaviour
 
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
-		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
@@ -116,14 +114,14 @@ public class LevelManager : MonoBehaviour
 					Cutscene.StartCutscene();
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, true, true);
-					playerControl.GoToPoint(bossWave.playerWaitPoint.position, false);
+					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false);
 
 					bossWaveInitialized = true;
 				}
 
 				if (waveTimer >= bossWave.startTime + bossWave.introLength)
 				{
-					playerControl.continuouslyRunning = true;
+					PlayerControl.instance.continuouslyRunning = true;
 					bossWavePlayerMoved = true;
 
 					Cutscene.EndCutscene(true);
@@ -147,7 +145,7 @@ public class LevelManager : MonoBehaviour
 				}
 			}
 		}
-		else if (playerControl.health > 0f)
+		else if (PlayerControl.instance.health > 0f)
 		{
 			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime && spawnEnemies)
 			{

@@ -14,10 +14,10 @@ public class SpeedBoost : Powerup
 
 	protected override void Pickup()
 	{
-		player.speedMultiplier = speedMultiplier;
-		player.ResetSpeed(duration);
+		PlayerControl.instance.speedMultiplier = speedMultiplier;
+		PlayerControl.instance.ResetSpeed(duration);
 
-		PopupMessage.CreatePopup(player.popupMessagePoint.position, ((int)duration).ToString(), popupImage);
+		PopupMessage.CreatePopup(PlayerControl.instance.popupMessagePoint.position, ((int)duration).ToString(), popupImage);
 
 		base.Pickup();
 	}

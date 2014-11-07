@@ -48,7 +48,6 @@ public abstract class Enemy : MonoBehaviour
 	protected Vector3 velocity;
 	protected Transform frontCheck;
 	protected Transform popupMessagePoint;
-	protected PlayerControl playerControl;
 
 	protected virtual void Awake()
 	{
@@ -57,7 +56,6 @@ public abstract class Enemy : MonoBehaviour
 		controller = GetComponent<CharacterController2D>();
 		frontCheck = transform.FindChild("frontCheck");
 		popupMessagePoint = transform.FindChild("popupMessage");
-		playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 
 		health = maxHealth;
 	}
@@ -87,7 +85,7 @@ public abstract class Enemy : MonoBehaviour
 			if (health <= 0f)
 			{
 				ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
-				int pointsAdded = playerControl.AddPointsFromEnemy(maxHealth, damage);
+				int pointsAdded = PlayerControl.instance.AddPointsFromEnemy(maxHealth, damage);
 				PopupMessage.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
 
 				if (Random.Range(0f, 100f) <= microchipChance)

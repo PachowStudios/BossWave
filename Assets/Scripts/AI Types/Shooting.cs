@@ -11,14 +11,12 @@ public class Shooting : Enemy
 	private float cooldownTimer = 0f;
 	private float detectionRange;
 
-	private Transform player;
 	private Transform gun;
 
 	new void Awake()
 	{
 		base.Awake();
 
-		player = playerControl.transform;
 		gun = transform.FindChild("Gun");
 
 		detectionRange = Random.Range(minDetectionRange, maxDetectionRange);
@@ -30,22 +28,22 @@ public class Shooting : Enemy
 
 		anim.SetBool("Walking", right || left);
 
-		if (player.position.x > transform.position.x + detectionRange)
+		if (PlayerControl.instance.transform.position.x > transform.position.x + detectionRange)
 		{
 			right = true;
 			left = !right;
 		}
-		else if (player.position.x > transform.position.x &&
+		else if (PlayerControl.instance.transform.position.x > transform.position.x &&
 				 transform.localScale.x < 0f)
 		{
 			Flip();
 		}
-		else if (player.position.x < transform.position.x - detectionRange)
+		else if (PlayerControl.instance.transform.position.x < transform.position.x - detectionRange)
 		{
 			left = true;
 			right = !left;
 		}
-		else if (player.position.x < transform.position.x &&
+		else if (PlayerControl.instance.transform.position.x < transform.position.x &&
 				 transform.localScale.x > 0f)
 		{
 			Flip();
@@ -57,13 +55,13 @@ public class Shooting : Enemy
 
 		cooldownTimer += Time.deltaTime;
 
-		if (cooldownTimer >= cooldownTime && Mathf.Abs(player.position.x - transform.position.x) <= detectionRange)
+		if (cooldownTimer >= cooldownTime && Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
 		{
 			anim.SetTrigger("Shoot");
 
-			Vector3 gunLookPosition = player.collider2D.bounds.center;
+			Vector3 gunLookPosition = PlayerControl.instance.transform.collider2D.bounds.center;
 			gunLookPosition -= gun.transform.position;
-			gunLookPosition.y += (Mathf.Abs(projectile.gravity) / 2f) * (Mathf.Abs(player.position.x - transform.position.x) / projectile.shotSpeed);
+			gunLookPosition.y += (Mathf.Abs(projectile.gravity) / 2f) * (Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) / projectile.shotSpeed);
 			float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
 			gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
 

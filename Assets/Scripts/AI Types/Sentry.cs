@@ -22,7 +22,6 @@ public class Sentry : Enemy
 	private bool fire = false;
 	private bool fireUp = false;
 
-	private Transform player;
 	private Collider2D sideFireCollider;
 	private Collider2D upFireCollider;
 
@@ -34,11 +33,10 @@ public class Sentry : Enemy
 		currentMoveTime = Random.Range(minMoveTime, maxMoveTime);
 		currentFireTime = Random.Range(minFireTime, maxFireTime);
 
-		player = playerControl.transform;
 		sideFireCollider = transform.FindChild("sideFire").collider2D;
 		upFireCollider = transform.FindChild("upFire").collider2D;
 
-		right = player.position.x > transform.position.x;
+		right = PlayerControl.instance.transform.position.x > transform.position.x;
 		left = !right;
 	}
 
@@ -110,10 +108,10 @@ public class Sentry : Enemy
 
 			if (cooldownTimer >= cooldownTime)
 			{
-				if (Mathf.Abs(player.position.x - transform.position.x) <= detectionRange)
+				if (Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
 				{
-					if ((player.position.x < transform.position.x && transform.localScale.x > 0f) ||
-						(player.position.x > transform.position.x && transform.localScale.x < 0f))
+					if ((PlayerControl.instance.transform.position.x < transform.position.x && transform.localScale.x > 0f) ||
+						(PlayerControl.instance.transform.position.x > transform.position.x && transform.localScale.x < 0f))
 					{
 						Flip();
 					}
@@ -123,7 +121,7 @@ public class Sentry : Enemy
 
 					cooldownTimer = 0f;
 
-					fireUp = player.position.y >= transform.position.y + 1;
+					fireUp = PlayerControl.instance.transform.position.y >= transform.position.y + 1;
 
 				}
 			}

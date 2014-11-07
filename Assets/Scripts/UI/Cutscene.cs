@@ -8,12 +8,10 @@ public class Cutscene : MonoBehaviour
 {
 	private static bool cutsceneActive = false;
 
-	private static PlayerControl player;
 	private static Animator anim;
 
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
 		anim = GetComponent<Animator>();
 	}
 
@@ -23,7 +21,7 @@ public class Cutscene : MonoBehaviour
 		{
 			if (disableInput)
 			{
-				player.DisableInput();
+				PlayerControl.instance.DisableInput();
 			}
 
 			cutsceneActive = true;
@@ -39,9 +37,9 @@ public class Cutscene : MonoBehaviour
 	{
 		if (cutsceneActive)
 		{
-			if (enableInput && player.IsInputDisabled())
+			if (enableInput && PlayerControl.instance.IsInputDisabled())
 			{
-				player.EnableInput();
+				PlayerControl.instance.EnableInput();
 			}
 
 			cutsceneActive = false;

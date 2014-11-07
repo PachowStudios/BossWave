@@ -18,7 +18,6 @@ public class FlyingBomber : Enemy
 	private float bombTimer = 0f;
 	private float currentBombTime = 0f;
 
-	private Transform player;
 	private Transform gun;
 	private Transform groundLevel;
 
@@ -28,7 +27,6 @@ public class FlyingBomber : Enemy
 
 		right = true;
 
-		player = playerControl.transform;
 		gun = transform.FindChild("Gun");
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 
@@ -66,11 +64,11 @@ public class FlyingBomber : Enemy
 
 		bombTimer += Time.deltaTime;
 
-		if (bombTimer >= currentBombTime && Mathf.Abs(player.position.x - transform.position.x) <= detectionRange)
+		if (bombTimer >= currentBombTime && Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
 		{
 			anim.SetTrigger("Shoot");
 
-			Vector3 gunLookPosition = player.collider2D.bounds.center;
+			Vector3 gunLookPosition = PlayerControl.instance.collider2D.bounds.center;
 			gunLookPosition -= gun.transform.position;
 			gunLookPosition.y += (Mathf.Abs(projectile.gravity) / 3.5f);
 			float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
@@ -84,12 +82,12 @@ public class FlyingBomber : Enemy
 			bombTimer = 0f;
 		}
 
-		if (player.position.x > transform.position.x + detectionRange)
+		if (PlayerControl.instance.transform.position.x > transform.position.x + detectionRange)
 		{
 			right = true;
 			left = !right;
 		}
-		else if (player.position.x < transform.position.x - detectionRange)
+		else if (PlayerControl.instance.transform.position.x < transform.position.x - detectionRange)
 		{
 			left = true;
 			right = !left;

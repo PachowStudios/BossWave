@@ -13,8 +13,8 @@ public class GiveGun : Powerup
 
 	protected override void Pickup()
 	{
-		int newRarity = Mathf.RoundToInt(Random.Range((int)player.gun.rarity - 1f,
-													  (int)player.gun.rarity + 2f));
+		int newRarity = Mathf.RoundToInt(Random.Range((int)PlayerControl.instance.gun.rarity - 1f,
+													  (int)PlayerControl.instance.gun.rarity + 2f));
 		newRarity = Mathf.Clamp(newRarity, newRarity,
 							    (int)Gun.RarityLevel.NUM_TYPES);
 
@@ -22,7 +22,7 @@ public class GiveGun : Powerup
 
 		foreach (Gun gun in guns)
 		{
-			if ((int)gun.rarity == newRarity && player.gun.gunName != gun.gunName)
+			if ((int)gun.rarity == newRarity && PlayerControl.instance.gun.gunName != gun.gunName)
 			{
 				possibleGuns.Add(gun);
 			}
