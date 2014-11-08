@@ -6,7 +6,7 @@ using System.Linq;
 
 public class LevelManager : MonoBehaviour 
 {
-	private static LevelManager instance;
+	public static LevelManager instance;
 
 	[System.Serializable]
 	public struct Wave
@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<Enemy> enemies;
+	public List<Gun> guns;
 	public List<Powerup> powerups;
 	public List<Microchip> microchips;
 	public float minPowerupTime = 15f;

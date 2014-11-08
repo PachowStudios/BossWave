@@ -17,7 +17,7 @@ GameObject:
   - 61: {fileID: 6100000}
   - 58: {fileID: 5800000}
   m_Layer: 13
-  m_Name: Small Microchip
+  m_Name: Medium Microchip
   m_TagString: Microchip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8139596, y: -1.55147779, z: 0}
+  m_LocalPosition: {x: -6.92871284, y: -2.83103633, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +59,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: 5
+  m_Radius: 4
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100000
 BoxCollider2D:
@@ -70,7 +70,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .600000024, y: .75999999}
+  m_Size: {x: .699999988, y: .860000014}
   m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
@@ -81,7 +81,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c9fedd0790c1acb49b4d3b72c72188cc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 473cf87481f2a5c40bbde85079f2fe18, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -101,13 +101,8 @@ MonoBehaviour:
   autoDestroy: 1
   minLifetime: 5
   maxLifetime: 10
-  minValue: 1
-  maxValue: 10
-  minScatter: {x: 3, y: 8}
-  maxScatter: {x: 5, y: 12}
-  minShake: 25
-  maxShake: 100
-  shakeTime: 1.5
+  minValue: 10
+  maxValue: 50
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a98391b0d41f40428d5d2c1175621b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnetForce: 35
-  magnetUplift: 11
+  magnetForce: 30
+  magnetUplift: 10
   lookDamping: 3
 --- !u!114 &11400004
 MonoBehaviour:
@@ -157,8 +152,8 @@ SpriteRenderer:
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2151687535
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: f7a0147c54ba63f4c8ee16b1948aebe9, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300008, guid: f7a0147c54ba63f4c8ee16b1948aebe9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

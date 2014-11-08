@@ -11,11 +11,10 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
-  - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 0
-  m_Name: Give Gun
+  m_Name: HiTech Gun Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.68496561, y: .431182653, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,14 +39,14 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_FixedAngle: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -56,24 +55,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1.20000005, y: 1.60000002}
+  m_IsTrigger: 0
+  m_Size: {x: 2.4000001, y: 1.17999995}
   m_Center: {x: 0, y: 0}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae5fb3824822021479811345252171f8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,11 +72,8 @@ MonoBehaviour:
   autoDestroy: 1
   minLifetime: 10
   maxLifetime: 15
-  guns:
-  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
-  - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
-  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
-  - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
+  minRarity: 4
+  maxRarity: 5
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,8 +108,8 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2151687535
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
-  m_Color: {r: 0, g: .131034374, b: 1, a: 1}
+  m_Sprite: {fileID: 21300008, guid: de7bea1e159268a4c90c8f8ddd929f6e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

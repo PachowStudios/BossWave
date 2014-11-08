@@ -9,10 +9,9 @@ public class Gun : MonoBehaviour
 		Uncommon,
 		Rare,
 		VeryRare,
-		//Legendary,
-		//Godly,
+		Legendary,
+		Godly,
 		//Boss,
-		NUM_TYPES
 	};
 
 	public string gunName;
