@@ -17,7 +17,6 @@ public class GunCrate : Powerup
 		int getPossibleGunTrys = 0;
 
 		List<Gun> possibleGuns = GetPossibleGuns(GetNewRarity(), ref getPossibleGunTrys);
-		Debug.Log(getPossibleGunTrys);
 
 		if (possibleGuns[0].gunName != PlayerControl.instance.gun.gunName)
 		{

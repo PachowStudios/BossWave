@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Health : Powerup
+public class VitalTank : Powerup
 {
 	public float minHealth = 5f;
 	public float maxHealth = 100f;

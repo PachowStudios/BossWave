@@ -11,11 +11,10 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
-  - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  m_Layer: 0
-  m_Name: Health
+  m_Layer: 13
+  m_Name: Vital Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.32285881, y: .127924368, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -40,14 +39,14 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_FixedAngle: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -56,24 +55,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 1.20000005, y: 1.60000002}
+  m_IsTrigger: 0
+  m_Size: {x: 1, y: 1.58000004}
   m_Center: {x: 0, y: 0}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 90fb1b122e4c56e4f84db7894932425f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,7 +74,7 @@ MonoBehaviour:
   maxLifetime: 15
   minHealth: 5
   maxHealth: 100
-  popupImage: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
+  popupImage: {fileID: 21300002, guid: b7a7533d1a8305f4c89b46e78d5d8eb3, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,8 +109,8 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2151687535
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 31e69b04d8aa8ec45a4a8a57b5e5a57b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300002, guid: b7a7533d1a8305f4c89b46e78d5d8eb3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

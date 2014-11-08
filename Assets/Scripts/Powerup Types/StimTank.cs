@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpeedBoost : Powerup
+public class StimTank : Powerup
 {
 	public float speedMultiplier = 1.5f;
 	public float duration = 5f;
