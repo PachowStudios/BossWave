@@ -21,6 +21,8 @@ public class Gun : MonoBehaviour
 
 	[HideInInspector]
 	public bool disableInput = false;
+	[HideInInspector]
+	public Transform firePoint;
 
 	private bool shoot;
 	private float shootTimer = 0f;
@@ -28,8 +30,6 @@ public class Gun : MonoBehaviour
 	#if !MOBILE_INPUT
 	private bool useMouse = true;
 	#endif
-
-	private Transform firePoint;
 
 	public bool FacingRight
 	{
@@ -59,6 +59,8 @@ public class Gun : MonoBehaviour
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
+
+		shootTimer = shootCooldown;
 	}
 
 	void Update()

@@ -70,7 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Venom
   projectile: {fileID: 11400002, guid: 1b860a96f0cd0b8458cb139c9bfa6a5e, type: 2}
-  aimAtMouse: 1
   shootCooldown: .200000003
   rarity: 1
   disableInput: 0

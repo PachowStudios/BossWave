@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEnemies: 0
-  spawnPowerups: 1
+  spawnPowerups: 0
   introCRT: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}

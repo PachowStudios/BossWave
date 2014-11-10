@@ -70,7 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Cyclone
   projectile: {fileID: 11400002, guid: 86580ed020204484eb4025312d0fa3c2, type: 2}
-  aimAtMouse: 1
   shootCooldown: .300000012
   rarity: 2
   disableInput: 0

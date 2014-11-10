@@ -71,7 +71,7 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
-	private void TakeDamage(GameObject enemy)
+	public void TakeDamage(GameObject enemy)
 	{
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;

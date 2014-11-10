@@ -70,7 +70,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Falcon
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
-  aimAtMouse: 1
   shootCooldown: .150000006
   rarity: 0
   disableInput: 0

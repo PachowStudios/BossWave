@@ -47,6 +47,11 @@ public static class Extensions
 		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
 	}
 
+	public static float DistanceFrom(this Vector3 parent, Vector3 target)
+	{
+		return Mathf.Pow(parent.x - target.x, 2) + Mathf.Pow(parent.y - target.y, 2);
+	}
+
 	public static void AddExplosionForce(this Rigidbody2D parent, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier = 0f)
 	{
 		Vector3 dir = (parent.transform.position - explosionPosition);
