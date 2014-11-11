@@ -6,13 +6,16 @@ using Vectrosity;
 
 public class SmartLaser : Projectile
 {
+	public int maxTargets = 5;
 	[Range(2, 32)]
 	public int subDivisionsPerTarget = 16;
 	public Material material;
 	public float width = 2f;
+	public float length = 20f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
 
+	private float adjustedWidth;
 	private float cooldownTime;
 	private float cooldownTimer;
 
@@ -24,6 +27,7 @@ public class SmartLaser : Projectile
 	{
 		base.Awake();
 
+		adjustedWidth = Camera.main.WorldToScreenPoint(Camera.main.ViewportToWorldPoint(Vector3.zero) + new Vector3(width, 0f, 0f)).x;
 		cooldownTime = 1f / shotSpeed;
 		cooldownTimer = cooldownTime;
 
@@ -32,16 +36,27 @@ public class SmartLaser : Projectile
 		VectorLine.canvas.sortingLayerName = sortingLayer;
 		VectorLine.canvas.sortingOrder = sortingOrder;
 
-		vectorLine = new VectorLine("Laser", new List<Vector3>(), material, width, LineType.Continuous, Joins.Weld);
-		vectorLine.textureScale = 1.0f;
+		vectorLine = new VectorLine("Laser", new Vector3[maxTargets * subDivisionsPerTarget], material, adjustedWidth, LineType.Continuous, Joins.Weld);
+		vectorLine.textureScale = 1f;
+		vectorLine.maxWeldDistance = adjustedWidth * 2f;
 	}
 
 	void FixedUpdate()
 	{
 		GetTargets();
-		UpdatePath();
 
 		vectorLine.material = material;
+
+		if (targetEnemies.Count <= 1)
+		{
+			vectorLine.points3.Clear();
+			vectorLine.points3.AddRange(targets);
+		}
+		else
+		{
+			vectorLine.MakeSpline(targets.ToArray());
+		}
+
 		vectorLine.Draw();
 
 		cooldownTimer += Time.deltaTime;
@@ -76,9 +91,9 @@ public class SmartLaser : Projectile
 
 		targets = targets.OrderBy(v => v.DistanceFrom(origin)).ToList<Vector3>();
 
-		if (targets.Count == 1)
+		if (targetEnemies.Count == 0)
 		{
-			targets.Add(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(50f, 0f, 0f)));
+			targets.Add(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f)));
 		}
 	}
 
@@ -86,13 +101,20 @@ public class SmartLaser : Projectile
 	{
 		vectorLine.points3.Clear();
 
-		Vector3[] targetsArray = targets.ToArray<Vector3>();
-		int totalSubdivisions = (targets.Count - 1) * subDivisionsPerTarget;
-
-		for (int i = 0; i < totalSubdivisions; i++)
+		if (targets.Count > 2)
 		{
-			Vector3 currentPoint = iTween.PointOnPath(targetsArray, i / (float)totalSubdivisions);
-			vectorLine.points3.Add(currentPoint);
+			Vector3[] targetsArray = targets.ToArray<Vector3>();
+			int totalSubdivisions = (targets.Count - 1) * subDivisionsPerTarget;
+
+			for (int i = 0; i < totalSubdivisions; i++)
+			{
+				Vector3 currentPoint = iTween.PointOnPath(targetsArray, i / (float)totalSubdivisions);
+				vectorLine.points3.Add(currentPoint);
+			}
+		}
+		else
+		{
+			vectorLine.points3.AddRange(targets);
 		}
 	}
 
