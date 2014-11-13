@@ -11,8 +11,8 @@ public class SmartLaser : Projectile
 	[Range(2, 32)]
 	public int subDivisionsPerTarget = 16;
 	public Material material;
-	public float width = 2f;
-	public float length = 20f;
+	public float width = 0.5f;
+	public float length = 10f;
 	public float wiggle = 0.5f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
@@ -24,6 +24,7 @@ public class SmartLaser : Projectile
 	private List<Enemy> allEnemies = new List<Enemy>();
 	private List<Enemy> targetEnemies = new List<Enemy>();
 	private List<Vector3> targets = new List<Vector3>();
+	private List<Vector3> previousPoints = new List<Vector3>();
 	private VectorLine vectorLine;
 
 	new void Awake()
@@ -39,15 +40,14 @@ public class SmartLaser : Projectile
 		VectorLine.canvas.sortingLayerName = sortingLayer;
 		VectorLine.canvas.sortingOrder = sortingOrder;
 
-		vectorLine = new VectorLine("Laser", new Vector3[maxTargets * subDivisionsPerTarget], material, adjustedWidth, LineType.Continuous, Joins.Weld);
+		vectorLine = new VectorLine("Laser", new Vector3[maxTargets * subDivisionsPerTarget], material, adjustedWidth, LineType.Continuous, Joins.Fill);
 		vectorLine.textureScale = 1f;
-		vectorLine.maxWeldDistance = adjustedWidth * 2f;
 	}
 
 	void OnDrawGizmos()
 	{
 		int index = 0;
-		List<Color> gizmoColors = new List<Color>(new Color[] { Color.magenta, Color.red, Color.yellow, Color.blue, Color.green});
+		List<Color> gizmoColors = new List<Color>(new Color[] { Color.magenta, Color.red, Color.yellow, Color.blue, Color.green });
 		foreach (Vector3 target in targets)
 		{
 			if (index != 0)
@@ -66,19 +66,12 @@ public class SmartLaser : Projectile
 
 		vectorLine.material = material;
 
-		if (targetEnemies.Count <= 1)
-		{
-			vectorLine.points3.Clear();
-			vectorLine.points3.AddRange(targets);
-		}
-		else
-		{
-			if (vectorLine.points3.Count < maxTargets * subDivisionsPerTarget)
-			{
-				vectorLine.Resize(maxTargets * subDivisionsPerTarget);
-			}
+		previousPoints = new List<Vector3>(vectorLine.points3);
+		vectorLine.MakeSpline(targets.ToArray());
 
-			vectorLine.MakeSpline(targets.ToArray());
+		if (previousPoints[0] != Vector3.zero)
+		{
+			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.4f).ToArray());
 		}
 
 		vectorLine.Draw();
@@ -142,6 +135,35 @@ public class SmartLaser : Projectile
 		}
 	}
 
+	private void DamageTargets()
+	{
+		foreach (Enemy enemy in targetEnemies)
+		{
+			enemy.TakeDamage(gameObject);
+		}
+	}
+
+	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float lerpPoint)
+	{
+		if (oldList.Count == newList.Count)
+		{
+			List<Vector3> result = new List<Vector3>();
+
+			for (int i = 0; i < newList.Count; i++)
+			{
+				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, lerpPoint),
+									   Mathf.Lerp(oldList[i].y, newList[i].y, lerpPoint),
+									   newList[i].z));
+			}
+
+			return result;
+		}
+		else
+		{
+			return newList;
+		}
+	}
+
 	private Enemy GetClosestEnemy(Enemy currentEnemy)
 	{
 		Enemy closestEnemy = null;
@@ -163,14 +185,6 @@ public class SmartLaser : Projectile
 		return closestEnemy;
 	}
 
-	private void DamageTargets()
-	{
-		foreach (Enemy enemy in targetEnemies)
-		{
-			enemy.TakeDamage(gameObject);
-		}
-	}
-
 	private Vector3 OffsetPosition(Vector3 currentPosition)
 	{
 		Vector3 result;
@@ -178,7 +192,7 @@ public class SmartLaser : Projectile
 		result.x = Random.Range(currentPosition.x - wiggle, currentPosition.x + wiggle);
 		result.y = Random.Range(currentPosition.y - wiggle, currentPosition.y + wiggle);
 		result.z = currentPosition.z;
-
+		
 		return result;
 	}
 }

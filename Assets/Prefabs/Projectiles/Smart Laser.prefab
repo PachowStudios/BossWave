@@ -140,11 +140,12 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   maxTargets: 5
+  jumpRange: 5
   subDivisionsPerTarget: 16
   material: {fileID: 2100000, guid: d6576ac30a9c2f847b563c5ce5e6d650, type: 2}
   width: .449999988
   length: 10
-  jumpRange: 5
+  wiggle: .25
   sortingLayer: Player
   sortingOrder: 1
 --- !u!1001 &100100000
