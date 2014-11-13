@@ -143,7 +143,8 @@ MonoBehaviour:
   subDivisionsPerTarget: 16
   material: {fileID: 2100000, guid: d6576ac30a9c2f847b563c5ce5e6d650, type: 2}
   width: .449999988
-  length: 20
+  length: 10
+  jumpRange: 5
   sortingLayer: Player
   sortingOrder: 1
 --- !u!1001 &100100000

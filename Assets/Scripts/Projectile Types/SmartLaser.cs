@@ -7,11 +7,13 @@ using Vectrosity;
 public class SmartLaser : Projectile
 {
 	public int maxTargets = 5;
+	public float jumpRange = 5f;
 	[Range(2, 32)]
 	public int subDivisionsPerTarget = 16;
 	public Material material;
 	public float width = 2f;
 	public float length = 20f;
+	public float wiggle = 0.5f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
 
@@ -19,6 +21,7 @@ public class SmartLaser : Projectile
 	private float cooldownTime;
 	private float cooldownTimer;
 
+	private List<Enemy> allEnemies = new List<Enemy>();
 	private List<Enemy> targetEnemies = new List<Enemy>();
 	private List<Vector3> targets = new List<Vector3>();
 	private VectorLine vectorLine;
@@ -41,6 +44,22 @@ public class SmartLaser : Projectile
 		vectorLine.maxWeldDistance = adjustedWidth * 2f;
 	}
 
+	void OnDrawGizmos()
+	{
+		int index = 0;
+		List<Color> gizmoColors = new List<Color>(new Color[] { Color.magenta, Color.red, Color.yellow, Color.blue, Color.green});
+		foreach (Vector3 target in targets)
+		{
+			if (index != 0)
+			{
+				Gizmos.color = new Color(gizmoColors[index - 1].r, gizmoColors[index - 1].g, gizmoColors[index - 1].b, 0.25f);
+				Gizmos.DrawSphere(target, jumpRange);
+			}
+
+			index++;
+		}
+	}
+
 	void FixedUpdate()
 	{
 		GetTargets();
@@ -54,6 +73,11 @@ public class SmartLaser : Projectile
 		}
 		else
 		{
+			if (vectorLine.points3.Count < maxTargets * subDivisionsPerTarget)
+			{
+				vectorLine.Resize(maxTargets * subDivisionsPerTarget);
+			}
+
 			vectorLine.MakeSpline(targets.ToArray());
 		}
 
@@ -75,47 +99,68 @@ public class SmartLaser : Projectile
 
 	private void GetTargets()
 	{
+		allEnemies.Clear();
 		targetEnemies.Clear();
 		targets.Clear();
 
 		Vector3 origin = PlayerControl.instance.gun.firePoint.position;
 		transform.position = origin;
-
 		targets.Add(origin);
 
 		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
 		{
-			targetEnemies.Add(enemy.GetComponent<Enemy>());
-			targets.Add(enemy.collider2D.bounds.center);
+			allEnemies.Add(enemy.GetComponent<Enemy>());
 		}
 
-		targets = targets.OrderBy(v => v.DistanceFrom(origin)).ToList<Vector3>();
+		if (allEnemies.Count > 0)
+		{
+			allEnemies = allEnemies.OrderBy(e => e.collider2D.bounds.center.DistanceFrom(origin)).ToList<Enemy>();
 
+			if (allEnemies[0].collider2D.bounds.center.DistanceFrom(origin) <= length)
+			{
+				Enemy currentEnemy = allEnemies[0];
+
+				targetEnemies.Add(currentEnemy);
+				targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
+
+				do
+				{
+					currentEnemy = GetClosestEnemy(currentEnemy);
+
+					if (currentEnemy != null)
+					{
+						targetEnemies.Add(currentEnemy);
+						targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
+					}
+				} while (currentEnemy != null);
+			}
+		}
+		
 		if (targetEnemies.Count == 0)
 		{
 			targets.Add(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f)));
 		}
 	}
 
-	private void UpdatePath()
+	private Enemy GetClosestEnemy(Enemy currentEnemy)
 	{
-		vectorLine.points3.Clear();
+		Enemy closestEnemy = null;
+		float closestDistance = jumpRange;
 
-		if (targets.Count > 2)
+		allEnemies.Remove(currentEnemy);
+
+		foreach (Enemy enemy in allEnemies)
 		{
-			Vector3[] targetsArray = targets.ToArray<Vector3>();
-			int totalSubdivisions = (targets.Count - 1) * subDivisionsPerTarget;
+			float currentDistance = currentEnemy.collider2D.bounds.center.DistanceFrom(enemy.collider2D.bounds.center);
 
-			for (int i = 0; i < totalSubdivisions; i++)
+			if (currentDistance <= closestDistance)
 			{
-				Vector3 currentPoint = iTween.PointOnPath(targetsArray, i / (float)totalSubdivisions);
-				vectorLine.points3.Add(currentPoint);
+				closestEnemy = enemy;
+				closestDistance = currentDistance;
 			}
 		}
-		else
-		{
-			vectorLine.points3.AddRange(targets);
-		}
+
+		return closestEnemy;
 	}
 
 	private void DamageTargets()
@@ -124,5 +169,16 @@ public class SmartLaser : Projectile
 		{
 			enemy.TakeDamage(gameObject);
 		}
+	}
+
+	private Vector3 OffsetPosition(Vector3 currentPosition)
+	{
+		Vector3 result;
+
+		result.x = Random.Range(currentPosition.x - wiggle, currentPosition.x + wiggle);
+		result.y = Random.Range(currentPosition.y - wiggle, currentPosition.y + wiggle);
+		result.z = currentPosition.z;
+
+		return result;
 	}
 }
