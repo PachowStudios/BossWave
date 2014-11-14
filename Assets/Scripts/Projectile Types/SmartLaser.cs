@@ -26,6 +26,7 @@ public class SmartLaser : Projectile
 	private List<Vector3> targets = new List<Vector3>();
 	private List<Vector3> previousPoints = new List<Vector3>();
 	private VectorLine vectorLine;
+	private PolygonCollider2D detectionCollider;
 
 	new void Awake()
 	{
@@ -40,8 +41,11 @@ public class SmartLaser : Projectile
 		VectorLine.canvas.sortingLayerName = sortingLayer;
 		VectorLine.canvas.sortingOrder = sortingOrder;
 
-		vectorLine = new VectorLine("Laser", new Vector3[maxTargets * subDivisionsPerTarget], material, adjustedWidth, LineType.Continuous, Joins.Fill);
+		vectorLine = new VectorLine("Laser", Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, maxTargets * subDivisionsPerTarget).ToList<Vector3>(), material, adjustedWidth, LineType.Continuous, Joins.Fill);
 		vectorLine.textureScale = 1f;
+
+		detectionCollider = gameObject.AddComponent<PolygonCollider2D>();
+		detectionCollider.isTrigger = true;
 	}
 
 	void OnDrawGizmos()
@@ -62,17 +66,14 @@ public class SmartLaser : Projectile
 
 	void FixedUpdate()
 	{
+		UpdateCollider();
 		GetTargets();
 
 		vectorLine.material = material;
 
 		previousPoints = new List<Vector3>(vectorLine.points3);
 		vectorLine.MakeSpline(targets.ToArray());
-
-		if (previousPoints[0] != Vector3.zero)
-		{
-			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
-		}
+		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
 
 		vectorLine.Draw();
 
@@ -88,6 +89,14 @@ public class SmartLaser : Projectile
 	void OnDestroy()
 	{
 		VectorLine.Destroy(ref vectorLine);
+	}
+
+	private void UpdateCollider()
+	{
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(0, width / 2f)),
+													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(0, -(width / 2f))),
+													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(length, -(width / 2f))),
+													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(length, width / 2f)) });
 	}
 
 	private void GetTargets()
