@@ -47,6 +47,11 @@ public static class Extensions
 		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
 	}
 
+	public static Vector3 TransformPointLocal(this Transform parent, Vector3 target)
+	{
+		return parent.TransformPoint(target) - parent.position;
+	}
+
 	public static float DistanceFrom(this Vector3 parent, Vector3 target)
 	{
 		return Mathf.Sqrt(Mathf.Pow(parent.x - target.x, 2) + Mathf.Pow(parent.y - target.y, 2));

@@ -8,6 +8,7 @@ public class SmartLaser : Projectile
 {
 	public int maxTargets = 5;
 	public float jumpRange = 5f;
+	public float detectionRange = 2f;
 	[Range(2, 32)]
 	public int subDivisionsPerTarget = 16;
 	public Material material;
@@ -93,10 +94,10 @@ public class SmartLaser : Projectile
 
 	private void UpdateCollider()
 	{
-		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(0, width / 2f)),
-													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(0, -(width / 2f))),
-													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(length, -(width / 2f))),
-													 PlayerControl.instance.gun.firePoint.TransformPoint(new Vector2(length, width / 2f)) });
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, detectionRange)),
+													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -detectionRange)),
+													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, -detectionRange)),
+													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, detectionRange)) } );
 	}
 
 	private void GetTargets()
@@ -118,10 +119,21 @@ public class SmartLaser : Projectile
 		{
 			allEnemies = allEnemies.OrderBy(e => e.collider2D.bounds.center.DistanceFrom(origin)).ToList<Enemy>();
 
-			if (allEnemies[0].collider2D.bounds.center.DistanceFrom(origin) <= length)
-			{
-				Enemy currentEnemy = allEnemies[0];
+			bool hitEnemy = false;
+			Enemy currentEnemy = null;
 
+			foreach (Enemy possibleTarget in allEnemies)
+			{
+				if (detectionCollider.OverlapPoint(possibleTarget.transform.position))
+				{
+					hitEnemy = true;
+					currentEnemy = possibleTarget;
+					break;
+				}
+			}
+
+			if (hitEnemy && currentEnemy != null)
+			{
 				targetEnemies.Add(currentEnemy);
 				targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
 

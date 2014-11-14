@@ -7203,7 +7203,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: orthographic size
-      value: 11.258503
+      value: 11.2474442
       objectReference: {fileID: 0}
     - target: {fileID: 22400078, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -7298,7 +7298,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 11.258503
+  orthographic size: 11.2474442
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7633,7 +7633,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_HandleRect: {fileID: 1900975841}
   m_Direction: 2
-  m_Value: 1.52587887e-07
+  m_Value: 3.05175774e-07
   m_Size: .800000012
   m_NumberOfSteps: 0
   m_OnValueChanged:
