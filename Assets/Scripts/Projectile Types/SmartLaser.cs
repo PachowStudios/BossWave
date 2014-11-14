@@ -71,7 +71,7 @@ public class SmartLaser : Projectile
 
 		if (previousPoints[0] != Vector3.zero)
 		{
-			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.4f).ToArray());
+			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
 		}
 
 		vectorLine.Draw();
@@ -143,16 +143,27 @@ public class SmartLaser : Projectile
 		}
 	}
 
-	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float lerpPoint)
+	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float defaultLerpPoint)
 	{
+		float currentLerpPoint = defaultLerpPoint;
+
 		if (oldList.Count == newList.Count)
 		{
 			List<Vector3> result = new List<Vector3>();
 
 			for (int i = 0; i < newList.Count; i++)
 			{
-				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, lerpPoint),
-									   Mathf.Lerp(oldList[i].y, newList[i].y, lerpPoint),
+				if (newList[i].DistanceFrom(targets[0]) < targets[1].DistanceFrom(targets[0]))
+				{
+					currentLerpPoint = Extensions.ConvertRange(1f - newList[i].DistanceFrom(targets[0]) / targets[1].DistanceFrom(targets[0]), 0f, 1f, defaultLerpPoint, 1f);
+				}
+				else
+				{
+					currentLerpPoint = defaultLerpPoint;
+				}
+
+				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, currentLerpPoint),
+									   Mathf.Lerp(oldList[i].y, newList[i].y, currentLerpPoint),
 									   newList[i].z));
 			}
 

@@ -134,7 +134,7 @@ MonoBehaviour:
   knockback: 0
   gravity: 0
   shotSpeed: 7.5
-  lifetime: 5
+  lifetime: 7
   autoDestroy: 1
   destroyOnCollision: 0
   direction: {x: 0, y: 0, z: 0}
