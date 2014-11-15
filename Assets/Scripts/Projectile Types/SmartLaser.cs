@@ -53,12 +53,13 @@ public class SmartLaser : Projectile
 	{
 		int index = 0;
 		List<Color> gizmoColors = new List<Color>(new Color[] { Color.magenta, Color.red, Color.yellow, Color.blue, Color.green });
-		foreach (Vector3 target in targets)
+
+		foreach (Enemy target in targetEnemies)
 		{
-			if (index != 0)
+			if (target != null)
 			{
-				Gizmos.color = new Color(gizmoColors[index - 1].r, gizmoColors[index - 1].g, gizmoColors[index - 1].b, 0.25f);
-				Gizmos.DrawSphere(target, jumpRange);
+				Gizmos.color = new Color(gizmoColors[index].r, gizmoColors[index].g, gizmoColors[index].b, 0.25f);
+				Gizmos.DrawSphere(target.transform.position, jumpRange);
 			}
 
 			index++;
@@ -146,7 +147,7 @@ public class SmartLaser : Projectile
 						targetEnemies.Add(currentEnemy);
 						targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
 					}
-				} while (currentEnemy != null);
+				} while (currentEnemy != null && targetEnemies.Count < maxTargets);
 			}
 		}
 		
