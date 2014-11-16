@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
 	public float comboDecreaseTime = 1f;
 	public int maxScore = 999999999;
 	public int maxMicrochips = 99999;
+	public Gun startingGun;
 
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -93,6 +94,11 @@ public class PlayerControl : MonoBehaviour
 		health = maxHealth;
 
 		lastHitTime = Time.time - invincibilityPeriod;
+	}
+
+	void Start()
+	{
+		SwapGun(startingGun);
 	}
 
 	void Update()
@@ -374,7 +380,7 @@ public class PlayerControl : MonoBehaviour
 
 	public void AddHealth(float amount)
 	{
-		health = Mathf.Clamp(health + amount, health, maxHealth);
+		health = Mathf.Clamp(health + amount, 0f, maxHealth);
 	}
 
 	public int AddPoints(int points)

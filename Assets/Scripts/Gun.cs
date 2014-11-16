@@ -15,12 +15,16 @@ public class Gun : MonoBehaviour
 	};
 
 	public string gunName;
+	public RarityLevel rarity = RarityLevel.Common;
 	public Projectile projectile;
 	public bool continuousFire = false;
 	public float shootCooldown = 0.5f;
 	public bool canOverheat = false;
 	public float overheatTime = 5f;
-	public RarityLevel rarity = RarityLevel.Common;
+	public float overheatDamage = 0f;
+	[Range(0f, 1f)]
+	public float overheatThreshold = 0.5f;
+	public Gradient overheatGradient;
 
 	[HideInInspector]
 	public bool disableInput = false;
@@ -31,12 +35,16 @@ public class Gun : MonoBehaviour
 	private bool previousShoot;
 	private bool shootStart;
 	private float shootTimer = 0f;
+	private bool overheated = false;
+	private float overheatTimer = 0f;
 
 	private Projectile projectileInstance;
 
 	#if !MOBILE_INPUT
 	private bool useMouse = true;
 	#endif
+
+	private SpriteRenderer spriteRenderer;
 
 	public bool FacingRight
 	{
@@ -66,6 +74,7 @@ public class Gun : MonoBehaviour
 	void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
+		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		shootTimer = shootCooldown;
 	}
@@ -105,7 +114,7 @@ public class Gun : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if (!disableInput)
+		if (!disableInput && !overheated)
 		{
 			Vector3 shotDirection = RotateTowardsMouse();
 
@@ -135,6 +144,38 @@ public class Gun : MonoBehaviour
 					shootTimer = 0f;
 				}
 			}
+		}
+		else
+		{
+			if (continuousFire && projectileInstance != null)
+			{
+				Destroy(projectileInstance.gameObject);
+			}
+		}
+
+		if (canOverheat)
+		{
+			if (shoot && !disableInput && !overheated)
+			{
+				overheatTimer = Mathf.Clamp(overheatTimer + Time.deltaTime, 0f, overheatTime);
+
+				if (overheatTimer >= overheatTime)
+				{
+					overheated = true;
+					PlayerControl.instance.AddHealth(-overheatDamage);
+				}
+			}
+			else
+			{
+				overheatTimer = Mathf.Clamp(overheatTimer - Time.deltaTime, 0f, overheatTime);
+
+				if (overheatTimer <= overheatTime * overheatThreshold)
+				{
+					overheated = false;
+				}
+			}
+
+			spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
 		}
 	}
 
