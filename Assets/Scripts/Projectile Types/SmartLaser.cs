@@ -6,7 +6,7 @@ using Vectrosity;
 
 public class SmartLaser : Projectile
 {
-	public int maxTargets = 5;
+	public int maxJumps = 5;
 	public float jumpRange = 5f;
 	public float detectionRange = 2f;
 	[Range(2, 32)]
@@ -42,7 +42,14 @@ public class SmartLaser : Projectile
 		VectorLine.canvas.sortingLayerName = sortingLayer;
 		VectorLine.canvas.sortingOrder = sortingOrder;
 
-		vectorLine = new VectorLine("Laser", Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, maxTargets * subDivisionsPerTarget).ToList<Vector3>(), material, adjustedWidth, LineType.Continuous, Joins.Fill);
+		int totalSubdivisions = (GameObject.FindGameObjectsWithTag("Enemy").ToList<GameObject>().Count + 1) * subDivisionsPerTarget;
+
+		vectorLine = new VectorLine("Laser", 
+									Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
+									material, 
+									adjustedWidth, 
+									LineType.Continuous, 
+									Joins.Weld);
 		vectorLine.textureScale = 1f;
 
 		detectionCollider = gameObject.AddComponent<PolygonCollider2D>();
@@ -51,18 +58,13 @@ public class SmartLaser : Projectile
 
 	void OnDrawGizmos()
 	{
-		int index = 0;
-		List<Color> gizmoColors = new List<Color>(new Color[] { Color.magenta, Color.red, Color.yellow, Color.blue, Color.green });
-
 		foreach (Enemy target in targetEnemies)
 		{
 			if (target != null)
 			{
-				Gizmos.color = new Color(gizmoColors[index].r, gizmoColors[index].g, gizmoColors[index].b, 0.25f);
+				Gizmos.color = new Color(Color.magenta.r, Color.magenta.g, Color.magenta.b, 0.15f);
 				Gizmos.DrawSphere(target.transform.position, jumpRange);
 			}
-
-			index++;
 		}
 	}
 
@@ -120,23 +122,25 @@ public class SmartLaser : Projectile
 		{
 			allEnemies = allEnemies.OrderBy(e => e.collider2D.bounds.center.DistanceFrom(origin)).ToList<Enemy>();
 
-			bool hitEnemy = false;
-			Enemy currentEnemy = null;
+			List<Enemy> directTargets = new List<Enemy>();
 
-			foreach (Enemy possibleTarget in allEnemies)
+			foreach (Enemy enemy in allEnemies)
 			{
-				if (detectionCollider.OverlapPoint(possibleTarget.transform.position))
+				if (detectionCollider.OverlapPoint(enemy.transform.position))
 				{
-					hitEnemy = true;
-					currentEnemy = possibleTarget;
-					break;
+					directTargets.Add(enemy);
 				}
 			}
 
-			if (hitEnemy && currentEnemy != null)
+			allEnemies.RemoveAll(directTargets.Contains);
+
+			foreach (Enemy enemy in directTargets)
 			{
-				targetEnemies.Add(currentEnemy);
-				targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
+				int jumps = 0;
+				Enemy currentEnemy = enemy;
+
+				targetEnemies.Add(enemy);
+				targets.Add(OffsetPosition(enemy.collider2D.bounds.center));
 
 				do
 				{
@@ -146,14 +150,16 @@ public class SmartLaser : Projectile
 					{
 						targetEnemies.Add(currentEnemy);
 						targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
+
+						jumps++;
 					}
-				} while (currentEnemy != null && targetEnemies.Count < maxTargets);
+				} while (currentEnemy != null && jumps < maxJumps);
 			}
 		}
 		
 		if (targetEnemies.Count == 0)
 		{
-			targets.Add(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f)));
+			targets.Add(OffsetPosition(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f))));
 		}
 	}
 

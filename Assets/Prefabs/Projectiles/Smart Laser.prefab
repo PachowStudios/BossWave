@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 1
-  damage: .5
+  damage: .100000001
   knockback: 0
   gravity: 0
   shotSpeed: 7.5
@@ -139,12 +139,13 @@ MonoBehaviour:
   destroyOnCollision: 0
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
-  maxTargets: 5
-  jumpRange: 5
+  maxJumps: 3
+  jumpRange: 7
+  detectionRange: 3.5
   subDivisionsPerTarget: 16
   material: {fileID: 2100000, guid: d6576ac30a9c2f847b563c5ce5e6d650, type: 2}
   width: .449999988
-  length: 10
+  length: 13
   wiggle: .25
   sortingLayer: Player
   sortingOrder: 1
