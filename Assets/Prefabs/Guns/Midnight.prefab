@@ -70,7 +70,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Midnight
   projectile: {fileID: 11400002, guid: 7df364f30fb95ce4c825f39fe7e174e7, type: 2}
+  continuousFire: 1
   shootCooldown: 7.5
+  canOverheat: 0
+  overheatTime: 5
   rarity: 3
   disableInput: 0
   firePoint: {fileID: 0}

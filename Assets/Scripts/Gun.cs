@@ -16,7 +16,10 @@ public class Gun : MonoBehaviour
 
 	public string gunName;
 	public Projectile projectile;
+	public bool continuousFire = false;
 	public float shootCooldown = 0.5f;
+	public bool canOverheat = false;
+	public float overheatTime = 5f;
 	public RarityLevel rarity = RarityLevel.Common;
 
 	[HideInInspector]
@@ -25,7 +28,11 @@ public class Gun : MonoBehaviour
 	public Transform firePoint;
 
 	private bool shoot;
+	private bool previousShoot;
+	private bool shootStart;
 	private float shootTimer = 0f;
+
+	private Projectile projectileInstance;
 
 	#if !MOBILE_INPUT
 	private bool useMouse = true;
@@ -65,6 +72,8 @@ public class Gun : MonoBehaviour
 
 	void Update()
 	{
+		previousShoot = shoot;
+
 		#if MOBILE_INPUT
 		shoot = CrossPlatformInputManager.GetAxis("GunRotation") != 0f;
 		#else
@@ -90,6 +99,8 @@ public class Gun : MonoBehaviour
 			shoot = xboxInput;
 		}
 		#endif
+
+		shootStart = shootStart || (shoot && !previousShoot);
 	}
 
 	void FixedUpdate()
@@ -98,14 +109,31 @@ public class Gun : MonoBehaviour
 		{
 			Vector3 shotDirection = RotateTowardsMouse();
 
-			shootTimer += Time.deltaTime;
-
-			if (shoot && shootTimer >= shootCooldown)
+			if (continuousFire)
 			{
-				Projectile projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-				projectileInstance.direction = shotDirection;
+				if (shootStart)
+				{
+					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
+					projectileInstance.direction = shotDirection;
+					shootStart = false;
+				}
 
-				shootTimer = 0f;
+				if (projectileInstance != null && !shoot)
+				{
+					Destroy(projectileInstance.gameObject);
+				}
+			}
+			else
+			{
+				shootTimer += Time.deltaTime;
+
+				if (shoot && shootTimer >= shootCooldown)
+				{
+					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
+					projectileInstance.direction = shotDirection;
+
+					shootTimer = 0f;
+				}
 			}
 		}
 	}
