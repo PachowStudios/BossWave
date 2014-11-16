@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a45f837c9bb9949854c5bae828a78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultFade: .699999988
   borderBuffer: -32
   distortionAmount: .300000012
   noiseIntensity: 3.5

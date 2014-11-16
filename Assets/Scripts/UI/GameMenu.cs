@@ -148,13 +148,13 @@ public class GameMenu : MonoBehaviour
 
 	public void SetFOV(float newFOV)
 	{
-		ScaleWidthCamera.FOV = newFOV;
+		ScaleWidthCamera.FOV = Mathf.Abs((int)newFOV);
 	}
 
 	public void ApplySettings()
 	{
 		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
-		PlayerPrefs.SetFloat("Settings/FOV", fovSlider.value);
+		PlayerPrefs.SetInt("Settings/FOV", (int)fovSlider.value);
 
 		#if !MOBILE_INPUT
 		resolutionSelector.SetResolution();
@@ -173,8 +173,8 @@ public class GameMenu : MonoBehaviour
 
 		if (PlayerPrefs.HasKey("Settings/FOV"))
 		{
-			fovSlider.value = PlayerPrefs.GetFloat("Settings/FOV");
-			ScaleWidthCamera.FOV = fovSlider.value;
+			fovSlider.value = PlayerPrefs.GetInt("Settings/FOV");
+			ScaleWidthCamera.FOV = Mathf.Abs((int)fovSlider.value);
 		}
 
 		#if !MOBILE_INPUT

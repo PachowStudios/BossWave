@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 1
-  damage: .100000001
+  damage: 2
   knockback: 0
   gravity: 0
   shotSpeed: 7.5

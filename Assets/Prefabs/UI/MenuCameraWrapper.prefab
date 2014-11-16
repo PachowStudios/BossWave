@@ -1231,7 +1231,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 11.2436972
+  orthographic size: 11.2489519
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2759,7 +2759,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651259b46b2c94342931f7526a9a7c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetWidth: 1920
+  editorFOV: 400
+  overrideSettings: 0
+  useWorldSpaceUI: 0
+  worldSpaceUI: {fileID: 0}
 --- !u!114 &11400072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3224,10 +3227,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 22400090}
   m_HandleRect: {fileID: 22400080}
   m_Direction: 1
-  m_MinValue: 42
-  m_MaxValue: 54.0499992
-  m_WholeNumbers: 0
-  m_Value: 54.0499992
+  m_MinValue: -500
+  m_MaxValue: -300
+  m_WholeNumbers: 1
+  m_Value: -300
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3446,10 +3449,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 22400122}
   m_HandleRect: {fileID: 22400128}
   m_Direction: 1
-  m_MinValue: 42
-  m_MaxValue: 54.0499992
-  m_WholeNumbers: 0
-  m_Value: 48
+  m_MinValue: -500
+  m_MaxValue: -300
+  m_WholeNumbers: 1
+  m_Value: -400
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -4,14 +4,25 @@ using System.Collections;
 [ExecuteInEditMode]
 public class ScaleWidthCamera : MonoBehaviour 
 {
-	public float targetWidth = 1920;
+	public int editorFOV;
+	public bool overrideSettings = false;
+	public bool useWorldSpaceUI = false;
+	public RectTransform worldSpaceUI;
 
-	public static float FOV = 42f;
+	public static int FOV = 400;
 
 	void OnPreRender()
 	{
-		float height = (targetWidth / Screen.width) * Screen.height;
+		if (overrideSettings || (!Application.isPlaying && Application.isEditor))
+		{
+			FOV = editorFOV;
+		}
 
-		camera.orthographicSize = (height / FOV) / 2f;
+		camera.orthographicSize = FOV / 20f / camera.aspect;
+
+		if (useWorldSpaceUI && worldSpaceUI != null)
+		{
+			worldSpaceUI.sizeDelta = new Vector2(FOV / 10f, FOV / 10f / camera.aspect);
+		}
 	}
 }
