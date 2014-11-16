@@ -49,7 +49,7 @@ public class SmartLaser : Projectile
 									material, 
 									adjustedWidth, 
 									LineType.Continuous, 
-									Joins.Weld);
+									Joins.Fill);
 		vectorLine.textureScale = 1f;
 
 		detectionCollider = gameObject.AddComponent<PolygonCollider2D>();
@@ -97,8 +97,8 @@ public class SmartLaser : Projectile
 
 	private void UpdateCollider()
 	{
-		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, detectionRange)),
-													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -detectionRange)),
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, width / 2f)),
+													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -(width / 2f))),
 													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, -detectionRange)),
 													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, detectionRange)) } );
 	}
