@@ -21,6 +21,7 @@ public class PopupMessage : MonoBehaviour
 
 		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
 		popupInstance.transform.parent = instance.transform;
+		popupInstance.transform.SetAsFirstSibling();
 		popupInstance.followPlayer = followPlayer;
 
 		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
