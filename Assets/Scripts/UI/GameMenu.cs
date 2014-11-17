@@ -102,11 +102,14 @@ public class GameMenu : MonoBehaviour
 
 	public void LoadLevel(string levelName)
 	{
-		sounds = FindObjectsOfType<AudioSource>();
+		if (!Application.isLoadingLevel)
+		{
+			sounds = FindObjectsOfType<AudioSource>();
 
-		TimeWarpEffect.StartWarp(0f, loadTime, sounds, iTween.EaseType.easeOutSine);
-		CRTEffect.AnimateScanlines(loadTime, 0f, iTween.EaseType.easeOutSine);
-		StartCoroutine(LoadLevelCoroutine(levelName));
+			TimeWarpEffect.StartWarp(0f, loadTime, sounds, iTween.EaseType.easeOutSine);
+			CRTEffect.AnimateScanlines(loadTime, 0f, iTween.EaseType.easeOutSine);
+			StartCoroutine(LoadLevelCoroutine(levelName));
+		}
 	}
 
 	private IEnumerator LoadLevelCoroutine(string levelName)

@@ -75,7 +75,10 @@ public class MainMenu : MonoBehaviour
 
 	public void LoadLevel(string levelName)
 	{
-		StartCoroutine(HideMenu(levelName));
+		if (!Application.isLoadingLevel)
+		{
+			StartCoroutine(HideMenu(levelName));
+		}
 	}
 
 	public void SetVolume(float newVolume)
@@ -151,7 +154,7 @@ public class MainMenu : MonoBehaviour
 			AsyncOperation async = Application.LoadLevelAsync(levelName);
 			async.allowSceneActivation = false;
 
-			yield return new WaitForSeconds(fadeTime);
+			yield return StartCoroutine(Extensions.WaitForRealSeconds(fadeTime));
 
 			async.allowSceneActivation = true;
 		}
