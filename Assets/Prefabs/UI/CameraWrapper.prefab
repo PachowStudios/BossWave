@@ -2133,8 +2133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651259b46b2c94342931f7526a9a7c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideSettings: 1
   editorFOV: 400
-  overrideSettings: 0
   useWorldSpaceUI: 1
   worldSpaceUI: {fileID: 22400010}
 --- !u!114 &11400042
@@ -4597,7 +4597,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 22.4979}
+  m_SizeDelta: {x: 40, y: 22.4979038}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400012
 RectTransform:
@@ -5210,7 +5210,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -99.9999695}
   m_SizeDelta: {x: 1500, y: 1000}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400080

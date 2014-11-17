@@ -4,8 +4,8 @@ using System.Collections;
 [ExecuteInEditMode]
 public class ScaleWidthCamera : MonoBehaviour 
 {
-	public int editorFOV;
 	public bool overrideSettings = false;
+	public int editorFOV;
 	public bool useWorldSpaceUI = false;
 	public RectTransform worldSpaceUI;
 
