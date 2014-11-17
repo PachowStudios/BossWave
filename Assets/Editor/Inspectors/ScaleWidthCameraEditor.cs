@@ -5,8 +5,8 @@ using UnityEditor.AnimatedValues;
 [CustomEditor(typeof(ScaleWidthCamera))]
 public class ScaleWidthCameraEditor : Editor
 {
-	AnimBool showEditorOverride;
-	AnimBool showWorldSpaceUI;
+	private AnimBool showEditorOverride;
+	private AnimBool showWorldSpaceUI;
 
 	private ScaleWidthCamera Target
 	{
@@ -25,8 +25,8 @@ public class ScaleWidthCameraEditor : Editor
 		EditorGUILayout.TextField("Current FOV", ScaleWidthCamera.FOV.ToString());
 		GUI.enabled = true;
 
-		showEditorOverride.target = EditorGUILayout.Toggle("Override Settings", showEditorOverride.target);
-		Target.overrideSettings = showEditorOverride.value;
+		Target.overrideSettings = EditorGUILayout.Toggle("Override Settings", Target.overrideSettings);
+		showEditorOverride.target = Target.overrideSettings;
 
 		if (EditorGUILayout.BeginFadeGroup(showEditorOverride.faded))
 		{
@@ -62,6 +62,8 @@ public class ScaleWidthCameraEditor : Editor
 		{
 			EditorUtility.SetDirty(Target);
 		}
+
+		DrawDefaultInspector();
 
 		Repaint();
 	}
