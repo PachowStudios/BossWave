@@ -26,9 +26,16 @@ public class GunEditor : Editor
 
 	public override void OnInspectorGUI()
 	{
+		serializedTarget.Update();
+
 		Target.gunName = EditorGUILayout.TextField("Gun Name", Target.gunName);
 		Target.rarity = (Gun.RarityLevel)EditorGUILayout.EnumPopup("Rarity", Target.rarity);
 		Target.projectile = (Projectile)EditorGUILayout.ObjectField("Projectile", Target.projectile, typeof(Projectile), false);
+
+		if (Target.projectile == null)
+		{
+			EditorGUILayout.HelpBox("No projectile selected!", MessageType.Warning);
+		}
 
 		Target.continuousFire = EditorGUILayout.Toggle("Continuous Fire", Target.continuousFire);
 		showContinuousFire.target = !Target.continuousFire;

@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
 		Legendary,
 		Godly,
 		//Boss,
+		NUM_ITEMS
 	};
 
 	public string gunName;

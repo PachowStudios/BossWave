@@ -21,9 +21,8 @@ public class ScaleWidthCameraEditor : Editor
 
 	public override void OnInspectorGUI()
 	{
-		GUI.enabled = false;
-		EditorGUILayout.TextField("Current FOV", ScaleWidthCamera.FOV.ToString());
-		GUI.enabled = true;
+		EditorGUILayout.LabelField("Current FOV", ScaleWidthCamera.FOV.ToString());
+		EditorGUILayout.Space();
 
 		Target.overrideSettings = EditorGUILayout.Toggle("Override Settings", Target.overrideSettings);
 		showEditorOverride.target = Target.overrideSettings;
@@ -62,8 +61,6 @@ public class ScaleWidthCameraEditor : Editor
 		{
 			EditorUtility.SetDirty(Target);
 		}
-
-		DrawDefaultInspector();
 
 		Repaint();
 	}
