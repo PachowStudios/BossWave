@@ -5,7 +5,8 @@ using System.Collections;
 public class CRTEffect : MonoBehaviour 
 {
 	public float defaultFade = 0.7f;
-	public float borderBuffer = -32f;
+	public float borderBuffer = -64f;
+	public float borderZeroed = -32f;
 	public float distortionAmount = 0.2f;
 	public float noiseIntensity = 3.5f;
 	public Vector2 gamma = new Vector2(1f, 2.2f);
@@ -34,7 +35,7 @@ public class CRTEffect : MonoBehaviour
 		instance.EnableCRTShader();
 		
 		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.borderBuffer,
-													    "to", 0f,
+													    "to", instance.borderZeroed,
 													    "time", fadeTime,
 													    "easetype", iTween.EaseType.easeOutCirc,
 													    "onupdate", "UpdateCRTBorder",
@@ -68,7 +69,7 @@ public class CRTEffect : MonoBehaviour
 			instance.EnableCRTShader();
 		}
 
-		iTween.ValueTo(instance.gameObject, iTween.Hash("from", 0f,
+		iTween.ValueTo(instance.gameObject, iTween.Hash("from", instance.borderZeroed,
 														"to", instance.borderBuffer,
 														"time", fadeTime,
 														"easetype", iTween.EaseType.easeOutCirc,

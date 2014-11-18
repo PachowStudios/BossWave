@@ -828,7 +828,7 @@ public class VectorLine {
 		var pos = go.transform.position;
 		go.transform.position = pos;
 		_canvas = go.AddComponent<Canvas>();
-		_canvas.renderMode = RenderMode.Overlay;
+		_canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 		_canvas.sortingOrder = 1;
 		MonoBehaviour.DontDestroyOnLoad (go);
 	}
@@ -843,7 +843,7 @@ public class VectorLine {
 		var go = new GameObject("VectorCanvas3D");
 		go.layer = LayerMask.NameToLayer ("UI");
 		_canvas3D = go.AddComponent<Canvas>();
-		_canvas3D.renderMode = RenderMode.World;
+		_canvas3D.renderMode = RenderMode.WorldSpace;
 		_canvas3D.worldCamera = cam3D;
 		var rt = go.GetComponent<RectTransform>();
 		SetupTransform (rt);
@@ -854,7 +854,7 @@ public class VectorLine {
 		if (_canvas == null) {
 			SetCanvas();
 		}
-		_canvas.renderMode = RenderMode.OverlayCamera;
+		_canvas.renderMode = RenderMode.ScreenSpaceCamera;
 		_canvas.worldCamera = cam;
 	}
 	
