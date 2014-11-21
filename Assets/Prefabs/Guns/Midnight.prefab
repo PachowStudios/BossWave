@@ -74,7 +74,7 @@ MonoBehaviour:
   continuousFire: 1
   shootCooldown: 7.5
   canOverheat: 1
-  overheatTime: 2.5
+  overheatTime: 5
   overheatDamage: 10
   overheatThreshold: .5
   overheatGradient:

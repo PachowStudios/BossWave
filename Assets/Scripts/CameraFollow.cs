@@ -7,26 +7,34 @@ public class CameraFollow : MonoBehaviour
 	public float smoothing = 3f;
 	public Transform follow;
 
-	public Vector2 marginUnits;
-
 	private Vector3 velocity = Vector3.zero;
 
-	void Awake()
+	private float marginUnitsX
 	{
-		marginUnits = new Vector2(camera.orthographicSize * camera.aspect * (margin.x / 100f),
-								  camera.orthographicSize * (margin.y / 100f));
+		get
+		{
+			return camera.orthographicSize * camera.aspect * (margin.x / 100f);
+		}
+	}
+
+	private float marginUnitsY
+	{
+		get
+		{
+			return camera.orthographicSize * (margin.y / 100f);
+		}
 	}
 
 	void FixedUpdate()
 	{
 		Vector3 targetPosition = transform.position;
 
-		if (Mathf.Abs(transform.position.x - follow.position.x) > marginUnits.x)
+		if (Mathf.Abs(transform.position.x - follow.position.x) > marginUnitsX)
 		{
 			targetPosition.x = follow.position.x;
 		}
 
-		if (Mathf.Abs(transform.position.y - follow.position.y) > marginUnits.y)
+		if (Mathf.Abs(transform.position.y - follow.position.y) > marginUnitsY)
 		{
 			targetPosition.y = follow.position.y;
 		}
@@ -34,11 +42,11 @@ public class CameraFollow : MonoBehaviour
 		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
 	}
 
-	public void FollowObject(Transform target, bool explicitX = false, bool explicitY = false)
+	public void FollowObject(Transform target, Vector2 newMargin)
 	{
 		follow = target;
 
-		marginUnits.x = explicitX ? 0.01f : camera.orthographicSize * camera.aspect * (margin.x / 100f);
-		marginUnits.y = explicitY ? 0.01f : camera.orthographicSize * (margin.y / 100f);
+		margin.x = newMargin.x == 0f ? margin.x : newMargin.x;
+		margin.y = newMargin.y == 0f ? margin.y : newMargin.y;
 	}
 }

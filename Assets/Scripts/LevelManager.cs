@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour
 				{
 					Cutscene.StartCutscene();
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
-					mainCamera.FollowObject(cameraWrapper, true, true);
+					mainCamera.FollowObject(cameraWrapper, new Vector2(0.01f, 0.01f));
 					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false);
 
 					bossWaveInitialized = true;

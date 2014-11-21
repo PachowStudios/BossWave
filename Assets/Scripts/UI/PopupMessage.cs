@@ -20,7 +20,7 @@ public class PopupMessage : MonoBehaviour
 		newPosition.z = instance.transform.position.z;
 
 		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
-		popupInstance.transform.parent = instance.transform;
+		popupInstance.transform.SetParent(instance.transform);
 		popupInstance.transform.SetAsFirstSibling();
 		popupInstance.followPlayer = followPlayer;
 
