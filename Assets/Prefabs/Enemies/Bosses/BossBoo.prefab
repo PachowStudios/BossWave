@@ -14,6 +14,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400004}
   m_Layer: 11
   m_Name: BossBoo
   m_TagString: Enemy
@@ -218,6 +219,11 @@ MonoBehaviour:
   difficulty: 5
   maxHealth: 50
   damage: 5
+  microchipChance: 25
+  minMicrochips: 1
+  maxMicrochips: 3
+  smallestMicrochip: 0
+  biggestMicrochip: 0
   knockback: 3
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
@@ -238,6 +244,47 @@ MonoBehaviour:
   smashRange: 4
   smashTime: 2
   smashGravity: -50
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0401554a0e6f9466db3c1a798d358b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: 
+  playAutomatically: 1
+  delay: 0
+  type: 8
+  showIconInInspector: 1
+  keys:
+  - alpha
+  - time
+  indexes: 0000000001000000
+  metadatas:
+  - 
+  - 
+  ints: 
+  floats:
+  - 0
+  - 1
+  bools: 
+  strings: []
+  vector3s: []
+  colors: []
+  spaces: 
+  easeTypes: 
+  loopTypes: 
+  gameObjects: []
+  transforms: []
+  audioClips: []
+  audioSources: []
+  vector3Arrays: []
+  transformArrays: []
+  paths: []
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -31,7 +31,7 @@ public class ScaleWidthCameraEditor : Editor
 		{
 			EditorGUI.indentLevel++;
 
-			Target.editorFOV = EditorGUILayout.IntField("Editor FOV", Target.editorFOV);
+			Target.overrideFOV = EditorGUILayout.IntField("Override FOV", Target.overrideFOV);
 
 			EditorGUI.indentLevel--;
 		}

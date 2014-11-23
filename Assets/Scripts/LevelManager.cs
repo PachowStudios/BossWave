@@ -44,6 +44,9 @@ public class LevelManager : MonoBehaviour
 	public float minPowerupTime = 15f;
 	public float maxPowerupTime = 25f;
 	public float powerupBuffer = 5f;
+	public GameObject worldBoundaries;
+	public GameObject runningBoundaries;
+	public int runningFOV = 400;
 
 	[HideInInspector]
 	public bool bossWavePlayerMoved = false;
@@ -55,14 +58,15 @@ public class LevelManager : MonoBehaviour
 	private int currentWave = 0;
 	private float waveTimer;
 
+	private float powerupTimer = 0f;
+	private float powerupTime;
+	private float powerupRange;
+
 	private CameraFollow mainCamera;
 	private Transform cameraWrapper;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
 	private Transform powerupSpawner;
-	private float powerupTimer = 0f;
-	private float powerupTime;
-	private float powerupRange;
 
 	void Awake()
 	{
@@ -73,6 +77,7 @@ public class LevelManager : MonoBehaviour
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
+
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
 		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
 
@@ -113,6 +118,7 @@ public class LevelManager : MonoBehaviour
 				if (!bossWaveInitialized)
 				{
 					Cutscene.StartCutscene();
+					ScaleWidthCamera.AnimateFOV(runningFOV, 1f);
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, new Vector2(0.01f, 0.01f));
 					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false);
@@ -122,6 +128,9 @@ public class LevelManager : MonoBehaviour
 
 				if (waveTimer >= bossWave.startTime + bossWave.introLength)
 				{
+					worldBoundaries.SetActive(false);
+					runningBoundaries.SetActive(true);
+
 					PlayerControl.instance.continuouslyRunning = true;
 					bossWavePlayerMoved = true;
 
