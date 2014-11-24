@@ -1429,7 +1429,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 14.0356836
+  orthographic size: 11.2583895
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2085,7 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overrideSettings: 1
-  overrideFOV: 499
+  overrideFOV: 400
   useWorldSpaceUI: 1
   worldSpaceUI: {fileID: 22400010}
 --- !u!114 &11400042
@@ -3670,7 +3670,7 @@ MonoBehaviour:
   m_MinValue: -300
   m_MaxValue: -500
   m_WholeNumbers: 1
-  m_Value: -500
+  m_Value: -300
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4617,7 +4617,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 49.9000015, y: 28.0713673}
+  m_SizeDelta: {x: 40, y: 22.5167789}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400012
 RectTransform:

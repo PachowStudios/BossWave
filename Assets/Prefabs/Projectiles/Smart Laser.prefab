@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 1
-  damage: 2
+  damage: 4
   knockback: 0
   gravity: 0
   shotSpeed: 7.5
@@ -139,7 +139,7 @@ MonoBehaviour:
   destroyOnCollision: 0
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
-  maxJumps: 3
+  maxJumps: 50
   jumpRange: 7
   detectionRange: 3.5
   subDivisionsPerTarget: 16
