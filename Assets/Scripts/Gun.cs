@@ -59,7 +59,6 @@ public class Gun : MonoBehaviour
 	{
 		get
 		{
-			RotateTowardsMouse();
 			return !shoot;
 		}
 	}
@@ -110,15 +109,17 @@ public class Gun : MonoBehaviour
 		}
 		#endif
 
+		shoot = disableInput ? false : shoot;
+
 		shootStart = shootStart || (shoot && !previousShoot);
 	}
 
 	void FixedUpdate()
 	{
+		Vector3 shotDirection = RotateTowardsMouse();
+
 		if (!disableInput && !overheated)
 		{
-			Vector3 shotDirection = RotateTowardsMouse();
-
 			if (continuousFire)
 			{
 				if (shootStart)
