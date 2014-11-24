@@ -76,6 +76,7 @@ public class PlayerControl : MonoBehaviour
 
 	private bool cancelGoTo = false;
 	private bool useTargetPoint = false;
+	private bool goToFaceRight = false;
 	private bool reEnableAfterMove = true;
 	private bool inertiaAfterMove = false;
 	private Vector3 targetPoint;
@@ -155,6 +156,15 @@ public class PlayerControl : MonoBehaviour
 
 			if (cancelGoTo)
 			{
+				if (goToFaceRight && transform.localScale.x < 0)
+				{
+					Flip();
+				}
+				if (!goToFaceRight && transform.localScale.x > 0)
+				{
+					Flip();
+				}
+
 				ResetInput();
 
 				useTargetPoint = false;
@@ -430,10 +440,11 @@ public class PlayerControl : MonoBehaviour
 		StartCoroutine(ResetSpeedCoroutine(delay));
 	}
 
-	public void GoToPoint(Vector3 point, bool autoEnableInput = true, bool inertia = false)
+	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
 	{
 		targetPoint = point;
 		useTargetPoint = true;
+		goToFaceRight = faceRight;
 		cancelGoTo = false;
 		reEnableAfterMove = autoEnableInput;
 		inertiaAfterMove = inertia;

@@ -121,7 +121,7 @@ public class LevelManager : MonoBehaviour
 					ScaleWidthCamera.AnimateFOV(runningFOV, 1f);
 					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
 					mainCamera.FollowObject(cameraWrapper, new Vector2(0.01f, 0.01f));
-					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false);
+					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
 
 					bossWaveInitialized = true;
 				}
