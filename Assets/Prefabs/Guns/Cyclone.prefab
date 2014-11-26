@@ -69,10 +69,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Cyclone
-  projectile: {fileID: 11400002, guid: 86580ed020204484eb4025312d0fa3c2, type: 2}
-  shootCooldown: .300000012
   rarity: 2
+  projectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f, type: 2}
+  continuousFire: 0
+  shootCooldown: 1
+  canOverheat: 0
+  overheatTime: 5
+  overheatDamage: 0
+  overheatThreshold: .5
+  overheatGradient:
+    key0:
+      serializedVersion: 2
+      rgba: 4294967295
+    key1:
+      serializedVersion: 2
+      rgba: 4294967295
+    key2:
+      serializedVersion: 2
+      rgba: 0
+    key3:
+      serializedVersion: 2
+      rgba: 0
+    key4:
+      serializedVersion: 2
+      rgba: 0
+    key5:
+      serializedVersion: 2
+      rgba: 0
+    key6:
+      serializedVersion: 2
+      rgba: 0
+    key7:
+      serializedVersion: 2
+      rgba: 0
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   disableInput: 0
+  firePoint: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

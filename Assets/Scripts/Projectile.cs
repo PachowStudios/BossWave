@@ -17,8 +17,8 @@ public abstract class Projectile : MonoBehaviour
 	[HideInInspector]
 	public Vector3 velocity;
 
-	private CharacterController2D controller;
-	private SpriteRenderer spriteRenderer;
+	protected CharacterController2D controller;
+	protected SpriteRenderer spriteRenderer;
 
 	protected virtual void Awake()
 	{
@@ -36,7 +36,7 @@ public abstract class Projectile : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D trigger)
+	protected virtual void OnTriggerEnter2D(Collider2D trigger)
 	{
 		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
 		{
@@ -44,7 +44,7 @@ public abstract class Projectile : MonoBehaviour
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D trigger)
+	protected virtual void OnTriggerStay2D(Collider2D trigger)
 	{
 		OnTriggerEnter2D(trigger);
 	}
