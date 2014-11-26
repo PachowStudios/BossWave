@@ -8,6 +8,7 @@ public class SpriteExplosion : MonoBehaviour
 	public float lifetime = 4f;
 	public string sortingLayer = "Foreground";
 	public int sortingOrder = 1;
+	public Material material;
 
 	LevelManager levelManager;
 
@@ -37,6 +38,11 @@ public class SpriteExplosion : MonoBehaviour
 		partSystem.renderer.sortingOrder = sortingOrder;
 		currentParticle.size = 1f / pixelsPerUnit;
 		Vector3 randomTranslate = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+
+		if (material != null)
+		{
+			partSystem.renderer.material = material;
+		}
 
 		for (int i = 0; i < sprite.bounds.size.x * 10f; i++)
 		{

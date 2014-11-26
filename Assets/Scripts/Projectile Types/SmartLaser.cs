@@ -17,10 +17,18 @@ public class SmartLaser : Projectile
 	public float wiggle = 0.5f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
+	public LayerMask collisionLayer;
+	[Range(0f, 10f)]
+	public float tipExplosionsPerSec = 1f;
 
 	private float adjustedWidth;
 	private float cooldownTime;
 	private float cooldownTimer;
+	private float tipExplosionTime;
+	private float tipExplosionTimer;
+	private bool previousTipEnabled = false;
+	private Vector3 previousTipPosition;
+	private Vector3 tipVelocity;
 
 	private List<Enemy> allEnemies = new List<Enemy>();
 	private List<Enemy> targetEnemies = new List<Enemy>();
@@ -28,14 +36,20 @@ public class SmartLaser : Projectile
 	private List<Vector3> previousPoints = new List<Vector3>();
 	private VectorLine vectorLine;
 	private PolygonCollider2D detectionCollider;
+	private SpriteRenderer tip;
 
 	new void Awake()
 	{
 		base.Awake();
 
+		tip = transform.FindChild("Tip").GetComponent<SpriteRenderer>();
+
 		adjustedWidth = Camera.main.WorldToScreenPoint(Camera.main.ViewportToWorldPoint(Vector3.zero) + new Vector3(width, 0f, 0f)).x;
 		cooldownTime = 1f / shotSpeed;
 		cooldownTimer = cooldownTime;
+
+		tipExplosionTime = 1f / tipExplosionsPerSec;
+		tipExplosionTimer = tipExplosionTime;
 
 		VectorLine.SetCanvasCamera(Camera.main);
 		VectorLine.canvas.planeDistance = 9;
@@ -48,7 +62,7 @@ public class SmartLaser : Projectile
 									Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
 									material, 
 									adjustedWidth, 
-									LineType.Continuous, 
+									LineType.Continuous,
 									Joins.Fill);
 		vectorLine.textureScale = 1f;
 
@@ -70,6 +84,9 @@ public class SmartLaser : Projectile
 
 	void FixedUpdate()
 	{
+		previousTipEnabled = tip.enabled;
+		previousTipPosition = tip.transform.position;
+
 		UpdateCollider();
 		GetTargets();
 
@@ -79,6 +96,9 @@ public class SmartLaser : Projectile
 		vectorLine.MakeSpline(targets.ToArray());
 		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
 
+		tip.transform.position = vectorLine.points3.Last();
+		tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+
 		vectorLine.Draw();
 
 		cooldownTimer += Time.deltaTime;
@@ -87,6 +107,30 @@ public class SmartLaser : Projectile
 		{
 			DamageTargets();
 			cooldownTimer = 0f;
+		}
+
+		tipExplosionTimer += Time.deltaTime;
+
+		if (!previousTipEnabled && tip.enabled)
+		{
+			tipExplosionTimer = tipExplosionTime;
+		}
+
+		if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
+		{
+			if (targetEnemies.Count > 0)
+			{
+				foreach (Enemy enemy in targetEnemies)
+				{
+					ExplodeEffect.Explode(enemy.transform, Vector3.zero, tip.sprite, tip.material);
+				}
+			}
+			else
+			{
+				ExplodeEffect.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
+			}
+
+			tipExplosionTimer = 0f;
 		}
 	}
 
@@ -159,7 +203,24 @@ public class SmartLaser : Projectile
 		
 		if (targetEnemies.Count == 0)
 		{
-			targets.Add(OffsetPosition(PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f))));
+			Vector3 endPoint = PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f));
+			RaycastHit2D raycast = Physics2D.Linecast(origin, endPoint, collisionLayer);
+
+			if (raycast.collider != null)
+			{
+				endPoint = raycast.point;
+				tip.enabled = true;
+			}
+			else
+			{
+				tip.enabled = false;
+			}
+
+			targets.Add(OffsetPosition(endPoint));
+		}
+		else
+		{
+			tip.enabled = true;
 		}
 	}
 

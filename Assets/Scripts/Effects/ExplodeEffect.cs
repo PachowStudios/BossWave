@@ -15,11 +15,12 @@ public class ExplodeEffect : MonoBehaviour
 		instance = this;
 	}
 
-	public static void Explode(Transform transform, Vector3 velocity, Sprite sprite)
+	public static void Explode(Transform transform, Vector3 velocity, Sprite sprite, Material material = null)
 	{
 		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
 		explosionInstance.transform.localScale = transform.localScale;
 		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
+		explosionInstance.material = material;
 		explosionInstance.Explode(velocity, sprite);
 	}
 }
