@@ -6,12 +6,17 @@ using Vectrosity;
 
 public class SmartLaser : Projectile
 {
+	public List<Texture2D> lineTextures;
+	public List<Sprite> tipSprites;
+	public List<Color> colors;
+	public Material lineMaterial;
+	[Range(0.01f, 0.1f)]
+	public float animationTime = 0.01f;
 	public int maxJumps = 5;
 	public float jumpRange = 5f;
 	public float detectionRange = 2f;
 	[Range(2, 32)]
 	public int subDivisionsPerTarget = 16;
-	public Material material;
 	public float width = 0.5f;
 	public float length = 10f;
 	public float wiggle = 0.5f;
@@ -21,6 +26,8 @@ public class SmartLaser : Projectile
 	[Range(0f, 10f)]
 	public float tipExplosionsPerSec = 1f;
 
+	private int currentAnimationFrame = 0;
+	private float animationTimer = 0f;
 	private float adjustedWidth;
 	private float cooldownTime;
 	private float cooldownTimer;
@@ -60,7 +67,7 @@ public class SmartLaser : Projectile
 
 		vectorLine = new VectorLine("Laser", 
 									Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
-									material, 
+									lineMaterial, 
 									adjustedWidth, 
 									LineType.Continuous,
 									Joins.Fill);
@@ -87,10 +94,12 @@ public class SmartLaser : Projectile
 		previousTipEnabled = tip.enabled;
 		previousTipPosition = tip.transform.position;
 
+		UpdateMaterials();
 		UpdateCollider();
 		GetTargets();
 
-		vectorLine.material = material;
+		vectorLine.material = lineMaterial;
+		tip.material = lineMaterial;
 
 		previousPoints = new List<Vector3>(vectorLine.points3);
 		vectorLine.MakeSpline(targets.ToArray());
@@ -137,6 +146,22 @@ public class SmartLaser : Projectile
 	void OnDestroy()
 	{
 		VectorLine.Destroy(ref vectorLine);
+	}
+
+	private void UpdateMaterials()
+	{
+		animationTimer += Time.deltaTime;
+
+		if (animationTimer >= animationTime)
+		{
+			lineMaterial.SetColor("_TintColor", colors[currentAnimationFrame]);
+
+			lineMaterial.mainTexture = lineTextures[currentAnimationFrame];
+			tip.sprite = tipSprites[currentAnimationFrame];
+
+			animationTimer = 0f;
+			currentAnimationFrame = (currentAnimationFrame + 1 >= lineTextures.Count) ? 0 : currentAnimationFrame + 1;
+		}
 	}
 
 	private void UpdateCollider()
