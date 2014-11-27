@@ -112,7 +112,7 @@ public class BlackHole : Projectile
 				}
 				else if (outerRadius.OverlapPoint(currentParticles[i].position))
 				{
-					currentParticles[i].velocity = currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius + 0.5f, outerRotation);
+					currentParticles[i].velocity = Vector3.Lerp(currentParticles[i].velocity, currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius + 0.5f, outerRotation), 0.1f);
 					currentParticles[i].startLifetime = currentParticles[i].lifetime = affectedParticleLifetime;
 				}
 			}
