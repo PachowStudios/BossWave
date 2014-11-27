@@ -16,12 +16,11 @@ public class BlackHole : Projectile
 	public ParticleSystem particleSystemPrefab;
 	public string particlesSortingLayer = "Foreground";
 	public int particlesSortingOrder = 1;
-	public float lifetimeEmissionBuffer = 1f;
+	public float particleDestroyDelay = 1f;
 
 	private bool activated = false;
 	private float cooldownTime;
 	private float cooldownTimer;
-	private float secondsActive;
 	private ParticleSystem particleSystemInstance;
 	private List<ParticleSystem> allParticleSystems;
 
@@ -87,9 +86,6 @@ public class BlackHole : Projectile
 			particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
 			particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;
 			particleSystemInstance.renderer.sortingOrder = particlesSortingOrder;
-			StartCoroutine(StopParticleEmission());
-
-			secondsActive = 0f;
 
 			if (autoDestroy)
 			{
@@ -100,9 +96,6 @@ public class BlackHole : Projectile
 
 	private void SimulateBlackHole()
 	{
-		secondsActive += Time.deltaTime;
-		particleSystemInstance.startLifetime = lifetime - secondsActive + 0.01f;
-
 		allParticleSystems = GameObject.FindObjectsOfType<ParticleSystem>().ToList<ParticleSystem>();
 
 		foreach (ParticleSystem particleSystem in allParticleSystems)
@@ -126,18 +119,13 @@ public class BlackHole : Projectile
 		}
 	}
 
-	private IEnumerator StopParticleEmission()
-	{
-		yield return new WaitForSeconds(lifetime - lifetimeEmissionBuffer);
-
-		particleSystemInstance.enableEmission = false;
-	}
-
 	private IEnumerator DestroyEmitter()
 	{
 		yield return new WaitForSeconds(lifetime);
 
 		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
+		particleSystemInstance.enableEmission = false;
+		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
 		Destroy(gameObject);
 	}
 }

@@ -114,7 +114,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: 2
+  m_Radius: 4
   m_Center: {x: 0, y: 0}
 --- !u!58 &5800002
 CircleCollider2D:
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0}
 --- !u!61 &6100000
 BoxCollider2D:
@@ -206,16 +206,16 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   outerDamage: .5
   damageRate: 5
-  outerForce: 15
-  innerForce: 25
-  outerRotation: .5
-  innerRotation: .899999976
+  outerForce: 5
+  innerForce: 12.5
+  outerRotation: 1
+  innerRotation: 1.5
   activationBuffer: .699999988
   particleSystemPrefab: {fileID: 19800000, guid: b880edb78a26cd8438531bb595c21493,
     type: 2}
   particlesSortingLayer: Foreground
   particlesSortingOrder: 1
-  lifetimeEmissionBuffer: 1
+  particleDestroyDelay: 3
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

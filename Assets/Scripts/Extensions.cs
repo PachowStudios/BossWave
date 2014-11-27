@@ -65,7 +65,7 @@ public static class Extensions
 
 		if (twistVelocity != 0f)
 		{
-			baseForce = new Vector3(baseForce.x + (baseForce.y * twistVelocity), baseForce.y - (baseForce.x * twistVelocity), 0f);
+			baseForce = new Vector3(baseForce.x - (baseForce.y * twistVelocity), baseForce.y + (baseForce.x * twistVelocity), 0f);
 		}
 
 		return baseForce;
