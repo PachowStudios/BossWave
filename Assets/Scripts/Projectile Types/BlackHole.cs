@@ -17,6 +17,7 @@ public class BlackHole : Projectile
 	public string particlesSortingLayer = "Foreground";
 	public int particlesSortingOrder = 1;
 	public float particleDestroyDelay = 1f;
+	public float affectedParticleLifetime = 1f;
 
 	private bool activated = false;
 	private float cooldownTime;
@@ -105,13 +106,14 @@ public class BlackHole : Projectile
 
 			for (int i = 0; i < currentParticles.Length; i++)
 			{
-				if (innerRadius.bounds.Contains(currentParticles[i].position))
+				if (innerRadius.OverlapPoint(currentParticles[i].position))
 				{
 					currentParticles[i].velocity = currentParticles[i].position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation);
 				}
-				else if (outerRadius.bounds.Contains(currentParticles[i].position))
+				else if (outerRadius.OverlapPoint(currentParticles[i].position))
 				{
 					currentParticles[i].velocity = currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius + 0.5f, outerRotation);
+					currentParticles[i].startLifetime = currentParticles[i].lifetime = affectedParticleLifetime;
 				}
 			}
 

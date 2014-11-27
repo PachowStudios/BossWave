@@ -206,7 +206,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   outerDamage: .5
   damageRate: 5
-  outerForce: 5
+  outerForce: 7.5
   innerForce: 12.5
   outerRotation: 1
   innerRotation: 1.5
@@ -216,6 +216,7 @@ MonoBehaviour:
   particlesSortingLayer: Foreground
   particlesSortingOrder: 1
   particleDestroyDelay: 3
+  affectedParticleLifetime: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

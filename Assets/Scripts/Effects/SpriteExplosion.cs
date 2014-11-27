@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class SpriteExplosion : MonoBehaviour 
 {
 	public float pixelsPerUnit = 10f;
-	public float lifetime = 4f;
+	public float lifetime = 1f;
+	public float systemLifetime = 5f;
 	public string sortingLayer = "Foreground";
 	public int sortingOrder = 1;
 	public Material material;
@@ -82,7 +83,7 @@ public class SpriteExplosion : MonoBehaviour
 		}
 
 		partSystem.SetParticles(particles.ToArray(), particles.ToArray().Length);
-		Destroy(gameObject, lifetime);
-		yield return new WaitForSeconds(1f);
+		Destroy(gameObject, systemLifetime);
+		yield return null;
 	}
 }
