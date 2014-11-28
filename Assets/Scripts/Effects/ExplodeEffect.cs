@@ -23,4 +23,13 @@ public class ExplodeEffect : MonoBehaviour
 		explosionInstance.material = material;
 		explosionInstance.Explode(velocity, sprite);
 	}
+
+	public static void ExplodePartial(Transform transform, Vector3 velocity, Sprite sprite, float percentage, Material material = null)
+	{
+		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
+		explosionInstance.transform.localScale = transform.localScale;
+		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
+		explosionInstance.material = material;
+		explosionInstance.ExplodePartial(velocity, sprite, percentage);
+	}
 }

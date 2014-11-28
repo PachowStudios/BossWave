@@ -50,6 +50,14 @@ public abstract class Enemy : MonoBehaviour
 	protected Transform frontCheck;
 	protected Transform popupMessagePoint;
 
+	public Sprite Sprite
+	{
+		get
+		{
+			return spriteRenderer.sprite;
+		}
+	}
+
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();

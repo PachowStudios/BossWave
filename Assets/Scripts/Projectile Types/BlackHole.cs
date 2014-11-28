@@ -27,7 +27,6 @@ public class BlackHole : Projectile
 
 	private CircleCollider2D outerRadius;
 	private CircleCollider2D innerRadius;
-	private BoxCollider2D hitBox;
 
 	new void Awake()
 	{
@@ -36,7 +35,6 @@ public class BlackHole : Projectile
 
 		outerRadius = transform.FindChild("outerRadius").GetComponent<CircleCollider2D>();
 		innerRadius = transform.FindChild("innerRadius").GetComponent<CircleCollider2D>();
-		hitBox = GetComponent<BoxCollider2D>();
 
 		damageTime = 1f / damageRate;
 		damageTimer = damageTime;
@@ -157,6 +155,7 @@ public class BlackHole : Projectile
 
 						if (damageTimer >= damageTime)
 						{
+							ExplodeEffect.ExplodePartial(currentEnemy.transform, currentEnemy.velocity * 2f, currentEnemy.Sprite, 0.1f);
 							currentEnemy.TakeDamage(gameObject);
 						}
 					}

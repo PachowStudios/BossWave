@@ -30,6 +30,11 @@ public class SpriteExplosion : MonoBehaviour
 		StartCoroutine(DoExplode(velocity, sprite));
 	}
 
+	public void ExplodePartial(Vector3 velocity, Sprite sprite, float percentage)
+	{
+		StartCoroutine(DoExplodePartial(velocity, sprite, percentage));
+	}
+
 	private IEnumerator DoExplode(Vector3 velocity, Sprite sprite)
 	{
 		ParticleSystem partSystem = GetComponent<ParticleSystem>();
@@ -77,6 +82,7 @@ public class SpriteExplosion : MonoBehaviour
 					}
 
 					currentParticle.velocity += randomTranslate;
+
 					particles.Add(currentParticle);
 				}
 			}
@@ -84,6 +90,53 @@ public class SpriteExplosion : MonoBehaviour
 
 		partSystem.SetParticles(particles.ToArray(), particles.ToArray().Length);
 		Destroy(gameObject, systemLifetime);
+
+		yield return null;
+	}
+
+	private IEnumerator DoExplodePartial(Vector3 velocity, Sprite sprite, float percentage)
+	{
+		ParticleSystem partSystem = GetComponent<ParticleSystem>();
+		List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
+		ParticleSystem.Particle currentParticle = new ParticleSystem.Particle();
+		partSystem.renderer.sortingLayerName = sortingLayer;
+		partSystem.renderer.sortingOrder = sortingOrder;
+		currentParticle.size = 1f / pixelsPerUnit;
+
+		if (material != null)
+		{
+			partSystem.renderer.material = material;
+		}
+
+		for (int i = 0; i < sprite.bounds.size.x * 10f; i++)
+		{
+			for (int j = 0; j < sprite.bounds.size.y * 10f; j++)
+			{
+				Color particleColor = sprite.texture.GetPixel((int)sprite.rect.x + i,
+															  (int)sprite.rect.y + j);
+
+				if (particleColor.a != 0f && Random.value < percentage)
+				{
+					Vector2 positionOffset = new Vector2(sprite.bounds.extents.x - sprite.bounds.center.y - 0.05f,
+														 sprite.bounds.extents.y - sprite.bounds.center.y - 0.05f);
+
+					Vector3 particlePosition = transform.TransformPoint((i / 10f) - positionOffset.x,
+																		(j / 10f) - positionOffset.y, 0);
+
+					currentParticle.position = particlePosition;
+					currentParticle.rotation = 0f;
+					currentParticle.color = particleColor;
+					currentParticle.velocity = velocity;
+					currentParticle.startLifetime = currentParticle.lifetime = lifetime;
+
+					particles.Add(currentParticle);
+				}
+			}
+		}
+
+		partSystem.SetParticles(particles.ToArray(), particles.ToArray().Length);
+		Destroy(gameObject, systemLifetime);
+
 		yield return null;
 	}
 }

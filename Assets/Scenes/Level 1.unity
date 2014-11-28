@@ -2256,7 +2256,7 @@ Transform:
   - {fileID: 1635039007}
   - {fileID: 1314699389}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
 --- !u!61 &329264790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3391,7 +3391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &546831606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4906,7 +4906,7 @@ Transform:
   - {fileID: 218963820}
   - {fileID: 318511269}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
 --- !u!82 &897096782
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6577,7 +6577,7 @@ Transform:
   m_Children:
   - {fileID: 1423182924}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &1321756729
 Prefab:
   m_ObjectHideFlags: 0
