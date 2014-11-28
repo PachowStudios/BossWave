@@ -33,6 +33,8 @@ public abstract class Enemy : MonoBehaviour
 
 	[HideInInspector]
 	public float health;
+	[HideInInspector]
+	public Vector3 velocity;
 
 	protected bool right = false;
 	protected bool left = false;
@@ -45,7 +47,6 @@ public abstract class Enemy : MonoBehaviour
 
 	protected CharacterController2D controller;
 	protected Animator anim;
-	protected Vector3 velocity;
 	protected Transform frontCheck;
 	protected Transform popupMessagePoint;
 
@@ -76,7 +77,7 @@ public abstract class Enemy : MonoBehaviour
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;
 		float knockback = enemyProjectile.knockback;
-		enemyProjectile.CheckDestroy();
+		enemyProjectile.CheckDestroyEnemy();
 
 		if (!invincible)
 		{
@@ -101,9 +102,7 @@ public abstract class Enemy : MonoBehaviour
 
 				if (timeWarpAtDeath)
 				{
-					spriteRenderer.enabled = false;
-					collider2D.enabled = false;
-					TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
+					DeathTimeWarp();
 				}
 
 				Destroy(gameObject);
@@ -127,6 +126,24 @@ public abstract class Enemy : MonoBehaviour
 				Invoke("ResetColor", flashLength);
 			}
 		}
+	}
+
+	public void Kill()
+	{
+		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
+		PlayerControl.instance.AddPointsFromEnemy(maxHealth, damage);
+
+		if (timeWarpAtDeath)
+		{
+			DeathTimeWarp();
+		}
+
+		Destroy(gameObject);
+	}
+
+	public void Move(Vector3 velocity)
+	{
+		controller.move(velocity * Time.deltaTime);
 	}
 
 	protected void InitialUpdate()
@@ -195,6 +212,13 @@ public abstract class Enemy : MonoBehaviour
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	private void DeathTimeWarp()
+	{
+		spriteRenderer.enabled = false;
+		collider2D.enabled = false;
+		TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
 	}
 
 	private void ResetColor()

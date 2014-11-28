@@ -10,7 +10,8 @@ public abstract class Projectile : MonoBehaviour
 	public float shotSpeed = 15f;
 	public float lifetime = 3f;
 	public bool autoDestroy = true;
-	public bool destroyOnCollision = true;
+	public bool destroyOnEnemy = true;
+	public bool destroyOnWorld = true;
 
 	[HideInInspector]
 	public Vector3 direction;
@@ -40,7 +41,7 @@ public abstract class Projectile : MonoBehaviour
 	{
 		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
 		{
-			CheckDestroy();
+			CheckDestroyWorld();
 		}
 	}
 
@@ -68,12 +69,25 @@ public abstract class Projectile : MonoBehaviour
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 	}
 
-	public void CheckDestroy()
+	public void CheckDestroyEnemy()
 	{
-		if (destroyOnCollision)
+		if (destroyOnEnemy)
 		{
-			ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
-			Destroy(gameObject);
+			DoDestroy();
 		}
+	}
+
+	public void CheckDestroyWorld()
+	{
+		if (destroyOnWorld)
+		{
+			DoDestroy();
+		}
+	}
+
+	private void DoDestroy()
+	{
+		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
+		Destroy(gameObject);
 	}
 }

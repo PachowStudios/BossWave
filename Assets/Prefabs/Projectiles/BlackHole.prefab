@@ -195,16 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerShot: 0
-  damage: 5
+  damage: .5
   knockback: 0
   gravity: 0
   shotSpeed: 15
   lifetime: 5
   autoDestroy: 1
-  destroyOnCollision: 1
+  destroyOnEnemy: 0
+  destroyOnWorld: 1
   direction: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
-  outerDamage: .5
   damageRate: 5
   outerForce: 7.5
   innerForce: 12.5

@@ -344,7 +344,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			damage = enemy.GetComponent<Projectile>().damage;
 			knockback = enemy.GetComponent<Projectile>().knockback;
-			enemy.GetComponent<Projectile>().CheckDestroy();
+			enemy.GetComponent<Projectile>().CheckDestroyEnemy();
 		}
 
 		health -= damage;
