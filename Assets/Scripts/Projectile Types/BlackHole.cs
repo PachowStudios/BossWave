@@ -61,11 +61,11 @@ public class BlackHole : Projectile
 
 	new void OnTriggerEnter2D(Collider2D trigger)
 	{
-		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider") && hitBox.bounds.Intersects(trigger.bounds))
+		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
 		{
 			CheckDestroyWorld();
 		}
-		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.bounds.Intersects(trigger.bounds))
+		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.OverlapPoint(trigger.bounds.center))
 		{
 			if (trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
 			{
@@ -73,14 +73,15 @@ public class BlackHole : Projectile
 				{
 					Activate();
 				}
-				else
-				{
-					Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
+			}
 
-					if (!allEnemies.Contains(currentEnemy))
-					{
-						allEnemies.Add(currentEnemy);
-					}
+			if (activated)
+			{
+				Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
+
+				if (!allEnemies.Contains(currentEnemy))
+				{
+					allEnemies.Add(currentEnemy);
 				}
 			}
 		}
