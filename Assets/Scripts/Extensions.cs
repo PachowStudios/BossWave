@@ -52,6 +52,11 @@ public static class Extensions
 		return parent.TransformPoint(target) - parent.position;
 	}
 
+	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
+	{
+		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
+	}
+
 	public static float DistanceFrom(this Vector3 parent, Vector3 target)
 	{
 		return Mathf.Sqrt(Mathf.Pow(parent.x - target.x, 2) + Mathf.Pow(parent.y - target.y, 2));

@@ -12,10 +12,12 @@ public class BlackHole : Projectile
 	public float innerRotation = 1f;
 	[Range(0.1f, 1f)]
 	public float activationBuffer = 80f;
+	public Color color = Color.black;
 	public ParticleSystem particleSystemPrefab;
 	public string particlesSortingLayer = "Foreground";
 	public int particlesSortingOrder = 1;
 	public float particleDestroyDelay = 1f;
+	public float generatedParticleLifetime = 0.5f;
 	public float affectedParticleLifetime = 1f;
 
 	private bool activated = false;
@@ -32,7 +34,7 @@ public class BlackHole : Projectile
 	new void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		spriteRenderer = transform.FindChild("sprite").GetComponent<SpriteRenderer>();
 
 		outerRadius = transform.FindChild("outerRadius").GetComponent<CircleCollider2D>();
 		innerRadius = transform.FindChild("innerRadius").GetComponent<CircleCollider2D>();
@@ -51,7 +53,7 @@ public class BlackHole : Projectile
 		{
 			shotSpeed = Mathf.Lerp(shotSpeed, 0f, 0.1f);
 
-			if (!spawned && shotSpeed <= 0.15f)
+			if (!spawned && shotSpeed <= 0.5f)
 			{
 				Spawn();
 			}
@@ -103,9 +105,13 @@ public class BlackHole : Projectile
 	{
 		spawned = true;
 
+		spriteRenderer.gameObject.ColorTo(color, 0.2f, 0f);
+
 		particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
 		particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;
 		particleSystemInstance.renderer.sortingOrder = particlesSortingOrder;
+		particleSystemInstance.startColor = color;
+		particleSystemInstance.startLifetime = generatedParticleLifetime;
 
 		if (autoDestroy)
 		{
