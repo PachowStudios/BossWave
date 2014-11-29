@@ -17,9 +17,19 @@ public abstract class Projectile : MonoBehaviour
 	public Vector3 direction;
 	[HideInInspector]
 	public Vector3 velocity;
+	[HideInInspector]
+	public bool disableMovement = false;
 
 	protected CharacterController2D controller;
 	protected SpriteRenderer spriteRenderer;
+
+	public Sprite Sprite
+	{
+		get
+		{
+			return spriteRenderer.sprite;
+		}
+	}
 
 	protected virtual void Awake()
 	{
@@ -57,9 +67,12 @@ public abstract class Projectile : MonoBehaviour
 
 	protected void ApplyMovement()
 	{
-		velocity.x = direction.x * shotSpeed;
-		direction.y += (gravity * Time.fixedDeltaTime) / 10f;
-		velocity.y = direction.y * shotSpeed;
+		if (!disableMovement)
+		{
+			velocity.x = direction.x * shotSpeed;
+			direction.y += (gravity * Time.fixedDeltaTime) / 10f;
+			velocity.y = direction.y * shotSpeed;
+		}
 
 		controller.move(velocity * Time.fixedDeltaTime);
 	}
@@ -67,6 +80,11 @@ public abstract class Projectile : MonoBehaviour
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	public void Move(Vector3 velocity)
+	{
+		controller.move(velocity * Time.deltaTime);
 	}
 
 	public void CheckDestroyEnemy()
@@ -85,7 +103,7 @@ public abstract class Projectile : MonoBehaviour
 		}
 	}
 
-	private void DoDestroy()
+	public void DoDestroy()
 	{
 		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
 		Destroy(gameObject);

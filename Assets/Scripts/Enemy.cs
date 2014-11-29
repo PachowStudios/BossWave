@@ -43,8 +43,7 @@ public abstract class Enemy : MonoBehaviour
 	[HideInInspector]
 	protected float normalizedHorizontalSpeed = 0;
 
-	private SpriteRenderer spriteRenderer;
-
+	protected SpriteRenderer spriteRenderer;
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Transform frontCheck;

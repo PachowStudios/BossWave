@@ -21,6 +21,7 @@ TagManager:
   - Microchip
   - RunningBoundaries
   - ParticleSystem
+  - Hazard
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   User Layer 11: Enemies
   User Layer 12: ParticleCollider
   User Layer 13: Pickups
-  User Layer 14: BlackHole
+  User Layer 14: Hazards
   User Layer 15: 
   User Layer 16: 
   User Layer 17: 

@@ -117,7 +117,7 @@ public class SpriteExplosion : MonoBehaviour
 
 				if (particleColor.a != 0f && Random.value < percentage)
 				{
-					Vector2 positionOffset = new Vector2(sprite.bounds.extents.x - sprite.bounds.center.y - 0.05f,
+					Vector2 positionOffset = new Vector2(sprite.bounds.extents.x - sprite.bounds.center.x - 0.05f,
 														 sprite.bounds.extents.y - sprite.bounds.center.y - 0.05f);
 
 					Vector3 particlePosition = transform.TransformPoint((i / 10f) - positionOffset.x,
