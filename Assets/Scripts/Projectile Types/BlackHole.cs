@@ -19,6 +19,7 @@ public class BlackHole : Projectile
 	public float affectedParticleLifetime = 1f;
 
 	private bool activated = false;
+	private bool spawned = false;
 	private float damageTime;
 	private float damageTimer;
 	private ParticleSystem particleSystemInstance;
@@ -44,16 +45,24 @@ public class BlackHole : Projectile
 	{
 		InitialUpdate();
 
-		if (!activated)
-		{
-			ApplyMovement();
-		}
-		else
-		{
-			particleSystemInstance.transform.position = transform.position;
+		ApplyMovement();
 
-			SimulateParticles();
-			SimulateEnemies();
+		if (activated)
+		{
+			shotSpeed = Mathf.Lerp(shotSpeed, 0f, 0.1f);
+
+			if (!spawned && shotSpeed <= 0.15f)
+			{
+				Spawn();
+			}
+
+			if (spawned)
+			{
+				particleSystemInstance.transform.position = transform.position;
+
+				SimulateParticles();
+				SimulateEnemies();
+			}
 		}
 	}
 
@@ -69,7 +78,7 @@ public class BlackHole : Projectile
 			{
 				if (!activated)
 				{
-					Activate();
+					activated = true;
 				}
 			}
 
@@ -90,9 +99,9 @@ public class BlackHole : Projectile
 		OnTriggerEnter2D(trigger);
 	}
 
-	private void Activate()
+	private void Spawn()
 	{
-		activated = true;
+		spawned = true;
 
 		particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
 		particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;
