@@ -112,6 +112,8 @@ public class Gun : MonoBehaviour
 		shoot = disableInput ? false : shoot;
 
 		shootStart = shootStart || (shoot && !previousShoot);
+
+		RotateTowardsMouse();
 	}
 
 	void FixedUpdate()
@@ -207,16 +209,14 @@ public class Gun : MonoBehaviour
 		}
 		#endif
 
-		Transform originalTransform = transform;
-		originalTransform.rotation = Quaternion.Euler(newEuler);
-		Vector3 shotDirection = originalTransform.right;
+		Vector3 shotDirection = Quaternion.Euler(newEuler) * Vector3.right;
 
 		newEuler.y = newEuler.z > 90f && newEuler.z < 270f ? 180f : 0f;
 
 		Vector3 newScale = transform.localScale;
 		newScale.y = newEuler.y == 180f ? -1f : 1f;
-
 		transform.localScale = newScale;
+
 		transform.rotation = Quaternion.Euler(newEuler);
 
 		return shotDirection;

@@ -256,7 +256,7 @@ MonoBehaviour:
   outerRotation: 1
   innerRotation: 1.5
   activationBuffer: .699999988
-  color: {r: .0735294223, g: .0735294223, b: .0735294223, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 1}
   particleSystemPrefab: {fileID: 19800000, guid: b880edb78a26cd8438531bb595c21493,
     type: 2}
   particlesSortingLayer: Foreground
