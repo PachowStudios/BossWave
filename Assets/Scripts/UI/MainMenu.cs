@@ -12,8 +12,11 @@ public class MainMenu : MonoBehaviour
 	public float startDelay = 1f;
 	public float fadeTime = 2f;
 	public float nodeMoveSpeed = 2f;
+	public float interactableThreshold = 0.75f;
+	public float overlayVisibility = 0.5f;
 
 	public Image logo;
+	public CanvasGroup blackOverlay;
 
 	private Slider volumeSlider;
 	private Slider fovSlider;
@@ -143,6 +146,12 @@ public class MainMenu : MonoBehaviour
 											   "easetype", iTween.EaseType.easeOutQuint,
 											   "onupdate", "UpdateMenuAlpha",
 											   "ignoretimescale", true));
+		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
+											   "to", overlayVisibility,
+											   "time", fadeTime,
+											   "easetype", iTween.EaseType.easeOutQuint,
+											   "onupdate", "UpdateOverlay",
+											   "ignoretimescale", true));
 	}
 
 	private IEnumerator HideMenu(string levelName = "none")
@@ -167,8 +176,13 @@ public class MainMenu : MonoBehaviour
 	private void UpdateMenuAlpha(float newValue)
 	{
 		menu.alpha = newValue;
-		menu.interactable = newValue == 1f;
-		menu.blocksRaycasts = newValue == 1f;
+		menu.interactable = newValue >= interactableThreshold;
+		menu.blocksRaycasts = newValue >= interactableThreshold;
+	}
+
+	private void UpdateOverlay(float newValue)
+	{
+		blackOverlay.alpha = newValue;
 	}
 
 	private void GoToUpdateX(float newValue)

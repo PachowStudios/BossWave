@@ -1429,7 +1429,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 11.2583895
+  orthographic size: 11.2585039
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1956,6 +1956,7 @@ MonoBehaviour:
   fadeTime: .699999988
   loadTime: 2
   nodeMoveSpeed: 2
+  interactableThreshold: .75
   pauseOverlay: {fileID: 22500010}
   gameOverOverlay: {fileID: 22500012}
   pauseSelect: {fileID: 11400058}
@@ -3233,7 +3234,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11400110}
   m_HandleRect: {fileID: 22400080}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: .800000012
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4617,7 +4618,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 22.5167789}
+  m_SizeDelta: {x: 40, y: 22.5170078}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400012
 RectTransform:
@@ -5230,7 +5231,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 1500, y: 1000}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400080
@@ -5247,7 +5248,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: NaN}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400082

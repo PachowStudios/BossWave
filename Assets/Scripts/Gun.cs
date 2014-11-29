@@ -59,6 +59,7 @@ public class Gun : MonoBehaviour
 	{
 		get
 		{
+			RotateTowardsMouse();
 			return !shoot;
 		}
 	}
@@ -112,8 +113,6 @@ public class Gun : MonoBehaviour
 		shoot = disableInput ? false : shoot;
 
 		shootStart = shootStart || (shoot && !previousShoot);
-
-		RotateTowardsMouse();
 	}
 
 	void FixedUpdate()
