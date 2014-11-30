@@ -70,7 +70,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunName: Cyclone
   rarity: 2
-  projectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f, type: 2}
+  projectile: {fileID: 11400002, guid: 86580ed020204484eb4025312d0fa3c2, type: 2}
+  secondaryShot: 1
+  secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
+    type: 2}
+  secondaryCooldown: 10
+  showSecondaryGUI: 1
+  secondaryIcon: {fileID: 21300002, guid: 68f1568d8904bc347a6217114c4974ef, type: 3}
   continuousFire: 0
   shootCooldown: 1
   canOverheat: 0
@@ -122,6 +128,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   disableInput: 0
   firePoint: {fileID: 0}
+  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

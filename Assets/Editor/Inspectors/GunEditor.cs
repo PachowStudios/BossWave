@@ -5,6 +5,8 @@ using UnityEditor.AnimatedValues;
 [CustomEditor(typeof(Gun))]
 public class GunEditor : Editor
 {
+	private AnimBool showSecondaryShot;
+	private AnimBool showSecondaryGUI;
 	private AnimBool showContinuousFire;
 	private AnimBool showCanOverheat;
 	private SerializedObject serializedTarget;
@@ -17,6 +19,8 @@ public class GunEditor : Editor
 
 	void OnEnable()
 	{
+		showSecondaryShot = new AnimBool(Target.secondaryShot);
+		showSecondaryGUI = new AnimBool(Target.showSecondaryGUI);
 		showContinuousFire = new AnimBool(Target.continuousFire);
 		showCanOverheat = new AnimBool(Target.canOverheat);
 
@@ -34,8 +38,51 @@ public class GunEditor : Editor
 
 		if (Target.projectile == null)
 		{
-			EditorGUILayout.HelpBox("No projectile selected!", MessageType.Warning);
+			EditorGUILayout.HelpBox("No projectile selected!", MessageType.Error);
 		}
+
+		EditorGUILayout.Space();
+
+		Target.secondaryShot = EditorGUILayout.Toggle("Secondary Shot", Target.secondaryShot);
+		showSecondaryShot.target = Target.secondaryShot;
+
+		if (EditorGUILayout.BeginFadeGroup(showSecondaryShot.faded))
+		{
+			EditorGUI.indentLevel++;
+
+			Target.secondaryProjectile = (Projectile)EditorGUILayout.ObjectField("Projectile", Target.secondaryProjectile, typeof(Projectile), false);
+
+			if (Target.secondaryProjectile == null)
+			{
+				EditorGUILayout.HelpBox("No secondary projectile selected!", MessageType.Error);
+			}
+
+			Target.secondaryCooldown = EditorGUILayout.FloatField("Cooldown", Target.secondaryCooldown);
+			Target.showSecondaryGUI = EditorGUILayout.Toggle("Show GUI", Target.showSecondaryGUI);
+			showSecondaryGUI.target = Target.showSecondaryGUI;
+
+			if (EditorGUILayout.BeginFadeGroup(showSecondaryGUI.faded))
+			{
+				EditorGUI.indentLevel++;
+
+				Target.secondaryIcon = (Sprite)EditorGUILayout.ObjectField("Icon", Target.secondaryIcon, typeof(Sprite), false);
+
+				if (Target.secondaryIcon == null)
+				{
+					EditorGUILayout.HelpBox("No icon selected!", MessageType.Error);
+				}
+
+				EditorGUI.indentLevel--;
+			}
+
+			EditorGUILayout.EndFadeGroup();
+
+			EditorGUILayout.Space();
+
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.EndFadeGroup();
 
 		Target.continuousFire = EditorGUILayout.Toggle("Continuous Fire", Target.continuousFire);
 		showContinuousFire.target = !Target.continuousFire;
@@ -45,6 +92,7 @@ public class GunEditor : Editor
 			EditorGUI.indentLevel++;
 
 			Target.shootCooldown = EditorGUILayout.FloatField("Shot Cooldown", Target.shootCooldown);
+			EditorGUILayout.Space();
 
 			EditorGUI.indentLevel--;
 		}

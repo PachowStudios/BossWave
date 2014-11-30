@@ -3496,6 +3496,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
+      propertyPath: orthographic size
+      value: 11.2585039
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
   m_RootGameObject: {fileID: 1229284137}

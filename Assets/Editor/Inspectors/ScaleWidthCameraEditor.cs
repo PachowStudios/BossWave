@@ -7,6 +7,7 @@ public class ScaleWidthCameraEditor : Editor
 {
 	private AnimBool showEditorOverride;
 	private AnimBool showWorldSpaceUI;
+	private SerializedObject serializedTarget;
 
 	private ScaleWidthCamera Target
 	{
@@ -17,10 +18,13 @@ public class ScaleWidthCameraEditor : Editor
 	{
 		showEditorOverride = new AnimBool(Target.overrideSettings);
 		showWorldSpaceUI = new AnimBool(Target.useWorldSpaceUI);
+		serializedTarget = new SerializedObject(Target);
 	}
 
 	public override void OnInspectorGUI()
 	{
+		serializedTarget.Update();
+
 		EditorGUILayout.LabelField("Current FOV", ScaleWidthCamera.FOV.ToString());
 		EditorGUILayout.Space();
 
@@ -49,7 +53,7 @@ public class ScaleWidthCameraEditor : Editor
 
 			if (Target.worldSpaceUI == null)
 			{
-				EditorGUILayout.HelpBox("No world space UI selected!", MessageType.Warning);
+				EditorGUILayout.HelpBox("No world space UI selected!", MessageType.Error);
 			}
 
 			EditorGUI.indentLevel--;

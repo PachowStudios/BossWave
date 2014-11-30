@@ -18,8 +18,16 @@ public class Gun : MonoBehaviour
 	public string gunName;
 	public RarityLevel rarity = RarityLevel.Common;
 	public Projectile projectile;
+
+	public bool secondaryShot = false;
+	public Projectile secondaryProjectile;
+	public float secondaryCooldown = 5f;
+	public bool showSecondaryGUI = false;
+	public Sprite secondaryIcon;
+
 	public bool continuousFire = false;
 	public float shootCooldown = 0.5f;
+
 	public bool canOverheat = false;
 	public float overheatTime = 5f;
 	public float overheatDamage = 0f;
@@ -31,15 +39,21 @@ public class Gun : MonoBehaviour
 	public bool disableInput = false;
 	[HideInInspector]
 	public Transform firePoint;
+	[HideInInspector]
+	public float secondaryTimer;
 
 	private bool shoot;
 	private bool previousShoot;
 	private bool shootStart;
-	private float shootTimer = 0f;
+	private bool secondaryShoot;
+
+	private float shootTimer;
+
 	private bool overheated = false;
 	private float overheatTimer = 0f;
 
 	private Projectile projectileInstance;
+	private Projectile secondaryProjectileInstance;
 
 	#if !MOBILE_INPUT
 	private bool useMouse = true;
@@ -60,7 +74,7 @@ public class Gun : MonoBehaviour
 		get
 		{
 			RotateTowardsMouse();
-			return !shoot;
+			return !shoot && !secondaryShoot;
 		}
 	}
 
@@ -78,6 +92,7 @@ public class Gun : MonoBehaviour
 		spriteRenderer = GetComponent<SpriteRenderer>();
 
 		shootTimer = shootCooldown;
+		secondaryTimer = secondaryCooldown;
 	}
 
 	void Update()
@@ -89,6 +104,7 @@ public class Gun : MonoBehaviour
 		#else
 		bool xboxInput = CrossPlatformInputManager.GetAxis("XboxGunX") != 0f || CrossPlatformInputManager.GetAxis("XboxGunY") != 0f;
 		bool mouseInput = CrossPlatformInputManager.GetButton("Shoot");
+		bool secondaryMouseInput = CrossPlatformInputManager.GetButton("SecondaryShoot");
 
 		if (useMouse)
 		{
@@ -98,10 +114,11 @@ public class Gun : MonoBehaviour
 			}
 
 			shoot = mouseInput;
+			secondaryShoot = secondaryMouseInput;
 		}
 		else
 		{
-			if (mouseInput)
+			if (mouseInput || secondaryMouseInput)
 			{
 				useMouse = true;
 			}
@@ -111,6 +128,7 @@ public class Gun : MonoBehaviour
 		#endif
 
 		shoot = disableInput ? false : shoot;
+		secondaryShoot = disableInput ? false : secondaryShoot;
 
 		shootStart = shootStart || (shoot && !previousShoot);
 	}
@@ -146,6 +164,16 @@ public class Gun : MonoBehaviour
 
 					shootTimer = 0f;
 				}
+
+				secondaryTimer += Time.deltaTime;
+
+				if (secondaryShoot && secondaryTimer >= secondaryCooldown)
+				{
+					secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
+					secondaryProjectileInstance.direction = shotDirection;
+
+					secondaryTimer = 0f;
+				}
 			}
 		}
 		else
@@ -158,7 +186,7 @@ public class Gun : MonoBehaviour
 
 		if (canOverheat)
 		{
-			if (shoot && !disableInput && !overheated)
+			if ((shoot || secondaryShoot) && !disableInput && !overheated)
 			{
 				overheatTimer = Mathf.Clamp(overheatTimer + Time.deltaTime, 0f, overheatTime);
 
@@ -191,7 +219,7 @@ public class Gun : MonoBehaviour
 		#else
 		if (useMouse)
 		{
-			if (shoot)
+			if (shoot || secondaryShoot)
 			{
 				Vector3 mousePosition = Input.mousePosition;
 				mousePosition.z = 10f;

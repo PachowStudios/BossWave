@@ -57,7 +57,7 @@ public class HealthDisplay : MonoBehaviour
 			face.sprite = health25;
 		}
 
-		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1, 1), ref healthVelocity, healthDamping);
+		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1f, 1f), ref healthVelocity, healthDamping);
 		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.score, ref scoreVelocity, textDamping);
 		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.instance.microchips, ref microchipsVelocity, textDamping);
 

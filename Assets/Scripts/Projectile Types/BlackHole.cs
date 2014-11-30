@@ -42,6 +42,11 @@ public class BlackHole : Projectile
 
 		damageTime = 1f / damageRate;
 		damageTimer = damageTime;
+
+		if (autoDestroy)
+		{
+			StartCoroutine(FailsafeDestroy());
+		}
 	}
 
 	void FixedUpdate()
@@ -88,24 +93,24 @@ public class BlackHole : Projectile
 
 			if (activated)
 			{
-				if (trigger.tag == "Enemy")
-				{
-					Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
+				Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
 
-					if (!targetEnemies.Contains(currentEnemy))
-					{
-						targetEnemies.Add(currentEnemy);
-					}
+				if (!targetEnemies.Contains(currentEnemy))
+				{
+					targetEnemies.Add(currentEnemy);
 				}
-				else if (trigger.tag == "Projectile" || trigger.tag == "PlayerProjectile")
-				{
-					Projectile currentProjectile = trigger.gameObject.GetComponent<Projectile>();
+			}
+		}
+		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Projectiles") && outerRadius.OverlapPoint(trigger.bounds.center))
+		{
+			if (activated)
+			{
+				Projectile currentProjectile = trigger.gameObject.GetComponent<Projectile>();
 
-					if (!targetProjectiles.Contains(currentProjectile))
-					{
-						currentProjectile.disableMovement = true;
-						targetProjectiles.Add(currentProjectile);
-					}
+				if (!targetProjectiles.Contains(currentProjectile))
+				{
+					currentProjectile.disableMovement = true;
+					targetProjectiles.Add(currentProjectile);
 				}
 			}
 		}
@@ -235,9 +240,20 @@ public class BlackHole : Projectile
 			currentProjectile.disableMovement = false;
 		}
 
-		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
+		ExplodeEffect.Explode(transform, Vector3.zero, Sprite);
 		particleSystemInstance.enableEmission = false;
 		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
 		Destroy(gameObject);
+	}
+
+	private IEnumerator FailsafeDestroy()
+	{
+		yield return new WaitForSeconds(lifetime);
+
+		if (!activated)
+		{
+			ExplodeEffect.Explode(transform, velocity, Sprite);
+			Destroy(gameObject);
+		}
 	}
 }
