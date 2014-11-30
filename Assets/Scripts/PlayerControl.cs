@@ -40,8 +40,6 @@ public class PlayerControl : MonoBehaviour
 	public Gun gun;
 
 	[HideInInspector]
-	public float health;
-	[HideInInspector]
 	public int score = 0;
 	[HideInInspector]
 	public int combo = 1;
@@ -49,6 +47,8 @@ public class PlayerControl : MonoBehaviour
 	public int microchips = 0;
 	[HideInInspector]
 	public bool continuouslyRunning = false;
+
+	private float health;
 
 	private bool right;
 	private bool left;
@@ -80,6 +80,22 @@ public class PlayerControl : MonoBehaviour
 	private bool reEnableAfterMove = true;
 	private bool inertiaAfterMove = false;
 	private Vector3 targetPoint;
+
+	public float Health
+	{
+		get { return health; }
+
+		set
+		{
+			if (value < health)
+			{
+				lastHitTime = Time.time;
+			}
+
+			health = Mathf.Clamp(value, 0f, maxHealth);
+			CheckDeath();
+		}
+	}
 
 	void Awake()
 	{
@@ -347,21 +363,9 @@ public class PlayerControl : MonoBehaviour
 			enemy.GetComponent<Projectile>().CheckDestroyEnemy();
 		}
 
-		health -= damage;
+		Health -= damage;
 
-		if (health <= 0f)
-		{
-			SetRenderersEnabled(false);
-			collider2D.enabled = false;
-			DisableInput();
-
-			foreach (SpriteRenderer sprite in spriteRenderers)
-			{
-				sprite.transform.localScale = transform.localScale;
-				ExplodeEffect.Explode(sprite.transform, velocity, sprite.sprite);
-			}
-		}
-		else
+		if (health > 0f)
 		{
 			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
 			velocity.y = Mathf.Sqrt(knockback * -gravity);
@@ -374,23 +378,6 @@ public class PlayerControl : MonoBehaviour
 			controller.move(velocity * Time.deltaTime);
 			lastHitTime = Time.time;
 		}
-	}
-
-	void Flip()
-	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-		if (runFullTimer > 0f)
-		{
-			runFullTimer = 0f;
-			runFull = false;
-			anim.SetBool("Running_Full", runFull);
-		}
-	}
-
-	public void AddHealth(float amount)
-	{
-		health = Mathf.Clamp(health + amount, 0f, maxHealth);
 	}
 
 	public int AddPoints(int points)
@@ -478,6 +465,36 @@ public class PlayerControl : MonoBehaviour
 	private void ResetInput()
 	{
 		left = right = run = jump = false;
+	}
+
+	private bool CheckDeath()
+	{
+		if (health <= 0f)
+		{
+			SetRenderersEnabled(false);
+			collider2D.enabled = false;
+			DisableInput();
+
+			foreach (SpriteRenderer sprite in spriteRenderers)
+			{
+				sprite.transform.localScale = transform.localScale;
+				ExplodeEffect.Explode(sprite.transform, velocity, sprite.sprite);
+			}
+		}
+
+		return health <= 0f;
+	}
+
+	private void Flip()
+	{
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+
+		if (runFullTimer > 0f)
+		{
+			runFullTimer = 0f;
+			runFull = false;
+			anim.SetBool("Running_Full", runFull);
+		}
 	}
 
 	private IEnumerator ResetSpeedCoroutine(float delay)

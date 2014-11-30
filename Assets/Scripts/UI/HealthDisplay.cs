@@ -38,7 +38,7 @@ public class HealthDisplay : MonoBehaviour
 
 	void OnGUI()
 	{
-		healthPercent = Mathf.Clamp(PlayerControl.instance.health / PlayerControl.instance.maxHealth, 0f, 1f);
+		healthPercent = Mathf.Clamp(PlayerControl.instance.Health / PlayerControl.instance.maxHealth, 0f, 1f);
 
 		if (healthPercent > 0.75f)
 		{

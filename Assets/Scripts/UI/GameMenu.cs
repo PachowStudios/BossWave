@@ -88,7 +88,7 @@ public class GameMenu : MonoBehaviour
 			}
 		}
 
-		if (!gameOver && PlayerControl.instance.health <= 0f)
+		if (!gameOver && PlayerControl.instance.Health <= 0f)
 		{
 			sounds = FindObjectsOfType<AudioSource>();
 
