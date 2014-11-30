@@ -8786,7 +8786,7 @@ Prefab:
       objectReference: {fileID: 329264789}
     - target: {fileID: 11400142, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: m_Value
-      value: -500
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 22400010, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: m_SizeDelta.y
@@ -9426,7 +9426,7 @@ MonoBehaviour:
   m_MinValue: -300
   m_MaxValue: -500
   m_WholeNumbers: 1
-  m_Value: -300
+  m_Value: -500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
