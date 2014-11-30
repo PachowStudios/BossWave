@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9814b27566e2f4c9a396296bade3ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 0
+  introCRT: 1
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
 --- !u!1001 &100100000

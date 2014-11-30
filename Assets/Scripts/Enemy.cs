@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
 	};
 
 	public Difficulty difficulty = Difficulty.Easy;
+	public bool immuneToInstantKill = false;
 	public float maxHealth = 10f;
 	public float damage = 5f;
 	[Range(0f, 100f)]

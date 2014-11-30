@@ -108,6 +108,8 @@ public class GameMenu : MonoBehaviour
 	{
 		if (!Application.isLoadingLevel)
 		{
+			levelName = (levelName == "Retry") ? Application.loadedLevelName : levelName;
+
 			sounds = FindObjectsOfType<AudioSource>();
 
 			TimeWarpEffect.StartWarp(0f, loadTime, sounds, iTween.EaseType.easeOutSine);

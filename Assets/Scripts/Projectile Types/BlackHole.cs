@@ -155,7 +155,7 @@ public class BlackHole : Projectile
 				}
 				else if (outerRadius.OverlapPoint(currentParticles[i].position))
 				{
-					currentParticles[i].velocity = Vector3.Lerp(currentParticles[i].velocity, currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.1f);
+					currentParticles[i].velocity = Vector3.Lerp(currentParticles[i].velocity, currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation, 1.5f), 0.1f);
 					currentParticles[i].startLifetime = currentParticles[i].lifetime = affectedParticleLifetime;
 				}
 			}
@@ -178,10 +178,7 @@ public class BlackHole : Projectile
 					{
 						currentEnemy.Move(currentEnemy.transform.position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation));
 
-						if (damageTimer >= damageTime)
-						{
-							currentEnemy.Kill();
-						}
+						currentEnemy.Kill();
 					}
 					else if (outerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
@@ -189,7 +186,7 @@ public class BlackHole : Projectile
 
 						if (damageTimer >= damageTime)
 						{
-							ExplodeEffect.ExplodePartial(currentEnemy.transform, currentEnemy.velocity * 2f, currentEnemy.Sprite, 0.1f);
+							ExplodeEffect.ExplodePartial(currentEnemy.transform, currentEnemy.velocity, currentEnemy.Sprite, 0.05f);
 							currentEnemy.TakeDamage(gameObject);
 						}
 					}

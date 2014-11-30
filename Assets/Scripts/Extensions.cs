@@ -62,16 +62,12 @@ public static class Extensions
 		return Mathf.Sqrt(Mathf.Pow(parent.x - target.x, 2) + Mathf.Pow(parent.y - target.y, 2));
 	}
 
-	public static Vector3 CalculateBlackHoleForce(this Vector3 parent, float implosionForce, Vector3 implosionPosition, float implosionRadius, float twistVelocity = 0f)
+	public static Vector3 CalculateBlackHoleForce(this Vector3 parent, float implosionForce, Vector3 implosionPosition, float implosionRadius, float twistVelocity, float wearoffOverride = 1f)
 	{
 		Vector3 dir = (parent - implosionPosition);
-		float wearoff = 1 - (dir.magnitude / implosionRadius);
+		float wearoff = wearoffOverride - (dir.magnitude / implosionRadius);
 		Vector3 baseForce = dir.normalized * (-implosionForce) * wearoff;
-
-		if (twistVelocity != 0f)
-		{
-			baseForce = new Vector3(baseForce.x - (baseForce.y * twistVelocity), baseForce.y + (baseForce.x * twistVelocity), 0f);
-		}
+		baseForce = new Vector3(baseForce.x - (baseForce.y * twistVelocity), baseForce.y + (baseForce.x * twistVelocity), 0f);
 
 		return baseForce;
 	}
