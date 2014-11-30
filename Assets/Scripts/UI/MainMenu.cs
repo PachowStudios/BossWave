@@ -50,6 +50,7 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		Time.timeScale = 1f;
+		Time.fixedDeltaTime = TimeWarpEffect.instance.defaultFixedTimestep;
 
 		StartCoroutine(ShowMenu());
 	}

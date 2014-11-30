@@ -3,8 +3,11 @@ using System.Collections;
 
 public class TimeWarpEffect : MonoBehaviour
 {
-	static private TimeWarpEffect instance;
+	public float defaultFixedTimestep = 0.0166667f;
+
 	static private AudioSource[] allSounds;
+
+	static public TimeWarpEffect instance;
 
 	void Awake()
 	{
@@ -61,6 +64,7 @@ public class TimeWarpEffect : MonoBehaviour
 	private void UpdateValues(float newValue)
 	{
 		Time.timeScale = newValue;
+		Time.fixedDeltaTime = defaultFixedTimestep * newValue;
 
 		if (allSounds != null)
 		{

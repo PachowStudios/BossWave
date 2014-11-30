@@ -93,12 +93,14 @@ public class LevelManager : MonoBehaviour
 		if (introCRT)
 		{
 			Time.timeScale = 0f;
+			Time.fixedDeltaTime = 0f;
 			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
 			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
 		}
 		else
 		{
 			Time.timeScale = 1f;
+			Time.fixedDeltaTime = TimeWarpEffect.instance.defaultFixedTimestep;
 			mainMusic.pitch = 1f;
 		}
 	}
