@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 100
   invincibilityPeriod: 2
   gravity: -35
   walkSpeed: 10
@@ -372,6 +372,8 @@ MonoBehaviour:
   secondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
+  showSecondaryGUI: 0
+  secondaryIcon: {fileID: 0}
   continuousFire: 0
   shootCooldown: .150000006
   canOverheat: 0
@@ -423,6 +425,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   disableInput: 0
   firePoint: {fileID: 0}
+  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

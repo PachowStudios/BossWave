@@ -43,7 +43,7 @@ public abstract class Projectile : MonoBehaviour
 
 		if (autoDestroy)
 		{
-			Destroy(gameObject, lifetime);
+			StartCoroutine(FailsafeDestroy());
 		}
 	}
 
@@ -106,6 +106,14 @@ public abstract class Projectile : MonoBehaviour
 	public void DoDestroy()
 	{
 		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
+		Destroy(gameObject);
+	}
+
+	protected IEnumerator FailsafeDestroy()
+	{
+		yield return new WaitForSeconds(lifetime);
+
+		ExplodeEffect.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);
 	}
 }

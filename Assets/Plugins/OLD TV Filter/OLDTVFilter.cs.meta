@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b265ee9da0a8ccb4a85edf543d68f5b5
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - tvMask: {fileID: 2800000, guid: a03b274818a04934c9fa753935791fd8, type: 3}
+  - tvStatic: {fileID: 2800000, guid: e80c3c84ea861404d8a427db8b7abf04, type: 3}
+  - materialTv: {fileID: 2100000, guid: 59dd12874c63dda4b86c2b099186204c, type: 2}
+  - materialTvMobile: {fileID: 2100000, guid: ba839a63b6b0c554793050ebaaca95eb, type: 2}
+  - materialEgg: {fileID: 2100000, guid: b603444e53089e4449ac23d3bff24e37, type: 2}
+  - musicManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

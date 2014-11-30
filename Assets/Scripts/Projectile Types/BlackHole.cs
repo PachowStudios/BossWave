@@ -109,7 +109,6 @@ public class BlackHole : Projectile
 
 				if (!targetProjectiles.Contains(currentProjectile))
 				{
-					currentProjectile.disableMovement = true;
 					targetProjectiles.Add(currentProjectile);
 				}
 			}
@@ -222,7 +221,7 @@ public class BlackHole : Projectile
 					}
 					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
 					{
-						currentProjectile.Move(Vector3.Lerp(currentProjectile.velocity, currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.1f));
+						currentProjectile.Move(currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation) * 5f);
 					}
 				}
 			}
@@ -235,18 +234,13 @@ public class BlackHole : Projectile
 	{
 		yield return new WaitForSeconds(lifetime);
 
-		foreach (Projectile currentProjectile in targetProjectiles)
-		{
-			currentProjectile.disableMovement = false;
-		}
-
 		ExplodeEffect.Explode(transform, Vector3.zero, Sprite);
 		particleSystemInstance.enableEmission = false;
 		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
 		Destroy(gameObject);
 	}
 
-	private IEnumerator FailsafeDestroy()
+	new IEnumerator FailsafeDestroy()
 	{
 		yield return new WaitForSeconds(lifetime);
 
