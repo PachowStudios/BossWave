@@ -221,7 +221,9 @@ public class BlackHole : Projectile
 					}
 					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
 					{
-						currentProjectile.Move(currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation) * 5f);
+						Vector3 force = currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation);
+						currentProjectile.direction = Vector3.Lerp(currentProjectile.direction, force.normalized, 0.05f);
+						currentProjectile.Move(force);
 					}
 				}
 			}
