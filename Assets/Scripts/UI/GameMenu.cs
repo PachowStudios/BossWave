@@ -88,7 +88,7 @@ public class GameMenu : MonoBehaviour
 			}
 		}
 
-		if (!gameOver && PlayerControl.instance.Health <= 0f)
+		if (!gameOver && PlayerControl.instance.Dead)
 		{
 			sounds = FindObjectsOfType<AudioSource>();
 
@@ -96,7 +96,7 @@ public class GameMenu : MonoBehaviour
 			canPause = false;
 
 			SelectObject(gameOverSelect);
-			TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
+			//TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
 			CRTEffect.StartCRT(fadeTime);
 			Fade(0f, 1f, "UpdateGameOverAlpha", false);
 

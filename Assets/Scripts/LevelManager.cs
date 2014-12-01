@@ -158,7 +158,7 @@ public class LevelManager : MonoBehaviour
 				}
 			}
 		}
-		else if (PlayerControl.instance.Health > 0f)
+		else if (!PlayerControl.instance.Dead)
 		{
 			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime && spawnEnemies)
 			{

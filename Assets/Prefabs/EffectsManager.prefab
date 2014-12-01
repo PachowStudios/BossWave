@@ -41,6 +41,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876bd141ba78a7947a8f8e538952749c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultFixedTimestep: .0166666992
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,7 +69,7 @@ MonoBehaviour:
   defaultFade: .699999988
   borderBuffer: -64
   borderZeroed: -32
-  distortionAmount: .300000012
+  distortionAmount: .200000003
   noiseIntensity: 3.5
   gamma: {x: 1, y: 2.20000005}
   crtBorder: {fileID: 0}

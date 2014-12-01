@@ -18,6 +18,7 @@ public class ExplodeEffect : MonoBehaviour
 	public static void Explode(Transform transform, Vector3 velocity, Sprite sprite, Material material = null)
 	{
 		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
+		explosionInstance.transform.parent = instance.transform;
 		explosionInstance.transform.localScale = transform.localScale;
 		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
 		explosionInstance.material = material;
@@ -27,6 +28,7 @@ public class ExplodeEffect : MonoBehaviour
 	public static void ExplodePartial(Transform transform, Vector3 velocity, Sprite sprite, float percentage, Material material = null)
 	{
 		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
+		explosionInstance.transform.parent = instance.transform;
 		explosionInstance.transform.localScale = transform.localScale;
 		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
 		explosionInstance.material = material;

@@ -25,20 +25,15 @@ public class PlayerControl : MonoBehaviour
 	public Gun startingGun;
 
 	[HideInInspector]
+	public Gun gun;
+	[HideInInspector]
+	public Vector3 velocity;
+	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 	[HideInInspector]
 	public float speedMultiplier = 1f;
 	[HideInInspector]
 	public Transform popupMessagePoint;
-
-	private CharacterController2D controller;
-	private Animator anim;
-	private RaycastHit2D lastControllerColliderHit;
-	private Vector3 velocity;
-	private List<SpriteRenderer> spriteRenderers;
-	[HideInInspector]
-	public Gun gun;
-
 	[HideInInspector]
 	public int score = 0;
 	[HideInInspector]
@@ -47,8 +42,15 @@ public class PlayerControl : MonoBehaviour
 	public int microchips = 0;
 	[HideInInspector]
 	public bool continuouslyRunning = false;
+	[HideInInspector]
+	public List<SpriteRenderer> spriteRenderers;
+
+	private CharacterController2D controller;
+	private Animator anim;
+	private RaycastHit2D lastControllerColliderHit;
 
 	private float health;
+	private bool dead = false;
 
 	private bool right;
 	private bool left;
@@ -95,6 +97,11 @@ public class PlayerControl : MonoBehaviour
 			health = Mathf.Clamp(value, 0f, maxHealth);
 			CheckDeath();
 		}
+	}
+
+	public bool Dead
+	{
+		get { return dead; }
 	}
 
 	void Awake()
@@ -346,7 +353,7 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	void TakeDamage(GameObject enemy)
+	private void TakeDamage(GameObject enemy)
 	{
 		float damage = 0f;
 		float knockback = 0f;
@@ -378,6 +385,11 @@ public class PlayerControl : MonoBehaviour
 			controller.move(velocity * Time.deltaTime);
 			lastHitTime = Time.time;
 		}
+	}
+
+	public void Move(Vector3 velocity)
+	{
+		controller.move(velocity * Time.deltaTime);
 	}
 
 	public int AddPoints(int points)
@@ -469,8 +481,10 @@ public class PlayerControl : MonoBehaviour
 
 	private bool CheckDeath()
 	{
-		if (health <= 0f)
+		if (health <= 0f && !dead)
 		{
+			dead = true;
+
 			SetRenderersEnabled(false);
 			collider2D.enabled = false;
 			DisableInput();
@@ -482,7 +496,7 @@ public class PlayerControl : MonoBehaviour
 			}
 		}
 
-		return health <= 0f;
+		return dead;
 	}
 
 	private void Flip()

@@ -68,9 +68,17 @@ public class BlackHole : Projectile
 			{
 				particleSystemInstance.transform.position = transform.position;
 
+				damageTimer += Time.deltaTime;
+
 				SimulateParticles();
 				SimulateEnemies();
 				SimulateProjectiles();
+				SimulatePlayer();
+
+				if (damageTimer >= damageTime)
+				{
+					damageTimer = 0f;
+				}
 			}
 		}
 	}
@@ -168,8 +176,6 @@ public class BlackHole : Projectile
 	{
 		if (targetEnemies.Count > 0)
 		{
-			damageTimer += Time.deltaTime;
-
 			foreach (Enemy currentEnemy in targetEnemies)
 			{
 				if (currentEnemy != null)
@@ -197,11 +203,6 @@ public class BlackHole : Projectile
 			}
 
 			targetEnemies.RemoveAll(e => e == null);
-
-			if (damageTimer >= damageTime)
-			{
-				damageTimer = 0f;
-			}
 		}
 	}
 
@@ -229,6 +230,32 @@ public class BlackHole : Projectile
 			}
 
 			targetProjectiles.RemoveAll(p => p == null);
+		}
+	}
+
+	private void SimulatePlayer()
+	{
+		if (innerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
+		{
+			PlayerControl.instance.Health = 0f;
+		}
+		else if (outerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
+		{
+			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.2f));
+
+			if (damageTimer >= damageTime)
+			{
+				foreach (SpriteRenderer sprite in PlayerControl.instance.spriteRenderers)
+				{
+					Transform tempTransform = new GameObject().transform;
+					sprite.transform.CopyTo(tempTransform);
+					tempTransform.localScale = PlayerControl.instance.transform.localScale;
+					ExplodeEffect.ExplodePartial(tempTransform.transform, PlayerControl.instance.velocity, sprite.sprite, 0.1f / PlayerControl.instance.spriteRenderers.Count);
+					Destroy(tempTransform.gameObject);
+				}
+
+				PlayerControl.instance.Health -= damage;
+			}
 		}
 	}
 

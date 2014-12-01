@@ -52,6 +52,17 @@ public static class Extensions
 		return parent.TransformPoint(target) - parent.position;
 	}
 
+	public static void CopyTo(this Transform parent, Transform target)
+	{
+		target.name = parent.name + " Temp Transform";
+		target.parent = parent.parent;
+		target.position = parent.position;
+		target.rotation = parent.rotation;
+		target.localPosition = parent.localPosition;
+		target.localRotation = parent.localRotation;
+		target.localScale = parent.localScale;
+	}
+
 	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
 	{
 		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
