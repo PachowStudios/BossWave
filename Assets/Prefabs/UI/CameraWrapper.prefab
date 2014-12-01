@@ -2169,7 +2169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651259b46b2c94342931f7526a9a7c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideSettings: 1
+  overrideSettings: 0
   overrideFOV: 400
   useWorldSpaceUI: 1
   worldSpaceUI: {fileID: 22400010}
@@ -3755,7 +3755,7 @@ MonoBehaviour:
   m_MinValue: -300
   m_MaxValue: -500
   m_WholeNumbers: 1
-  m_Value: -500
+  m_Value: -300
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

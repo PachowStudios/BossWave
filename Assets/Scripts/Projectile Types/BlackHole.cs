@@ -174,7 +174,7 @@ public class BlackHole : Projectile
 			{
 				if (currentEnemy != null)
 				{
-					if (innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
+					if (!currentEnemy.immuneToInstantKill && innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
 						currentEnemy.Move(currentEnemy.transform.position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation));
 
@@ -182,7 +182,10 @@ public class BlackHole : Projectile
 					}
 					else if (outerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
-						currentEnemy.Move(Vector3.Lerp(currentEnemy.velocity, currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.5f));
+						if (!currentEnemy.immuneToInstantKill)
+						{
+							currentEnemy.Move(Vector3.Lerp(currentEnemy.velocity, currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.5f));
+						}
 
 						if (damageTimer >= damageTime)
 						{

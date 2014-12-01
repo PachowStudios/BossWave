@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 5
+  immuneToInstantKill: 1
   maxHealth: 50
   damage: 5
   microchipChance: 25
@@ -233,6 +234,7 @@ MonoBehaviour:
   inAirDamping: 5
   timeWarpAtDeath: 1
   health: 0
+  velocity: {x: 0, y: 0, z: 0}
   minFlyHeight: 3
   maxFlyHeight: 5
   flyHeightBuffer: 2

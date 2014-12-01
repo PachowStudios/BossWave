@@ -43,6 +43,21 @@ public class GunEditor : Editor
 
 		EditorGUILayout.Space();
 
+		Target.continuousFire = EditorGUILayout.Toggle("Continuous Fire", Target.continuousFire);
+		showContinuousFire.target = !Target.continuousFire;
+
+		if (EditorGUILayout.BeginFadeGroup(showContinuousFire.faded))
+		{
+			EditorGUI.indentLevel++;
+
+			Target.shootCooldown = EditorGUILayout.FloatField("Shot Cooldown", Target.shootCooldown);
+			EditorGUILayout.Space();
+
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.EndFadeGroup();
+
 		Target.secondaryShot = EditorGUILayout.Toggle("Secondary Shot", Target.secondaryShot);
 		showSecondaryShot.target = Target.secondaryShot;
 
@@ -77,21 +92,6 @@ public class GunEditor : Editor
 
 			EditorGUILayout.EndFadeGroup();
 
-			EditorGUILayout.Space();
-
-			EditorGUI.indentLevel--;
-		}
-
-		EditorGUILayout.EndFadeGroup();
-
-		Target.continuousFire = EditorGUILayout.Toggle("Continuous Fire", Target.continuousFire);
-		showContinuousFire.target = !Target.continuousFire;
-
-		if (EditorGUILayout.BeginFadeGroup(showContinuousFire.faded))
-		{
-			EditorGUI.indentLevel++;
-
-			Target.shootCooldown = EditorGUILayout.FloatField("Shot Cooldown", Target.shootCooldown);
 			EditorGUILayout.Space();
 
 			EditorGUI.indentLevel--;
