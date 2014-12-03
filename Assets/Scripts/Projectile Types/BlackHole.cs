@@ -28,6 +28,7 @@ public class BlackHole : Projectile
 	private List<ParticleSystem> targetParticleSystems;
 	private List<Enemy> targetEnemies = new List<Enemy>();
 	private List<Projectile> targetProjectiles = new List<Projectile>();
+	private List<Powerup> targetPowerups = new List<Powerup>();
 
 	private CircleCollider2D outerRadius;
 	private CircleCollider2D innerRadius;
@@ -73,6 +74,7 @@ public class BlackHole : Projectile
 				SimulateParticles();
 				SimulateEnemies();
 				SimulateProjectiles();
+				SimulatePowerups();
 				SimulatePlayer();
 
 				if (damageTimer >= damageTime)
@@ -182,8 +184,6 @@ public class BlackHole : Projectile
 				{
 					if (!currentEnemy.immuneToInstantKill && innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
-						currentEnemy.Move(currentEnemy.transform.position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation));
-
 						currentEnemy.Kill();
 					}
 					else if (outerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
@@ -216,8 +216,6 @@ public class BlackHole : Projectile
 				{
 					if (innerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
 					{
-						currentProjectile.Move(currentProjectile.transform.position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation));
-
 						currentProjectile.DoDestroy();
 					}
 					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
@@ -233,6 +231,37 @@ public class BlackHole : Projectile
 		}
 	}
 
+	private void SimulatePowerups()
+	{
+		foreach (Powerup currentPowerup in GameObject.FindObjectsOfType<Powerup>())
+		{
+			if (!targetPowerups.Contains(currentPowerup) && outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
+			{
+				targetPowerups.Add(currentPowerup);
+			}
+		}
+
+		if (targetPowerups.Count > 0)
+		{
+			foreach (Powerup currentPowerup in targetPowerups)
+			{
+				if (currentPowerup != null)
+				{
+					if (innerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
+					{
+						currentPowerup.Destroy();
+					}
+					else if (outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
+					{
+						currentPowerup.rigidbody2D.velocity = Vector3.Lerp(currentPowerup.rigidbody2D.velocity, currentPowerup.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.5f);
+					}
+				}
+			}
+
+			targetPowerups.RemoveAll(p => p == null);
+		}
+	}
+
 	private void SimulatePlayer()
 	{
 		if (innerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
@@ -241,7 +270,7 @@ public class BlackHole : Projectile
 		}
 		else if (outerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
 		{
-			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.2f));
+			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
 
 			if (damageTimer >= damageTime)
 			{

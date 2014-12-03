@@ -9,6 +9,7 @@ public class GameMenu : MonoBehaviour
 
 	public float fadeTime = 0.7f;
 	public float loadTime = 2f;
+	public float gameOverDelay = 1f;
 	public float nodeMoveSpeed = 2f;
 	public float interactableThreshold = 0.75f;
 	public CanvasGroup pauseOverlay;
@@ -90,15 +91,10 @@ public class GameMenu : MonoBehaviour
 
 		if (!gameOver && PlayerControl.instance.Dead)
 		{
-			sounds = FindObjectsOfType<AudioSource>();
-
 			gameOver = true;
 			canPause = false;
 
-			SelectObject(gameOverSelect);
-			//TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
-			CRTEffect.StartCRT(fadeTime);
-			Fade(0f, 1f, "UpdateGameOverAlpha", false);
+			StartCoroutine(GameOver());
 
 			SetJoysticks(false);
 		}
@@ -193,6 +189,15 @@ public class GameMenu : MonoBehaviour
 			Screen.fullScreen = fullscreenToggle.isOn;
 		}
 		#endif
+	}
+
+	private IEnumerator GameOver()
+	{
+		yield return new WaitForSeconds(gameOverDelay);
+
+		SelectObject(gameOverSelect);
+		CRTEffect.StartCRT(fadeTime);
+		Fade(0f, 1f, "UpdateGameOverAlpha", false);
 	}
 
 	private void Fade(float from, float to, string updateMethod, bool setPause)

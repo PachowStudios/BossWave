@@ -20,7 +20,7 @@ public abstract class Powerup : MonoBehaviour
 
 		if (autoDestroy)
 		{
-			Invoke("AutoDestroy", Random.Range(minLifetime, maxLifetime));
+			Invoke("Destroy", Random.Range(minLifetime, maxLifetime));
 		}
 	}
 
@@ -43,7 +43,7 @@ public abstract class Powerup : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	private void AutoDestroy()
+	public void Destroy()
 	{
 		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);

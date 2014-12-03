@@ -1859,6 +1859,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: f111e5f3a87ffa447b21c18cc7c1b3bb, type: 2}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f111e5f3a87ffa447b21c18cc7c1b3bb, type: 2}
   m_RootGameObject: {fileID: 329264788}
@@ -2487,7 +2491,7 @@ Transform:
   - {fileID: 1635039007}
   - {fileID: 1314699389}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!61 &329264790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3793,7 +3797,7 @@ Transform:
   - {fileID: 272269106}
   - {fileID: 1716367544}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!114 &529944277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3912,7 +3916,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!114 &546831606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5135,7 +5139,7 @@ Transform:
   - {fileID: 1780211652}
   - {fileID: 11117400}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!61 &823393136
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6941,6 +6945,7 @@ MonoBehaviour:
   eventSystem: {fileID: 57618911}
   fadeTime: .699999988
   loadTime: 2
+  gameOverDelay: 1
   nodeMoveSpeed: 2
   interactableThreshold: .75
   pauseOverlay: {fileID: 1578247075}
