@@ -287,7 +287,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -343,79 +343,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: 0
-  spawnPowerups: 0
-  introCRT: 0
+  spawnEnemies: 1
+  spawnPowerups: 1
+  introCRT: 1
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
   - startTime: 2
-    amount: 10
+    amount: 15
     spawnDelay: 1
     difficulty: 0
-  - startTime: 15
-    amount: 7
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 29
-    amount: 12
-    spawnDelay: 1
-    difficulty: 0
-  - startTime: 43
-    amount: 5
-    spawnDelay: 2
-    difficulty: 0
-  - startTime: 53
-    amount: 5
-    spawnDelay: .400000006
-    difficulty: 1
-  - startTime: 56
-    amount: 4
-    spawnDelay: .150000006
-    difficulty: 2
-  - startTime: 56
+  - startTime: 22.7000008
     amount: 10
     spawnDelay: 1
     difficulty: 1
-  - startTime: 69
-    amount: 4
-    spawnDelay: .150000006
-    difficulty: 2
-  - startTime: 70
-    amount: 10
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 83
-    amount: 10
-    spawnDelay: .150000006
-    difficulty: 0
-  - startTime: 97
-    amount: 4
-    spawnDelay: .150000006
-    difficulty: 1
-  - startTime: 98
-    amount: 5
-    spawnDelay: 2
-    difficulty: 0
-  - startTime: 99
-    amount: 5
-    spawnDelay: 2
-    difficulty: 2
-  - startTime: 110
-    amount: 7
-    spawnDelay: 2
-    difficulty: 0
-  - startTime: 125
-    amount: 10
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 139
-    amount: 10
+  - startTime: 34.2000008
+    amount: 20
     spawnDelay: .5
+    difficulty: 0
+  - startTime: 45.2999992
+    amount: 5
+    spawnDelay: 1
     difficulty: 2
+  - startTime: 56.4000015
+    amount: 7
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 67.9000015
+    amount: 7
+    spawnDelay: 1
+    difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 100
+    startTime: 81.6999969
     introLength: 8.69999981
     totalLength: 30
     cameraMoveSpeed: 17.5
@@ -439,7 +399,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
-  - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
   microchips:
   - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}

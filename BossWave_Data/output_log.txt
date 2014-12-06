@@ -1,51 +1,43 @@
 Initialize engine version: 4.6.0f2 (b073107612b7)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.4475]
-    Renderer: NVIDIA GeForce GTX 760
-    Vendor:   NVIDIA
-    VRAM:     3072 MB (via DXGI)
-    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+    Version:  Direct3D 9.0c [igdumdim32.dll 10.18.10.3308]
+    Renderer: Intel(R) HD Graphics 4000
+    Vendor:   Intel
+    VRAM:     912 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=0
 Begin MonoManager ReloadAssembly
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.072 seconds
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.087 seconds
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 5.417794 ms
-System memory in use before: 11.6 MB.
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 11.4 MB.
-
-Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 963.
-Total: 0.885314 ms (FindLiveObjects: 0.036278 ms CreateObjectMapping: 0.015798 ms MarkObjects: 0.299005 ms  DeleteObjects: 0.090403 ms)
-
-UnloadTime: 2.725281 ms
-System memory in use before: 42.8 MB.
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+Platform assembly: C:\Users\Ryan\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 18.618759 ms
+System memory in use before: 42.9 MB.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 System memory in use after: 42.7 MB.
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 1482.
-Total: 0.937391 ms (FindLiveObjects: 0.045933 ms CreateObjectMapping: 0.016676 ms MarkObjects: 0.438561 ms  DeleteObjects: 0.017554 ms)
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1408.
+Total: 2.286291 ms (FindLiveObjects: 0.099010 ms CreateObjectMapping: 0.039845 ms MarkObjects: 0.893507 ms  DeleteObjects: 0.145496 ms)
 
-UnloadTime: 3.276481 ms
-System memory in use before: 43.6 MB.
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-System memory in use after: 14.2 MB.
+UnloadTime: 11.128994 ms
+System memory in use before: 42.9 MB.
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+System memory in use after: 13.4 MB.
 
-Unloading 197 unused Assets to reduce memory usage. Loaded Objects now: 1055.
-Total: 3.294913 ms (FindLiveObjects: 0.042129 ms CreateObjectMapping: 0.016969 ms MarkObjects: 0.453189 ms  DeleteObjects: 2.365713 ms)
+Unloading 195 unused Assets to reduce memory usage. Loaded Objects now: 1053.
+Total: 8.919375 ms (FindLiveObjects: 0.091765 ms CreateObjectMapping: 0.034412 ms MarkObjects: 1.049870 ms  DeleteObjects: 6.597464 ms)
 
