@@ -14,7 +14,7 @@ GameObject:
   - 50: {fileID: 5000000}
   m_Layer: 14
   m_Name: BlackHole
-  m_TagString: Hazard
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

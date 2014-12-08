@@ -9,10 +9,11 @@ public class TheRIFT : Enemy
 	public float minSwoopTime = 3f;
 	public float maxSwoopTime = 5f;
 	public float swoopLength = 5f;
+	public AnimationCurve swoopCurve;
 	public float smashRange = 4f;
 	public float smashTime = 2f;
 	public float smashGravity = -50f;
-	public AnimationCurve swoopCurve;
+	public Projectile laserProjectile;
 
 	private float defaultGravity;
 	private float swoopTimer = 0f;
@@ -111,7 +112,7 @@ public class TheRIFT : Enemy
 			}
 		}
 
-		if (!smashing)
+		if (!smashing && smashTimer >= smashTime)
 		{
 			swoopTimer += Time.deltaTime;
 

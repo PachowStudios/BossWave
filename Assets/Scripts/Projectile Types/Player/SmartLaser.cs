@@ -6,10 +6,10 @@ using Vectrosity;
 
 public class SmartLaser : Projectile
 {
-	public List<Texture2D> lineTextures;
+	public List<Texture2D> laserTextures;
 	public List<Sprite> tipSprites;
 	public List<Color> colors;
-	public Material lineMaterial;
+	public Material material;
 	[Range(0.01f, 0.1f)]
 	public float animationTime = 0.01f;
 	public int maxJumps = 5;
@@ -67,7 +67,7 @@ public class SmartLaser : Projectile
 
 		vectorLine = new VectorLine("Laser", 
 									Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
-									lineMaterial, 
+									material, 
 									adjustedWidth, 
 									LineType.Continuous,
 									Joins.Fill);
@@ -75,18 +75,6 @@ public class SmartLaser : Projectile
 
 		detectionCollider = gameObject.AddComponent<PolygonCollider2D>();
 		detectionCollider.isTrigger = true;
-	}
-
-	void OnDrawGizmos()
-	{
-		foreach (Enemy target in targetEnemies)
-		{
-			if (target != null)
-			{
-				Gizmos.color = new Color(Color.magenta.r, Color.magenta.g, Color.magenta.b, 0.15f);
-				Gizmos.DrawSphere(target.transform.position, jumpRange);
-			}
-		}
 	}
 
 	void FixedUpdate()
@@ -97,9 +85,6 @@ public class SmartLaser : Projectile
 		UpdateMaterials();
 		UpdateCollider();
 		GetTargets();
-
-		vectorLine.material = lineMaterial;
-		tip.material = lineMaterial;
 
 		previousPoints = new List<Vector3>(vectorLine.points3);
 		vectorLine.MakeSpline(targets.ToArray());
@@ -154,13 +139,16 @@ public class SmartLaser : Projectile
 
 		if (animationTimer >= animationTime)
 		{
-			lineMaterial.SetColor("_TintColor", colors[currentAnimationFrame]);
+			material.SetColor("_TintColor", colors[currentAnimationFrame]);
 
-			lineMaterial.mainTexture = lineTextures[currentAnimationFrame];
+			material.mainTexture = laserTextures[currentAnimationFrame];
 			tip.sprite = tipSprites[currentAnimationFrame];
 
 			animationTimer = 0f;
-			currentAnimationFrame = (currentAnimationFrame + 1 >= lineTextures.Count) ? 0 : currentAnimationFrame + 1;
+			currentAnimationFrame = (currentAnimationFrame + 1 >= laserTextures.Count) ? 0 : currentAnimationFrame + 1;
+
+			vectorLine.material = material;
+			tip.material = material;
 		}
 	}
 
