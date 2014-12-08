@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   m_Layer: 11
-  m_Name: BossBoo
+  m_Name: The R.I.F.T
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ GameObject:
   m_Layer: 11
   m_Name: frontCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 813524716, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -64,7 +64,7 @@ GameObject:
   m_Layer: 11
   m_Name: popupMessage
   m_TagString: Untagged
-  m_Icon: {fileID: -514703022, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -235,17 +235,30 @@ MonoBehaviour:
   timeWarpAtDeath: 1
   health: 0
   velocity: {x: 0, y: 0, z: 0}
-  minFlyHeight: 3
-  maxFlyHeight: 5
-  flyHeightBuffer: 2
+  minFloatHeight: 3
+  maxFloatHeight: 5
   minSwoopTime: 3
   maxSwoopTime: 5
-  minSwoopDistance: 10
-  maxSwoopDistance: 12
-  swoopSpeedMultiplier: 3
+  swoopLength: 2
   smashRange: 4
   smashTime: 2
+  smashLength: .75
   smashGravity: -50
+  swoopCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: .600000083
+      outSlope: .600000083
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -28,7 +28,7 @@ GameObject:
   m_Layer: 0
   m_Name: Powerup Spawner
   m_TagString: PowerupSpawner
-  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -287,7 +287,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -343,9 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: 1
-  spawnPowerups: 1
-  introCRT: 1
+  spawnEnemies: 0
+  spawnPowerups: 0
+  introCRT: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
@@ -375,7 +375,7 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 81.6999969
+    startTime: 1
     introLength: 8.69999981
     totalLength: 30
     cameraMoveSpeed: 17.5
@@ -386,9 +386,8 @@ MonoBehaviour:
   - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
   - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}
   - {fileID: 11400002, guid: 3521c620716cd344888e0477030574ab, type: 2}
-  - {fileID: 11400002, guid: ee94e9bb7554c6c4ab421ca6868fa5ed, type: 2}
-  - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
   - {fileID: 11400002, guid: ba68351ce86ddb34d907af73ad128a50, type: 2}
+  - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
   guns:
   - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}

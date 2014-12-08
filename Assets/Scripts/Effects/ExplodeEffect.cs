@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ExplodeEffect : MonoBehaviour 
 {
-	static private ExplodeEffect instance;
+	private static ExplodeEffect instance;
 
 	public SpriteExplosion explosionPrefab;
 	public float pixelsPerUnit = 10f;

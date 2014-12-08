@@ -111,6 +111,22 @@ public static class Extensions
 		return (((num - oldMin) * newRange) / oldRange) + newMin;
 	}
 
+	public static float GetDecimal(float num)
+	{
+		string result;
+
+		if (num.ToString().Split('.').Length == 2)
+		{
+			result = "0." + num.ToString().Split('.')[1];
+		}
+		else
+		{
+			result = "0";
+		}
+
+		return float.Parse(result);
+	}
+
 	public static IEnumerator WaitForRealSeconds(float time)
 	{
 		float start = Time.realtimeSinceStartup;

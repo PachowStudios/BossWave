@@ -346,7 +346,7 @@ MonoBehaviour:
   comboDecreaseTime: 2
   maxScore: 999999999
   maxMicrochips: 999999
-  startingGun: {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
+  startingGun: {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
   gun: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   speedMultiplier: 1
