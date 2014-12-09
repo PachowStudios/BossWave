@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: 9fcbace64bb10af44b9124af8bf4a9d9
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Eye_Blink_0
+    21300002: Eye_Blink_1
+    21300004: Eye_Blink_2
+    21300006: Eye_Blink_3
+    21300008: Eye_Blink_4
+    21300010: Eye_Blink_5
+    21300012: Eye_Blink_6
+    21300014: Eye_Blink_7
+    21300016: Eye_Blink_Inactive
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Eye_Blink_0
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_1
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_3
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_4
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_5
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_6
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_7
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 33
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Eye_Blink_Inactive
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 32
+        width: 24
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

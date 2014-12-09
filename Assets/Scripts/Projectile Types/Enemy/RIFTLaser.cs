@@ -23,6 +23,8 @@ public class RIFTLaser : Projectile
 
 	[HideInInspector]
 	public Vector3 firePoint;
+	[HideInInspector]
+	public Vector3 targetPoint;
 
 	private int currentAnimationFrame = 0;
 	private float animationTimer = 0f;
@@ -31,11 +33,11 @@ public class RIFTLaser : Projectile
 	private float cooldownTimer;
 	private float tipExplosionTime;
 	private float tipExplosionTimer;
-	private bool previousTipEnabled = false;
 	private Vector3 previousTipPosition;
 	private Vector3 tipVelocity;
 
 	private List<Vector3> targets = new List<Vector3>();
+	private List<Vector3> previousPoints = new List<Vector3>();
 	private VectorLine vectorLine;
 	private SpriteRenderer tip;
 
@@ -44,6 +46,7 @@ public class RIFTLaser : Projectile
 		base.Awake();
 
 		tip = transform.FindChild("Tip").GetComponent<SpriteRenderer>();
+
 		adjustedWidth = Camera.main.WorldToScreenPoint(Camera.main.ViewportToWorldPoint(Vector3.zero) + new Vector3(width, 0f, 0f)).x;
 		cooldownTime = 1f / shotSpeed;
 		cooldownTimer = cooldownTime;
@@ -64,14 +67,51 @@ public class RIFTLaser : Projectile
 									Joins.Fill);
 
 		vectorLine.textureScale = 1f;
+
+		targets.Add(firePoint);
+		targets.Add(targetPoint);
 	}
 
 	void FixedUpdate()
 	{
-		previousTipEnabled = tip.enabled;
 		previousTipPosition = tip.transform.position;
 
+		transform.position = firePoint;
+		targets[0] = firePoint;
+		targets[1] = targetPoint.OffsetPosition(wiggle);
+
 		UpdateMaterials();
+
+		previousPoints = new List<Vector3>(vectorLine.points3);
+		vectorLine.MakeSpline(targets.ToArray());
+		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
+
+		tip.transform.position = vectorLine.points3.Last();
+		tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+
+		vectorLine.Draw();
+
+		cooldownTimer += Time.deltaTime;
+
+		if (cooldownTimer >= cooldownTime)
+		{
+			PlayerControl.instance.Health -= damage;
+			cooldownTimer = 0f;
+		}
+
+		tipExplosionTimer += Time.deltaTime;
+
+		if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
+		{
+			ExplodeEffect.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
+		}
+
+		tipExplosionTimer = 0f;
+	}
+
+	void OnDestroy()
+	{
+		VectorLine.Destroy(ref vectorLine);
 	}
 
 	private void UpdateMaterials()
@@ -93,12 +133,35 @@ public class RIFTLaser : Projectile
 		}
 	}
 
-	private void GetTargets()
+	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float defaultLerpPoint)
 	{
-		targets.Clear();
+		float currentLerpPoint = defaultLerpPoint;
 
-		transform.position = firePoint;
-		targets.Add(firePoint);
-		targets.Add(PlayerControl.instance.collider2D.bounds.center);
+		if (oldList.Count == newList.Count)
+		{
+			List<Vector3> result = new List<Vector3>();
+
+			for (int i = 0; i < newList.Count; i++)
+			{
+				if (newList[i].DistanceFrom(targets[0]) < targets[1].DistanceFrom(targets[0]))
+				{
+					currentLerpPoint = Extensions.ConvertRange(1f - newList[i].DistanceFrom(targets[0]) / targets[1].DistanceFrom(targets[0]), 0f, 1f, defaultLerpPoint, 1f);
+				}
+				else
+				{
+					currentLerpPoint = defaultLerpPoint;
+				}
+
+				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, currentLerpPoint),
+									   Mathf.Lerp(oldList[i].y, newList[i].y, currentLerpPoint),
+									   newList[i].z));
+			}
+
+			return result;
+		}
+		else
+		{
+			return newList;
+		}
 	}
 }

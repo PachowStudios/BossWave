@@ -49,7 +49,7 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .592156887, g: .125490203, b: 1, a: 1}
+        second: {r: .529411793, g: 0, b: 1, a: 1}
       data:
         first:
           name: _EmisColor

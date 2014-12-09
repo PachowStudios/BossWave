@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BossBoo_Idle
+  m_Name: RIFT_Eye_Blink_Inactive
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,11 +18,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300100, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - time: 1
-      value: {fileID: 21300100, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+      value: {fileID: 21300016, guid: 9fcbace64bb10af44b9124af8bf4a9d9, type: 3}
     attribute: m_Sprite
-    path: Body
+    path: Eye Blink
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -32,19 +30,18 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 2073732236
+    - path: 720040941
       attribute: 0
       script: {fileID: 0}
       classID: 212
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300100, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - {fileID: 21300100, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+    - {fileID: 21300016, guid: 9fcbace64bb10af44b9124af8bf4a9d9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 1.01666665
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

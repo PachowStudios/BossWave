@@ -83,6 +83,17 @@ public static class Extensions
 		return baseForce;
 	}
 
+	public static Vector3 OffsetPosition(this Vector3 parent, float wiggle)
+	{
+		Vector3 result;
+
+		result.x = Random.Range(parent.x - wiggle, parent.x + wiggle);
+		result.y = Random.Range(parent.y - wiggle, parent.y + wiggle);
+		result.z = parent.z;
+
+		return result;
+	}
+
 	public static void AddExplosionForce(this Rigidbody2D parent, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier = 0f)
 	{
 		Vector3 dir = (parent.transform.position - explosionPosition);

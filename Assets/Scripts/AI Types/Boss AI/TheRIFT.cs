@@ -163,7 +163,7 @@ public class TheRIFT : Enemy
 		swoopPath.Clear();
 		swoopPath.Add(startingPosition);
 		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x, 
-									groundLevel.position.y - 0.2f, 
+									groundLevel.position.y - 1f, 
 									startingPosition.z));
 		swoopPath.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x,

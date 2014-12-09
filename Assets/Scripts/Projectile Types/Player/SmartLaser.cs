@@ -197,7 +197,7 @@ public class SmartLaser : Projectile
 				Enemy currentEnemy = enemy;
 
 				targetEnemies.Add(enemy);
-				targets.Add(OffsetPosition(enemy.collider2D.bounds.center));
+				targets.Add(enemy.collider2D.bounds.center.OffsetPosition(wiggle));
 
 				do
 				{
@@ -206,7 +206,7 @@ public class SmartLaser : Projectile
 					if (currentEnemy != null)
 					{
 						targetEnemies.Add(currentEnemy);
-						targets.Add(OffsetPosition(currentEnemy.collider2D.bounds.center));
+						targets.Add(currentEnemy.collider2D.bounds.center.OffsetPosition(wiggle));
 
 						jumps++;
 					}
@@ -229,7 +229,7 @@ public class SmartLaser : Projectile
 				tip.enabled = false;
 			}
 
-			targets.Add(OffsetPosition(endPoint));
+			targets.Add(endPoint.OffsetPosition(wiggle));
 		}
 		else
 		{
@@ -296,16 +296,5 @@ public class SmartLaser : Projectile
 		}
 
 		return closestEnemy;
-	}
-
-	private Vector3 OffsetPosition(Vector3 currentPosition)
-	{
-		Vector3 result;
-
-		result.x = Random.Range(currentPosition.x - wiggle, currentPosition.x + wiggle);
-		result.y = Random.Range(currentPosition.y - wiggle, currentPosition.y + wiggle);
-		result.z = currentPosition.z;
-		
-		return result;
 	}
 }
