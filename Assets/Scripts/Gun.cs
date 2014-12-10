@@ -223,7 +223,7 @@ public class Gun : MonoBehaviour
 			{
 				Vector3 mousePosition = Input.mousePosition;
 				mousePosition.z = 10f;
-				newEuler = new Vector3(0f, 0f, transform.LookAt2D(Camera.main.ScreenToWorldPoint(mousePosition)));
+				newEuler = new Vector3(0f, 0f, transform.position.LookAt2D(Camera.main.ScreenToWorldPoint(mousePosition)));
 			}
 			else
 			{

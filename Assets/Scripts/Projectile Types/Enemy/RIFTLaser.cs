@@ -6,14 +6,15 @@ using Vectrosity;
 
 public class RIFTLaser : Projectile
 {
-	public List<Texture2D> laserTextures;
-	public List<Sprite> tipSprites;
+	public List<Texture2D> textures;
 	public List<Color> colors;
 	public Material material;
 	[Range(0.01f, 0.1f)]
 	public float animationTime = 0.01f;
+	[Range(2, 32)]
 	public int subdivisions = 16;
 	public float width = 1.5f;
+	public float lengthOffset = 0f;
 	public float wiggle = 0.5f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
@@ -22,37 +23,39 @@ public class RIFTLaser : Projectile
 	public float tipExplosionsPerSec = 7f;
 
 	[HideInInspector]
-	public Vector3 firePoint;
+	public Transform firePoint;
 	[HideInInspector]
 	public Vector3 targetPoint;
 
+	private bool charging = true;
 	private int currentAnimationFrame = 0;
 	private float animationTimer = 0f;
 	private float adjustedWidth;
 	private float cooldownTime;
 	private float cooldownTimer;
 	private float tipExplosionTime;
-	private float tipExplosionTimer;
+	private float tipExplosionTimer = 0f;
 	private Vector3 previousTipPosition;
 	private Vector3 tipVelocity;
-
 	private List<Vector3> targets = new List<Vector3>();
 	private List<Vector3> previousPoints = new List<Vector3>();
 	private VectorLine vectorLine;
+
 	private SpriteRenderer tip;
+	private SpriteRenderer charge;
 
 	new void Awake()
 	{
 		base.Awake();
 
 		tip = transform.FindChild("Tip").GetComponent<SpriteRenderer>();
+		charge = transform.FindChild("Charge").GetComponent<SpriteRenderer>();
 
 		adjustedWidth = Camera.main.WorldToScreenPoint(Camera.main.ViewportToWorldPoint(Vector3.zero) + new Vector3(width, 0f, 0f)).x;
 		cooldownTime = 1f / shotSpeed;
 		cooldownTimer = cooldownTime;
 
 		tipExplosionTime = 1f / tipExplosionsPerSec;
-		tipExplosionTimer = tipExplosionTime;
 
 		VectorLine.SetCanvasCamera(Camera.main);
 		VectorLine.canvas.planeDistance = 9;
@@ -65,53 +68,64 @@ public class RIFTLaser : Projectile
 									adjustedWidth,
 									LineType.Continuous,
 									Joins.Fill);
-
 		vectorLine.textureScale = 1f;
-
-		targets.Add(firePoint);
-		targets.Add(targetPoint);
 	}
 
 	void FixedUpdate()
 	{
-		previousTipPosition = tip.transform.position;
-
-		transform.position = firePoint;
-		targets[0] = firePoint;
-		targets[1] = targetPoint.OffsetPosition(wiggle);
+		transform.position = firePoint.position;
+		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, firePoint.position.LookAt2D(targetPoint)));
 
 		UpdateMaterials();
 
-		previousPoints = new List<Vector3>(vectorLine.points3);
-		vectorLine.MakeSpline(targets.ToArray());
-		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
-
-		tip.transform.position = vectorLine.points3.Last();
-		tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
-
-		vectorLine.Draw();
-
-		cooldownTimer += Time.deltaTime;
-
-		if (cooldownTimer >= cooldownTime)
+		if (!charging)
 		{
-			PlayerControl.instance.Health -= damage;
-			cooldownTimer = 0f;
+			previousTipPosition = tip.transform.position;
+
+			targets[0] = firePoint.position;
+			Vector3 offsetTarget = targetPoint.OffsetPosition(wiggle);
+			targets[1] = transform.TransformPoint(new Vector3(firePoint.position.DistanceFrom(offsetTarget) + lengthOffset, 0f, 0f));
+
+			previousPoints = new List<Vector3>(vectorLine.points3);
+			vectorLine.MakeSpline(targets.ToArray());
+			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
+
+			tip.transform.position = vectorLine.points3.Last();
+			tip.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, vectorLine.points3.First().LookAt2D(vectorLine.points3.Last())));
+			tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+
+			vectorLine.Draw();
+
+			cooldownTimer += Time.deltaTime;
+
+			if (cooldownTimer >= cooldownTime)
+			{
+				PlayerControl.instance.Health -= damage;
+				cooldownTimer = 0f;
+			}
+
+			tipExplosionTimer += Time.deltaTime;
+
+			if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
+			{
+				ExplodeEffect.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
+				tipExplosionTimer = 0f;
+			}			
 		}
-
-		tipExplosionTimer += Time.deltaTime;
-
-		if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
-		{
-			ExplodeEffect.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
-		}
-
-		tipExplosionTimer = 0f;
 	}
 
 	void OnDestroy()
 	{
 		VectorLine.Destroy(ref vectorLine);
+	}
+
+	public void Fire()
+	{
+		targets.Add(firePoint.position);
+		targets.Add(firePoint.position);
+		vectorLine.MakeSpline(targets.ToArray());
+		tip.enabled = true;
+		charging = false;
 	}
 
 	private void UpdateMaterials()
@@ -121,15 +135,15 @@ public class RIFTLaser : Projectile
 		if (animationTimer >= animationTime)
 		{
 			material.SetColor("_TintColor", colors[currentAnimationFrame]);
+			material.mainTexture = textures[currentAnimationFrame];
 
-			material.mainTexture = laserTextures[currentAnimationFrame];
-			tip.sprite = tipSprites[currentAnimationFrame];
-
-			animationTimer = 0f;
-			currentAnimationFrame = (currentAnimationFrame + 1 >= laserTextures.Count) ? 0 : currentAnimationFrame + 1;
+			currentAnimationFrame = (currentAnimationFrame + 1 >= textures.Count) ? 0 : currentAnimationFrame + 1;
 
 			vectorLine.material = material;
 			tip.material = material;
+			charge.material = material;
+
+			animationTimer = 0f;
 		}
 	}
 

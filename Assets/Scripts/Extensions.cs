@@ -39,14 +39,6 @@ public static class Extensions
 		return null;
 	}
 
-	public static float LookAt2D(this Transform parent, Vector3 target)
-	{
-		Vector3 targetPosition = target - parent.position;
-		float angle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
-
-		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
-	}
-
 	public static Vector3 TransformPointLocal(this Transform parent, Vector3 target)
 	{
 		return parent.TransformPoint(target) - parent.position;
@@ -66,6 +58,14 @@ public static class Extensions
 	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
 	{
 		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
+	}
+
+	public static float LookAt2D(this Vector3 parent, Vector3 target)
+	{
+		Vector3 targetPosition = target - parent;
+		float angle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
+
+		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
 	}
 
 	public static float DistanceFrom(this Vector3 parent, Vector3 target)

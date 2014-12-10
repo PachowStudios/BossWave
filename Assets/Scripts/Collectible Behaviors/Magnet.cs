@@ -20,7 +20,7 @@ public class Magnet : MonoBehaviour
 		if (trigger.tag == "Player")
 		{
 			rigidbody2D.AddExplosionForce(-magnetForce, PlayerControl.instance.transform.position + new Vector3(0f, 2f, 0f), magnetCollider.radius * 2, magnetUplift);
-			gameObject.RotateUpdate(new Vector3(0, 0, transform.LookAt2D(PlayerControl.instance.transform.position) - 90f), lookDamping);
+			gameObject.RotateUpdate(new Vector3(0, 0, transform.position.LookAt2D(PlayerControl.instance.transform.position) - 90f), lookDamping);
 		}
 	}
 

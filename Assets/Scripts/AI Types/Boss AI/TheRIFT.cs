@@ -13,16 +13,23 @@ public class TheRIFT : Enemy
 	public float smashRange = 4f;
 	public float smashTime = 2f;
 	public float smashGravity = -50f;
-	public Projectile laserProjectile;
+	public float minLaserTime = 5f;
+	public float maxLaserTime = 10f;
+	public RIFTLaser laserPrefab;
 
 	private float defaultGravity;
 	private float swoopTimer = 0f;
-	private float smashTimer = 0f;
 	private float swoopTime;
+	private float smashTimer = 0f;
+	private float laserTimer = 0f;
+	private float laserTime;
 	private bool swooping = false;
 	private bool smashing = false;
+	private bool firingLaser = false;
 	private List<Vector3> swoopPath = new List<Vector3>();
+	private RIFTLaser laserInstance;
 
+	private Transform firePoint;
 	private Transform groundLevel;
 
 	private float swoopPercentage
@@ -41,10 +48,19 @@ public class TheRIFT : Enemy
 		}
 	}
 
+	private float newLaserTime
+	{
+		get
+		{
+			return Random.Range(minLaserTime, maxLaserTime);
+		}
+	}
+
 	new void Awake()
 	{
 		base.Awake();
 
+		firePoint = transform.FindChild("firePoint");
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 
 		defaultGravity = gravity;
@@ -53,6 +69,7 @@ public class TheRIFT : Enemy
 		maxFloatHeight += groundLevel.transform.position.y;
 
 		swoopTime = newSwoopTime;
+		laserTime = newLaserTime;
 	}
 
 	void FixedUpdate()
@@ -112,7 +129,7 @@ public class TheRIFT : Enemy
 			}
 		}
 
-		if (!smashing && smashTimer >= smashTime)
+		if (!smashing && smashTimer >= smashTime && !firingLaser)
 		{
 			swoopTimer += Time.deltaTime;
 
@@ -145,6 +162,26 @@ public class TheRIFT : Enemy
 						swoopTime = newSwoopTime;
 						Flip();
 					}
+				}
+			}
+		}
+
+		if (!swooping)
+		{
+			laserTimer += Time.deltaTime;
+
+			if (laserTimer >= laserTime)
+			{
+				if (!firingLaser)
+				{
+					firingLaser = true;
+
+					laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
+					laserInstance.firePoint = firePoint;
+				}
+				else
+				{
+					laserInstance.targetPoint = PlayerControl.instance.transform.position;
 				}
 			}
 		}
