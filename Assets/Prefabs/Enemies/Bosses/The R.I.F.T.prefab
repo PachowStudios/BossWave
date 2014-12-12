@@ -376,6 +376,27 @@ MonoBehaviour:
   smashGravity: -50
   minLaserTime: 7.5
   maxLaserTime: 8
+  laserLength: 3
+  laserCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .710208595
+      value: .0941036791
+      inSlope: .395948023
+      outSlope: .395948023
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 4.86643982
+      outSlope: 4.86643982
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:

@@ -15,6 +15,8 @@ public class TheRIFT : Enemy
 	public float smashGravity = -50f;
 	public float minLaserTime = 5f;
 	public float maxLaserTime = 10f;
+	public float laserLength = 3f;
+	public AnimationCurve laserCurve;
 	public RIFTLaser laserPrefab;
 
 	private float defaultGravity;
@@ -27,6 +29,9 @@ public class TheRIFT : Enemy
 	private bool smashing = false;
 	private bool firingLaser = false;
 	private List<Vector3> swoopPath = new List<Vector3>();
+	private List<Vector3> laserPath = new List<Vector3>();
+	private Vector3[] swoopPathArray;
+	private Vector3[] laserPathArray;
 	private RIFTLaser laserInstance;
 
 	private Transform firePoint;
@@ -37,6 +42,14 @@ public class TheRIFT : Enemy
 		get
 		{
 			return swoopCurve.Evaluate(Mathf.Clamp((swoopTimer - swoopTime) / swoopLength, 0f, 1f));
+		}
+	}
+
+	private float laserPercentage
+	{
+		get
+		{
+			return laserCurve.Evaluate(Mathf.Clamp((laserTimer - laserTime) / laserLength, 0f, 1f));
 		}
 	}
 
@@ -78,6 +91,7 @@ public class TheRIFT : Enemy
 
 		invincible = !swooping;
 
+		// Floating
 		if (!swooping && !smashing)
 		{
 			if (transform.position.y >= maxFloatHeight)
@@ -100,6 +114,7 @@ public class TheRIFT : Enemy
 			}
 		}
 
+		// Smashing
 		if (!swooping)
 		{
 			smashTimer += Time.deltaTime;
@@ -129,6 +144,7 @@ public class TheRIFT : Enemy
 			}
 		}
 
+		// Swooping
 		if (!smashing && smashTimer >= smashTime && !firingLaser)
 		{
 			swoopTimer += Time.deltaTime;
@@ -148,7 +164,7 @@ public class TheRIFT : Enemy
 				{
 					Vector3 prevPosition = transform.position;
 
-					gameObject.PutOnPath(swoopPath.ToArray(), swoopPercentage);
+					gameObject.PutOnPath(swoopPathArray, swoopPercentage);
 
 					if (transform.localScale.x > 0 && prevPosition.x > transform.position.x && swoopPercentage > 0.25f)
 					{
@@ -160,12 +176,17 @@ public class TheRIFT : Enemy
 						swooping = false;
 						swoopTimer = 0f;
 						swoopTime = newSwoopTime;
-						Flip();
+
+						if (transform.localScale.x < 0)
+						{
+							Flip();
+						}
 					}
 				}
 			}
 		}
 
+		// Firing Laser
 		if (!swooping)
 		{
 			laserTimer += Time.deltaTime;
@@ -175,13 +196,32 @@ public class TheRIFT : Enemy
 				if (!firingLaser)
 				{
 					firingLaser = true;
-
+					UpdateLaserPath();
 					laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
-					laserInstance.firePoint = firePoint;
+					laserInstance.firePoint = firePoint.position;
 				}
-				else
+				else if (laserInstance != null)
 				{
-					laserInstance.targetPoint = PlayerControl.instance.transform.position;
+					laserInstance.firePoint = firePoint.position;
+
+					if (laserInstance.Charging)
+					{
+						laserTimer = laserTime;
+					}
+					else
+					{
+						laserInstance.targetPoint = iTween.PointOnPath(laserPathArray, laserPercentage);
+
+						if (laserPercentage == 1f)
+						{
+							firingLaser = false;
+							laserTimer = 0f;
+							laserTime = newLaserTime;
+							laserInstance.firePoint = laserInstance.targetPoint;
+
+							Destroy(laserInstance.gameObject, 0.5f);
+						}
+					}
 				}
 			}
 		}
@@ -207,5 +247,24 @@ public class TheRIFT : Enemy
 									Camera.main.ViewportToWorldPoint(new Vector3(1f, 0.75f, 10f)).y,
 									startingPosition.z));
 		swoopPath.Add(startingPosition);
+		swoopPathArray = swoopPath.ToArray();
+	}
+
+	private void UpdateLaserPath()
+	{
+		Vector3 startingPosition = transform.position;
+		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
+
+		laserPath.Clear();
+		laserPath.Add(new Vector3(startingPosition.x,
+								  groundLevel.position.y,
+								  startingPosition.z));
+		laserPath.Add(new Vector3(screenRight.x + 1f,
+								  groundLevel.position.y,
+								  startingPosition.z));
+		laserPath.Add(new Vector3(screenRight.x + 1f,
+								  screenRight.y + 1f,
+								  startingPosition.z));
+		laserPathArray = laserPath.ToArray();
 	}
 }

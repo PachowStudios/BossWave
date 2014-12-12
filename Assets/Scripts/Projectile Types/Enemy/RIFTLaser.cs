@@ -23,7 +23,7 @@ public class RIFTLaser : Projectile
 	public float tipExplosionsPerSec = 7f;
 
 	[HideInInspector]
-	public Transform firePoint;
+	public Vector3 firePoint;
 	[HideInInspector]
 	public Vector3 targetPoint;
 
@@ -43,6 +43,11 @@ public class RIFTLaser : Projectile
 
 	private SpriteRenderer tip;
 	private SpriteRenderer charge;
+
+	public bool Charging
+	{
+		get { return charging; }
+	}
 
 	new void Awake()
 	{
@@ -73,8 +78,9 @@ public class RIFTLaser : Projectile
 
 	void FixedUpdate()
 	{
-		transform.position = firePoint.position;
-		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, firePoint.position.LookAt2D(targetPoint)));
+		transform.position = firePoint;
+		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, firePoint.LookAt2D(targetPoint)));
+		charge.transform.rotation = Quaternion.identity;
 
 		UpdateMaterials();
 
@@ -82,9 +88,9 @@ public class RIFTLaser : Projectile
 		{
 			previousTipPosition = tip.transform.position;
 
-			targets[0] = firePoint.position;
+			targets[0] = firePoint;
 			Vector3 offsetTarget = targetPoint.OffsetPosition(wiggle);
-			targets[1] = transform.TransformPoint(new Vector3(firePoint.position.DistanceFrom(offsetTarget) + lengthOffset, 0f, 0f));
+			targets[1] = transform.TransformPoint(new Vector3(firePoint.DistanceFrom(offsetTarget) + lengthOffset, 0f, 0f));
 
 			previousPoints = new List<Vector3>(vectorLine.points3);
 			vectorLine.MakeSpline(targets.ToArray());
@@ -121,8 +127,8 @@ public class RIFTLaser : Projectile
 
 	public void Fire()
 	{
-		targets.Add(firePoint.position);
-		targets.Add(firePoint.position);
+		targets.Add(firePoint);
+		targets.Add(firePoint);
 		vectorLine.MakeSpline(targets.ToArray());
 		tip.enabled = true;
 		charging = false;
