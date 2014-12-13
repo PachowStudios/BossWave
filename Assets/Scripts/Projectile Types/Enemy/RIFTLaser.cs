@@ -15,7 +15,6 @@ public class RIFTLaser : Projectile
 	public int subdivisions = 16;
 	public float width = 1.5f;
 	public float lengthOffset = 0f;
-	public float wiggle = 0.5f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
 	public LayerMask collisionLayer;
@@ -72,7 +71,7 @@ public class RIFTLaser : Projectile
 									material,
 									adjustedWidth,
 									LineType.Continuous,
-									Joins.Fill);
+									Joins.Weld);
 		vectorLine.textureScale = 1f;
 	}
 
@@ -89,15 +88,14 @@ public class RIFTLaser : Projectile
 			previousTipPosition = tip.transform.position;
 
 			targets[0] = firePoint;
-			Vector3 offsetTarget = targetPoint.OffsetPosition(wiggle);
-			targets[1] = transform.TransformPoint(new Vector3(firePoint.DistanceFrom(offsetTarget) + lengthOffset, 0f, 0f));
+			targets[1] = transform.TransformPoint(new Vector3(firePoint.DistanceFrom(targetPoint) + lengthOffset, 0f, 0f));
 
 			previousPoints = new List<Vector3>(vectorLine.points3);
 			vectorLine.MakeSpline(targets.ToArray());
 			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
 
 			tip.transform.position = vectorLine.points3.Last();
-			tip.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, vectorLine.points3.First().LookAt2D(vectorLine.points3.Last())));
+			tip.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last())));
 			tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
 
 			vectorLine.Draw();
@@ -106,8 +104,11 @@ public class RIFTLaser : Projectile
 
 			if (cooldownTimer >= cooldownTime)
 			{
-				PlayerControl.instance.Health -= damage;
-				cooldownTimer = 0f;
+				if (Physics2D.Raycast(firePoint, (tip.transform.position - firePoint).normalized, 100f, collisionLayer).collider != null)
+				{
+					PlayerControl.instance.Health -= damage;
+					cooldownTimer = 0f;
+				}
 			}
 
 			tipExplosionTimer += Time.deltaTime;

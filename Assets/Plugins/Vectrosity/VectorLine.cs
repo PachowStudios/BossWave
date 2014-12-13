@@ -316,6 +316,27 @@ public class VectorLine {
 			m_vectorObject.GetComponent<Collider2D>().enabled = value;
 		}
 	}
+	public Collider2D colliderObject
+	{
+		get
+		{
+			if (m_collider)
+			{
+				if (m_continuous)
+				{
+					return m_vectorObject.GetComponent<EdgeCollider2D>();
+				}
+				else
+				{
+					return m_vectorObject.GetComponent<PolygonCollider2D>();
+				}
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 	bool m_trigger = false;
 	public bool trigger {
 		get {return m_trigger;}

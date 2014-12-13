@@ -217,9 +217,8 @@ public class TheRIFT : Enemy
 							firingLaser = false;
 							laserTimer = 0f;
 							laserTime = newLaserTime;
-							laserInstance.firePoint = laserInstance.targetPoint;
 
-							Destroy(laserInstance.gameObject, 0.5f);
+							Destroy(laserInstance.gameObject);
 						}
 					}
 				}
@@ -262,9 +261,7 @@ public class TheRIFT : Enemy
 		laserPath.Add(new Vector3(screenRight.x + 1f,
 								  groundLevel.position.y,
 								  startingPosition.z));
-		laserPath.Add(new Vector3(screenRight.x + 1f,
-								  screenRight.y + 1f,
-								  startingPosition.z));
+		laserPath.Add(laserPath[0]);
 		laserPathArray = laserPath.ToArray();
 	}
 }

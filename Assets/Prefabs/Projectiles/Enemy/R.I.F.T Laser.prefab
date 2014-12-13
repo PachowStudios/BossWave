@@ -13,7 +13,7 @@ GameObject:
   - 95: {fileID: 9500002}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: R.I.F.T Laser
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 212: {fileID: 21200002}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,17 +228,16 @@ MonoBehaviour:
   - {r: .801470578, g: .200367644, b: .469827414, a: 1}
   material: {fileID: 2100000, guid: 0d66a237f16255248b3b209f3c6f67b1, type: 2}
   animationTime: .00999999978
-  subdivisions: 16
+  subdivisions: 32
   width: 1.29999995
   lengthOffset: -1.39999998
-  wiggle: 0
   sortingLayer: Foreground
   sortingOrder: 2
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   tipExplosionsPerSec: 6
-  firePoint: {fileID: 0}
+  firePoint: {x: 0, y: 0, z: 0}
   targetPoint: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
