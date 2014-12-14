@@ -217,8 +217,8 @@ public class TheRIFT : Enemy
 							firingLaser = false;
 							laserTimer = 0f;
 							laserTime = newLaserTime;
-
-							Destroy(laserInstance.gameObject);
+							laserInstance.Stop();
+							laserInstance = null;
 						}
 					}
 				}

@@ -135,6 +135,16 @@ public class RIFTLaser : Projectile
 		charging = false;
 	}
 
+	public void Stop()
+	{
+		charge.enabled = false;
+		iTween.ValueTo(gameObject, iTween.Hash("from", firePoint,
+											   "to", vectorLine.points3.Last(),
+											   "time", 0.1f,
+											   "onupdate", "FirePointUpdate"));
+		Destroy(gameObject, 0.1f);
+	}
+
 	private void UpdateMaterials()
 	{
 		animationTimer += Time.deltaTime;
@@ -184,5 +194,10 @@ public class RIFTLaser : Projectile
 		{
 			return newList;
 		}
+	}
+
+	private void FirePointUpdate(Vector3 newValue)
+	{
+		firePoint = newValue;
 	}
 }
