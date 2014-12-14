@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: 7083e350bfaa3e54d907bbdfa3579ad5
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Running_0
+    21300002: Running_1
+    21300004: Running_2
+    21300006: Running_3
+    21300008: Running_4
+    21300010: Running_5
+    21300012: Running_6
+    21300014: Running_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Running_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 22
+        height: 23
+      alignment: 9
+      pivot: {x: 1, y: .0434782617}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: .933333337, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_2
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 0
+        width: 18
+        height: 24
+      alignment: 9
+      pivot: {x: 1, y: .0416666679}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_3
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 2
+        width: 26
+        height: 23
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 2
+        width: 21
+        height: 24
+      alignment: 9
+      pivot: {x: .90476191, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: .866666675, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_6
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1
+        width: 15
+        height: 23
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Running_7
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 2
+        width: 26
+        height: 23
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

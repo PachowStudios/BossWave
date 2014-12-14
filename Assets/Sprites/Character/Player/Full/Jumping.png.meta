@@ -1,0 +1,102 @@
+fileFormatVersion: 2
+guid: e1a6f4b3b4236fd4baa8011696fa6fa2
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Jumping_0
+    21300002: Jumping_1
+    21300004: Jumping_2
+    21300006: Jumping_3
+    21300008: Jumping_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Jumping_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 0
+        width: 12
+        height: 30
+      alignment: 9
+      pivot: {x: 1, y: .233333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Jumping_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 8
+        width: 23
+        height: 15
+      alignment: 9
+      pivot: {x: .608695626, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Jumping_2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 9
+        width: 15
+        height: 23
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Jumping_3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 12
+        width: 23
+        height: 15
+      alignment: 9
+      pivot: {x: .478260875, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Jumping_4
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 6
+        width: 15
+        height: 28
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

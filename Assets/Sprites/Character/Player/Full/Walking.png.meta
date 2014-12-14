@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: ef39d776bd16b5a4aaba502644f03a61
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Walking_0
+    21300002: Walking_1
+    21300004: Walking_2
+    21300006: Walking_3
+    21300008: Walking_4
+    21300010: Walking_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Walking_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 13
+        height: 24
+      alignment: 9
+      pivot: {x: .769230783, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walking_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 0
+        width: 11
+        height: 25
+      alignment: 9
+      pivot: {x: .818181813, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walking_2
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 0
+        width: 9
+        height: 24
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walking_3
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 10
+        height: 24
+      alignment: 9
+      pivot: {x: .899999976, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walking_4
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 0
+        width: 9
+        height: 25
+      alignment: 8
+      pivot: {x: 1, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Walking_5
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 11
+        height: 24
+      alignment: 9
+      pivot: {x: .818181813, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
