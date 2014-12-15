@@ -236,7 +236,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256
-  tipExplosionsPerSec: 6
+  tipExplosionsPerSec: 8
   firePoint: {x: 0, y: 0, z: 0}
   targetPoint: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000

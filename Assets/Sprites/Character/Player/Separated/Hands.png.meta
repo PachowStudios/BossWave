@@ -54,8 +54,8 @@ TextureImporter:
         y: 6
         width: 2
         height: 8
-      alignment: 9
-      pivot: {x: .5, y: 1}
+      alignment: 3
+      pivot: {x: 1, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Hands_Straight
       rect:
@@ -75,7 +75,7 @@ TextureImporter:
         width: 7
         height: 6
       alignment: 9
-      pivot: {x: 0, y: .166666672}
+      pivot: {x: 0, y: .833333313}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Hands_Angled
       rect:
@@ -83,7 +83,7 @@ TextureImporter:
         x: 66
         y: 8
         width: 8
-        height: 4
+        height: 6
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}

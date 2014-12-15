@@ -12,8 +12,6 @@ public class PlayerControl : MonoBehaviour
 	public float gravity = -35f;
 	public float walkSpeed = 10f;
 	public float runSpeed = 17.5f;
-	public float runFullSpeed = 20f;
-	public float runFullTime = 1.5f;
 	public float continuousRunSpeed = 10f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
@@ -23,6 +21,9 @@ public class PlayerControl : MonoBehaviour
 	public int maxScore = 999999999;
 	public int maxMicrochips = 99999;
 	public Gun startingGun;
+	public float minAltIdleTime = 5f;
+	public float maxAltIdleTime = 10f;
+	public List<string> altIdleAnimations;
 
 	[HideInInspector]
 	public Gun gun;
@@ -51,20 +52,17 @@ public class PlayerControl : MonoBehaviour
 
 	private float health;
 	private bool dead = false;
-
 	private bool right;
 	private bool left;
 	private bool jump;
 	private bool run;
+	private bool usingGun = false;
 	private bool disableInput = false;
 	private bool inPortal = false;
 
 	#if MOBILE_INPUT
 	private bool lastJump;
 	#endif
-
-	private bool runFull = false;
-	private float runFullTimer = 0f;
 
 	private float lastHitTime;
 	private bool canTakeDamage = true;
@@ -75,6 +73,9 @@ public class PlayerControl : MonoBehaviour
 	private float currentMaxCombo = 1f;
 	private float comboTimer = 0f;
 	private float killChain = 0f;
+
+	private float altIdleTimer = 0f;
+	private float altIdleTime = 0f;
 
 	private bool cancelGoTo = false;
 	private bool useTargetPoint = false;
@@ -104,6 +105,14 @@ public class PlayerControl : MonoBehaviour
 		get { return dead; }
 	}
 
+	private float newAltIdleTime
+	{
+		get
+		{
+			return Random.Range(minAltIdleTime, maxAltIdleTime);
+		}
+	}
+
 	void Awake()
 	{
 		instance = this;
@@ -118,11 +127,20 @@ public class PlayerControl : MonoBehaviour
 		health = maxHealth;
 
 		lastHitTime = Time.time - invincibilityPeriod;
+		altIdleTime = newAltIdleTime;
 	}
 
 	void Start()
 	{
 		SwapGun(startingGun);
+
+		foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+		{
+			if (spriteRenderer.name != "Full")
+			{
+				spriteRenderer.color = Color.clear;
+			}
+		}
 	}
 
 	void Update()
@@ -138,7 +156,7 @@ public class PlayerControl : MonoBehaviour
 			jump = jump || (jumpInput && !lastJump);
 			lastJump = jumpInput;
 			#else
-			run = CrossPlatformInputManager.GetButton("Run");
+			run = CrossPlatformInputManager.GetButton("Run") && gun.NoInput;
 			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && controller.isGrounded);
 			#endif
 		}
@@ -223,13 +241,11 @@ public class PlayerControl : MonoBehaviour
 			if (!canTakeDamage)
 			{
 				flashTimer += Time.deltaTime;
-
 				smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
 
 				if (flashTimer > smoothFlashTime)
 				{
 					SetRenderersEnabled(alternate: true);
-
 					flashTimer = 0f;
 				}
 			}
@@ -251,10 +267,28 @@ public class PlayerControl : MonoBehaviour
 		else
 		{
 			normalizedHorizontalSpeed = 0f;
+
+			if (!jump)
+			{
+				altIdleTimer += Time.deltaTime;
+
+				if (altIdleTimer >= altIdleTime)
+				{
+					anim.SetTrigger(altIdleAnimations[Random.Range(0, altIdleAnimations.Count)]);
+					altIdleTimer = 0f;
+					altIdleTime = newAltIdleTime;
+				}
+			}
 		}
 
 		if (gun.NoInput)
 		{
+			if (usingGun)
+			{
+				usingGun = false;
+				SetRenderersVisible(alternate: true);
+			}
+
 			if (continuouslyRunning && transform.localScale.x < 0f)
 			{
 				Flip();
@@ -270,6 +304,12 @@ public class PlayerControl : MonoBehaviour
 		}
 		else
 		{
+			if (!usingGun)
+			{
+				usingGun = true;
+				SetRenderersVisible(alternate: true);
+			}
+
 			if (gun.FacingRight && transform.localScale.x < 0f)
 			{
 				Flip();
@@ -291,29 +331,11 @@ public class PlayerControl : MonoBehaviour
 			jump = false;
 		}
 
-		if (run)
-		{
-			runFullTimer += Time.deltaTime;
-
-			if (runFullTimer >= runFullTime || continuouslyRunning)
-			{
-				runFull = true;
-				anim.SetBool("Running_Full", runFull);
-			}
-		}
-		else if (runFullTimer > 0f)
-		{
-			runFullTimer = 0f;
-			runFull = false;
-			anim.SetBool("Running_Full", runFull);
-		}
-
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x,
-								normalizedHorizontalSpeed * (run ? (runFull ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed 
-																													  : runFullSpeed) 
-																			: runSpeed) 
+								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
+																										   : runSpeed)
 																 : walkSpeed) * speedMultiplier,
 								Time.fixedDeltaTime * smoothedMovementFactor);
 		velocity.y += gravity * Time.fixedDeltaTime;
@@ -502,13 +524,6 @@ public class PlayerControl : MonoBehaviour
 	private void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-
-		if (runFullTimer > 0f)
-		{
-			runFullTimer = 0f;
-			runFull = false;
-			anim.SetBool("Running_Full", runFull);
-		}
 	}
 
 	private IEnumerator ResetSpeedCoroutine(float delay)
@@ -528,6 +543,21 @@ public class PlayerControl : MonoBehaviour
 			else
 			{
 				sprite.enabled = enabled;
+			}
+		}
+	}
+
+	private void SetRenderersVisible(bool enabled = true, bool alternate = false)
+	{
+		foreach (SpriteRenderer sprite in spriteRenderers)
+		{
+			if (alternate)
+			{
+				sprite.color = sprite.color == Color.white ? Color.clear : Color.white;
+			}
+			else
+			{
+				sprite.color = enabled ? Color.white : Color.clear;
 			}
 		}
 	}

@@ -206,7 +206,14 @@ public class Gun : MonoBehaviour
 				}
 			}
 
-			spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
+			if (NoInput)
+			{
+				spriteRenderer.color = Color.clear;
+			}
+			else
+			{
+				spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
+			}
 		}
 	}
 
