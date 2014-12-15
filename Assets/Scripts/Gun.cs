@@ -128,7 +128,9 @@ public class Gun : MonoBehaviour
 		#endif
 
 		shoot = disableInput ? false : shoot;
-		secondaryShoot = disableInput ? false : secondaryShoot;
+		secondaryShoot = disableInput ? false 
+			                          : secondaryShot ? secondaryShoot 
+									                  : false;
 
 		shootStart = shootStart || (shoot && !previousShoot);
 	}
@@ -165,14 +167,17 @@ public class Gun : MonoBehaviour
 					shootTimer = 0f;
 				}
 
-				secondaryTimer += Time.deltaTime;
-
-				if (secondaryShoot && secondaryTimer >= secondaryCooldown)
+				if (secondaryShot)
 				{
-					secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
-					secondaryProjectileInstance.direction = shotDirection;
+					secondaryTimer += Time.deltaTime;
 
-					secondaryTimer = 0f;
+					if (secondaryShoot && secondaryTimer >= secondaryCooldown)
+					{
+						secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
+						secondaryProjectileInstance.direction = shotDirection;
+
+						secondaryTimer = 0f;
+					}
 				}
 			}
 		}
