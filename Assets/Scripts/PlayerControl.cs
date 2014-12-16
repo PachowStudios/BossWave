@@ -105,6 +105,11 @@ public class PlayerControl : MonoBehaviour
 		get { return dead; }
 	}
 
+	public bool FacingRight
+	{
+		get { return transform.localScale.x > 0; }
+	}
+
 	private float newAltIdleTime
 	{
 		get

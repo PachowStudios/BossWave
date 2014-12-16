@@ -12,8 +12,6 @@ public abstract class Projectile : MonoBehaviour
 	public bool autoDestroy = true;
 	public bool destroyOnEnemy = true;
 	public bool destroyOnWorld = true;
-
-	[HideInInspector]
 	public bool disableMovement = false;
 
 	protected Vector3 velocity;
@@ -92,9 +90,9 @@ public abstract class Projectile : MonoBehaviour
 			velocity.x = direction.x * shotSpeed;
 			direction.y += (gravity * Time.fixedDeltaTime) / 10f;
 			velocity.y = direction.y * shotSpeed;
+			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
 		}
 
-		transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
 		controller.move(velocity * Time.fixedDeltaTime);
 	}
 
@@ -105,7 +103,7 @@ public abstract class Projectile : MonoBehaviour
 
 	public void Initialize(Vector3 newDirection)
 	{
-		if (direction == Vector3.zero)
+		if (direction == Vector3.zero && !disableMovement)
 		{
 			direction = newDirection;
 			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
