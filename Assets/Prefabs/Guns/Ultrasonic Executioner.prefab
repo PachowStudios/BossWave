@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Sequential Atomizer
+  m_Name: Ultrasonic Executioner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.04999995, y: -.349999994, z: 0}
+  m_LocalPosition: {x: 1.64999998, y: -.150000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -68,19 +68,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Sequential Atomizer
-  rarity: 5
-  projectile: {fileID: 11400002, guid: 7df364f30fb95ce4c825f39fe7e174e7, type: 2}
+  gunName: Ultrasonic Executioner
+  rarity: 4
+  projectile: {fileID: 11400002, guid: 15be0f18eb63d29418bb56ce6a575f1a, type: 2}
   secondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
   showSecondaryGUI: 0
   secondaryIcon: {fileID: 0}
-  continuousFire: 1
-  shootCooldown: 7.5
-  canOverheat: 1
-  overheatTime: 10
-  overheatDamage: 10
+  continuousFire: 0
+  shootCooldown: 3
+  canOverheat: 0
+  overheatTime: 5
+  overheatDamage: 0
   overheatThreshold: .5
   overheatGradient:
     key0:
@@ -91,10 +91,10 @@ MonoBehaviour:
       rgba: 4294967295
     key2:
       serializedVersion: 2
-      rgba: 7895295
+      rgba: 0
     key3:
       serializedVersion: 2
-      rgba: 255
+      rgba: 0
     key4:
       serializedVersion: 2
       rgba: 0
@@ -108,22 +108,22 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
     ctime0: 0
-    ctime1: 32768
-    ctime2: 58982
-    ctime3: 65535
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
     ctime4: 0
     ctime5: 0
     ctime6: 0
     ctime7: 0
     atime0: 0
     atime1: 65535
-    atime2: 65535
+    atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
-    m_NumColorKeys: 4
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   disableInput: 0
   firePoint: {fileID: 0}
@@ -148,7 +148,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 4273737757
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300006, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
+  m_Sprite: {fileID: 21300010, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

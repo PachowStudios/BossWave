@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
 		VeryRare,
 		Legendary,
 		Godly,
-		//Boss,
+		Boss,
 		NUM_ITEMS
 	};
 

@@ -110,8 +110,8 @@ TextureImporter:
         y: 76
         width: 30
         height: 6
-      alignment: 4
-      pivot: {x: 0, y: .5}
+      alignment: 9
+      pivot: {x: .166666672, y: .833333313}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Guns_BlazeCatalyzer
       rect:
