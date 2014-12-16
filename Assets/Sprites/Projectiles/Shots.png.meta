@@ -1,9 +1,25 @@
 fileFormatVersion: 2
-guid: 68f1568d8904bc347a6217114c4974ef
+guid: 45704994fb76bf248a3a2b7e2c3eb5a3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Shots_Basic
-    21300002: Shots_BlackHole
+    21300000: Shots_FusionCannon_0
+    21300002: Shots_FusionCannon_1
+    21300004: Shots_CausticMagnum_0
+    21300006: Shots_CausticMagnum_1
+    21300008: Shots_CausticMagnum_2
+    21300010: Shots_CausticMagnum_3
+    21300012: Shots_PulsePistol_0
+    21300014: Shots_PulsePistol_1
+    21300016: Shots_PulsePistol_2
+    21300018: Shots_SpatialDestabilizer_0
+    21300020: Shots_SpatialDestabilizer_1
+    21300022: Shots_UltrasonicExecutioner
+    21300024: Shots_BlazeCatalyzer
+    21300026: Shots_TheElectrocutioner_0
+    21300028: Shots_TheElectrocutioner_1
+    21300030: Shots_TheElectrocutioner_2
+    21300032: Shots_TripleD
+    21300034: Shots_ComraderyConstructor
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -45,23 +61,183 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Shots_Basic
+    - name: Shots_FusionCannon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3
+        x: 4
+        y: 75
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_FusionCannon_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 76
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_CausticMagnum_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 66
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_CausticMagnum_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 66
+        width: 11
+        height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_CausticMagnum_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 67
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_CausticMagnum_3
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 67
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_PulsePistol_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 59
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_PulsePistol_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 59
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_PulsePistol_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 59
+        width: 9
+        height: 3
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_SpatialDestabilizer_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_SpatialDestabilizer_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 46
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_UltrasonicExecutioner
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 41
+        width: 3
+        height: 1
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_BlazeCatalyzer
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 33
         width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_TheElectrocutioner_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 21
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_TheElectrocutioner_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 22
+        width: 20
         height: 7
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Shots_BlackHole
+    - name: Shots_TheElectrocutioner_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 13
-        height: 13
+        x: 51
+        y: 22
+        width: 20
+        height: 8
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_TripleD
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 15
+        width: 3
+        height: 2
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Shots_ComraderyConstructor
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4
+        width: 5
+        height: 7
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

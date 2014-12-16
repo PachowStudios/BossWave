@@ -3,12 +3,14 @@ using System.Collections;
 
 public static class Extensions
 {
+	// Renderer
 	public static bool IsVisibleFrom(this Renderer renderer, Camera camera)
 	{
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
 		return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
 	}
 
+	// Transform
 	public static Transform FindSubChild(this Transform parent, string name, bool confirmEnabled = true)
 	{
 		if (parent.name.Equals(name))
@@ -44,6 +46,18 @@ public static class Extensions
 		return parent.TransformPoint(target) - parent.position;
 	}
 
+	public static void CorrectScaleForRotation(this Transform parent, Vector3 target, bool correctY = false)
+	{
+		bool flipY = target.z > 90f && target.z < 270f;
+
+		target.y = correctY && flipY ? 180f : 0f;
+
+		Vector3 newScale = parent.localScale;
+		newScale.y = flipY ? -1f : 1f;
+		parent.localScale = newScale;
+		parent.rotation = Quaternion.Euler(target);
+	}
+
 	public static void CopyTo(this Transform parent, Transform target)
 	{
 		target.name = parent.name + " Temp Transform";
@@ -55,17 +69,26 @@ public static class Extensions
 		target.localScale = parent.localScale;
 	}
 
+	// Bounds
 	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
 	{
 		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
 	}
 
+	// Vector3
 	public static float LookAt2D(this Vector3 parent, Vector3 target)
 	{
 		Vector3 targetPosition = target - parent;
 		float angle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
 
 		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
+	}
+
+	public static Vector3 DirectionToRotation2D(this Vector3 parent)
+	{
+		float angle = Mathf.Atan2(parent.y, parent.x) * Mathf.Rad2Deg;
+
+		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles;
 	}
 
 	public static float DistanceFrom(this Vector3 parent, Vector3 target)
@@ -94,6 +117,7 @@ public static class Extensions
 		return result;
 	}
 
+	// Rigidbody2D
 	public static void AddExplosionForce(this Rigidbody2D parent, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier = 0f)
 	{
 		Vector3 dir = (parent.transform.position - explosionPosition);
@@ -109,6 +133,7 @@ public static class Extensions
 		}
 	}
 
+	// Utility
 	public static int RandomSign()
 	{
 		return (Random.value < 0.5) ? -1 : 1;

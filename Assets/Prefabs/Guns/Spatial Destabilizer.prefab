@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Cyclone
+  m_Name: Spatial Destabilizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.13072968, y: -2.32010293, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1500001, y: .25, z: 0}
+  m_LocalPosition: {x: 1.85000002, y: -.349999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -68,17 +68,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Cyclone
+  gunName: Spatial Destabilizer
   rarity: 2
-  projectile: {fileID: 11400002, guid: 86580ed020204484eb4025312d0fa3c2, type: 2}
+  projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
   secondaryShot: 1
   secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
     type: 2}
   secondaryCooldown: 10
   showSecondaryGUI: 1
-  secondaryIcon: {fileID: 21300002, guid: 68f1568d8904bc347a6217114c4974ef, type: 3}
+  secondaryIcon: {fileID: 21300020, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   continuousFire: 0
-  shootCooldown: .75
+  shootCooldown: .5
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0
@@ -149,7 +149,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 4273737757
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300008, guid: 03f487a42a49c2d4aa24e6c961457770, type: 3}
+  m_Sprite: {fileID: 21300008, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

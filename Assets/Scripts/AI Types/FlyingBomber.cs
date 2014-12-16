@@ -77,7 +77,7 @@ public class FlyingBomber : Enemy
 			float bulletRotation = transform.localScale.x > 0 ? 0f : 180f;
 
 			Projectile projectileInstance = Instantiate(projectile, gun.transform.position, Quaternion.Euler(new Vector3(0, 0, bulletRotation))) as Projectile;
-			projectileInstance.direction = gun.transform.right;
+			projectileInstance.Initialize(gun.transform.right);
 
 			bombTimer = 0f;
 		}

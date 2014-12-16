@@ -268,7 +268,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 0f;
 
-			if (!jump)
+			if (!jump && gun.NoInput)
 			{
 				altIdleTimer += Time.deltaTime;
 
@@ -293,6 +293,7 @@ public class PlayerControl : MonoBehaviour
 			{
 				Flip();
 			}
+
 			if (right && transform.localScale.x < 0f)
 			{
 				Flip();

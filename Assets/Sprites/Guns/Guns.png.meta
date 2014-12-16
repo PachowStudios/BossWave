@@ -1,12 +1,17 @@
 fileFormatVersion: 2
-guid: 03f487a42a49c2d4aa24e6c961457770
+guid: f99d6ea24dddf214e86230d63d669811
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Guns
-    21300002: Gun_Venom
-    21300004: Gun_Midnight
-    21300006: Gun_Falcon
-    21300008: Gun_Cyclone
+    21300000: Guns_FusionCannon
+    21300002: Guns_CausticMagnum
+    21300004: Guns_PulsePistol
+    21300006: Guns_SequentialAtomizer
+    21300008: Guns_SpatialDestabilizer
+    21300010: Guns_UltrasonicExecutioner
+    21300012: Guns_BlazeCatalyzer
+    21300014: Guns_TheElectrocutioner
+    21300016: Guns_TripleD
+    21300018: Guns_ComraderyConstructor
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,7 +35,7 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: 0
-    aniso: 1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -48,43 +53,103 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Gun_Venom
+    - name: Guns_FusionCannon
       rect:
         serializedVersion: 2
-        x: 4
-        y: 15
-        width: 18
+        x: 0
+        y: 164
+        width: 23
+        height: 12
+      alignment: 9
+      pivot: {x: .173913047, y: .583333313}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_CausticMagnum
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 145
+        width: 24
         height: 11
+      alignment: 9
+      pivot: {x: .0833333358, y: .818181813}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_PulsePistol
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 129
+        width: 22
+        height: 9
       alignment: 4
       pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Gun_Midnight
+    - name: Guns_SequentialAtomizer
       rect:
         serializedVersion: 2
-        x: 26
-        y: 11
-        width: 25
-        height: 15
+        x: 0
+        y: 114
+        width: 27
+        height: 9
       alignment: 9
-      pivot: {x: .0900000036, y: .5}
+      pivot: {x: .185185179, y: .888888896}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Gun_Falcon
+    - name: Guns_SpatialDestabilizer
       rect:
         serializedVersion: 2
-        x: 55
-        y: 16
-        width: 15
+        x: 0
+        y: 95
+        width: 31
+        height: 13
+      alignment: 9
+      pivot: {x: .225806445, y: .769230783}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_UltrasonicExecutioner
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 30
+        height: 6
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_BlazeCatalyzer
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 32
         height: 10
       alignment: 4
       pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Gun_Cyclone
+    - name: Guns_TheElectrocutioner
       rect:
         serializedVersion: 2
-        x: 74
-        y: 12
-        width: 24
-        height: 14
+        x: 0
+        y: 38
+        width: 22
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_TripleD
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 20
+        height: 10
+      alignment: 4
+      pivot: {x: 0, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Guns_ComraderyConstructor
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 22
+        height: 9
       alignment: 4
       pivot: {x: 0, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -14,21 +14,36 @@ public abstract class Projectile : MonoBehaviour
 	public bool destroyOnWorld = true;
 
 	[HideInInspector]
-	public Vector3 direction;
-	[HideInInspector]
-	public Vector3 velocity;
-	[HideInInspector]
 	public bool disableMovement = false;
 
+	protected Vector3 velocity;
 	protected CharacterController2D controller;
 	protected SpriteRenderer spriteRenderer;
 
+	private Vector3 direction;
+
 	public Sprite Sprite
 	{
-		get
+		get { return spriteRenderer.sprite; }
+	}
+
+	public Color SpriteColor
+	{
+		get { return spriteRenderer == null ? Color.clear : spriteRenderer.color; }
+
+		set
 		{
-			return spriteRenderer.sprite;
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.color = value;
+			}
 		}
+	}
+
+	public Vector3 Direction
+	{
+		get { return direction; }
+		set { direction = value; }
 	}
 
 	protected virtual void Awake()
@@ -45,6 +60,11 @@ public abstract class Projectile : MonoBehaviour
 		{
 			StartCoroutine(FailsafeDestroy());
 		}
+	}
+
+	protected virtual void OnEnable()
+	{
+		SpriteColor = Color.clear;
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D trigger)
@@ -74,12 +94,23 @@ public abstract class Projectile : MonoBehaviour
 			velocity.y = direction.y * shotSpeed;
 		}
 
+		transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
 		controller.move(velocity * Time.fixedDeltaTime);
 	}
 
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	public void Initialize(Vector3 newDirection)
+	{
+		if (direction == Vector3.zero)
+		{
+			direction = newDirection;
+			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+			SpriteColor = Color.white;
+		}
 	}
 
 	public void Move(Vector3 velocity)

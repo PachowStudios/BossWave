@@ -146,7 +146,7 @@ public class Gun : MonoBehaviour
 				if (shootStart)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-					projectileInstance.direction = shotDirection;
+					projectileInstance.Initialize(shotDirection);
 					shootStart = false;
 				}
 
@@ -162,7 +162,7 @@ public class Gun : MonoBehaviour
 				if (shoot && shootTimer >= shootCooldown)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-					projectileInstance.direction = shotDirection;
+					projectileInstance.Initialize(shotDirection);
 
 					shootTimer = 0f;
 				}
@@ -174,7 +174,7 @@ public class Gun : MonoBehaviour
 					if (secondaryShoot && secondaryTimer >= secondaryCooldown)
 					{
 						secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
-						secondaryProjectileInstance.direction = shotDirection;
+						secondaryProjectileInstance.Initialize(shotDirection);
 
 						secondaryTimer = 0f;
 					}
@@ -249,14 +249,7 @@ public class Gun : MonoBehaviour
 		#endif
 
 		Vector3 shotDirection = Quaternion.Euler(newEuler) * Vector3.right;
-
-		newEuler.y = newEuler.z > 90f && newEuler.z < 270f ? 180f : 0f;
-
-		Vector3 newScale = transform.localScale;
-		newScale.y = newEuler.y == 180f ? -1f : 1f;
-		transform.localScale = newScale;
-
-		transform.rotation = Quaternion.Euler(newEuler);
+		transform.CorrectScaleForRotation(newEuler, true);
 
 		return shotDirection;
 	}

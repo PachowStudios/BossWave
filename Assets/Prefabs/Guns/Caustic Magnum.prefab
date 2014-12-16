@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Falcon
+  m_Name: Caustic Magnum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ GameObject:
   m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.66213799, y: -.86095345, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.29999995, y: .0500000007, z: 0}
+  m_LocalPosition: {x: 1.54999995, y: -.349999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -68,11 +68,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Falcon
-  rarity: 0
-  projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
+  gunName: Caustic Magnum
+  rarity: 1
+  projectile: {fileID: 11400002, guid: 1b860a96f0cd0b8458cb139c9bfa6a5e, type: 2}
+  secondaryShot: 0
+  secondaryProjectile: {fileID: 0}
+  secondaryCooldown: 5
+  showSecondaryGUI: 0
+  secondaryIcon: {fileID: 0}
   continuousFire: 0
-  shootCooldown: .150000006
+  shootCooldown: .200000003
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0
@@ -122,6 +127,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   disableInput: 0
   firePoint: {fileID: 0}
+  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,7 +148,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 4273737757
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300006, guid: 03f487a42a49c2d4aa24e6c961457770, type: 3}
+  m_Sprite: {fileID: 21300002, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -165,7 +165,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 1.29999995, y: 1.29999995}
+  m_Size: {x: .899999976, y: .899999976}
   m_Center: {x: 0, y: 0}
 --- !u!95 &9500000
 Animator:
@@ -176,7 +176,7 @@ Animator:
   m_GameObject: {fileID: 100006}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1b70cd481cf648e46927e72a03ff6663, type: 2}
+  m_Controller: {fileID: 9100000, guid: 80c8ac06d608bb74b8a85bba2d075400, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -247,8 +247,6 @@ MonoBehaviour:
   autoDestroy: 1
   destroyOnEnemy: 0
   destroyOnWorld: 1
-  direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
   disableMovement: 0
   damageRate: 5
   outerForce: 11
@@ -284,7 +282,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 4273737757
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300002, guid: 68f1568d8904bc347a6217114c4974ef, type: 3}
+  m_Sprite: {fileID: 21300018, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

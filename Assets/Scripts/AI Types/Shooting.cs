@@ -68,7 +68,7 @@ public class Shooting : Enemy
 			float bulletRotation = transform.localScale.x > 0 ? 0f : 180f;
 
 			Projectile projectileInstance = Instantiate(projectile, gun.position, Quaternion.Euler(new Vector3(0, 0, bulletRotation))) as Projectile;
-			projectileInstance.direction = gun.transform.right;
+			projectileInstance.Initialize(gun.transform.right);
 			
 			cooldownTimer = 0f;
 		}
