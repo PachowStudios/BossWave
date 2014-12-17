@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6100000}
   m_Layer: 14
   m_Name: Smart Laser
-  m_TagString: Projectile
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,11 +117,14 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  ignoreTag: 
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -144,7 +147,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:

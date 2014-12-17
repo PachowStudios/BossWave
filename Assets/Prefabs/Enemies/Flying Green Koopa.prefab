@@ -174,11 +174,14 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 512
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 51456
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  ignoreTag: none
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -201,7 +204,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:
@@ -215,8 +217,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 0
+  immuneToInstantKill: 0
   maxHealth: 15
   damage: 7
+  microchipChance: 25
+  minMicrochips: 1
+  maxMicrochips: 3
+  smallestMicrochip: 0
+  biggestMicrochip: 0
   knockback: 3
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
@@ -226,6 +234,7 @@ MonoBehaviour:
   inAirDamping: 5
   timeWarpAtDeath: 0
   health: 10
+  velocity: {x: 0, y: 0, z: 0}
   jumpHeight: 4
   jumpTime: 1
 --- !u!212 &21200000

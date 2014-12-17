@@ -111,7 +111,7 @@ public class BlackHole : Projectile
 				}
 			}
 		}
-		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Projectiles") && outerRadius.OverlapPoint(trigger.bounds.center))
+		else if ((trigger.gameObject.layer == LayerMask.NameToLayer("Projectiles") || trigger.gameObject.layer == LayerMask.NameToLayer("EnemyProjectiles")) && outerRadius.OverlapPoint(trigger.bounds.center))
 		{
 			if (activated)
 			{

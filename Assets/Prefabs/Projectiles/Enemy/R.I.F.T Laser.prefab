@@ -13,7 +13,7 @@ GameObject:
   - 95: {fileID: 9500002}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: R.I.F.T Laser
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Tip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 212: {fileID: 21200002}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,11 +162,14 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  ignoreTag: 
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -189,7 +192,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400004
 MonoBehaviour:
@@ -211,8 +213,6 @@ MonoBehaviour:
   autoDestroy: 0
   destroyOnEnemy: 0
   destroyOnWorld: 0
-  direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
   disableMovement: 0
   textures:
   - {fileID: 2800000, guid: e7d4cfb8786725747a50947cd1e54e51, type: 3}

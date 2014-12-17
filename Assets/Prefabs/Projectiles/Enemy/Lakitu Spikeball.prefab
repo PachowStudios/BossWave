@@ -14,7 +14,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  m_Layer: 15
+  m_Layer: 17
   m_Name: Lakitu Spikeball
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -90,11 +90,14 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  ignoreTag: none
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -117,7 +120,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:
@@ -130,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShot: 0
   damage: 7.5
   knockback: 2
   gravity: -40
@@ -139,8 +140,6 @@ MonoBehaviour:
   autoDestroy: 1
   destroyOnEnemy: 1
   destroyOnWorld: 1
-  direction: {x: 0, y: 0, z: 0}
-  velocity: {x: 0, y: 0, z: 0}
   disableMovement: 0
 --- !u!212 &21200000
 SpriteRenderer:

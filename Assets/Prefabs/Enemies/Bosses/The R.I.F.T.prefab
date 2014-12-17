@@ -256,7 +256,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: 5, y: 5}
@@ -292,11 +292,14 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 512
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 51456
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  ignoreTag: RunningBoundaries
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -319,7 +322,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:

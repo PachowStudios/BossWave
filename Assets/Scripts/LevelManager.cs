@@ -139,7 +139,6 @@ public class LevelManager : MonoBehaviour
 
 					Cutscene.EndCutscene(true);
 					bossInstance.GetComponent<Enemy>().enabled = true;
-					bossInstance.GetComponent<Collider2D>().enabled = true;
 
 					foreach(GameObject element in scrollingElements)
 					{

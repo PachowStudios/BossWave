@@ -319,12 +319,15 @@ MonoBehaviour:
   _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 66048
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 4096
-  ignoreTag: 
+    m_Bits: 0
   slopeLimit: 30
+  jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -347,7 +350,6 @@ MonoBehaviour:
     m_PostInfinity: 2
   totalHorizontalRays: 8
   totalVerticalRays: 4
-  createTriggerHelperGameObject: 0
   triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:
@@ -373,7 +375,7 @@ MonoBehaviour:
   comboDecreaseTime: 2
   maxScore: 999999999
   maxMicrochips: 999999
-  startingGun: {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
+  startingGun: {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
   minAltIdleTime: 5
   maxAltIdleTime: 10
   altIdleAnimations:
