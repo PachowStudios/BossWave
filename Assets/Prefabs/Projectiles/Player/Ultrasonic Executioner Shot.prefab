@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400006}
   - 212: {fileID: 21200000}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
@@ -45,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.61999989, y: -2.83999991, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -87,8 +88,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .300000012, y: .300000012}
-  m_Center: {x: 0, y: 0}
+  m_Size: {x: 3, y: .100000001}
+  m_Center: {x: -1.35000002, y: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -110,7 +111,7 @@ TrailRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_LightmapIndex: 255
@@ -124,27 +125,27 @@ TrailRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: .100000001
   m_StartWidth: .100000001
   m_EndWidth: .100000001
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 4286468194
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 3214567804
     m_Color[2]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 2142073725
     m_Color[3]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 1070700192
     m_Color[4]:
       serializedVersion: 2
-      rgba: 4294967295
+      rgba: 16777215
   m_MinVertexDistance: .100000001
-  m_Autodestruct: 0
+  m_Autodestruct: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,16 +204,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShot: 1
   damage: 15
   knockback: 4
   gravity: 0
-  shotSpeed: 150
+  shotSpeed: 250
   lifetime: 3
   autoDestroy: 1
   destroyOnEnemy: 0
-  destroyOnWorld: 1
+  destroyOnWorld: 0
   disableMovement: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,6 +227,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingLayer: Player
   sortingOrder: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 788721c91c463464a8210c075afd5024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

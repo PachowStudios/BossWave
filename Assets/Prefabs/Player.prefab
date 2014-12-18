@@ -375,7 +375,7 @@ MonoBehaviour:
   comboDecreaseTime: 2
   maxScore: 999999999
   maxMicrochips: 999999
-  startingGun: {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  startingGun: {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
   minAltIdleTime: 5
   maxAltIdleTime: 10
   altIdleAnimations:

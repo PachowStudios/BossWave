@@ -13,11 +13,12 @@ public abstract class Projectile : MonoBehaviour
 	public bool destroyOnWorld = true;
 	public bool disableMovement = false;
 
+	[HideInInspector]
+	public Vector3 direction;
+
 	protected Vector3 velocity;
 	protected CharacterController2D controller;
 	protected SpriteRenderer spriteRenderer;
-
-	private Vector3 direction;
 
 	public Sprite Sprite
 	{
@@ -35,12 +36,6 @@ public abstract class Projectile : MonoBehaviour
 				spriteRenderer.color = value;
 			}
 		}
-	}
-
-	public Vector3 Direction
-	{
-		get { return direction; }
-		set { direction = value; }
 	}
 
 	protected virtual void Awake()
@@ -128,7 +123,7 @@ public abstract class Projectile : MonoBehaviour
 
 	public void DoDestroy()
 	{
-		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
+		ExplodeEffect.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);
 	}
 
@@ -136,7 +131,6 @@ public abstract class Projectile : MonoBehaviour
 	{
 		yield return new WaitForSeconds(lifetime);
 
-		ExplodeEffect.Explode(transform, velocity, Sprite);
-		Destroy(gameObject);
+		DoDestroy();
 	}
 }
