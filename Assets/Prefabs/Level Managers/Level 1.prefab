@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.09169996, z: 0}
+  m_LocalPosition: {x: 0, y: 6.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -177,7 +177,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5.19999981, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -189,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.19999981, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -201,7 +201,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 11.5340004, z: 0}
+  m_LocalPosition: {x: -10, y: 16.7000008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -240,7 +240,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: 1, y: 20}
-  m_Center: {x: 20.5, y: 0}
+  m_Center: {x: 25.5, y: 0}
 --- !u!61 &6100002
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -251,7 +251,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Size: {x: 1, y: 20}
-  m_Center: {x: -20.5, y: 0}
+  m_Center: {x: -25.5, y: 0}
 --- !u!61 &6100004
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -407,7 +407,7 @@ MonoBehaviour:
   powerupBuffer: 5
   worldBoundaries: {fileID: 100014}
   runningBoundaries: {fileID: 100012}
-  runningFOV: 400
+  runningFOV: 500
   bossWavePlayerMoved: 0
 --- !u!114 &11400002
 MonoBehaviour:
@@ -423,15 +423,9 @@ MonoBehaviour:
   pathName: Boss Intro
   pathColor: {r: .741176486, g: .309803933, b: .674509823, a: 1}
   nodes:
-  - {x: -10, y: 11.5340004, z: 0}
-  - {x: -7.07491732, y: 8.93567562, z: 0}
-  - {x: -13.0259476, y: 7.34697247, z: 0}
-  - {x: -5.76367283, y: 3.94091845, z: 0}
-  - {x: -14.2867594, y: 2.20173001, z: 0}
-  - {x: -5.66280699, y: -.00518929958, z: 0}
-  - {x: -14.9423819, y: -2.98303246, z: 0}
-  - {x: -10, y: -3.19141388, z: 0}
-  nodeCount: 8
+  - {x: -10, y: 16.7000008, z: 0}
+  - {x: -10, y: 3, z: 0}
+  nodeCount: 2
   initialized: 1
   initialName: New Path 3
 --- !u!1001 &100100000

@@ -60,6 +60,10 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: ScrollingBackground
+    userID: 7
+    uniqueID: 839705433
+    locked: 0
   - name: Background
     userID: 1
     uniqueID: 2651302749
