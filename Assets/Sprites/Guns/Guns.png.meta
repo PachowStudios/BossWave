@@ -80,8 +80,8 @@ TextureImporter:
         y: 129
         width: 22
         height: 9
-      alignment: 4
-      pivot: {x: 0, y: .5}
+      alignment: 9
+      pivot: {x: .0454545468, y: .777777791}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Guns_SequentialAtomizer
       rect:
@@ -130,8 +130,8 @@ TextureImporter:
         y: 38
         width: 22
         height: 12
-      alignment: 4
-      pivot: {x: 0, y: .5}
+      alignment: 9
+      pivot: {x: .227272734, y: .75}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Guns_TripleD
       rect:

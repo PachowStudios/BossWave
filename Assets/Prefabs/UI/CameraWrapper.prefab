@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300006, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 220a80c8e11dbfa4bad808bc39767175, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1942,10 +1942,10 @@ MonoBehaviour:
   microchipsDigits: 6
   textDamping: 1
   healthDamping: .5
-  healthFull: {fileID: 21300006, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health75: {fileID: 21300008, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health50: {fileID: 21300010, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health25: {fileID: 21300012, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
+  healthFull: {fileID: 21300000, guid: 220a80c8e11dbfa4bad808bc39767175, type: 3}
+  health75: {fileID: 21300000, guid: 220a80c8e11dbfa4bad808bc39767175, type: 3}
+  health50: {fileID: 21300000, guid: 220a80c8e11dbfa4bad808bc39767175, type: 3}
+  health25: {fileID: 21300000, guid: 220a80c8e11dbfa4bad808bc39767175, type: 3}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
