@@ -25,15 +25,15 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 4.532483 ms
+UnloadTime: 4.732015 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1683.
-Total: 0.819779 ms (FindLiveObjects: 0.048273 ms CreateObjectMapping: 0.019309 ms MarkObjects: 0.376536 ms  DeleteObjects: 0.042715 ms)
+Total: 0.851669 ms (FindLiveObjects: 0.051492 ms CreateObjectMapping: 0.019602 ms MarkObjects: 0.396723 ms  DeleteObjects: 0.046225 ms)
 
-UnloadTime: 3.010245 ms
+UnloadTime: 2.541549 ms
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 315 unused Assets to reduce memory usage. Loaded Objects now: 1259.
-Total: 3.840556 ms (FindLiveObjects: 0.044177 ms CreateObjectMapping: 0.024283 ms MarkObjects: 0.462844 ms  DeleteObjects: 2.863082 ms)
+Unloading 380 unused Assets to reduce memory usage. Loaded Objects now: 1254.
+Total: 3.366009 ms (FindLiveObjects: 0.041544 ms CreateObjectMapping: 0.027794 ms MarkObjects: 0.445290 ms  DeleteObjects: 2.505855 ms)
 

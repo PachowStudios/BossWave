@@ -353,8 +353,8 @@ MonoBehaviour:
   timeWarpAtDeath: 0
   health: 0
   velocity: {x: 0, y: 0, z: 0}
-  minFloatHeight: 3
-  maxFloatHeight: 5
+  minFloatHeight: 9
+  maxFloatHeight: 11
   minSwoopTime: 3
   maxSwoopTime: 5
   swoopLength: 2
