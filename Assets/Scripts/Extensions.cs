@@ -163,6 +163,12 @@ public static class Extensions
 		return float.Parse(result);
 	}
 
+	public static Vector3 SuperSmoothLerp(Vector3 followOld, Vector3 targetOld, Vector3 targetNew, float elapsedTime, float lerpAmount)
+	{
+		Vector3 f = followOld - targetOld + (targetNew - targetOld) / (lerpAmount * elapsedTime);
+		return targetNew - (targetNew - targetOld) / (lerpAmount * elapsedTime) + f * Mathf.Exp(-lerpAmount * elapsedTime);
+	}
+
 	public static IEnumerator WaitForRealSeconds(float time)
 	{
 		float start = Time.realtimeSinceStartup;

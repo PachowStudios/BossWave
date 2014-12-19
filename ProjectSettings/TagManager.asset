@@ -68,6 +68,10 @@ TagManager:
     userID: 1
     uniqueID: 2651302749
     locked: 0
+  - name: Front Background
+    userID: 8
+    uniqueID: 2421719245
+    locked: 0
   - name: Powerup
     userID: 5
     uniqueID: 2151687535

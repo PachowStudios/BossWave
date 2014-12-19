@@ -1,0 +1,39 @@
+Initialize engine version: 4.6.0f2 (b073107612b7)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.4475]
+    Renderer: NVIDIA GeForce GTX 760
+    Vendor:   NVIDIA
+    VRAM:     3072 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.034 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
+WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
+WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 4.532483 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1683.
+Total: 0.819779 ms (FindLiveObjects: 0.048273 ms CreateObjectMapping: 0.019309 ms MarkObjects: 0.376536 ms  DeleteObjects: 0.042715 ms)
+
+UnloadTime: 3.010245 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 315 unused Assets to reduce memory usage. Loaded Objects now: 1259.
+Total: 3.840556 ms (FindLiveObjects: 0.044177 ms CreateObjectMapping: 0.024283 ms MarkObjects: 0.462844 ms  DeleteObjects: 2.863082 ms)
+

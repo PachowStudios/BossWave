@@ -110,6 +110,11 @@ public class PlayerControl : MonoBehaviour
 		get { return transform.localScale.x > 0; }
 	}
 
+	public bool IsGrounded
+	{
+		get { return controller.isGrounded; }
+	}
+
 	private float newAltIdleTime
 	{
 		get
@@ -176,7 +181,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		velocity = controller.velocity;
 
-		if (controller.isGrounded)
+		if (IsGrounded)
 		{
 			velocity.y = 0f;
 		}

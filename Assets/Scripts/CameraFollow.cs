@@ -3,50 +3,48 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour 
 {
-	public Vector2 margin = new Vector2(70f, 70f);
-	public float smoothing = 3f;
+	public float yOffset = 0f;
+	public float smoothing = 1f;
 	public Transform follow;
 
-	private Vector3 velocity = Vector3.zero;
+	private float currentYOffset;
+	private bool usePlayerY = false;
+	private Vector3 targetPosition = new Vector3();
+	private Vector3 previousTargetPosition = new Vector3();
 
-	private float marginUnitsX
+	void Awake()
 	{
-		get
-		{
-			return camera.orthographicSize * camera.aspect * (margin.x / 100f);
-		}
-	}
+		currentYOffset = yOffset;
 
-	private float marginUnitsY
-	{
-		get
-		{
-			return camera.orthographicSize * (margin.y / 100f);
-		}
+		targetPosition.y = follow.position.y + currentYOffset;
 	}
 
 	void FixedUpdate()
 	{
-		Vector3 targetPosition = transform.position;
+		previousTargetPosition = targetPosition;
 
-		if (Mathf.Abs(transform.position.x - follow.position.x) > marginUnitsX)
+		targetPosition.x = follow.position.x;
+		targetPosition.z = transform.position.z;
+
+		if (usePlayerY || follow.tag == "Player")
 		{
-			targetPosition.x = follow.position.x;
+			if (PlayerControl.instance.IsGrounded)
+			{
+				targetPosition.y = PlayerControl.instance.transform.position.y + currentYOffset;
+			}
+		}
+		else
+		{
+			targetPosition.y = follow.position.y + currentYOffset;
 		}
 
-		if (Mathf.Abs(transform.position.y - follow.position.y) > marginUnitsY)
-		{
-			targetPosition.y = follow.position.y;
-		}
-
-		transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothing);
+		transform.position = Extensions.SuperSmoothLerp(transform.position, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
 	}
 
-	public void FollowObject(Transform target, Vector2 newMargin)
+	public void FollowObject(Transform target, bool newUsePlayerY, float newYOffset = -1f)
 	{
+		currentYOffset = newYOffset == -1f ? yOffset : newYOffset;
+		usePlayerY = newUsePlayerY;
 		follow = target;
-
-		margin.x = newMargin.x == 0f ? margin.x : newMargin.x;
-		margin.y = newMargin.y == 0f ? margin.y : newMargin.y;
 	}
 }
