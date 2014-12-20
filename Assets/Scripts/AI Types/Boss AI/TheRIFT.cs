@@ -6,6 +6,8 @@ public class TheRIFT : Enemy
 {
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
+	public float minPreAttackDelay = 0.25f;
+	public float maxPreAttackDelay = 0.75f;
 	public float minSwoopTime = 3f;
 	public float maxSwoopTime = 5f;
 	public float swoopLength = 5f;
@@ -28,6 +30,7 @@ public class TheRIFT : Enemy
 	private bool swooping = false;
 	private bool smashing = false;
 	private bool firingLaser = false;
+	private bool preAttacking = false;
 	private List<Vector3> swoopPath = new List<Vector3>();
 	private List<Vector3> laserPath = new List<Vector3>();
 	private Vector3[] swoopPathArray;
@@ -50,6 +53,14 @@ public class TheRIFT : Enemy
 		get
 		{
 			return laserCurve.Evaluate(Mathf.Clamp((laserTimer - laserTime) / laserLength, 0f, 1f));
+		}
+	}
+
+	private float newPreAttackTime
+	{
+		get
+		{
+			return Random.Range(minPreAttackDelay, maxPreAttackDelay);
 		}
 	}
 
@@ -89,10 +100,16 @@ public class TheRIFT : Enemy
 	{
 		InitialUpdate();
 
-		invincible = !swooping;
+		invincible = !swooping && !firingLaser;
+		anim.SetBool("Eye Shield", invincible || preAttacking);
+
+		if ((!swooping && !smashing && !firingLaser) || preAttacking)
+		{
+			anim.SetBool("Attacking", false);
+		}
 
 		// Floating
-		if (!swooping && !smashing)
+		if ((!swooping && !smashing) || preAttacking)
 		{
 			if (transform.position.y >= maxFloatHeight)
 			{
@@ -126,6 +143,7 @@ public class TheRIFT : Enemy
 					if (Mathf.Abs(transform.position.x - PlayerControl.instance.transform.position.x) < smashRange)
 					{
 						smashing = true;
+						anim.SetBool("Attacking", true);
 						smashTimer = smashTime;
 					}
 				}
@@ -156,11 +174,11 @@ public class TheRIFT : Enemy
 					if (velocity.y < 0f && transform.position.y < (minFloatHeight + maxFloatHeight) / 2f)
 					{
 						swooping = true;
-						swoopTimer = swoopTime;
-						UpdateSwoopPath();
+						preAttacking = true;
+						anim.SetTrigger("Blink");
 					}
 				}
-				else
+				else if (!preAttacking)
 				{
 					Vector3 prevPosition = transform.position;
 
@@ -196,11 +214,10 @@ public class TheRIFT : Enemy
 				if (!firingLaser)
 				{
 					firingLaser = true;
-					UpdateLaserPath();
-					laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
-					laserInstance.firePoint = firePoint.position;
+					preAttacking = true;
+					anim.SetTrigger("PreAttack");
 				}
-				else if (laserInstance != null)
+				else if (!preAttacking && laserInstance != null)
 				{
 					laserInstance.firePoint = firePoint.position;
 
@@ -225,11 +242,21 @@ public class TheRIFT : Enemy
 			}
 		}
 
-		if (!swooping)
+		if (!swooping || preAttacking)
 		{
 			GetMovement();
 			ApplyMovement();
 		}
+	}
+
+	public override void TakeDamage(GameObject enemy)
+	{
+		if (!invincible)
+		{
+			anim.SetTrigger("Hit");
+		}
+
+		base.TakeDamage(enemy);
 	}
 
 	private void UpdateSwoopPath()
@@ -263,5 +290,33 @@ public class TheRIFT : Enemy
 								  startingPosition.z));
 		laserPath.Add(laserPath[0]);
 		laserPathArray = laserPath.ToArray();
+	}
+
+	private void EndPreAttack()
+	{
+		StartCoroutine(DoEndPreAttack());
+	}
+
+	private IEnumerator DoEndPreAttack()
+	{
+		yield return new WaitForSeconds(newPreAttackTime);
+
+		if (preAttacking)
+		{
+			preAttacking = false;
+			anim.SetBool("Attacking", true);
+
+			if (swooping)
+			{
+				UpdateSwoopPath();
+				swoopTimer = swoopTime;
+			}
+			else if (firingLaser)
+			{
+				UpdateLaserPath();
+				laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
+				laserInstance.firePoint = firePoint.position;
+			}
+		}
 	}
 }

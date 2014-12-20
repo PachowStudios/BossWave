@@ -19,9 +19,9 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: b63d6a29fd2150f4caea2fbc1dfc69fc, type: 3}
-    - time: .0500000007
+    - time: .0666666701
       value: {fileID: 21300002, guid: b63d6a29fd2150f4caea2fbc1dfc69fc, type: 3}
-    - time: .100000001
+    - time: .13333334
       value: {fileID: 21300000, guid: b63d6a29fd2150f4caea2fbc1dfc69fc, type: 3}
     attribute: m_Sprite
     path: Eye
@@ -47,7 +47,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .116666667
+    m_StopTime: .150000006
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -63,4 +63,11 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_Events: []
+  m_Events:
+  - time: .13333334
+    functionName: EndPreAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
