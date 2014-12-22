@@ -30,7 +30,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 11
-  m_Name: Koopa Bot
+  m_Name: Melee Bot B
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.0867424, y: -4.87057734, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.59969997, y: 1.20000005, z: 0}
+  m_LocalPosition: {x: -1.20000005, y: 1.20000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2.4000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -141,8 +141,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 2.79999995, y: 2.4000001}
-  m_Center: {x: 0, y: 1.20000005}
+  m_Size: {x: 1.10000002, y: 1.5}
+  m_Center: {x: 0, y: .75}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -152,7 +152,7 @@ Animator:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e92e250ddf6933e4780ce3645f4af17a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3b678b52608358645931e1086f5c745a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -213,19 +213,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db536cab8d1db144a85adc29ad57be1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dee219394281314da42ac94fe6e4e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   difficulty: 1
   immuneToInstantKill: 0
   maxHealth: 20
-  damage: 7
+  damage: 5
   microchipChance: 25
   minMicrochips: 1
-  maxMicrochips: 3
+  maxMicrochips: 2
   smallestMicrochip: 0
   biggestMicrochip: 0
-  knockback: 3
+  knockback: 1
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
@@ -235,7 +235,9 @@ MonoBehaviour:
   timeWarpAtDeath: 0
   health: 10
   velocity: {x: 0, y: 0, z: 0}
-  followBuffer: 1.5
+  followRange: 1.79999995
+  attackRange: 1.79999995
+  attackCooldownTime: 1.5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -256,7 +258,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1018039513
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300010, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df73059756e26634d84d26c664685011, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

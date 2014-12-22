@@ -375,7 +375,7 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1
+    startTime: 1000
     introLength: 2
     totalLength: 30
     cameraMoveSpeed: 17.5
@@ -385,7 +385,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
   - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}
-  - {fileID: 11400002, guid: 3521c620716cd344888e0477030574ab, type: 2}
+  - {fileID: 0}
   - {fileID: 11400002, guid: ba68351ce86ddb34d907af73ad128a50, type: 2}
   - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
   guns:

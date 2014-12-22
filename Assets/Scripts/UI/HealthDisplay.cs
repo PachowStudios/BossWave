@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class HealthDisplay : MonoBehaviour
@@ -9,10 +10,7 @@ public class HealthDisplay : MonoBehaviour
 	public int microchipsDigits = 5;
 	public float textDamping = 1f;
 	public float healthDamping = 1f;
-	public Sprite healthFull;
-	public Sprite health75;
-	public Sprite health50;
-	public Sprite health25;
+	public List<Sprite> healthFaces;
 
 	private float healthPercent;
 	private Vector3 healthVelocity = Vector3.zero;
@@ -40,22 +38,7 @@ public class HealthDisplay : MonoBehaviour
 	{
 		healthPercent = Mathf.Clamp(PlayerControl.instance.Health / PlayerControl.instance.maxHealth, 0f, 1f);
 
-		if (healthPercent > 0.75f)
-		{
-			face.sprite = healthFull;
-		}
-		else if (healthPercent > 0.5f)
-		{
-			face.sprite = health75;
-		}
-		else if (healthPercent > 0.25f)
-		{
-			face.sprite = health50;
-		}
-		else
-		{
-			face.sprite = health25;
-		}
+		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
 
 		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1f, 1f), ref healthVelocity, healthDamping);
 		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.score, ref scoreVelocity, textDamping);

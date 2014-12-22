@@ -170,7 +170,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 1;
 
-			if (transform.localScale.x < 0f)
+			if (transform.localScale.x > 0f)
 			{
 				Flip();
 			}
@@ -179,7 +179,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = -1;
 
-			if (transform.localScale.x > 0f)
+			if (transform.localScale.x < 0f)
 			{
 				Flip();
 			}

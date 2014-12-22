@@ -386,21 +386,23 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	private void TakeDamage(GameObject enemy)
+	public void TakeDamage(GameObject enemy)
 	{
 		float damage = 0f;
 		float knockback = 0f;
 
 		if (enemy.tag == "Enemy")
 		{
-			damage = enemy.GetComponent<Enemy>().damage;
-			knockback = enemy.GetComponent<Enemy>().knockback;
+			Enemy currentEnemy = enemy.GetComponent<Enemy>();
+			damage = currentEnemy.damage;
+			knockback = currentEnemy.knockback;
 		}
 		else if (enemy.tag == "Projectile")
 		{
-			damage = enemy.GetComponent<Projectile>().damage;
-			knockback = enemy.GetComponent<Projectile>().knockback;
-			enemy.GetComponent<Projectile>().CheckDestroyEnemy();
+			Projectile currentProjectile = enemy.GetComponent<Projectile>();
+			damage = currentProjectile.damage;
+			knockback = currentProjectile.knockback;
+			currentProjectile.CheckDestroyEnemy();
 		}
 
 		Health -= damage;
