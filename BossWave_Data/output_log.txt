@@ -17,7 +17,7 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.034 seconds
+- Completed reload, in  0.035 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
@@ -25,15 +25,21 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 4.732015 ms
+UnloadTime: 5.700422 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1683.
-Total: 0.851669 ms (FindLiveObjects: 0.051492 ms CreateObjectMapping: 0.019602 ms MarkObjects: 0.396723 ms  DeleteObjects: 0.046225 ms)
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1664.
+Total: 0.813928 ms (FindLiveObjects: 0.048566 ms CreateObjectMapping: 0.016969 ms MarkObjects: 0.389409 ms  DeleteObjects: 0.043592 ms)
 
-UnloadTime: 2.541549 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename:  Line: 1644)
 
-Unloading 380 unused Assets to reduce memory usage. Loaded Objects now: 1254.
-Total: 3.366009 ms (FindLiveObjects: 0.041544 ms CreateObjectMapping: 0.027794 ms MarkObjects: 0.445290 ms  DeleteObjects: 2.505855 ms)
-
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: needs reset, doing it
+FullResetD3DDevice
+ResetD3DDevice
+dev->Reset
+D3Dwindow device not lost anymore

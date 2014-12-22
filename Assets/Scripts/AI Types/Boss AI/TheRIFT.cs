@@ -100,10 +100,10 @@ public class TheRIFT : Enemy
 	{
 		InitialUpdate();
 
-		invincible = !swooping && !firingLaser;
-		anim.SetBool("Eye Shield", invincible || preAttacking);
+		invincible = !swooping && !firingLaser && !preAttacking;
+		anim.SetBool("Eye Shield", invincible);
 
-		if ((!swooping && !smashing && !firingLaser) || preAttacking)
+		if (((!swooping && !firingLaser) || preAttacking) && !smashing)
 		{
 			anim.SetBool("Attacking", false);
 		}
