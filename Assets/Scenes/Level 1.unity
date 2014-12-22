@@ -5167,11 +5167,11 @@ MonoBehaviour:
     playerWaitPoint: {fileID: 958922501}
     progressBar: {fileID: 499590856}
   enemies:
-  - {fileID: 11400002, guid: e22b20dde01ea9147849a6cf46dd0cc0, type: 2}
-  - {fileID: 11400002, guid: d5a7c019f3c736a47aaa2a4f715dcf5e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400002, guid: ba68351ce86ddb34d907af73ad128a50, type: 2}
-  - {fileID: 11400002, guid: 63d167020ffa9ba4ca011ba145cdd935, type: 2}
+  - {fileID: 0}
   guns:
   - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}

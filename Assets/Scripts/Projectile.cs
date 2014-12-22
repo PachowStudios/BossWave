@@ -11,6 +11,7 @@ public abstract class Projectile : MonoBehaviour
 	public bool autoDestroy = true;
 	public bool destroyOnEnemy = true;
 	public bool destroyOnWorld = true;
+	public bool correctRotation = true;
 	public bool disableMovement = false;
 
 	[HideInInspector]
@@ -79,7 +80,11 @@ public abstract class Projectile : MonoBehaviour
 			velocity.x = direction.x * shotSpeed;
 			direction.y += (gravity * Time.fixedDeltaTime) / 10f;
 			velocity.y = direction.y * shotSpeed;
-			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+
+			if (correctRotation)
+			{
+				transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+			}
 		}
 
 		controller.move(velocity * Time.fixedDeltaTime);
@@ -95,7 +100,12 @@ public abstract class Projectile : MonoBehaviour
 		if (direction == Vector3.zero && !disableMovement)
 		{
 			direction = newDirection;
-			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+
+			if (correctRotation)
+			{
+				transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+			}
+
 			SpriteColor = Color.white;
 		}
 	}

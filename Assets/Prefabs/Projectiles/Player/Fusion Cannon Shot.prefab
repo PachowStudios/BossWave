@@ -135,11 +135,12 @@ MonoBehaviour:
   damage: 5
   knockback: 0
   gravity: 0
-  shotSpeed: 40
+  shotSpeed: 20
   lifetime: 3
   autoDestroy: 1
   destroyOnEnemy: 1
   destroyOnWorld: 1
+  correctRotation: 1
   disableMovement: 0
   direction: {x: 0, y: 0, z: 0}
 --- !u!212 &21200000

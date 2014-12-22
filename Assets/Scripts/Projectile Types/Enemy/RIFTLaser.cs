@@ -78,7 +78,7 @@ public class RIFTLaser : Projectile
 	void FixedUpdate()
 	{
 		transform.position = firePoint;
-		transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, firePoint.LookAt2D(targetPoint)));
+		transform.rotation = firePoint.LookAt2D(targetPoint);
 		charge.transform.rotation = Quaternion.identity;
 
 		UpdateMaterials();
@@ -95,7 +95,7 @@ public class RIFTLaser : Projectile
 			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
 
 			tip.transform.position = vectorLine.points3.Last();
-			tip.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last())));
+			tip.transform.rotation = vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last());
 			tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
 
 			vectorLine.Draw();

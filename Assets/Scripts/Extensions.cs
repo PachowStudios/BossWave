@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public static class Extensions
 {
@@ -41,6 +42,18 @@ public static class Extensions
 		return null;
 	}
 
+	public static List<Transform> FindChildTransforms(this Transform parent)
+	{
+		List<Transform> results = new List<Transform>();
+
+		foreach (Transform child in parent)
+		{
+			results.Add(child);
+		}
+
+		return results;
+	}
+
 	public static Vector3 TransformPointLocal(this Transform parent, Vector3 target)
 	{
 		return parent.TransformPoint(target) - parent.position;
@@ -69,6 +82,20 @@ public static class Extensions
 		target.localScale = parent.localScale;
 	}
 
+	public static void LookAt2D(this Transform parent, Vector3 target, bool local = false)
+	{
+		Quaternion newRotation = parent.position.LookAt2D(target);
+
+		if (local)
+		{
+			parent.localRotation = newRotation;
+		}
+		else
+		{
+			parent.rotation = newRotation;
+		}
+	}
+
 	// Bounds
 	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
 	{
@@ -76,12 +103,12 @@ public static class Extensions
 	}
 
 	// Vector3
-	public static float LookAt2D(this Vector3 parent, Vector3 target)
+	public static Quaternion LookAt2D(this Vector3 parent, Vector3 target)
 	{
 		Vector3 targetPosition = target - parent;
 		float angle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
 
-		return Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z;
+		return Quaternion.Euler(new Vector3(0f, 0f, Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles.z));
 	}
 
 	public static Vector3 DirectionToRotation2D(this Vector3 parent)
