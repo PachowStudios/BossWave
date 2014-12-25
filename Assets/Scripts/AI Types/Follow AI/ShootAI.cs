@@ -7,6 +7,10 @@ public class ShootAI : FollowAI
 {
 	public float maxRangeOffset = 1f;
 	public bool horizontalShot = true;
+	public bool useRandomGun = false;
+	public bool burstShot = false;
+	public int shotsPerBurst = 1;
+	public float delayBetweenShots = 0.1f;
 	public Projectile projectile;
 
 	private List<Transform> guns;
@@ -26,6 +30,31 @@ public class ShootAI : FollowAI
 	protected override void Attack()
 	{
 		base.Attack();
+
+		if (useRandomGun)
+		{
+			guns.Shuffle();
+		}
+
+		if (burstShot)
+		{
+			for (int i = 1; i <= shotsPerBurst; i++)
+			{
+				StartCoroutine(Fire(delayBetweenShots * i));
+			}
+		}
+		else
+		{
+			StartCoroutine(Fire());
+		}
+	}
+
+	protected IEnumerator Fire(float delay = 0f)
+	{
+		if (delay > 0f)
+		{
+			yield return new WaitForSeconds(delay);
+		}
 
 		guns[currentGun].LookAt2D(PlayerControl.instance.collider2D.bounds.center, true);
 
@@ -51,5 +80,7 @@ public class ShootAI : FollowAI
 		projectileInstance.Initialize(shotDirection);
 
 		currentGun = (currentGun + 1 == guns.Count) ? 0 : currentGun + 1;
+
+		yield return null;
 	}
 }

@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DinoTorch_Walking
+  m_Name: HeavyBotA_Idle
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,11 +18,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300030, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - time: .0833333358
-      value: {fileID: 21300032, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - time: .166666672
-      value: {fileID: 21300030, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+      value: {fileID: 21300002, guid: ad1b4cc1a87442c44a5e3cdad82b822f, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -41,13 +37,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300030, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - {fileID: 21300032, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - {fileID: 21300030, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+    - {fileID: 21300002, guid: ad1b4cc1a87442c44a5e3cdad82b822f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .183333337
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

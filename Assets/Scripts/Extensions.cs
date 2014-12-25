@@ -160,6 +160,18 @@ public static class Extensions
 		}
 	}
 
+	// Generic List
+	public static void Shuffle<T>(this List<T> parent)
+	{
+		for (int i = 0; i < parent.Count; i++)
+		{
+			T temp = parent[i];
+			int randomIndex = Random.Range(i, parent.Count);
+			parent[i] = parent[randomIndex];
+			parent[randomIndex] = temp;
+		}
+	}
+
 	// Utility
 	public static int RandomSign()
 	{

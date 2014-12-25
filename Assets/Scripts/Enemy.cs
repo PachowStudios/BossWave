@@ -39,9 +39,9 @@ public abstract class Enemy : MonoBehaviour
 
 	protected bool right = false;
 	protected bool left = false;
+	protected bool disableMovement = false;
 	protected bool invincible = false;
 
-	[HideInInspector]
 	protected float normalizedHorizontalSpeed = 0;
 
 	protected SpriteRenderer spriteRenderer;
@@ -154,6 +154,16 @@ public abstract class Enemy : MonoBehaviour
 		controller.move(velocity * Time.deltaTime);
 	}
 
+	public void EnableMovement(bool enable)
+	{
+		disableMovement = !enable;
+	}
+
+	private void EnableMovementAnim(int enable)
+	{
+		EnableMovement(enable != 0);
+	}
+
 	protected void InitialUpdate()
 	{
 		velocity = controller.velocity;
@@ -188,6 +198,8 @@ public abstract class Enemy : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 0;
 		}
+
+		normalizedHorizontalSpeed = disableMovement ? 0 : normalizedHorizontalSpeed;
 	}
 
 	protected void ApplyMovement()
