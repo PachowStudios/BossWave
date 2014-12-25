@@ -390,18 +390,21 @@ public class PlayerControl : MonoBehaviour
 	{
 		float damage = 0f;
 		float knockback = 0f;
+		float knockbackDirection = 1f;
 
 		if (enemy.tag == "Enemy")
 		{
 			Enemy currentEnemy = enemy.GetComponent<Enemy>();
 			damage = currentEnemy.damage;
 			knockback = currentEnemy.knockback;
+			knockbackDirection = Mathf.Sign(transform.position.x - enemy.transform.position.x);
 		}
 		else if (enemy.tag == "Projectile")
 		{
 			Projectile currentProjectile = enemy.GetComponent<Projectile>();
 			damage = currentProjectile.damage;
 			knockback = currentProjectile.knockback;
+			knockbackDirection = Mathf.Sign(currentProjectile.direction.x);
 			currentProjectile.CheckDestroyEnemy();
 		}
 
@@ -409,13 +412,8 @@ public class PlayerControl : MonoBehaviour
 
 		if (health > 0f)
 		{
-			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
+			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity) * knockbackDirection;
 			velocity.y = Mathf.Sqrt(knockback * -gravity);
-
-			if (transform.position.x - enemy.transform.position.x < 0)
-			{
-				velocity.x *= -1;
-			}
 
 			controller.move(velocity * Time.deltaTime);
 			lastHitTime = Time.time;
