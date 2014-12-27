@@ -5,6 +5,8 @@ public class AcceleratingShot : Projectile
 {
 	public float accelTime = 1f;
 	public AnimationCurve accelCurve;
+	public bool hasTrail = false;
+	public float trailPercentage = 0f;
 
 	private float originalShotSpeed;
 	private float accelTimer = 0f;
@@ -33,6 +35,11 @@ public class AcceleratingShot : Projectile
 			accelTimer += Time.deltaTime;
 
 			shotSpeed = originalShotSpeed * accelPercentage;
+
+			if (accelPercentage >= trailPercentage)
+			{
+				anim.SetBool("Trail", true);
+			}
 		}
 
 		ApplyMovement();

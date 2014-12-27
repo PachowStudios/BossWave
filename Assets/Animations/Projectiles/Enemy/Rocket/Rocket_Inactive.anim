@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Spikeball_Spiking
+  m_Name: Rocket_Inactive
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,11 +18,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300082, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - time: .166666672
-      value: {fileID: 21300084, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - time: .333333343
-      value: {fileID: 21300082, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+      value: {fileID: 21300000, guid: 9be89750776fa1d4abc3e79edd296013, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -41,13 +37,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300082, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - {fileID: 21300084, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
-    - {fileID: 21300082, guid: fd7d77880a7e2d24eb20dde7410fb3b7, type: 3}
+    - {fileID: 21300000, guid: 9be89750776fa1d4abc3e79edd296013, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .350000024
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

@@ -20,6 +20,7 @@ public abstract class Projectile : MonoBehaviour
 	protected Vector3 velocity;
 	protected CharacterController2D controller;
 	protected SpriteRenderer spriteRenderer;
+	protected Animator anim;
 
 	public Sprite Sprite
 	{
@@ -43,6 +44,7 @@ public abstract class Projectile : MonoBehaviour
 	{
 		controller = GetComponent<CharacterController2D>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		anim = GetComponent<Animator>();
 
 		if (autoDestroy)
 		{
