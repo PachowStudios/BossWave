@@ -1054,8 +1054,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  relativeSpeed: .114285715
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1068,8 +1070,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .25
+  relativeSpeed: .0142857144
   scroll: 0
   loop: 0
+  cameraParallax: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1082,8 +1086,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .100000001
+  relativeSpeed: .00571428565
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1096,8 +1102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: .0500000007
+  relativeSpeed: .00285714283
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1110,8 +1118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 17.5
+  relativeSpeed: 1
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1124,8 +1134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  relativeSpeed: .171428576
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1138,8 +1150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7.5
+  relativeSpeed: .428571433
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1152,8 +1166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  relativeSpeed: .857142866
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1166,8 +1182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 16
+  relativeSpeed: .914285719
   scroll: 0
   loop: 1
+  cameraParallax: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

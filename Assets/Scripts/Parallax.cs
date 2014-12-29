@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ScrollInfinite : MonoBehaviour 
+public class Parallax : MonoBehaviour 
 {
 	public float speed = 17.5f;
+	[Range(0f, 1f)]
+	public float relativeSpeed = 1f;
 	public bool scroll = false;
-	public bool loop = true;
+	public bool loop = false;
+	public bool cameraParallax = false;
 
 	private List<Transform> layers = new List<Transform>();
 
@@ -30,7 +33,7 @@ public class ScrollInfinite : MonoBehaviour
 	{
 		if (scroll)
 		{
-			transform.Translate(new Vector2(-speed, 0) * Time.deltaTime);
+			transform.Translate(new Vector2(-(relativeSpeed * LevelManager.instance.bossWave.cameraMoveSpeed), 0) * Time.deltaTime);
 
 			Transform firstChild = layers.FirstOrDefault();
 
@@ -60,6 +63,10 @@ public class ScrollInfinite : MonoBehaviour
 					}
 				}
 			}
+		}
+		else if (cameraParallax)
+		{
+			transform.Translate((1 - relativeSpeed) * CameraFollow.instance.DeltaMovement);
 		}
 	}
 }

@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
 
 					foreach(GameObject element in scrollingElements)
 					{
-						element.GetComponent<ScrollInfinite>().scroll = true;
+						element.GetComponent<Parallax>().scroll = true;
 					}
 
 					bossWave.progressBar.GetComponent<Animator>().SetTrigger("Show");
