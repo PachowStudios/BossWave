@@ -21,7 +21,7 @@ public class FlyingBomber : Enemy
 	private Transform gun;
 	private Transform groundLevel;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 
@@ -37,12 +37,11 @@ public class FlyingBomber : Enemy
 		currentBombTime = Random.Range(minBombTime, maxBombTime);
 	}
 
-	void FixedUpdate()
+	protected override void ApplyAnimation()
+	{ }
+
+	protected override void Walk()
 	{
-		InitialUpdate();
-
-		CheckFrontCollision();
-
 		if (transform.position.y >= flyHeight + flyHeightBuffer)
 		{
 			gravity = defaultGravity;
@@ -61,7 +60,10 @@ public class FlyingBomber : Enemy
 				velocity.y += -defaultGravity * Time.fixedDeltaTime;
 			}
 		}
+	}
 
+	protected override void CheckAttack()
+	{
 		bombTimer += Time.deltaTime;
 
 		if (bombTimer >= currentBombTime && Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
@@ -96,8 +98,5 @@ public class FlyingBomber : Enemy
 		{
 			right = left = false;
 		}
-
-		GetMovement();
-		ApplyMovement();
 	}
 }

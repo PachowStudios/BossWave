@@ -13,6 +13,14 @@ public abstract class Enemy : MonoBehaviour
 		Boss
 	};
 
+	public bool spawned = false;
+	public LayerMask spawnPlatformMask;
+	public LayerMask spawnTriggerMask;
+	public string spawnSortingLayer = "Spawn";
+	public int spawnSortingOrder = 0;
+	public Color spawnColor = new Color(0.102f, 0.11f, 0.22f, 1f);
+	public float spawnTime = 1f;
+	public float spawnLength = 0.5f;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;
 	public float maxHealth = 10f;
@@ -41,7 +49,6 @@ public abstract class Enemy : MonoBehaviour
 	protected bool left = false;
 	protected bool disableMovement = false;
 	protected bool invincible = false;
-
 	protected float normalizedHorizontalSpeed = 0;
 
 	protected SpriteRenderer spriteRenderer;
@@ -49,6 +56,13 @@ public abstract class Enemy : MonoBehaviour
 	protected Animator anim;
 	protected Transform frontCheck;
 	protected Transform popupMessagePoint;
+
+	private LayerMask defaultPlatformMask;
+	private LayerMask defaultTriggerMask;
+	private string defaultSortingLayer;
+	private int defaultSortingOrder;
+	private Color defaultColor;
+	private float spawnTimer = 0f;
 
 	public Sprite Sprite
 	{
@@ -58,6 +72,12 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	protected abstract void ApplyAnimation();
+
+	protected abstract void Walk();
+
+	protected abstract void CheckAttack();
+
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -66,7 +86,48 @@ public abstract class Enemy : MonoBehaviour
 		frontCheck = transform.FindChild("frontCheck");
 		popupMessagePoint = transform.FindChild("popupMessage");
 
+		defaultPlatformMask = controller.platformMask;
+		defaultTriggerMask = controller.triggerMask;
+		defaultSortingLayer = spriteRenderer.sortingLayerName;
+		defaultSortingOrder = spriteRenderer.sortingOrder;
+		defaultColor = spriteRenderer.color;
+
+		if (!spawned)
+		{
+			controller.platformMask = spawnPlatformMask;
+			controller.triggerMask = spawnTriggerMask;
+			spriteRenderer.sortingLayerName = spawnSortingLayer;
+			spriteRenderer.sortingOrder = spawnSortingOrder;
+			spriteRenderer.color = spawnColor;
+		}
+
 		health = maxHealth;
+	}
+
+	protected virtual void FixedUpdate()
+	{
+		InitialUpdate();
+		ApplyAnimation();
+
+		if (!spawned)
+		{
+			spawnTimer += Time.deltaTime;
+
+			if (spawnTimer >= spawnTime)
+			{
+				Spawn();
+			}
+
+			left = true;
+		}
+		else
+		{
+			Walk();
+			CheckAttack();
+		}
+
+		GetMovement();
+		ApplyMovement();
 	}
 
 	void OnTriggerEnter2D(Collider2D enemy)
@@ -174,6 +235,22 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	protected void Spawn()
+	{
+		controller.platformMask = defaultPlatformMask;
+		controller.triggerMask = defaultTriggerMask;
+		spriteRenderer.sortingLayerName = defaultSortingLayer;
+		spriteRenderer.sortingOrder = defaultSortingOrder;
+
+		iTween.ValueTo(gameObject, iTween.Hash("from", spawnColor,
+											   "to", defaultColor,
+											   "time", spawnLength,
+											   "easetype", iTween.EaseType.easeInOutSine,
+											   "onupdate", "UpdateColor"));
+
+		spawned = true;
+	}
+
 	protected void GetMovement()
 	{
 		if (right)
@@ -239,6 +316,11 @@ public abstract class Enemy : MonoBehaviour
 		spriteRenderer.enabled = false;
 		collider2D.enabled = false;
 		TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
+	}
+
+	private void UpdateColor(Color newValue)
+	{
+		spriteRenderer.color = newValue;
 	}
 
 	private void ResetColor()

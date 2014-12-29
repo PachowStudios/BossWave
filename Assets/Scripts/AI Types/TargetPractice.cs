@@ -3,13 +3,17 @@ using System.Collections;
 
 public class TargetPractice : Enemy
 {
-	new void Awake()
-	{
-		base.Awake();
-	}
-
-	void FixedUpdate()
+	protected override void FixedUpdate()
 	{
 		InitialUpdate();
 	}
+
+	protected override void ApplyAnimation()
+	{ }
+
+	protected override void Walk()
+	{ }
+
+	protected override void CheckAttack()
+	{ }
 }

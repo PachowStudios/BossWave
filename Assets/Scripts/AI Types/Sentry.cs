@@ -25,7 +25,7 @@ public class Sentry : Enemy
 	private Collider2D sideFireCollider;
 	private Collider2D upFireCollider;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 
@@ -40,16 +40,15 @@ public class Sentry : Enemy
 		left = !right;
 	}
 
-	void FixedUpdate()
+	protected override void ApplyAnimation()
 	{
-		InitialUpdate();
-
-		CheckFrontCollision();
-
 		anim.SetBool("Walking", right || left);
 		anim.SetBool("Fire", fire);
 		anim.SetBool("Fire_Up", fireUp);
+	}
 
+	protected override void Walk()
+	{
 		if (!right && !left && !fire)
 		{
 			waitTimer += Time.deltaTime;
@@ -63,7 +62,10 @@ public class Sentry : Enemy
 				currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
 			}
 		}
-		
+	}
+
+	protected override void CheckAttack()
+	{
 		if ((right || left) && !fire)
 		{
 			moveTimer += Time.deltaTime;
@@ -126,8 +128,5 @@ public class Sentry : Enemy
 				}
 			}
 		}
-
-		GetMovement();
-		ApplyMovement();
 	}
 }

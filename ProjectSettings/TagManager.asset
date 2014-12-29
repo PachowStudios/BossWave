@@ -41,7 +41,7 @@ TagManager:
   User Layer 15: Projectiles
   User Layer 16: RunningCollider
   User Layer 17: EnemyProjectiles
-  User Layer 18: 
+  User Layer 18: SpawnCollider
   User Layer 19: 
   User Layer 20: 
   User Layer 21: 
@@ -67,6 +67,10 @@ TagManager:
   - name: Background
     userID: 1
     uniqueID: 2651302749
+    locked: 0
+  - name: Spawn
+    userID: 9
+    uniqueID: 3339607737
     locked: 0
   - name: Front Background
     userID: 8

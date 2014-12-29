@@ -80,7 +80,16 @@ public class TheRIFT : Enemy
 		}
 	}
 
-	new void Awake()
+	protected override void ApplyAnimation()
+	{ }
+
+	protected override void Walk()
+	{ }
+
+	protected override void CheckAttack()
+	{ }
+
+	protected override void Awake()
 	{
 		base.Awake();
 
@@ -96,7 +105,7 @@ public class TheRIFT : Enemy
 		laserTime = newLaserTime;
 	}
 
-	void FixedUpdate()
+	protected override void FixedUpdate()
 	{
 		InitialUpdate();
 

@@ -9,17 +9,18 @@ public class FollowAI : Enemy
 
 	private float attackCooldownTimer = 0f;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 	}
 
-	void FixedUpdate()
+	protected override void ApplyAnimation()
 	{
-		InitialUpdate();
-
 		anim.SetBool("Walking", right || left);
+	}
 
+	protected override void Walk()
+	{
 		if (PlayerControl.instance.transform.position.x > transform.position.x + followRange)
 		{
 			right = true;
@@ -34,7 +35,10 @@ public class FollowAI : Enemy
 		{
 			right = left = false;
 		}
+	}
 
+	protected override void CheckAttack()
+	{
 		attackCooldownTimer += Time.deltaTime;
 
 		if (attackCooldownTimer >= attackCooldownTime &&
@@ -43,9 +47,6 @@ public class FollowAI : Enemy
 			Attack();
 			attackCooldownTimer = 0f;
 		}
-
-		GetMovement();
-		ApplyMovement();
 	}
 
 	protected virtual void Attack()

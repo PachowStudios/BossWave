@@ -16,7 +16,7 @@ public class ShootAI : FollowAI
 	private List<Transform> guns;
 	private int currentGun = 0;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 
