@@ -45,9 +45,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   m_Layer: 0
-  m_Name: frontCheck
+  m_Name: ledgeCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 813524716, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 168350284, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.4499998, y: .379999995, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -206,7 +206,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.89999998, y: 1.29999995, z: 0}
+  m_LocalPosition: {x: -1.70000005, y: -.200000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -370,9 +370,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 512
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 59648
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -416,9 +413,6 @@ MonoBehaviour:
   spawnPlatformMask:
     serializedVersion: 2
     m_Bits: 262144
-  spawnTriggerMask:
-    serializedVersion: 2
-    m_Bits: 0
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
   spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
@@ -440,9 +434,13 @@ MonoBehaviour:
   moveSpeed: 3
   groundDamping: 10
   inAirDamping: 5
+  checkFrontCollision: 0
+  checkLedgeCollision: 1
   timeWarpAtDeath: 0
   health: 10
   velocity: {x: 0, y: 0, z: 0}
+  invincible: 0
+  ignoreProjectiles: 0
   followRange: 7
   attackRange: 20
   attackCooldownTime: 2

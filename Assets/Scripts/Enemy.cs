@@ -37,6 +37,8 @@ public abstract class Enemy : MonoBehaviour
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
+	public bool checkFrontCollision = false;
+	public bool checkLedgeCollision = false;
 	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
@@ -56,8 +58,9 @@ public abstract class Enemy : MonoBehaviour
 	protected SpriteRenderer spriteRenderer;
 	protected CharacterController2D controller;
 	protected Animator anim;
-	protected Transform frontCheck;
 	protected Transform popupMessagePoint;
+	protected Transform frontCheck;
+	protected Transform ledgeCheck;
 
 	private LayerMask defaultPlatformMask;
 	private string defaultSortingLayer;
@@ -84,8 +87,14 @@ public abstract class Enemy : MonoBehaviour
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		frontCheck = transform.FindChild("frontCheck");
 		popupMessagePoint = transform.FindChild("popupMessage");
+
+		if (checkFrontCollision)
+		{
+			frontCheck = transform.FindChild("frontCheck");
+		}
+
+		ledgeCheck = transform.FindChild("ledgeCheck");
 
 		defaultPlatformMask = controller.platformMask;
 		defaultSortingLayer = spriteRenderer.sortingLayerName;
@@ -100,6 +109,7 @@ public abstract class Enemy : MonoBehaviour
 			spriteRenderer.color = spawnColor;
 			invincible = true;
 			ignoreProjectiles = true;
+			left = true;
 		}
 
 		health = maxHealth;
@@ -110,19 +120,29 @@ public abstract class Enemy : MonoBehaviour
 		InitialUpdate();
 		ApplyAnimation();
 
+		if (checkFrontCollision)
+		{
+			CheckFrontCollision();
+		}
+
 		if (!spawned)
 		{
+			CheckLedgeCollision();
+
 			spawnTimer += Time.deltaTime;
 
 			if (spawnTimer >= spawnTime)
 			{
 				Spawn();
 			}
-
-			left = true;
 		}
 		else
 		{
+			if (checkLedgeCollision)
+			{
+				CheckLedgeCollision();
+			}
+
 			Walk();
 			CheckAttack();
 		}
@@ -293,18 +313,27 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void CheckFrontCollision()
 	{
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position);
+		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, controller.platformMask);
 
-		foreach (Collider2D hit in frontHits)
+		if (frontHits.Length > 0)
 		{
-			if (hit.tag == "Obstacle" || hit.tag == "WorldBoundaries")
-			{
-				Flip();
+			Flip();
 
-				right = !right;
-				left = !right;
-				break;
-			}
+			right = !right;
+			left = !right;
+		}
+	}
+
+	protected void CheckLedgeCollision()
+	{
+		Collider2D[] ledgeHits = Physics2D.OverlapPointAll(ledgeCheck.position, controller.platformMask);
+
+		if (ledgeHits.Length == 0)
+		{
+			Flip();
+
+			right = !right;
+			left = !right;
 		}
 	}
 

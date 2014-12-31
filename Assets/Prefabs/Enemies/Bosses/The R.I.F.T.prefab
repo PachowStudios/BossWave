@@ -292,9 +292,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 51456
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -334,6 +331,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef2ba3be1b6701429e6ace7545d7d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 1
+  spawnPlatformMask:
+    serializedVersion: 2
+    m_Bits: 0
+  spawnSortingLayer: Spawn
+  spawnSortingOrder: 0
+  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
+  spawnTime: 0
+  spawnLength: 0
   difficulty: 5
   immuneToInstantKill: 1
   maxHealth: 50
@@ -350,9 +356,13 @@ MonoBehaviour:
   moveSpeed: 8
   groundDamping: 10
   inAirDamping: 5
+  checkFrontCollision: 0
+  checkLedgeCollision: 0
   timeWarpAtDeath: 0
   health: 0
   velocity: {x: 0, y: 0, z: 0}
+  invincible: 0
+  ignoreProjectiles: 0
   minFloatHeight: 9
   maxFloatHeight: 11
   minPreAttackDelay: .25

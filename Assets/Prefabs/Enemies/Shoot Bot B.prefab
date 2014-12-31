@@ -45,9 +45,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   m_Layer: 0
-  m_Name: frontCheck
+  m_Name: ledgeCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 813524716, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 168350284, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -146,7 +146,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.20000005, y: .649999976, z: 0}
+  m_LocalPosition: {x: -1, y: -.200000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -258,9 +258,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 512
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 43264
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -300,6 +297,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da8102142bb53c4d9f1da5e97c5cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawned: 0
+  spawnPlatformMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  spawnSortingLayer: Spawn
+  spawnSortingOrder: 0
+  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
+  spawnTime: 1
+  spawnLength: .5
   difficulty: 0
   immuneToInstantKill: 0
   maxHealth: 20
@@ -316,14 +322,22 @@ MonoBehaviour:
   moveSpeed: 4.5
   groundDamping: 10
   inAirDamping: 5
+  checkFrontCollision: 0
+  checkLedgeCollision: 0
   timeWarpAtDeath: 0
   health: 10
   velocity: {x: 0, y: 0, z: 0}
+  invincible: 0
+  ignoreProjectiles: 0
   followRange: 5
   attackRange: 10
   attackCooldownTime: .75
   maxRangeOffset: 1
   horizontalShot: 1
+  useRandomGun: 0
+  burstShot: 0
+  shotsPerBurst: 1
+  delayBetweenShots: .100000001
   projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
