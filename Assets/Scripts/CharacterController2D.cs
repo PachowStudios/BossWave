@@ -92,7 +92,7 @@ public class CharacterController2D : MonoBehaviour
 	/// <summary>
 	/// mask with all layers that trigger events should fire when intersected
 	/// </summary>
-	public LayerMask triggerMask = 0;
+	//public LayerMask triggerMask = 0;
 
 	/// <summary>
 	/// mask with all layers that should act as one-way platforms. Note that one-way platforms should always be EdgeCollider2Ds. This is private because it does not support being
@@ -199,12 +199,12 @@ public class CharacterController2D : MonoBehaviour
 		skinWidth = _skinWidth;
 
 		// we want to set our CC2D to ignore all collision layers except what is in our triggerMask
-		for (var i = 0; i < 32; i++)
+		/*for (var i = 0; i < 32; i++)
 		{
 			// see if our triggerMask contains this layer and if not ignore it
 			if ((triggerMask.value & 1 << i) == 0)
 				Physics2D.IgnoreLayerCollision(gameObject.layer, i);
-		}
+		}*/
 	}
 
 

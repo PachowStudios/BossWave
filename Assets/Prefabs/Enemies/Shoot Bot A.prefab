@@ -260,7 +260,7 @@ MonoBehaviour:
     m_Bits: 512
   triggerMask:
     serializedVersion: 2
-    m_Bits: 43264
+    m_Bits: 59648
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
   spawnColor: {r: .101960786, g: .109803922, b: .219607845, a: 1}
-  spawnTime: 1
+  spawnTime: 2
   spawnLength: .5
   difficulty: 1
   immuneToInstantKill: 0

@@ -15,7 +15,6 @@ public abstract class Enemy : MonoBehaviour
 
 	public bool spawned = false;
 	public LayerMask spawnPlatformMask;
-	public LayerMask spawnTriggerMask;
 	public string spawnSortingLayer = "Spawn";
 	public int spawnSortingOrder = 0;
 	public Color spawnColor = new Color(0.102f, 0.11f, 0.22f, 1f);
@@ -44,11 +43,14 @@ public abstract class Enemy : MonoBehaviour
 	public float health;
 	[HideInInspector]
 	public Vector3 velocity;
+	[HideInInspector]
+	public bool invincible = false;
+	[HideInInspector]
+	public bool ignoreProjectiles = false;
 
 	protected bool right = false;
 	protected bool left = false;
 	protected bool disableMovement = false;
-	protected bool invincible = false;
 	protected float normalizedHorizontalSpeed = 0;
 
 	protected SpriteRenderer spriteRenderer;
@@ -58,7 +60,6 @@ public abstract class Enemy : MonoBehaviour
 	protected Transform popupMessagePoint;
 
 	private LayerMask defaultPlatformMask;
-	private LayerMask defaultTriggerMask;
 	private string defaultSortingLayer;
 	private int defaultSortingOrder;
 	private Color defaultColor;
@@ -87,7 +88,6 @@ public abstract class Enemy : MonoBehaviour
 		popupMessagePoint = transform.FindChild("popupMessage");
 
 		defaultPlatformMask = controller.platformMask;
-		defaultTriggerMask = controller.triggerMask;
 		defaultSortingLayer = spriteRenderer.sortingLayerName;
 		defaultSortingOrder = spriteRenderer.sortingOrder;
 		defaultColor = spriteRenderer.color;
@@ -95,10 +95,11 @@ public abstract class Enemy : MonoBehaviour
 		if (!spawned)
 		{
 			controller.platformMask = spawnPlatformMask;
-			controller.triggerMask = spawnTriggerMask;
 			spriteRenderer.sortingLayerName = spawnSortingLayer;
 			spriteRenderer.sortingOrder = spawnSortingOrder;
 			spriteRenderer.color = spawnColor;
+			invincible = true;
+			ignoreProjectiles = true;
 		}
 
 		health = maxHealth;
@@ -130,9 +131,9 @@ public abstract class Enemy : MonoBehaviour
 		ApplyMovement();
 	}
 
-	void OnTriggerEnter2D(Collider2D enemy)
+	protected virtual void OnTriggerEnter2D(Collider2D enemy)
 	{
-		if (enemy.tag == "PlayerProjectile")
+		if (!ignoreProjectiles && enemy.tag == "PlayerProjectile")
 		{
 			if (health > 0f)
 			{
@@ -238,9 +239,10 @@ public abstract class Enemy : MonoBehaviour
 	protected void Spawn()
 	{
 		controller.platformMask = defaultPlatformMask;
-		controller.triggerMask = defaultTriggerMask;
 		spriteRenderer.sortingLayerName = defaultSortingLayer;
 		spriteRenderer.sortingOrder = defaultSortingOrder;
+		invincible = false;
+		ignoreProjectiles = false;
 
 		iTween.ValueTo(gameObject, iTween.Hash("from", spawnColor,
 											   "to", defaultColor,

@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Parallax : MonoBehaviour 
 {
-	public float speed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
 	public bool scroll = false;

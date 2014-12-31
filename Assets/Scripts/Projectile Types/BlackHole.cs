@@ -93,21 +93,24 @@ public class BlackHole : Projectile
 		}
 		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.OverlapPoint(trigger.bounds.center))
 		{
-			if (trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
+			Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
+
+			if (!currentEnemy.ignoreProjectiles)
 			{
-				if (!activated)
+				if (trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
 				{
-					activated = true;
+					if (!activated)
+					{
+						activated = true;
+					}
 				}
-			}
 
-			if (activated)
-			{
-				Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
-
-				if (!targetEnemies.Contains(currentEnemy))
+				if (activated)
 				{
-					targetEnemies.Add(currentEnemy);
+					if (!targetEnemies.Contains(currentEnemy))
+					{
+						targetEnemies.Add(currentEnemy);
+					}
 				}
 			}
 		}
@@ -180,7 +183,7 @@ public class BlackHole : Projectile
 		{
 			foreach (Enemy currentEnemy in targetEnemies)
 			{
-				if (currentEnemy != null)
+				if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
 				{
 					if (!currentEnemy.immuneToInstantKill && innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
