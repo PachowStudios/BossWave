@@ -17,7 +17,7 @@ public abstract class Enemy : MonoBehaviour
 	public LayerMask spawnPlatformMask;
 	public string spawnSortingLayer = "Spawn";
 	public int spawnSortingOrder = 0;
-	public Color spawnColor = new Color(0.102f, 0.11f, 0.22f, 1f);
+	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
 	public float spawnTime = 1f;
 	public float spawnLength = 0.5f;
 	public Difficulty difficulty = Difficulty.Easy;

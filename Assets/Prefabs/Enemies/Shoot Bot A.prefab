@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20.7600002, y: 2.99000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -303,7 +303,7 @@ MonoBehaviour:
     m_Bits: 262144
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
-  spawnColor: {r: .101960786, g: .109803922, b: .219607845, a: 1}
+  spawnColor: {r: .13333334, g: .137254909, b: .152941182, a: 1}
   spawnTime: 2
   spawnLength: .5
   difficulty: 1
