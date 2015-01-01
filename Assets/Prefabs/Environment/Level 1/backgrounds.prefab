@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400010}
   - 212: {fileID: 21200008}
+  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: 2-Assembly Line Back Animated
   m_TagString: Untagged
@@ -106,6 +107,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400012}
   - 212: {fileID: 21200010}
+  - 95: {fileID: 9500002}
   m_Layer: 0
   m_Name: 5-Assembly Line Front Animated
   m_TagString: Untagged
@@ -243,6 +245,36 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 22, y: 1}
   m_Center: {x: 43.5999985, y: 9.89999962}
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88f13f07f7cbbe3418df037383831287, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &9500002
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8d4e1b808881f24ba3b5eb97e1d84f0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
