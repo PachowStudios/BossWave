@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 2.4000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -410,13 +410,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 0
+  simulateSpawner: {fileID: 0}
   spawnPlatformMask:
     serializedVersion: 2
     m_Bits: 262144
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
   spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
-  spawnTime: 1
+  spawnEntryRange: 1
+  spawnJumpHeight: 4
   spawnLength: .5
   difficulty: 3
   immuneToInstantKill: 0
@@ -437,7 +439,6 @@ MonoBehaviour:
   checkFrontCollision: 0
   checkLedgeCollision: 1
   timeWarpAtDeath: 0
-  health: 10
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0

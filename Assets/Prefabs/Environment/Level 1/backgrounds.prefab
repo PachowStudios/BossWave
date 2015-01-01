@@ -8,7 +8,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
   - 212: {fileID: 21200000}
   m_Layer: 0
   m_Name: 0-Wall
@@ -41,7 +40,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400004}
-  - 114: {fileID: 11400002}
   - 212: {fileID: 21200002}
   m_Layer: 0
   m_Name: 1-Assembly Line Back
@@ -91,7 +89,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400010}
-  - 114: {fileID: 11400004}
   - 212: {fileID: 21200008}
   m_Layer: 0
   m_Name: 2-Assembly Line Back Animated
@@ -246,51 +243,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 22, y: 1}
   m_Center: {x: 43.5999985, y: 9.89999962}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relativeSpeed: .0500000007
-  scroll: 0
-  loop: 0
-  cameraParallax: 1
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relativeSpeed: .150000006
-  scroll: 0
-  loop: 0
-  cameraParallax: 1
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relativeSpeed: .150000006
-  scroll: 0
-  loop: 0
-  cameraParallax: 1
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

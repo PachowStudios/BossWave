@@ -395,6 +395,12 @@ public class PlayerControl : MonoBehaviour
 		if (enemy.tag == "Enemy")
 		{
 			Enemy currentEnemy = enemy.GetComponent<Enemy>();
+
+			if (!currentEnemy.spawned)
+			{
+				return;
+			}
+
 			damage = currentEnemy.damage;
 			knockback = currentEnemy.knockback;
 			knockbackDirection = Mathf.Sign(transform.position.x - enemy.transform.position.x);
