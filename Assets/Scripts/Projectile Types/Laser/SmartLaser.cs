@@ -154,8 +154,8 @@ public class SmartLaser : Projectile
 
 	private void UpdateCollider()
 	{
-		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, width / 2f)),
-													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -(width / 2f))),
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, detectionRange / 4f)),
+													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -(detectionRange / 4f))),
 													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, -detectionRange)),
 													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, detectionRange)) } );
 	}
