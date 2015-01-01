@@ -86,6 +86,9 @@ public class TheRIFT : Enemy
 	protected override void Walk()
 	{ }
 
+	protected override void Jump(float height)
+	{ }
+
 	protected override void CheckAttack()
 	{ }
 

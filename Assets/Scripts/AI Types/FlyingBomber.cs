@@ -62,6 +62,9 @@ public class FlyingBomber : Enemy
 		}
 	}
 
+	protected override void Jump(float height)
+	{ }
+
 	protected override void CheckAttack()
 	{
 		bombTimer += Time.deltaTime;

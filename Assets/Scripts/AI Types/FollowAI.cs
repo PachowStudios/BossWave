@@ -37,6 +37,11 @@ public class FollowAI : Enemy
 		}
 	}
 
+	protected override void Jump(float height)
+	{
+		velocity.y = Mathf.Sqrt(2f * height * -gravity);
+	}
+
 	protected override void CheckAttack()
 	{
 		attackCooldownTimer += Time.deltaTime;

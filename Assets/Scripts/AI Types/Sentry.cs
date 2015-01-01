@@ -64,6 +64,9 @@ public class Sentry : Enemy
 		}
 	}
 
+	protected override void Jump(float height)
+	{ }
+
 	protected override void CheckAttack()
 	{
 		if ((right || left) && !fire)

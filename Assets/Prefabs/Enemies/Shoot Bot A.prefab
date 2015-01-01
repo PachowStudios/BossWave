@@ -298,13 +298,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 0
+  simulateSpawner: {fileID: 0}
   spawnPlatformMask:
     serializedVersion: 2
     m_Bits: 262144
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
   spawnColor: {r: .13333334, g: .137254909, b: .152941182, a: 1}
-  spawnTime: 2
+  spawnEntryRange: 1
+  spawnJumpHeight: 4
   spawnLength: .5
   difficulty: 1
   immuneToInstantKill: 0
@@ -325,7 +327,6 @@ MonoBehaviour:
   checkFrontCollision: 0
   checkLedgeCollision: 0
   timeWarpAtDeath: 0
-  health: 10
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0

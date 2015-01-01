@@ -14,11 +14,13 @@ public abstract class Enemy : MonoBehaviour
 	};
 
 	public bool spawned = false;
+	public Transform simulateSpawner;
 	public LayerMask spawnPlatformMask;
 	public string spawnSortingLayer = "Spawn";
 	public int spawnSortingOrder = 0;
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
-	public float spawnTime = 1f;
+	public float spawnEntryRange = 1f;
+	public float spawnJumpHeight = 4f;
 	public float spawnLength = 0.5f;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;
@@ -42,14 +44,13 @@ public abstract class Enemy : MonoBehaviour
 	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
-	public float health;
-	[HideInInspector]
 	public Vector3 velocity;
 	[HideInInspector]
 	public bool invincible = false;
 	[HideInInspector]
 	public bool ignoreProjectiles = false;
 
+	protected float health;
 	protected bool right = false;
 	protected bool left = false;
 	protected bool disableMovement = false;
@@ -66,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
 	private string defaultSortingLayer;
 	private int defaultSortingOrder;
 	private Color defaultColor;
-	private float spawnTimer = 0f;
+	private Vector3 entryPoint;
 
 	public Sprite Sprite
 	{
@@ -76,9 +77,20 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	public Transform Spawner
+	{
+		set
+		{
+			entryPoint = Extensions.Vector3Range(value.FindChild("Entry Start").position,
+												 value.FindChild("Entry End").position);
+		}
+	}
+
 	protected abstract void ApplyAnimation();
 
 	protected abstract void Walk();
+
+	protected abstract void Jump(float height);
 
 	protected abstract void CheckAttack();
 
@@ -112,6 +124,11 @@ public abstract class Enemy : MonoBehaviour
 			left = true;
 		}
 
+		if (simulateSpawner != null)
+		{
+			Spawner = simulateSpawner;
+		}
+
 		health = maxHealth;
 	}
 
@@ -129,9 +146,7 @@ public abstract class Enemy : MonoBehaviour
 		{
 			CheckLedgeCollision();
 
-			spawnTimer += Time.deltaTime;
-
-			if (spawnTimer >= spawnTime)
+			if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
 			{
 				Spawn();
 			}
@@ -258,6 +273,8 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void Spawn()
 	{
+		Jump(entryPoint.y - transform.position.y + spawnJumpHeight);
+
 		controller.platformMask = defaultPlatformMask;
 		spriteRenderer.sortingLayerName = defaultSortingLayer;
 		spriteRenderer.sortingOrder = defaultSortingOrder;
