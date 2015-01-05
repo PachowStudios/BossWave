@@ -9,11 +9,6 @@ public class FollowAI : Enemy
 
 	private float attackCooldownTimer = 0f;
 
-	protected override void Awake()
-	{
-		base.Awake();
-	}
-
 	protected override void ApplyAnimation()
 	{
 		anim.SetBool("Walking", right || left);

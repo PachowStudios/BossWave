@@ -62,13 +62,13 @@ public class ShootAI : FollowAI
 
 		if (horizontalShot)
 		{
-			if (PlayerControl.instance.transform.position.x < transform.position.x)
+			if (FacingRight)
 			{
-				shotDirection = new Vector3(-1f, 0f, 0f);
+				shotDirection = new Vector3(1f, 0f, 0f);
 			}
 			else
 			{
-				shotDirection = new Vector3(1f, 0f, 0f);
+				shotDirection = new Vector3(-1f, 0f, 0f);
 			}
 		}
 		else

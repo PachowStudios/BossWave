@@ -77,6 +77,16 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	public bool FacingRight
+	{
+		get { return transform.localScale.x < 0; }
+	}
+
+	public bool IsGrounded
+	{
+		get { return controller.isGrounded; }
+	}
+
 	public Transform Spawner
 	{
 		set
@@ -280,6 +290,7 @@ public abstract class Enemy : MonoBehaviour
 		spriteRenderer.sortingOrder = defaultSortingOrder;
 		invincible = false;
 		ignoreProjectiles = false;
+		left = right = false;
 
 		iTween.ValueTo(gameObject, iTween.Hash("from", spawnColor,
 											   "to", defaultColor,
@@ -343,14 +354,17 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void CheckLedgeCollision()
 	{
-		Collider2D[] ledgeHits = Physics2D.OverlapPointAll(ledgeCheck.position, controller.platformMask);
-
-		if (ledgeHits.Length == 0)
+		if (IsGrounded)
 		{
-			Flip();
+			Collider2D[] ledgeHits = Physics2D.OverlapPointAll(ledgeCheck.position, controller.platformMask);
 
-			right = !right;
-			left = !right;
+			if (ledgeHits.Length == 0)
+			{
+				Flip();
+
+				right = !right;
+				left = !right;
+			}
 		}
 	}
 

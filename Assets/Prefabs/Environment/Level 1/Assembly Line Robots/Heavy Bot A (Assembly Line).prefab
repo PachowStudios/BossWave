@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   m_Layer: 0
-  m_Name: Assembly Line Shoot Bot A
+  m_Name: Heavy Bot A (Assembly Line)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2651302749
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4721e7e6736ed9642a509c67db6f2acc, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 4721e7e6736ed9642a509c67db6f2acc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
