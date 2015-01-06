@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class LevelManager : MonoBehaviour 
 {
@@ -71,6 +72,8 @@ public class LevelManager : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
+
+		DOTween.Init();
 
 		mainCamera = Camera.main.GetComponent<CameraFollow>();
 		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;

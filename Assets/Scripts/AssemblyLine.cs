@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class AssemblyLine : MonoBehaviour 
 {
@@ -19,7 +20,7 @@ public class AssemblyLine : MonoBehaviour
 
 	void Start()
 	{
-		path = iTweenPath.GetPath(pathName);
+		path = VectorPath.GetPath(pathName);
 	}
 
 	void FixedUpdate()
@@ -31,19 +32,12 @@ public class AssemblyLine : MonoBehaviour
 			GameObject currentObject = Instantiate(prefab, path[0], Quaternion.identity) as GameObject;
 			currentObject.transform.parent = transform;
 
-			iTween.MoveTo(currentObject, iTween.Hash("path", path,
-													 "speed", speed,
-													 "easetype", iTween.EaseType.linear,
-													 "oncomplete", "DestroyObject",
-													 "oncompleteparams", currentObject,
-													 "oncompletetarget", gameObject));
+			currentObject.transform.DOPath(path, speed, PathType.Linear, PathMode.Sidescroller2D)
+				.SetSpeedBased()
+				.SetEase(Ease.Linear)
+				.OnComplete(() => Destroy(currentObject));
 
 			spawnTimer = 0f;
 		}
-	}
-
-	private void DestroyObject(GameObject target)
-	{
-		Destroy(target);
 	}
 }
