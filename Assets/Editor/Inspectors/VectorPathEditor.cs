@@ -41,14 +41,14 @@ public class VectorPathEditor : Editor
 
 	void OnSceneGUI()
 	{
-		if (Target.enabled && Target.nodes.Count > 0)
+		if (Target.enabled && Target.nodes.Length> 0)
 		{
 			Undo.RecordObject(Target, "Adjust Vector Path");
 
-			Handles.Label(Target.nodes[0], "'" + Target.pathName + "' Begin", style);
-			Handles.Label(Target.nodes[Target.nodes.Count - 1], "'" + Target.pathName + "' End", style);
+			Handles.Label(Target.nodes[0], "'" + Target.pathName + " Begin", style);
+			Handles.Label(Target.nodes[Target.nodes.Length - 1], "'" + Target.pathName + " End", style);
 
-			for (int i = 0; i < Target.nodes.Count; i++)
+			for (int i = 0; i < Target.nodes.Length; i++)
 			{
 				Target.nodes[i] = Handles.PositionHandle(Target.nodes[i], Quaternion.identity);
 			}

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class VectorPath : MonoBehaviour
 {
-	public static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
+	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
 
 	public string pathName;
 	public Color pathColor = Color.cyan;
-	public List<Vector3> nodes = new List<Vector3>() { Vector3.zero, Vector3.zero };
+	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
 
 	void OnEnable()
 	{
@@ -22,11 +22,11 @@ public class VectorPath : MonoBehaviour
 
 	void OnDrawGizmosSelected()
 	{
-		if (enabled && nodes.Count >= 2)
+		if (enabled && nodes.Length >= 2)
 		{
 			Gizmos.color = pathColor;
 
-			for (int i = 1; i < nodes.Count; i++)
+			for (int i = 1; i < nodes.Length; i++)
 			{
 				Gizmos.DrawLine(nodes[i - 1], nodes[i]);
 			}
@@ -39,7 +39,7 @@ public class VectorPath : MonoBehaviour
 
 		if (paths.ContainsKey(requestedName))
 		{
-			return paths[requestedName].nodes.ToArray();
+			return paths[requestedName].nodes;
 		}
 		else
 		{
