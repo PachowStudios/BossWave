@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -292,11 +293,8 @@ public abstract class Enemy : MonoBehaviour
 		ignoreProjectiles = false;
 		left = right = false;
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", spawnColor,
-											   "to", defaultColor,
-											   "time", spawnLength,
-											   "easetype", iTween.EaseType.easeInOutSine,
-											   "onupdate", "UpdateColor"));
+		spriteRenderer.DOColor(defaultColor, spawnLength)
+			.SetEase(Ease.InOutSine);
 
 		spawned = true;
 	}
@@ -378,11 +376,6 @@ public abstract class Enemy : MonoBehaviour
 		spriteRenderer.enabled = false;
 		collider2D.enabled = false;
 		TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
-	}
-
-	private void UpdateColor(Color newValue)
-	{
-		spriteRenderer.color = newValue;
 	}
 
 	private void ResetColor()

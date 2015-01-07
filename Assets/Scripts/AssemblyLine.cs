@@ -37,6 +37,7 @@ public class AssemblyLine : MonoBehaviour
 				.SetEase(Ease.Linear)
 				.OnComplete(() => Destroy(currentObject));
 
+
 			spawnTimer = 0f;
 		}
 	}

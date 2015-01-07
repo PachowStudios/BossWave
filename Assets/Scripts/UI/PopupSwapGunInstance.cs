@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using DG.Tweening;
+using DG.Tweening.Core;
 
 public class PopupSwapGunInstance : MonoBehaviour 
 {
@@ -75,18 +77,14 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	public void DisappearNoSelection()
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-											   "to", 0f,
-											   "delay", appearTime * 0.4f,
-											   "time", appearTime * 0.6f,
-											   "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha"));
+		canvasGroup.alpha = 1f;
+		yOffset = 0f;
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
-											   "to", distance * 2f,
-											   "time", appearTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdatePosition"));
+		canvasGroup.DOFade(0f, appearTime * 0.6f)
+			.SetEase(Ease.InQuad)
+			.SetDelay(appearTime * 0.4f);
+		DOTween.To(() => yOffset, x => yOffset = x, distance * 2f, appearTime)
+			.SetEase(Ease.OutQuint);
 
 		Destroy(gameObject, appearTime);
 	}
@@ -103,74 +101,30 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	private void Appear()
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
-											   "to", 1f,
-											   "time", appearTime * 0.6f,
-											   "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha"));
+		canvasGroup.alpha = 0f;
+		yOffset = -distance;
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", -distance,
-											   "to", 0f,
-											   "time", appearTime,
-											   "easetype", iTween.EaseType.easeOutBack,
-											   "onupdate", "UpdatePosition"));
+		canvasGroup.DOFade(1f, appearTime * 0.6f)
+			.SetEase(Ease.InQuad);
+		DOTween.To(() => yOffset, x => yOffset = x, 0f, appearTime)
+			.SetEase(Ease.OutBack);
 	}
 
 	private void Disappear(bool swap)
 	{
-		string selected = swap ? "New" : "Old";
-		string notSelected = swap ? "Old" : "New";
+		Transform selectedTransform = swap ? newGun.transform : oldGun.transform;
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-												"to", 0f,
-												"delay", disappearTime * 0.4f,
-												"time", disappearTime * 0.6f,
-												"easetype", iTween.EaseType.easeInQuad,
-												"onupdate", "Update" + selected + "Alpha"));
-
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-												"to", disappearScale,
-												"time", disappearTime,
-												"easetype", iTween.EaseType.easeInCubic,
-												"onupdate", "Update" + selected + "Scale"));
-
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-												"to", 0f,
-												"time", disappearTime * 0.5f,
-												"easetype", iTween.EaseType.easeInQuad,
-												"onupdate", "Update" + notSelected + "Alpha"));
+		DOTween.To(() => newGun.alpha, x => newGun.alpha = x, 0f, disappearTime * (swap ? 0.6f : 0.5f))
+			.SetEase(Ease.InQuad)
+			.SetDelay(disappearTime * (swap ? 0.4f : 0f));
+		DOTween.To(() => oldGun.alpha, x => oldGun.alpha = x, 0f, disappearTime * (swap ? 0.5f : 0.6f))
+			.SetEase(Ease.InQuad)
+			.SetDelay(disappearTime * (swap ? 0f : 0.4f));
+		selectedTransform.DOScale(new Vector3(disappearScale, disappearScale, 1f), disappearTime)
+			.SetEase(Ease.InCubic);
+		timerAlpha.DOFade(0f, disappearTime * 0.5f)
+			.SetEase(Ease.InQuad);
 
 		Destroy(gameObject, disappearTime);
-	}
-
-	private void UpdateAlpha(float newValue)
-	{
-		canvasGroup.alpha = newValue;
-	}
-
-	private void UpdatePosition(float newValue)
-	{
-		yOffset = newValue;
-	}
-
-	private void UpdateNewAlpha(float newValue)
-	{
-		newGun.alpha = newValue;
-	}
-
-	private void UpdateNewScale(float newValue)
-	{
-		newGun.transform.localScale = new Vector3(newValue, newValue, 1f);
-	}
-
-	private void UpdateOldAlpha(float newValue)
-	{
-		oldGun.alpha = newValue;
-		timerAlpha.alpha = newValue;
-	}
-
-	private void UpdateOldScale(float newValue)
-	{
-		oldGun.transform.localScale = new Vector3(newValue, newValue, 1f);
 	}
 }

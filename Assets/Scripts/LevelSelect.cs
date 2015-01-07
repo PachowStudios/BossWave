@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class LevelSelect : MonoBehaviour 
 {
@@ -16,8 +17,8 @@ public class LevelSelect : MonoBehaviour
 		{
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
-			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
-			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
+			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
 		}
 		else
 		{

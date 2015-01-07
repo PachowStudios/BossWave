@@ -97,8 +97,8 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
-			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, iTween.EaseType.easeInOutSine);
-			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, iTween.EaseType.easeInOutSine);
+			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
+			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
 		}
 		else
 		{
@@ -150,11 +150,9 @@ public class LevelManager : MonoBehaviour
 
 					bossWave.progressBar.GetComponent<Animator>().SetTrigger("Show");
 
-					iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
-														   "to", 1f,
-														   "time", bossWave.totalLength,
-														   "easetype", iTween.EaseType.linear,
-														   "onupdate", "BossWaveProgressBarUpdate"));
+					bossWave.progressBar.value = 0f;
+					DOTween.To(() => bossWave.progressBar.value, x => bossWave.progressBar.value = x, 1f, bossWave.totalLength)
+						.SetEase(Ease.Linear);
 
 					bossWaveIntroComplete = true;
 				}
@@ -224,10 +222,5 @@ public class LevelManager : MonoBehaviour
 				yield return new WaitForSeconds(waves[wave].spawnDelay);
 			}
 		}
-	}
-
-	private void BossWaveProgressBarUpdate(float newValue)
-	{
-		bossWave.progressBar.value = newValue;
 	}
 }

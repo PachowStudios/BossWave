@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class MainMenu : MonoBehaviour 
 {
@@ -57,19 +58,9 @@ public class MainMenu : MonoBehaviour
 
 	public void GoToNode(string node)
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.x,
-											   "to", -transform.FindChild(node).GetComponent<RectTransform>().anchoredPosition.x,
-											   "time", nodeMoveSpeed,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "GoToUpdateX",
-											   "ignoretimescale", true));
-
-		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
-											   "to", -transform.FindChild(node).GetComponent<RectTransform>().anchoredPosition.y,
-											   "time", nodeMoveSpeed,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "GoToUpdateY",
-											   "ignoretimescale", true));
+		rectTransform.DOAnchorPos(-transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition, nodeMoveSpeed)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true);
 	}
 
 	public void SelectObject(GameObject gameObject)
@@ -141,25 +132,20 @@ public class MainMenu : MonoBehaviour
 
 		logo.GetComponent<Animator>().SetTrigger("Start");
 		CRTEffect.StartCRT(fadeTime);
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
-											   "to", 1f,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdateMenuAlpha",
-											   "ignoretimescale", true));
-		iTween.ValueTo(gameObject, iTween.Hash("from", 1f,
-											   "to", overlayVisibility,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "UpdateOverlay",
-											   "ignoretimescale", true));
+		DOTween.To(UpdateMenuAlpha, 0f, 1f, fadeTime)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true);
+		blackOverlay.alpha = 1f;
+		blackOverlay.DOFade(overlayVisibility, fadeTime)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true);
 	}
 
 	private IEnumerator HideMenu(string levelName = "none")
 	{
 		if (levelName != "none" && levelName != "Exit")
 		{
-			CRTEffect.AnimateScanlines(fadeTime, 0f, iTween.EaseType.easeOutSine);
+			CRTEffect.AnimateScanlines(fadeTime, 0f, Ease.OutSine);
 
 			AsyncOperation async = Application.LoadLevelAsync(levelName);
 			async.allowSceneActivation = false;
@@ -179,20 +165,5 @@ public class MainMenu : MonoBehaviour
 		menu.alpha = newValue;
 		menu.interactable = newValue >= interactableThreshold;
 		menu.blocksRaycasts = newValue >= interactableThreshold;
-	}
-
-	private void UpdateOverlay(float newValue)
-	{
-		blackOverlay.alpha = newValue;
-	}
-
-	private void GoToUpdateX(float newValue)
-	{
-		rectTransform.anchoredPosition = new Vector2(newValue, rectTransform.anchoredPosition.y);
-	}
-
-	private void GoToUpdateY(float newValue)
-	{
-		rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, newValue);
 	}
 }

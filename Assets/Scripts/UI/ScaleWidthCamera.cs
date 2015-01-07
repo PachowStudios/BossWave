@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 [ExecuteInEditMode]
 public class ScaleWidthCamera : MonoBehaviour 
@@ -36,16 +37,8 @@ public class ScaleWidthCamera : MonoBehaviour
 	public static void AnimateFOV(int newFOV, float time)
 	{
 		instance.overrideSettings = true;
-
-		iTween.ValueTo(instance.gameObject, iTween.Hash("from", FOV,
-														"to", newFOV,
-														"time", time,
-														"easetype", iTween.EaseType.easeOutQuint,
-														"onupdate", "UpdateFOV"));
-	}
-
-	private void UpdateFOV(float newValue)
-	{
-		overrideFOV = (int)newValue;
+		instance.overrideFOV = FOV;
+		DOTween.To(() => instance.overrideFOV, x => instance.overrideFOV = x, newFOV, time)
+			.SetEase(Ease.OutQuint);
 	}
 }

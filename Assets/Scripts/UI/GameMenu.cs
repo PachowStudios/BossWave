@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using DG.Tweening;
+using DG.Tweening.Core;
 
 public class GameMenu : MonoBehaviour 
 {
@@ -72,7 +74,7 @@ public class GameMenu : MonoBehaviour
 				SelectObject(pauseSelect);
 				TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
 				CRTEffect.StartCRT(fadeTime);
-				Fade(0f, 1f, "UpdatePauseAlpha", true);
+				Fade(0f, 1f, UpdatePauseAlpha, true);
 
 				SetJoysticks(false);
 			}
@@ -83,7 +85,7 @@ public class GameMenu : MonoBehaviour
 				GoToNode("Pause Menu");
 				TimeWarpEffect.EndWarp(fadeTime, sounds);
 				CRTEffect.EndCRT(fadeTime);
-				Fade(1f, 0f, "UpdatePauseAlpha", true);
+				Fade(1f, 0f, UpdatePauseAlpha, true);
 
 				SetJoysticks(true);
 			}
@@ -108,8 +110,8 @@ public class GameMenu : MonoBehaviour
 
 			sounds = FindObjectsOfType<AudioSource>();
 
-			TimeWarpEffect.StartWarp(0f, loadTime, sounds, iTween.EaseType.easeOutSine);
-			CRTEffect.AnimateScanlines(loadTime, 0f, iTween.EaseType.easeOutSine);
+			TimeWarpEffect.StartWarp(0f, loadTime, sounds, Ease.OutSine);
+			CRTEffect.AnimateScanlines(loadTime, 0f, Ease.OutSine);
 			StartCoroutine(LoadLevelCoroutine(levelName));
 		}
 	}
@@ -126,19 +128,9 @@ public class GameMenu : MonoBehaviour
 
 	public void GoToNode(string node)
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.x,
-											   "to", -transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition.x,
-											   "time", nodeMoveSpeed,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "GoToUpdateX",
-											   "ignoretimescale", true));
-
-		iTween.ValueTo(gameObject, iTween.Hash("from", rectTransform.anchoredPosition.y,
-											   "to", -transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition.y,
-											   "time", nodeMoveSpeed,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", "GoToUpdateY",
-											   "ignoretimescale", true));
+		rectTransform.DOAnchorPos(-transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition, nodeMoveSpeed)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true);
 	}
 
 	public void SelectObject(Selectable selectable)
@@ -197,19 +189,15 @@ public class GameMenu : MonoBehaviour
 
 		SelectObject(gameOverSelect);
 		CRTEffect.StartCRT(fadeTime);
-		Fade(0f, 1f, "UpdateGameOverAlpha", false);
+		Fade(0f, 1f, UpdateGameOverAlpha, false);
 	}
 
-	private void Fade(float from, float to, string updateMethod, bool setPause)
+	private void Fade(float from, float to, DOSetter<float> updateMethod, bool setPause)
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", from,
-											   "to", to,
-											   "time", fadeTime,
-											   "easetype", iTween.EaseType.easeOutQuint,
-											   "onupdate", updateMethod,
-											   "oncomplete", "EnablePausing",
-											   "oncompleteparams", setPause,
-											   "ignoretimescale", true));
+		DOTween.To(updateMethod, from, to, fadeTime)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true)
+			.OnComplete(() => EnablePausing(setPause));
 	}
 
 	private void EnablePausing(bool enabled)
@@ -239,15 +227,5 @@ public class GameMenu : MonoBehaviour
 		gameOverOverlay.alpha = newValue;
 		gameOverOverlay.interactable = newValue >= interactableThreshold;
 		gameOverOverlay.blocksRaycasts = newValue >= interactableThreshold;
-	}
-
-	private void GoToUpdateX(float newValue)
-	{
-		rectTransform.anchoredPosition = new Vector2(newValue, rectTransform.anchoredPosition.y);
-	}
-
-	private void GoToUpdateY(float newValue)
-	{
-		rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, newValue);
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class PopupMessageInstance : MonoBehaviour 
 {
@@ -41,35 +42,17 @@ public class PopupMessageInstance : MonoBehaviour
 
 	public void Appear()
 	{
-		iTween.ValueTo(gameObject, iTween.Hash("from", 0f,
-											   "to", 1f,
-											   "time", time * 0.15f,
-										       "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha"));
+		canvasGroup.alpha = 0f;
+		yOffset = -distance;
 
-		iTween.ValueTo(gameObject, iTween.Hash("from", -distance,
-											   "to", 0f,
-											   "time", time * 0.25f,
-											   "easetype", iTween.EaseType.easeOutBack,
-											   "onupdate", "UpdatePosition"));
-
-		iTween.ValueTo(gameObject, iTween.Hash("delay", time * 0.75f,
-											   "from", 1f,
-											   "to", 0f,
-											   "time", time * 0.25f,
-											   "easetype", iTween.EaseType.easeInQuad,
-											   "onupdate", "UpdateAlpha"));
+		canvasGroup.DOFade(1f, time * 0.15f)
+			.SetEase(Ease.InQuad);
+		DOTween.To(() => yOffset, x => yOffset = x, 0f, time * 0.25f)
+			.SetEase(Ease.OutBack);
+		canvasGroup.DOFade(0f, time * 0.25f)
+			.SetEase(Ease.InQuad)
+			.SetDelay(time * 0.75f);
 
 		Destroy(gameObject, time);
-	}
-
-	private void UpdateAlpha(float newValue)
-	{
-		canvasGroup.alpha = newValue;
-	}
-
-	private void UpdatePosition(float newValue)
-	{
-		yOffset = newValue;
 	}
 }

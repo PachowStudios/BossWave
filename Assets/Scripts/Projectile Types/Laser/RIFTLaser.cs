@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Vectrosity;
+using DG.Tweening;
 
 public class RIFTLaser : Projectile
 {
@@ -138,10 +139,7 @@ public class RIFTLaser : Projectile
 	public void Stop()
 	{
 		charge.enabled = false;
-		iTween.ValueTo(gameObject, iTween.Hash("from", firePoint,
-											   "to", vectorLine.points3.Last(),
-											   "time", 0.1f,
-											   "onupdate", "FirePointUpdate"));
+		DOTween.To(() => firePoint, x => firePoint = x, vectorLine.points3.Last(), 0.1f);
 		Destroy(gameObject, 0.1f);
 	}
 
@@ -194,10 +192,5 @@ public class RIFTLaser : Projectile
 		{
 			return newList;
 		}
-	}
-
-	private void FirePointUpdate(Vector3 newValue)
-	{
-		firePoint = newValue;
 	}
 }
