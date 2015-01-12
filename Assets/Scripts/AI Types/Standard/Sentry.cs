@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sentry : Enemy
+public class Sentry : StandardEnemy
 {
 	public float detectionRange = 5f;
 	public float minWaitTime = 0.5f;

@@ -15,14 +15,6 @@ public abstract class Enemy : MonoBehaviour
 	};
 
 	public bool spawned = false;
-	public Transform simulateSpawner;
-	public LayerMask spawnPlatformMask;
-	public string spawnSortingLayer = "Spawn";
-	public int spawnSortingOrder = 0;
-	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
-	public float spawnEntryRange = 1f;
-	public float spawnJumpHeight = 4f;
-	public float spawnLength = 0.5f;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;
 	public float maxHealth = 10f;
@@ -40,8 +32,6 @@ public abstract class Enemy : MonoBehaviour
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
-	public bool checkFrontCollision = false;
-	public bool checkLedgeCollision = false;
 	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
@@ -61,14 +51,6 @@ public abstract class Enemy : MonoBehaviour
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Transform popupMessagePoint;
-	protected Transform frontCheck;
-	protected Transform ledgeCheck;
-
-	private LayerMask defaultPlatformMask;
-	private string defaultSortingLayer;
-	private int defaultSortingOrder;
-	private Color defaultColor;
-	private Vector3 entryPoint;
 
 	public Sprite Sprite
 	{
@@ -88,23 +70,6 @@ public abstract class Enemy : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
-	public Transform Spawner
-	{
-		set
-		{
-			entryPoint = Extensions.Vector3Range(value.FindChild("Entry Start").position,
-												 value.FindChild("Entry End").position);
-		}
-	}
-
-	protected abstract void ApplyAnimation();
-
-	protected abstract void Walk();
-
-	protected abstract void Jump(float height);
-
-	protected abstract void CheckAttack();
-
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -112,69 +77,7 @@ public abstract class Enemy : MonoBehaviour
 		controller = GetComponent<CharacterController2D>();
 		popupMessagePoint = transform.FindChild("popupMessage");
 
-		if (checkFrontCollision)
-		{
-			frontCheck = transform.FindChild("frontCheck");
-		}
-
-		ledgeCheck = transform.FindChild("ledgeCheck");
-
-		defaultPlatformMask = controller.platformMask;
-		defaultSortingLayer = spriteRenderer.sortingLayerName;
-		defaultSortingOrder = spriteRenderer.sortingOrder;
-		defaultColor = spriteRenderer.color;
-
-		if (!spawned)
-		{
-			controller.platformMask = spawnPlatformMask;
-			spriteRenderer.sortingLayerName = spawnSortingLayer;
-			spriteRenderer.sortingOrder = spawnSortingOrder;
-			spriteRenderer.color = spawnColor;
-			invincible = true;
-			ignoreProjectiles = true;
-			left = true;
-		}
-
-		if (simulateSpawner != null)
-		{
-			Spawner = simulateSpawner;
-		}
-
 		health = maxHealth;
-	}
-
-	protected virtual void FixedUpdate()
-	{
-		InitialUpdate();
-		ApplyAnimation();
-
-		if (checkFrontCollision)
-		{
-			CheckFrontCollision();
-		}
-
-		if (!spawned)
-		{
-			CheckLedgeCollision();
-
-			if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
-			{
-				Spawn();
-			}
-		}
-		else
-		{
-			if (checkLedgeCollision)
-			{
-				CheckLedgeCollision();
-			}
-
-			Walk();
-			CheckAttack();
-		}
-
-		GetMovement();
-		ApplyMovement();
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D enemy)
@@ -262,16 +165,6 @@ public abstract class Enemy : MonoBehaviour
 		controller.move(velocity * Time.deltaTime);
 	}
 
-	public void EnableMovement(bool enable)
-	{
-		disableMovement = !enable;
-	}
-
-	private void EnableMovementAnim(int enable)
-	{
-		EnableMovement(enable != 0);
-	}
-
 	protected void InitialUpdate()
 	{
 		velocity = controller.velocity;
@@ -280,23 +173,6 @@ public abstract class Enemy : MonoBehaviour
 		{
 			velocity.y = 0;
 		}
-	}
-
-	protected void Spawn()
-	{
-		Jump(entryPoint.y - transform.position.y + spawnJumpHeight);
-
-		controller.platformMask = defaultPlatformMask;
-		spriteRenderer.sortingLayerName = defaultSortingLayer;
-		spriteRenderer.sortingOrder = defaultSortingOrder;
-		invincible = false;
-		ignoreProjectiles = false;
-		left = right = false;
-
-		spriteRenderer.DOColor(defaultColor, spawnLength)
-			.SetEase(Ease.InOutSine);
-
-		spawned = true;
 	}
 
 	protected void GetMovement()
@@ -335,35 +211,6 @@ public abstract class Enemy : MonoBehaviour
 		velocity.y += gravity * Time.fixedDeltaTime;
 
 		controller.move(velocity * Time.fixedDeltaTime);
-	}
-
-	protected void CheckFrontCollision()
-	{
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, controller.platformMask);
-
-		if (frontHits.Length > 0)
-		{
-			Flip();
-
-			right = !right;
-			left = !right;
-		}
-	}
-
-	protected void CheckLedgeCollision()
-	{
-		if (IsGrounded)
-		{
-			Collider2D[] ledgeHits = Physics2D.OverlapPointAll(ledgeCheck.position, controller.platformMask);
-
-			if (ledgeHits.Length == 0)
-			{
-				Flip();
-
-				right = !right;
-				left = !right;
-			}
-		}
 	}
 
 	protected void Flip()

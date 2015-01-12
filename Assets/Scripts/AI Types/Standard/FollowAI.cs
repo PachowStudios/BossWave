@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowAI : Enemy
+public class FollowAI : StandardEnemy
 {
 	public float followRange = 5f;
 	public float attackRange = 5f;

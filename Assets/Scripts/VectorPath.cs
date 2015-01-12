@@ -8,6 +8,7 @@ public class VectorPath : MonoBehaviour
 
 	public string pathName;
 	public Color pathColor = Color.cyan;
+	public bool linear = true;
 	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
 
 	void OnEnable()
@@ -24,11 +25,18 @@ public class VectorPath : MonoBehaviour
 	{
 		if (enabled && nodes.Length >= 2)
 		{
-			Gizmos.color = pathColor;
-
-			for (int i = 1; i < nodes.Length; i++)
+			if (linear)
 			{
-				Gizmos.DrawLine(nodes[i - 1], nodes[i]);
+				Gizmos.color = pathColor;
+
+				for (int i = 1; i < nodes.Length; i++)
+				{
+					Gizmos.DrawLine(nodes[i - 1], nodes[i]);
+				}
+			}
+			else
+			{
+				iTween.DrawPath(nodes, pathColor);
 			}
 		}
 	}

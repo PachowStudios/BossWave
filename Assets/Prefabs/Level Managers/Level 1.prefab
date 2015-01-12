@@ -77,22 +77,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100010
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400010}
-  - 114: {fileID: 11400002}
-  m_Layer: 0
-  m_Name: Boss Spawner
-  m_TagString: BossSpawner
-  m_Icon: {fileID: 1319202362, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +132,6 @@ Transform:
   m_Children:
   - {fileID: 400008}
   - {fileID: 400002}
-  - {fileID: 400010}
   - {fileID: 400006}
   m_Father: {fileID: 400000}
   m_RootOrder: 0
@@ -163,7 +146,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -176,18 +159,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400004}
   m_RootOrder: 0
---- !u!4 &400010
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 26, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400004}
-  m_RootOrder: 2
 --- !u!4 &400012
 Transform:
   m_ObjectHideFlags: 1
@@ -323,11 +294,9 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1000
-    introLength: 2
+    startTime: 1
     totalLength: 30
     cameraMoveSpeed: 17.5
-    bossSpawner: {fileID: 400010}
     playerWaitPoint: {fileID: 400006}
     progressBar: {fileID: 0}
   enemies:
@@ -357,25 +326,6 @@ MonoBehaviour:
   runningBoundaries: {fileID: 100012}
   runningFOV: 642
   bossWavePlayerMoved: 0
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ef3b15c32eb43108261a87963b8937, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathName: Boss Intro
-  pathColor: {r: .741176486, g: .309803933, b: .674509823, a: 1}
-  nodes:
-  - {x: -15, y: 26, z: 0}
-  - {x: -15, y: 3, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 3
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

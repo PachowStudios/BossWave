@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FlyingBomber : Enemy
+public class FlyingBomber : StandardEnemy
 {
 	public Projectile projectile;
 	public float minFlyHeigt = 5f;

@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 
-public class TheRIFT : Enemy
+public class TheRIFT : Boss
 {
+	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
+	public string spawnPathName;
+	public float spawnFadeTime = 3f;
+	public float spawnPathTime = 5f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
 	public float minPreAttackDelay = 0.25f;
@@ -38,6 +43,7 @@ public class TheRIFT : Enemy
 	private Vector3[] laserPathArray;
 	private RIFTLaser laserInstance;
 
+	private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
 	private Transform firePoint;
 	private Transform groundLevel;
 
@@ -81,22 +87,11 @@ public class TheRIFT : Enemy
 		}
 	}
 
-	protected override void ApplyAnimation()
-	{ }
-
-	protected override void Walk()
-	{ }
-
-	protected override void Jump(float height)
-	{ }
-
-	protected override void CheckAttack()
-	{ }
-
 	protected override void Awake()
 	{
 		base.Awake();
 
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
 		firePoint = transform.FindChild("firePoint");
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 
@@ -107,9 +102,59 @@ public class TheRIFT : Enemy
 
 		swoopTime = newSwoopTime;
 		laserTime = newLaserTime;
+
+		foreach (SpriteRenderer sprite in spriteRenderers)
+		{
+			sprite.color = spawnColor;
+		}
 	}
 
-	protected override void FixedUpdate()
+	void FixedUpdate()
+	{
+		if (spawned)
+		{
+			MainAI();
+		}
+	}
+
+	public override void TakeDamage(GameObject enemy)
+	{
+		if (!invincible)
+		{
+			anim.SetTrigger("Hit");
+		}
+
+		base.TakeDamage(enemy);
+	}
+
+	public override void Spawn()
+	{
+		if (!spawned)
+		{
+			CameraFollow.instance.FollowObject(transform, false, 2f);
+
+			Sequence spawnSequence = DOTween.Sequence();
+
+			spawnSequence.AppendInterval(1f);
+
+			foreach (SpriteRenderer sprite in spriteRenderers)
+			{
+				spawnSequence.Insert(1, sprite.DOColor(Color.white, spawnFadeTime));
+			}
+
+			spawnSequence.AppendInterval(0.5f);
+			spawnSequence.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, PathType.CatmullRom, PathMode.Sidescroller2D));
+			spawnSequence.AppendCallback(FinishSpawn);
+		}
+	}
+
+	private void FinishSpawn()
+	{
+		CameraFollow.instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
+		spawned = true;
+	}
+
+	private void MainAI()
 	{
 		InitialUpdate();
 
@@ -260,16 +305,6 @@ public class TheRIFT : Enemy
 			GetMovement();
 			ApplyMovement();
 		}
-	}
-
-	public override void TakeDamage(GameObject enemy)
-	{
-		if (!invincible)
-		{
-			anim.SetTrigger("Hit");
-		}
-
-		base.TakeDamage(enemy);
 	}
 
 	private void UpdateSwoopPath()

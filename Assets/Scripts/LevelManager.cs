@@ -21,12 +21,10 @@ public class LevelManager : MonoBehaviour
 	[System.Serializable]
 	public struct BossWave
 	{
-		public Enemy boss;
+		public Boss boss;
 		public float startTime;
-		public float introLength;
 		public float totalLength;
 		public float cameraMoveSpeed;
-		public Transform bossSpawner;
 		public Transform playerWaitPoint;
 		public Scrollbar progressBar;
 	}
@@ -38,7 +36,7 @@ public class LevelManager : MonoBehaviour
 	public AudioSource mainMusic;
 	public List<Wave> waves;
 	public BossWave bossWave;
-	public List<Enemy> enemies;
+	public List<StandardEnemy> enemies;
 	public List<Gun> guns;
 	public List<Powerup> powerups;
 	public List<Microchip> microchips;
@@ -52,7 +50,7 @@ public class LevelManager : MonoBehaviour
 	[HideInInspector]
 	public bool bossWavePlayerMoved = false;
 
-	private Enemy bossInstance;
+	private Boss bossInstance;
 	private bool bossWaveActive = false;
 	private bool bossWaveIntroComplete = false;
 	private bool bossWaveInitialized = false;
@@ -63,10 +61,9 @@ public class LevelManager : MonoBehaviour
 	private float powerupTime;
 	private float powerupRange;
 
-	private CameraFollow mainCamera;
-	private Transform cameraWrapper;
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
+	private Transform bossSpawner;
 	private Transform powerupSpawner;
 
 	void Awake()
@@ -75,10 +72,9 @@ public class LevelManager : MonoBehaviour
 
 		DOTween.Init();
 
-		mainCamera = Camera.main.GetComponent<CameraFollow>();
-		cameraWrapper = GameObject.FindGameObjectWithTag("CameraWrapper").transform;
 		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
+		bossSpawner = GameObject.FindGameObjectWithTag("BossSpawner").transform;
 		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
 
 		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
@@ -125,14 +121,14 @@ public class LevelManager : MonoBehaviour
 				{
 					Cutscene.StartCutscene();
 					ScaleWidthCamera.AnimateFOV(runningFOV, 1f);
-					bossInstance = Instantiate(bossWave.boss, bossWave.bossSpawner.position, Quaternion.identity) as Enemy;
-					mainCamera.FollowObject(cameraWrapper, true);
+					bossInstance = Instantiate(bossWave.boss, bossSpawner.position, Quaternion.identity) as Boss;
+					bossInstance.Spawn();
 					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
 
 					bossWaveInitialized = true;
 				}
 
-				if (waveTimer >= bossWave.startTime + bossWave.introLength)
+				if (bossInstance.spawned)
 				{
 					worldBoundaries.SetActive(false);
 					runningBoundaries.SetActive(true);
@@ -141,7 +137,6 @@ public class LevelManager : MonoBehaviour
 					bossWavePlayerMoved = true;
 
 					Cutscene.EndCutscene(true);
-					bossInstance.GetComponent<Enemy>().enabled = true;
 
 					foreach(GameObject element in scrollingElements)
 					{
@@ -199,9 +194,9 @@ public class LevelManager : MonoBehaviour
 
 	private IEnumerator SpawnWave(int wave)
 	{
-		List<Enemy> possibleEnemies = new List<Enemy>();
+		List<StandardEnemy> possibleEnemies = new List<StandardEnemy>();
 
-		foreach (Enemy enemy in enemies)
+		foreach (StandardEnemy enemy in enemies)
 		{
 			if (enemy.difficulty == waves[wave].difficulty)
 			{
@@ -216,7 +211,7 @@ public class LevelManager : MonoBehaviour
 				int enemyToSpawn = Mathf.RoundToInt(Random.Range(0f, possibleEnemies.Count - 1));
 				int spawnerToUse = Mathf.RoundToInt(Random.Range(0f, spawners.Count - 1));
 
-				Enemy currentEnemy = Instantiate(possibleEnemies[enemyToSpawn], spawners[spawnerToUse].transform.FindChild("Spawn").position, Quaternion.identity) as Enemy;
+				StandardEnemy currentEnemy = Instantiate(possibleEnemies[enemyToSpawn], spawners[spawnerToUse].transform.FindChild("Spawn").position, Quaternion.identity) as StandardEnemy;
 				currentEnemy.Spawner = spawners[spawnerToUse].transform;
 
 				yield return new WaitForSeconds(waves[wave].spawnDelay);

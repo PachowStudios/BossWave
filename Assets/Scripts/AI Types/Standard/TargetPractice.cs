@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TargetPractice : Enemy
+public class TargetPractice : StandardEnemy
 {
 	protected override void FixedUpdate()
 	{

@@ -13,8 +13,6 @@ GameObject:
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  - 114: {fileID: 11400006}
-  - 114: {fileID: 11400004}
   m_Layer: 11
   m_Name: The R.I.F.T
   m_TagString: Enemy
@@ -326,20 +324,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ef2ba3be1b6701429e6ace7545d7d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawned: 1
-  spawnPlatformMask:
-    serializedVersion: 2
-    m_Bits: 0
-  spawnSortingLayer: Spawn
-  spawnSortingOrder: 0
-  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
-  spawnTime: 0
-  spawnLength: 0
+  spawned: 0
   difficulty: 5
   immuneToInstantKill: 1
   maxHealth: 50
@@ -356,13 +346,14 @@ MonoBehaviour:
   moveSpeed: 8
   groundDamping: 10
   inAirDamping: 5
-  checkFrontCollision: 0
-  checkLedgeCollision: 0
   timeWarpAtDeath: 0
-  health: 0
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0
+  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 1}
+  spawnPathName: Boss Intro
+  spawnFadeTime: 3
+  spawnPathTime: 5
   minFloatHeight: 9
   maxFloatHeight: 11
   minPreAttackDelay: .25
@@ -407,90 +398,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0401554a0e6f9466db3c1a798d358b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: 
-  playAutomatically: 1
-  delay: 0
-  type: 8
-  showIconInInspector: 1
-  keys:
-  - alpha
-  - time
-  indexes: 0000000001000000
-  metadatas:
-  - 
-  - 
-  ints: 
-  floats:
-  - 0
-  - 1
-  bools: 
-  strings: []
-  vector3s: []
-  colors: []
-  spaces: 
-  easeTypes: 
-  loopTypes: 
-  gameObjects: []
-  transforms: []
-  audioClips: []
-  audioSources: []
-  vector3Arrays: []
-  transformArrays: []
-  paths: []
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0401554a0e6f9466db3c1a798d358b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: 
-  playAutomatically: 1
-  delay: 0
-  type: 17
-  showIconInInspector: 1
-  keys:
-  - path
-  - time
-  - easetype
-  indexes: 000000000000000000000000
-  metadatas:
-  - p
-  - 
-  - 
-  ints: 
-  floats:
-  - 2
-  bools: 
-  strings:
-  - Boss Intro
-  vector3s: []
-  colors: []
-  spaces: 
-  easeTypes: 03000000
-  loopTypes: 
-  gameObjects: []
-  transforms: []
-  audioClips: []
-  audioSources: []
-  vector3Arrays: []
-  transformArrays: []
-  paths: []
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
