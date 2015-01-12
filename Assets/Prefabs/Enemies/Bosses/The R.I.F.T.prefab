@@ -289,7 +289,7 @@ MonoBehaviour:
   _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -350,10 +350,13 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0
-  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 1}
+  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
-  spawnFadeTime: 3
-  spawnPathTime: 5
+  silhouetteTubesName: 2-Boss Silhouette Tubes
+  silhouetteBodyName: 3-Boss Silhouette Body
+  spawnFadeTime: .5
+  spawnPathTime: 4
+  spawnLaserDelay: .100000001
   minFloatHeight: 9
   maxFloatHeight: 11
   minPreAttackDelay: .25

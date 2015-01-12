@@ -19,6 +19,7 @@ public class RIFTLaser : Projectile
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
 	public LayerMask collisionLayer;
+	public LayerMask worldCollisionLayer;
 	[Range(0f, 10f)]
 	public float tipExplosionsPerSec = 7f;
 
@@ -87,6 +88,13 @@ public class RIFTLaser : Projectile
 		if (!charging)
 		{
 			previousTipPosition = tip.transform.position;
+
+			RaycastHit2D raycast = Physics2D.Linecast(firePoint, targetPoint, worldCollisionLayer);
+
+			if (raycast.collider != null)
+			{
+				targetPoint = raycast.point;
+			}
 
 			targets[0] = firePoint;
 			targets[1] = transform.TransformPoint(new Vector3(firePoint.DistanceFrom(targetPoint) + lengthOffset, 0f, 0f));

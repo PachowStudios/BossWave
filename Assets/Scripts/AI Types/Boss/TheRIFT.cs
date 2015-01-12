@@ -6,8 +6,10 @@ using DG.Tweening;
 
 public class TheRIFT : Boss
 {
-	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
+	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
+	public string silhouetteTubesName;
+	public string silhouetteBodyName;
 	public float spawnFadeTime = 3f;
 	public float spawnPathTime = 5f;
 	public float minFloatHeight = 3f;
@@ -46,6 +48,8 @@ public class TheRIFT : Boss
 	private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
 	private Transform firePoint;
 	private Transform groundLevel;
+	private SpriteRenderer silhouetteTubes;
+	private GameObject silhouetteBody;
 
 	private float swoopPercentage
 	{
@@ -94,6 +98,8 @@ public class TheRIFT : Boss
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
 		firePoint = transform.FindChild("firePoint");
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
+		silhouetteTubes = GameObject.Find(silhouetteTubesName).GetComponent<SpriteRenderer>();
+		silhouetteBody = GameObject.Find(silhouetteBodyName);
 
 		defaultGravity = gravity;
 
@@ -131,20 +137,24 @@ public class TheRIFT : Boss
 	{
 		if (!spawned)
 		{
-			CameraFollow.instance.FollowObject(transform, false, 2f);
+			CameraFollow.instance.FollowObject(transform, false, 2f, true);
 
 			Sequence spawnSequence = DOTween.Sequence();
 
-			spawnSequence.AppendInterval(1f);
+			spawnSequence.AppendInterval(0.5f);
 
 			foreach (SpriteRenderer sprite in spriteRenderers)
 			{
 				spawnSequence.Insert(1, sprite.DOColor(Color.white, spawnFadeTime));
 			}
 
-			spawnSequence.AppendInterval(0.5f);
-			spawnSequence.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, PathType.CatmullRom, PathMode.Sidescroller2D));
-			spawnSequence.AppendCallback(FinishSpawn);
+			spawnSequence
+				.AppendCallback(() => ExplodeEffect.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite))
+				.AppendCallback(() => Destroy(silhouetteTubes.gameObject))
+				.AppendCallback(() => Destroy(silhouetteBody))
+				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, PathType.CatmullRom, PathMode.Sidescroller2D)
+					.SetEase(Ease.InCubic))
+				.AppendCallback(FinishSpawn);
 		}
 	}
 

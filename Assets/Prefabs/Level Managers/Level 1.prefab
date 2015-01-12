@@ -324,7 +324,7 @@ MonoBehaviour:
   powerupBuffer: 5
   worldBoundaries: {fileID: 0}
   runningBoundaries: {fileID: 100012}
-  runningFOV: 642
+  runningFOV: 630
   bossWavePlayerMoved: 0
 --- !u!1001 &100100000
 Prefab:
