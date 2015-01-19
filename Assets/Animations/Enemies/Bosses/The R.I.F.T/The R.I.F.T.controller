@@ -789,6 +789,14 @@ StateMachine:
       second:
       - {fileID: 110150302}
     data:
+      first: {fileID: 110202558}
+      second:
+      - {fileID: 110159841}
+    data:
+      first: {fileID: 110206962}
+      second:
+      - {fileID: 110185674}
+    data:
       first: {fileID: 110200000}
       second:
       - {fileID: 110100000}
@@ -800,14 +808,6 @@ StateMachine:
       first: {fileID: 110201474}
       second:
       - {fileID: 110133974}
-    data:
-      first: {fileID: 110202558}
-      second:
-      - {fileID: 110159841}
-    data:
-      first: {fileID: 110206962}
-      second:
-      - {fileID: 110185674}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

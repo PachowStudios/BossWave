@@ -6,6 +6,19 @@ using DG.Tweening;
 
 public class TheRIFT : Boss
 {
+	public enum Attacks
+	{
+		Swoop,
+		Laser
+	};
+
+	[System.Serializable]
+	public struct Attack
+	{
+		public float time;
+		public List<Attacks> possibleAttacks;
+	};
+
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
 	public string silhouetteTubesName;
@@ -16,28 +29,21 @@ public class TheRIFT : Boss
 	public float maxFloatHeight = 5f;
 	public float minPreAttackDelay = 0.25f;
 	public float maxPreAttackDelay = 0.75f;
-	public float minSwoopTime = 3f;
-	public float maxSwoopTime = 5f;
 	public float swoopLength = 5f;
-	public AnimationCurve swoopCurve;
 	public float smashRange = 4f;
 	public float smashTime = 2f;
 	public float smashGravity = -50f;
-	public float minLaserTime = 5f;
-	public float maxLaserTime = 10f;
 	public float laserLength = 3f;
+	public AnimationCurve swoopCurve;
 	public AnimationCurve laserCurve;
 	public RIFTLaser laserPrefab;
+	public List<Attack> attacks;
 
 	private float defaultGravity;
-	private float swoopTimer = 0f;
-	private float swoopTime;
+	private int currentAttack = 0;
+	private float attackTimer = 0f;
 	private float smashTimer = 0f;
-	private float laserTimer = 0f;
-	private float laserTime;
-	private bool swooping = false;
-	private bool smashing = false;
-	private bool firingLaser = false;
+	private bool attacking = false;
 	private bool preAttacking = false;
 	private List<Vector3> swoopPath = new List<Vector3>();
 	private List<Vector3> laserPath = new List<Vector3>();
@@ -75,22 +81,6 @@ public class TheRIFT : Boss
 		}
 	}
 
-	private float newSwoopTime
-	{
-		get
-		{
-			return Random.Range(minSwoopTime, maxSwoopTime);
-		}
-	}
-
-	private float newLaserTime
-	{
-		get
-		{
-			return Random.Range(minLaserTime, maxLaserTime);
-		}
-	}
-
 	protected override void Awake()
 	{
 		base.Awake();
@@ -105,9 +95,6 @@ public class TheRIFT : Boss
 
 		minFloatHeight += groundLevel.transform.position.y;
 		maxFloatHeight += groundLevel.transform.position.y;
-
-		swoopTime = newSwoopTime;
-		laserTime = newLaserTime;
 
 		foreach (SpriteRenderer sprite in spriteRenderers)
 		{
@@ -165,6 +152,46 @@ public class TheRIFT : Boss
 	}
 
 	private void MainAI()
+	{
+		InitialUpdate();
+
+		invincible = !attacking && !preAttacking;
+		anim.SetBool("Eye Shield", invincible);
+
+		attackTimer += Time.deltaTime;
+
+		if (currentAttack < attacks.Count && attackTimer >= attacks[currentAttack].time)
+		{
+			int attackToUse = Random.Range(0, attacks[currentAttack].possibleAttacks.Count);
+
+			Attack(attacks[currentAttack].possibleAttacks[attackToUse]);
+		}
+	}
+
+	private void Attack(Attacks attackToUse)
+	{
+		switch (attackToUse)
+		{
+			case Attacks.Laser:
+				anim.SetTrigger("PreAttack Laser");
+				break;
+			case Attacks.Swoop:
+				anim.SetTrigger("PreAttack Swoop");
+				break;
+		}
+	}
+
+	private void FireLaser()
+	{
+
+	}
+
+	private void Swoop()
+	{
+
+	}
+
+	private void MainAIOld()
 	{
 		InitialUpdate();
 
