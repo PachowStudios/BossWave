@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using DG.Tweening;
 
 public class TheRIFT : Boss
@@ -16,6 +17,7 @@ public class TheRIFT : Boss
 	public struct Attack
 	{
 		public float time;
+		public float preAttackTime;
 		public List<Attacks> possibleAttacks;
 	};
 
@@ -47,8 +49,6 @@ public class TheRIFT : Boss
 	private bool preAttacking = false;
 	private List<Vector3> swoopPath = new List<Vector3>();
 	private List<Vector3> laserPath = new List<Vector3>();
-	private Vector3[] swoopPathArray;
-	private Vector3[] laserPathArray;
 	private RIFTLaser laserInstance;
 
 	private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
@@ -70,14 +70,6 @@ public class TheRIFT : Boss
 		get
 		{
 			return laserCurve.Evaluate(Mathf.Clamp((laserTimer - laserTime) / laserLength, 0f, 1f));
-		}
-	}
-
-	private float newPreAttackTime
-	{
-		get
-		{
-			return Random.Range(minPreAttackDelay, maxPreAttackDelay);
 		}
 	}
 
@@ -160,35 +152,69 @@ public class TheRIFT : Boss
 
 		attackTimer += Time.deltaTime;
 
-		if (currentAttack < attacks.Count && attackTimer >= attacks[currentAttack].time)
+		if (currentAttack < attacks.Count && attackTimer >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime)
 		{
-			int attackToUse = Random.Range(0, attacks[currentAttack].possibleAttacks.Count);
-
-			Attack(attacks[currentAttack].possibleAttacks[attackToUse]);
+			if (!attacking && !preAttacking)
+			{
+				StartCoroutine(Attack(attacks[currentAttack]));
+				currentAttack++;
+				preAttacking = true;
+			}
 		}
 	}
 
-	private void Attack(Attacks attackToUse)
+	private IEnumerator Attack(Attack attack)
 	{
-		switch (attackToUse)
+		int attackToUse = UnityEngine.Random.Range(0, attacks[currentAttack].possibleAttacks.Count);
+		Action attackFunction = null;
+
+		switch (attack.possibleAttacks[attackToUse])
 		{
 			case Attacks.Laser:
 				anim.SetTrigger("PreAttack Laser");
+				attackFunction = () => FireLaser();
 				break;
 			case Attacks.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
+				attackFunction = () => Swoop();
 				break;
+		}
+
+		if (attackFunction != null)
+		{
+			yield return new WaitForSeconds(attack.preAttackTime);
+
+			attacking = true;
+			preAttacking = false;
+			attackFunction.Invoke();
 		}
 	}
 
 	private void FireLaser()
 	{
+		laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
 
+		
 	}
 
 	private void Swoop()
 	{
 
+	}
+
+	private void GenerateLaserPath()
+	{
+		Vector3 startingPosition = transform.position;
+		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
+
+		laserPath.Clear();
+		laserPath.Add(new Vector3(startingPosition.x,
+								  groundLevel.position.y,
+								  startingPosition.z));
+		laserPath.Add(new Vector3(screenRight.x + 1f,
+								  groundLevel.position.y,
+								  startingPosition.z));
+		laserPath.Add(laserPath[0]);
 	}
 
 	private void MainAIOld()
