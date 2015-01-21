@@ -27,10 +27,9 @@ public class TheRIFT : Boss
 	public string silhouetteBodyName;
 	public float spawnFadeTime = 3f;
 	public float spawnPathTime = 5f;
+	public float returnSpeed = 30f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
-	public float minPreAttackDelay = 0.25f;
-	public float maxPreAttackDelay = 0.75f;
 	public float swoopLength = 5f;
 	public float smashRange = 4f;
 	public float smashTime = 2f;
@@ -42,11 +41,15 @@ public class TheRIFT : Boss
 	public List<Attack> attacks;
 
 	private float defaultGravity;
+	private float startingX;
+	private Vector3 prevPosition;
 	private int currentAttack = 0;
 	private float attackTimer = 0f;
 	private float smashTimer = 0f;
 	private bool attacking = false;
 	private bool preAttacking = false;
+	private bool floating = true;
+	private bool applyMovement = true;
 	private List<Vector3> swoopPath = new List<Vector3>();
 	private List<Vector3> laserPath = new List<Vector3>();
 	private RIFTLaser laserInstance;
@@ -56,22 +59,6 @@ public class TheRIFT : Boss
 	private Transform groundLevel;
 	private SpriteRenderer silhouetteTubes;
 	private GameObject silhouetteBody;
-
-	private float swoopPercentage
-	{
-		get
-		{
-			return swoopCurve.Evaluate(Mathf.Clamp((swoopTimer - swoopTime) / swoopLength, 0f, 1f));
-		}
-	}
-
-	private float laserPercentage
-	{
-		get
-		{
-			return laserCurve.Evaluate(Mathf.Clamp((laserTimer - laserTime) / laserLength, 0f, 1f));
-		}
-	}
 
 	protected override void Awake()
 	{
@@ -141,13 +128,15 @@ public class TheRIFT : Boss
 	{
 		CameraFollow.instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
 		spawned = true;
+		startingX = transform.position.x;
+		prevPosition = transform.position;
 	}
 
 	private void MainAI()
 	{
 		InitialUpdate();
 
-		invincible = !attacking && !preAttacking;
+		invincible = !attacking;
 		anim.SetBool("Eye Shield", invincible);
 
 		attackTimer += Time.deltaTime;
@@ -156,14 +145,27 @@ public class TheRIFT : Boss
 		{
 			if (!attacking && !preAttacking)
 			{
-				StartCoroutine(Attack(attacks[currentAttack]));
+				StartCoroutine(DoAttack(attacks[currentAttack]));
 				currentAttack++;
 				preAttacking = true;
 			}
 		}
+
+		if (applyMovement)
+		{
+			if (floating)
+			{
+				Float();
+			}
+
+			ReturnPosition();
+
+			GetMovement();
+			ApplyMovement();
+		}
 	}
 
-	private IEnumerator Attack(Attack attack)
+	private IEnumerator DoAttack(Attack attack)
 	{
 		int attackToUse = UnityEngine.Random.Range(0, attacks[currentAttack].possibleAttacks.Count);
 		Action attackFunction = null;
@@ -172,7 +174,7 @@ public class TheRIFT : Boss
 		{
 			case Attacks.Laser:
 				anim.SetTrigger("PreAttack Laser");
-				attackFunction = () => FireLaser();
+				attackFunction = () => StartCoroutine(FireLaser());
 				break;
 			case Attacks.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
@@ -190,16 +192,92 @@ public class TheRIFT : Boss
 		}
 	}
 
-	private void FireLaser()
+	private IEnumerator FireLaser()
 	{
 		laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
 
-		
+		GameObject laserTarget = new GameObject();
+		laserTarget.transform.parent = transform;
+
+		Tween chargeTween = DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, Vector3.zero, laserInstance.chargeTime)
+			.OnUpdate(() => laserInstance.firePoint = firePoint.position);
+
+		yield return chargeTween.WaitForCompletion();
+
+		GenerateLaserPath();
+		laserTarget.transform.position = laserPath[0];
+		laserTarget.transform.DOPath(laserPath.ToArray(), laserLength, PathType.CatmullRom, PathMode.Sidescroller2D)
+			.SetEase(laserCurve)
+			.OnUpdate(() =>
+			{
+				laserInstance.firePoint = firePoint.position;
+				laserInstance.targetPoint = laserTarget.transform.position;
+			})
+			.OnComplete(() =>
+			{
+				laserInstance.Stop();
+				laserInstance = null;
+				Destroy(laserTarget);
+				attacking = false;
+			});
 	}
 
 	private void Swoop()
 	{
+		applyMovement = false;
 
+		GenerateSwoopPath();
+		transform.DOPath(swoopPath.ToArray(), swoopLength, PathType.CatmullRom, PathMode.Sidescroller2D)
+			.SetEase(swoopCurve)
+			.OnComplete(() =>
+			{
+				applyMovement = true;
+				attacking = false;
+			});
+	}
+
+	private void Float()
+	{
+		if (transform.position.y >= maxFloatHeight)
+		{
+			gravity = defaultGravity;
+
+			if (velocity.y > 0)
+			{
+				velocity.y -= -defaultGravity * Time.deltaTime;
+			}
+		}
+		else if (transform.position.y <= minFloatHeight)
+		{
+			gravity = -defaultGravity;
+
+			if (velocity.y < 0)
+			{
+				velocity.y += -defaultGravity * Time.deltaTime;
+			}
+		}
+	}
+
+	private void ReturnPosition()
+	{
+		if (transform.position.x > startingX + 1f)
+		{
+			velocity.x = -returnSpeed;
+		}
+
+		if (transform.localScale.x > 0f && 
+			prevPosition.x > transform.position.x && 
+			transform.position.x > startingX)
+		{
+			Flip();
+		}
+		else if (transform.localScale.x < 0f && 
+				 transform.position.x <= startingX)
+		{
+			Flip();
+		}
+
+		prevPosition = transform.position;
 	}
 
 	private void GenerateLaserPath()
@@ -208,7 +286,7 @@ public class TheRIFT : Boss
 		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
 
 		laserPath.Clear();
-		laserPath.Add(new Vector3(startingPosition.x,
+		laserPath.Add(new Vector3(startingX,
 								  groundLevel.position.y,
 								  startingPosition.z));
 		laserPath.Add(new Vector3(screenRight.x + 1f,
@@ -217,217 +295,229 @@ public class TheRIFT : Boss
 		laserPath.Add(laserPath[0]);
 	}
 
-	private void MainAIOld()
-	{
-		InitialUpdate();
-
-		invincible = !swooping && !firingLaser && !preAttacking;
-		anim.SetBool("Eye Shield", invincible);
-
-		if (((!swooping && !firingLaser) || preAttacking) && !smashing)
-		{
-			anim.SetBool("Attacking", false);
-		}
-
-		// Floating
-		if ((!swooping && !smashing) || preAttacking)
-		{
-			if (transform.position.y >= maxFloatHeight)
-			{
-				gravity = defaultGravity;
-
-				if (velocity.y > 0)
-				{
-					velocity.y -= -defaultGravity * Time.deltaTime;
-				}
-			}
-			else if (transform.position.y <= minFloatHeight)
-			{
-				gravity = -defaultGravity;
-
-				if (velocity.y < 0)
-				{
-					velocity.y += -defaultGravity * Time.deltaTime;
-				}
-			}
-		}
-
-		// Smashing
-		if (!swooping)
-		{
-			smashTimer += Time.deltaTime;
-
-			if (smashTimer >= smashTime)
-			{
-				if (!smashing)
-				{
-					if (Mathf.Abs(transform.position.x - PlayerControl.instance.transform.position.x) < smashRange)
-					{
-						smashing = true;
-						anim.SetBool("Attacking", true);
-						smashTimer = smashTime;
-					}
-				}
-				else
-				{
-					if (transform.position.y > groundLevel.position.y)
-					{
-						gravity = Mathf.Lerp(gravity, smashGravity, 0.75f);
-					}
-					else
-					{
-						smashing = false;
-						smashTimer = 0f;
-					}
-				}
-			}
-		}
-
-		// Swooping
-		if (!smashing && smashTimer >= smashTime && !firingLaser)
-		{
-			swoopTimer += Time.deltaTime;
-
-			if (swoopTimer >= swoopTime)
-			{
-				if (!swooping)
-				{
-					if (velocity.y < 0f && transform.position.y < (minFloatHeight + maxFloatHeight) / 2f)
-					{
-						swooping = true;
-						preAttacking = true;
-						anim.SetTrigger("Blink");
-					}
-				}
-				else if (!preAttacking)
-				{
-					Vector3 prevPosition = transform.position;
-
-					gameObject.PutOnPath(swoopPathArray, swoopPercentage);
-
-					if (transform.localScale.x > 0 && prevPosition.x > transform.position.x && swoopPercentage > 0.25f)
-					{
-						Flip();
-					}
-
-					if (swoopPercentage == 1f)
-					{
-						swooping = false;
-						swoopTimer = 0f;
-						swoopTime = newSwoopTime;
-
-						if (transform.localScale.x < 0)
-						{
-							Flip();
-						}
-					}
-				}
-			}
-		}
-
-		// Firing Laser
-		if (!swooping)
-		{
-			laserTimer += Time.deltaTime;
-
-			if (laserTimer >= laserTime)
-			{
-				if (!firingLaser)
-				{
-					firingLaser = true;
-					preAttacking = true;
-					anim.SetTrigger("PreAttack");
-				}
-				else if (!preAttacking && laserInstance != null)
-				{
-					laserInstance.firePoint = firePoint.position;
-
-					if (laserInstance.Charging)
-					{
-						laserTimer = laserTime;
-					}
-					else
-					{
-						laserInstance.targetPoint = iTween.PointOnPath(laserPathArray, laserPercentage);
-
-						if (laserPercentage == 1f)
-						{
-							firingLaser = false;
-							laserTimer = 0f;
-							laserTime = newLaserTime;
-							laserInstance.Stop();
-							laserInstance = null;
-						}
-					}
-				}
-			}
-		}
-
-		if (!swooping || preAttacking)
-		{
-			GetMovement();
-			ApplyMovement();
-		}
-	}
-
-	private void UpdateSwoopPath()
+	private void GenerateSwoopPath()
 	{
 		Vector3 startingPosition = transform.position;
 
 		swoopPath.Clear();
 		swoopPath.Add(startingPosition);
-		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x, 
-									groundLevel.position.y - 1f, 
+		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x,
+									groundLevel.position.y - 1f,
 									startingPosition.z));
 		swoopPath.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
-		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x,
-									Camera.main.ViewportToWorldPoint(new Vector3(1f, 0.75f, 10f)).y,
-									startingPosition.z));
-		swoopPath.Add(startingPosition);
-		swoopPathArray = swoopPath.ToArray();
 	}
 
-	private void UpdateLaserPath()
-	{
-		Vector3 startingPosition = transform.position;
-		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
+	//private void MainAIOld()
+	//{
+	//	InitialUpdate();
 
-		laserPath.Clear();
-		laserPath.Add(new Vector3(startingPosition.x,
-								  groundLevel.position.y,
-								  startingPosition.z));
-		laserPath.Add(new Vector3(screenRight.x + 1f,
-								  groundLevel.position.y,
-								  startingPosition.z));
-		laserPath.Add(laserPath[0]);
-		laserPathArray = laserPath.ToArray();
-	}
+	//	invincible = !swooping && !firingLaser && !preAttacking;
+	//	anim.SetBool("Eye Shield", invincible);
 
-	private void EndPreAttack()
-	{
-		StartCoroutine(DoEndPreAttack());
-	}
+	//	if (((!swooping && !firingLaser) || preAttacking) && !smashing)
+	//	{
+	//		anim.SetBool("Attacking", false);
+	//	}
 
-	private IEnumerator DoEndPreAttack()
-	{
-		yield return new WaitForSeconds(newPreAttackTime);
+	//	// Floating
+	//	if ((!swooping && !smashing) || preAttacking)
+	//	{
+	//		if (transform.position.y >= maxFloatHeight)
+	//		{
+	//			gravity = defaultGravity;
 
-		if (preAttacking)
-		{
-			preAttacking = false;
-			anim.SetBool("Attacking", true);
+	//			if (velocity.y > 0)
+	//			{
+	//				velocity.y -= -defaultGravity * Time.deltaTime;
+	//			}
+	//		}
+	//		else if (transform.position.y <= minFloatHeight)
+	//		{
+	//			gravity = -defaultGravity;
 
-			if (swooping)
-			{
-				UpdateSwoopPath();
-				swoopTimer = swoopTime;
-			}
-			else if (firingLaser)
-			{
-				UpdateLaserPath();
-				laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
-				laserInstance.firePoint = firePoint.position;
-			}
-		}
-	}
+	//			if (velocity.y < 0)
+	//			{
+	//				velocity.y += -defaultGravity * Time.deltaTime;
+	//			}
+	//		}
+	//	}
+
+	//	// Smashing
+	//	if (!swooping)
+	//	{
+	//		smashTimer += Time.deltaTime;
+
+	//		if (smashTimer >= smashTime)
+	//		{
+	//			if (!smashing)
+	//			{
+	//				if (Mathf.Abs(transform.position.x - PlayerControl.instance.transform.position.x) < smashRange)
+	//				{
+	//					smashing = true;
+	//					anim.SetBool("Attacking", true);
+	//					smashTimer = smashTime;
+	//				}
+	//			}
+	//			else
+	//			{
+	//				if (transform.position.y > groundLevel.position.y)
+	//				{
+	//					gravity = Mathf.Lerp(gravity, smashGravity, 0.75f);
+	//				}
+	//				else
+	//				{
+	//					smashing = false;
+	//					smashTimer = 0f;
+	//				}
+	//			}
+	//		}
+	//	}
+
+	//	// Swooping
+	//	if (!smashing && smashTimer >= smashTime && !firingLaser)
+	//	{
+	//		swoopTimer += Time.deltaTime;
+
+	//		if (swoopTimer >= swoopTime)
+	//		{
+	//			if (!swooping)
+	//			{
+	//				if (velocity.y < 0f && transform.position.y < (minFloatHeight + maxFloatHeight) / 2f)
+	//				{
+	//					swooping = true;
+	//					preAttacking = true;
+	//					anim.SetTrigger("Blink");
+	//				}
+	//			}
+	//			else if (!preAttacking)
+	//			{
+	//				Vector3 prevPosition = transform.position;
+
+	//				gameObject.PutOnPath(swoopPathArray, swoopPercentage);
+
+	//				if (transform.localScale.x > 0 && prevPosition.x > transform.position.x && swoopPercentage > 0.25f)
+	//				{
+	//					Flip();
+	//				}
+
+	//				if (swoopPercentage == 1f)
+	//				{
+	//					swooping = false;
+	//					swoopTimer = 0f;
+	//					swoopTime = newSwoopTime;
+
+	//					if (transform.localScale.x < 0)
+	//					{
+	//						Flip();
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+
+	//	// Firing Laser
+	//	if (!swooping)
+	//	{
+	//		laserTimer += Time.deltaTime;
+
+	//		if (laserTimer >= laserTime)
+	//		{
+	//			if (!firingLaser)
+	//			{
+	//				firingLaser = true;
+	//				preAttacking = true;
+	//				anim.SetTrigger("PreAttack");
+	//			}
+	//			else if (!preAttacking && laserInstance != null)
+	//			{
+	//				laserInstance.firePoint = firePoint.position;
+
+	//				if (laserInstance.Charging)
+	//				{
+	//					laserTimer = laserTime;
+	//				}
+	//				else
+	//				{
+	//					laserInstance.targetPoint = iTween.PointOnPath(laserPathArray, laserPercentage);
+
+	//					if (laserPercentage == 1f)
+	//					{
+	//						firingLaser = false;
+	//						laserTimer = 0f;
+	//						laserTime = newLaserTime;
+	//						laserInstance.Stop();
+	//						laserInstance = null;
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+
+	//	if (!swooping || preAttacking)
+	//	{
+	//		GetMovement();
+	//		ApplyMovement();
+	//	}
+	//}
+
+	//private void UpdateSwoopPath()
+	//{
+	//	Vector3 startingPosition = transform.position;
+
+	//	swoopPath.Clear();
+	//	swoopPath.Add(startingPosition);
+	//	swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x, 
+	//								groundLevel.position.y - 1f, 
+	//								startingPosition.z));
+	//	swoopPath.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
+	//	swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x,
+	//								Camera.main.ViewportToWorldPoint(new Vector3(1f, 0.75f, 10f)).y,
+	//								startingPosition.z));
+	//	swoopPath.Add(startingPosition);
+	//	swoopPathArray = swoopPath.ToArray();
+	//}
+
+	//private void UpdateLaserPath()
+	//{
+	//	Vector3 startingPosition = transform.position;
+	//	Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
+
+	//	laserPath.Clear();
+	//	laserPath.Add(new Vector3(startingPosition.x,
+	//							  groundLevel.position.y,
+	//							  startingPosition.z));
+	//	laserPath.Add(new Vector3(screenRight.x + 1f,
+	//							  groundLevel.position.y,
+	//							  startingPosition.z));
+	//	laserPath.Add(laserPath[0]);
+	//	laserPathArray = laserPath.ToArray();
+	//}
+
+	//private void EndPreAttack()
+	//{
+	//	StartCoroutine(DoEndPreAttack());
+	//}
+
+	//private IEnumerator DoEndPreAttack()
+	//{
+	//	yield return new WaitForSeconds(newPreAttackTime);
+
+	//	if (preAttacking)
+	//	{
+	//		preAttacking = false;
+	//		anim.SetBool("Attacking", true);
+
+	//		if (swooping)
+	//		{
+	//			UpdateSwoopPath();
+	//			swoopTimer = swoopTime;
+	//		}
+	//		else if (firingLaser)
+	//		{
+	//			UpdateLaserPath();
+	//			laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
+	//			laserInstance.firePoint = firePoint.position;
+	//		}
+	//	}
+	//}
 }

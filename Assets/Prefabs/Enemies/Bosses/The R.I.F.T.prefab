@@ -289,7 +289,7 @@ MonoBehaviour:
   _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -354,37 +354,31 @@ MonoBehaviour:
   spawnPathName: Boss Intro
   silhouetteTubesName: 2-Boss Silhouette Tubes
   silhouetteBodyName: 3-Boss Silhouette Body
-  spawnFadeTime: .5
-  spawnPathTime: 4
-  spawnLaserDelay: .100000001
+  spawnFadeTime: 3
+  spawnPathTime: 5
+  returnSpeed: 30
   minFloatHeight: 9
   maxFloatHeight: 11
-  minPreAttackDelay: .25
-  maxPreAttackDelay: .75
-  minSwoopTime: 5
-  maxSwoopTime: 7
-  swoopLength: 2
+  swoopLength: 1
+  smashRange: 4
+  smashTime: 2
+  smashGravity: -50
+  laserLength: 2
   swoopCurve:
     serializedVersion: 2
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - time: 1
       value: 1
-      inSlope: .600000083
-      outSlope: .600000083
+      inSlope: .0283022616
+      outSlope: .0283022616
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  smashRange: 4
-  smashTime: 2
-  smashGravity: -50
-  minLaserTime: 3
-  maxLaserTime: 5
-  laserLength: 2
   laserCurve:
     serializedVersion: 2
     m_Curve:
@@ -392,6 +386,21 @@ MonoBehaviour:
       value: 0
       inSlope: 0
       outSlope: 0
+      tangentMode: 0
+    - time: .261217892
+      value: .112247385
+      inSlope: 1.24890363
+      outSlope: 1.24890363
+      tangentMode: 0
+    - time: .497916609
+      value: .496874928
+      inSlope: .0161290895
+      outSlope: .0161290895
+      tangentMode: 0
+    - time: .754421949
+      value: .904368758
+      inSlope: 1.23292208
+      outSlope: 1.23292208
       tangentMode: 0
     - time: 1
       value: 1
@@ -401,6 +410,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
+  attacks:
+  - time: 5
+    preAttackTime: 1
+    possibleAttacks: 00000000
+  - time: 5
+    preAttackTime: .100000001
+    possibleAttacks: 01000000
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

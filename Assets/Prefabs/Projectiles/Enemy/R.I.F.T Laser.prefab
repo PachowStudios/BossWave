@@ -225,6 +225,7 @@ MonoBehaviour:
   - {r: .838235259, g: .221885815, b: .498180211, a: 1}
   - {r: .801470578, g: .200367644, b: .469827414, a: 1}
   material: {fileID: 2100000, guid: 0d66a237f16255248b3b209f3c6f67b1, type: 2}
+  chargeTime: .699999988
   animationTime: .00999999978
   subdivisions: 32
   width: 1.29999995
@@ -236,7 +237,7 @@ MonoBehaviour:
     m_Bits: 256
   worldCollisionLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   tipExplosionsPerSec: 8
   firePoint: {x: 0, y: 0, z: 0}
   targetPoint: {x: 0, y: 0, z: 0}
