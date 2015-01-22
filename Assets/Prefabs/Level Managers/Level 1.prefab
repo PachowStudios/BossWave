@@ -264,7 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnEnemies: 0
   spawnPowerups: 0
-  introCRT: 0
+  introCRT: 1
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:

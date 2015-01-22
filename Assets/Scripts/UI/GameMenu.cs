@@ -123,6 +123,7 @@ public class GameMenu : MonoBehaviour
 
 		yield return StartCoroutine(Extensions.WaitForRealSeconds(loadTime - (loadTime * 0.05f)));
 
+		DOTween.Kill();
 		async.allowSceneActivation = true;
 	}
 

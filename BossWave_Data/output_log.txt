@@ -1,7 +1,7 @@
 Initialize engine version: 4.6.0f2 (b073107612b7)
 GfxDevice: creating device client; threaded=1
 Direct3D:
-    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.4475]
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.4709]
     Renderer: NVIDIA GeForce GTX 760
     Vendor:   NVIDIA
     VRAM:     3072 MB (via DXGI)
@@ -17,29 +17,35 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.035 seconds
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll into Unity Child Domain
+- Completed reload, in  0.051 seconds
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
+desktop: 1920x1080 144Hz; virtual: 3840x1080 at -1920,0
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 5.700422 ms
+UnloadTime: 4.511126 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1664.
-Total: 0.813928 ms (FindLiveObjects: 0.048566 ms CreateObjectMapping: 0.016969 ms MarkObjects: 0.389409 ms  DeleteObjects: 0.043592 ms)
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 1823.
+Total: 0.840551 ms (FindLiveObjects: 0.052077 ms CreateObjectMapping: 0.020479 ms MarkObjects: 0.415741 ms  DeleteObjects: 0.044470 ms)
 
-HandleD3DDeviceLost
-  HandleD3DDeviceLost: still lost
-Skipped frame because GfxDevice is in invalid state (device lost)
- 
-(Filename:  Line: 1644)
+UnloadTime: 2.581631 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-HandleD3DDeviceLost
-  HandleD3DDeviceLost: needs reset, doing it
-FullResetD3DDevice
-ResetD3DDevice
-dev->Reset
-D3Dwindow device not lost anymore
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1836.
+Total: 0.813050 ms (FindLiveObjects: 0.042715 ms CreateObjectMapping: 0.019602 ms MarkObjects: 0.434465 ms  DeleteObjects: 0.023112 ms)
+
+UnloadTime: 2.623469 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 312 unused Assets to reduce memory usage. Loaded Objects now: 1292.
+Total: 3.056472 ms (FindLiveObjects: 0.039789 ms CreateObjectMapping: 0.021064 ms MarkObjects: 0.403160 ms  DeleteObjects: 2.303691 ms)
+

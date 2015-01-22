@@ -5,6 +5,7 @@ using System.Linq;
 
 public class Parallax : MonoBehaviour 
 {
+	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
 	public bool scroll = false;
@@ -32,7 +33,9 @@ public class Parallax : MonoBehaviour
 	{
 		if (scroll)
 		{
-			transform.Translate(new Vector2(-(relativeSpeed * LevelManager.instance.bossWave.cameraSpeed), 0) * Time.deltaTime);
+			float speed = (LevelManager.instance == null) ? defaultSpeed : LevelManager.instance.bossWave.cameraSpeed;
+
+			transform.Translate(new Vector2(-(relativeSpeed * speed), 0) * Time.deltaTime);
 
 			Transform firstChild = layers.FirstOrDefault();
 

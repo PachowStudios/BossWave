@@ -26,6 +26,7 @@ public class TheRIFT : Boss
 	public string spawnLaserPathName;
 	public string silhouetteTubesName;
 	public string silhouetteBodyName;
+	public string objectToDestroyName;
 	public float spawnFadeTime = 3f;
 	public float spawnPathTime = 5f;
 	public float spawnLaserPathTime = 2f;
@@ -56,6 +57,7 @@ public class TheRIFT : Boss
 	private Transform groundLevel;
 	private SpriteRenderer silhouetteTubes;
 	private GameObject silhouetteBody;
+	private SpriteRenderer objectToDestroy;
 
 	protected override void Awake()
 	{
@@ -66,6 +68,7 @@ public class TheRIFT : Boss
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 		silhouetteTubes = GameObject.Find(silhouetteTubesName).GetComponent<SpriteRenderer>();
 		silhouetteBody = GameObject.Find(silhouetteBodyName);
+		objectToDestroy = GameObject.Find(objectToDestroyName).GetComponent<SpriteRenderer>();
 
 		defaultGravity = gravity;
 
@@ -118,7 +121,13 @@ public class TheRIFT : Boss
 				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
 					.SetEase(Ease.InCubic))
 				.AppendCallback(FinishSpawn)
-				.AppendCallback(() => FireLaser(VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), spawnLaserPathTime, laserIntroCurve, GameObject.Find("Foregrounds").transform));
+				.AppendCallback(() => FireLaser(VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), spawnLaserPathTime, laserIntroCurve, GameObject.Find("Foregrounds").transform))
+				.AppendInterval(spawnLaserPathTime + 0.25f)
+				.AppendCallback(() => 
+				{
+					ExplodeEffect.Explode(objectToDestroy.transform, Vector3.zero, objectToDestroy.sprite);
+					Destroy(objectToDestroy.gameObject);
+				});
 		}
 	}
 

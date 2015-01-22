@@ -355,6 +355,7 @@ MonoBehaviour:
   spawnLaserPathName: Boss Laser Intro
   silhouetteTubesName: 2-Boss Silhouette Tubes
   silhouetteBodyName: 3-Boss Silhouette Body
+  objectToDestroyName: Right Wall
   spawnFadeTime: 2
   spawnPathTime: 5
   spawnLaserPathTime: 1

@@ -32,6 +32,8 @@ public class MainMenu : MonoBehaviour
 
 	void Awake()
 	{
+		DOTween.Init();
+
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
 		fovSlider = transform.FindSubChild("FOV").GetComponent<Slider>();
 
@@ -129,7 +131,7 @@ public class MainMenu : MonoBehaviour
 	private IEnumerator ShowMenu()
 	{
 		yield return new WaitForSeconds(startDelay);
-
+		
 		logo.GetComponent<Animator>().SetTrigger("Start");
 		CRTEffect.StartCRT(fadeTime);
 		DOTween.To(UpdateMenuAlpha, 0f, 1f, fadeTime)
@@ -152,6 +154,7 @@ public class MainMenu : MonoBehaviour
 
 			yield return StartCoroutine(Extensions.WaitForRealSeconds(fadeTime));
 
+			DOTween.Kill();
 			async.allowSceneActivation = true;
 		}
 		else if (levelName == "Exit")

@@ -134,7 +134,7 @@ public class SpriteExplosion : MonoBehaviour
 			}
 		}
 
-		partSystem.SetParticles(particles.ToArray(), particles.ToArray().Length);
+		partSystem.SetParticles(particles.ToArray(), particles.Count);
 		Destroy(gameObject, systemLifetime);
 
 		yield return null;
