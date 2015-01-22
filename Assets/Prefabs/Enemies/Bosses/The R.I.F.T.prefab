@@ -360,9 +360,6 @@ MonoBehaviour:
   minFloatHeight: 9
   maxFloatHeight: 11
   swoopLength: 1
-  smashRange: 4
-  smashTime: 2
-  smashGravity: -50
   laserLength: 2
   swoopCurve:
     serializedVersion: 2
@@ -411,11 +408,8 @@ MonoBehaviour:
     m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
   attacks:
-  - time: 5
+  - time: 4
     preAttackTime: 1
-    possibleAttacks: 00000000
-  - time: 5
-    preAttackTime: .100000001
     possibleAttacks: 01000000
 --- !u!212 &21200000
 SpriteRenderer:

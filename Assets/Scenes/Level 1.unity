@@ -637,11 +637,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400010, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 28.1215763
+      value: 28.1115875
       objectReference: {fileID: 0}
     - target: {fileID: 2000000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: orthographic size
-      value: 14.0607882
+      value: 14.0557938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
@@ -1954,7 +1954,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 28.1215763}
+  m_SizeDelta: {x: 50, y: 28.1115875}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &193568062
 MonoBehaviour:
@@ -8662,7 +8662,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 14.0607882
+  orthographic size: 14.0557938
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
