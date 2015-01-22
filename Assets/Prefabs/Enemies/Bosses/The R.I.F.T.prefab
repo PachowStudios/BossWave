@@ -353,12 +353,15 @@ MonoBehaviour:
   spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
   spawnLaserPathName: Boss Laser Intro
+  doorPathName: Door Open
   silhouetteTubesName: 2-Boss Silhouette Tubes
   silhouetteBodyName: 3-Boss Silhouette Body
-  objectToDestroyName: Right Wall
+  wallName: Right Wall
+  doorName: Door
   spawnFadeTime: 2
   spawnPathTime: 5
   spawnLaserPathTime: 1
+  doorOpenTime: .5
   returnSpeed: 30
   minFloatHeight: 9
   maxFloatHeight: 11

@@ -24,12 +24,15 @@ public class TheRIFT : Boss
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
 	public string spawnLaserPathName;
+	public string doorPathName;
 	public string silhouetteTubesName;
 	public string silhouetteBodyName;
-	public string objectToDestroyName;
+	public string wallName;
+	public string doorName;
 	public float spawnFadeTime = 3f;
 	public float spawnPathTime = 5f;
 	public float spawnLaserPathTime = 2f;
+	public float doorOpenTime = 1f;
 	public float returnSpeed = 30f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
@@ -57,7 +60,8 @@ public class TheRIFT : Boss
 	private Transform groundLevel;
 	private SpriteRenderer silhouetteTubes;
 	private GameObject silhouetteBody;
-	private SpriteRenderer objectToDestroy;
+	private SpriteRenderer wall;
+	private Transform door;
 
 	protected override void Awake()
 	{
@@ -68,7 +72,8 @@ public class TheRIFT : Boss
 		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 		silhouetteTubes = GameObject.Find(silhouetteTubesName).GetComponent<SpriteRenderer>();
 		silhouetteBody = GameObject.Find(silhouetteBodyName);
-		objectToDestroy = GameObject.Find(objectToDestroyName).GetComponent<SpriteRenderer>();
+		wall = GameObject.Find(wallName).GetComponent<SpriteRenderer>();
+		door = GameObject.Find(doorName).transform;
 
 		defaultGravity = gravity;
 
@@ -119,14 +124,19 @@ public class TheRIFT : Boss
 				.AppendCallback(() => Destroy(silhouetteTubes.gameObject))
 				.AppendCallback(() => Destroy(silhouetteBody))
 				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
-					.SetEase(Ease.InCubic))
+					.SetEase(Ease.InCubic)
+					.OnComplete(() =>
+					{
+						door.DOLocalPath(VectorPath.GetPath(doorPathName), doorOpenTime, VectorPath.GetPathType(doorPathName), PathMode.Sidescroller2D)
+							.SetEase(Ease.InOutCubic);
+					}))
 				.AppendCallback(FinishSpawn)
 				.AppendCallback(() => FireLaser(VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), spawnLaserPathTime, laserIntroCurve, GameObject.Find("Foregrounds").transform))
 				.AppendInterval(spawnLaserPathTime + 0.25f)
-				.AppendCallback(() => 
+				.AppendCallback(() =>
 				{
-					ExplodeEffect.Explode(objectToDestroy.transform, Vector3.zero, objectToDestroy.sprite);
-					Destroy(objectToDestroy.gameObject);
+					ExplodeEffect.Explode(wall.transform, Vector3.zero, wall.sprite);
+					Destroy(wall.gameObject);
 				});
 		}
 	}
