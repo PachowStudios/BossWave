@@ -29,16 +29,21 @@ public class AssemblyLine : MonoBehaviour
 
 		if (spawnTimer >= spawnDelay)
 		{
-			GameObject currentObject = Instantiate(prefab, path[0] + transform.position, Quaternion.identity) as GameObject;
-			currentObject.transform.parent = transform;
-
-			currentObject.transform.DOLocalPath(path, speed, PathType.Linear, PathMode.Sidescroller2D)
-				.SetSpeedBased()
-				.SetEase(Ease.Linear)
-				.OnComplete(() => Destroy(currentObject));
-
-
+			Spawn();
 			spawnTimer = 0f;
 		}
+	}
+
+	private Tween Spawn()
+	{
+		GameObject currentObject = Instantiate(prefab, path[0] + transform.position, Quaternion.identity) as GameObject;
+		currentObject.transform.parent = transform;
+
+		Tween currentTween = currentObject.transform.DOLocalPath(path, speed, PathType.Linear, PathMode.Sidescroller2D)
+			.SetSpeedBased()
+			.SetEase(Ease.Linear)
+			.OnComplete(() => Destroy(currentObject));
+
+		return currentTween;
 	}
 }
