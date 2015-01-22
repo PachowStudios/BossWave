@@ -24,7 +24,9 @@ public class LevelManager : MonoBehaviour
 		public Boss boss;
 		public float startTime;
 		public float totalLength;
-		public float cameraMoveSpeed;
+		public float cameraSpeed;
+		public float fullCameraSpeed;
+		public float speedUpTime;
 		public Transform playerWaitPoint;
 		public Scrollbar progressBar;
 	}
@@ -142,6 +144,9 @@ public class LevelManager : MonoBehaviour
 					{
 						element.GetComponent<Parallax>().scroll = true;
 					}
+
+					DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, bossWave.fullCameraSpeed, bossWave.speedUpTime)
+						.SetEase(Ease.OutSine);
 
 					bossWave.progressBar.GetComponent<Animator>().SetTrigger("Show");
 

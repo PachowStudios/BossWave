@@ -72,7 +72,7 @@ public class SpriteExplosion : MonoBehaviour
 
 					if (levelManager != null)
 					{
-						currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraMoveSpeed : velocity.x) + Random.Range(-10f, 10f),
+						currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraSpeed : velocity.x) + Random.Range(-10f, 10f),
 															   velocity.y + Random.Range(-10f, 10f));
 					}
 					else

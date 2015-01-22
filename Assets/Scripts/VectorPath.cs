@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class VectorPath : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class VectorPath : MonoBehaviour
 
 	public string pathName;
 	public Color pathColor = Color.cyan;
-	public bool linear = true;
+	public PathType pathType = PathType.Linear;
 	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
 
 	void OnEnable()
@@ -25,7 +26,7 @@ public class VectorPath : MonoBehaviour
 	{
 		if (enabled && nodes.Length >= 2)
 		{
-			if (linear)
+			if (pathType == PathType.Linear)
 			{
 				Gizmos.color = pathColor;
 
@@ -53,6 +54,21 @@ public class VectorPath : MonoBehaviour
 		{
 			Debug.Log("No path with the name " + requestedName + " exists!");
 			return null;
+		}
+	}
+
+	public static PathType GetPathType(string requestedName)
+	{
+		requestedName = requestedName.ToLower();
+
+		if (paths.ContainsKey(requestedName))
+		{
+			return paths[requestedName].pathType;
+		}
+		else
+		{
+			Debug.Log("No path with the name " + requestedName + " exists!");
+			return PathType.Linear;
 		}
 	}
 }

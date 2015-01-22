@@ -352,10 +352,12 @@ MonoBehaviour:
   ignoreProjectiles: 0
   spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
+  spawnLaserPathName: Boss Laser Intro
   silhouetteTubesName: 2-Boss Silhouette Tubes
   silhouetteBodyName: 3-Boss Silhouette Body
-  spawnFadeTime: 3
+  spawnFadeTime: 2
   spawnPathTime: 5
+  spawnLaserPathTime: 1
   returnSpeed: 30
   minFloatHeight: 9
   maxFloatHeight: 11
@@ -398,6 +400,21 @@ MonoBehaviour:
       value: .904368758
       inSlope: 1.23292208
       outSlope: 1.23292208
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  laserIntroCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
     - time: 1
       value: 1

@@ -32,7 +32,7 @@ public class Parallax : MonoBehaviour
 	{
 		if (scroll)
 		{
-			transform.Translate(new Vector2(-(relativeSpeed * LevelManager.instance.bossWave.cameraMoveSpeed), 0) * Time.deltaTime);
+			transform.Translate(new Vector2(-(relativeSpeed * LevelManager.instance.bossWave.cameraSpeed), 0) * Time.deltaTime);
 
 			Transform firstChild = layers.FirstOrDefault();
 

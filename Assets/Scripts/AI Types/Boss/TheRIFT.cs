@@ -23,10 +23,12 @@ public class TheRIFT : Boss
 
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
+	public string spawnLaserPathName;
 	public string silhouetteTubesName;
 	public string silhouetteBodyName;
 	public float spawnFadeTime = 3f;
 	public float spawnPathTime = 5f;
+	public float spawnLaserPathTime = 2f;
 	public float returnSpeed = 30f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
@@ -34,6 +36,7 @@ public class TheRIFT : Boss
 	public float laserLength = 3f;
 	public AnimationCurve swoopCurve;
 	public AnimationCurve laserCurve;
+	public AnimationCurve laserIntroCurve;
 	public RIFTLaser laserPrefab;
 	public List<Attack> attacks;
 
@@ -112,9 +115,10 @@ public class TheRIFT : Boss
 				.AppendCallback(() => ExplodeEffect.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite))
 				.AppendCallback(() => Destroy(silhouetteTubes.gameObject))
 				.AppendCallback(() => Destroy(silhouetteBody))
-				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, PathType.CatmullRom, PathMode.Sidescroller2D)
+				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
 					.SetEase(Ease.InCubic))
-				.AppendCallback(FinishSpawn);
+				.AppendCallback(FinishSpawn)
+				.AppendCallback(() => FireLaser(VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), spawnLaserPathTime, laserIntroCurve, GameObject.Find("Foregrounds").transform));
 		}
 	}
 
@@ -180,28 +184,32 @@ public class TheRIFT : Boss
 		{
 			yield return new WaitForSeconds(attack.preAttackTime);
 
-			attacking = true;
 			preAttacking = false;
 			attackFunction.Invoke();
 		}
 	}
 
-	private void FireLaser(List<Vector3> laserPathOverride = null)
+	private void FireLaser(Vector3[] laserPath = null, PathType pathType = PathType.CatmullRom, float length = -1f, AnimationCurve easeCurve = null, Transform targetParent = null)
 	{
-		List<Vector3> laserPath = laserPathOverride == null ? GenerateLaserPath() : laserPathOverride;
+		attacking = true;
+
+		laserPath = (laserPath == null) ? GenerateLaserPath() : laserPath;
+		length = (length == -1f) ? laserLength : length;
+		easeCurve = (easeCurve == null) ? laserCurve : easeCurve;
 
 		laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
-		GameObject laserTarget = new GameObject();
-		laserTarget.transform.parent = transform;
+
+		Transform laserTarget = new GameObject().transform;
+		laserTarget.name = "Laser Target";
+		laserTarget.parent = (targetParent == null) ? laserTarget : targetParent;
 
 		Sequence laserSequence = DOTween.Sequence();
 
 		laserSequence
-			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, Vector3.zero, laserInstance.chargeTime)
-				.OnUpdate(() => laserInstance.firePoint = firePoint.position)
-				.OnComplete(() => laserTarget.transform.position = laserPath[0]))
-			.Append(laserTarget.transform.DOPath(laserPath.ToArray(), laserLength, PathType.CatmullRom, PathMode.Sidescroller2D)
-				.SetEase(laserCurve)
+			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], laserInstance.chargeTime)
+				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
+			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
+				.SetEase(easeCurve)
 				.OnUpdate(() =>
 				{
 					laserInstance.firePoint = firePoint.position;
@@ -211,17 +219,19 @@ public class TheRIFT : Boss
 				{
 					laserInstance.Stop();
 					laserInstance = null;
-					Destroy(laserTarget);
 					attacking = false;
+					Destroy(laserTarget.gameObject);
 				}));
 	}
 
-	private void Swoop(List<Vector3> swoopPathOverride = null)
+	private void Swoop(Vector3[] swoopPath = null)
 	{
-		List<Vector3> swoopPath = swoopPathOverride == null ? GenerateSwoopPath() : swoopPathOverride;
+		attacking = true;
+
+		swoopPath = (swoopPath == null) ? GenerateSwoopPath() : swoopPath;
 		applyMovement = false;
 
-		transform.DOPath(swoopPath.ToArray(), swoopLength, PathType.CatmullRom, PathMode.Sidescroller2D)
+		transform.DOPath(swoopPath, swoopLength, PathType.CatmullRom, PathMode.Sidescroller2D)
 			.SetEase(swoopCurve)
 			.OnComplete(() =>
 			{
@@ -274,7 +284,7 @@ public class TheRIFT : Boss
 		prevPosition = transform.position;
 	}
 
-	private List<Vector3> GenerateLaserPath()
+	private Vector3[] GenerateLaserPath()
 	{
 		List<Vector3> laserPath = new List<Vector3>();
 		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
@@ -287,10 +297,10 @@ public class TheRIFT : Boss
 								  transform.position.z));
 		laserPath.Add(laserPath[0]);
 
-		return laserPath;
+		return laserPath.ToArray();
 	}
 
-	private List<Vector3> GenerateSwoopPath()
+	private Vector3[] GenerateSwoopPath()
 	{
 		List<Vector3> swoopPath = new List<Vector3>();
 
@@ -300,6 +310,6 @@ public class TheRIFT : Boss
 									transform.position.z));
 		swoopPath.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 
-		return swoopPath;
+		return swoopPath.ToArray();
 	}
 }
