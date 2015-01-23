@@ -70,6 +70,14 @@ public abstract class Enemy : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
+	protected bool PlayerOnRightSide
+	{
+		get
+		{
+			return PlayerControl.instance.transform.position.x > transform.position.x;
+		}
+	}
+
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();

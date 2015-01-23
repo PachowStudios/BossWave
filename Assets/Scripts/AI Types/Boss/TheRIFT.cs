@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using DG.Tweening;
 
-public class TheRIFT : Boss
+public sealed class TheRIFT : Boss
 {
 	public enum Attacks
 	{

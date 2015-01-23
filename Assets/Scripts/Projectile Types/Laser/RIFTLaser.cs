@@ -19,7 +19,6 @@ public class RIFTLaser : Projectile
 	public float lengthOffset = 0f;
 	public string sortingLayer = "Player";
 	public int sortingOrder = 1;
-	public LayerMask collisionLayer;
 	public LayerMask worldCollisionLayer;
 	[Range(0f, 10f)]
 	public float tipExplosionsPerSec = 7f;
@@ -85,11 +84,11 @@ public class RIFTLaser : Projectile
 		{
 			previousTipPosition = tip.transform.position;
 
-			RaycastHit2D raycast = Physics2D.Linecast(firePoint, targetPoint, worldCollisionLayer);
+			RaycastHit2D worldRaycast = Physics2D.Linecast(firePoint, targetPoint, worldCollisionLayer);
 
-			if (raycast.collider != null)
+			if (worldRaycast.collider != null)
 			{
-				targetPoint = raycast.point;
+				targetPoint = worldRaycast.point;
 			}
 
 			targets[0] = firePoint;
@@ -109,7 +108,9 @@ public class RIFTLaser : Projectile
 
 			if (cooldownTimer >= cooldownTime)
 			{
-				if (Physics2D.Raycast(firePoint, (tip.transform.position - firePoint).normalized, 100f, collisionLayer).collider != null)
+				RaycastHit2D playerRaycast = Physics2D.Linecast(firePoint, targetPoint, LayerMask.GetMask("Player"));
+
+				if (playerRaycast.collider != null)
 				{
 					PlayerControl.instance.Health -= damage;
 					cooldownTimer = 0f;

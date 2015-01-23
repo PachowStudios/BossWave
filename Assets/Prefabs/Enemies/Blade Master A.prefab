@@ -45,9 +45,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   m_Layer: 0
-  m_Name: ledgeCheck
+  m_Name: frontCheck
   m_TagString: Untagged
-  m_Icon: {fileID: 168350284, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 813524716, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -63,6 +63,21 @@ GameObject:
   m_Name: popupMessage
   m_TagString: Untagged
   m_Icon: {fileID: -514703022, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400008}
+  m_Layer: 0
+  m_Name: ledgeCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 168350284, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -89,6 +104,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
+  - {fileID: 400008}
   - {fileID: 400004}
   - {fileID: 400006}
   m_Father: {fileID: 0}
@@ -100,11 +116,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -.200000003, z: 0}
+  m_LocalPosition: {x: -1, y: 1.60000002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -112,11 +128,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.20000005, z: 0}
+  m_LocalPosition: {x: .699999988, y: 4.30000019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
-  m_RootOrder: 2
+  m_RootOrder: 3
+--- !u!4 &400008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: -.200000003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+  m_RootOrder: 1
 --- !u!50 &5000000
 Rigidbody2D:
   m_ObjectHideFlags: 1
@@ -141,8 +169,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 2, y: 4}
-  m_Center: {x: .800000012, y: 2}
+  m_Size: {x: 2, y: 3.5}
+  m_Center: {x: .800000012, y: 1.75}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -223,7 +251,7 @@ MonoBehaviour:
   maxMicrochips: 3
   smallestMicrochip: 0
   biggestMicrochip: 1
-  knockback: 7
+  knockback: 1.5
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
@@ -246,13 +274,13 @@ MonoBehaviour:
   spawnLength: .5
   checkFrontCollision: 0
   checkLedgeCollision: 0
-  followRange: 1.5
-  attackRange: 1.5
-  attackCooldownTime: 1.5
+  swipeRange: 2
   minDashRange: 5
   maxDashRange: 30
-  dashCooldownTime: 5
+  swipeCooldownTime: .5
+  dashCooldownTime: 2
   dashSpeed: 30
+  stabLegnth: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

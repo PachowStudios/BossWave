@@ -1,0 +1,111 @@
+﻿using UnityEngine;
+using System.Collections;
+using DG.Tweening;
+
+public sealed class DashAI : StandardEnemy
+{
+	public float swipeRange = 2f;
+	public float minDashRange = 5f;
+	public float maxDashRange = 10f;
+	public float swipeCooldownTime = 0.5f;
+	public float dashCooldownTime = 5f;
+	public float dashSpeed = 25f;
+	public float stabLegnth = 1f;
+
+	private bool dashing = false;
+	private float swipeCooldownTimer = 0f;
+	private float dashCooldownTimer = 0f;
+	private float defaultMoveSpeed;
+	private float dashTarget;
+
+	protected override void Awake()
+	{
+		base.Awake();
+
+		defaultMoveSpeed = moveSpeed;
+		frontCheck = transform.FindChild("frontCheck");
+	}
+
+	protected override void ApplyAnimation()
+	{
+		anim.SetBool("Walking", (right || left) && !disableMovement);
+		anim.SetBool("Running", dashing);
+	}
+
+	protected override void Walk()
+	{
+		if (!dashing)
+		{
+			if (PlayerControl.instance.transform.position.x > transform.position.x + swipeRange)
+			{
+				right = true;
+				left = !right;
+			}
+			else if (PlayerControl.instance.transform.position.x < transform.position.x - swipeRange)
+			{
+				left = true;
+				right = !left;
+			}
+			else
+			{
+				right = left = false;
+			}
+		}
+	}
+
+	protected override void CheckAttack()
+	{
+		if (!dashing)
+		{
+			swipeCooldownTimer += Time.deltaTime;
+
+			if (swipeCooldownTimer >= swipeCooldownTime && IsPlayerInRange(0f, swipeRange))
+			{
+				anim.SetTrigger("Swipe");
+				PlayerControl.instance.TakeDamage(gameObject);
+				swipeCooldownTimer = 0f;
+			}
+
+			dashCooldownTimer += Time.deltaTime;
+
+			if (dashCooldownTimer >= dashCooldownTime && IsPlayerInRange(minDashRange, maxDashRange))
+			{
+				dashing = true;
+				moveSpeed = dashSpeed;
+				dashTarget = transform.position.x + (maxDashRange * (FacingRight ? 1 : -1));
+				dashCooldownTimer = 0f;
+			}
+		}
+		else if (!disableMovement)
+		{
+			if (!CheckLedgeCollision(false) || CheckFrontCollision(false) ||
+				(left && transform.position.x < dashTarget) ||
+				(right && transform.position.x > dashTarget))
+			{
+				Stab(false);
+			}
+			else if (IsPlayerInRange(0f, swipeRange))
+			{
+				Stab(true);
+			}
+		}
+	}
+
+	private void Stab(bool damagePlayer)
+	{
+		disableMovement = true;
+		moveSpeed = defaultMoveSpeed;
+		anim.SetTrigger("Stab");
+
+		if (damagePlayer)
+		{
+			PlayerControl.instance.TakeDamage(gameObject);
+		}
+
+		Sequence sequence = DOTween.Sequence();
+
+		sequence
+			.AppendInterval(stabLegnth)
+			.AppendCallback(() => disableMovement = dashing = false);
+	}
+}

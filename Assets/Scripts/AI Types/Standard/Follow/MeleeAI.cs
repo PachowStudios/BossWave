@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MeleeAI : FollowAI
+public sealed class MeleeAI : FollowAI
 {
-	protected override void Attack(string triggerName)
+	protected override void Attack()
 	{
-		base.Attack(triggerName);
+		base.Attack();
 
 		PlayerControl.instance.TakeDamage(gameObject);
 	}

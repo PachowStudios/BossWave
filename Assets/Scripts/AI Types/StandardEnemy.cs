@@ -37,8 +37,6 @@ public abstract class StandardEnemy : Enemy
 
 	protected abstract void Walk();
 
-	protected abstract void Jump(float height);
-
 	protected abstract void CheckAttack();
 
 	protected override void Awake()
@@ -100,7 +98,11 @@ public abstract class StandardEnemy : Enemy
 				CheckLedgeCollision();
 			}
 
-			Walk();
+			if (!disableMovement)
+			{
+				Walk();
+			}
+
 			CheckAttack();
 		}
 
@@ -135,32 +137,55 @@ public abstract class StandardEnemy : Enemy
 		spawned = true;
 	}
 
-	protected void CheckFrontCollision()
+	protected virtual void Jump(float height)
 	{
-		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, controller.platformMask);
+		velocity.y = Mathf.Sqrt(2f * height * -gravity);
+	}
 
-		if (frontHits.Length > 0)
+	protected bool CheckFrontCollision(bool flip = true)
+	{
+		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
+
+		if (frontHit != null && flip)
 		{
 			Flip();
 
 			right = !right;
 			left = !right;
 		}
+
+		return frontHit != null;
 	}
 
-	protected void CheckLedgeCollision()
+	protected bool CheckLedgeCollision(bool flip = true)
 	{
 		if (IsGrounded)
 		{
-			Collider2D[] ledgeHits = Physics2D.OverlapPointAll(ledgeCheck.position, controller.platformMask);
+			Collider2D ledgeHit = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
 
-			if (ledgeHits.Length == 0)
+			if (ledgeHit != null && flip)
 			{
 				Flip();
 
 				right = !right;
 				left = !right;
 			}
+
+			return ledgeHit != null;
 		}
+		else
+		{
+			return false;
+		}
+	}
+
+	protected bool IsPlayerInRange(float min, float max)
+	{
+		int direction = PlayerOnRightSide ? 1 : -1;
+		Vector3 startPoint = new Vector3(transform.position.x + (min * direction), collider2D.bounds.center.y, 0f);
+		Vector3 endPoint = startPoint + new Vector3((max - min) * direction, 0f, 0f);
+		RaycastHit2D linecast = Physics2D.Linecast(startPoint, endPoint, LayerMask.GetMask("Player"));
+
+		return linecast.collider != null;
 	}
 }

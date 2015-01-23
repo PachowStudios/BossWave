@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 3a495d3faee58a047ba2d167cc2506ad, type: 3}
+          m_Texture: {fileID: 2800000, guid: 95bb048cb7ddc604eb4664bd9b21f017, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -41,7 +41,7 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .58431375, g: .109803922, b: 1, a: 1}
+        second: {r: .619607866, g: .184313729, b: 1, a: 1}
       data:
         first:
           name: _EmisColor

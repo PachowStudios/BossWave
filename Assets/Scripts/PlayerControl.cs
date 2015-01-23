@@ -389,6 +389,11 @@ public class PlayerControl : MonoBehaviour
 
 	public void TakeDamage(GameObject enemy)
 	{
+		if (!canTakeDamage)
+		{
+			return;
+		}
+
 		float damage = 0f;
 		float knockback = 0f;
 		float knockbackDirection = 1f;

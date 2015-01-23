@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ShootAI : FollowAI
+public sealed class ShootAI : FollowAI
 {
 	public float maxRangeOffset = 1f;
 	public bool horizontalShot = true;
@@ -27,9 +27,9 @@ public class ShootAI : FollowAI
 		attackRange += rangeOffset;
 	}
 
-	protected override void Attack(string triggerName)
+	protected override void Attack()
 	{
-		base.Attack(triggerName);
+		base.Attack();
 
 		if (useRandomGun)
 		{
@@ -49,7 +49,7 @@ public class ShootAI : FollowAI
 		}
 	}
 
-	protected IEnumerator Fire(float delay = 0f)
+	private IEnumerator Fire(float delay = 0f)
 	{
 		if (delay > 0f)
 		{
