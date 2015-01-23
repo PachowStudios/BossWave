@@ -27,9 +27,9 @@ public class ShootAI : FollowAI
 		attackRange += rangeOffset;
 	}
 
-	protected override void Attack()
+	protected override void Attack(string triggerName)
 	{
-		base.Attack();
+		base.Attack(triggerName);
 
 		if (useRandomGun)
 		{

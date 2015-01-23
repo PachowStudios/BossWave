@@ -7,7 +7,15 @@ public abstract class FollowAI : StandardEnemy
 	public float attackRange = 5f;
 	public float attackCooldownTime = 1f;
 
-	private float attackCooldownTimer = 0f;
+	protected float attackCooldownTimer = 0f;
+
+	protected bool InAttackRange
+	{
+		get
+		{
+			return Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= attackRange;
+		}
+	}
 
 	protected override void ApplyAnimation()
 	{
@@ -41,17 +49,16 @@ public abstract class FollowAI : StandardEnemy
 	{
 		attackCooldownTimer += Time.deltaTime;
 
-		if (attackCooldownTimer >= attackCooldownTime &&
-			Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= attackRange)
+		if (attackCooldownTimer >= attackCooldownTime && InAttackRange)
 		{
-			Attack();
+			Attack("Attack");
 			attackCooldownTimer = 0f;
 		}
 	}
 
-	protected virtual void Attack()
+	protected virtual void Attack(string triggerName)
 	{
-		anim.SetTrigger("Attack");
+		anim.SetTrigger(triggerName);
 
 		if ((PlayerControl.instance.transform.position.x > transform.position.x &&
 				 transform.localScale.x > 0f) ||

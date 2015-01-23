@@ -210,10 +210,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dee219394281314da42ac94fe6e4e9e, type: 3}
+  m_Script: {fileID: 11500000, guid: dcd216d912ed91042b87c6a695a94ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawned: 0
+  spawned: 1
   difficulty: 1
   immuneToInstantKill: 0
   maxHealth: 30
@@ -223,11 +223,11 @@ MonoBehaviour:
   maxMicrochips: 3
   smallestMicrochip: 0
   biggestMicrochip: 1
-  knockback: 1.5
+  knockback: 7
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
-  moveSpeed: 10
+  moveSpeed: 3
   groundDamping: 10
   inAirDamping: 5
   timeWarpAtDeath: 0
@@ -246,9 +246,13 @@ MonoBehaviour:
   spawnLength: .5
   checkFrontCollision: 0
   checkLedgeCollision: 0
-  followRange: 1.79999995
-  attackRange: 1.79999995
+  followRange: 1.5
+  attackRange: 1.5
   attackCooldownTime: 1.5
+  minDashRange: 5
+  maxDashRange: 30
+  dashCooldownTime: 5
+  dashSpeed: 30
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

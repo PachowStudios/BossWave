@@ -431,7 +431,7 @@ MonoBehaviour:
   attacks:
   - time: 4
     preAttackTime: 1
-    possibleAttacks: 01000000
+    possibleAttacks: 00000000
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

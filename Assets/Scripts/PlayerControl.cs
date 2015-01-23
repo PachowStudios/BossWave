@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -418,11 +419,18 @@ public class PlayerControl : MonoBehaviour
 
 		if (health > 0f)
 		{
-			velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity) * knockbackDirection;
-			velocity.y = Mathf.Sqrt(knockback * -gravity);
+			Sequence knockbackSequence = DOTween.Sequence();
 
-			controller.move(velocity * Time.deltaTime);
-			lastHitTime = Time.time;
+			knockbackSequence
+				.AppendInterval(0.1f)
+				.AppendCallback(() =>
+				{
+					velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity) * knockbackDirection;
+					velocity.y = Mathf.Sqrt(knockback * -gravity);
+
+					controller.move(velocity * Time.deltaTime);
+					lastHitTime = Time.time;
+				});
 		}
 	}
 
