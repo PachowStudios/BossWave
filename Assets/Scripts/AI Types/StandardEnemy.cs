@@ -69,6 +69,7 @@ public abstract class StandardEnemy : Enemy
 		if (simulateSpawner != null)
 		{
 			Spawner = simulateSpawner;
+			transform.position = simulateSpawner.FindChild("Spawn").position;
 		}
 	}
 
@@ -122,7 +123,7 @@ public abstract class StandardEnemy : Enemy
 
 	protected virtual void Spawn()
 	{
-		Jump(entryPoint.y - transform.position.y + spawnJumpHeight);
+		Jump(Mathf.Max(1f, entryPoint.y - transform.position.y + spawnJumpHeight));
 
 		controller.platformMask = defaultPlatformMask;
 		spriteRenderer.sortingLayerName = defaultSortingLayer;
@@ -139,7 +140,10 @@ public abstract class StandardEnemy : Enemy
 
 	protected virtual void Jump(float height)
 	{
-		velocity.y = Mathf.Sqrt(2f * height * -gravity);
+		if (height >= 0)
+		{
+			velocity.y = Mathf.Sqrt(2f * height * -gravity);
+		}
 	}
 
 	protected bool CheckFrontCollision(bool flip = true)

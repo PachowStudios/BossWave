@@ -336,7 +336,7 @@ public class PlayerControl : MonoBehaviour
 		{
 			if (!inPortal)
 			{
-				velocity.y = Mathf.Sqrt(2f * jumpHeight * -gravity);
+				velocity.y = Mathf.Sqrt(Mathf.Max(0f, 2f * jumpHeight * -gravity));
 				anim.SetTrigger("Jump");
 			}
 

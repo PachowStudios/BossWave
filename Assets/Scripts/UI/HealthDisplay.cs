@@ -13,7 +13,8 @@ public class HealthDisplay : MonoBehaviour
 	public List<Sprite> healthFaces;
 
 	private float healthPercent;
-	private Vector3 healthVelocity = Vector3.zero;
+	private float originalHealthWidth;
+	private Vector2 healthVelocity = Vector2.zero;
 
 	private float scoreValue = 0f;
 	private float scoreVelocity = 0f;
@@ -32,6 +33,8 @@ public class HealthDisplay : MonoBehaviour
 		bar = transform.FindChild("Bar").GetComponent<Image>();
 		score = transform.FindChild("Score").GetComponent<Text>();
 		microchips = transform.FindChild("Microchips").GetComponent<Text>();
+
+		originalHealthWidth = bar.rectTransform.sizeDelta.x;
 	}
 
 	void OnGUI()
@@ -40,7 +43,7 @@ public class HealthDisplay : MonoBehaviour
 
 		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
 
-		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(healthPercent, 1f, 1f), ref healthVelocity, healthDamping);
+		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, bar.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
 		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.score, ref scoreVelocity, textDamping);
 		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.instance.microchips, ref microchipsVelocity, textDamping);
 

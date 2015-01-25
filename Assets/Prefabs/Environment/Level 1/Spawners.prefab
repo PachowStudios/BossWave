@@ -184,8 +184,7 @@ MonoBehaviour:
   pathColor: {r: 1, g: 0, b: 1, a: 1}
   pathType: 0
   nodes:
-  - {x: 20, y: 0, z: 0}
-  - {x: 30, y: 0, z: 0}
+  - {x: 30, y: 3.20000005, z: 0}
   - {x: 30, y: 30, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
