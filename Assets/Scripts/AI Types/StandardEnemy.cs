@@ -163,7 +163,7 @@ public abstract class StandardEnemy : Enemy
 		{
 			Collider2D ledgeHit = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
 
-			if (ledgeHit != null && flip)
+			if (ledgeHit == null && flip)
 			{
 				Flip();
 
@@ -171,7 +171,7 @@ public abstract class StandardEnemy : Enemy
 				left = !right;
 			}
 
-			return ledgeHit != null;
+			return ledgeHit == null;
 		}
 		else
 		{

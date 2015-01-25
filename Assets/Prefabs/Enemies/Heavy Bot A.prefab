@@ -410,6 +410,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 0
+  difficulty: 3
+  immuneToInstantKill: 0
+  maxHealth: 300
+  damage: 15
+  microchipChance: 75
+  minMicrochips: 2
+  maxMicrochips: 3
+  smallestMicrochip: 1
+  biggestMicrochip: 2
+  knockback: {x: 3, y: 3}
+  flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
+  flashLength: .100000001
+  gravity: -50
+  moveSpeed: 3
+  groundDamping: 10
+  inAirDamping: 5
+  timeWarpAtDeath: 0
+  velocity: {x: 0, y: 0, z: 0}
+  invincible: 0
+  ignoreProjectiles: 0
   simulateSpawner: {fileID: 0}
   spawnPlatformMask:
     serializedVersion: 2
@@ -420,28 +440,8 @@ MonoBehaviour:
   spawnEntryRange: 1
   spawnJumpHeight: 4
   spawnLength: .5
-  difficulty: 3
-  immuneToInstantKill: 0
-  maxHealth: 300
-  damage: 15
-  microchipChance: 75
-  minMicrochips: 2
-  maxMicrochips: 3
-  smallestMicrochip: 1
-  biggestMicrochip: 2
-  knockback: 1.5
-  flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
-  flashLength: .100000001
-  gravity: -50
-  moveSpeed: 3
-  groundDamping: 10
-  inAirDamping: 5
   checkFrontCollision: 0
   checkLedgeCollision: 1
-  timeWarpAtDeath: 0
-  velocity: {x: 0, y: 0, z: 0}
-  invincible: 0
-  ignoreProjectiles: 0
   followRange: 7
   attackRange: 20
   attackCooldownTime: 2

@@ -11,7 +11,7 @@ public abstract class FollowAI : StandardEnemy
 
 	protected override void ApplyAnimation()
 	{
-		anim.SetBool("Walking", (right || left) && !disableMovement);
+		anim.SetBool("Walking", right || left);
 	}
 
 	protected override void Walk()

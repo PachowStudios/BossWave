@@ -32,7 +32,7 @@ public sealed class DashAI : StandardEnemy
 
 	protected override void ApplyAnimation()
 	{
-		anim.SetBool("Walking", (right || left) && !disableMovement);
+		anim.SetBool("Walking", right || left);
 		anim.SetBool("Running", dashing);
 	}
 
@@ -82,7 +82,7 @@ public sealed class DashAI : StandardEnemy
 		}
 		else if (!disableMovement)
 		{
-			if (!CheckLedgeCollision(false) || CheckFrontCollision(false) ||
+			if (CheckLedgeCollision(false) || CheckFrontCollision(false) ||
 				(left && transform.position.x < dashTarget) ||
 				(right && transform.position.x > dashTarget))
 			{

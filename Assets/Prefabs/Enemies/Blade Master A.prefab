@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -241,10 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd216d912ed91042b87c6a695a94ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawned: 1
+  spawned: 0
   difficulty: 1
   immuneToInstantKill: 0
-  maxHealth: 30
+  maxHealth: 100
   damage: 7.5
   microchipChance: 25
   minMicrochips: 1

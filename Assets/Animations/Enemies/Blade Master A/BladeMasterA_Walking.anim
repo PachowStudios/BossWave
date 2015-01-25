@@ -19,15 +19,15 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300008, guid: b2529fa80083757438201262a7a69db5, type: 3}
-    - time: .116666667
+    - time: .13333334
       value: {fileID: 21300000, guid: b2529fa80083757438201262a7a69db5, type: 3}
-    - time: .233333334
+    - time: .400000006
       value: {fileID: 21300002, guid: b2529fa80083757438201262a7a69db5, type: 3}
-    - time: .349999994
+    - time: .666666687
       value: {fileID: 21300004, guid: b2529fa80083757438201262a7a69db5, type: 3}
-    - time: .466666669
+    - time: .933333337
       value: {fileID: 21300006, guid: b2529fa80083757438201262a7a69db5, type: 3}
-    - time: .583333313
+    - time: 1.06666672
       value: {fileID: 21300008, guid: b2529fa80083757438201262a7a69db5, type: 3}
     attribute: m_Sprite
     path: Body
@@ -56,7 +56,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .599999964
+    m_StopTime: 1.08333337
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -72,4 +72,39 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: EnableMovementAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: .13333334
+    functionName: EnableMovementAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: .400000006
+    functionName: EnableMovementAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: .666666687
+    functionName: EnableMovementAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 1
+    messageOptions: 0
+  - time: .933333337
+    functionName: EnableMovementAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

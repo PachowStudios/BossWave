@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
-  knockback: {x: .100000001, y: .5}
+  knockback: {x: 0, y: 0}
   gravity: 0
   shotSpeed: 7.5
   lifetime: 0
