@@ -55,7 +55,7 @@ public sealed class TheRIFT : Boss
 	private bool applyMovement = true;
 	private RIFTLaser laserInstance;
 
-	private List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
+	private List<SpriteRenderer> spriteRenderers;
 	private Transform firePoint;
 	private Transform groundLevel;
 	private SpriteRenderer silhouetteTubes;

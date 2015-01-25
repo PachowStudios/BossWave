@@ -4,11 +4,17 @@ using System.Collections.Generic;
 
 public static class Extensions
 {
+	// GameObject
+	public static void HideInHiearchy(this GameObject parent, bool hide = true)
+	{
+		parent.hideFlags = parent.hideFlags ^ HideFlags.HideInHierarchy;
+	}
+
 	// Renderer
-	public static bool IsVisibleFrom(this Renderer renderer, Camera camera)
+	public static bool IsVisibleFrom(this Renderer parent, Camera camera)
 	{
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
-		return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
+		return GeometryUtility.TestPlanesAABB(planes, parent.bounds);
 	}
 
 	// Transform

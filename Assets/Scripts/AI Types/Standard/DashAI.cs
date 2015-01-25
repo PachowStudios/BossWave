@@ -2,6 +2,7 @@
 using System.Collections;
 using DG.Tweening;
 
+[RequireComponent(typeof(GhostTrailEffect))]
 public sealed class DashAI : StandardEnemy
 {
 	public float swipeDamage = 5f;
@@ -22,12 +23,16 @@ public sealed class DashAI : StandardEnemy
 	private float defaultMoveSpeed;
 	private float dashTarget;
 
+	private GhostTrailEffect ghostTrail;
+
 	protected override void Awake()
 	{
 		base.Awake();
 
 		defaultMoveSpeed = moveSpeed;
 		frontCheck = transform.FindChild("frontCheck");
+
+		ghostTrail = GetComponent<GhostTrailEffect>();
 	}
 
 	protected override void ApplyAnimation()
@@ -75,6 +80,7 @@ public sealed class DashAI : StandardEnemy
 			if (dashCooldownTimer >= dashCooldownTime && IsPlayerInRange(minDashRange, maxDashRange))
 			{
 				dashing = true;
+				ghostTrail.trailActive = true;
 				moveSpeed = dashSpeed;
 				dashTarget = transform.position.x + (maxDashRange * (FacingRight ? 1 : -1));
 				dashCooldownTimer = 0f;
@@ -110,6 +116,6 @@ public sealed class DashAI : StandardEnemy
 
 		sequence
 			.AppendInterval(stabLegnth)
-			.AppendCallback(() => disableMovement = dashing = false);
+			.AppendCallback(() => disableMovement = dashing = ghostTrail.trailActive = false);
 	}
 }
