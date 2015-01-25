@@ -25,7 +25,7 @@ public abstract class Enemy : MonoBehaviour
 	public int maxMicrochips = 3;
 	public Microchip.Size smallestMicrochip;
 	public Microchip.Size biggestMicrochip;
-	public float knockback = 3f;
+	public Vector2 knockback = new Vector2(3f, 3f);
 	public Color flashColor = new Color(1f, 0.47f, 0.47f, 1f);
 	public float flashLength = 0.1f;
 	public float gravity = -35f;
@@ -103,7 +103,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;
-		float knockback = enemyProjectile.knockback;
+		Vector2 knockback = enemyProjectile.knockback;
 		enemyProjectile.CheckDestroyEnemy();
 
 		if (!invincible)
@@ -136,8 +136,8 @@ public abstract class Enemy : MonoBehaviour
 			}
 			else
 			{
-				velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity);
-				velocity.y = Mathf.Sqrt(knockback * -gravity);
+				velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity);
+				velocity.y = Mathf.Sqrt(knockback.y * -gravity);
 
 				if (transform.position.x - enemy.transform.position.x < 0)
 				{

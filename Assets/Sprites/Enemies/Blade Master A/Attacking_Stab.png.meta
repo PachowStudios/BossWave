@@ -57,8 +57,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 40
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_1
       rect:
@@ -67,8 +67,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 38
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_2
       rect:
@@ -77,8 +77,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 36
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_3
       rect:
@@ -87,8 +87,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 36
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_4
       rect:
@@ -97,8 +97,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 36
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_5
       rect:
@@ -107,8 +107,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 36
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Attacking_Stab_6
       rect:
@@ -117,8 +117,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 38
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

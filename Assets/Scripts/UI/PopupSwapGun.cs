@@ -41,10 +41,10 @@ public class PopupSwapGun : MonoBehaviour
 
 		oldStats.text = PlayerControl.instance.gun.projectile.damage + "\n" +
 						PlayerControl.instance.gun.FireRate + "\n" +
-						PlayerControl.instance.gun.projectile.knockback;
+						PlayerControl.instance.gun.projectile.knockback.x;
 
 		newStats.text = newGunPrefab.projectile.damage + "\n" +
 						newGunPrefab.FireRate + "\n" +
-						newGunPrefab.projectile.knockback;
+						newGunPrefab.projectile.knockback.x;
 	}
 }

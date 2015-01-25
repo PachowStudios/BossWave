@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class Projectile : MonoBehaviour 
 {
 	public float damage = 5f;
-	public float knockback = 2f;
+	public Vector2 knockback = new Vector2(2f, 2f);
 	public float gravity = 0f;
 	public float shotSpeed = 15f;
 	public float lifetime = 3f;

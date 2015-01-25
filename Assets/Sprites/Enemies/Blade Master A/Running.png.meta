@@ -56,8 +56,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Running_1
       rect:
@@ -66,8 +66,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Running_2
       rect:
@@ -76,8 +76,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Running_3
       rect:
@@ -86,8 +86,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Running_4
       rect:
@@ -96,8 +96,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Running_5
       rect:
@@ -106,8 +106,8 @@ TextureImporter:
         y: 0
         width: 49
         height: 41
-      alignment: 7
-      pivot: {x: .5, y: 0}
+      alignment: 9
+      pivot: {x: .663265288, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

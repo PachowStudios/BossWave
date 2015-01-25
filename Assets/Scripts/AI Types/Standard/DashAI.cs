@@ -4,6 +4,10 @@ using DG.Tweening;
 
 public sealed class DashAI : StandardEnemy
 {
+	public float swipeDamage = 5f;
+	public float stabDamage = 10f;
+	public Vector2 swipeKnockback = new Vector2(3f, 5f);
+	public Vector2 stabKnockback = new Vector2(10f, 1f);
 	public float swipeRange = 2f;
 	public float minDashRange = 5f;
 	public float maxDashRange = 10f;
@@ -62,7 +66,7 @@ public sealed class DashAI : StandardEnemy
 			if (swipeCooldownTimer >= swipeCooldownTime && IsPlayerInRange(0f, swipeRange))
 			{
 				anim.SetTrigger("Swipe");
-				PlayerControl.instance.TakeDamage(gameObject);
+				PlayerControl.instance.TakeDamage(gameObject, swipeDamage, swipeKnockback);
 				swipeCooldownTimer = 0f;
 			}
 
@@ -99,7 +103,7 @@ public sealed class DashAI : StandardEnemy
 
 		if (damagePlayer)
 		{
-			PlayerControl.instance.TakeDamage(gameObject);
+			PlayerControl.instance.TakeDamage(gameObject, stabDamage, stabKnockback);
 		}
 
 		Sequence sequence = DOTween.Sequence();

@@ -360,19 +360,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  invincibilityPeriod: 2
+  invincibilityPeriod: 1
   gravity: -35
   walkSpeed: 10
   runSpeed: 15
   continuousRunSpeed: 10
   groundDamping: 6
   inAirDamping: 5
-  jumpHeight: 5
+  jumpHeight: 7
   comboStartKills: 3
   comboDecreaseTime: 2
   maxScore: 999999999
   maxMicrochips: 999999
-  startingGun: {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  startingGun: {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
   minAltIdleTime: 5
   maxAltIdleTime: 10
   altIdleAnimations:

@@ -387,15 +387,13 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	public void TakeDamage(GameObject enemy)
+	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
 	{
 		if (!canTakeDamage)
 		{
 			return;
 		}
 
-		float damage = 0f;
-		float knockback = 0f;
 		float knockbackDirection = 1f;
 
 		if (enemy.tag == "Enemy")
@@ -407,8 +405,8 @@ public class PlayerControl : MonoBehaviour
 				return;
 			}
 
-			damage = currentEnemy.damage;
-			knockback = currentEnemy.knockback;
+			damage = (damage == 0f) ? currentEnemy.damage : damage;
+			knockback = (knockback == default(Vector2)) ? currentEnemy.knockback : knockback;
 			knockbackDirection = Mathf.Sign(transform.position.x - enemy.transform.position.x);
 		}
 		else if (enemy.tag == "Projectile")
@@ -420,22 +418,25 @@ public class PlayerControl : MonoBehaviour
 			currentProjectile.CheckDestroyEnemy();
 		}
 
-		Health -= damage;
-
-		if (health > 0f)
+		if (damage != 0f)
 		{
-			Sequence knockbackSequence = DOTween.Sequence();
+			Health -= damage;
 
-			knockbackSequence
-				.AppendInterval(0.1f)
-				.AppendCallback(() =>
-				{
-					velocity.x = Mathf.Sqrt(Mathf.Pow(knockback, 2) * -gravity) * knockbackDirection;
-					velocity.y = Mathf.Sqrt(knockback * -gravity);
+			if (health > 0f)
+			{
+				Sequence knockbackSequence = DOTween.Sequence();
 
-					controller.move(velocity * Time.deltaTime);
-					lastHitTime = Time.time;
-				});
+				knockbackSequence
+					.AppendInterval(0.1f)
+					.AppendCallback(() =>
+					{
+						velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity) * knockbackDirection;
+						velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+
+						controller.move(velocity * Time.deltaTime);
+						lastHitTime = Time.time;
+					});
+			}
 		}
 	}
 
