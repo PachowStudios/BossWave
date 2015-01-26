@@ -7,14 +7,14 @@ using DG.Tweening;
 
 public sealed class TheRIFT : Boss
 {
-	public enum Attacks
+	public enum AttackType
 	{
 		Swoop,
 		Laser,
 		Cannon
 	};
 
-	public enum Pattern
+	public enum AttackPattern
 	{
 		SweepAndBack,
 		SwoopPlayer,
@@ -27,9 +27,10 @@ public sealed class TheRIFT : Boss
 		public float time;
 		public float preAttackTime;
 		public float length;
-		public int cannonShots;
-		public Pattern pattern;
-		public List<Attacks> possibleAttacks;
+		public int modifier;
+		public AttackPattern pattern;
+		public AnimationCurve curve;
+		public List<AttackType> possibleAttacks;
 	};
 
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
@@ -47,10 +48,7 @@ public sealed class TheRIFT : Boss
 	public float returnSpeed = 30f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
-	public AnimationCurve swoopCurve;
-	public AnimationCurve laserCurve;
 	public AnimationCurve laserIntroCurve;
-	public AnimationCurve cannonCurve;
 	public RIFTLaser laserPrefab;
 	public Projectile cannonPrefab;
 	public List<Attack> attacks;
@@ -142,7 +140,7 @@ public sealed class TheRIFT : Boss
 							.SetEase(Ease.InOutCubic);
 					}))
 				.AppendCallback(FinishSpawn)
-				.AppendCallback(() => FireLaser(0, spawnLaserPathTime, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), laserIntroCurve, GameObject.Find("Foregrounds").transform))
+				.AppendCallback(() => FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform))
 				.AppendInterval(spawnLaserPathTime + 0.25f)
 				.AppendCallback(() =>
 				{
@@ -197,21 +195,21 @@ public sealed class TheRIFT : Boss
 	private IEnumerator DoAttack(Attack attack)
 	{
 		int attackToUse = UnityEngine.Random.Range(0, attack.possibleAttacks.Count);
-		Action<Pattern, float> attackFunction = null;
+		Action<Attack> attackFunction = null;
 
 		switch (attack.possibleAttacks[attackToUse])
 		{
-			case Attacks.Laser:
+			case AttackType.Laser:
 				anim.SetTrigger("PreAttack Laser");
-				attackFunction = (x, y) => FireLaser(x, y);
+				attackFunction = (x) => FireLaser(x);
 				break;
-			case Attacks.Swoop:
+			case AttackType.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
-				attackFunction = (x, y) => Swoop(x, y);
+				attackFunction = (x) => Swoop(x);
 				break;
-			case Attacks.Cannon:
+			case AttackType.Cannon:
 				anim.SetTrigger("PreAttack Laser");
-				attackFunction = (x, y) => FireCannon(x, y, attack.cannonShots);
+				attackFunction = (x) => FireCannon(x);
 				break;
 		}
 
@@ -220,17 +218,16 @@ public sealed class TheRIFT : Boss
 			yield return new WaitForSeconds(attack.preAttackTime);
 
 			preAttacking = false;
-			attackFunction.Invoke(attack.pattern, attack.length);
+			attackFunction.Invoke(attack);
 		}
 	}
 
-	private void FireLaser(Pattern pattern, float length, Vector3[] laserPath = null, PathType pathType = PathType.CatmullRom, AnimationCurve easeCurve = null, Transform targetParent = null)
+	private void FireLaser(float length, AttackPattern pattern, AnimationCurve curve, Vector3[] laserPath = null, PathType pathType = PathType.CatmullRom, Transform targetParent = null)
 	{
 		attacking = true;
 		anim.SetTrigger("Attack Flash");
 
 		laserPath = (laserPath == null) ? GeneratePath(pattern) : laserPath;
-		easeCurve = (easeCurve == null) ? laserCurve : easeCurve;
 
 		laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
 
@@ -243,7 +240,7 @@ public sealed class TheRIFT : Boss
 			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], laserInstance.chargeTime)
 				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
 			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
-				.SetEase(easeCurve)
+				.SetEase(curve)
 				.OnUpdate(() =>
 				{
 					laserInstance.firePoint = firePoint.position;
@@ -258,7 +255,12 @@ public sealed class TheRIFT : Boss
 				}));
 	}
 
-	private void Swoop(Pattern pattern, float length, Vector3[] swoopPath = null)
+	private void FireLaser(Attack attack)
+	{
+		FireLaser(attack.length, attack.pattern, attack.curve);
+	}
+
+	private void Swoop(float length, AttackPattern pattern, AnimationCurve curve, Vector3[] swoopPath = null)
 	{
 		attacking = true;
 		anim.SetTrigger("Attack Flash");
@@ -267,7 +269,7 @@ public sealed class TheRIFT : Boss
 		applyMovement = false;
 
 		transform.DOPath(swoopPath, length, PathType.CatmullRom, PathMode.Sidescroller2D)
-			.SetEase(swoopCurve)
+			.SetEase(curve)
 			.OnComplete(() =>
 			{
 				applyMovement = true;
@@ -275,7 +277,12 @@ public sealed class TheRIFT : Boss
 			});
 	}
 
-	private void FireCannon(Pattern pattern, float length, int shots, Vector3[] cannonPath = null)
+	private void Swoop(Attack attack)
+	{
+		Swoop(attack.length, attack.pattern, attack.curve);
+	}
+
+	private void FireCannon(float length, AttackPattern pattern, AnimationCurve curve, int shots, Vector3[] cannonPath = null)
 	{
 		attacking = true;
 		anim.SetTrigger("Attack Cannon");
@@ -302,13 +309,18 @@ public sealed class TheRIFT : Boss
 
 		cannonTarget.DOPath(cannonPath, length, PathType.Linear, PathMode.Sidescroller2D)
 			.SetDelay(0.25f)
-			.SetEase(cannonCurve)
+			.SetEase(curve)
 			.OnComplete(() =>
 			{
 				attacking = false;
 				cannonSequence.Kill();
 				Destroy(cannonTarget.gameObject);
 			});
+	}
+
+	private void FireCannon(Attack attack)
+	{
+		FireCannon(attack.length, attack.pattern, attack.curve, attack.modifier);
 	}
 
 	private void Float()
@@ -355,14 +367,14 @@ public sealed class TheRIFT : Boss
 		prevPosition = transform.position;
 	}
 
-	private Vector3[] GeneratePath(Pattern pattern)
+	private Vector3[] GeneratePath(AttackPattern pattern)
 	{
 		List<Vector3> path = new List<Vector3>();
 		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
 
 		switch (pattern)
 		{ 
-			case Pattern.SweepAndBack:
+			case AttackPattern.SweepAndBack:
 				path.Add(new Vector3(startingX,
 									 groundLevel.position.y,
 									 transform.position.z));
@@ -371,14 +383,14 @@ public sealed class TheRIFT : Boss
 									 transform.position.z));
 				path.Add(path[0]);
 				break;
-			case Pattern.SwoopPlayer:
+			case AttackPattern.SwoopPlayer:
 				path.Add(transform.position);
 				path.Add(new Vector3(PlayerControl.instance.transform.position.x,
 									 groundLevel.position.y - 1f,
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				break;
-			case Pattern.PlayerProximity:
+			case AttackPattern.PlayerProximity:
 				path.Add(new Vector3(PlayerControl.instance.transform.position.x - 3f,
 									 groundLevel.position.y,
 									 transform.position.z));

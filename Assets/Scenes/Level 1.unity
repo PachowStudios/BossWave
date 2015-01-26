@@ -5750,7 +5750,7 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1000
+    startTime: 1
     totalLength: 30
     cameraSpeed: 15
     fullCameraSpeed: 30
@@ -9538,6 +9538,10 @@ Prefab:
       propertyPath: worldBoundaries
       value: 
       objectReference: {fileID: 65468173}
+    - target: {fileID: 11400000, guid: 6e1c59e01d6ec974e8ffd50923d166a1, type: 2}
+      propertyPath: bossWave.startTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e1c59e01d6ec974e8ffd50923d166a1, type: 2}
   m_RootGameObject: {fileID: 897096780}
@@ -11422,7 +11426,7 @@ MonoBehaviour:
   m_MinValue: -300
   m_MaxValue: -500
   m_WholeNumbers: 1
-  m_Value: -300
+  m_Value: -500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

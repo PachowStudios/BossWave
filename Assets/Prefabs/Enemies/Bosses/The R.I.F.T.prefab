@@ -446,8 +446,23 @@ MonoBehaviour:
   - time: 4
     preAttackTime: 1
     length: 1
-    cannonShots: 3
+    modifier: 3
     pattern: 2
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: 1
+        value: 1
+        inSlope: .0283022616
+        outSlope: .0283022616
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
     possibleAttacks: 02000000
 --- !u!212 &21200000
 SpriteRenderer:

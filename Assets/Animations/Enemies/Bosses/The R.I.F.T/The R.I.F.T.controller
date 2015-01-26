@@ -163,7 +163,7 @@ Transition:
     m_EventTreshold: 0
     m_ExitTime: .899999976
   - m_ConditionMode: 1
-    m_ConditionEvent: Flash
+    m_ConditionEvent: Attack Flash
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -367,7 +367,7 @@ Transition:
     m_EventTreshold: 0
     m_ExitTime: .899999976
   - m_ConditionMode: 1
-    m_ConditionEvent: Cannon
+    m_ConditionEvent: Attack Cannon
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
