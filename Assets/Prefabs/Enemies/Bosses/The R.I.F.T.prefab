@@ -339,7 +339,7 @@ MonoBehaviour:
   maxMicrochips: 3
   smallestMicrochip: 0
   biggestMicrochip: 0
-  knockback: 3
+  knockback: {x: 3, y: 3}
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: -10
@@ -365,8 +365,6 @@ MonoBehaviour:
   returnSpeed: 30
   minFloatHeight: 9
   maxFloatHeight: 11
-  swoopLength: 1
-  laserLength: 2
   swoopCurve:
     serializedVersion: 2
     m_Curve:
@@ -427,11 +425,30 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+  cannonCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 10
+    m_PreInfinity: 2
+    m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
+  cannonPrefab: {fileID: 11400002, guid: 3ca141e57ba2d9a41ac532105b117e89, type: 2}
   attacks:
   - time: 4
     preAttackTime: 1
-    possibleAttacks: 01000000
+    length: 1
+    cannonShots: 3
+    pattern: 2
+    possibleAttacks: 02000000
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

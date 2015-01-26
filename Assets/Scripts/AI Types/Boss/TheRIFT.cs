@@ -10,7 +10,15 @@ public sealed class TheRIFT : Boss
 	public enum Attacks
 	{
 		Swoop,
-		Laser
+		Laser,
+		Cannon
+	};
+
+	public enum Pattern
+	{
+		SweepAndBack,
+		SwoopPlayer,
+		PlayerProximity
 	};
 
 	[System.Serializable]
@@ -18,6 +26,9 @@ public sealed class TheRIFT : Boss
 	{
 		public float time;
 		public float preAttackTime;
+		public float length;
+		public int cannonShots;
+		public Pattern pattern;
 		public List<Attacks> possibleAttacks;
 	};
 
@@ -36,12 +47,12 @@ public sealed class TheRIFT : Boss
 	public float returnSpeed = 30f;
 	public float minFloatHeight = 3f;
 	public float maxFloatHeight = 5f;
-	public float swoopLength = 5f;
-	public float laserLength = 3f;
 	public AnimationCurve swoopCurve;
 	public AnimationCurve laserCurve;
 	public AnimationCurve laserIntroCurve;
+	public AnimationCurve cannonCurve;
 	public RIFTLaser laserPrefab;
+	public Projectile cannonPrefab;
 	public List<Attack> attacks;
 
 	private float defaultGravity;
@@ -131,7 +142,7 @@ public sealed class TheRIFT : Boss
 							.SetEase(Ease.InOutCubic);
 					}))
 				.AppendCallback(FinishSpawn)
-				.AppendCallback(() => FireLaser(VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), spawnLaserPathTime, laserIntroCurve, GameObject.Find("Foregrounds").transform))
+				.AppendCallback(() => FireLaser(0, spawnLaserPathTime, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), laserIntroCurve, GameObject.Find("Foregrounds").transform))
 				.AppendInterval(spawnLaserPathTime + 0.25f)
 				.AppendCallback(() =>
 				{
@@ -155,6 +166,7 @@ public sealed class TheRIFT : Boss
 
 		invincible = !attacking;
 		anim.SetBool("Eye Shield", invincible);
+		anim.SetBool("Attacking", attacking);
 
 		attackTimer += Time.deltaTime;
 
@@ -184,18 +196,22 @@ public sealed class TheRIFT : Boss
 
 	private IEnumerator DoAttack(Attack attack)
 	{
-		int attackToUse = UnityEngine.Random.Range(0, attacks[currentAttack].possibleAttacks.Count);
-		Action attackFunction = null;
+		int attackToUse = UnityEngine.Random.Range(0, attack.possibleAttacks.Count);
+		Action<Pattern, float> attackFunction = null;
 
 		switch (attack.possibleAttacks[attackToUse])
 		{
 			case Attacks.Laser:
 				anim.SetTrigger("PreAttack Laser");
-				attackFunction = () => FireLaser();
+				attackFunction = (x, y) => FireLaser(x, y);
 				break;
 			case Attacks.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
-				attackFunction = () => Swoop();
+				attackFunction = (x, y) => Swoop(x, y);
+				break;
+			case Attacks.Cannon:
+				anim.SetTrigger("PreAttack Laser");
+				attackFunction = (x, y) => FireCannon(x, y, attack.cannonShots);
 				break;
 		}
 
@@ -204,26 +220,25 @@ public sealed class TheRIFT : Boss
 			yield return new WaitForSeconds(attack.preAttackTime);
 
 			preAttacking = false;
-			attackFunction.Invoke();
+			attackFunction.Invoke(attack.pattern, attack.length);
 		}
 	}
 
-	private void FireLaser(Vector3[] laserPath = null, PathType pathType = PathType.CatmullRom, float length = -1f, AnimationCurve easeCurve = null, Transform targetParent = null)
+	private void FireLaser(Pattern pattern, float length, Vector3[] laserPath = null, PathType pathType = PathType.CatmullRom, AnimationCurve easeCurve = null, Transform targetParent = null)
 	{
 		attacking = true;
+		anim.SetTrigger("Attack Flash");
 
-		laserPath = (laserPath == null) ? GenerateLaserPath() : laserPath;
-		length = (length == -1f) ? laserLength : length;
+		laserPath = (laserPath == null) ? GeneratePath(pattern) : laserPath;
 		easeCurve = (easeCurve == null) ? laserCurve : easeCurve;
 
 		laserInstance = Instantiate(laserPrefab, firePoint.position, Quaternion.identity) as RIFTLaser;
 
 		Transform laserTarget = new GameObject().transform;
-		laserTarget.name = "Laser Target";
+		laserTarget.gameObject.HideInHiearchy();
 		laserTarget.parent = (targetParent == null) ? laserTarget : targetParent;
 
 		Sequence laserSequence = DOTween.Sequence();
-
 		laserSequence
 			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], laserInstance.chargeTime)
 				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
@@ -243,19 +258,56 @@ public sealed class TheRIFT : Boss
 				}));
 	}
 
-	private void Swoop(Vector3[] swoopPath = null)
+	private void Swoop(Pattern pattern, float length, Vector3[] swoopPath = null)
 	{
 		attacking = true;
+		anim.SetTrigger("Attack Flash");
 
-		swoopPath = (swoopPath == null) ? GenerateSwoopPath() : swoopPath;
+		swoopPath = (swoopPath == null) ? GeneratePath(pattern) : swoopPath;
 		applyMovement = false;
 
-		transform.DOPath(swoopPath, swoopLength, PathType.CatmullRom, PathMode.Sidescroller2D)
+		transform.DOPath(swoopPath, length, PathType.CatmullRom, PathMode.Sidescroller2D)
 			.SetEase(swoopCurve)
 			.OnComplete(() =>
 			{
 				applyMovement = true;
 				attacking = false;
+			});
+	}
+
+	private void FireCannon(Pattern pattern, float length, int shots, Vector3[] cannonPath = null)
+	{
+		attacking = true;
+		anim.SetTrigger("Attack Cannon");
+
+		cannonPath = (cannonPath == null) ? GeneratePath(pattern) : cannonPath;
+
+		Transform cannonTarget = new GameObject().transform;
+		cannonTarget.gameObject.HideInHiearchy();
+		cannonTarget.transform.position = cannonPath[0];
+
+		Sequence cannonSequence = DOTween.Sequence();
+		cannonSequence.AppendInterval(0.25f);
+
+		for (int i = 1; i <= shots; i++)
+		{
+			cannonSequence
+				.AppendCallback(() =>
+				{
+					Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
+					currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
+				})
+				.AppendInterval((length / shots) * i);
+		}
+
+		cannonTarget.DOPath(cannonPath, length, PathType.Linear, PathMode.Sidescroller2D)
+			.SetDelay(0.25f)
+			.SetEase(cannonCurve)
+			.OnComplete(() =>
+			{
+				attacking = false;
+				cannonSequence.Kill();
+				Destroy(cannonTarget.gameObject);
 			});
 	}
 
@@ -303,32 +355,39 @@ public sealed class TheRIFT : Boss
 		prevPosition = transform.position;
 	}
 
-	private Vector3[] GenerateLaserPath()
+	private Vector3[] GeneratePath(Pattern pattern)
 	{
-		List<Vector3> laserPath = new List<Vector3>();
+		List<Vector3> path = new List<Vector3>();
 		Vector3 screenRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 10f));
 
-		laserPath.Add(new Vector3(startingX,
-								  groundLevel.position.y,
-								  transform.position.z));
-		laserPath.Add(new Vector3(screenRight.x + 1f,
-								  groundLevel.position.y,
-								  transform.position.z));
-		laserPath.Add(laserPath[0]);
+		switch (pattern)
+		{ 
+			case Pattern.SweepAndBack:
+				path.Add(new Vector3(startingX,
+									 groundLevel.position.y,
+									 transform.position.z));
+				path.Add(new Vector3(screenRight.x + 1f,
+									 groundLevel.position.y,
+									 transform.position.z));
+				path.Add(path[0]);
+				break;
+			case Pattern.SwoopPlayer:
+				path.Add(transform.position);
+				path.Add(new Vector3(PlayerControl.instance.transform.position.x,
+									 groundLevel.position.y - 1f,
+									 transform.position.z));
+				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
+				break;
+			case Pattern.PlayerProximity:
+				path.Add(new Vector3(PlayerControl.instance.transform.position.x - 3f,
+									 groundLevel.position.y,
+									 transform.position.z));
+				path.Add(new Vector3(PlayerControl.instance.transform.position.x + 3f,
+									 groundLevel.position.y,
+									 transform.position.z));
+				break;
+		}
 
-		return laserPath.ToArray();
-	}
-
-	private Vector3[] GenerateSwoopPath()
-	{
-		List<Vector3> swoopPath = new List<Vector3>();
-
-		swoopPath.Add(transform.position);
-		swoopPath.Add(new Vector3(PlayerControl.instance.transform.position.x,
-									groundLevel.position.y - 1f,
-									transform.position.z));
-		swoopPath.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
-
-		return swoopPath.ToArray();
+		return path.ToArray();
 	}
 }

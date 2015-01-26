@@ -172,7 +172,10 @@ public class SmartLaser : Projectile
 
 		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
 		{
-			allEnemies.Add(enemy.GetComponent<Enemy>());
+			if (enemy.collider2D != null)
+			{
+				allEnemies.Add(enemy.GetComponent<Enemy>());
+			}
 		}
 
 		if (allEnemies.Count > 0)

@@ -38,6 +38,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Attack Cannon
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: Attack Flash
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Body
@@ -150,6 +162,10 @@ Transition:
     m_ConditionEvent: Attacking
     m_EventTreshold: 0
     m_ExitTime: .899999976
+  - m_ConditionMode: 1
+    m_ConditionEvent: Flash
+    m_EventTreshold: 0
+    m_ExitTime: .899999976
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -167,7 +183,27 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Attacking
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110122392
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110261184}
+  m_DstState: {fileID: 110255452}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Attacking
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -227,7 +263,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Attacking
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -308,6 +344,50 @@ Transition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: Eye Shield
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110148172
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 0}
+  m_DstState: {fileID: 110211084}
+  m_TransitionDuration: .100000001
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Attacking
+    m_EventTreshold: 0
+    m_ExitTime: .899999976
+  - m_ConditionMode: 1
+    m_ConditionEvent: Cannon
+    m_EventTreshold: 0
+    m_ExitTime: .899999976
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110149313
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110211084}
+  m_DstState: {fileID: 110261184}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: Attack Cannon
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -447,7 +527,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Attacking
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -589,6 +669,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110211084
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Cannon Activating
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: b8db6b419120d7e4e86ea330bcebb0c7, type: 2}
+  m_ParentStateMachine: {fileID: 110748016}
+  m_Position: {x: 264, y: -12, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110219832
 State:
   m_ObjectHideFlags: 3
@@ -615,7 +710,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 054581e64eb12824a93cf9a264d2672f, type: 2}
   m_ParentStateMachine: {fileID: 110748016}
-  m_Position: {x: 264, y: 72, z: 0}
+  m_Position: {x: 504, y: 72, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -691,6 +786,21 @@ State:
   - {fileID: 7400000, guid: d069d93afd1ce9341838794fa22b2eec, type: 2}
   m_ParentStateMachine: {fileID: 110748016}
   m_Position: {x: -216, y: 72, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110261184
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Cannon Active
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: b237509968f224247a70a629617ef4da, type: 2}
+  m_ParentStateMachine: {fileID: 110748016}
+  m_Position: {x: 264, y: 72, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -919,6 +1029,8 @@ StateMachine:
   - {fileID: 110260474}
   - {fileID: 110289691}
   - {fileID: 110225443}
+  - {fileID: 110211084}
+  - {fileID: 110261184}
   m_ChildStateMachine:
   - {fileID: 110713501}
   m_ChildStateMachinePosition:
@@ -929,6 +1041,7 @@ StateMachine:
       second:
       - {fileID: 110187173}
       - {fileID: 110106701}
+      - {fileID: 110148172}
     data:
       first: {fileID: 110255452}
       second:
@@ -946,6 +1059,14 @@ StateMachine:
       first: {fileID: 110225443}
       second:
       - {fileID: 110168099}
+    data:
+      first: {fileID: 110211084}
+      second:
+      - {fileID: 110149313}
+    data:
+      first: {fileID: 110261184}
+      second:
+      - {fileID: 110122392}
     data:
       first: {fileID: 110219832}
       second:
