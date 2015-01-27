@@ -21,7 +21,7 @@ public class VitalTank : Powerup
 	protected override void Pickup()
 	{
 		PlayerControl.instance.Health += healthAmount;
-		PopupMessage.CreatePopup(PlayerControl.instance.popupMessagePoint.position, ((int)healthAmount).ToString(), popupImage);
+		PopupMessage.CreatePopup(PlayerControl.instance.PopupMessagePoint, ((int)healthAmount).ToString(), popupImage);
 
 		base.Pickup();
 	}

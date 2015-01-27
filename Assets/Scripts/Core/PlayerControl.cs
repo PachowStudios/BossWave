@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using DG.Tweening;
 
-public class PlayerControl : MonoBehaviour
+public sealed class PlayerControl : MonoBehaviour
 {
+	#region Variables
 	public static PlayerControl instance;
 
 	public float maxHealth = 100f;
@@ -13,6 +15,7 @@ public class PlayerControl : MonoBehaviour
 	public float gravity = -35f;
 	public float walkSpeed = 10f;
 	public float runSpeed = 17.5f;
+	public bool continuouslyRunning = false;
 	public float continuousRunSpeed = 10f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
@@ -25,31 +28,6 @@ public class PlayerControl : MonoBehaviour
 	public float minAltIdleTime = 5f;
 	public float maxAltIdleTime = 10f;
 	public List<string> altIdleAnimations;
-
-	[HideInInspector]
-	public Gun gun;
-	[HideInInspector]
-	public Vector3 velocity;
-	[HideInInspector]
-	private float normalizedHorizontalSpeed = 0;
-	[HideInInspector]
-	public float speedMultiplier = 1f;
-	[HideInInspector]
-	public Transform popupMessagePoint;
-	[HideInInspector]
-	public int score = 0;
-	[HideInInspector]
-	public int combo = 1;
-	[HideInInspector]
-	public int microchips = 0;
-	[HideInInspector]
-	public bool continuouslyRunning = false;
-	[HideInInspector]
-	public List<SpriteRenderer> spriteRenderers;
-
-	private CharacterController2D controller;
-	private Animator anim;
-	private RaycastHit2D lastControllerColliderHit;
 
 	private float health;
 	private bool dead = false;
@@ -65,12 +43,19 @@ public class PlayerControl : MonoBehaviour
 	private bool lastJump;
 	#endif
 
+	private Vector3 velocity;
+	private float normalizedHorizontalSpeed = 0;
+	private float speedMultiplier = 1f;
+
 	private float lastHitTime;
 	private bool canTakeDamage = true;
 	private float flashTimer = 0f;
 	private float flashTime = 0.25f;
 	private float smoothFlashTime;
 
+	private int score = 0;
+	private int microchips = 0;
+	private int combo = 1;
 	private float currentMaxCombo = 1f;
 	private float comboTimer = 0f;
 	private float killChain = 0f;
@@ -85,6 +70,14 @@ public class PlayerControl : MonoBehaviour
 	private bool inertiaAfterMove = false;
 	private Vector3 targetPoint;
 
+	private CharacterController2D controller;
+	private Animator anim;
+	private Gun gun;
+	private Transform popupMessagePoint;
+	private List<SpriteRenderer> spriteRenderers;
+	#endregion
+
+	#region Properties
 	public float Health
 	{
 		get { return health; }
@@ -106,9 +99,29 @@ public class PlayerControl : MonoBehaviour
 		get { return dead; }
 	}
 
+	public int Score
+	{
+		get { return score; }
+	}
+
+	public int Microchips
+	{
+		get { return microchips; }
+	}
+
+	public int Combo
+	{
+		get { return combo; }
+	}
+
 	public bool FacingRight
 	{
 		get { return transform.localScale.x > 0; }
+	}
+
+	public bool Jumped
+	{
+		get { return jump; }
 	}
 
 	public bool IsGrounded
@@ -116,15 +129,34 @@ public class PlayerControl : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
-	private float newAltIdleTime
+	public Vector3 Velocity
 	{
-		get
-		{
-			return Random.Range(minAltIdleTime, maxAltIdleTime);
-		}
+		get { return velocity; }
 	}
 
-	void Awake()
+	public Gun Gun
+	{
+		get { return gun; }
+	}
+
+	public Vector3 PopupMessagePoint
+	{
+		get { return popupMessagePoint.position; }
+	}
+
+	public ReadOnlyCollection<SpriteRenderer> SpriteRenderers
+	{
+		get { return spriteRenderers.AsReadOnly(); }
+	}
+
+	private float NewAltIdleTime
+	{
+		get { return Random.Range(minAltIdleTime, maxAltIdleTime); }
+	}
+	#endregion
+
+	#region Monobehaviour
+	private void Awake()
 	{
 		instance = this;
 
@@ -138,10 +170,10 @@ public class PlayerControl : MonoBehaviour
 		health = maxHealth;
 
 		lastHitTime = Time.time - invincibilityPeriod;
-		altIdleTime = newAltIdleTime;
+		altIdleTime = NewAltIdleTime;
 	}
 
-	void Start()
+	private void Start()
 	{
 		SwapGun(startingGun);
 
@@ -154,7 +186,7 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	void Update()
+	private void Update()
 	{
 		if (!disableInput)
 		{
@@ -173,189 +205,33 @@ public class PlayerControl : MonoBehaviour
 		}
 
 		run = (run && (right || left)) || continuouslyRunning;
-
-		anim.SetBool("Walking", right || left || continuouslyRunning);
-		anim.SetBool("Running", run);
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
-		velocity = controller.velocity;
-
-		if (IsGrounded)
-		{
-			velocity.y = 0f;
-		}
-
-		anim.SetBool("Grounded", controller.isGrounded);
-		anim.SetBool("Falling", velocity.y < 0f);
-		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
+		InitialUpdate();
+		ApplyAnimation();
 
 		if (useTargetPoint && disableInput)
 		{
-			if (transform.position.x < targetPoint.x && !left)
-			{
-				right = true;
-			}
-			else if (transform.position.x > targetPoint.x && !right)
-			{
-				left = true;
-			}
-			else
-			{
-				cancelGoTo = true;	
-			}
-
-			if (cancelGoTo)
-			{
-				if (goToFaceRight && transform.localScale.x < 0)
-				{
-					Flip();
-				}
-				if (!goToFaceRight && transform.localScale.x > 0)
-				{
-					Flip();
-				}
-
-				ResetInput();
-
-				useTargetPoint = false;
-
-				if (!inertiaAfterMove)
-				{
-					velocity.x = 0f;
-				}
-
-				if (reEnableAfterMove)
-				{
-					EnableInput();
-				}
-			}
+			UpdateGoTo();
 		}
 
 		if (combo > 1)
 		{
-			comboTimer += Time.deltaTime;
-
-			if (comboTimer >= Mathf.Clamp(comboDecreaseTime - (0.25f * (currentMaxCombo - combo)), comboDecreaseTime * 0.25f, comboDecreaseTime))
-			{
-				combo--;
-				killChain = combo == 1 ? 0f : GetNextCombo() - combo;
-				comboTimer = 0f;
-			}
+			UpdateCombo();
 		}
 
 		if (health > 0f)
 		{
-			canTakeDamage = Time.time > lastHitTime + invincibilityPeriod;
-
-			if (!canTakeDamage)
-			{
-				flashTimer += Time.deltaTime;
-				smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
-
-				if (flashTimer > smoothFlashTime)
-				{
-					SetRenderersEnabled(alternate: true);
-					flashTimer = 0f;
-				}
-			}
-			else
-			{
-				SetRenderersEnabled(true);
-				smoothFlashTime = flashTime;
-			}
+			UpdateInvincibilityFlash();	
 		}
 
-		if (right)
-		{
-			normalizedHorizontalSpeed = 1f;
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1f;
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0f;
-
-			if (!jump && gun.NoInput)
-			{
-				altIdleTimer += Time.deltaTime;
-
-				if (altIdleTimer >= altIdleTime)
-				{
-					anim.SetTrigger(altIdleAnimations[Random.Range(0, altIdleAnimations.Count)]);
-					altIdleTimer = 0f;
-					altIdleTime = newAltIdleTime;
-				}
-			}
-		}
-
-		if (gun.NoInput)
-		{
-			if (usingGun)
-			{
-				usingGun = false;
-				SetRenderersVisible(alternate: true);
-			}
-
-			if (continuouslyRunning && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-
-			if (right && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-			else if (left && !continuouslyRunning && transform.localScale.x > 0f)
-			{
-				Flip();
-			}
-		}
-		else
-		{
-			if (!usingGun)
-			{
-				usingGun = true;
-				SetRenderersVisible(alternate: true);
-			}
-
-			if (gun.FacingRight && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-			else if (!gun.FacingRight && transform.localScale.x > 0f)
-			{
-				Flip();
-			}
-		}
-
-		if (jump && controller.isGrounded)
-		{
-			if (!inPortal)
-			{
-				velocity.y = Mathf.Sqrt(Mathf.Max(0f, 2f * jumpHeight * -gravity));
-				anim.SetTrigger("Jump");
-			}
-
-			jump = false;
-		}
-
-		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
-
-		velocity.x = Mathf.Lerp(velocity.x,
-								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
-																										   : runSpeed)
-																 : walkSpeed) * speedMultiplier,
-								Time.fixedDeltaTime * smoothedMovementFactor);
-		velocity.y += gravity * Time.fixedDeltaTime;
-
-		controller.move(velocity * Time.fixedDeltaTime);		
+		GetMovement();
+		ApplyMovement();
 	}
 
-	void OnTriggerEnter2D(Collider2D enemy)
+	private void OnTriggerEnter2D(Collider2D enemy)
 	{
 		if (enemy.tag == "Enemy" || enemy.tag == "Projectile")
 		{
@@ -374,19 +250,21 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D enemy)
+	private void OnTriggerStay2D(Collider2D enemy)
 	{
 		OnTriggerEnter2D(enemy);
 	}
 
-	void OnTriggerExit2D(Collider2D other)
+	private void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.tag == "Portal")
 		{
 			inPortal = false;
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
 	{
 		if (!canTakeDamage)
@@ -487,9 +365,14 @@ public class PlayerControl : MonoBehaviour
 		spriteRenderers.Add(gun.GetComponent<SpriteRenderer>());
 	}
 
-	public void ResetSpeed(float delay)
+	public void SpeedBoost(float multiplier, float length)
 	{
-		StartCoroutine(ResetSpeedCoroutine(delay));
+		speedMultiplier = multiplier;
+
+		Sequence speedSequence = DOTween.Sequence();
+		speedSequence
+			.AppendInterval(length)
+			.AppendCallback(() => speedMultiplier = 1f);
 	}
 
 	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
@@ -526,6 +409,206 @@ public class PlayerControl : MonoBehaviour
 	{
 		return disableInput;
 	}
+	#endregion
+
+	#region Private Update Methods
+	private void InitialUpdate()
+	{
+		velocity = controller.velocity;
+
+		if (IsGrounded)
+		{
+			velocity.y = 0f;
+		}
+	}
+
+	private void ApplyAnimation()
+	{
+		anim.SetBool("Walking", right || left || continuouslyRunning);
+		anim.SetBool("Running", run);
+		anim.SetBool("Grounded", controller.isGrounded);
+		anim.SetBool("Falling", velocity.y < 0f);
+		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
+	}
+
+	private void UpdateGoTo()
+	{
+		if (transform.position.x < targetPoint.x && !left)
+		{
+			right = true;
+		}
+		else if (transform.position.x > targetPoint.x && !right)
+		{
+			left = true;
+		}
+		else
+		{
+			cancelGoTo = true;
+		}
+
+		if (cancelGoTo)
+		{
+			if (goToFaceRight && transform.localScale.x < 0)
+			{
+				Flip();
+			}
+			if (!goToFaceRight && transform.localScale.x > 0)
+			{
+				Flip();
+			}
+
+			ResetInput();
+
+			useTargetPoint = false;
+
+			if (!inertiaAfterMove)
+			{
+				velocity.x = 0f;
+			}
+
+			if (reEnableAfterMove)
+			{
+				EnableInput();
+			}
+		}
+	}
+
+	private void UpdateCombo()
+	{
+		comboTimer += Time.deltaTime;
+
+		if (comboTimer >= Mathf.Clamp(comboDecreaseTime - (0.25f * (currentMaxCombo - combo)), comboDecreaseTime * 0.25f, comboDecreaseTime))
+		{
+			combo--;
+			killChain = combo == 1 ? 0f : GetNextCombo() - combo;
+			comboTimer = 0f;
+		}
+	}
+
+	private void UpdateInvincibilityFlash()
+	{
+		canTakeDamage = Time.time > lastHitTime + invincibilityPeriod;
+
+		if (!canTakeDamage)
+		{
+			flashTimer += Time.deltaTime;
+			smoothFlashTime = Mathf.Lerp(smoothFlashTime, 0.05f, 0.025f);
+
+			if (flashTimer > smoothFlashTime)
+			{
+				SetRenderersEnabled(alternate: true);
+				flashTimer = 0f;
+			}
+		}
+		else
+		{
+			SetRenderersEnabled(true);
+			smoothFlashTime = flashTime;
+		}
+	}
+
+	private void GetMovement()
+	{
+		if (right)
+		{
+			normalizedHorizontalSpeed = 1f;
+		}
+		else if (left)
+		{
+			normalizedHorizontalSpeed = -1f;
+		}
+		else
+		{
+			normalizedHorizontalSpeed = 0f;
+
+			if (!jump && gun.NoInput)
+			{
+				altIdleTimer += Time.deltaTime;
+
+				if (altIdleTimer >= altIdleTime)
+				{
+					anim.SetTrigger(altIdleAnimations[Random.Range(0, altIdleAnimations.Count)]);
+					altIdleTimer = 0f;
+					altIdleTime = NewAltIdleTime;
+				}
+			}
+		}
+
+		if (gun.NoInput)
+		{
+			if (usingGun)
+			{
+				usingGun = false;
+				SetRenderersVisible(alternate: true);
+			}
+
+			if (continuouslyRunning && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+
+			if (right && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+			else if (left && !continuouslyRunning && transform.localScale.x > 0f)
+			{
+				Flip();
+			}
+		}
+		else
+		{
+			if (!usingGun)
+			{
+				usingGun = true;
+				SetRenderersVisible(alternate: true);
+			}
+
+			if (gun.FacingRight && transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+			else if (!gun.FacingRight && transform.localScale.x > 0f)
+			{
+				Flip();
+			}
+		}
+
+		if (jump && controller.isGrounded)
+		{
+			if (!inPortal)
+			{
+				Jump(jumpHeight);
+			}
+
+			jump = false;
+		}
+	}
+
+	private void ApplyMovement()
+	{
+		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
+
+		velocity.x = Mathf.Lerp(velocity.x,
+								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
+																										   : runSpeed)
+																 : walkSpeed) * speedMultiplier,
+								Time.fixedDeltaTime * smoothedMovementFactor);
+		velocity.y += gravity * Time.fixedDeltaTime;
+
+		controller.move(velocity * Time.fixedDeltaTime);
+	}
+	#endregion
+
+	#region Private Helper Methods
+	private void Jump(float height)
+	{
+		if (height >= 0f)
+		{
+			velocity.y = Mathf.Sqrt(2f * height * -gravity);
+			anim.SetTrigger("Jump");
+		}
+	}
 
 	private void ResetInput()
 	{
@@ -555,12 +638,6 @@ public class PlayerControl : MonoBehaviour
 	private void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-	}
-
-	private IEnumerator ResetSpeedCoroutine(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		speedMultiplier = 1f;
 	}
 
 	private void SetRenderersEnabled(bool enabled = true, bool alternate = false)
@@ -604,6 +681,7 @@ public class PlayerControl : MonoBehaviour
 
 		return nextCombo;
 	}
+	#endregion
 }
 
 

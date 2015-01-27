@@ -14,10 +14,8 @@ public class StimTank : Powerup
 
 	protected override void Pickup()
 	{
-		PlayerControl.instance.speedMultiplier = speedMultiplier;
-		PlayerControl.instance.ResetSpeed(duration);
-
-		PopupMessage.CreatePopup(PlayerControl.instance.popupMessagePoint.position, ((int)duration).ToString(), popupImage);
+		PlayerControl.instance.SpeedBoost(speedMultiplier, duration);
+		PopupMessage.CreatePopup(PlayerControl.instance.PopupMessagePoint, ((int)duration).ToString(), popupImage);
 
 		base.Pickup();
 	}

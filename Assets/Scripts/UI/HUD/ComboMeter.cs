@@ -12,6 +12,6 @@ public class ComboMeter : MonoBehaviour
 
 	void OnGUI()
 	{
-		anim.SetInteger("Combo", (int)PlayerControl.instance.combo);
+		anim.SetInteger("Combo", PlayerControl.instance.Combo);
 	}
 }

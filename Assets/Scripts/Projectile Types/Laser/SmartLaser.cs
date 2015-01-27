@@ -66,7 +66,7 @@ public class SmartLaser : Projectile
 		int totalSubdivisions = (GameObject.FindGameObjectsWithTag("Enemy").ToList<GameObject>().Count + 1) * subDivisionsPerTarget;
 
 		vectorLine = new VectorLine("Laser", 
-									Enumerable.Repeat<Vector3>(PlayerControl.instance.gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
+									Enumerable.Repeat<Vector3>(PlayerControl.instance.Gun.firePoint.position, totalSubdivisions).ToList<Vector3>(), 
 									material, 
 									adjustedWidth, 
 									LineType.Continuous,
@@ -154,10 +154,10 @@ public class SmartLaser : Projectile
 
 	private void UpdateCollider()
 	{
-		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, detectionRange / 4f)),
-													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(0f, -(detectionRange / 4f))),
-													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, -detectionRange)),
-													 PlayerControl.instance.gun.firePoint.TransformPointLocal(new Vector2(length, detectionRange)) } );
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, detectionRange / 4f)),
+													 PlayerControl.instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, -(detectionRange / 4f))),
+													 PlayerControl.instance.Gun.firePoint.TransformPointLocal(new Vector2(length, -detectionRange)),
+													 PlayerControl.instance.Gun.firePoint.TransformPointLocal(new Vector2(length, detectionRange)) } );
 	}
 
 	private void GetTargets()
@@ -166,7 +166,7 @@ public class SmartLaser : Projectile
 		targetEnemies.Clear();
 		targets.Clear();
 
-		Vector3 origin = PlayerControl.instance.gun.firePoint.position;
+		Vector3 origin = PlayerControl.instance.Gun.firePoint.position;
 		transform.position = origin;
 		targets.Add(origin);
 
@@ -219,7 +219,7 @@ public class SmartLaser : Projectile
 		
 		if (targetEnemies.Count == 0)
 		{
-			Vector3 endPoint = PlayerControl.instance.gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f));
+			Vector3 endPoint = PlayerControl.instance.Gun.firePoint.TransformPoint(new Vector3(length, 0f, 0f));
 			RaycastHit2D raycast = Physics2D.Linecast(origin, endPoint, collisionLayer);
 
 			if (raycast.collider != null)

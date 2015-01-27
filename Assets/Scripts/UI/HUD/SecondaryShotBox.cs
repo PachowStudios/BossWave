@@ -24,12 +24,12 @@ public class SecondaryShotBox : MonoBehaviour
 
 	void OnGUI()
 	{
-		if (!show && PlayerControl.instance.gun.secondaryShot)
+		if (!show && PlayerControl.instance.Gun.secondaryShot)
 		{
 			show = true;
 			anim.SetTrigger("Show");
 		}
-		else if (show && !PlayerControl.instance.gun.secondaryShot)
+		else if (show && !PlayerControl.instance.Gun.secondaryShot)
 		{
 			show = false;
 			anim.SetTrigger("Hide");
@@ -37,8 +37,8 @@ public class SecondaryShotBox : MonoBehaviour
 
 		if (show)
 		{
-			cooldownPercent = Mathf.Clamp(PlayerControl.instance.gun.secondaryTimer / PlayerControl.instance.gun.secondaryCooldown, 0f, 1f);
-			icon.sprite = PlayerControl.instance.gun.secondaryIcon;
+			cooldownPercent = Mathf.Clamp(PlayerControl.instance.Gun.secondaryTimer / PlayerControl.instance.Gun.secondaryCooldown, 0f, 1f);
+			icon.sprite = PlayerControl.instance.Gun.secondaryIcon;
 		}
 		else
 		{

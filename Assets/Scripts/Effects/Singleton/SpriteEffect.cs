@@ -14,16 +14,21 @@ public class SpriteEffect : MonoBehaviour
 
 	private static SpriteEffect instance;
 
-	public List<Effect> allEffects;
+	public List<Effect> effectsLibrary;
 
 	private static Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>();
 
-	void Awake()
+	private void Awake()
 	{
 		instance = this;
 
-		foreach (Effect effect in allEffects)
+		foreach (Effect effect in effectsLibrary)
 		{
+			if (effects.ContainsKey(effect.name.ToLower()))
+			{
+				effects.Remove(effect.name.ToLower());
+			}
+
 			effects.Add(effect.name.ToLower(), effect.prefab);
 		}
 	}

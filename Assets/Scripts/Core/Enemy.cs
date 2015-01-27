@@ -54,10 +54,7 @@ public abstract class Enemy : MonoBehaviour
 
 	public Sprite Sprite
 	{
-		get
-		{
-			return spriteRenderer.sprite;
-		}
+		get { return spriteRenderer.sprite; }
 	}
 
 	public bool FacingRight
@@ -72,10 +69,7 @@ public abstract class Enemy : MonoBehaviour
 
 	protected bool PlayerOnRightSide
 	{
-		get
-		{
-			return PlayerControl.instance.transform.position.x > transform.position.x;
-		}
+		get { return PlayerControl.instance.transform.position.x > transform.position.x; }
 	}
 
 	protected virtual void Awake()

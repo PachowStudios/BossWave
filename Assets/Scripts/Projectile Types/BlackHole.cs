@@ -273,18 +273,18 @@ public class BlackHole : Projectile
 		}
 		else if (outerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
 		{
-			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
+			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.Velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
 
 			if (damageTimer >= damageTime)
 			{
-				foreach (SpriteRenderer sprite in PlayerControl.instance.spriteRenderers)
+				foreach (SpriteRenderer sprite in PlayerControl.instance.SpriteRenderers)
 				{
 					if (sprite.color != Color.clear)
 					{
 						Transform tempTransform = new GameObject().transform;
 						sprite.transform.CopyTo(tempTransform);
 						tempTransform.localScale = PlayerControl.instance.transform.localScale;
-						ExplodeEffect.ExplodePartial(tempTransform.transform, PlayerControl.instance.velocity, sprite.sprite, 0.1f / PlayerControl.instance.spriteRenderers.Count);
+						ExplodeEffect.ExplodePartial(tempTransform.transform, PlayerControl.instance.Velocity, sprite.sprite, 0.1f / PlayerControl.instance.SpriteRenderers.Count);
 						Destroy(tempTransform.gameObject);
 					}
 				}

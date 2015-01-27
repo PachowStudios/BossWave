@@ -61,7 +61,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		transform.position = PlayerControl.instance.popupMessagePoint.position + new Vector3(0f, yOffset, 0f);
+		transform.position = PlayerControl.instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
 
 		if (timer > 0)
 		{

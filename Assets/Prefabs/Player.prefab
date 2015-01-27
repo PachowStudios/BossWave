@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   invincibilityPeriod: 1
-  gravity: -35
+  gravity: -45
   walkSpeed: 10
   runSpeed: 15
   continuousRunSpeed: 10

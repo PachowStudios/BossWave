@@ -44,8 +44,8 @@ public class HealthDisplay : MonoBehaviour
 		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
 
 		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, bar.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
-		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.score, ref scoreVelocity, textDamping);
-		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.instance.microchips, ref microchipsVelocity, textDamping);
+		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.Score, ref scoreVelocity, textDamping);
+		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.instance.Microchips, ref microchipsVelocity, textDamping);
 
 		score.text = Mathf.RoundToInt(scoreValue).ToString().PadLeft(scoreDigits, '0');
 		microchips.text = Mathf.RoundToInt(microchipsValue).ToString().PadLeft(microchipsDigits, '0');

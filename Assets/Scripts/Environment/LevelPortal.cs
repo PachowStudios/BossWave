@@ -10,11 +10,7 @@ public class LevelPortal : MonoBehaviour
 
 	void Update()
 	{
-		#if MOBILE_INPUT
-		if (CrossPlatformInputManager.GetAxis("Vertical") > 0.6f)
-		#else
-		if (CrossPlatformInputManager.GetButton("Jump"))
-		#endif
+		if (PlayerControl.instance.Jumped)
 		{
 			if (portalSelected)
 			{

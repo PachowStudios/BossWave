@@ -61,12 +61,24 @@ public class Gun : MonoBehaviour
 
 	private SpriteRenderer spriteRenderer;
 
+	public Sprite Sprite
+	{
+		get 
+		{
+			if (spriteRenderer != null)
+			{
+				return spriteRenderer.sprite;
+			}
+			else
+			{
+				return GetComponent<SpriteRenderer>().sprite;
+			}
+		}
+	}
+
 	public bool FacingRight
 	{
-		get
-		{
-			return transform.rotation.eulerAngles.y == 0f;
-		}
+		get { return transform.rotation.eulerAngles.y == 0f; }
 	}
 
 	public bool NoInput
@@ -80,10 +92,7 @@ public class Gun : MonoBehaviour
 
 	public float FireRate
 	{
-		get
-		{
-			return Mathf.Round((1f / shootCooldown) * 10f) / 10f;
-		}
+		get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; }
 	}
 
 	void Awake()

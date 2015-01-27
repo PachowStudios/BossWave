@@ -50,7 +50,7 @@ public class CameraFollow : MonoBehaviour
 		{
 			if (PlayerControl.instance.IsGrounded ||
 				(PlayerControl.instance.transform.position.y + currentYOffset < targetPosition.y &&
-				PlayerControl.instance.velocity.y < 0f))
+				PlayerControl.instance.Velocity.y < 0f))
 			{
 				targetPosition.y = PlayerControl.instance.transform.position.y + currentYOffset;
 			}
