@@ -178,6 +178,14 @@ public static class Extensions
 		}
 	}
 
+	// AnimationCurve
+	public static float EvaluateInterval(this AnimationCurve parent, int currentInterval, int intervals)
+	{
+		float current = parent.Evaluate(1f - ((float)currentInterval / intervals));
+		float previous = parent.Evaluate(1f - ((float)(currentInterval - 1) / intervals));
+		return previous - current;
+	}
+
 	// Utility
 	public static int RandomSign()
 	{

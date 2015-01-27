@@ -365,51 +365,6 @@ MonoBehaviour:
   returnSpeed: 30
   minFloatHeight: 9
   maxFloatHeight: 11
-  swoopCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: .0283022616
-      outSlope: .0283022616
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  laserCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: .261217892
-      value: .112247385
-      inSlope: 1.24890363
-      outSlope: 1.24890363
-      tangentMode: 0
-    - time: .497916609
-      value: .496874928
-      inSlope: .0161290895
-      outSlope: .0161290895
-      tangentMode: 0
-    - time: .754421949
-      value: .904368758
-      inSlope: 1.23292208
-      outSlope: 1.23292208
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
   laserIntroCurve:
     serializedVersion: 2
     m_Curve:
@@ -425,28 +380,13 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  cannonCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 10
-    m_PreInfinity: 2
-    m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
   cannonPrefab: {fileID: 11400002, guid: 3ca141e57ba2d9a41ac532105b117e89, type: 2}
   attacks:
   - time: 4
     preAttackTime: 1
-    length: 1
-    modifier: 3
+    length: 2
+    modifier: 4
     pattern: 2
     curve:
       serializedVersion: 2
@@ -458,8 +398,8 @@ MonoBehaviour:
         tangentMode: 0
       - time: 1
         value: 1
-        inSlope: .0283022616
-        outSlope: .0283022616
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

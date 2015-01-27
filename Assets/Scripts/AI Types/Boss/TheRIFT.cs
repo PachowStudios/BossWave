@@ -299,12 +299,12 @@ public sealed class TheRIFT : Boss
 		for (int i = 1; i <= shots; i++)
 		{
 			cannonSequence
+				.AppendInterval(curve.EvaluateInterval(i, shots) * length)
 				.AppendCallback(() =>
 				{
 					Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
 					currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
-				})
-				.AppendInterval((length / shots) * i);
+				});
 		}
 
 		cannonTarget.DOPath(cannonPath, length, PathType.Linear, PathMode.Sidescroller2D)
