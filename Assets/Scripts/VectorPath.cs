@@ -5,12 +5,12 @@ using DG.Tweening;
 
 public class VectorPath : MonoBehaviour
 {
-	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
-
 	public string pathName;
 	public Color pathColor = Color.cyan;
 	public PathType pathType = PathType.Linear;
 	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
+
+	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
 
 	void OnEnable()
 	{

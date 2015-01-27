@@ -302,14 +302,19 @@ public sealed class TheRIFT : Boss
 				.AppendInterval(curve.EvaluateInterval(i, shots) * length)
 				.AppendCallback(() =>
 				{
-					Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
-					currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
+					if (cannonTarget != null)
+					{
+						Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
+						currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
+						SpriteEffect.SpawnEffect("Small Dust Explosion", firePoint.position, firePoint);
+						anim.SetTrigger("Cannon Fire");
+					}
 				});
 		}
 
 		cannonTarget.DOPath(cannonPath, length, PathType.Linear, PathMode.Sidescroller2D)
 			.SetDelay(0.25f)
-			.SetEase(curve)
+			.SetEase(Ease.Linear)
 			.OnComplete(() =>
 			{
 				attacking = false;

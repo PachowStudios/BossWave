@@ -23,7 +23,7 @@ public class LevelSelect : MonoBehaviour
 		else
 		{
 			Time.timeScale = 1f;
-			Time.fixedDeltaTime = TimeWarpEffect.instance.defaultFixedTimestep;
+			Time.fixedDeltaTime = TimeWarpEffect.DefaultFixedTimestep;
 			mainMusic.pitch = 1f;
 		}
 	}

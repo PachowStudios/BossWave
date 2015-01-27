@@ -385,7 +385,7 @@ MonoBehaviour:
   attacks:
   - time: 4
     preAttackTime: 1
-    length: 2
+    length: 1
     modifier: 4
     pattern: 2
     curve:
@@ -393,14 +393,14 @@ MonoBehaviour:
       m_Curve:
       - time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
       - time: 1
         value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
     possibleAttacks: 02000000

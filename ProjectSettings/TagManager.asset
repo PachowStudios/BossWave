@@ -93,6 +93,10 @@ TagManager:
     userID: 2
     uniqueID: 3423334565
     locked: 0
+  - name: Effects
+    userID: 10
+    uniqueID: 3710787823
+    locked: 0
   - name: UI
     userID: 4
     uniqueID: 3335956447

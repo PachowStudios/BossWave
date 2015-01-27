@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class CRTEffect : MonoBehaviour 
 {
+	private static CRTEffect instance;
+
 	public float defaultFade = 0.7f;
 	public float borderBuffer = -64f;
 	public float borderZeroed = -32f;
@@ -16,8 +18,6 @@ public class CRTEffect : MonoBehaviour
 	private static Vector2 defaultScanlines;
 	private static CRT crtShader;
 	private static NoiseAndGrain noiseShader;
-
-	private static CRTEffect instance;
 
 	void Awake()
 	{

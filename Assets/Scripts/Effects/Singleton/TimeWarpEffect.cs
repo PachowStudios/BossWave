@@ -4,11 +4,16 @@ using DG.Tweening;
 
 public class TimeWarpEffect : MonoBehaviour
 {
+	private static TimeWarpEffect instance;
+
 	public float defaultFixedTimestep = 0.0166667f;
 
-	static private AudioSource[] allSounds;
+	private static AudioSource[] allSounds;
 
-	static public TimeWarpEffect instance;
+	public static float DefaultFixedTimestep
+	{
+		get { return instance.defaultFixedTimestep; }
+	}
 
 	void Awake()
 	{
