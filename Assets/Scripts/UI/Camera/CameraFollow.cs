@@ -48,7 +48,9 @@ public class CameraFollow : MonoBehaviour
 
 		if (usePlayerY || follow.tag == "Player")
 		{
-			if (PlayerControl.instance.IsGrounded)
+			if (PlayerControl.instance.IsGrounded ||
+				(PlayerControl.instance.transform.position.y + currentYOffset < targetPosition.y &&
+				PlayerControl.instance.velocity.y < 0f))
 			{
 				targetPosition.y = PlayerControl.instance.transform.position.y + currentYOffset;
 			}

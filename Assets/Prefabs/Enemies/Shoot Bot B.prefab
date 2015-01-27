@@ -260,7 +260,7 @@ MonoBehaviour:
     m_Bits: 512
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 524288
   slopeLimit: 30
   jumpingThreshold: .0700000003
   slopeSpeedMultiplier:
@@ -298,14 +298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 0
-  spawnPlatformMask:
-    serializedVersion: 2
-    m_Bits: 262144
-  spawnSortingLayer: Spawn
-  spawnSortingOrder: 0
-  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
-  spawnTime: 1
-  spawnLength: .5
   difficulty: 0
   immuneToInstantKill: 0
   maxHealth: 20
@@ -315,20 +307,29 @@ MonoBehaviour:
   maxMicrochips: 2
   smallestMicrochip: 0
   biggestMicrochip: 0
-  knockback: 1
+  knockback: {x: 3, y: 3}
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
   moveSpeed: 4.5
   groundDamping: 10
   inAirDamping: 5
-  checkFrontCollision: 0
-  checkLedgeCollision: 0
   timeWarpAtDeath: 0
-  health: 10
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0
+  simulateSpawner: {fileID: 0}
+  spawnPlatformMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  spawnSortingLayer: Spawn
+  spawnSortingOrder: 0
+  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
+  spawnEntryRange: 1
+  spawnJumpHeight: 4
+  spawnLength: .5
+  checkFrontCollision: 0
+  checkLedgeCollision: 0
   followRange: 5
   attackRange: 10
   attackCooldownTime: .75
