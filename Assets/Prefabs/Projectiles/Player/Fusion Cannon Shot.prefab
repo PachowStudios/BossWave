@@ -90,9 +90,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 18944
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -133,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  knockback: 0
+  knockback: {x: 1, y: 0}
   gravity: 0
   shotSpeed: 20
   lifetime: 3

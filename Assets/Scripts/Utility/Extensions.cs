@@ -108,6 +108,12 @@ public static class Extensions
 		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
 	}
 
+	// Vector2
+	public static Vector2 Sign(this Vector2 parent)
+	{
+		return ((Vector3)parent).Sign();
+	}
+
 	// Vector3
 	public static Quaternion LookAt2D(this Vector3 parent, Vector3 target)
 	{
@@ -148,6 +154,11 @@ public static class Extensions
 		result.z = parent.z;
 
 		return result;
+	}
+
+	public static Vector3 Sign(this Vector3 parent)
+	{
+		return new Vector3(Mathf.Sign(parent.x), Mathf.Sign(parent.y), Mathf.Sign(parent.z));
 	}
 
 	// Rigidbody2D

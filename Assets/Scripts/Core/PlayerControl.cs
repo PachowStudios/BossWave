@@ -144,6 +144,11 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return popupMessagePoint.position; }
 	}
 
+	public float Top
+	{
+		get { return collider2D.bounds.max.y; }
+	}
+
 	public ReadOnlyCollection<SpriteRenderer> SpriteRenderers
 	{
 		get { return spriteRenderers.AsReadOnly(); }

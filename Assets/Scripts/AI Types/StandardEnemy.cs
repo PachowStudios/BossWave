@@ -185,7 +185,7 @@ public abstract class StandardEnemy : Enemy
 
 	protected bool IsPlayerInRange(float min, float max)
 	{
-		int direction = PlayerOnRightSide ? 1 : -1;
+		int direction = IsPlayerOnRightSide ? 1 : -1;
 		Vector3 startPoint = new Vector3(transform.position.x + (min * direction), collider2D.bounds.center.y, 0f);
 		Vector3 endPoint = startPoint + new Vector3((max - min) * direction, 0f, 0f);
 		RaycastHit2D linecast = Physics2D.Linecast(startPoint, endPoint, LayerMask.GetMask("Player"));

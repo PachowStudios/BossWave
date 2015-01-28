@@ -45,19 +45,31 @@ public sealed class DashAI : StandardEnemy
 	{
 		if (!dashing)
 		{
-			if (PlayerControl.instance.transform.position.x > transform.position.x + swipeRange)
+			if (PlayerControl.instance.Top < transform.position.y)
 			{
-				right = true;
-				left = !right;
-			}
-			else if (PlayerControl.instance.transform.position.x < transform.position.x - swipeRange)
-			{
-				left = true;
-				right = !left;
+				if (!right && !left)
+				{
+					right = (checkLedgeCollision) ? Random.value < 0.5f
+												  : IsPlayerOnRightSide;
+					left = !right;
+				}
 			}
 			else
 			{
-				right = left = false;
+				if (PlayerControl.instance.transform.position.x > transform.position.x + swipeRange)
+				{
+					right = true;
+					left = !right;
+				}
+				else if (PlayerControl.instance.transform.position.x < transform.position.x - swipeRange)
+				{
+					left = true;
+					right = !left;
+				}
+				else
+				{
+					right = left = false;
+				}
 			}
 		}
 	}

@@ -67,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
-	protected bool PlayerOnRightSide
+	protected bool IsPlayerOnRightSide
 	{
 		get { return PlayerControl.instance.transform.position.x > transform.position.x; }
 	}
@@ -98,6 +98,7 @@ public abstract class Enemy : MonoBehaviour
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;
 		Vector2 knockback = enemyProjectile.knockback;
+		Vector2 knockbackDirection = enemyProjectile.direction.Sign();
 		enemyProjectile.CheckDestroyEnemy();
 
 		if (!invincible)
@@ -130,16 +131,13 @@ public abstract class Enemy : MonoBehaviour
 			}
 			else
 			{
-				velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity);
-				velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+				knockback.x += Mathf.Sqrt(Mathf.Abs(Mathf.Pow(knockback.x, 2) * -gravity));
+				knockback.y += Mathf.Sqrt(Mathf.Abs(knockback.y * -gravity));
+				knockback.Scale(knockbackDirection);
 
-				if (transform.position.x - enemy.transform.position.x < 0)
+				if (knockback.x != 0 || knockback.y != 0)
 				{
-					velocity.x *= -1;
-				}
-
-				if (velocity.x > 0 || velocity.y > 0)
-				{
+					velocity += (Vector3)knockback;
 					controller.move(velocity * Time.deltaTime);
 				}
 
@@ -218,6 +216,15 @@ public abstract class Enemy : MonoBehaviour
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	protected void FacePlayer()
+	{
+		if ((PlayerControl.instance.transform.position.x < transform.position.x && FacingRight) ||
+			(PlayerControl.instance.transform.position.x > transform.position.x && !FacingRight))
+		{
+			Flip();
+		}
 	}
 
 	private void DeathTimeWarp()

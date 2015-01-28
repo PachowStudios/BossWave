@@ -16,19 +16,39 @@ public abstract class FollowAI : StandardEnemy
 
 	protected override void Walk()
 	{
-		if (PlayerControl.instance.transform.position.x > transform.position.x + followRange)
+		if (IsGrounded)
 		{
-			right = true;
-			left = !right;
-		}
-		else if (PlayerControl.instance.transform.position.x < transform.position.x - followRange)
-		{
-			left = true;
-			right = !left;
+			if (PlayerControl.instance.Top < transform.position.y)
+			{
+				if (!right && !left)
+				{
+					right = (checkLedgeCollision) ? Random.value < 0.5f
+												  : IsPlayerOnRightSide;
+					left = !right;
+				}
+			}
+			else
+			{
+				if (PlayerControl.instance.transform.position.x > transform.position.x + followRange)
+				{
+					right = true;
+					left = !right;
+				}
+				else if (PlayerControl.instance.transform.position.x < transform.position.x - followRange)
+				{
+					left = true;
+					right = !left;
+				}
+				else
+				{
+					right = left = false;
+				}
+			}
 		}
 		else
 		{
 			right = left = false;
+			FacePlayer();
 		}
 	}
 
@@ -46,11 +66,6 @@ public abstract class FollowAI : StandardEnemy
 	protected virtual void Attack()
 	{
 		anim.SetTrigger("Attack");
-
-		if ((PlayerControl.instance.transform.position.x > transform.position.x && FacingRight) ||
-			(PlayerControl.instance.transform.position.x < transform.position.x && !FacingRight))
-		{
-			Flip();
-		}
+		FacePlayer();
 	}
 }
