@@ -12,7 +12,6 @@ public abstract class StandardEnemy : Enemy
 	public float spawnEntryRange = 1f;
 	public float spawnJumpHeight = 4f;
 	public float spawnLength = 0.5f;
-	public bool turnAtLedges = false;
 
 	protected Transform frontCheck;
 	protected Transform ledgeCheck;
@@ -30,6 +29,11 @@ public abstract class StandardEnemy : Enemy
 			entryPoint = Extensions.Vector3Range(value.FindChild("Entry Start").position,
 												 value.FindChild("Entry End").position);
 		}
+	}
+
+	protected int RelativePlayerHeight
+	{
+		get { return (int)(lastGroundedPosition.y - PlayerControl.instance.LastGroundedPosition.y); }
 	}
 
 	protected abstract void ApplyAnimation();
@@ -170,7 +174,7 @@ public abstract class StandardEnemy : Enemy
 
 	protected bool IsPlayerInRange(float min, float max)
 	{
-		int direction = IsPlayerOnRightSide ? 1 : -1;
+		int direction = FacingRight ? 1 : -1;
 		Vector3 startPoint = new Vector3(transform.position.x + (min * direction), collider2D.bounds.center.y, 0f);
 		Vector3 endPoint = startPoint + new Vector3((max - min) * direction, 0f, 0f);
 		RaycastHit2D linecast = Physics2D.Linecast(startPoint, endPoint, LayerMask.GetMask("Player"));

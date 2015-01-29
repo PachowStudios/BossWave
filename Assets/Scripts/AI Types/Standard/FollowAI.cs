@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class FollowAI : StandardEnemy
 {
+	public bool followOffLedges = false;
 	public float followRange = 5f;
 	public float attackRange = 5f;
 	public float attackCooldownTime = 1f;
@@ -18,7 +19,7 @@ public abstract class FollowAI : StandardEnemy
 	{
 		if (IsGrounded)
 		{
-			if ((int)lastGroundedPosition.y > (int)PlayerControl.instance.LastGroundedPosition.y)
+			if (RelativePlayerHeight != 0)
 			{
 				if (!right && !left)
 				{
@@ -27,11 +28,15 @@ public abstract class FollowAI : StandardEnemy
 				}
 
 				CheckFrontCollision(true);
-				CheckLedgeCollision(true);
+
+				if (RelativePlayerHeight < 0 || !followOffLedges)
+				{
+					CheckLedgeCollision(true);
+				}
 			}
 			else
 			{
-				if (CheckLedgeCollision())
+				if (CheckLedgeCollision() || followOffLedges)
 				{
 					if (transform.position.x + followRange < PlayerControl.instance.transform.position.x)
 					{
@@ -46,6 +51,7 @@ public abstract class FollowAI : StandardEnemy
 					else
 					{
 						right = left = false;
+						FacePlayer();
 					}
 				}
 				else
@@ -77,6 +83,5 @@ public abstract class FollowAI : StandardEnemy
 	protected virtual void Attack()
 	{
 		anim.SetTrigger("Attack");
-		FacePlayer();
 	}
 }
