@@ -12,8 +12,7 @@ public abstract class StandardEnemy : Enemy
 	public float spawnEntryRange = 1f;
 	public float spawnJumpHeight = 4f;
 	public float spawnLength = 0.5f;
-	public bool checkFrontCollision = false;
-	public bool checkLedgeCollision = false;
+	public bool turnAtLedges = false;
 
 	protected Transform frontCheck;
 	protected Transform ledgeCheck;
@@ -43,11 +42,7 @@ public abstract class StandardEnemy : Enemy
 	{
 		base.Awake();
 
-		if (checkFrontCollision)
-		{
-			frontCheck = transform.FindChild("frontCheck");
-		}
-
+		frontCheck = transform.FindChild("frontCheck");
 		ledgeCheck = transform.FindChild("ledgeCheck");
 
 		defaultPlatformMask = controller.platformMask;
@@ -78,14 +73,9 @@ public abstract class StandardEnemy : Enemy
 		InitialUpdate();
 		ApplyAnimation();
 
-		if (checkFrontCollision)
-		{
-			CheckFrontCollision();
-		}
-
 		if (!spawned)
 		{
-			CheckLedgeCollision();
+			CheckLedgeCollision(true);
 
 			if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
 			{
@@ -94,11 +84,6 @@ public abstract class StandardEnemy : Enemy
 		}
 		else
 		{
-			if (checkLedgeCollision)
-			{
-				CheckLedgeCollision();
-			}
-
 			if (!disableMovement)
 			{
 				Walk();
@@ -146,7 +131,7 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	protected bool CheckFrontCollision(bool flip = true)
+	protected bool CheckFrontCollision(bool flip = false)
 	{
 		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
 
@@ -161,7 +146,7 @@ public abstract class StandardEnemy : Enemy
 		return frontHit != null;
 	}
 
-	protected bool CheckLedgeCollision(bool flip = true)
+	protected bool CheckLedgeCollision(bool flip = false)
 	{
 		if (IsGrounded)
 		{
@@ -175,7 +160,7 @@ public abstract class StandardEnemy : Enemy
 				left = !right;
 			}
 
-			return ledgeHit == null;
+			return ledgeHit != null;
 		}
 		else
 		{

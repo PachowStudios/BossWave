@@ -5,13 +5,13 @@ using DG.Tweening;
 [RequireComponent(typeof(GhostTrailEffect))]
 public sealed class DashAI : StandardEnemy
 {
+	public float swipeRange = 2f;
+	public float minDashRange = 5f;
+	public float maxDashRange = 10f;
 	public float swipeDamage = 5f;
 	public float stabDamage = 10f;
 	public Vector2 swipeKnockback = new Vector2(3f, 5f);
 	public Vector2 stabKnockback = new Vector2(10f, 1f);
-	public float swipeRange = 2f;
-	public float minDashRange = 5f;
-	public float maxDashRange = 10f;
 	public float swipeCooldownTime = 0.5f;
 	public float dashCooldownTime = 5f;
 	public float dashSpeed = 25f;
@@ -43,32 +43,48 @@ public sealed class DashAI : StandardEnemy
 
 	protected override void Walk()
 	{
-		if (!dashing)
+		if (IsGrounded && !dashing)
 		{
-			if (PlayerControl.instance.Top < transform.position.y)
+			if ((int)lastGroundedPosition.y > (int)PlayerControl.instance.LastGroundedPosition.y)
 			{
 				if (!right && !left)
 				{
-					right = (checkLedgeCollision) ? Random.value < 0.5f
-												  : IsPlayerOnRightSide;
+					right = Random.value < 0.5f;
 					left = !right;
 				}
+
+				CheckFrontCollision(true);
+				CheckLedgeCollision(true);
 			}
 			else
 			{
-				if (PlayerControl.instance.transform.position.x > transform.position.x + swipeRange)
+				if (CheckLedgeCollision())
 				{
-					right = true;
-					left = !right;
-				}
-				else if (PlayerControl.instance.transform.position.x < transform.position.x - swipeRange)
-				{
-					left = true;
-					right = !left;
+					if (transform.position.x + swipeRange < PlayerControl.instance.transform.position.x)
+					{
+						right = true;
+						left = !right;
+					}
+					else if (transform.position.x - swipeRange > PlayerControl.instance.transform.position.x)
+					{
+						left = true;
+						right = !left;
+					}
+					else
+					{
+						right = left = false;
+					}
 				}
 				else
 				{
-					right = left = false;
+					if (PlayerControl.instance.IsGrounded)
+					{
+						CheckLedgeCollision(true);
+					}
+					else
+					{
+						right = left = false;
+					}
 				}
 			}
 		}

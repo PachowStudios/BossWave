@@ -18,37 +18,48 @@ public abstract class FollowAI : StandardEnemy
 	{
 		if (IsGrounded)
 		{
-			if (PlayerControl.instance.Top < transform.position.y)
+			if ((int)lastGroundedPosition.y > (int)PlayerControl.instance.LastGroundedPosition.y)
 			{
 				if (!right && !left)
 				{
-					right = (checkLedgeCollision) ? Random.value < 0.5f
-												  : IsPlayerOnRightSide;
+					right = Random.value < 0.5f;
 					left = !right;
 				}
+
+				CheckFrontCollision(true);
+				CheckLedgeCollision(true);
 			}
 			else
 			{
-				if (PlayerControl.instance.transform.position.x > transform.position.x + followRange)
+				if (CheckLedgeCollision())
 				{
-					right = true;
-					left = !right;
-				}
-				else if (PlayerControl.instance.transform.position.x < transform.position.x - followRange)
-				{
-					left = true;
-					right = !left;
+					if (transform.position.x + followRange < PlayerControl.instance.transform.position.x)
+					{
+						right = true;
+						left = !right;
+					}
+					else if (transform.position.x - followRange > PlayerControl.instance.transform.position.x)
+					{
+						left = true;
+						right = !left;
+					}
+					else
+					{
+						right = left = false;
+					}
 				}
 				else
 				{
-					right = left = false;
+					if (PlayerControl.instance.IsGrounded)
+					{
+						CheckLedgeCollision(true);
+					}
+					else
+					{
+						right = left = false;
+					}
 				}
 			}
-		}
-		else
-		{
-			right = left = false;
-			FacePlayer();
 		}
 	}
 

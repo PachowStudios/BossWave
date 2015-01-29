@@ -44,11 +44,12 @@ public sealed class PlayerControl : MonoBehaviour
 	#endif
 
 	private Vector3 velocity;
+	private Vector3 lastGroundedPosition;
 	private float normalizedHorizontalSpeed = 0;
 	private float speedMultiplier = 1f;
 
-	private float lastHitTime;
 	private bool canTakeDamage = true;
+	private float lastHitTime;
 	private float flashTimer = 0f;
 	private float flashTime = 0.25f;
 	private float smoothFlashTime;
@@ -134,6 +135,11 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return velocity; }
 	}
 
+	public Vector3 LastGroundedPosition
+	{
+		get { return lastGroundedPosition; }
+	}
+
 	public Gun Gun
 	{
 		get { return gun; }
@@ -144,9 +150,9 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return popupMessagePoint.position; }
 	}
 
-	public float Top
+	public float Height
 	{
-		get { return collider2D.bounds.max.y; }
+		get { return collider2D.bounds.size.y; }
 	}
 
 	public ReadOnlyCollection<SpriteRenderer> SpriteRenderers
@@ -424,6 +430,7 @@ public sealed class PlayerControl : MonoBehaviour
 		if (IsGrounded)
 		{
 			velocity.y = 0f;
+			lastGroundedPosition = transform.position;
 		}
 	}
 

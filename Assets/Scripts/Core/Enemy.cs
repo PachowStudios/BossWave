@@ -47,6 +47,8 @@ public abstract class Enemy : MonoBehaviour
 	protected bool disableMovement = false;
 	protected float normalizedHorizontalSpeed = 0;
 
+	protected Vector3 lastGroundedPosition;
+
 	protected SpriteRenderer spriteRenderer;
 	protected CharacterController2D controller;
 	protected Animator anim;
@@ -172,6 +174,7 @@ public abstract class Enemy : MonoBehaviour
 		if (controller.isGrounded)
 		{
 			velocity.y = 0;
+			lastGroundedPosition = transform.position;
 		}
 	}
 
