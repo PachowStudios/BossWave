@@ -20,20 +20,28 @@ public abstract class StandardEnemy : Enemy
 	private string defaultSortingLayer;
 	private int defaultSortingOrder;
 	private Color defaultColor;
+	private Vector3 spawnPoint;
 	private Vector3 entryPoint;
 
 	public Transform Spawner
 	{
 		set
 		{
+			spawned = false;
+			spawnPoint = value.FindChild("Spawn").position;
 			entryPoint = Extensions.Vector3Range(value.FindChild("Entry Start").position,
 												 value.FindChild("Entry End").position);
 		}
 	}
 
-	protected int RelativePlayerHeight
+	protected int RelativePlayerLastGrounded
 	{
 		get { return (int)(lastGroundedPosition.y - PlayerControl.instance.LastGroundedPosition.y); }
+	}
+
+	protected float RelativePlayerHeight
+	{
+		get { return transform.position.y - PlayerControl.instance.transform.position.y; }
 	}
 
 	protected abstract void ApplyAnimation();
@@ -54,8 +62,17 @@ public abstract class StandardEnemy : Enemy
 		defaultSortingOrder = spriteRenderer.sortingOrder;
 		defaultColor = spriteRenderer.color;
 
+		if (simulateSpawner != null)
+		{
+			Spawner = simulateSpawner;
+		}
+	}
+
+	protected virtual void Start()
+	{
 		if (!spawned)
 		{
+			transform.position = spawnPoint;
 			controller.platformMask = spawnPlatformMask;
 			spriteRenderer.sortingLayerName = spawnSortingLayer;
 			spriteRenderer.sortingOrder = spawnSortingOrder;
@@ -63,12 +80,6 @@ public abstract class StandardEnemy : Enemy
 			invincible = true;
 			ignoreProjectiles = true;
 			left = true;
-		}
-
-		if (simulateSpawner != null)
-		{
-			Spawner = simulateSpawner;
-			transform.position = simulateSpawner.FindChild("Spawn").position;
 		}
 	}
 
@@ -119,7 +130,6 @@ public abstract class StandardEnemy : Enemy
 		spriteRenderer.sortingOrder = defaultSortingOrder;
 		invincible = false;
 		ignoreProjectiles = false;
-		left = right = false;
 
 		spriteRenderer.DOColor(defaultColor, spawnLength)
 			.SetEase(Ease.InOutSine);

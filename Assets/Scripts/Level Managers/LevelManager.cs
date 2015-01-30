@@ -216,7 +216,7 @@ public class LevelManager : MonoBehaviour
 				int enemyToSpawn = Mathf.RoundToInt(Random.Range(0f, possibleEnemies.Count - 1));
 				int spawnerToUse = Mathf.RoundToInt(Random.Range(0f, spawners.Count - 1));
 
-				StandardEnemy currentEnemy = Instantiate(possibleEnemies[enemyToSpawn], spawners[spawnerToUse].transform.FindChild("Spawn").position, Quaternion.identity) as StandardEnemy;
+				StandardEnemy currentEnemy = Instantiate(possibleEnemies[enemyToSpawn], Vector3.zero, Quaternion.identity) as StandardEnemy;
 				currentEnemy.Spawner = spawners[spawnerToUse].transform;
 
 				yield return new WaitForSeconds(waves[wave].spawnDelay);

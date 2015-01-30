@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour
 		Boss
 	};
 
-	public bool spawned = false;
+	public bool spawned = true;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;
 	public float maxHealth = 10f;
