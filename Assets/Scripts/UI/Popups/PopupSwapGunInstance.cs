@@ -61,7 +61,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		transform.position = PlayerControl.instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
+		transform.position = PlayerControl.Instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
 
 		if (timer > 0)
 		{
@@ -93,7 +93,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 	{
 		if (swap)
 		{
-			PlayerControl.instance.SwapGun(newGunPrefab);
+			PlayerControl.Instance.SwapGun(newGunPrefab);
 		}
 
 		Disappear(swap);

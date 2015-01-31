@@ -135,7 +135,7 @@ public abstract class Projectile : MonoBehaviour
 
 	public void DoDestroy()
 	{
-		ExplodeEffect.Explode(transform, velocity, Sprite);
+		ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);
 	}
 

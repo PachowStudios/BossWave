@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class LevelManager : MonoBehaviour 
 {
-	public static LevelManager instance;
+	private static LevelManager instance;
 
 	[System.Serializable]
 	public struct Wave
@@ -68,7 +68,12 @@ public class LevelManager : MonoBehaviour
 	private Transform bossSpawner;
 	private Transform powerupSpawner;
 
-	void Awake()
+	public static LevelManager Instance
+	{
+		get { return instance; }
+	}
+
+	private void Awake()
 	{
 		instance = this;
 
@@ -85,7 +90,7 @@ public class LevelManager : MonoBehaviour
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 
-	void Start()
+	private void Start()
 	{
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
@@ -95,18 +100,18 @@ public class LevelManager : MonoBehaviour
 		{
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
-			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
-			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
+			TimeWarpEffect.Instance.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
+			CRTEffect.Instance.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
 		}
 		else
 		{
 			Time.timeScale = 1f;
-			Time.fixedDeltaTime = TimeWarpEffect.DefaultFixedTimestep;
+			Time.fixedDeltaTime = TimeWarpEffect.Instance.DefaultFixedTimestep;
 			mainMusic.pitch = 1f;
 		}
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		waveTimer = mainMusic.time;
 
@@ -121,11 +126,11 @@ public class LevelManager : MonoBehaviour
 			{
 				if (!bossWaveInitialized)
 				{
-					Cutscene.StartCutscene();
-					ScaleWidthCamera.AnimateFOV(runningFOV, 1f);
+					Cutscene.Instance.StartCutscene();
+					ScaleWidthCamera.Instance.AnimateFOV(runningFOV, 1f);
 					bossInstance = Instantiate(bossWave.boss, bossSpawner.position, Quaternion.identity) as Boss;
 					bossInstance.Spawn();
-					PlayerControl.instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
+					PlayerControl.Instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
 
 					bossWaveInitialized = true;
 				}
@@ -135,10 +140,10 @@ public class LevelManager : MonoBehaviour
 					worldBoundaries.SetActive(false);
 					runningBoundaries.SetActive(true);
 
-					PlayerControl.instance.continuouslyRunning = true;
+					PlayerControl.Instance.continuouslyRunning = true;
 					bossWavePlayerMoved = true;
 
-					Cutscene.EndCutscene(true);
+					Cutscene.Instance.EndCutscene(true);
 
 					foreach(GameObject element in scrollingElements)
 					{
@@ -158,7 +163,7 @@ public class LevelManager : MonoBehaviour
 				}
 			}
 		}
-		else if (!PlayerControl.instance.Dead)
+		else if (!PlayerControl.Instance.Dead)
 		{
 			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime && spawnEnemies)
 			{
@@ -185,9 +190,9 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public static void SpawnMicrochip(Vector3 position, Microchip.Size size = Microchip.Size.Small, bool randomVelocity = true)
+	public void SpawnMicrochip(Vector3 position, Microchip.Size size = Microchip.Size.Small, bool randomVelocity = true)
 	{
-		Microchip microchipToSpawn = instance.microchips[(int)size];
+		Microchip microchipToSpawn = microchips[(int)size];
 
 		Microchip microchipInstance = Instantiate(microchipToSpawn, position, Quaternion.identity) as Microchip;
 		

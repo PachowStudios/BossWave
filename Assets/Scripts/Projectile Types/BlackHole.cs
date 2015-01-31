@@ -198,7 +198,7 @@ public class BlackHole : Projectile
 
 						if (damageTimer >= damageTime)
 						{
-							ExplodeEffect.ExplodePartial(currentEnemy.transform, currentEnemy.velocity, currentEnemy.Sprite, 0.05f);
+							ExplodeEffect.Instance.ExplodePartial(currentEnemy.transform, currentEnemy.velocity, currentEnemy.Sprite, 0.05f);
 							currentEnemy.TakeDamage(gameObject);
 						}
 					}
@@ -267,29 +267,29 @@ public class BlackHole : Projectile
 
 	private void SimulatePlayer()
 	{
-		if (innerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
+		if (innerRadius.OverlapPoint(PlayerControl.Instance.collider2D.bounds.center))
 		{
-			PlayerControl.instance.Health = 0f;
+			PlayerControl.Instance.Health = 0f;
 		}
-		else if (outerRadius.OverlapPoint(PlayerControl.instance.collider2D.bounds.center))
+		else if (outerRadius.OverlapPoint(PlayerControl.Instance.collider2D.bounds.center))
 		{
-			PlayerControl.instance.Move(Vector3.Lerp(PlayerControl.instance.Velocity, PlayerControl.instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
+			PlayerControl.Instance.Move(Vector3.Lerp(PlayerControl.Instance.Velocity, PlayerControl.Instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
 
 			if (damageTimer >= damageTime)
 			{
-				foreach (SpriteRenderer sprite in PlayerControl.instance.SpriteRenderers)
+				foreach (SpriteRenderer sprite in PlayerControl.Instance.SpriteRenderers)
 				{
 					if (sprite.color != Color.clear)
 					{
 						Transform tempTransform = new GameObject().transform;
 						sprite.transform.CopyTo(tempTransform);
-						tempTransform.localScale = PlayerControl.instance.transform.localScale;
-						ExplodeEffect.ExplodePartial(tempTransform.transform, PlayerControl.instance.Velocity, sprite.sprite, 0.1f / PlayerControl.instance.SpriteRenderers.Count);
+						tempTransform.localScale = PlayerControl.Instance.transform.localScale;
+						ExplodeEffect.Instance.ExplodePartial(tempTransform.transform, PlayerControl.Instance.Velocity, sprite.sprite, 0.1f / PlayerControl.Instance.SpriteRenderers.Count);
 						Destroy(tempTransform.gameObject);
 					}
 				}
 
-				PlayerControl.instance.Health -= damage;
+				PlayerControl.Instance.Health -= damage;
 			}
 		}
 	}
@@ -298,7 +298,7 @@ public class BlackHole : Projectile
 	{
 		yield return new WaitForSeconds(lifetime);
 
-		ExplodeEffect.Explode(transform, Vector3.zero, Sprite);
+		ExplodeEffect.Instance.Explode(transform, Vector3.zero, Sprite);
 		particleSystemInstance.enableEmission = false;
 		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
 		Destroy(gameObject);
@@ -310,7 +310,7 @@ public class BlackHole : Projectile
 
 		if (!activated)
 		{
-			ExplodeEffect.Explode(transform, velocity, Sprite);
+			ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 			Destroy(gameObject);
 		}
 	}

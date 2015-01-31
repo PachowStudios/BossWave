@@ -8,7 +8,7 @@ using DG.Tweening;
 public sealed class PlayerControl : MonoBehaviour
 {
 	#region Variables
-	public static PlayerControl instance;
+	private static PlayerControl instance;
 
 	public float maxHealth = 100f;
 	public float invincibilityPeriod = 2f;
@@ -79,6 +79,11 @@ public sealed class PlayerControl : MonoBehaviour
 	#endregion
 
 	#region Properties
+	public static PlayerControl Instance
+	{
+		get { return instance; }
+	}
+
 	public float Health
 	{
 		get { return health; }
@@ -438,7 +443,7 @@ public sealed class PlayerControl : MonoBehaviour
 	{
 		anim.SetBool("Walking", right || left || continuouslyRunning);
 		anim.SetBool("Running", run);
-		anim.SetBool("Grounded", controller.isGrounded);
+		anim.SetBool("Grounded", IsGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
 		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
 	}
@@ -640,7 +645,7 @@ public sealed class PlayerControl : MonoBehaviour
 			foreach (SpriteRenderer sprite in spriteRenderers)
 			{
 				sprite.transform.localScale = transform.localScale;
-				ExplodeEffect.Explode(sprite.transform, velocity, sprite.sprite);
+				ExplodeEffect.Instance.Explode(sprite.transform, velocity, sprite.sprite);
 			}
 		}
 

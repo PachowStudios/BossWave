@@ -6,22 +6,34 @@ using System.Linq;
 
 public class Cutscene : MonoBehaviour
 {
-	private static bool cutsceneActive = false;
+	private static Cutscene instance;
 
-	private static Animator anim;
+	public float fadeTime = 0.5f;
 
-	void Awake()
+	private bool cutsceneActive = false;
+	private Animator anim;
+
+	public static Cutscene Instance
 	{
-		anim = GetComponent<Animator>();
+		get { return instance; }
 	}
 
-	public static void StartCutscene(bool disableInput = false)
+	private void Awake()
+	{
+		instance = this;
+
+		anim = GetComponent<Animator>();
+
+		cutsceneActive = false;
+	}
+
+	public void StartCutscene(bool disableInput = false)
 	{
 		if (!cutsceneActive)
 		{
 			if (disableInput)
 			{
-				PlayerControl.instance.DisableInput();
+				PlayerControl.Instance.DisableInput();
 			}
 
 			cutsceneActive = true;
@@ -33,13 +45,13 @@ public class Cutscene : MonoBehaviour
 		}
 	}
 
-	public static void EndCutscene(bool enableInput = false)
+	public void EndCutscene(bool enableInput = false)
 	{
 		if (cutsceneActive)
 		{
-			if (enableInput && PlayerControl.instance.IsInputDisabled())
+			if (enableInput && PlayerControl.Instance.IsInputDisabled())
 			{
-				PlayerControl.instance.EnableInput();
+				PlayerControl.Instance.EnableInput();
 			}
 
 			cutsceneActive = false;
@@ -50,4 +62,6 @@ public class Cutscene : MonoBehaviour
 			Debug.LogError("Tried to end a cutscene when there weren't any active!");
 		}
 	}
+
+	
 }

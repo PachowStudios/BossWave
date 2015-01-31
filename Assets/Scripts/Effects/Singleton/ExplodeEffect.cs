@@ -8,29 +8,32 @@ public class ExplodeEffect : MonoBehaviour
 	public SpriteExplosion explosionPrefab;
 	public float pixelsPerUnit = 10f;
 
-	private static SpriteExplosion explosionInstance;
+	public static ExplodeEffect Instance
+	{
+		get { return instance; }
+	}
 
-	void Awake()
+	private void Awake()
 	{
 		instance = this;
 	}
 
-	public static void Explode(Transform transform, Vector3 velocity, Sprite sprite, Material material = null)
+	public void Explode(Transform target, Vector3 velocity, Sprite sprite, Material material = null)
 	{
-		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
-		explosionInstance.transform.parent = instance.transform;
-		explosionInstance.transform.localScale = transform.localScale;
-		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
+		SpriteExplosion explosionInstance = Instantiate(explosionPrefab, target.position, target.rotation) as SpriteExplosion;
+		explosionInstance.transform.parent = transform;
+		explosionInstance.transform.localScale = target.localScale;
+		explosionInstance.pixelsPerUnit = pixelsPerUnit;
 		explosionInstance.material = material;
 		explosionInstance.Explode(velocity, sprite);
 	}
 
-	public static void ExplodePartial(Transform transform, Vector3 velocity, Sprite sprite, float percentage, Material material = null)
+	public void ExplodePartial(Transform target, Vector3 velocity, Sprite sprite, float percentage, Material material = null)
 	{
-		explosionInstance = Instantiate(instance.explosionPrefab, transform.position, transform.rotation) as SpriteExplosion;
-		explosionInstance.transform.parent = instance.transform;
-		explosionInstance.transform.localScale = transform.localScale;
-		explosionInstance.pixelsPerUnit = instance.pixelsPerUnit;
+		SpriteExplosion explosionInstance = Instantiate(explosionPrefab, target.position, target.rotation) as SpriteExplosion;
+		explosionInstance.transform.parent = transform;
+		explosionInstance.transform.localScale = target.localScale;
+		explosionInstance.pixelsPerUnit = pixelsPerUnit;
 		explosionInstance.material = material;
 		explosionInstance.ExplodePartial(velocity, sprite, percentage);
 	}

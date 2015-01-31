@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class FollowAI : StandardEnemy
 {
-	public bool followOffLedges = false;
+	public bool followVertically = false;
 	public float followRange = 5f;
 	public float attackRange = 5f;
 	public float attackCooldownTime = 1f;
@@ -29,34 +29,20 @@ public abstract class FollowAI : StandardEnemy
 
 				CheckFrontCollision(true);
 
-				if (RelativePlayerLastGrounded < 0 || !followOffLedges)
+				if (RelativePlayerLastGrounded < 0 || !followVertically)
 				{
 					CheckLedgeCollision(true);
 				}
 			}
 			else
 			{
-				if (CheckLedgeCollision() || followOffLedges)
+				if (CheckLedgeCollision() || followVertically)
 				{
-					if (transform.position.x + followRange < PlayerControl.instance.transform.position.x)
-					{
-						right = true;
-						left = !right;
-					}
-					else if (transform.position.x - followRange > PlayerControl.instance.transform.position.x)
-					{
-						left = true;
-						right = !left;
-					}
-					else
-					{
-						right = left = false;
-						FacePlayer();
-					}
+					FollowPlayer();
 				}
 				else
 				{
-					if (PlayerControl.instance.IsGrounded)
+					if (PlayerControl.Instance.IsGrounded)
 					{
 						CheckLedgeCollision(true);
 					}
@@ -67,10 +53,33 @@ public abstract class FollowAI : StandardEnemy
 				}
 			}
 
-			if (followOffLedges && !CheckLedgeCollision())
+			if (followVertically && !CheckLedgeCollision())
 			{
-				Jump(Mathf.Clamp(-RelativePlayerHeight, 1f, spawnJumpHeight));
+				Jump(Mathf.Max(1f, -RelativePlayerHeight));
 			}
+		}
+		else
+		{
+			FollowPlayer();
+		}
+	}
+
+	protected virtual void FollowPlayer()
+	{
+		if (transform.position.x + followRange < PlayerControl.Instance.transform.position.x)
+		{
+			right = true;
+			left = !right;
+		}
+		else if (transform.position.x - followRange > PlayerControl.Instance.transform.position.x)
+		{
+			left = true;
+			right = !left;
+		}
+		else
+		{
+			right = left = false;
+			FacePlayer();
 		}
 	}
 

@@ -112,7 +112,7 @@ public class RIFTLaser : Projectile
 
 				if (playerRaycast.collider != null)
 				{
-					PlayerControl.instance.Health -= damage;
+					PlayerControl.Instance.Health -= damage;
 					cooldownTimer = 0f;
 				}
 			}
@@ -121,7 +121,7 @@ public class RIFTLaser : Projectile
 
 			if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
 			{
-				ExplodeEffect.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
+				ExplodeEffect.Instance.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
 				tipExplosionTimer = 0f;
 			}			
 		}

@@ -17,13 +17,13 @@ public class LevelSelect : MonoBehaviour
 		{
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
-			TimeWarpEffect.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
-			CRTEffect.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
+			TimeWarpEffect.Instance.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
+			CRTEffect.Instance.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
 		}
 		else
 		{
 			Time.timeScale = 1f;
-			Time.fixedDeltaTime = TimeWarpEffect.DefaultFixedTimestep;
+			Time.fixedDeltaTime = TimeWarpEffect.Instance.DefaultFixedTimestep;
 			mainMusic.pitch = 1f;
 		}
 	}

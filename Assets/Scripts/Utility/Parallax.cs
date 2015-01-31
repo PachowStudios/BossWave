@@ -33,7 +33,7 @@ public class Parallax : MonoBehaviour
 	{
 		if (scroll)
 		{
-			float speed = (LevelManager.instance == null) ? defaultSpeed : LevelManager.instance.bossWave.cameraSpeed;
+			float speed = (LevelManager.Instance == null) ? defaultSpeed : LevelManager.Instance.bossWave.cameraSpeed;
 
 			transform.Translate(new Vector2(-(relativeSpeed * speed), 0) * Time.deltaTime);
 
@@ -68,7 +68,7 @@ public class Parallax : MonoBehaviour
 		}
 		else if (cameraParallax)
 		{
-			transform.Translate((1 - relativeSpeed) * CameraFollow.instance.DeltaMovement);
+			transform.Translate((1 - relativeSpeed) * CameraFollow.Instance.DeltaMovement);
 		}
 	}
 }

@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		Time.timeScale = 1f;
-		Time.fixedDeltaTime = TimeWarpEffect.DefaultFixedTimestep;
+		Time.fixedDeltaTime = TimeWarpEffect.Instance.DefaultFixedTimestep;
 
 		StartCoroutine(ShowMenu());
 	}
@@ -85,7 +85,7 @@ public class MainMenu : MonoBehaviour
 
 	public void SetFOV(float newFOV)
 	{
-		ScaleWidthCamera.FOV = Mathf.Abs((int)newFOV);
+		ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)newFOV);
 	}
 
 	public void ApplySettings()
@@ -116,7 +116,7 @@ public class MainMenu : MonoBehaviour
 		if (PlayerPrefs.HasKey("Settings/FOV"))
 		{
 			fovSlider.value = PlayerPrefs.GetInt("Settings/FOV");
-			ScaleWidthCamera.FOV = Mathf.Abs((int)fovSlider.value);
+			ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)fovSlider.value);
 		}
 
 		#if !MOBILE_INPUT
@@ -133,7 +133,7 @@ public class MainMenu : MonoBehaviour
 		yield return new WaitForSeconds(startDelay);
 		
 		logo.GetComponent<Animator>().SetTrigger("Start");
-		CRTEffect.StartCRT(fadeTime);
+		CRTEffect.Instance.StartCRT(fadeTime);
 		DOTween.To(UpdateMenuAlpha, 0f, 1f, fadeTime)
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);
@@ -147,7 +147,7 @@ public class MainMenu : MonoBehaviour
 	{
 		if (levelName != "none" && levelName != "Exit")
 		{
-			CRTEffect.AnimateScanlines(fadeTime, 0f, Ease.OutSine);
+			CRTEffect.Instance.AnimateScanlines(fadeTime, 0f, Ease.OutSine);
 
 			AsyncOperation async = Application.LoadLevelAsync(levelName);
 			async.allowSceneActivation = false;

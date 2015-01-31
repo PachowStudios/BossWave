@@ -3,14 +3,25 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class HealthDisplay : MonoBehaviour
 {
+	private static HealthDisplay instance;
+
+	public Image face;
+	public Image bar;
+	public Text score;
+	public Text microchips;
+
+	public float fadeTime = 0.5f;
 	public int scoreDigits = 12;
 	public int microchipsDigits = 5;
 	public float textDamping = 1f;
 	public float healthDamping = 1f;
 	public List<Sprite> healthFaces;
+
+	private bool showing = true;
 
 	private float healthPercent;
 	private float originalHealthWidth;
@@ -22,32 +33,55 @@ public class HealthDisplay : MonoBehaviour
 	private float microchipsValue = 0f;
 	private float microchipsVelocity = 0f;
 
-	private Image face;
-	private Image bar;
-	private Text score;
-	private Text microchips;
+	private CanvasGroup canvasGroup;
 
-	void Awake()
+	public static HealthDisplay Instance
 	{
-		face = transform.FindChild("Face").GetComponent<Image>();
-		bar = transform.FindChild("Bar").GetComponent<Image>();
-		score = transform.FindChild("Score").GetComponent<Text>();
-		microchips = transform.FindChild("Microchips").GetComponent<Text>();
+		get { return instance; }
+	}
+
+	private void Awake()
+	{
+		instance = this;
+
+		canvasGroup = GetComponent<CanvasGroup>();
 
 		originalHealthWidth = bar.rectTransform.sizeDelta.x;
 	}
 
-	void OnGUI()
+	private void OnGUI()
 	{
-		healthPercent = Mathf.Clamp(PlayerControl.instance.Health / PlayerControl.instance.maxHealth, 0f, 1f);
+		healthPercent = Mathf.Clamp(PlayerControl.Instance.Health / PlayerControl.Instance.maxHealth, 0f, 1f);
 
 		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
 
 		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, bar.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
-		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.instance.Score, ref scoreVelocity, textDamping);
-		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.instance.Microchips, ref microchipsVelocity, textDamping);
+		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.Instance.Score, ref scoreVelocity, textDamping);
+		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.Instance.Microchips, ref microchipsVelocity, textDamping);
 
 		score.text = Mathf.RoundToInt(scoreValue).ToString().PadLeft(scoreDigits, '0');
 		microchips.text = Mathf.RoundToInt(microchipsValue).ToString().PadLeft(microchipsDigits, '0');
+	}
+
+	public void Show(float time = 0f)
+	{
+		if (!showing)
+		{
+			time = (time == 0f) ? fadeTime : time;
+			canvasGroup.DOFade(1f, time);
+
+			showing = true;
+		}
+	}
+
+	public void Hide(float time = 0f)
+	{
+		if (showing)
+		{
+			time = (time == 0f) ? fadeTime : time;
+			canvasGroup.DOFade(0f, time);
+
+			showing = false;
+		}
 	}
 }

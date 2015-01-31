@@ -12,6 +12,7 @@ public abstract class StandardEnemy : Enemy
 	public float spawnEntryRange = 1f;
 	public float spawnJumpHeight = 4f;
 	public float spawnLength = 0.5f;
+	public float maxJumpHeight = 7f;
 
 	protected Transform frontCheck;
 	protected Transform ledgeCheck;
@@ -36,12 +37,12 @@ public abstract class StandardEnemy : Enemy
 
 	protected int RelativePlayerLastGrounded
 	{
-		get { return (int)(lastGroundedPosition.y - PlayerControl.instance.LastGroundedPosition.y); }
+		get { return (int)(lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y); }
 	}
 
 	protected float RelativePlayerHeight
 	{
-		get { return transform.position.y - PlayerControl.instance.transform.position.y; }
+		get { return transform.position.y - PlayerControl.Instance.transform.position.y; }
 	}
 
 	protected abstract void ApplyAnimation();
@@ -139,10 +140,8 @@ public abstract class StandardEnemy : Enemy
 
 	protected virtual void Jump(float height)
 	{
-		if (height >= 0)
-		{
-			velocity.y = Mathf.Sqrt(2f * height * -gravity);
-		}
+		height = Mathf.Clamp(height, 0f, maxJumpHeight);
+		velocity.y = Mathf.Sqrt(2f * height * -gravity);
 	}
 
 	protected bool CheckFrontCollision(bool flip = false)
@@ -151,8 +150,6 @@ public abstract class StandardEnemy : Enemy
 
 		if (frontHit != null && flip)
 		{
-			Flip();
-
 			right = !right;
 			left = !right;
 		}
@@ -168,8 +165,6 @@ public abstract class StandardEnemy : Enemy
 
 			if (ledgeHit == null && flip)
 			{
-				Flip();
-
 				right = !right;
 				left = !right;
 			}

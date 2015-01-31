@@ -207,7 +207,7 @@ public class Gun : MonoBehaviour
 				if (overheatTimer >= overheatTime)
 				{
 					overheated = true;
-					PlayerControl.instance.Health -= overheatDamage;
+					PlayerControl.Instance.Health -= overheatDamage;
 				}
 			}
 			else

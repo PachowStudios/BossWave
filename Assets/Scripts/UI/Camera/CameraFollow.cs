@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour 
 {
-	public static CameraFollow instance;
+	private static CameraFollow instance;
 
 	public float yOffset = 0f;
 	public float smoothing = 1f;
@@ -16,6 +16,11 @@ public class CameraFollow : MonoBehaviour
 	private Vector3 previousTargetPosition = new Vector3();
 	private Vector3 previousPosition;
 
+	public static CameraFollow Instance
+	{
+		get { return instance; }
+	}
+
 	public Vector3 DeltaMovement
 	{
 		get
@@ -24,7 +29,7 @@ public class CameraFollow : MonoBehaviour
 		}
 	}
 
-	void Awake()
+	private void Awake()
 	{
 		instance = this;
 
@@ -34,7 +39,7 @@ public class CameraFollow : MonoBehaviour
 		previousPosition = transform.position;
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		previousPosition = transform.position;
 		previousTargetPosition = targetPosition;
@@ -48,11 +53,11 @@ public class CameraFollow : MonoBehaviour
 
 		if (usePlayerY || follow.tag == "Player")
 		{
-			if (PlayerControl.instance.IsGrounded ||
-				(PlayerControl.instance.transform.position.y + currentYOffset < targetPosition.y &&
-				PlayerControl.instance.Velocity.y < 0f))
+			if (PlayerControl.Instance.IsGrounded ||
+				(PlayerControl.Instance.transform.position.y + currentYOffset < targetPosition.y &&
+				PlayerControl.Instance.Velocity.y < 0f))
 			{
-				targetPosition.y = PlayerControl.instance.transform.position.y + currentYOffset;
+				targetPosition.y = PlayerControl.Instance.transform.position.y + currentYOffset;
 			}
 		}
 		else

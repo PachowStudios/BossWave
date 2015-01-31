@@ -63,7 +63,7 @@ public sealed class DashAI : FollowAI
 			dashCooldownTimer += Time.deltaTime;
 
 			if (dashCooldownTimer >= dashCooldownTime && 
-				PlayerControl.instance.IsGrounded && 
+				PlayerControl.Instance.IsGrounded && 
 				IsPlayerInRange(minDashRange, maxDashRange))
 			{
 				StartDash();
@@ -85,7 +85,7 @@ public sealed class DashAI : FollowAI
 	protected override void Attack()
 	{
 		anim.SetTrigger("Swipe");
-		PlayerControl.instance.TakeDamage(gameObject, swipeDamage, swipeKnockback);
+		PlayerControl.Instance.TakeDamage(gameObject, swipeDamage, swipeKnockback);
 	}
 
 	private void StartDash()
@@ -104,7 +104,7 @@ public sealed class DashAI : FollowAI
 
 		if (IsPlayerInRange(0f, attackRange))
 		{
-			PlayerControl.instance.TakeDamage(gameObject, stabDamage, stabKnockback);
+			PlayerControl.Instance.TakeDamage(gameObject, stabDamage, stabKnockback);
 		}
 
 		Sequence sequence = DOTween.Sequence();

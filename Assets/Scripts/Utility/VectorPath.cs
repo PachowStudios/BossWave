@@ -12,7 +12,7 @@ public class VectorPath : MonoBehaviour
 
 	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
 
-	void OnEnable()
+	private void OnEnable()
 	{
 		if (paths.ContainsKey(pathName.ToLower()))
 		{
@@ -22,7 +22,7 @@ public class VectorPath : MonoBehaviour
 		paths.Add(pathName.ToLower(), this);
 	}
 
-	void OnDrawGizmosSelected()
+	private void OnDrawGizmosSelected()
 	{
 		if (enabled && nodes.Length >= 2)
 		{

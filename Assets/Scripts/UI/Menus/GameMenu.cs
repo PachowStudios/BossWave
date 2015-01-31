@@ -72,8 +72,8 @@ public class GameMenu : MonoBehaviour
 				paused = true;
 				canPause = false;
 				SelectObject(pauseSelect);
-				TimeWarpEffect.StartWarp(0f, fadeTime, sounds);
-				CRTEffect.StartCRT(fadeTime);
+				TimeWarpEffect.Instance.StartWarp(0f, fadeTime, sounds);
+				CRTEffect.Instance.StartCRT(fadeTime);
 				Fade(0f, 1f, UpdatePauseAlpha, true);
 
 				SetJoysticks(false);
@@ -83,15 +83,15 @@ public class GameMenu : MonoBehaviour
 				paused = false;
 				canPause = false;
 				GoToNode("Pause Menu");
-				TimeWarpEffect.EndWarp(fadeTime, sounds);
-				CRTEffect.EndCRT(fadeTime);
+				TimeWarpEffect.Instance.EndWarp(fadeTime, sounds);
+				CRTEffect.Instance.EndCRT(fadeTime);
 				Fade(1f, 0f, UpdatePauseAlpha, true);
 
 				SetJoysticks(true);
 			}
 		}
 
-		if (!gameOver && PlayerControl.instance.Dead)
+		if (!gameOver && PlayerControl.Instance.Dead)
 		{
 			gameOver = true;
 			canPause = false;
@@ -110,8 +110,8 @@ public class GameMenu : MonoBehaviour
 
 			sounds = FindObjectsOfType<AudioSource>();
 
-			TimeWarpEffect.StartWarp(0f, loadTime, sounds, Ease.OutSine);
-			CRTEffect.AnimateScanlines(loadTime, 0f, Ease.OutSine);
+			TimeWarpEffect.Instance.StartWarp(0f, loadTime, sounds, Ease.OutSine);
+			CRTEffect.Instance.AnimateScanlines(loadTime, 0f, Ease.OutSine);
 			StartCoroutine(LoadLevelCoroutine(levelName));
 		}
 	}
@@ -146,7 +146,7 @@ public class GameMenu : MonoBehaviour
 
 	public void SetFOV(float newFOV)
 	{
-		ScaleWidthCamera.FOV = Mathf.Abs((int)newFOV);
+		ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)newFOV);
 	}
 
 	public void ApplySettings()
@@ -172,7 +172,7 @@ public class GameMenu : MonoBehaviour
 		if (PlayerPrefs.HasKey("Settings/FOV"))
 		{
 			fovSlider.value = PlayerPrefs.GetInt("Settings/FOV");
-			ScaleWidthCamera.FOV = Mathf.Abs((int)fovSlider.value);
+			ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)fovSlider.value);
 		}
 
 		#if !MOBILE_INPUT
@@ -189,7 +189,7 @@ public class GameMenu : MonoBehaviour
 		yield return new WaitForSeconds(gameOverDelay);
 
 		SelectObject(gameOverSelect);
-		CRTEffect.StartCRT(fadeTime);
+		CRTEffect.Instance.StartCRT(fadeTime);
 		Fade(0f, 1f, UpdateGameOverAlpha, false);
 	}
 

@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8190b8bf1ba1c4a8956b543c0e953c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allEffects:
+  effectsLibrary:
   - name: Small Dust Explosion
     prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
 --- !u!1001 &100100000

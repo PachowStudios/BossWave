@@ -10,17 +10,22 @@ public class PopupMessage : MonoBehaviour
 	public PopupMessageInstance popupPrefab;
 	public float textBuffer = 5f;
 
-	void Awake()
+	public static PopupMessage Instance
+	{
+		get { return instance; }
+	}
+
+	private void Awake()
 	{
 		instance = this;
 	}
 
-	public static void CreatePopup(Vector3 newPosition, string newText, Sprite newImage = null, bool followPlayer = false)
+	public void CreatePopup(Vector3 newPosition, string newText, Sprite newImage = null, bool followPlayer = false)
 	{
-		newPosition.z = instance.transform.position.z;
+		newPosition.z = transform.position.z;
 
-		PopupMessageInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
-		popupInstance.transform.SetParent(instance.transform);
+		PopupMessageInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
+		popupInstance.transform.SetParent(transform);
 		popupInstance.transform.SetAsFirstSibling();
 		popupInstance.followPlayer = followPlayer;
 
@@ -29,25 +34,25 @@ public class PopupMessage : MonoBehaviour
 		Text instanceText = popupInstance.GetComponentInChildren<Text>();
 
 		float imageWidth;
-		float textBuffer;
+		float currentTextBuffer;
 
 		if (newImage != null)
 		{
 			instanceImage.sprite = newImage;
 			imageWidth = instanceRect.sizeDelta.y * (instanceImage.sprite.bounds.size.x / instanceImage.sprite.bounds.size.y);
-			textBuffer = instance.textBuffer;
+			currentTextBuffer = textBuffer;
 		}
 		else
 		{
 			imageWidth = 0f;
-			textBuffer = 0f;
+			currentTextBuffer = 0f;
 		}
 
 		instanceText.text = newText;
 
-		instanceText.rectTransform.offsetMin = new Vector2(imageWidth + instance.textBuffer, 0);
-		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
+		instanceText.rectTransform.offsetMin = new Vector2(imageWidth + currentTextBuffer, 0);
+		popupInstance.transform.localScale = popupPrefab.transform.localScale;
 
-		instanceRect.sizeDelta = new Vector2(imageWidth + textBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
+		instanceRect.sizeDelta = new Vector2(imageWidth + currentTextBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
 	}
 }

@@ -8,27 +8,32 @@ public class PopupSwapGun : MonoBehaviour
 
 	public PopupSwapGunInstance popupPrefab;
 
-	private static PopupSwapGunInstance currentPopup = null;
+	private PopupSwapGunInstance currentPopup = null;
 
-	void Awake()
+	public static PopupSwapGun Instance
+	{
+		get { return instance; }
+	}
+
+	private void Awake()
 	{
 		instance = this;
 	}
 
-	public static void CreatePopup(Vector3 newPosition, Gun newGunPrefab)
+	public void CreatePopup(Vector3 newPosition, Gun newGunPrefab)
 	{
 		if (currentPopup != null)
 		{
 			currentPopup.DisappearNoSelection();
 		}
 
-		newPosition.z = instance.transform.position.z;
+		newPosition.z = transform.position.z;
 
-		PopupSwapGunInstance popupInstance = Instantiate(instance.popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
+		PopupSwapGunInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
 		currentPopup = popupInstance;
-		popupInstance.transform.SetParent(instance.transform);
+		popupInstance.transform.SetParent(transform);
 		popupInstance.transform.SetAsFirstSibling();
-		popupInstance.transform.localScale = instance.popupPrefab.transform.localScale;
+		popupInstance.transform.localScale = popupPrefab.transform.localScale;
 		popupInstance.newGunPrefab = newGunPrefab;
 
 		Image oldGun = popupInstance.transform.FindSubChild("Old Gun").GetComponent<Image>();
@@ -36,12 +41,12 @@ public class PopupSwapGun : MonoBehaviour
 		Text oldStats = popupInstance.transform.FindSubChild("Old Stats").GetComponent<Text>();
 		Text newStats = popupInstance.transform.FindSubChild("New Stats").GetComponent<Text>();
 
-		oldGun.sprite = PlayerControl.instance.Gun.Sprite;
+		oldGun.sprite = PlayerControl.Instance.Gun.Sprite;
 		newGun.sprite = newGunPrefab.Sprite;
 
-		oldStats.text = PlayerControl.instance.Gun.projectile.damage + "\n" +
-						PlayerControl.instance.Gun.FireRate + "\n" +
-						PlayerControl.instance.Gun.projectile.knockback.x;
+		oldStats.text = PlayerControl.Instance.Gun.projectile.damage + "\n" +
+						PlayerControl.Instance.Gun.FireRate + "\n" +
+						PlayerControl.Instance.Gun.projectile.knockback.x;
 
 		newStats.text = newGunPrefab.projectile.damage + "\n" +
 						newGunPrefab.FireRate + "\n" +

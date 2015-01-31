@@ -8,43 +8,48 @@ public class TimeWarpEffect : MonoBehaviour
 
 	public float defaultFixedTimestep = 0.0166667f;
 
-	private static AudioSource[] allSounds;
+	private AudioSource[] allSounds;
 
-	public static float DefaultFixedTimestep
+	public static TimeWarpEffect Instance
 	{
-		get { return instance.defaultFixedTimestep; }
+		get { return instance; }
 	}
 
-	void Awake()
+	public float DefaultFixedTimestep
+	{
+		get { return defaultFixedTimestep; }
+	}
+
+	private void Awake()
 	{
 		instance = this;
 		allSounds = null;
 	}
 
-	public static void Warp(float timeScale, float length, float fadeTime, AudioSource[] sounds = null)
+	public void Warp(float timeScale, float length, float fadeTime, AudioSource[] sounds = null)
 	{
 		allSounds = sounds;
 
 		Sequence sequence = DOTween.Sequence().SetEase(Ease.OutQuint).SetUpdate(true);
-		sequence.Append(DOTween.To(instance.UpdateValues, Time.timeScale, timeScale, fadeTime))
+		sequence.Append(DOTween.To(UpdateValues, Time.timeScale, timeScale, fadeTime))
 			.AppendInterval(length)
-			.Append(DOTween.To(instance.UpdateValues, timeScale, 1f, fadeTime));
+			.Append(DOTween.To(UpdateValues, timeScale, 1f, fadeTime));
 	}
 
-	public static void StartWarp(float timeScale, float fadeTime, AudioSource[] sounds = null, Ease easeType = Ease.OutQuint)
+	public void StartWarp(float timeScale, float fadeTime, AudioSource[] sounds = null, Ease easeType = Ease.OutQuint)
 	{
 		allSounds = sounds;
 
-		DOTween.To(instance.UpdateValues, Time.timeScale, timeScale, fadeTime)
+		DOTween.To(UpdateValues, Time.timeScale, timeScale, fadeTime)
 			.SetEase(easeType)
 			.SetUpdate(true);
 	}
 
-	public static void EndWarp(float fadeTime, AudioSource[] sounds = null, Ease easeType = Ease.InSine)
+	public void EndWarp(float fadeTime, AudioSource[] sounds = null, Ease easeType = Ease.InSine)
 	{
 		allSounds = sounds;
 
-		DOTween.To(instance.UpdateValues, Time.timeScale, 1f, fadeTime)
+		DOTween.To(UpdateValues, Time.timeScale, 1f, fadeTime)
 			.SetEase(easeType)
 			.SetUpdate(true);
 	}

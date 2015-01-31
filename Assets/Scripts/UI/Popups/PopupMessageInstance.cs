@@ -31,7 +31,7 @@ public class PopupMessageInstance : MonoBehaviour
 	{
 		if (followPlayer)
 		{
-			transform.position = PlayerControl.instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
+			transform.position = PlayerControl.Instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
 		}
 
 		else

@@ -18,11 +18,11 @@ public class GunCrate : Powerup
 
 		List<Gun> possibleGuns = GetPossibleGuns(GetNewRarity(), ref getPossibleGunTrys);
 
-		if (possibleGuns[0].gunName != PlayerControl.instance.Gun.gunName)
+		if (possibleGuns[0].gunName != PlayerControl.Instance.Gun.gunName)
 		{
 			int newGun = Mathf.RoundToInt(Random.Range(0f, possibleGuns.Count - 1f));
 
-			PopupSwapGun.CreatePopup(PlayerControl.instance.PopupMessagePoint, possibleGuns[newGun]);
+			PopupSwapGun.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, possibleGuns[newGun]);
 		}
 
 		base.Pickup();
@@ -39,9 +39,9 @@ public class GunCrate : Powerup
 
 		List<Gun> possibleGuns = new List<Gun>();
 
-		foreach (Gun gun in LevelManager.instance.guns)
+		foreach (Gun gun in LevelManager.Instance.guns)
 		{
-			if ((int)gun.rarity == rarity && PlayerControl.instance.Gun.gunName != gun.gunName)
+			if ((int)gun.rarity == rarity && PlayerControl.Instance.Gun.gunName != gun.gunName)
 			{
 				possibleGuns.Add(gun);
 			}
@@ -55,7 +55,7 @@ public class GunCrate : Powerup
 			}
 			else
 			{
-				possibleGuns.Add(PlayerControl.instance.Gun);
+				possibleGuns.Add(PlayerControl.Instance.Gun);
 			}
 		}
 

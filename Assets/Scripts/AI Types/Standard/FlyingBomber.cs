@@ -69,11 +69,11 @@ public class FlyingBomber : StandardEnemy
 	{
 		bombTimer += Time.deltaTime;
 
-		if (bombTimer >= currentBombTime && Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
+		if (bombTimer >= currentBombTime && Mathf.Abs(PlayerControl.Instance.transform.position.x - transform.position.x) <= detectionRange)
 		{
 			anim.SetTrigger("Shoot");
 
-			Vector3 gunLookPosition = PlayerControl.instance.collider2D.bounds.center;
+			Vector3 gunLookPosition = PlayerControl.Instance.collider2D.bounds.center;
 			gunLookPosition -= gun.transform.position;
 			gunLookPosition.y += (Mathf.Abs(projectile.gravity) / 3.5f);
 			float gunAngle = Mathf.Atan2(gunLookPosition.y, gunLookPosition.x) * Mathf.Rad2Deg;
@@ -87,12 +87,12 @@ public class FlyingBomber : StandardEnemy
 			bombTimer = 0f;
 		}
 
-		if (PlayerControl.instance.transform.position.x > transform.position.x + detectionRange)
+		if (PlayerControl.Instance.transform.position.x > transform.position.x + detectionRange)
 		{
 			right = true;
 			left = !right;
 		}
-		else if (PlayerControl.instance.transform.position.x < transform.position.x - detectionRange)
+		else if (PlayerControl.Instance.transform.position.x < transform.position.x - detectionRange)
 		{
 			left = true;
 			right = !left;

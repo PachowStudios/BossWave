@@ -11,20 +11,6 @@ public class SpriteExplosion : MonoBehaviour
 	public int sortingOrder = 1;
 	public Material material;
 
-	LevelManager levelManager;
-
-	void Awake()
-	{
-		if (GameObject.FindGameObjectWithTag("LevelManager") != null)
-		{
-			levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
-		}
-		else
-		{
-			levelManager = null;
-		}
-	}
-
 	public void Explode(Vector3 velocity, Sprite sprite)
 	{
 		StartCoroutine(DoExplode(velocity, sprite));
@@ -70,9 +56,9 @@ public class SpriteExplosion : MonoBehaviour
 					currentParticle.color = particleColor;
 					currentParticle.startLifetime = currentParticle.lifetime = lifetime;
 
-					if (levelManager != null)
+					if (LevelManager.Instance != null)
 					{
-						currentParticle.velocity = new Vector2((levelManager.bossWavePlayerMoved ? -levelManager.bossWave.cameraSpeed : velocity.x) + Random.Range(-10f, 10f),
+						currentParticle.velocity = new Vector2((LevelManager.Instance.bossWavePlayerMoved ? -LevelManager.Instance.bossWave.cameraSpeed : velocity.x) + Random.Range(-10f, 10f),
 															   velocity.y + Random.Range(-10f, 10f));
 					}
 					else

@@ -71,7 +71,7 @@ public abstract class Enemy : MonoBehaviour
 
 	protected bool IsPlayerOnRightSide
 	{
-		get { return PlayerControl.instance.transform.position.x > transform.position.x; }
+		get { return PlayerControl.Instance.transform.position.x > transform.position.x; }
 	}
 
 	protected virtual void Awake()
@@ -109,9 +109,9 @@ public abstract class Enemy : MonoBehaviour
 
 			if (health <= 0f)
 			{
-				ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
-				int pointsAdded = PlayerControl.instance.AddPointsFromEnemy(maxHealth, damage);
-				PopupMessage.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
+				ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
+				int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+				PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
 
 				if (Random.Range(0f, 100f) <= microchipChance)
 				{
@@ -120,7 +120,7 @@ public abstract class Enemy : MonoBehaviour
 					for (int i = 0; i < microchipsToSpawn; i++)
 					{
 						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
-						LevelManager.SpawnMicrochip(transform.position, microchipSize);
+						LevelManager.Instance.SpawnMicrochip(transform.position, microchipSize);
 					}
 				}
 
@@ -151,8 +151,8 @@ public abstract class Enemy : MonoBehaviour
 
 	public void Kill()
 	{
-		ExplodeEffect.Explode(transform, velocity, spriteRenderer.sprite);
-		PlayerControl.instance.AddPointsFromEnemy(maxHealth, damage);
+		ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
+		PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
 
 		if (timeWarpAtDeath)
 		{
@@ -223,8 +223,8 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void FacePlayer()
 	{
-		if ((PlayerControl.instance.transform.position.x < transform.position.x && FacingRight) ||
-			(PlayerControl.instance.transform.position.x > transform.position.x && !FacingRight))
+		if ((PlayerControl.Instance.transform.position.x < transform.position.x && FacingRight) ||
+			(PlayerControl.Instance.transform.position.x > transform.position.x && !FacingRight))
 		{
 			Flip();
 		}
@@ -234,7 +234,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		spriteRenderer.enabled = false;
 		collider2D.enabled = false;
-		TimeWarpEffect.Warp(0.15f, 0f, 0.5f);
+		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
 	}
 
 	private void ResetColor()

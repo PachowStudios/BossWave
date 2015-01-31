@@ -7,6 +7,6 @@ public sealed class MeleeAI : FollowAI
 	{
 		base.Attack();
 
-		PlayerControl.instance.TakeDamage(gameObject);
+		PlayerControl.Instance.TakeDamage(gameObject);
 	}
 }

@@ -25,7 +25,7 @@ public class ScaleWidthCameraEditor : Editor
 	{
 		serializedTarget.Update();
 
-		EditorGUILayout.LabelField("Current FOV", ScaleWidthCamera.FOV.ToString());
+		EditorGUILayout.LabelField("Current FOV", Target.FOV.ToString());
 		EditorGUILayout.Space();
 
 		Target.overrideSettings = EditorGUILayout.Toggle("Override Settings", Target.overrideSettings);

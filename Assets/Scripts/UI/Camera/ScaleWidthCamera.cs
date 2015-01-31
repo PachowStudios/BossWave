@@ -5,21 +5,26 @@ using DG.Tweening;
 [ExecuteInEditMode]
 public class ScaleWidthCamera : MonoBehaviour 
 {
-	public static ScaleWidthCamera instance;
+	private static ScaleWidthCamera instance;
 
 	public bool overrideSettings = false;
 	public int overrideFOV;
 	public bool useWorldSpaceUI = false;
 	public RectTransform worldSpaceUI;
 
-	public static int FOV = 400;
+	public int FOV = 400;
 
-	void Awake()
+	public static ScaleWidthCamera Instance
+	{
+		get { return instance; }
+	}
+
+	private void OnEnable()
 	{
 		instance = this;
 	}
 
-	void OnPreRender()
+	private void OnPreRender()
 	{
 		if (overrideSettings)
 		{
@@ -34,11 +39,11 @@ public class ScaleWidthCamera : MonoBehaviour
 		}
 	}
 
-	public static void AnimateFOV(int newFOV, float time)
+	public void AnimateFOV(int newFOV, float time)
 	{
-		instance.overrideSettings = true;
-		instance.overrideFOV = FOV;
-		DOTween.To(() => instance.overrideFOV, x => instance.overrideFOV = x, newFOV, time)
+		Instance.overrideSettings = true;
+		Instance.overrideFOV = FOV;
+		DOTween.To(() => Instance.overrideFOV, x => Instance.overrideFOV = x, newFOV, time)
 			.SetEase(Ease.OutQuint);
 	}
 }

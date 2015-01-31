@@ -117,7 +117,7 @@ public sealed class TheRIFT : Boss
 	{
 		if (!spawned)
 		{
-			CameraFollow.instance.FollowObject(transform, false, 2f, true);
+			CameraFollow.Instance.FollowObject(transform, false, 2f, true);
 
 			Sequence spawnSequence = DOTween.Sequence();
 
@@ -129,7 +129,7 @@ public sealed class TheRIFT : Boss
 			}
 
 			spawnSequence
-				.AppendCallback(() => ExplodeEffect.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite))
+				.AppendCallback(() => ExplodeEffect.Instance.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite))
 				.AppendCallback(() => Destroy(silhouetteTubes.gameObject))
 				.AppendCallback(() => Destroy(silhouetteBody))
 				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
@@ -144,7 +144,7 @@ public sealed class TheRIFT : Boss
 				.AppendInterval(spawnLaserPathTime + 0.25f)
 				.AppendCallback(() =>
 				{
-					ExplodeEffect.Explode(wall.transform, Vector3.zero, wall.sprite);
+					ExplodeEffect.Instance.Explode(wall.transform, Vector3.zero, wall.sprite);
 					Destroy(wall.gameObject);
 				});
 		}
@@ -152,7 +152,7 @@ public sealed class TheRIFT : Boss
 
 	private void FinishSpawn()
 	{
-		CameraFollow.instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
+		CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
 		spawned = true;
 		startingX = transform.position.x;
 		prevPosition = transform.position;
@@ -306,7 +306,7 @@ public sealed class TheRIFT : Boss
 					{
 						Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
 						currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
-						SpriteEffect.SpawnEffect("Small Dust Explosion", firePoint.position, firePoint);
+						SpriteEffect.Instance.SpawnEffect("Small Dust Explosion", firePoint.position, firePoint);
 						anim.SetTrigger("Cannon Fire");
 					}
 				});
@@ -390,16 +390,16 @@ public sealed class TheRIFT : Boss
 				break;
 			case AttackPattern.SwoopPlayer:
 				path.Add(transform.position);
-				path.Add(new Vector3(PlayerControl.instance.transform.position.x,
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x,
 									 groundLevel.position.y - 1f,
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				break;
 			case AttackPattern.PlayerProximity:
-				path.Add(new Vector3(PlayerControl.instance.transform.position.x - 3f,
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x - 3f,
 									 groundLevel.position.y,
 									 transform.position.z));
-				path.Add(new Vector3(PlayerControl.instance.transform.position.x + 3f,
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x + 3f,
 									 groundLevel.position.y,
 									 transform.position.z));
 				break;

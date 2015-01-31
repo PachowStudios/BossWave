@@ -36,7 +36,7 @@ public class Sentry : StandardEnemy
 		sideFireCollider = transform.FindChild("sideFire").collider2D;
 		upFireCollider = transform.FindChild("upFire").collider2D;
 
-		right = PlayerControl.instance.transform.position.x > transform.position.x;
+		right = PlayerControl.Instance.transform.position.x > transform.position.x;
 		left = !right;
 	}
 
@@ -113,10 +113,10 @@ public class Sentry : StandardEnemy
 
 			if (cooldownTimer >= cooldownTime)
 			{
-				if (Mathf.Abs(PlayerControl.instance.transform.position.x - transform.position.x) <= detectionRange)
+				if (Mathf.Abs(PlayerControl.Instance.transform.position.x - transform.position.x) <= detectionRange)
 				{
-					if ((PlayerControl.instance.transform.position.x < transform.position.x && transform.localScale.x > 0f) ||
-						(PlayerControl.instance.transform.position.x > transform.position.x && transform.localScale.x < 0f))
+					if ((PlayerControl.Instance.transform.position.x < transform.position.x && transform.localScale.x > 0f) ||
+						(PlayerControl.Instance.transform.position.x > transform.position.x && transform.localScale.x < 0f))
 					{
 						Flip();
 					}
@@ -126,7 +126,7 @@ public class Sentry : StandardEnemy
 
 					cooldownTimer = 0f;
 
-					fireUp = PlayerControl.instance.transform.position.y >= transform.position.y + 1;
+					fireUp = PlayerControl.Instance.transform.position.y >= transform.position.y + 1;
 
 				}
 			}

@@ -16,7 +16,12 @@ public class SpriteEffect : MonoBehaviour
 
 	public List<Effect> effectsLibrary;
 
-	private static Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>();
+	private Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>();
+
+	public static SpriteEffect Instance
+	{
+		get { return instance; }
+	}
 
 	private void Awake()
 	{
@@ -33,14 +38,14 @@ public class SpriteEffect : MonoBehaviour
 		}
 	}
 
-	public static void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null)
+	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null)
 	{
 		requestedName = requestedName.ToLower();
 
 		if (effects.ContainsKey(requestedName))
 		{
 			SpriteRenderer currentEffect = Instantiate(effects[requestedName], targetPosition, Quaternion.identity) as SpriteRenderer;
-			currentEffect.transform.parent = (parent == null) ? instance.transform : parent;
+			currentEffect.transform.parent = (parent == null) ? transform : parent;
 		}
 		else
 		{

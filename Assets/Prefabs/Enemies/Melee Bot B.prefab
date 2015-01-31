@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dee219394281314da42ac94fe6e4e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawned: 0
+  spawned: 1
   difficulty: 0
   immuneToInstantKill: 0
   maxHealth: 20
@@ -272,7 +272,8 @@ MonoBehaviour:
   spawnEntryRange: 1
   spawnJumpHeight: 4
   spawnLength: .5
-  followOffLedges: 1
+  maxJumpHeight: 7
+  followVertically: 0
   followRange: 1.79999995
   attackRange: 1.79999995
   attackCooldownTime: 1.5

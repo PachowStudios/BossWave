@@ -56,7 +56,7 @@ public sealed class ShootAI : FollowAI
 			yield return new WaitForSeconds(delay);
 		}
 
-		guns[currentGun].LookAt2D(PlayerControl.instance.collider2D.bounds.center, true);
+		guns[currentGun].LookAt2D(PlayerControl.Instance.collider2D.bounds.center, true);
 
 		Vector3 shotDirection = Vector3.zero;
 

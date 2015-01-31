@@ -23,8 +23,8 @@ public class Microchip : Powerup
 
 	protected override void Pickup()
 	{
-		PlayerControl.instance.AddMicrochips(microchipValue);
-		PopupMessage.CreatePopup(PlayerControl.instance.PopupMessagePoint, microchipValue.ToString(), spriteRenderer.sprite);
+		PlayerControl.Instance.AddMicrochips(microchipValue);
+		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, microchipValue.ToString(), spriteRenderer.sprite);
 
 		base.Pickup();
 	}

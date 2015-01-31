@@ -10,7 +10,7 @@ public class LevelPortal : MonoBehaviour
 
 	void Update()
 	{
-		if (PlayerControl.instance.Jumped)
+		if (PlayerControl.Instance.Jumped)
 		{
 			if (portalSelected)
 			{

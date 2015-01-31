@@ -64,7 +64,7 @@ public class ResolutionSelector : MonoBehaviour
 	public void SetResolution()
 	{
 		Screen.SetResolution(resolutions[selected].width, resolutions[selected].height, Screen.fullScreen);
-		CRTEffect.UpdateResolution(resolutions[selected].height);
+		CRTEffect.Instance.UpdateResolution(resolutions[selected].height);
 	}
 
 	private void SetText()

@@ -39,13 +39,13 @@ public abstract class Powerup : MonoBehaviour
 
 	protected virtual void Pickup()
 	{
-		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
+		ExplodeEffect.Instance.Explode(transform, Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
 	}
 
 	public void Destroy()
 	{
-		ExplodeEffect.Explode(transform, Vector3.zero, spriteRenderer.sprite);
+		ExplodeEffect.Instance.Explode(transform, Vector3.zero, spriteRenderer.sprite);
 		Destroy(gameObject);
 	}
 }
