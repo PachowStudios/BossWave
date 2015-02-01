@@ -198,9 +198,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 35328
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -240,16 +237,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a95450f76b07d4ea843308a7565a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShot: 0
   damage: .5
-  knockback: 0
+  knockback: {x: 2, y: 2}
   gravity: 0
   shotSpeed: 15
   lifetime: 5
   autoDestroy: 1
   destroyOnEnemy: 0
   destroyOnWorld: 1
+  correctRotation: 1
   disableMovement: 0
+  direction: {x: 0, y: 0, z: 0}
   damageRate: 5
   outerForce: 11
   innerForce: 12.5
@@ -259,8 +257,8 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 1}
   particleSystemPrefab: {fileID: 19800000, guid: b880edb78a26cd8438531bb595c21493,
     type: 2}
-  particlesSortingLayer: Foreground
-  particlesSortingOrder: 1
+  particlesSortingLayer: Effects
+  particlesSortingOrder: 0
   particleDestroyDelay: 3
   generatedParticleLifetime: .5
   affectedParticleLifetime: 1
@@ -282,8 +280,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 4273737757
-  m_SortingOrder: 1
+  m_SortingLayerID: 3501680325
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300018, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

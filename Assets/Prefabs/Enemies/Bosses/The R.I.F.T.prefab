@@ -351,7 +351,7 @@ MonoBehaviour:
   invincible: 0
   ignoreProjectiles: 0
   introName: The R.I.F.T
-  introDescription: Radioactive Infernal Fortified Titan
+  introDescription: Reasonably Intelligent Floating Thing
   introSprite: {fileID: 21300000, guid: 8b56fab6f11112f4db115fe12063e514, type: 3}
   spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
@@ -425,7 +425,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 1910810007
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6ad5b180ca1bf5742a1405f6da386753, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -447,7 +447,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 1910810007
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 83941621338a8e44dacaae557354a5f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -469,7 +469,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 1910810007
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e4096ed8603d0eb43ad9899495f7fad4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -491,7 +491,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 1910810007
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 5164cd537aefe184b978ae994105387d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -513,7 +513,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 1018039513
+  m_SortingLayerID: 1910810007
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 9fcbace64bb10af44b9124af8bf4a9d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

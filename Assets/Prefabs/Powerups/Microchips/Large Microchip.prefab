@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.50134468, y: 1.07059455, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   autoDestroy: 1
   minLifetime: 5
   maxLifetime: 10
+  popupSprite: {fileID: 21300014, guid: f7a0147c54ba63f4c8ee16b1948aebe9, type: 3}
   minValue: 50
   maxValue: 250
 --- !u!114 &11400002

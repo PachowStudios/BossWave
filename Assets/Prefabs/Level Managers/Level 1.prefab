@@ -310,8 +310,11 @@ MonoBehaviour:
   guns:
   - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
-  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  - {fileID: 11400000, guid: c406c033fd5440e48a34362e7be8a036, type: 2}
+  - {fileID: 11400000, guid: b4639e7e0b3d0c54ba55eaefd352b812, type: 2}
+  - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
   - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
+  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
   powerups:
   - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}

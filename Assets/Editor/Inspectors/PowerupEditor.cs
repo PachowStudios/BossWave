@@ -6,7 +6,6 @@ using UnityEditor.AnimatedValues;
 public class PowerupEditor : Editor
 {
 	private AnimBool showAutoDestroy;
-	private SerializedObject serializedTarget;
 
 	private Powerup Target
 	{
@@ -16,12 +15,11 @@ public class PowerupEditor : Editor
 	void OnEnable()
 	{
 		showAutoDestroy = new AnimBool(Target.autoDestroy);
-		serializedTarget = new SerializedObject(Target);
 	}
 
 	public override void OnInspectorGUI()
 	{
-		serializedTarget.Update();
+		serializedObject.Update();
 
 		Target.autoDestroy = EditorGUILayout.Toggle("Auto Destroy", Target.autoDestroy);
 		showAutoDestroy.target = Target.autoDestroy;
@@ -36,12 +34,14 @@ public class PowerupEditor : Editor
 			EditorGUI.indentLevel--;
 		}
 
+		DrawPropertiesExcluding(serializedObject, new string[] { "m_Script", "autoDestroy", "minLifetime", "maxLifetime" } );
+
 		if (GUI.changed)
 		{
 			EditorUtility.SetDirty(Target);
 		}
 
-		DrawPropertiesExcluding(serializedTarget, new string[] { "m_Script", "autoDestroy", "minLifetime", "maxLifetime" } );
+		serializedObject.ApplyModifiedProperties();
 		Repaint();
 	}
 }

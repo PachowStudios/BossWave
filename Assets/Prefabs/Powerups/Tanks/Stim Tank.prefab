@@ -72,9 +72,9 @@ MonoBehaviour:
   autoDestroy: 1
   minLifetime: 10
   maxLifetime: 15
+  popupSprite: {fileID: 21300004, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
   speedMultiplier: 1.5
   duration: 5
-  popupImage: {fileID: 21300004, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,9 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b83d1f65684d5468a887e7b0097fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 4
-  startTime: 1
-  fadeIn: 1
+  fadeTime: .5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

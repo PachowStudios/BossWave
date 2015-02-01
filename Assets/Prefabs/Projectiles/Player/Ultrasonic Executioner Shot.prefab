@@ -162,9 +162,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 18944
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -205,13 +202,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  knockback: 4
+  knockback: {x: 2, y: 2}
   gravity: 0
   shotSpeed: 250
   lifetime: 3
   autoDestroy: 1
   destroyOnEnemy: 0
   destroyOnWorld: 0
+  correctRotation: 1
   disableMovement: 0
   direction: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
@@ -225,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c566fb44f7147544887bfe4af19a7b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingLayer: Player
+  sortingLayer: Projectiles
   sortingOrder: 0
 --- !u!114 &11400006
 MonoBehaviour:
@@ -256,7 +254,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 4273737757
+  m_SortingLayerID: 3501680325
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300022, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

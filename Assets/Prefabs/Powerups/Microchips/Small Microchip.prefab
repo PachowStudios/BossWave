@@ -101,6 +101,7 @@ MonoBehaviour:
   autoDestroy: 1
   minLifetime: 5
   maxLifetime: 10
+  popupSprite: {fileID: 21300002, guid: f7a0147c54ba63f4c8ee16b1948aebe9, type: 3}
   minValue: 1
   maxValue: 10
 --- !u!114 &11400002

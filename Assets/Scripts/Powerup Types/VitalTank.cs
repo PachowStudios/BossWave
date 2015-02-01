@@ -3,9 +3,9 @@ using System.Collections;
 
 public class VitalTank : Powerup
 {
+	public Sprite popupSprite;
 	public float minHealth = 5f;
 	public float maxHealth = 100f;
-	public Sprite popupImage;
 
 	private float healthAmount;
 
@@ -21,7 +21,7 @@ public class VitalTank : Powerup
 	protected override void Pickup()
 	{
 		PlayerControl.Instance.Health += healthAmount;
-		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, ((int)healthAmount).ToString(), popupImage);
+		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, ((int)healthAmount).ToString(), popupSprite);
 
 		base.Pickup();
 	}

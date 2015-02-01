@@ -194,8 +194,8 @@ MonoBehaviour:
   width: .5
   length: 50
   wiggle: .25
-  sortingLayer: Player
-  sortingOrder: 1
+  sortingLayer: Projectiles
+  sortingOrder: 0
   collisionLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -218,8 +218,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 4273737757
-  m_SortingOrder: 2
+  m_SortingLayerID: 3501680325
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f5d63cd7f5951dc4dbda4b4ddaedf8f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

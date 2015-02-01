@@ -10,6 +10,7 @@ public class Microchip : Powerup
 		Large
 	};
 
+	public Sprite popupSprite;
 	public int minValue = 1;
 	public int maxValue = 10;
 	private int microchipValue = 0;
@@ -24,7 +25,7 @@ public class Microchip : Powerup
 	protected override void Pickup()
 	{
 		PlayerControl.Instance.AddMicrochips(microchipValue);
-		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, microchipValue.ToString(), spriteRenderer.sprite);
+		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, microchipValue.ToString(), popupSprite);
 
 		base.Pickup();
 	}

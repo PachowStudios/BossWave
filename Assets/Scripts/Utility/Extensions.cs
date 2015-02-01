@@ -200,14 +200,22 @@ public static class Extensions
 	}
 
 	// Text
-	public static IEnumerator Animate(this Text parent, string text, float interval)
+	public static IEnumerator Animate(this Text parent, string text, float interval, bool reverse = false)
 	{
 		int currentLetter = 0;
 		parent.text = "";
 
 		while (currentLetter < text.Length)
 		{
-			parent.text += text[currentLetter];
+			if (reverse)
+			{
+				parent.text = text[text.Length - 1 - currentLetter] + parent.text;
+			}
+			else
+			{
+				parent.text += text[currentLetter];
+			}
+
 			currentLetter++;
 
 			yield return new WaitForSeconds(interval);

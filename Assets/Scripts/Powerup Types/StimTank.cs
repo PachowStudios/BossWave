@@ -3,9 +3,9 @@ using System.Collections;
 
 public class StimTank : Powerup
 {
+	public Sprite popupSprite;
 	public float speedMultiplier = 1.5f;
 	public float duration = 5f;
-	public Sprite popupImage;
 
 	new void Awake()
 	{
@@ -15,7 +15,7 @@ public class StimTank : Powerup
 	protected override void Pickup()
 	{
 		PlayerControl.Instance.SpeedBoost(speedMultiplier, duration);
-		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, ((int)duration).ToString(), popupImage);
+		PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, ((int)duration).ToString(), popupSprite);
 
 		base.Pickup();
 	}

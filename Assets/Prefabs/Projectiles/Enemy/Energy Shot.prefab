@@ -90,9 +90,6 @@ MonoBehaviour:
   platformMask:
     serializedVersion: 2
     m_Bits: 0
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 17152
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -133,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2.5
-  knockback: 1
+  knockback: {x: 2, y: 2}
   gravity: 0
   shotSpeed: 20
   lifetime: 3
@@ -161,8 +158,8 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 4273737757
-  m_SortingOrder: 1
+  m_SortingLayerID: 3501680325
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300016, guid: 9be89750776fa1d4abc3e79edd296013, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000

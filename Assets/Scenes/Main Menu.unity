@@ -3867,6 +3867,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
+      propertyPath: orthographic size
+      value: 11.2486305
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
   m_RootGameObject: {fileID: 1229284137}
@@ -5986,6 +5990,7 @@ GameObject:
   - 114: {fileID: 1657426214}
   - 114: {fileID: 1657426213}
   - 114: {fileID: 1657426212}
+  - 114: {fileID: 1657426216}
   m_Layer: 0
   m_Name: EffectsManager
   m_TagString: Untagged
@@ -6051,6 +6056,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1657426216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400006, guid: 9ae7b5f5ebf65964fb2bd627c6b01715,
+    type: 2}
+  m_PrefabInternal: {fileID: 1537483224}
+  m_GameObject: {fileID: 1657426211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8190b8bf1ba1c4a8956b543c0e953c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectsLibrary:
+  - name: Small Dust Explosion
+    prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
 --- !u!1 &1671717562
 GameObject:
   m_ObjectHideFlags: 0
@@ -6613,7 +6633,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 11.2446356
+  orthographic size: 11.2486305
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6641,6 +6661,7 @@ MonoBehaviour:
   overrideFOV: 0
   useWorldSpaceUI: 0
   worldSpaceUI: {fileID: 0}
+  FOV: 400
 --- !u!1 &1875642252
 GameObject:
   m_ObjectHideFlags: 0

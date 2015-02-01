@@ -93,6 +93,14 @@ TagManager:
     userID: 2
     uniqueID: 3423334565
     locked: 0
+  - name: Boss
+    userID: 11
+    uniqueID: 1910810007
+    locked: 0
+  - name: Projectiles
+    userID: 12
+    uniqueID: 3501680325
+    locked: 0
   - name: Effects
     userID: 10
     uniqueID: 3710787823

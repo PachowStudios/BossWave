@@ -48,6 +48,6 @@ public class BossIntro : MonoBehaviour
 	public void AnimateText()
 	{
 		StartCoroutine(bossDescription.Animate(newBossDescription, textTypeInterval));
-		StartCoroutine(playerDescription.Animate(defaultPlayerDescription, textTypeInterval));
+		StartCoroutine(playerDescription.Animate(defaultPlayerDescription, textTypeInterval, true));
 	}
 }
