@@ -28,7 +28,7 @@ AnimationClip:
     - time: .666666687
       value: {fileID: 21300002, guid: f7a0147c54ba63f4c8ee16b1948aebe9, type: 3}
     attribute: m_Sprite
-    path: Health Display/Microchip Icon
+    path: Microchip Icon
     classID: 114
     script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_SampleRate: 60
@@ -38,7 +38,7 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 491418834
+    - path: 557797513
       attribute: 2015549526
       script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
       classID: 114

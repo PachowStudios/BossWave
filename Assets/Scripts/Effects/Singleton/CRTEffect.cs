@@ -32,6 +32,7 @@ public class CRTEffect : MonoBehaviour
 		crtShader = Camera.main.GetComponent<CRT>();
 		noiseShader = Camera.main.GetComponent<NoiseAndGrain>();
 		noiseShader.intensityMultiplier = noiseIntensity;
+		crtBorder.color = new Color(crtBorder.color.r, crtBorder.color.g, crtBorder.color.b, 1f);
 	}
 
 	public void StartCRT(float fadeTime, float scanlinesStart = -1f, float scanlinesEnd = -1f, Ease easeType = Ease.OutSine)

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public static class Extensions
 {
@@ -195,6 +197,21 @@ public static class Extensions
 		float current = parent.Evaluate(1f - ((float)currentInterval / intervals));
 		float previous = parent.Evaluate(1f - ((float)(currentInterval - 1) / intervals));
 		return previous - current;
+	}
+
+	// Text
+	public static IEnumerator Animate(this Text parent, string text, float interval)
+	{
+		int currentLetter = 0;
+		parent.text = "";
+
+		while (currentLetter < text.Length)
+		{
+			parent.text += text[currentLetter];
+			currentLetter++;
+
+			yield return new WaitForSeconds(interval);
+		}
 	}
 
 	// Utility

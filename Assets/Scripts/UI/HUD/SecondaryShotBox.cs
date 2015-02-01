@@ -11,12 +11,13 @@ public class SecondaryShotBox : MonoBehaviour
 	public Image icon;
 
 	public float fadeTime = 0.5f;
-	public float cooldownDamping = 0.5f;
-	public Gradient barGradient;
 	public float showY = 1f;
 	public float hideY = -3f;
+	public float cooldownDamping = 0.5f;
+	public Gradient barGradient;
 
-	private bool showing = false;
+	private bool showing = true;
+	private bool overrideShowing = false;
 
 	private float cooldownPercent;
 	private Vector3 cooldownVelocity = Vector3.zero;
@@ -39,7 +40,7 @@ public class SecondaryShotBox : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (PlayerControl.Instance.Gun.secondaryShot)
+		if (PlayerControl.Instance.Gun.secondaryShot && !overrideShowing)
 		{
 			if (!showing)
 			{
@@ -79,6 +80,7 @@ public class SecondaryShotBox : MonoBehaviour
 			}
 
 			showing = true;
+			overrideShowing = false;
 		}
 	}
 
@@ -96,8 +98,9 @@ public class SecondaryShotBox : MonoBehaviour
 			{
 				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, Instance.hideY), time);
 			}
-
+			
 			showing = false;
+			overrideShowing = true;
 		}
 	}
 }

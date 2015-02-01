@@ -3,15 +3,20 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class Cutscene : MonoBehaviour
 {
 	private static Cutscene instance;
 
 	public float fadeTime = 0.5f;
+	public float showY = 2f;
+	public float hideY = 0f;
+	public CanvasGroup canvasGroup;
+	public RectTransform topBar;
+	public RectTransform bottomBar;
 
-	private bool cutsceneActive = false;
-	private Animator anim;
+	private bool showing = false;
 
 	public static Cutscene Instance
 	{
@@ -21,45 +26,47 @@ public class Cutscene : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-
-		anim = GetComponent<Animator>();
-
-		cutsceneActive = false;
 	}
 
-	public void StartCutscene(bool disableInput = false)
+	public void Show(bool disableInput = false)
 	{
-		if (!cutsceneActive)
+		if (!showing)
 		{
+			canvasGroup.DOFade(1f, fadeTime);
+			topBar.DOAnchorPos(new Vector2(topBar.anchoredPosition.x, showY), fadeTime);
+			bottomBar.DOAnchorPos(new Vector2(bottomBar.anchoredPosition.x, -showY), fadeTime);
+
+			HealthDisplay.Instance.Hide(fadeTime);
+			ComboMeter.Instance.Hide(fadeTime);
+			SecondaryShotBox.Instance.Hide(fadeTime, true);
+
 			if (disableInput)
 			{
 				PlayerControl.Instance.DisableInput();
 			}
 
-			cutsceneActive = true;
-			anim.SetTrigger("Start");
-		}
-		else
-		{
-			Debug.LogError("Tried to start a cutscene when one was already active!");
+			showing = true;
 		}
 	}
 
-	public void EndCutscene(bool enableInput = false)
+	public void Hide(bool enableInput = false)
 	{
-		if (cutsceneActive)
+		if (showing)
 		{
+			canvasGroup.DOFade(0f, fadeTime);
+			topBar.DOAnchorPos(new Vector2(topBar.anchoredPosition.x, hideY), fadeTime);
+			bottomBar.DOAnchorPos(new Vector2(bottomBar.anchoredPosition.x, hideY), fadeTime);
+
+			HealthDisplay.Instance.Show(fadeTime);
+			ComboMeter.Instance.Show(fadeTime);
+			SecondaryShotBox.Instance.Show(fadeTime, true);
+
 			if (enableInput && PlayerControl.Instance.IsInputDisabled())
 			{
 				PlayerControl.Instance.EnableInput();
 			}
 
-			cutsceneActive = false;
-			anim.SetTrigger("End");
-		}
-		else
-		{
-			Debug.LogError("Tried to end a cutscene when there weren't any active!");
+			showing = false;
 		}
 	}
 

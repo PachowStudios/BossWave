@@ -126,7 +126,7 @@ public class LevelManager : MonoBehaviour
 			{
 				if (!bossWaveInitialized)
 				{
-					Cutscene.Instance.StartCutscene();
+					Cutscene.Instance.Show();
 					ScaleWidthCamera.Instance.AnimateFOV(runningFOV, 1f);
 					bossInstance = Instantiate(bossWave.boss, bossSpawner.position, Quaternion.identity) as Boss;
 					bossInstance.Spawn();
@@ -143,7 +143,7 @@ public class LevelManager : MonoBehaviour
 					PlayerControl.Instance.continuouslyRunning = true;
 					bossWavePlayerMoved = true;
 
-					Cutscene.Instance.EndCutscene(true);
+					Cutscene.Instance.Hide(true);
 
 					foreach(GameObject element in scrollingElements)
 					{

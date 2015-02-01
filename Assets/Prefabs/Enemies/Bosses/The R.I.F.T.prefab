@@ -350,6 +350,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0
+  introName: The R.I.F.T
+  introDescription: Radioactive Infernal Fortified Titan
+  introSprite: {fileID: 21300000, guid: 8b56fab6f11112f4db115fe12063e514, type: 3}
   spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
   spawnLaserPathName: Boss Laser Intro

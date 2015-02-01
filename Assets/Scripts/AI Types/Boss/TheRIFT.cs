@@ -33,6 +33,9 @@ public sealed class TheRIFT : Boss
 		public List<AttackType> possibleAttacks;
 	};
 
+	public string introName;
+	public string introDescription;
+	public Sprite introSprite;
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
 	public string spawnLaserPathName;
@@ -121,6 +124,7 @@ public sealed class TheRIFT : Boss
 
 			Sequence spawnSequence = DOTween.Sequence();
 
+			spawnSequence.AppendCallback(() => BossIntro.Instance.Show(introName, introDescription, introSprite));
 			spawnSequence.AppendInterval(0.5f);
 
 			foreach (SpriteRenderer sprite in spriteRenderers)
