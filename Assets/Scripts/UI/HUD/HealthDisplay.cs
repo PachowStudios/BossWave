@@ -10,7 +10,7 @@ public class HealthDisplay : MonoBehaviour
 	private static HealthDisplay instance;
 
 	public Image face;
-	public Image bar;
+	public Mask barMask;
 	public Text score;
 	public Text microchips;
 
@@ -46,7 +46,7 @@ public class HealthDisplay : MonoBehaviour
 
 		canvasGroup = GetComponent<CanvasGroup>();
 
-		originalHealthWidth = bar.rectTransform.sizeDelta.x;
+		originalHealthWidth = barMask.rectTransform.sizeDelta.x;
 	}
 
 	private void OnGUI()
@@ -55,7 +55,7 @@ public class HealthDisplay : MonoBehaviour
 
 		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
 
-		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, bar.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
+		barMask.rectTransform.sizeDelta = Vector2.SmoothDamp(barMask.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, barMask.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
 		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.Instance.Score, ref scoreVelocity, textDamping);
 		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.Instance.Microchips, ref microchipsVelocity, textDamping);
 

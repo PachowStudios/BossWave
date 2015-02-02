@@ -109,6 +109,7 @@ public class LevelManager : MonoBehaviour
 		if (waveTimer >= bossWave.startTime)
 		{
 			bossWaveActive = true;
+			PowerupSpawner.Instance.spawnPowerups = false;
 		}
 
 		if (bossWaveActive)

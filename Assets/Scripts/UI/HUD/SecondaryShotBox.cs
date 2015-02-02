@@ -20,7 +20,8 @@ public class SecondaryShotBox : MonoBehaviour
 	private bool overrideShowing = false;
 
 	private float cooldownPercent;
-	private Vector3 cooldownVelocity = Vector3.zero;
+	private float originalCooldownWidth;
+	private Vector2 cooldownVelocity = Vector3.zero;
 
 	private CanvasGroup canvasGroup;
 	private RectTransform rectTransform;
@@ -36,6 +37,8 @@ public class SecondaryShotBox : MonoBehaviour
 
 		canvasGroup = GetComponent<CanvasGroup>();
 		rectTransform = GetComponent<RectTransform>();
+
+		originalCooldownWidth = bar.rectTransform.sizeDelta.x;
 	}
 
 	private void OnGUI()
@@ -60,8 +63,8 @@ public class SecondaryShotBox : MonoBehaviour
 			cooldownPercent = 0f;
 		}
 
-		bar.transform.localScale = Vector3.SmoothDamp(bar.transform.localScale, new Vector3(cooldownPercent, 1f, 1f), ref cooldownVelocity, cooldownDamping);
-		bar.color = barGradient.Evaluate(bar.transform.localScale.x);
+		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalCooldownWidth * cooldownPercent, bar.rectTransform.sizeDelta.y), ref cooldownVelocity, cooldownDamping);
+		bar.color = barGradient.Evaluate(cooldownPercent);
 	}
 
 	public void Show(float time = 0f, bool fade = false)

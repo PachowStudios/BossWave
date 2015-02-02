@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: caebc02fc7653104a914826ba4eac999
+guid: d10ad4eb66f7b4b46b05de4c92aad23b
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: SecondaryShotBox_Frame
-    21300002: SecondaryShotBox_Bar
-    21300004: SecondaryShotBox_Bar_Full
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,14 +27,14 @@ TextureImporter:
     filterMode: 0
     aniso: 16
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
+  alignment: 6
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 10
@@ -45,26 +42,6 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: SecondaryShotBox_Frame
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 21
-        height: 24
-      alignment: 6
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SecondaryShotBox_Bar
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 21
-        width: 2
-        height: 2
-      alignment: 4
-      pivot: {x: 0, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
