@@ -372,13 +372,14 @@ public sealed class PlayerControl : MonoBehaviour
 	public void SwapGun(Gun newGun)
 	{
 		Transform oldTransform = gun.transform;
-		spriteRenderers.Remove(gun.GetComponent<SpriteRenderer>());
+		spriteRenderers.Remove(gun.SpriteRenderer);
 		Destroy(gun.gameObject);
 		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
 		gunInstance.transform.parent = transform;
 		gunInstance.transform.localScale = oldTransform.localScale;
+		gunInstance.SpriteRenderer.color = usingGun ? Color.white : Color.clear;
 		gun = gunInstance;
-		spriteRenderers.Add(gun.GetComponent<SpriteRenderer>());
+		spriteRenderers.Add(gun.SpriteRenderer);
 	}
 
 	public void SpeedBoost(float multiplier, float length)

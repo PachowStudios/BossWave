@@ -120,7 +120,7 @@ public abstract class Enemy : MonoBehaviour
 					for (int i = 0; i < microchipsToSpawn; i++)
 					{
 						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
-						LevelManager.Instance.SpawnMicrochip(transform.position, microchipSize);
+						PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
 					}
 				}
 

@@ -41,8 +41,8 @@ public class PopupSwapGun : MonoBehaviour
 		Text oldStats = popupInstance.transform.FindSubChild("Old Stats").GetComponent<Text>();
 		Text newStats = popupInstance.transform.FindSubChild("New Stats").GetComponent<Text>();
 
-		oldGun.sprite = PlayerControl.Instance.Gun.Sprite;
-		newGun.sprite = newGunPrefab.Sprite;
+		oldGun.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
+		newGun.sprite = newGunPrefab.SpriteRenderer.sprite;
 
 		oldStats.text = PlayerControl.Instance.Gun.projectile.damage + "\n" +
 						PlayerControl.Instance.Gun.FireRate + "\n" +

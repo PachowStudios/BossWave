@@ -39,7 +39,7 @@ public class GunCrate : Powerup
 
 		List<Gun> possibleGuns = new List<Gun>();
 
-		foreach (Gun gun in LevelManager.Instance.guns)
+		foreach (Gun gun in PowerupSpawner.Instance.guns)
 		{
 			if ((int)gun.rarity == rarity && PlayerControl.Instance.Gun.gunName != gun.gunName)
 			{

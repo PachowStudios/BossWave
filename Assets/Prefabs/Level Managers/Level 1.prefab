@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: Level 1
@@ -26,9 +27,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   m_Layer: 0
-  m_Name: Powerup Spawner
-  m_TagString: PowerupSpawner
-  m_Icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
+  m_Name: Powerup Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -77,6 +78,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100010
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400010}
+  m_Layer: 0
+  m_Name: Powerup End
+  m_TagString: Untagged
+  m_Icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &100012
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +110,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &100014
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400014}
+  m_Layer: 0
+  m_Name: Powerup Start
+  m_TagString: Untagged
+  m_Icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100016
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400016}
+  m_Layer: 0
+  m_Name: Bottom Powerup Spawner
+  m_TagString: PowerupSpawner
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -115,11 +161,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 400016}
   m_Father: {fileID: 400004}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -130,8 +177,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400008}
   - {fileID: 400002}
+  - {fileID: 400008}
   - {fileID: 400006}
   m_Father: {fileID: 400000}
   m_RootOrder: 0
@@ -158,7 +205,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
-  m_RootOrder: 0
+  m_RootOrder: 1
+--- !u!4 &400010
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400016}
+  m_RootOrder: 1
 --- !u!4 &400012
 Transform:
   m_ObjectHideFlags: 1
@@ -171,6 +230,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 1
+--- !u!4 &400014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400016}
+  m_RootOrder: 0
+--- !u!4 &400016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400014}
+  - {fileID: 400010}
+  m_Father: {fileID: 400002}
+  m_RootOrder: 0
 --- !u!61 &6100000
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -262,9 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: 0
-  spawnPowerups: 0
   introCRT: 0
+  spawnEnemies: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
@@ -294,11 +378,12 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1
+    startTime: 1000
     totalLength: 30
     cameraSpeed: 15
     fullCameraSpeed: 30
     speedUpTime: 5
+    spawner: {fileID: 0}
     playerWaitPoint: {fileID: 400006}
     progressBar: {fileID: 0}
   enemies:
@@ -307,30 +392,43 @@ MonoBehaviour:
   - {fileID: 11400002, guid: a89caa5c84b4afb4c98ab899dd518d26, type: 2}
   - {fileID: 11400002, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
   - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
-  guns:
-  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
-  - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
-  - {fileID: 11400000, guid: c406c033fd5440e48a34362e7be8a036, type: 2}
-  - {fileID: 11400000, guid: b4639e7e0b3d0c54ba55eaefd352b812, type: 2}
-  - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
-  - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
-  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  worldBoundaries: {fileID: 0}
+  runningBoundaries: {fileID: 100012}
+  runningFOV: 630
+  groundLevel: {fileID: 400008}
+  bossWavePlayerMoved: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPowerups: 0
   powerups:
-  - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
-  - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+  - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
   microchips:
   - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}
   - {fileID: 11400000, guid: 3795d2f4c176e6543b4a7638d533e561, type: 2}
-  minPowerupTime: 5
+  guns:
+  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
+  - {fileID: 11400000, guid: c406c033fd5440e48a34362e7be8a036, type: 2}
+  - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
+  - {fileID: 11400000, guid: b4639e7e0b3d0c54ba55eaefd352b812, type: 2}
+  - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
+  - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
+  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  minPowerupTime: 10
   maxPowerupTime: 15
-  powerupBuffer: 5
-  worldBoundaries: {fileID: 0}
-  runningBoundaries: {fileID: 100012}
-  runningFOV: 630
-  bossWavePlayerMoved: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

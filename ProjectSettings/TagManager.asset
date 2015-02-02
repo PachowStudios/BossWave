@@ -101,6 +101,10 @@ TagManager:
     userID: 12
     uniqueID: 3501680325
     locked: 0
+  - name: Guns
+    userID: 13
+    uniqueID: 76840989
+    locked: 0
   - name: Effects
     userID: 10
     uniqueID: 3710787823

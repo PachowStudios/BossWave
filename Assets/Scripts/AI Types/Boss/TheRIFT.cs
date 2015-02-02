@@ -69,7 +69,6 @@ public sealed class TheRIFT : Boss
 
 	private List<SpriteRenderer> spriteRenderers;
 	private Transform firePoint;
-	private Transform groundLevel;
 	private SpriteRenderer silhouetteTubes;
 	private GameObject silhouetteBody;
 	private SpriteRenderer wall;
@@ -81,7 +80,6 @@ public sealed class TheRIFT : Boss
 
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
 		firePoint = transform.FindChild("firePoint");
-		groundLevel = GameObject.FindGameObjectWithTag("GroundLevel").transform;
 		silhouetteTubes = GameObject.Find(silhouetteTubesName).GetComponent<SpriteRenderer>();
 		silhouetteBody = GameObject.Find(silhouetteBodyName);
 		wall = GameObject.Find(wallName).GetComponent<SpriteRenderer>();
@@ -89,8 +87,8 @@ public sealed class TheRIFT : Boss
 
 		defaultGravity = gravity;
 
-		minFloatHeight += groundLevel.transform.position.y;
-		maxFloatHeight += groundLevel.transform.position.y;
+		minFloatHeight += LevelManager.Instance.GroundLevel.y;
+		maxFloatHeight += LevelManager.Instance.GroundLevel.y;
 
 		foreach (SpriteRenderer sprite in spriteRenderers)
 		{
@@ -385,26 +383,26 @@ public sealed class TheRIFT : Boss
 		{ 
 			case AttackPattern.SweepAndBack:
 				path.Add(new Vector3(startingX,
-									 groundLevel.position.y,
+									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
 				path.Add(new Vector3(screenRight.x + 1f,
-									 groundLevel.position.y,
+									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
 				path.Add(path[0]);
 				break;
 			case AttackPattern.SwoopPlayer:
 				path.Add(transform.position);
 				path.Add(new Vector3(PlayerControl.Instance.transform.position.x,
-									 groundLevel.position.y - 1f,
+									 LevelManager.Instance.GroundLevel.y - 1f,
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				break;
 			case AttackPattern.PlayerProximity:
 				path.Add(new Vector3(PlayerControl.Instance.transform.position.x - 3f,
-									 groundLevel.position.y,
+									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
 				path.Add(new Vector3(PlayerControl.Instance.transform.position.x + 3f,
-									 groundLevel.position.y,
+									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
 				break;
 		}

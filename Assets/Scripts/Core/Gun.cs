@@ -61,17 +61,17 @@ public class Gun : MonoBehaviour
 
 	private SpriteRenderer spriteRenderer;
 
-	public Sprite Sprite
+	public SpriteRenderer SpriteRenderer
 	{
 		get 
 		{
 			if (spriteRenderer != null)
 			{
-				return spriteRenderer.sprite;
+				return spriteRenderer;
 			}
 			else
 			{
-				return GetComponent<SpriteRenderer>().sprite;
+				return GetComponent<SpriteRenderer>();
 			}
 		}
 	}

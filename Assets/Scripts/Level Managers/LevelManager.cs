@@ -27,27 +27,24 @@ public class LevelManager : MonoBehaviour
 		public float cameraSpeed;
 		public float fullCameraSpeed;
 		public float speedUpTime;
+		public Transform spawner;
 		public Transform playerWaitPoint;
 		public Scrollbar progressBar;
 	}
 
-	public bool spawnEnemies = true;
-	public bool spawnPowerups = true;
 	public bool introCRT = true;
+	public bool spawnEnemies = true;
 	public float fadeInTime = 2f;
 	public AudioSource mainMusic;
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<StandardEnemy> enemies;
-	public List<Gun> guns;
-	public List<Powerup> powerups;
-	public List<Microchip> microchips;
-	public float minPowerupTime = 15f;
-	public float maxPowerupTime = 25f;
-	public float powerupBuffer = 5f;
 	public GameObject worldBoundaries;
 	public GameObject runningBoundaries;
 	public int runningFOV = 400;
+
+	[SerializeField]
+	private Transform groundLevel;
 
 	[HideInInspector]
 	public bool bossWavePlayerMoved = false;
@@ -59,18 +56,17 @@ public class LevelManager : MonoBehaviour
 	private int currentWave = 0;
 	private float waveTimer;
 
-	private float powerupTimer = 0f;
-	private float powerupTime;
-	private float powerupRange;
-
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
-	private Transform bossSpawner;
-	private Transform powerupSpawner;
 
 	public static LevelManager Instance
 	{
 		get { return instance; }
+	}
+
+	public Vector3 GroundLevel
+	{
+		get { return groundLevel.position; }
 	}
 
 	private void Awake()
@@ -79,13 +75,8 @@ public class LevelManager : MonoBehaviour
 
 		DOTween.Init();
 
-		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList<GameObject>();
-		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList<GameObject>();
-		bossSpawner = GameObject.FindGameObjectWithTag("BossSpawner").transform;
-		powerupSpawner = GameObject.FindGameObjectWithTag("PowerupSpawner").transform;
-
-		powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
-		powerupRange = Camera.main.orthographicSize * Camera.main.aspect - powerupBuffer;
+		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList();
+		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList();
 
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
@@ -128,7 +119,7 @@ public class LevelManager : MonoBehaviour
 				{
 					Cutscene.Instance.Show();
 					ScaleWidthCamera.Instance.AnimateFOV(runningFOV, 1f);
-					bossInstance = Instantiate(bossWave.boss, bossSpawner.position, Quaternion.identity) as Boss;
+					bossInstance = Instantiate(bossWave.boss, bossWave.spawner.position, Quaternion.identity) as Boss;
 					bossInstance.Spawn();
 					PlayerControl.Instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
 
@@ -170,35 +161,10 @@ public class LevelManager : MonoBehaviour
 				StartCoroutine(SpawnWave(currentWave));
 				currentWave++;
 			}
-
-			powerupTimer += Time.deltaTime;
-
-			if (powerups.Count > 0 && powerupTimer >= powerupTime && spawnPowerups)
-			{
-				Vector3 powerupSpawnPoint = powerupSpawner.position + new Vector3(Random.Range(-powerupRange, powerupRange), 0, 0);
-				int powerupToSpawn = Random.Range(0, powerups.Count);
-
-				Instantiate(powerups[powerupToSpawn], powerupSpawnPoint, Quaternion.identity);
-
-				powerupTimer = 0f;
-				powerupTime = Random.Range(minPowerupTime, maxPowerupTime);
-			}
 		}
 		else
 		{
 			StopAllCoroutines();
-		}
-	}
-
-	public void SpawnMicrochip(Vector3 position, Microchip.Size size = Microchip.Size.Small, bool randomVelocity = true)
-	{
-		Microchip microchipToSpawn = microchips[(int)size];
-
-		Microchip microchipInstance = Instantiate(microchipToSpawn, position, Quaternion.identity) as Microchip;
-		
-		if (randomVelocity)
-		{
-			microchipInstance.GetComponent<Scatter>().DoScatter();
 		}
 	}
 
