@@ -54,6 +54,7 @@ public sealed class TheRIFT : Boss
 	public AnimationCurve laserIntroCurve;
 	public RIFTLaser laserPrefab;
 	public Projectile cannonPrefab;
+	public string cannonFireEffect;
 	public List<Attack> attacks;
 
 	private float defaultGravity;
@@ -314,7 +315,7 @@ public sealed class TheRIFT : Boss
 					{
 						Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
 						currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
-						SpriteEffect.Instance.SpawnEffect("Small Dust Explosion", firePoint.position, firePoint);
+						SpriteEffect.Instance.SpawnEffect(cannonFireEffect, firePoint.position, firePoint);
 						anim.SetTrigger("Cannon Fire");
 					}
 				});

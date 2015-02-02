@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public sealed class ShootAI : FollowAI
 {
@@ -11,6 +12,7 @@ public sealed class ShootAI : FollowAI
 	public bool burstShot = false;
 	public int shotsPerBurst = 1;
 	public float delayBetweenShots = 0.1f;
+	public float attackBuffer = 0f;
 	public Projectile projectile;
 
 	private List<Transform> guns;
@@ -40,12 +42,19 @@ public sealed class ShootAI : FollowAI
 		{
 			for (int i = 1; i <= shotsPerBurst; i++)
 			{
-				StartCoroutine(Fire(delayBetweenShots * i));
+				StartCoroutine(Fire(delayBetweenShots * i + attackBuffer));
+			}
+
+			if (attackBuffer != 0f)
+			{
+				DOTween.Sequence()
+					.AppendInterval(delayBetweenShots * shotsPerBurst + attackBuffer)
+					.AppendCallback(() => anim.SetTrigger("End Attack"));
 			}
 		}
 		else
 		{
-			StartCoroutine(Fire());
+			StartCoroutine(Fire(attackBuffer));
 		}
 	}
 
@@ -80,6 +89,7 @@ public sealed class ShootAI : FollowAI
 		projectileInstance.Initialize(shotDirection);
 
 		currentGun = (currentGun + 1 == guns.Count) ? 0 : currentGun + 1;
+		attackCooldownTimer = 0f;
 
 		yield return null;
 	}

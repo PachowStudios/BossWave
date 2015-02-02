@@ -6,6 +6,7 @@ public class AcceleratingShot : Projectile
 	public float accelTime = 1f;
 	public AnimationCurve accelCurve;
 	public bool hasTrail = false;
+	[Range(0f, 1f)]
 	public float trailPercentage = 0f;
 
 	private float originalShotSpeed;
@@ -26,7 +27,7 @@ public class AcceleratingShot : Projectile
 		originalShotSpeed = shotSpeed;
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		InitialUpdate();
 

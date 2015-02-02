@@ -39,6 +39,7 @@ public class LevelManager : MonoBehaviour
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<StandardEnemy> enemies;
+	public Transform foregroundLayer;
 	public GameObject worldBoundaries;
 	public GameObject runningBoundaries;
 	public int runningFOV = 400;

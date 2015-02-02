@@ -12,10 +12,12 @@ public abstract class Projectile : MonoBehaviour
 	public bool destroyOnEnemy = true;
 	public bool destroyOnWorld = true;
 	public bool correctRotation = true;
-	public bool disableMovement = false;
+	public string destroyEffect;
 
 	[HideInInspector]
 	public Vector3 direction;
+	[HideInInspector]
+	public bool disableMovement = false;
 
 	protected Vector3 velocity;
 	protected CharacterController2D controller;
@@ -135,6 +137,11 @@ public abstract class Projectile : MonoBehaviour
 
 	public void DoDestroy()
 	{
+		if (destroyEffect != "")
+		{
+			SpriteEffect.Instance.SpawnEffect(destroyEffect, transform.position, LevelManager.Instance.foregroundLayer);
+		}
+
 		ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);
 	}

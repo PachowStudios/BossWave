@@ -385,29 +385,30 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
-  cannonPrefab: {fileID: 11400002, guid: 3ca141e57ba2d9a41ac532105b117e89, type: 2}
+  cannonPrefab: {fileID: 11400002, guid: 374d5da20bfd76047be862557f941b97, type: 2}
+  cannonFireEffect: Small Dust Explosion
   attacks:
   - time: 4
     preAttackTime: 1
-    length: 1
-    modifier: 4
-    pattern: 1
+    length: 2
+    modifier: 10
+    pattern: 0
     curve:
       serializedVersion: 2
       m_Curve:
       - time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
       - time: 1
         value: 1
-        inSlope: .0283022616
-        outSlope: .0283022616
-        tangentMode: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
-    possibleAttacks: 00000000
+    possibleAttacks: 02000000
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
