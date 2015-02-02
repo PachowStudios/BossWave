@@ -23,7 +23,7 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\D
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.076 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
@@ -31,21 +31,9 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 5.932435 ms
+UnloadTime: 4.690769 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 2104.
-Total: 0.929493 ms (FindLiveObjects: 0.071387 ms CreateObjectMapping: 0.022235 ms MarkObjects: 0.435928 ms  DeleteObjects: 0.044178 ms)
-
-UnloadTime: 3.253375 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 2110.
-Total: 0.920131 ms (FindLiveObjects: 0.065243 ms CreateObjectMapping: 0.024575 ms MarkObjects: 0.488883 ms  DeleteObjects: 0.005851 ms)
-
-UnloadTime: 3.293457 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 291 unused Assets to reduce memory usage. Loaded Objects now: 1355.
-Total: 2.751325 ms (FindLiveObjects: 0.043592 ms CreateObjectMapping: 0.021357 ms MarkObjects: 0.451727 ms  DeleteObjects: 1.902580 ms)
+Unloading 27 unused Assets to reduce memory usage. Loaded Objects now: 2412.
+Total: 0.878294 ms (FindLiveObjects: 0.061439 ms CreateObjectMapping: 0.021650 ms MarkObjects: 0.413986 ms  DeleteObjects: 0.045640 ms)
 

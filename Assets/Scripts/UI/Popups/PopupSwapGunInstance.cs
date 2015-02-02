@@ -26,7 +26,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 	private CanvasGroup timerAlpha;
 	private Text timerText;
 
-	void Awake()
+	private void Awake()
 	{
 		canvasGroup = GetComponent<CanvasGroup>();
 		newGun = transform.FindChild("New").GetComponent<CanvasGroup>();
@@ -37,12 +37,12 @@ public class PopupSwapGunInstance : MonoBehaviour
 		timer = timeLimit;
 	}
 
-	void Start()
+	private void Start()
 	{
 		Appear();
 	}
 
-	void Update()
+	private void Update()
 	{
 		if (!selectionMade)
 		{
@@ -59,14 +59,14 @@ public class PopupSwapGunInstance : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		transform.position = PlayerControl.Instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
 
 		if (timer > 0)
 		{
 			timer -= Time.fixedDeltaTime;
-			timerText.text = timer.ToString("F1");
+			timerText.text = timer.ToString("F2");
 		}
 		else if (!selectionMade)
 		{

@@ -69,6 +69,11 @@ public abstract class Enemy : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
+	public bool WasGroundedLastFrame
+	{
+		get { return controller.wasGroundedLastFrame; }
+	}
+
 	protected bool IsPlayerOnRightSide
 	{
 		get { return PlayerControl.Instance.transform.position.x > transform.position.x; }

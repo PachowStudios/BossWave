@@ -21,15 +21,15 @@ public abstract class FollowAI : StandardEnemy
 		{
 			if (RelativePlayerLastGrounded != 0)
 			{
-				if (!right && !left)
+				if (!WasGroundedLastFrame && IsGrounded)
 				{
-					right = Random.value < 0.5f;
+					right = IsPlayerOnRightSide;
 					left = !right;
 				}
 
 				CheckFrontCollision(true);
 
-				if (RelativePlayerLastGrounded < 0 || !followVertically)
+				if (!followVertically)
 				{
 					CheckLedgeCollision(true);
 				}
@@ -38,7 +38,10 @@ public abstract class FollowAI : StandardEnemy
 			{
 				if (CheckLedgeCollision() || followVertically)
 				{
-					FollowPlayer();
+					if (RelativePlayerHeight < 0.5f)
+					{
+						FollowPlayer();
+					}
 				}
 				else
 				{
@@ -55,12 +58,8 @@ public abstract class FollowAI : StandardEnemy
 
 			if (followVertically && !CheckLedgeCollision())
 			{
-				Jump(Mathf.Max(1f, -RelativePlayerHeight));
+				Jump(Mathf.Max(0f, -RelativePlayerHeight) + 2f);
 			}
-		}
-		else
-		{
-			FollowPlayer();
 		}
 	}
 

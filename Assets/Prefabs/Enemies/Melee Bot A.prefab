@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.80482793, y: 11.7744064, z: 0}
+  m_LocalPosition: {x: 1.01688337, y: 22.7002621, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -210,21 +210,16 @@ MonoBehaviour:
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
-    - time: -90
-      value: 1.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
     - time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 90
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 10
+    - time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
   totalHorizontalRays: 8

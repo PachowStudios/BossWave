@@ -91,7 +91,7 @@ public abstract class StandardEnemy : Enemy
 
 		if (!spawned)
 		{
-			CheckLedgeCollision(true);
+			CheckFrontCollision(true);
 
 			if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
 			{
