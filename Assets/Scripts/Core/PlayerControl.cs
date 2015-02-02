@@ -74,8 +74,9 @@ public sealed class PlayerControl : MonoBehaviour
 	private CharacterController2D controller;
 	private Animator anim;
 	private Gun gun;
-	private Transform popupMessagePoint;
+	private GhostTrailEffect ghostTrail;
 	private List<SpriteRenderer> spriteRenderers;
+	private Transform popupMessagePoint;
 	#endregion
 
 	#region Properties
@@ -176,12 +177,12 @@ public sealed class PlayerControl : MonoBehaviour
 	{
 		instance = this;
 
-		popupMessagePoint = transform.FindChild("popupMessage");
-
-		anim = GetComponent<Animator>();
 		controller = GetComponent<CharacterController2D>();
-		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+		anim = GetComponent<Animator>();
 		gun = GetComponentInChildren<Gun>();
+		ghostTrail = GetComponent<GhostTrailEffect>();
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+		popupMessagePoint = transform.FindChild("popupMessage");
 
 		health = maxHealth;
 
@@ -375,6 +376,7 @@ public sealed class PlayerControl : MonoBehaviour
 		spriteRenderers.Remove(gun.SpriteRenderer);
 		Destroy(gun.gameObject);
 		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
+		gunInstance.name = newGun.name;
 		gunInstance.transform.parent = transform;
 		gunInstance.transform.localScale = oldTransform.localScale;
 		gunInstance.SpriteRenderer.color = usingGun ? Color.white : Color.clear;
@@ -385,11 +387,16 @@ public sealed class PlayerControl : MonoBehaviour
 	public void SpeedBoost(float multiplier, float length)
 	{
 		speedMultiplier = multiplier;
+		ghostTrail.trailActive = true;
 
 		Sequence speedSequence = DOTween.Sequence();
 		speedSequence
 			.AppendInterval(length)
-			.AppendCallback(() => speedMultiplier = 1f);
+			.AppendCallback(() =>
+			{
+				speedMultiplier = 1f;
+				ghostTrail.trailActive = false;
+			});
 	}
 
 	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)

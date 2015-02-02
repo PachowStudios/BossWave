@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using DG.Tweening;
 
@@ -14,12 +15,27 @@ public class GhostTrailEffect : MonoBehaviour
 	private float ghostSpawnTimer = 0f;
 	private List<SpriteRenderer> spriteRenderers;
 
-	void Awake()
+	private ReadOnlyCollection<SpriteRenderer> SpriteRenderers
 	{
-		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+		get
+		{
+			if (gameObject.tag == "Player")
+			{
+				return PlayerControl.Instance.SpriteRenderers;
+			}
+			else
+			{
+				return spriteRenderers.AsReadOnly();
+			}
+		}
 	}
 
-	void FixedUpdate()
+	private void Awake()
+	{
+		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList();
+	}
+
+	private void FixedUpdate()
 	{
 		if (trailActive)
 		{
@@ -27,25 +43,40 @@ public class GhostTrailEffect : MonoBehaviour
 
 			if (ghostSpawnTimer >= ghostSpawnTime)
 			{
-				foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+				GameObject currentParent = new GameObject();
+				currentParent.HideInHiearchy();
+				transform.CopyTo(currentParent.transform);
+				currentParent.name = gameObject.name + " Ghost";
+
+				foreach (SpriteRenderer spriteRenderer in SpriteRenderers)
 				{
-					SpriteRenderer currentGhost = Instantiate(spriteRenderer, spriteRenderer.transform.position, Quaternion.identity) as SpriteRenderer;
-					currentGhost.gameObject.HideInHiearchy();
-					currentGhost.sortingOrder -= 1;
-					currentGhost.DOFade(0f, ghostLifetime)
+					GameObject currentGhost = new GameObject();
+					spriteRenderer.transform.CopyTo(currentGhost.transform);
+					currentGhost.name = spriteRenderer.name + " Ghost";
+					currentGhost.transform.parent = currentParent.transform;
+
+					SpriteRenderer ghostSpriteRenderer = currentGhost.AddComponent<SpriteRenderer>();
+					ghostSpriteRenderer.sprite = spriteRenderer.sprite;
+					ghostSpriteRenderer.color = spriteRenderer.color;
+					ghostSpriteRenderer.sortingLayerName = spriteRenderer.sortingLayerName;
+					ghostSpriteRenderer.sortingOrder = spriteRenderer.sortingOrder - 1;
+
+					ghostSpriteRenderer.DOFade(0f, ghostLifetime)
 						.SetEase(fadeCurve)
-						.OnUpdate(() => 
+						.OnUpdate(() =>
 						{
-							if (this != null)
+							if (this == null)
 							{
-								currentGhost.transform.localScale = transform.localScale;
-							}
-							else
-							{
-								currentGhost.DOKill(true);
+								ghostSpriteRenderer.DOKill(true);
 							}
 						})
-						.OnComplete(() => Destroy(currentGhost.gameObject));
+						.OnComplete(() =>
+						{
+							if (currentParent != null)
+							{
+								Destroy(currentParent);
+							}
+						});
 				}
 
 				ghostSpawnTimer = 0f;
