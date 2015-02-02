@@ -8,9 +8,10 @@ using DG.Tweening;
 public class GhostTrailEffect : MonoBehaviour 
 {
 	public bool trailActive = false;
-	public float ghostSpawnTime = 0.1f;
+	public float ghostSpawnTime = 0.075f;
 	public float ghostLifetime = 0.25f;
 	public AnimationCurve fadeCurve;
+	public string sortingLayer;
 
 	private float ghostSpawnTimer = 0f;
 	private List<SpriteRenderer> spriteRenderers;
@@ -58,8 +59,9 @@ public class GhostTrailEffect : MonoBehaviour
 					SpriteRenderer ghostSpriteRenderer = currentGhost.AddComponent<SpriteRenderer>();
 					ghostSpriteRenderer.sprite = spriteRenderer.sprite;
 					ghostSpriteRenderer.color = spriteRenderer.color;
-					ghostSpriteRenderer.sortingLayerName = spriteRenderer.sortingLayerName;
-					ghostSpriteRenderer.sortingOrder = spriteRenderer.sortingOrder - 1;
+					ghostSpriteRenderer.enabled = spriteRenderer.enabled;
+					ghostSpriteRenderer.sortingLayerName = sortingLayer;
+					ghostSpriteRenderer.sortingOrder = -20 + spriteRenderer.sortingOrder;
 
 					ghostSpriteRenderer.DOFade(0f, ghostLifetime)
 						.SetEase(fadeCurve)

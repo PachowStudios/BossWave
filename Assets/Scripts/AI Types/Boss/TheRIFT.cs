@@ -69,6 +69,8 @@ public sealed class TheRIFT : Boss
 
 	private List<SpriteRenderer> spriteRenderers;
 	private Transform firePoint;
+	private GhostTrailEffect ghostTrail;
+
 	private SpriteRenderer silhouetteTubes;
 	private GameObject silhouetteBody;
 	private SpriteRenderer wall;
@@ -80,6 +82,8 @@ public sealed class TheRIFT : Boss
 
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
 		firePoint = transform.FindChild("firePoint");
+		ghostTrail = GetComponent<GhostTrailEffect>();
+
 		silhouetteTubes = GameObject.Find(silhouetteTubesName).GetComponent<SpriteRenderer>();
 		silhouetteBody = GameObject.Find(silhouetteBodyName);
 		wall = GameObject.Find(wallName).GetComponent<SpriteRenderer>();
@@ -96,7 +100,7 @@ public sealed class TheRIFT : Boss
 		}
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		if (spawned)
 		{
@@ -269,12 +273,14 @@ public sealed class TheRIFT : Boss
 
 		swoopPath = (swoopPath == null) ? GeneratePath(pattern) : swoopPath;
 		applyMovement = false;
+		ghostTrail.trailActive = true;
 
 		transform.DOPath(swoopPath, length, PathType.CatmullRom, PathMode.Sidescroller2D)
 			.SetEase(curve)
 			.OnComplete(() =>
 			{
 				applyMovement = true;
+				ghostTrail.trailActive = false;
 				attacking = false;
 			});
 	}

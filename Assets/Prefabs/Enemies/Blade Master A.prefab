@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trailActive: 0
-  ghostSpawnTime: .0500000007
+  ghostSpawnTime: .075000003
   ghostLifetime: .25
   fadeCurve:
     serializedVersion: 2
@@ -316,6 +316,7 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+  sortingLayer: Character
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

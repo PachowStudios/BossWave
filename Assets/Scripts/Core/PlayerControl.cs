@@ -387,16 +387,11 @@ public sealed class PlayerControl : MonoBehaviour
 	public void SpeedBoost(float multiplier, float length)
 	{
 		speedMultiplier = multiplier;
-		ghostTrail.trailActive = true;
 
 		Sequence speedSequence = DOTween.Sequence();
 		speedSequence
 			.AppendInterval(length)
-			.AppendCallback(() =>
-			{
-				speedMultiplier = 1f;
-				ghostTrail.trailActive = false;
-			});
+			.AppendCallback(() => speedMultiplier = 1f );
 	}
 
 	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
@@ -454,6 +449,7 @@ public sealed class PlayerControl : MonoBehaviour
 		anim.SetBool("Grounded", IsGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
 		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
+		ghostTrail.trailActive = speedMultiplier > 1f;
 	}
 
 	private void UpdateGoTo()
