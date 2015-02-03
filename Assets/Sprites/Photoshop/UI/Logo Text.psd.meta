@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: 10f824f05cabe84439498669d033d6e9
+guid: bc3981e84aec56943919af3b122c3ce4
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Logo Text
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0

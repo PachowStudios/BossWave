@@ -72,7 +72,7 @@ MonoBehaviour:
   borderZeroed: -32
   distortionAmount: .200000003
   noiseIntensity: 3.5
-  gamma: {x: 1, y: 2.20000005}
+  scanlineOffset: {x: 0, y: 175}
   crtBorder: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:

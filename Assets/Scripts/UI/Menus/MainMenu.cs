@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 	public float interactableThreshold = 0.75f;
 	public float overlayVisibility = 0.5f;
 
-	public Image logo;
+	public Animator logo;
 	public CanvasGroup blackOverlay;
 
 	private Slider volumeSlider;
@@ -46,6 +46,8 @@ public class MainMenu : MonoBehaviour
 		rectTransform = GetComponent<RectTransform>();
 
 		menu.interactable = false;
+		blackOverlay.alpha = 1f;
+		UpdateMenuAlpha(0f);
 
 		LoadPrefs();
 	}
@@ -132,12 +134,11 @@ public class MainMenu : MonoBehaviour
 	{
 		yield return new WaitForSeconds(startDelay);
 		
-		logo.GetComponent<Animator>().SetTrigger("Start");
+		logo.SetTrigger("Start");
 		CRTEffect.Instance.StartCRT(fadeTime);
 		DOTween.To(UpdateMenuAlpha, 0f, 1f, fadeTime)
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);
-		blackOverlay.alpha = 1f;
 		blackOverlay.DOFade(overlayVisibility, fadeTime)
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);

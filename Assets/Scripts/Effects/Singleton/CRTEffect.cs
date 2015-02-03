@@ -12,12 +12,12 @@ public class CRTEffect : MonoBehaviour
 	public float borderZeroed = -32f;
 	public float distortionAmount = 0.2f;
 	public float noiseIntensity = 3.5f;
-	public Vector2 gamma = new Vector2(1f, 2.2f);
+	public Vector2 scanlineOffset = new Vector2(0f, 100f);
 	public Image crtBorder;
 
-	private static Vector2 defaultScanlines;
-	private static CRT crtShader;
-	private static NoiseAndGrain noiseShader;
+	private Vector2 defaultScanlines;
+	private CRT crtShader;
+	private NoiseAndGrain noiseShader;
 
 	public static CRTEffect Instance
 	{
@@ -28,7 +28,7 @@ public class CRTEffect : MonoBehaviour
 	{
 		instance = this;
 
-		defaultScanlines = new Vector2(Screen.height, Screen.height + 100f);
+		defaultScanlines = new Vector2(Screen.height + scanlineOffset.x, Screen.height + scanlineOffset.y);
 		crtShader = Camera.main.GetComponent<CRT>();
 		noiseShader = Camera.main.GetComponent<NoiseAndGrain>();
 		noiseShader.intensityMultiplier = noiseIntensity;
@@ -46,9 +46,6 @@ public class CRTEffect : MonoBehaviour
 			.SetUpdate(true);
 		DOTween.To(UpdateCRTScanlines, scanlines.x, scanlines.y, fadeTime)
 			.SetEase(easeType)
-			.SetUpdate(true);
-		DOTween.To(UpdateCRTGamma, gamma.x, gamma.x, fadeTime)
-			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);
 		DOTween.To(UpdateCRTShader, 0f, distortionAmount, fadeTime)
 			.SetEase(Ease.OutQuint)
@@ -69,9 +66,6 @@ public class CRTEffect : MonoBehaviour
 			.SetUpdate(true);
 		DOTween.To(UpdateCRTScanlines, scanlines.y, scanlines.x, fadeTime)
 			.SetEase(easeType)
-			.SetUpdate(true);
-		DOTween.To(UpdateCRTGamma, gamma.y, gamma.x, fadeTime)
-			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);
 		DOTween.To(UpdateCRTShader, distortionAmount, 0f, fadeTime)
 			.SetEase(Ease.OutQuint)
@@ -113,11 +107,6 @@ public class CRTEffect : MonoBehaviour
 	private void UpdateCRTScanlines(float newValue)
 	{
 		crtShader.TextureSize = newValue;
-	}
-
-	private void UpdateCRTGamma(float newValue)
-	{
-		crtShader.OutputGamma = newValue;
 	}
 
 	public void EnableCRTShader()
