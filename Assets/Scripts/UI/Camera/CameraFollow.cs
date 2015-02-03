@@ -5,9 +5,11 @@ public class CameraFollow : MonoBehaviour
 {
 	private static CameraFollow instance;
 
-	public float yOffset = 0f;
+	public float defaultYOffset = 10f;
+	public float platformYOffset = 5f;
 	public float smoothing = 1f;
-	public Transform follow;
+	public Transform followTarget;
+	public bool stayAboveGroundLevel = true;
 
 	private float currentYOffset;
 	private bool usePlayerY = false;
@@ -33,9 +35,9 @@ public class CameraFollow : MonoBehaviour
 	{
 		instance = this;
 
-		currentYOffset = yOffset;
+		currentYOffset = defaultYOffset;
 
-		targetPosition.y = follow.position.y + currentYOffset;
+		targetPosition.y = followTarget.position.y + currentYOffset;
 		previousPosition = transform.position;
 	}
 
@@ -46,23 +48,27 @@ public class CameraFollow : MonoBehaviour
 
 		if (!lockX)
 		{
-			targetPosition.x = follow.position.x;
+			targetPosition.x = followTarget.position.x;
 		}
 
 		targetPosition.z = transform.position.z;
 
-		if (usePlayerY || follow.tag == "Player")
+		if (usePlayerY || followTarget.tag == "Player")
 		{
+			currentYOffset = PlayerControl.Instance.transform.position.y - 1f > LevelManager.Instance.GroundLevel.y ? platformYOffset : defaultYOffset;
+
 			if (PlayerControl.Instance.IsGrounded ||
-				(PlayerControl.Instance.transform.position.y + currentYOffset < targetPosition.y &&
-				PlayerControl.Instance.Velocity.y < 0f))
+				(PlayerControl.Instance.Velocity.y < 0f &&
+				 PlayerControl.Instance.transform.position.y + currentYOffset < targetPosition.y))
 			{
 				targetPosition.y = PlayerControl.Instance.transform.position.y + currentYOffset;
 			}
+
+			targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
 		}
 		else
 		{
-			targetPosition.y = follow.position.y + currentYOffset;
+			targetPosition.y = followTarget.position.y + currentYOffset;
 		}
 
 		transform.position = Extensions.SuperSmoothLerp(transform.position, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
@@ -70,10 +76,10 @@ public class CameraFollow : MonoBehaviour
 
 	public void FollowObject(Transform target, bool newUsePlayerY, float newYOffset = -1f, bool newLockX = false)
 	{
-		currentYOffset = newYOffset == -1f ? yOffset : newYOffset;
+		currentYOffset = newYOffset == -1f ? defaultYOffset : newYOffset;
 		usePlayerY = newUsePlayerY;
 		lockX = newLockX;
-		follow = target;
-		targetPosition.x = follow.position.x;
+		followTarget = target;
+		targetPosition.x = followTarget.position.x;
 	}
 }
