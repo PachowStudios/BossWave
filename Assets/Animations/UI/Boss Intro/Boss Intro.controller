@@ -34,7 +34,7 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110200000}
-  m_DstState: {fileID: 110202173}
+  m_DstState: {fileID: 110286344}
   m_TransitionDuration: .25
   m_TransitionOffset: 0
   m_Conditions:
@@ -66,6 +66,46 @@ Transition:
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
+--- !u!1101 &110143654
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110286344}
+  m_DstState: {fileID: 110279311}
+  m_TransitionDuration: .00431542844
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110177289
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110279311}
+  m_DstState: {fileID: 110202173}
+  m_TransitionDuration: .00277708727
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: 2
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
 --- !u!1102 &110200000
 State:
   m_ObjectHideFlags: 3
@@ -92,7 +132,37 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: cbd5d948f8ac38c4a8f0ac2581afbad9, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 36, y: 168, z: 0}
+  m_Position: {x: 36, y: 336, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110279311
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Logo Loop
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 6f5c837c921a15740af88f69156df1f3, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: -96, y: 252, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
+--- !u!1102 &110286344
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Logo Start
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: c53a81429a34dd0468724c1414870ad9, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: -96, y: 168, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -107,17 +177,27 @@ StateMachine:
   m_States:
   - {fileID: 110200000}
   - {fileID: 110202173}
+  - {fileID: 110286344}
+  - {fileID: 110279311}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110202173}
+      first: {fileID: 110279311}
       second:
-      - {fileID: 110114388}
+      - {fileID: 110177289}
+    data:
+      first: {fileID: 110286344}
+      second:
+      - {fileID: 110143654}
     data:
       first: {fileID: 110200000}
       second:
       - {fileID: 110100000}
+    data:
+      first: {fileID: 110202173}
+      second:
+      - {fileID: 110114388}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

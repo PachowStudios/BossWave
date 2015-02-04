@@ -31,3 +31,25 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraFollow.Awake () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 4.873905 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2449.
+Total: 0.958163 ms (FindLiveObjects: 0.081334 ms CreateObjectMapping: 0.023698 ms MarkObjects: 0.487419 ms  DeleteObjects: 0.060854 ms)
+
+UnloadTime: 3.622588 ms
+NullReferenceException: Object reference not set to an instance of an object
+  at CameraFollow.Awake () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 294 unused Assets to reduce memory usage. Loaded Objects now: 1452.
+Total: 2.932710 ms (FindLiveObjects: 0.032767 ms CreateObjectMapping: 0.018139 ms MarkObjects: 0.405793 ms  DeleteObjects: 2.190170 ms)
+
