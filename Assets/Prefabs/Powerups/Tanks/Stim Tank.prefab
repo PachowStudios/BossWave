@@ -74,7 +74,7 @@ MonoBehaviour:
   maxLifetime: 15
   popupSprite: {fileID: 21300004, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
   speedMultiplier: 1.5
-  duration: 5
+  duration: 10
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

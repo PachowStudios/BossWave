@@ -6,6 +6,7 @@ public class VitalTank : Powerup
 	public Sprite popupSprite;
 	public float minHealth = 5f;
 	public float maxHealth = 100f;
+	public AnimationCurve healthCurve;
 
 	private float healthAmount;
 
@@ -13,9 +14,8 @@ public class VitalTank : Powerup
 	{
 		base.Awake();
 
-		healthAmount = Random.Range(minHealth, maxHealth) * Random.Range(1f, 10f);
-		healthAmount /= 10;
-		healthAmount = Mathf.RoundToInt(Mathf.Clamp(healthAmount, minHealth, maxHealth));
+		healthAmount = Extensions.ConvertRange(healthCurve.Evaluate(Random.value),
+											   0f, 1f, minHealth, maxHealth);
 	}
 
 	protected override void Pickup()

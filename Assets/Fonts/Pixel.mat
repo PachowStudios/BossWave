@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Micro
+  m_Name: Pixel
   m_Shader: {fileID: 10101, guid: 0000000000000000e000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,7 +17,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 60446da6a467ecc489e2af469057b135, type: 3}
+          m_Texture: {fileID: 2800000, guid: 714fb71514c94644b91b22ff79e4fdc0, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}

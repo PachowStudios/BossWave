@@ -223,8 +223,6 @@ GameObject:
   - 224: {fileID: 22400014}
   - 222: {fileID: 22200012}
   - 114: {fileID: 11400020}
-  - 114: {fileID: 11400152}
-  - 114: {fileID: 11400194}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -1023,8 +1021,6 @@ GameObject:
   - 224: {fileID: 22400006}
   - 222: {fileID: 22200006}
   - 114: {fileID: 11400190}
-  - 114: {fileID: 11400188}
-  - 114: {fileID: 11400198}
   m_Layer: 5
   m_Name: Microchips
   m_TagString: Untagged
@@ -2021,8 +2017,8 @@ MonoBehaviour:
   score: {fileID: 11400020}
   microchips: {fileID: 11400190}
   fadeTime: .5
-  scoreDigits: 9
-  microchipsDigits: 6
+  scoreDigits: 8
+  microchipsDigits: 5
   textDamping: 1
   healthDamping: .5
   healthFaces:
@@ -2041,10 +2037,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .988235295, g: .988235295, b: .988235295, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 9ef83da691a2cbe4d9ee986a0f1d4817, type: 2}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 3b9047ac416438747a1854eb58af724a, type: 2}
+    m_FontSize: 8
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2053,8 +2049,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: .899999976
-  m_Text: 000000000
+    m_LineSpacing: 1
+  m_Text: 00000000
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2135,9 +2131,6 @@ MonoBehaviour:
   gameOverOverlay: {fileID: 22500012}
   pauseSelect: {fileID: 11400058}
   gameOverSelect: {fileID: 11400064}
-  JoysticksToDisable:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3260,7 +3253,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 22400080}
   m_Direction: 2
   m_Value: 1
-  m_Size: .800000012
+  m_Size: .799999952
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3467,20 +3460,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: .5
---- !u!114 &11400152
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2.5, y: 0}
-  m_UseGraphicAlpha: 1
 --- !u!114 &11400154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3684,20 +3663,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11400188
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2.5, y: 0}
-  m_UseGraphicAlpha: 1
 --- !u!114 &11400190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3710,10 +3675,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 9ef83da691a2cbe4d9ee986a0f1d4817, type: 2}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 3b9047ac416438747a1854eb58af724a, type: 2}
+    m_FontSize: 8
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3722,8 +3687,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: .899999976
-  m_Text: 000000
+    m_LineSpacing: 1
+  m_Text: 00000
 --- !u!114 &11400192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3745,20 +3710,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &11400194
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 0, y: 2.5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &11400196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3776,20 +3727,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &11400198
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 0, y: 2.5}
-  m_UseGraphicAlpha: 1
 --- !u!114 &11400200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4007,7 +3944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -4028,7 +3965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -4190,7 +4127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -4211,7 +4148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -4232,7 +4169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .988235295, g: .988235295, b: .988235295, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3a3db4f11ed3674e943d48de123076a, type: 2}
     m_FontSize: 1
@@ -4258,7 +4195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3a3db4f11ed3674e943d48de123076a, type: 2}
     m_FontSize: 5
@@ -4284,7 +4221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .988235295, g: .988235295, b: .988235295, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3a3db4f11ed3674e943d48de123076a, type: 2}
     m_FontSize: 1
@@ -4310,7 +4247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3a3db4f11ed3674e943d48de123076a, type: 2}
     m_FontSize: 5
@@ -4925,13 +4862,13 @@ RectTransform:
   m_GameObject: {fileID: 100156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0399999991, y: .0399999991, z: 1}
+  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 22400012}
   m_RootOrder: 5
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 1.29999995, y: -2.9000001}
+  m_AnchoredPosition: {x: 1.29999995, y: -3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400008
@@ -5006,7 +4943,7 @@ RectTransform:
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0399999991, y: .0399999991, z: 1}
+  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 22400012}
   m_RootOrder: 3
