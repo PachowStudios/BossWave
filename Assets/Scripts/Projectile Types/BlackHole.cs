@@ -185,7 +185,7 @@ public class BlackHole : Projectile
 			{
 				if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
 				{
-					if (!currentEnemy.immuneToInstantKill && innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
+					if (innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
 					{
 						currentEnemy.Kill();
 					}

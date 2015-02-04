@@ -41,7 +41,6 @@ public abstract class Enemy : MonoBehaviour
 	[HideInInspector]
 	public bool ignoreProjectiles = false;
 
-	protected float health;
 	protected bool right = false;
 	protected bool left = false;
 	protected bool disableMovement = false;
@@ -53,6 +52,19 @@ public abstract class Enemy : MonoBehaviour
 	protected CharacterController2D controller;
 	protected Animator anim;
 	protected Transform popupMessagePoint;
+
+	private float health;
+
+	public float Health
+	{
+		get { return health; }
+
+		set
+		{
+			health = Mathf.Clamp(value, 0f, maxHealth);
+			CheckDeath();
+		}
+	}
 
 	public Sprite Sprite
 	{
@@ -89,14 +101,19 @@ public abstract class Enemy : MonoBehaviour
 		health = maxHealth;
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D enemy)
+	protected virtual void OnTriggerEnter2D(Collider2D other)
 	{
-		if (!ignoreProjectiles && enemy.tag == "PlayerProjectile")
+		if (!ignoreProjectiles && other.tag == "PlayerProjectile")
 		{
-			if (health > 0f)
+			if (Health > 0f)
 			{
-				TakeDamage(enemy.gameObject);
+				TakeDamage(other.gameObject);
 			}
+		}
+
+		if (other.tag == "Killzone")
+		{
+			Kill();
 		}
 	}
 
@@ -108,35 +125,11 @@ public abstract class Enemy : MonoBehaviour
 		Vector2 knockbackDirection = enemyProjectile.direction.Sign();
 		enemyProjectile.CheckDestroyEnemy();
 
-		if (!invincible)
+		if (!invincible && damage != 0f)
 		{
-			health -= damage;
+			Health -= damage;
 
-			if (health <= 0f)
-			{
-				ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
-				int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-				PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
-
-				if (Random.Range(0f, 100f) <= microchipChance)
-				{
-					int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
-
-					for (int i = 0; i < microchipsToSpawn; i++)
-					{
-						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
-						PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
-					}
-				}
-
-				if (timeWarpAtDeath)
-				{
-					DeathTimeWarp();
-				}
-
-				Destroy(gameObject);
-			}
-			else
+			if (Health > 0f)
 			{
 				knockback.x += Mathf.Sqrt(Mathf.Abs(Mathf.Pow(knockback.x, 2) * -gravity));
 				knockback.y += Mathf.Sqrt(Mathf.Abs(knockback.y * -gravity));
@@ -149,22 +142,21 @@ public abstract class Enemy : MonoBehaviour
 				}
 
 				spriteRenderer.color = flashColor;
-				Invoke("ResetColor", flashLength);
+
+				DOTween.Sequence()
+					.AppendInterval(flashLength)
+					.AppendCallback(() => ResetColor());
 			}
 		}
 	}
 
 	public void Kill()
 	{
-		ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
-		PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-
-		if (timeWarpAtDeath)
+		if (!immuneToInstantKill)
 		{
-			DeathTimeWarp();
+			health = 0f;
+			CheckDeath(false);
 		}
-
-		Destroy(gameObject);
 	}
 
 	public void Move(Vector3 velocity)
@@ -235,10 +227,40 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	private void CheckDeath(bool showPopup = true)
+	{
+		if (Health <= 0f)
+		{
+			ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
+			int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+
+			if (showPopup)
+			{
+				PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
+
+				if (Random.Range(0f, 100f) <= microchipChance)
+				{
+					int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
+
+					for (int i = 0; i < microchipsToSpawn; i++)
+					{
+						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
+						PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
+					}
+				}
+			}
+
+			if (timeWarpAtDeath)
+			{
+				DeathTimeWarp();
+			}
+
+			Destroy(gameObject);
+		}
+	}
+
 	private void DeathTimeWarp()
 	{
-		spriteRenderer.enabled = false;
-		collider2D.enabled = false;
 		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
 	}
 

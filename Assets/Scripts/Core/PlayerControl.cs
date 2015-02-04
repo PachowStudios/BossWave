@@ -227,7 +227,7 @@ public sealed class PlayerControl : MonoBehaviour
 			UpdateCombo();
 		}
 
-		if (health > 0f)
+		if (Health > 0f)
 		{
 			UpdateInvincibilityFlash();	
 		}
@@ -236,28 +236,33 @@ public sealed class PlayerControl : MonoBehaviour
 		ApplyMovement();
 	}
 
-	private void OnTriggerEnter2D(Collider2D enemy)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (enemy.tag == "Enemy" || enemy.tag == "Projectile")
+		if (other.tag == "Enemy" || other.tag == "Projectile")
 		{
 			if (canTakeDamage)
 			{
-				if (health > 0f)
+				if (Health > 0f)
 				{
-					TakeDamage(enemy.gameObject);
+					TakeDamage(other.gameObject);
 				}
 			}
 		}
 
-		if (enemy.tag == "Portal")
+		if (other.tag == "Portal")
 		{
 			inPortal = true;
 		}
+
+		if (other.tag == "Killzone")
+		{
+			Health = 0f;
+		}
 	}
 
-	private void OnTriggerStay2D(Collider2D enemy)
+	private void OnTriggerStay2D(Collider2D other)
 	{
-		OnTriggerEnter2D(enemy);
+		OnTriggerEnter2D(other);
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
@@ -305,7 +310,7 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			Health -= damage;
 
-			if (health > 0f)
+			if (Health > 0f)
 			{
 				Sequence knockbackSequence = DOTween.Sequence();
 
@@ -626,7 +631,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private bool CheckDeath()
 	{
-		if (health <= 0f && !dead)
+		if (Health <= 0f && !dead)
 		{
 			dead = true;
 
