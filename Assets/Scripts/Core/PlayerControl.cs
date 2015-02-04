@@ -39,10 +39,6 @@ public sealed class PlayerControl : MonoBehaviour
 	private bool disableInput = false;
 	private bool inPortal = false;
 
-	#if MOBILE_INPUT
-	private bool lastJump;
-	#endif
-
 	private Vector3 velocity;
 	private Vector3 lastGroundedPosition;
 	private float normalizedHorizontalSpeed = 0;
@@ -209,16 +205,8 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
-
-			#if MOBILE_INPUT
-			run = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > 0.7f;
-			bool jumpInput = CrossPlatformInputManager.GetAxis("Vertical") > 0.6f;
-			jump = jump || (jumpInput && !lastJump);
-			lastJump = jumpInput;
-			#else
 			run = CrossPlatformInputManager.GetButton("Run") && gun.NoInput;
-			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && controller.isGrounded);
-			#endif
+			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
 		}
 
 		run = (run && (right || left)) || continuouslyRunning;
@@ -595,7 +583,7 @@ public sealed class PlayerControl : MonoBehaviour
 			}
 		}
 
-		if (jump && controller.isGrounded)
+		if (jump && IsGrounded)
 		{
 			if (!inPortal)
 			{
@@ -608,7 +596,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void ApplyMovement()
 	{
-		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
+		float smoothedMovementFactor = IsGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x,
 								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed

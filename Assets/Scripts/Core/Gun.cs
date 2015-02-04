@@ -55,9 +55,7 @@ public class Gun : MonoBehaviour
 	private Projectile projectileInstance;
 	private Projectile secondaryProjectileInstance;
 
-	#if !MOBILE_INPUT
 	private bool useMouse = true;
-	#endif
 
 	private SpriteRenderer spriteRenderer;
 
@@ -108,9 +106,6 @@ public class Gun : MonoBehaviour
 	{
 		previousShoot = shoot;
 
-		#if MOBILE_INPUT
-		shoot = CrossPlatformInputManager.GetAxis("GunRotation") != 0f;
-		#else
 		bool xboxInput = CrossPlatformInputManager.GetAxis("XboxGunX") != 0f || CrossPlatformInputManager.GetAxis("XboxGunY") != 0f;
 		bool mouseInput = CrossPlatformInputManager.GetButton("Shoot");
 		bool secondaryMouseInput = CrossPlatformInputManager.GetButton("SecondaryShoot");
@@ -134,7 +129,6 @@ public class Gun : MonoBehaviour
 
 			shoot = xboxInput;
 		}
-		#endif
 
 		shoot = disableInput ? false : shoot;
 		secondaryShoot = disableInput ? false 
@@ -235,9 +229,6 @@ public class Gun : MonoBehaviour
 	{
 		Vector3 newEuler;
 
-		#if MOBILE_INPUT
-		newEuler = Quaternion.Euler(0, 0, CrossPlatformInputManager.GetAxis("GunRotation")).eulerAngles;
-		#else
 		if (useMouse)
 		{
 			if (shoot || secondaryShoot)
@@ -255,7 +246,6 @@ public class Gun : MonoBehaviour
 		{
 			newEuler = Quaternion.Euler(0f, 0f, Mathf.Atan2(CrossPlatformInputManager.GetAxis("XboxGunY"), CrossPlatformInputManager.GetAxis("XboxGunX")) * Mathf.Rad2Deg).eulerAngles;
 		}
-		#endif
 
 		Vector3 shotDirection = Quaternion.Euler(newEuler) * Vector3.right;
 		transform.CorrectScaleForRotation(newEuler, true);
