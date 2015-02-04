@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour
 		public Transform spawner;
 		public Transform playerWaitPoint;
 		public Transform scrollingEndcap;
-		public Scrollbar progressBar;
 	}
 
 	public bool introCRT = true;
@@ -146,11 +145,9 @@ public class LevelManager : MonoBehaviour
 
 					DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, bossWave.fullCameraSpeed, bossWave.speedUpTime)
 						.SetEase(Ease.OutSine);
-
-					bossWave.progressBar.GetComponent<Animator>().SetTrigger("Show");
-
-					bossWave.progressBar.value = 0f;
-					DOTween.To(() => bossWave.progressBar.value, x => bossWave.progressBar.value = x, 1f, bossWave.totalLength)
+					BossWaveTimer.Instance.Show();
+					BossWaveTimer.Instance.Timer = bossWave.totalLength;
+					DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, bossWave.totalLength)
 						.SetEase(Ease.Linear)
 						.OnComplete(() =>
 						{

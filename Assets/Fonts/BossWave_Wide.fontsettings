@@ -297,11 +297,11 @@ Font:
       height: -.078125
     vert:
       serializedVersion: 2
-      x: 0
+      x: 3
       y: 0
       width: 4
       height: -10
-    width: 5
+    width: 12
     flipped: 0
   - serializedVersion: 2
     index: 50

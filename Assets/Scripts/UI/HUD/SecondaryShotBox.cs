@@ -79,7 +79,7 @@ public class SecondaryShotBox : MonoBehaviour
 			}
 			else
 			{
-				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, Instance.showY), time);
+				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, showY), time);
 			}
 
 			showing = true;
@@ -99,7 +99,7 @@ public class SecondaryShotBox : MonoBehaviour
 			}
 			else
 			{
-				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, Instance.hideY), time);
+				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, hideY), time);
 			}
 			
 			showing = false;
