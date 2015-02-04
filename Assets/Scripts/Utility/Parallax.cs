@@ -14,13 +14,13 @@ public class Parallax : MonoBehaviour
 
 	private List<Transform> layers = new List<Transform>();
 
-	void Awake()
+	private void Awake()
 	{
 		for (int i = 0; i < transform.childCount; i++)
 		{
 			Transform child = transform.GetChild(i);
 			
-			if (child.renderer != null)
+			if (child.renderer != null && child.gameObject.activeSelf)
 			{
 				layers.Add(child);
 			}
@@ -29,7 +29,7 @@ public class Parallax : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		if (scroll)
 		{
@@ -70,5 +70,32 @@ public class Parallax : MonoBehaviour
 		{
 			transform.Translate((1 - relativeSpeed) * CameraFollow.Instance.DeltaMovement);
 		}
+	}
+
+	public void AddEndcap(Transform endcap)
+	{
+		layers.RemoveAll(l => 
+		{
+			if (!l.renderer.IsVisibleFrom(Camera.main))
+			{
+				Destroy(l.gameObject);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		});
+
+		Transform lastChild = layers.LastOrDefault();
+		Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
+
+		endcap.position = new Vector3(lastChild.position.x + lastSize.x,
+									  endcap.position.y,
+									  endcap.position.z);
+		endcap.gameObject.SetActive(true);
+
+		layers.Add(endcap);
+		loop = false;
 	}
 }

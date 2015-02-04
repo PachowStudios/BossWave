@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 		public float speedUpTime;
 		public Transform spawner;
 		public Transform playerWaitPoint;
+		public Transform scrollingEndcap;
 		public Scrollbar progressBar;
 	}
 
@@ -107,7 +108,7 @@ public class LevelManager : MonoBehaviour
 	{
 		waveTimer = mainMusic.time;
 
-		if (waveTimer >= bossWave.startTime)
+		if (waveTimer >= bossWave.startTime && !bossWaveActive)
 		{
 			bossWaveActive = true;
 			PowerupSpawner.Instance.spawnPowerups = false;
@@ -138,7 +139,7 @@ public class LevelManager : MonoBehaviour
 
 					Cutscene.Instance.Hide(true);
 
-					foreach(GameObject element in scrollingElements)
+					foreach (GameObject element in scrollingElements)
 					{
 						element.GetComponent<Parallax>().scroll = true;
 					}
@@ -150,7 +151,16 @@ public class LevelManager : MonoBehaviour
 
 					bossWave.progressBar.value = 0f;
 					DOTween.To(() => bossWave.progressBar.value, x => bossWave.progressBar.value = x, 1f, bossWave.totalLength)
-						.SetEase(Ease.Linear);
+						.SetEase(Ease.Linear)
+						.OnComplete(() =>
+						{
+							bossWave.scrollingEndcap.parent.GetComponent<Parallax>().AddEndcap(bossWave.scrollingEndcap);
+							bossWavePlayerMoved = false;
+							bossInstance.End();
+							DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, 0f, 1f)
+								.SetDelay(2.5f)
+								.SetEase(Ease.OutSine);
+						});
 
 					bossWaveIntroComplete = true;
 				}

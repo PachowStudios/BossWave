@@ -157,6 +157,12 @@ public sealed class TheRIFT : Boss
 		}
 	}
 
+	public override void End()
+	{
+		maxFloatHeight = 1000f;
+		minFloatHeight = 990f;
+	}
+
 	private void FinishSpawn()
 	{
 		CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
