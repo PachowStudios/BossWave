@@ -11,7 +11,7 @@ public class ResolutionSelector : MonoBehaviour
 	private List<Resolution> resolutions;
 	private int selected = 0;
 
-	void Awake()
+	private void Awake()
 	{
 		resolutions = Screen.resolutions.ToList<Resolution>();
 
@@ -30,7 +30,7 @@ public class ResolutionSelector : MonoBehaviour
 		}		
 	}
 
-	void Start()
+	private void Start()
 	{
 		Resolution windowRes = new Resolution();
 

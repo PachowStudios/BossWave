@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 1
+  introCRT: 0
   spawnEnemies: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
@@ -714,7 +714,7 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 3
+    startTime: 1000
     totalLength: 30
     cameraSpeed: 15
     fullCameraSpeed: 30

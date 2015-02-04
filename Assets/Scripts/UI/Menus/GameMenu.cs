@@ -18,7 +18,6 @@ public class GameMenu : MonoBehaviour
 	public CanvasGroup gameOverOverlay;
 	public Selectable pauseSelect;
 	public Selectable gameOverSelect;
-	public EasyJoystick[] JoysticksToDisable;
 
 	private bool paused = false;
 	private bool canPause = true;
@@ -26,24 +25,16 @@ public class GameMenu : MonoBehaviour
 	private AudioSource[] sounds;
 
 	private Slider volumeSlider;
-	private Slider fovSlider;
-
-	#if	!MOBILE_INPUT
 	private Toggle fullscreenToggle;
 	private ResolutionSelector resolutionSelector;
-	#endif
 
 	private RectTransform rectTransform;
 
-	void Awake()
+	private void Awake()
 	{
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
-		fovSlider = transform.FindSubChild("FOV").GetComponent<Slider>();
-
-		#if !MOBILE_INPUT
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
 		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
-		#endif
 
 		rectTransform = GetComponent<RectTransform>();
 
@@ -57,13 +48,9 @@ public class GameMenu : MonoBehaviour
 		LoadPrefs();
 	}
 
-	void Update()
+	private void Update()
 	{
-		#if MOBILE_INPUT
-		if (CrossPlatformInputManager.GetButton("Pause") && canPause)
-		#else
 		if (CrossPlatformInputManager.GetButtonDown("Pause") && canPause)
-		#endif
 		{
 			sounds = FindObjectsOfType<AudioSource>();
 
@@ -75,8 +62,6 @@ public class GameMenu : MonoBehaviour
 				TimeWarpEffect.Instance.StartWarp(0f, fadeTime, sounds);
 				CRTEffect.Instance.StartCRT(fadeTime);
 				Fade(0f, 1f, UpdatePauseAlpha, true);
-
-				SetJoysticks(false);
 			}
 			else
 			{
@@ -86,8 +71,6 @@ public class GameMenu : MonoBehaviour
 				TimeWarpEffect.Instance.EndWarp(fadeTime, sounds);
 				CRTEffect.Instance.EndCRT(fadeTime);
 				Fade(1f, 0f, UpdatePauseAlpha, true);
-
-				SetJoysticks(true);
 			}
 		}
 
@@ -97,8 +80,6 @@ public class GameMenu : MonoBehaviour
 			canPause = false;
 
 			StartCoroutine(GameOver());
-
-			SetJoysticks(false);
 		}
 	}
 
@@ -144,21 +125,12 @@ public class GameMenu : MonoBehaviour
 		AudioListener.volume = Mathf.Abs(newVolume);
 	}
 
-	public void SetFOV(float newFOV)
-	{
-		ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)newFOV);
-	}
-
 	public void ApplySettings()
 	{
 		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
-		PlayerPrefs.SetInt("Settings/FOV", (int)fovSlider.value);
-
-		#if !MOBILE_INPUT
 		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
-		#endif
 	}
 
 	private void LoadPrefs()
@@ -169,19 +141,11 @@ public class GameMenu : MonoBehaviour
 			AudioListener.volume = Mathf.Abs(volumeSlider.value);
 		}
 
-		if (PlayerPrefs.HasKey("Settings/FOV"))
-		{
-			fovSlider.value = PlayerPrefs.GetInt("Settings/FOV");
-			ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)fovSlider.value);
-		}
-
-		#if !MOBILE_INPUT
 		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
 		{
 			fullscreenToggle.isOn = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
 			Screen.fullScreen = fullscreenToggle.isOn;
 		}
-		#endif
 	}
 
 	private IEnumerator GameOver()
@@ -204,16 +168,6 @@ public class GameMenu : MonoBehaviour
 	private void EnablePausing(bool enabled)
 	{
 		canPause = enabled;
-	}
-
-	private void SetJoysticks(bool enabled)
-	{
-		#if MOBILE_INPUT
-		foreach (EasyJoystick joystick in JoysticksToDisable)
-		{
-			joystick.enable = enabled;
-		}
-		#endif
 	}
 
 	private void UpdatePauseAlpha(float newValue)

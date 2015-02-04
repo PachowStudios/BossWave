@@ -7,7 +7,6 @@ public class ScaleWidthCameraEditor : Editor
 {
 	private AnimBool showEditorOverride;
 	private AnimBool showWorldSpaceUI;
-	private SerializedObject serializedTarget;
 
 	private ScaleWidthCamera Target
 	{
@@ -16,31 +15,17 @@ public class ScaleWidthCameraEditor : Editor
 
 	void OnEnable()
 	{
-		showEditorOverride = new AnimBool(Target.overrideSettings);
 		showWorldSpaceUI = new AnimBool(Target.useWorldSpaceUI);
-		serializedTarget = new SerializedObject(Target);
 	}
 
 	public override void OnInspectorGUI()
 	{
-		serializedTarget.Update();
+		serializedObject.Update();
 
 		EditorGUILayout.LabelField("Current FOV", Target.FOV.ToString());
 		EditorGUILayout.Space();
 
-		Target.overrideSettings = EditorGUILayout.Toggle("Override Settings", Target.overrideSettings);
-		showEditorOverride.target = Target.overrideSettings;
-
-		if (EditorGUILayout.BeginFadeGroup(showEditorOverride.faded))
-		{
-			EditorGUI.indentLevel++;
-
-			Target.overrideFOV = EditorGUILayout.IntField("Override FOV", Target.overrideFOV);
-
-			EditorGUI.indentLevel--;
-		}
-
-		EditorGUILayout.EndFadeGroup();
+		Target.defaultFOV = EditorGUILayout.IntField("Default FOV", Target.defaultFOV);
 
 		showWorldSpaceUI.target = EditorGUILayout.Toggle("Use World Space UI", showWorldSpaceUI.target);
 		Target.useWorldSpaceUI = showWorldSpaceUI.value;
@@ -66,6 +51,7 @@ public class ScaleWidthCameraEditor : Editor
 			EditorUtility.SetDirty(Target);
 		}
 
+		serializedObject.ApplyModifiedProperties();
 		Repaint();
 	}
 }

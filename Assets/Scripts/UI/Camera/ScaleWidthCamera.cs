@@ -7,12 +7,11 @@ public class ScaleWidthCamera : MonoBehaviour
 {
 	private static ScaleWidthCamera instance;
 
-	public bool overrideSettings = false;
-	public int overrideFOV;
+	public int defaultFOV = 500;
 	public bool useWorldSpaceUI = false;
 	public RectTransform worldSpaceUI;
 
-	public int FOV = 400;
+	public int FOV;
 
 	public static ScaleWidthCamera Instance
 	{
@@ -22,15 +21,12 @@ public class ScaleWidthCamera : MonoBehaviour
 	private void OnEnable()
 	{
 		instance = this;
+
+		FOV = defaultFOV;
 	}
 
 	private void OnPreRender()
 	{
-		if (overrideSettings)
-		{
-			FOV = overrideFOV;
-		}
-
 		camera.orthographicSize = FOV / 20f / camera.aspect;
 
 		if (useWorldSpaceUI && worldSpaceUI != null)
@@ -41,9 +37,7 @@ public class ScaleWidthCamera : MonoBehaviour
 
 	public void AnimateFOV(int newFOV, float time)
 	{
-		Instance.overrideSettings = true;
-		Instance.overrideFOV = FOV;
-		DOTween.To(() => Instance.overrideFOV, x => Instance.overrideFOV = x, newFOV, time)
+		DOTween.To(() => FOV, x => FOV = x, newFOV, time)
 			.SetEase(Ease.OutQuint);
 	}
 }

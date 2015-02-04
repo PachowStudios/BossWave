@@ -20,27 +20,19 @@ public class MainMenu : MonoBehaviour
 	public CanvasGroup blackOverlay;
 
 	private Slider volumeSlider;
-	private Slider fovSlider;
-
-	#if !MOBILE_INPUT
 	private Toggle fullscreenToggle;
 	private ResolutionSelector resolutionSelector;
-	#endif
 
 	private CanvasGroup menu;
 	private RectTransform rectTransform;
 
-	void Awake()
+	private void Awake()
 	{
 		DOTween.Init();
 
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
-		fovSlider = transform.FindSubChild("FOV").GetComponent<Slider>();
-
-		#if !MOBILE_INPUT
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
 		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
-		#endif
 
 		menu = GetComponent<CanvasGroup>();
 		rectTransform = GetComponent<RectTransform>();
@@ -52,7 +44,7 @@ public class MainMenu : MonoBehaviour
 		LoadPrefs();
 	}
 
-	void Start()
+	private void Start()
 	{
 		Time.timeScale = 1f;
 		Time.fixedDeltaTime = TimeWarpEffect.Instance.DefaultFixedTimestep;
@@ -85,21 +77,12 @@ public class MainMenu : MonoBehaviour
 		AudioListener.volume = Mathf.Abs(newVolume);
 	}
 
-	public void SetFOV(float newFOV)
-	{
-		ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)newFOV);
-	}
-
 	public void ApplySettings()
 	{
 		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
-		PlayerPrefs.SetInt("Settings/FOV", (int)fovSlider.value);
-
-		#if !MOBILE_INPUT
 		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
-		#endif
 	}
 
 	public void ResetPrefs()
@@ -115,19 +98,11 @@ public class MainMenu : MonoBehaviour
 			AudioListener.volume = Mathf.Abs(volumeSlider.value);
 		}
 
-		if (PlayerPrefs.HasKey("Settings/FOV"))
-		{
-			fovSlider.value = PlayerPrefs.GetInt("Settings/FOV");
-			ScaleWidthCamera.Instance.FOV = Mathf.Abs((int)fovSlider.value);
-		}
-
-		#if !MOBILE_INPUT
 		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
 		{
 			fullscreenToggle.isOn = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
 			Screen.fullScreen = fullscreenToggle.isOn;
 		}
-		#endif
 	}
 
 	private IEnumerator ShowMenu()
