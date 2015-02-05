@@ -8,7 +8,7 @@ public class PopupMessage : MonoBehaviour
 	private static PopupMessage instance;
 
 	public PopupMessageInstance popupPrefab;
-	public float textBuffer = 5f;
+	public float textBuffer = 0.4f;
 
 	public static PopupMessage Instance
 	{
@@ -20,39 +20,45 @@ public class PopupMessage : MonoBehaviour
 		instance = this;
 	}
 
-	public void CreatePopup(Vector3 newPosition, string newText, Sprite newImage = null, bool followPlayer = false)
+	public void CreatePopup(Vector3 newPosition, string newText = "", Sprite newImage = null, bool followPlayer = false)
 	{
-		newPosition.z = transform.position.z;
-
 		PopupMessageInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
 		popupInstance.transform.SetParent(transform);
 		popupInstance.transform.SetAsLastSibling();
 		popupInstance.followPlayer = followPlayer;
 
-		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
 		Image instanceImage = popupInstance.GetComponentInChildren<Image>();
 		Text instanceText = popupInstance.GetComponentInChildren<Text>();
-
-		float imageWidth;
-		float currentTextBuffer;
 
 		if (newImage != null)
 		{
 			instanceImage.sprite = newImage;
-			imageWidth = instanceRect.sizeDelta.y * (instanceImage.sprite.bounds.size.x / instanceImage.sprite.bounds.size.y);
-			currentTextBuffer = (newText == "") ? 0f : textBuffer;
+			instanceImage.rectTransform.sizeDelta = newImage.bounds.size;
+
+			if (newText == "")
+			{
+				instanceImage.rectTransform.pivot = new Vector2(0.5f, 0f);
+			}
 		}
-		else
+
+		if (newText != "")
 		{
-			imageWidth = 0f;
-			currentTextBuffer = 0f;
+			instanceText.text = newText;
+
+			if (newImage == null)
+			{
+				instanceText.alignment = TextAnchor.LowerCenter;
+			}
 		}
 
-		instanceText.text = newText;
+		if (newImage != null && newText != "")
+		{
+			float imageXOffset = (instanceImage.rectTransform.sizeDelta.x + textBuffer + (instanceText.preferredWidth / 10f)) / 2f;
+			float textXOffset = imageXOffset - textBuffer - instanceImage.rectTransform.sizeDelta.x;
+			float textYOffset = instanceImage.rectTransform.sizeDelta.y / 2f;
 
-		instanceText.rectTransform.offsetMin = new Vector2(imageWidth + currentTextBuffer, 0);
-		popupInstance.transform.localScale = popupPrefab.transform.localScale;
-
-		instanceRect.sizeDelta = new Vector2(imageWidth + currentTextBuffer + instanceText.preferredWidth, instanceRect.sizeDelta.y);
+			instanceImage.rectTransform.anchoredPosition = new Vector2(-imageXOffset, 0f);
+			instanceText.rectTransform.anchoredPosition = new Vector2(-textXOffset, textYOffset);
+		}
 	}
 }

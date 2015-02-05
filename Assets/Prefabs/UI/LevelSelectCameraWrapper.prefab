@@ -336,7 +336,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22400042}
-  - 114: {fileID: 11400082}
   m_Layer: 5
   m_Name: Standalone
   m_TagString: Untagged
@@ -367,7 +366,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22400046}
-  - 114: {fileID: 11400084}
   m_Layer: 5
   m_Name: Mobile
   m_TagString: Untagged
@@ -1754,10 +1752,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c70618e413ff04ebf46329bca21268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  margin: {x: 100, y: 100}
+  defaultYOffset: 10
+  platformYOffset: 5
   smoothing: 1
-  follow: {fileID: 0}
-  marginUnits: {x: 0, y: 0}
+  followTarget: {fileID: 0}
+  stayAboveGroundLevel: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2081,14 +2080,13 @@ MonoBehaviour:
   eventSystem: {fileID: 0}
   fadeTime: .699999988
   loadTime: 2
+  gameOverDelay: 1
   nodeMoveSpeed: 2
+  interactableThreshold: .75
   pauseOverlay: {fileID: 22500000}
   gameOverOverlay: {fileID: 22500002}
   pauseSelect: {fileID: 11400018}
   gameOverSelect: {fileID: 11400024}
-  JoysticksToDisable:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2527,10 +2525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651259b46b2c94342931f7526a9a7c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideSettings: 0
-  editorFOV: 400
+  defaultFOV: 500
   useWorldSpaceUI: 0
   worldSpaceUI: {fileID: 0}
+  FOV: 0
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2994,30 +2992,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 5, y: 5}
   m_UseGraphicAlpha: 1
---- !u!114 &11400082
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0441d0d92a8d73b47a451f964b86828c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableOnMobile: 0
---- !u!114 &11400084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0441d0d92a8d73b47a451f964b86828c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enableOnMobile: 1
 --- !u!114 &11400086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3752,7 +3726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e606be0412e3544da52dfc3eaea9404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 11400006, guid: d0476cedc0136804e91fc1a7dbec822f, type: 2}
+  popupPrefab: {fileID: 0}
   textBuffer: 5
 --- !u!114 &11400158
 MonoBehaviour:
@@ -3807,6 +3781,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf28d00987d637545918f14ac5571c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: .5
+  showY: 2
+  hideY: 0
+  canvasGroup: {fileID: 0}
+  topBar: {fileID: 0}
+  bottomBar: {fileID: 0}
 --- !u!114 &11400164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4108,6 +4088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815b993c15dc8764988241d51719722d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: .5
 --- !u!114 &11400192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4119,14 +4100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e917188e72b510d43b3dd004894ae6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  face: {fileID: 0}
+  barMask: {fileID: 0}
+  score: {fileID: 0}
+  microchips: {fileID: 0}
+  fadeTime: .5
   scoreDigits: 9
   microchipsDigits: 5
   textDamping: 1
   healthDamping: .5
-  healthFull: {fileID: 21300006, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health75: {fileID: 21300008, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health50: {fileID: 21300010, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
-  health25: {fileID: 21300012, guid: 5210eff516d46864f82a575b0586f9fb, type: 3}
+  healthFaces: []
 --- !u!114 &11400194
 MonoBehaviour:
   m_ObjectHideFlags: 1

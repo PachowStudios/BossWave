@@ -71,7 +71,7 @@ public class CameraFollow : MonoBehaviour
 			targetPosition.y = followTarget.position.y + currentYOffset;
 		}
 
-		transform.position = Extensions.SuperSmoothLerp(transform.position, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
+		transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
 	}
 
 	public void FollowObject(Transform target, bool newUsePlayerY, float newYOffset = -1f, bool newLockX = false)

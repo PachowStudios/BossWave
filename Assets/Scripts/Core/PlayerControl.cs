@@ -29,6 +29,7 @@ public sealed class PlayerControl : MonoBehaviour
 	public float minAltIdleTime = 5f;
 	public float maxAltIdleTime = 10f;
 	public List<string> altIdleAnimations;
+	public LayerMask bottomCollider;
 
 	private float health;
 	private bool dead = false;
@@ -461,6 +462,27 @@ public sealed class PlayerControl : MonoBehaviour
 		cancelGoTo = false;
 		reEnableAfterMove = autoEnableInput;
 		inertiaAfterMove = inertia;
+		DisableInput();
+	}
+
+	public IEnumerator JumpToFloor()
+	{
+		LayerMask originalCollider = controller.platformMask;
+
+		if (IsGrounded)
+		{
+			Jump(1f);
+			controller.move(velocity * Time.deltaTime);
+		}
+
+		controller.platformMask = bottomCollider;
+
+		while (!IsGrounded)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		controller.platformMask = originalCollider;
 		DisableInput();
 	}
 

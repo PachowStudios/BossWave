@@ -44,7 +44,7 @@ TagManager:
   User Layer 17: EnemyProjectiles
   User Layer 18: SpawnCollider
   User Layer 19: OneWayCollider
-  User Layer 20: 
+  User Layer 20: BottomCollider
   User Layer 21: 
   User Layer 22: 
   User Layer 23: 
@@ -85,13 +85,13 @@ TagManager:
     userID: 3
     uniqueID: 1018039513
     locked: 0
-  - name: Player
-    userID: 6
-    uniqueID: 4273737757
-    locked: 0
   - name: Foreground
     userID: 2
     uniqueID: 3423334565
+    locked: 0
+  - name: Player
+    userID: 6
+    uniqueID: 4273737757
     locked: 0
   - name: Boss
     userID: 11

@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400116}
   m_Layer: 0
   m_Name: CameraWrapper
   m_TagString: CameraWrapper
@@ -187,6 +188,7 @@ GameObject:
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400200}
   - 114: {fileID: 11400026}
+  - 114: {fileID: 11400014}
   m_Layer: 5
   m_Name: Game UI
   m_TagString: UI
@@ -1077,7 +1079,6 @@ GameObject:
   - 223: {fileID: 22300002}
   - 114: {fileID: 11400196}
   - 114: {fileID: 11400192}
-  - 114: {fileID: 11400014}
   - 114: {fileID: 11400004}
   m_Layer: 5
   m_Name: Menu UI
@@ -1999,14 +2000,14 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100158}
+  m_GameObject: {fileID: 100020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e606be0412e3544da52dfc3eaea9404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 11400006, guid: d0476cedc0136804e91fc1a7dbec822f, type: 2}
-  textBuffer: 5
+  popupPrefab: {fileID: 11400000, guid: d0476cedc0136804e91fc1a7dbec822f, type: 2}
+  textBuffer: .400000006
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3431,6 +3432,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11400116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adb9251021c9c440ba4c59d9ea9db68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400118
 MonoBehaviour:
   m_ObjectHideFlags: 1

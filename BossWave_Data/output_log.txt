@@ -36,13 +36,13 @@ NullReferenceException: Object reference not set to an instance of an object
  
 (Filename:  Line: -1)
 
-UnloadTime: 4.808671 ms
+UnloadTime: 4.513176 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
 Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2438.
-Total: 0.875952 ms (FindLiveObjects: 0.069924 ms CreateObjectMapping: 0.023405 ms MarkObjects: 0.453190 ms  DeleteObjects: 0.027794 ms)
+Total: 0.856935 ms (FindLiveObjects: 0.062024 ms CreateObjectMapping: 0.021357 ms MarkObjects: 0.435050 ms  DeleteObjects: 0.028086 ms)
 
-UnloadTime: 3.577831 ms
+UnloadTime: 3.686082 ms
 NullReferenceException: Object reference not set to an instance of an object
   at CameraFollow.Awake () [0x00000] in <filename unknown>:0 
  
@@ -50,6 +50,6 @@ NullReferenceException: Object reference not set to an instance of an object
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 286 unused Assets to reduce memory usage. Loaded Objects now: 1437.
-Total: 3.086315 ms (FindLiveObjects: 0.043007 ms CreateObjectMapping: 0.019309 ms MarkObjects: 0.435343 ms  DeleteObjects: 2.289063 ms)
+Unloading 294 unused Assets to reduce memory usage. Loaded Objects now: 1441.
+Total: 2.919550 ms (FindLiveObjects: 0.030719 ms CreateObjectMapping: 0.017554 ms MarkObjects: 0.422762 ms  DeleteObjects: 2.147459 ms)
 
