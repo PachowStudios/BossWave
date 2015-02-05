@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21200000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Spatial Destabilizer
+  m_Name: Void Cannon
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7792e0cfc538446aac1019aadcd5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunName: Spatial Destabilizer
+  gunName: Void Cannon
   rarity: 6
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
   secondaryShot: 1

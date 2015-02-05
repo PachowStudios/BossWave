@@ -11,8 +11,8 @@ TextureImporter:
     21300012: Shots_PulsePistol_0
     21300014: Shots_PulsePistol_1
     21300016: Shots_PulsePistol_2
-    21300018: Shots_SpatialDestabilizer_0
-    21300020: Shots_SpatialDestabilizer_1
+    21300018: Shots_VoidCannon_0
+    21300020: Shots_VoidCannon_1
     21300022: Shots_UltrasonicExecutioner
     21300024: Shots_BlazeCatalyzer
     21300026: Shots_TheElectrocutioner_0
@@ -151,7 +151,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Shots_SpatialDestabilizer_0
+    - name: Shots_VoidCannon_0
       rect:
         serializedVersion: 2
         x: 4
@@ -161,7 +161,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Shots_SpatialDestabilizer_1
+    - name: Shots_VoidCannon_1
       rect:
         serializedVersion: 2
         x: 17

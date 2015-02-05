@@ -347,13 +347,13 @@ MonoBehaviour:
   startingGuns:
   - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
   - {fileID: 0}
+  gunSwapCooldownTime: 1
   minAltIdleTime: 5
   maxAltIdleTime: 10
   altIdleAnimations:
   - Idle Breathing
   - Idle Windy
   - Idle Vaping
-  guns: []
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

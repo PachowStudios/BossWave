@@ -6,7 +6,7 @@ TextureImporter:
     21300002: Guns_CausticMagnum
     21300004: Guns_PulsePistol
     21300006: Guns_SequentialAtomizer
-    21300008: Guns_SpatialDestabilizer
+    21300008: Guns_VoidCannon
     21300010: Guns_UltrasonicExecutioner
     21300012: Guns_BlazeCatalyzer
     21300014: Guns_TheElectrocutioner
@@ -93,7 +93,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: .185185179, y: .888888896}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Guns_SpatialDestabilizer
+    - name: Guns_VoidCannon
       rect:
         serializedVersion: 2
         x: 0
