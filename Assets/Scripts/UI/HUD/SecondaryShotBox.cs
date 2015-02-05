@@ -58,6 +58,7 @@ public class SecondaryShotBox : MonoBehaviour
 			if (showing)
 			{
 				Hide();
+				overrideShowing = false;
 			}
 
 			cooldownPercent = 0f;

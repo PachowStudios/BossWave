@@ -26,7 +26,7 @@ public class PopupMessage : MonoBehaviour
 
 		PopupMessageInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
 		popupInstance.transform.SetParent(transform);
-		popupInstance.transform.SetAsFirstSibling();
+		popupInstance.transform.SetAsLastSibling();
 		popupInstance.followPlayer = followPlayer;
 
 		RectTransform instanceRect = popupInstance.GetComponent<RectTransform>();
@@ -40,7 +40,7 @@ public class PopupMessage : MonoBehaviour
 		{
 			instanceImage.sprite = newImage;
 			imageWidth = instanceRect.sizeDelta.y * (instanceImage.sprite.bounds.size.x / instanceImage.sprite.bounds.size.y);
-			currentTextBuffer = textBuffer;
+			currentTextBuffer = (newText == "") ? 0f : textBuffer;
 		}
 		else
 		{

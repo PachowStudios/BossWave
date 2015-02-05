@@ -191,6 +191,13 @@ MonoBehaviour:
   disappearTime: .400000006
   disappearScale: 1.5
   distance: 1
+  newCanvasGroup: {fileID: 22500004}
+  oldCanvasGroup: {fileID: 22500002}
+  newGun: {fileID: 11400002}
+  oldGun: {fileID: 11400020}
+  newStats: {fileID: 11400018}
+  oldStats: {fileID: 11400008}
+  timerText: {fileID: 11400024}
   newGunPrefab: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:

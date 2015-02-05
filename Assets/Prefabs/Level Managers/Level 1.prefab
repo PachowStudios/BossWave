@@ -714,7 +714,7 @@ MonoBehaviour:
     difficulty: 0
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1
+    startTime: 1000
     totalLength: 10
     cameraSpeed: 15
     fullCameraSpeed: 30
@@ -722,7 +722,6 @@ MonoBehaviour:
     spawner: {fileID: 0}
     playerWaitPoint: {fileID: 400006}
     scrollingEndcap: {fileID: 0}
-    progressBar: {fileID: 0}
   enemies:
   - {fileID: 11400002, guid: ee51739a689bcb84dacb00e32e7f9d39, type: 2}
   - {fileID: 11400002, guid: fdbf3a434753a3c4d839876750e0c3fb, type: 2}

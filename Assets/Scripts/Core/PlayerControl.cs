@@ -24,7 +24,8 @@ public sealed class PlayerControl : MonoBehaviour
 	public float comboDecreaseTime = 1f;
 	public int maxScore = 999999999;
 	public int maxMicrochips = 99999;
-	public Gun startingGun;
+	public List<Gun> startingGuns;
+	public float gunSwapCooldownTime = 0.5f;
 	public float minAltIdleTime = 5f;
 	public float maxAltIdleTime = 10f;
 	public List<string> altIdleAnimations;
@@ -38,6 +39,10 @@ public sealed class PlayerControl : MonoBehaviour
 	private bool usingGun = false;
 	private bool disableInput = false;
 	private bool inPortal = false;
+
+	private List<Gun> guns = new List<Gun>();
+	private int currentGunIndex = 0;
+	private float gunSwapCooldownTimer = 0f;
 
 	private Vector3 velocity;
 	private Vector3 lastGroundedPosition;
@@ -69,9 +74,9 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private CharacterController2D controller;
 	private Animator anim;
-	private Gun gun;
 	private GhostTrailEffect ghostTrail;
 	private List<SpriteRenderer> spriteRenderers;
+	private Transform gunPoint;
 	private Transform popupMessagePoint;
 	#endregion
 
@@ -142,11 +147,6 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return lastGroundedPosition; }
 	}
 
-	public Gun Gun
-	{
-		get { return gun; }
-	}
-
 	public Vector3 PopupMessagePoint
 	{
 		get { return popupMessagePoint.position; }
@@ -162,6 +162,21 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return spriteRenderers.AsReadOnly(); }
 	}
 
+	public ReadOnlyCollection<Gun> Guns
+	{
+		get { return guns.AsReadOnly(); }
+	}
+
+	public Gun Gun
+	{
+		get { return guns.ElementAtOrDefault(currentGunIndex); }
+	}
+
+	public bool GunsFull
+	{
+		get { return guns.Count >= startingGuns.Capacity; }
+	}
+
 	private float NewAltIdleTime
 	{
 		get { return Random.Range(minAltIdleTime, maxAltIdleTime); }
@@ -175,9 +190,9 @@ public sealed class PlayerControl : MonoBehaviour
 
 		controller = GetComponent<CharacterController2D>();
 		anim = GetComponent<Animator>();
-		gun = GetComponentInChildren<Gun>();
 		ghostTrail = GetComponent<GhostTrailEffect>();
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
+		gunPoint = transform.FindChild("gunPoint");
 		popupMessagePoint = transform.FindChild("popupMessage");
 
 		health = maxHealth;
@@ -188,13 +203,19 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void Start()
 	{
-		SwapGun(startingGun);
-
 		foreach (SpriteRenderer spriteRenderer in spriteRenderers)
 		{
 			if (spriteRenderer.name != "Full")
 			{
 				spriteRenderer.color = Color.clear;
+			}
+		}
+
+		foreach (Gun startingGun in startingGuns)
+		{
+			if (startingGun != null)
+			{
+				AddGun(startingGun);
 			}
 		}
 	}
@@ -205,8 +226,28 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
-			run = CrossPlatformInputManager.GetButton("Run") && gun.NoInput;
+			run = CrossPlatformInputManager.GetButton("Run") && Gun.NoInput;
 			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
+
+			gunSwapCooldownTimer += Time.deltaTime;
+
+			if (gunSwapCooldownTimer >= gunSwapCooldownTime)
+			{
+				for (int i = 0; i < guns.Count; i++)
+				{
+					if (CrossPlatformInputManager.GetButtonDown("Gun" + (i + 1).ToString()))
+					{
+						if (!PopupSwapGun.Instance.ShowingPopup)
+						{
+							PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", Gun.SpriteRenderer.sprite, true);
+						}
+
+						SelectGun(i);
+						gunSwapCooldownTimer = 0f;
+						break;
+					}
+				}
+			}
 		}
 
 		run = (run && (right || left)) || continuouslyRunning;
@@ -363,18 +404,42 @@ public sealed class PlayerControl : MonoBehaviour
 		microchips = Mathf.Clamp(microchips + newMicrochips, 0, maxMicrochips);
 	}
 
-	public void SwapGun(Gun newGun)
+	public void AddGun(Gun newGun)
 	{
-		Transform oldTransform = gun.transform;
-		spriteRenderers.Remove(gun.SpriteRenderer);
-		Destroy(gun.gameObject);
-		Gun gunInstance = Instantiate(newGun, oldTransform.position, oldTransform.rotation) as Gun;
+		int gunIndex = GunsFull ? currentGunIndex : guns.Count;
+
+		if (guns.ElementAtOrDefault(gunIndex) != null)
+		{
+			Destroy(guns[gunIndex].gameObject);
+			guns.RemoveAt(gunIndex);
+		}
+
+		Gun gunInstance = Instantiate(newGun, gunPoint.position, gunPoint.rotation) as Gun;
 		gunInstance.name = newGun.name;
 		gunInstance.transform.parent = transform;
-		gunInstance.transform.localScale = oldTransform.localScale;
-		gunInstance.SpriteRenderer.color = usingGun ? Color.white : Color.clear;
-		gun = gunInstance;
-		spriteRenderers.Add(gun.SpriteRenderer);
+		gunInstance.transform.localScale = gunPoint.localScale;
+		gunInstance.SpriteRenderer.color = Color.clear;
+		gunInstance.disableInput = true;
+		guns.Insert(gunIndex, gunInstance);
+
+		if (gunIndex == currentGunIndex)
+		{
+			SelectGun(gunIndex);
+		}
+	}
+
+	public void SelectGun(int gunIndex)
+	{
+		if (gunIndex == currentGunIndex)
+		{
+			guns[currentGunIndex].disableInput = false;
+		}
+		else
+		{
+			guns[currentGunIndex].disableInput = true;
+			guns[gunIndex].disableInput = false;
+			currentGunIndex = gunIndex;
+		}
 	}
 
 	public void SpeedBoost(float multiplier, float length)
@@ -406,7 +471,7 @@ public sealed class PlayerControl : MonoBehaviour
 	public void DisableInput()
 	{
 		disableInput = true;
-		gun.disableInput = true;
+		Gun.disableInput = true;
 		ResetInput();
 	}
 
@@ -414,7 +479,7 @@ public sealed class PlayerControl : MonoBehaviour
 	{
 		ResetInput();
 		disableInput = false;
-		gun.disableInput = false;
+		Gun.disableInput = false;
 	}
 
 	public bool IsInputDisabled()
@@ -441,7 +506,7 @@ public sealed class PlayerControl : MonoBehaviour
 		anim.SetBool("Running", run);
 		anim.SetBool("Grounded", IsGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
-		anim.SetFloat("Gun Angle", gun.transform.rotation.eulerAngles.z);
+		anim.SetFloat("Gun Angle", Gun.transform.rotation.eulerAngles.z);
 		ghostTrail.trailActive = speedMultiplier > 1f;
 	}
 
@@ -535,7 +600,7 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			normalizedHorizontalSpeed = 0f;
 
-			if (!jump && gun.NoInput)
+			if (!jump && Gun.NoInput)
 			{
 				altIdleTimer += Time.deltaTime;
 
@@ -548,7 +613,7 @@ public sealed class PlayerControl : MonoBehaviour
 			}
 		}
 
-		if (gun.NoInput)
+		if (Gun.NoInput)
 		{
 			if (usingGun)
 			{
@@ -578,11 +643,11 @@ public sealed class PlayerControl : MonoBehaviour
 				SetRenderersVisible(alternate: true);
 			}
 
-			if (gun.FacingRight && transform.localScale.x < 0f)
+			if (Gun.FacingRight && transform.localScale.x < 0f)
 			{
 				Flip();
 			}
-			else if (!gun.FacingRight && transform.localScale.x > 0f)
+			else if (!Gun.FacingRight && transform.localScale.x > 0f)
 			{
 				Flip();
 			}
@@ -637,6 +702,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 			SetRenderersEnabled(false);
 			collider2D.enabled = false;
+			PopupSwapGun.Instance.ClearPopup();
 			DisableInput();
 
 			foreach (SpriteRenderer sprite in spriteRenderers)

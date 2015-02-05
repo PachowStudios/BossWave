@@ -15,19 +15,19 @@ public class PopupMessageInstance : MonoBehaviour
 
 	private CanvasGroup canvasGroup;
 
-	void Awake()
+	private void Awake()
 	{
 		startingPosition = transform.position;
 
 		canvasGroup = GetComponent<CanvasGroup>();
 	}
 
-	void Start()
+	private void Start()
 	{
 		Appear();
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		if (followPlayer)
 		{
@@ -43,12 +43,12 @@ public class PopupMessageInstance : MonoBehaviour
 	public void Appear()
 	{
 		canvasGroup.alpha = 0f;
-		yOffset = -distance;
+		yOffset = 0f;
 
 		canvasGroup.DOFade(1f, time * 0.15f)
 			.SetEase(Ease.InQuad);
-		DOTween.To(() => yOffset, x => yOffset = x, 0f, time * 0.25f)
-			.SetEase(Ease.OutBack);
+		DOTween.To(() => yOffset, x => yOffset = x, distance, time)
+			.SetEase(Ease.OutQuad);
 		canvasGroup.DOFade(0f, time * 0.25f)
 			.SetEase(Ease.InQuad)
 			.SetDelay(time * 0.75f);

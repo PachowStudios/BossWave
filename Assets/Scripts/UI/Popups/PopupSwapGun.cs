@@ -15,6 +15,11 @@ public class PopupSwapGun : MonoBehaviour
 		get { return instance; }
 	}
 
+	public bool ShowingPopup
+	{
+		get { return currentPopup != null; }
+	}
+
 	private void Awake()
 	{
 		instance = this;
@@ -22,34 +27,23 @@ public class PopupSwapGun : MonoBehaviour
 
 	public void CreatePopup(Vector3 newPosition, Gun newGunPrefab)
 	{
-		if (currentPopup != null)
-		{
-			currentPopup.DisappearNoSelection();
-		}
+		ClearPopup();
 
 		newPosition.z = transform.position.z;
 
 		PopupSwapGunInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
 		currentPopup = popupInstance;
 		popupInstance.transform.SetParent(transform);
-		popupInstance.transform.SetAsFirstSibling();
+		popupInstance.transform.SetAsLastSibling();
 		popupInstance.transform.localScale = popupPrefab.transform.localScale;
 		popupInstance.newGunPrefab = newGunPrefab;
+	}
 
-		Image oldGun = popupInstance.transform.FindSubChild("Old Gun").GetComponent<Image>();
-		Image newGun = popupInstance.transform.FindSubChild("New Gun").GetComponent<Image>();
-		Text oldStats = popupInstance.transform.FindSubChild("Old Stats").GetComponent<Text>();
-		Text newStats = popupInstance.transform.FindSubChild("New Stats").GetComponent<Text>();
-
-		oldGun.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
-		newGun.sprite = newGunPrefab.SpriteRenderer.sprite;
-
-		oldStats.text = PlayerControl.Instance.Gun.projectile.damage + "\n" +
-						PlayerControl.Instance.Gun.FireRate + "\n" +
-						PlayerControl.Instance.Gun.projectile.knockback.x;
-
-		newStats.text = newGunPrefab.projectile.damage + "\n" +
-						newGunPrefab.FireRate + "\n" +
-						newGunPrefab.projectile.knockback.x;
+	public void ClearPopup()
+	{
+		if (currentPopup != null)
+		{
+			currentPopup.DisappearNoSelection();
+		}
 	}
 }

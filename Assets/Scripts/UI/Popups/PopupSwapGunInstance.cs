@@ -13,6 +13,14 @@ public class PopupSwapGunInstance : MonoBehaviour
 	public float disappearScale = 1.5f;
 	public float distance = 1f;
 
+	public CanvasGroup newCanvasGroup;
+	public CanvasGroup oldCanvasGroup;
+	public Image newGun;
+	public Image oldGun;
+	public Text newStats;
+	public Text oldStats;
+	public Text timerText;
+
 	[HideInInspector]
 	public Gun newGunPrefab;
 
@@ -21,24 +29,21 @@ public class PopupSwapGunInstance : MonoBehaviour
 	private bool selectionMade = false;
 
 	private CanvasGroup canvasGroup;
-	private CanvasGroup newGun;
-	private CanvasGroup oldGun;
-	private CanvasGroup timerAlpha;
-	private Text timerText;
 
 	private void Awake()
 	{
 		canvasGroup = GetComponent<CanvasGroup>();
-		newGun = transform.FindChild("New").GetComponent<CanvasGroup>();
-		oldGun = transform.FindChild("Old").GetComponent<CanvasGroup>();
-		timerAlpha = transform.FindChild("Timer").GetComponent<CanvasGroup>();
-		timerText = transform.FindChild("Timer").GetComponent<Text>();
 
 		timer = timeLimit;
 	}
 
 	private void Start()
 	{
+		newGun.sprite = newGunPrefab.SpriteRenderer.sprite;
+		newStats.text = newGunPrefab.projectile.damage + "\n" +
+						newGunPrefab.FireRate + "\n" +
+						newGunPrefab.projectile.knockback.x;
+
 		Appear();
 	}
 
@@ -75,6 +80,17 @@ public class PopupSwapGunInstance : MonoBehaviour
 		}
 	}
 
+	private void OnGUI()
+	{
+		if (!selectionMade)
+		{
+			oldGun.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
+			oldStats.text = PlayerControl.Instance.Gun.projectile.damage + "\n" +
+							PlayerControl.Instance.Gun.FireRate + "\n" +
+							PlayerControl.Instance.Gun.projectile.knockback.x;
+		}
+	}
+
 	public void DisappearNoSelection()
 	{
 		canvasGroup.alpha = 1f;
@@ -84,16 +100,15 @@ public class PopupSwapGunInstance : MonoBehaviour
 			.SetEase(Ease.InQuad)
 			.SetDelay(appearTime * 0.4f);
 		DOTween.To(() => yOffset, x => yOffset = x, distance * 2f, appearTime)
-			.SetEase(Ease.OutQuint);
-
-		Destroy(gameObject, appearTime);
+			.SetEase(Ease.OutQuint)
+			.OnComplete(() => Destroy(gameObject));
 	}
 
 	private void SwapGuns(bool swap)
 	{
 		if (swap)
 		{
-			PlayerControl.Instance.SwapGun(newGunPrefab);
+			PlayerControl.Instance.AddGun(newGunPrefab);
 		}
 
 		Disappear(swap);
@@ -114,15 +129,15 @@ public class PopupSwapGunInstance : MonoBehaviour
 	{
 		Transform selectedTransform = swap ? newGun.transform : oldGun.transform;
 
-		DOTween.To(() => newGun.alpha, x => newGun.alpha = x, 0f, disappearTime * (swap ? 0.6f : 0.5f))
+		newCanvasGroup.DOFade(0f, disappearTime * (swap ? 0.6f : 0.5f))
 			.SetEase(Ease.InQuad)
 			.SetDelay(disappearTime * (swap ? 0.4f : 0f));
-		DOTween.To(() => oldGun.alpha, x => oldGun.alpha = x, 0f, disappearTime * (swap ? 0.5f : 0.6f))
+		oldCanvasGroup.DOFade(0f, disappearTime * (swap ? 0.5f : 0.6f))
 			.SetEase(Ease.InQuad)
 			.SetDelay(disappearTime * (swap ? 0f : 0.4f));
 		selectedTransform.DOScale(new Vector3(disappearScale, disappearScale, 1f), disappearTime)
 			.SetEase(Ease.InCubic);
-		timerAlpha.DOFade(0f, disappearTime * 0.5f)
+		timerText.DOFade(0f, disappearTime * 0.5f)
 			.SetEase(Ease.InQuad);
 
 		Destroy(gameObject, disappearTime);

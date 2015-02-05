@@ -145,7 +145,13 @@ public abstract class Enemy : MonoBehaviour
 
 				DOTween.Sequence()
 					.AppendInterval(flashLength)
-					.AppendCallback(() => ResetColor());
+					.AppendCallback(() =>
+					{
+						if (this != null)
+						{
+							ResetColor();
+						}
+					});
 			}
 		}
 	}

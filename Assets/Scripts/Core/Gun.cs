@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
 		get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; }
 	}
 
-	void Awake()
+	private void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -102,7 +102,7 @@ public class Gun : MonoBehaviour
 		secondaryTimer = secondaryCooldown;
 	}
 
-	void Update()
+	private void Update()
 	{
 		previousShoot = shoot;
 
@@ -138,7 +138,7 @@ public class Gun : MonoBehaviour
 		shootStart = shootStart || (shoot && !previousShoot);
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		Vector3 shotDirection = RotateTowardsMouse();
 
@@ -214,14 +214,27 @@ public class Gun : MonoBehaviour
 				}
 			}
 
-			if (NoInput)
-			{
-				spriteRenderer.color = Color.clear;
-			}
-			else
+			if (!NoInput)
 			{
 				spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
 			}
+		}
+
+		if (disableInput || NoInput)
+		{
+			spriteRenderer.color = Color.clear;
+		}
+		else if (!canOverheat)
+		{
+			spriteRenderer.color = Color.white;
+		}
+	}
+
+	private void OnDisable()
+	{
+		if (continuousFire && projectileInstance != null)
+		{
+			Destroy(projectileInstance.gameObject);
 		}
 	}
 
