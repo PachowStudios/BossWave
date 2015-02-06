@@ -354,6 +354,8 @@ MonoBehaviour:
   introName: The R.I.F.T
   introDescription: Reasonably Intelligent Floating Thing
   introSprite: {fileID: 21300000, guid: 8b56fab6f11112f4db115fe12063e514, type: 3}
+  warningPopup: {fileID: 21300000, guid: 61f3730bdc492864e910ea44f8af4eb8, type: 3}
+  fightFOV: 630
   spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 0}
   spawnPathName: Boss Intro
   spawnLaserPathName: Boss Laser Intro
@@ -362,8 +364,8 @@ MonoBehaviour:
   silhouetteBodyName: 3-Boss Silhouette Body
   wallName: Right Wall
   doorName: Door
-  spawnFadeTime: 2
-  spawnPathTime: 5
+  spawnFadeTime: 1
+  spawnPathTime: 8
   spawnLaserPathTime: 1
   doorOpenTime: .5
   returnSpeed: 30

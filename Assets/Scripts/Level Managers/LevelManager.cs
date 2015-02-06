@@ -23,7 +23,6 @@ public class LevelManager : MonoBehaviour
 	{
 		public Boss boss;
 		public float startTime;
-		public float warningLength;
 		public float totalLength;
 		public float cameraSpeed;
 		public float fullCameraSpeed;
@@ -31,7 +30,6 @@ public class LevelManager : MonoBehaviour
 		public Transform spawner;
 		public Transform playerWaitPoint;
 		public Transform scrollingEndcap;
-		public Sprite warningPopup;
 	}
 
 	public bool introCRT = true;
@@ -44,7 +42,6 @@ public class LevelManager : MonoBehaviour
 	public Transform foregroundLayer;
 	public GameObject worldBoundaries;
 	public GameObject runningBoundaries;
-	public int runningFOV = 400;
 
 	[SerializeField]
 	private Transform groundLevel;
@@ -56,7 +53,6 @@ public class LevelManager : MonoBehaviour
 	private bool bossWaveActive = false;
 	private bool bossWaveIntroComplete = false;
 	private bool bossWaveInitialized = false;
-	private bool bossWaveWarningShown = false;
 	private int currentWave = 0;
 	private float waveTimer;
 
@@ -120,26 +116,10 @@ public class LevelManager : MonoBehaviour
 		{
 			if (!bossWaveIntroComplete)
 			{
-				if (!bossWaveWarningShown)
+				if (!bossWaveInitialized)
 				{
-					DOTween.Sequence()
-						.AppendCallback(() => Cutscene.Instance.Show())
-						.AppendInterval(bossWave.warningLength * 0.25f)
-						.AppendCallback(() => CameraShake.Instance.Shake(bossWave.warningLength * 0.5f, new Vector3(0f, 2f, 0f)))
-						.AppendInterval(bossWave.warningLength * 0.05f)
-						.AppendCallback(() => StartCoroutine(PlayerControl.Instance.JumpToFloor()))
-						.AppendInterval(bossWave.warningLength * 0.20f)
-						.AppendCallback(() => PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, "", bossWave.warningPopup, true));
-					bossWaveWarningShown = true;
-				}
-
-				if (!bossWaveInitialized && waveTimer >= bossWave.startTime + bossWave.warningLength)
-				{
-					
-					ScaleWidthCamera.Instance.AnimateFOV(runningFOV, 1f);
 					bossInstance = Instantiate(bossWave.boss, bossWave.spawner.position, Quaternion.identity) as Boss;
 					bossInstance.Spawn();
-					PlayerControl.Instance.GoToPoint(bossWave.playerWaitPoint.position, false, false);
 
 					bossWaveInitialized = true;
 				}

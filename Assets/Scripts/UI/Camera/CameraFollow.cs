@@ -63,14 +63,13 @@ public class CameraFollow : MonoBehaviour
 			{
 				targetPosition.y = PlayerControl.Instance.transform.position.y + currentYOffset;
 			}
-
-			targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
 		}
 		else
 		{
 			targetPosition.y = followTarget.position.y + currentYOffset;
 		}
 
+		targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
 		transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
 	}
 

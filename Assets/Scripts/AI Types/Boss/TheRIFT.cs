@@ -36,6 +36,8 @@ public sealed class TheRIFT : Boss
 	public string introName;
 	public string introDescription;
 	public Sprite introSprite;
+	public Sprite warningPopup;
+	public int fightFOV = 630;
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
 	public string spawnPathName;
 	public string spawnLaserPathName;
@@ -123,31 +125,48 @@ public sealed class TheRIFT : Boss
 	{
 		if (!spawned)
 		{
-			CameraFollow.Instance.FollowObject(transform, false, 2f, true);
-
 			Sequence spawnSequence = DOTween.Sequence();
-
-			spawnSequence.AppendCallback(() => BossIntro.Instance.Show(introName, introDescription, introSprite));
-			spawnSequence.AppendInterval(0.5f);
 
 			foreach (SpriteRenderer sprite in spriteRenderers)
 			{
-				spawnSequence.Insert(1, sprite.DOColor(Color.white, spawnFadeTime));
+				spawnSequence.Insert(0, sprite.DOColor(Color.white, spawnFadeTime)
+					.SetEase(Ease.InExpo));
 			}
 
 			spawnSequence
-				.AppendCallback(() => ExplodeEffect.Instance.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite))
-				.AppendCallback(() => Destroy(silhouetteTubes.gameObject))
-				.AppendCallback(() => Destroy(silhouetteBody))
+				.AppendCallback(() =>
+				{
+					ExplodeEffect.Instance.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite);
+					Destroy(silhouetteTubes.gameObject);
+					Destroy(silhouetteBody);
+					CameraShake.Instance.Shake(2f, new Vector3(0f, 2f, 0f));
+					StartCoroutine(PlayerControl.Instance.JumpToFloor());
+					PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, "", warningPopup, true);
+				})
+				.AppendInterval(2f)
+				.AppendCallback(() =>
+				{
+					Cutscene.Instance.Show();
+					ScaleWidthCamera.Instance.AnimateFOV(fightFOV, 1f);
+					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
+					BossIntro.Instance.Show(introName, introDescription, introSprite);
+					PlayerControl.Instance.GoToPoint(LevelManager.Instance.bossWave.playerWaitPoint.position, false, false);
+				})
 				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
-					.SetEase(Ease.InCubic)
+					.SetEase(Ease.InQuart)
 					.OnComplete(() =>
 					{
 						door.DOLocalPath(VectorPath.GetPath(doorPathName), doorOpenTime, VectorPath.GetPathType(doorPathName), PathMode.Sidescroller2D)
 							.SetEase(Ease.InOutCubic);
 					}))
-				.AppendCallback(FinishSpawn)
-				.AppendCallback(() => FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform))
+				.AppendCallback(() =>
+				{
+					FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform);
+					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
+					spawned = true;
+					startingX = transform.position.x;
+					prevPosition = transform.position;
+				})
 				.AppendInterval(spawnLaserPathTime + 0.25f)
 				.AppendCallback(() =>
 				{
@@ -161,14 +180,6 @@ public sealed class TheRIFT : Boss
 	{
 		maxFloatHeight = 1000f;
 		minFloatHeight = 990f;
-	}
-
-	private void FinishSpawn()
-	{
-		CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
-		spawned = true;
-		startingX = transform.position.x;
-		prevPosition = transform.position;
 	}
 
 	private void MainAI()

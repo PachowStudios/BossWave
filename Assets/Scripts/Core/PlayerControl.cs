@@ -223,7 +223,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void Update()
 	{
-		if (!disableInput)
+		if (!disableInput && !Dead)
 		{
 			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
 			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
@@ -257,26 +257,29 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		InitialUpdate();
-		ApplyAnimation();
-
-		if (useTargetPoint && disableInput)
+		if (!Dead)
 		{
-			UpdateGoTo();
-		}
+			InitialUpdate();
+			ApplyAnimation();
 
-		if (combo > 1)
-		{
-			UpdateCombo();
-		}
+			if (useTargetPoint && disableInput)
+			{
+				UpdateGoTo();
+			}
 
-		if (Health > 0f)
-		{
-			UpdateInvincibilityFlash();	
-		}
+			if (combo > 1)
+			{
+				UpdateCombo();
+			}
 
-		GetMovement();
-		ApplyMovement();
+			if (Health > 0f)
+			{
+				UpdateInvincibilityFlash();
+			}
+
+			GetMovement();
+			ApplyMovement();
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -471,7 +474,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 		if (IsGrounded)
 		{
-			Jump(1f);
+			Jump(1f, false);
 			controller.move(velocity * Time.deltaTime);
 		}
 
@@ -483,7 +486,6 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 
 		controller.platformMask = originalCollider;
-		DisableInput();
 	}
 
 	public void CancelGoTo()
@@ -703,12 +705,16 @@ public sealed class PlayerControl : MonoBehaviour
 	#endregion
 
 	#region Private Helper Methods
-	private void Jump(float height)
+	private void Jump(float height, bool playAnimation = true)
 	{
 		if (height >= 0f)
 		{
 			velocity.y = Mathf.Sqrt(2f * height * -gravity);
-			anim.SetTrigger("Jump");
+
+			if (playAnimation)
+			{
+				anim.SetTrigger("Jump");
+			}
 		}
 	}
 
