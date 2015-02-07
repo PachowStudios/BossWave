@@ -68,6 +68,7 @@ public sealed class TheRIFT : Boss
 	private bool preAttacking = false;
 	private bool floating = true;
 	private bool applyMovement = true;
+	private bool dead = false;
 	private RIFTLaser laserInstance;
 
 	private List<SpriteRenderer> spriteRenderers;
@@ -182,34 +183,57 @@ public sealed class TheRIFT : Boss
 		minFloatHeight = 990f;
 	}
 
+	protected override void CheckDeath(bool showDrops = true)
+	{
+		if (Health <= 0f && !dead)
+		{
+			dead = true;
+
+			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+			DOTween.Complete("RIFT Attack");
+			DOTween.Kill("RIFT Swoop");
+			DOTween.Kill("Boss Wave Timer");
+		}
+	}
+
 	private void MainAI()
 	{
 		InitialUpdate();
 
-		invincible = !attacking;
-		anim.SetBool("Eye Shield", invincible);
-		anim.SetBool("Attacking", attacking);
-
-		attackTimer += Time.deltaTime;
-
-		if (currentAttack < attacks.Count && attackTimer >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime)
+		if (!dead)
 		{
-			if (!attacking && !preAttacking)
+			invincible = !attacking;
+			anim.SetBool("Eye Shield", invincible);
+			anim.SetBool("Attacking", attacking);
+
+			attackTimer += Time.deltaTime;
+
+			if (currentAttack < attacks.Count && attackTimer >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime)
 			{
-				StartCoroutine(DoAttack(attacks[currentAttack]));
-				currentAttack++;
-				preAttacking = true;
+				if (!attacking && !preAttacking)
+				{
+					StartCoroutine(DoAttack(attacks[currentAttack]));
+					currentAttack++;
+					preAttacking = true;
+				}
+			}
+
+			if (applyMovement)
+			{
+				if (floating)
+				{
+					Float();
+				}
+
+				ReturnPosition();
+
+				GetMovement();
+				ApplyMovement();
 			}
 		}
-
-		if (applyMovement)
+		else
 		{
-			if (floating)
-			{
-				Float();
-			}
-
-			ReturnPosition();
+			FallToGround();
 
 			GetMovement();
 			ApplyMovement();
@@ -259,8 +283,8 @@ public sealed class TheRIFT : Boss
 		laserTarget.gameObject.HideInHiearchy();
 		laserTarget.parent = (targetParent == null) ? laserTarget : targetParent;
 
-		Sequence laserSequence = DOTween.Sequence();
-		laserSequence
+		DOTween.Sequence()
+			.SetId("RIFT Attack")
 			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], laserInstance.chargeTime)
 				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
 			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
@@ -294,6 +318,7 @@ public sealed class TheRIFT : Boss
 		ghostTrail.trailActive = true;
 
 		transform.DOPath(swoopPath, length, PathType.CatmullRom, PathMode.Sidescroller2D)
+			.SetId("RIFT Swoop")
 			.SetEase(curve)
 			.OnComplete(() =>
 			{
@@ -320,7 +345,9 @@ public sealed class TheRIFT : Boss
 		cannonTarget.transform.position = cannonPath[0];
 
 		Sequence cannonSequence = DOTween.Sequence();
-		cannonSequence.AppendInterval(0.25f);
+		cannonSequence
+			.SetId("RIFT Attack")
+			.AppendInterval(0.25f);
 
 		for (int i = 1; i <= shots; i++)
 		{
@@ -396,6 +423,29 @@ public sealed class TheRIFT : Boss
 		}
 
 		prevPosition = transform.position;
+	}
+
+	private void FallToGround()
+	{
+		if (transform.position.y > LevelManager.Instance.GroundLevel.y)
+		{
+			gravity = defaultGravity;
+		}
+		else
+		{
+			if (gravity != 0f)
+			{
+				SpriteEffect.Instance.SpawnEffect("Big Dust Poof", transform.position);
+				CameraShake.Instance.Shake(1f, new Vector3(0f, 2f, 0f));
+				anim.SetBool("Dead", true);
+				DOTween.To(() => LevelManager.Instance.bossWave.cameraSpeed, x => LevelManager.Instance.bossWave.cameraSpeed = x, 0f, 0.5f)
+					.SetEase(Ease.OutQuint)
+					.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
+			}
+
+			gravity = 0f;
+			velocity = Vector3.zero;
+		}
 	}
 
 	private Vector3[] GeneratePath(AttackPattern pattern)

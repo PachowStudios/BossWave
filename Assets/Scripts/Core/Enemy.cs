@@ -91,6 +91,8 @@ public abstract class Enemy : MonoBehaviour
 		get { return PlayerControl.Instance.transform.position.x > transform.position.x; }
 	}
 
+	protected abstract void CheckDeath(bool showDrops = true);
+
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -233,44 +235,12 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
-	private void CheckDeath(bool showPopup = true)
-	{
-		if (Health <= 0f)
-		{
-			ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
-			int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-
-			if (showPopup)
-			{
-				PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
-
-				if (Random.Range(0f, 100f) <= microchipChance)
-				{
-					int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
-
-					for (int i = 0; i < microchipsToSpawn; i++)
-					{
-						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
-						PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
-					}
-				}
-			}
-
-			if (timeWarpAtDeath)
-			{
-				DeathTimeWarp();
-			}
-
-			Destroy(gameObject);
-		}
-	}
-
-	private void DeathTimeWarp()
+	protected void DeathTimeWarp()
 	{
 		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
 	}
 
-	private void ResetColor()
+	protected void ResetColor()
 	{
 		spriteRenderer.color = Color.white;
 	}

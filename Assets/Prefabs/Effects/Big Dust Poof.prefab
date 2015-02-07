@@ -8,12 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 212: {fileID: 21200000}
+  - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
-  - 114: {fileID: 11400004}
-  - 114: {fileID: 11400006}
   m_Layer: 0
-  m_Name: EffectsManager
+  m_Name: Big Dust Poof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +30,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ef7f8e1a4cc55641884a1feb18ca71f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,57 +53,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876bd141ba78a7947a8f8e538952749c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e120877e44a3ba45b2e542884ac0456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultFixedTimestep: .0166666992
---- !u!114 &11400002
-MonoBehaviour:
+--- !u!212 &21200000
+SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bc5c677d4674042a821fe47b31795a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 11400000, guid: 30b0be472223e304f9c048f159c43fa0, type: 2}
-  pixelsPerUnit: 10
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a45f837c9bb9949854c5bae828a78a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultFade: .699999988
-  borderBuffer: -64
-  borderZeroed: -32
-  distortionAmount: .200000003
-  noiseIntensity: 3.5
-  scanlineOffset: {x: 0, y: 175}
-  crtBorder: {fileID: 0}
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8190b8bf1ba1c4a8956b543c0e953c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectsLibrary:
-  - name: Small Dust Explosion
-    prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
-  - name: Big Dust Poof
-    prefab: {fileID: 21200000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 3710787823
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300004, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

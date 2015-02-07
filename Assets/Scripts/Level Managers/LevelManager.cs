@@ -144,6 +144,7 @@ public class LevelManager : MonoBehaviour
 					BossWaveTimer.Instance.Show();
 					BossWaveTimer.Instance.Timer = bossWave.totalLength;
 					DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, bossWave.totalLength)
+						.SetId("Boss Wave Timer")
 						.SetEase(Ease.Linear)
 						.OnComplete(() =>
 						{
