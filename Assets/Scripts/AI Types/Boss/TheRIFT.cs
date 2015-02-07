@@ -427,9 +427,10 @@ public sealed class TheRIFT : Boss
 
 	private void FallToGround()
 	{
-		if (transform.position.y > LevelManager.Instance.GroundLevel.y)
+		if (transform.position.y > LevelManager.Instance.GroundLevel.y - 0.7f)
 		{
 			gravity = defaultGravity;
+			anim.SetTrigger("Hit");
 		}
 		else
 		{

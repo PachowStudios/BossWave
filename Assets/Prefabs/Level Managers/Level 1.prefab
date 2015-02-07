@@ -683,39 +683,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 0
+  introCRT: 1
   spawnEnemies: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
-  - startTime: 2
-    amount: 15
-    spawnDelay: 1
-    difficulty: 0
-  - startTime: 22.7000008
-    amount: 10
+  - startTime: 1
+    amount: 2
     spawnDelay: 1
     difficulty: 1
-  - startTime: 34.2000008
-    amount: 20
-    spawnDelay: .5
-    difficulty: 0
-  - startTime: 45.2999992
-    amount: 5
+  - startTime: 20
+    amount: 1
     spawnDelay: 1
-    difficulty: 2
-  - startTime: 56.4000015
-    amount: 7
+    difficulty: 4
+  - startTime: 40
+    amount: 1
     spawnDelay: 1
-    difficulty: 1
-  - startTime: 67.9000015
-    amount: 7
-    spawnDelay: 1
-    difficulty: 0
+    difficulty: 3
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
     startTime: 1
-    totalLength: 10
+    totalLength: 15
     cameraSpeed: 20
     fullCameraSpeed: 30
     speedUpTime: 5
@@ -728,6 +716,7 @@ MonoBehaviour:
   - {fileID: 11400002, guid: a89caa5c84b4afb4c98ab899dd518d26, type: 2}
   - {fileID: 11400002, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
   - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
+  - {fileID: 11400002, guid: 670399add197745458d030505ccdd6f4, type: 2}
   foregroundLayer: {fileID: 0}
   worldBoundaries: {fileID: 0}
   runningBoundaries: {fileID: 100012}
@@ -744,7 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPowerups: 1
+  spawnPowerups: 0
   powerups:
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}

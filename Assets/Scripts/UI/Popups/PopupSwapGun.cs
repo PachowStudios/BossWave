@@ -34,7 +34,7 @@ public class PopupSwapGun : MonoBehaviour
 		PopupSwapGunInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
 		currentPopup = popupInstance;
 		popupInstance.transform.SetParent(transform);
-		popupInstance.transform.SetAsLastSibling();
+		popupInstance.transform.SetAsFirstSibling();
 		popupInstance.transform.localScale = popupPrefab.transform.localScale;
 		popupInstance.newGunPrefab = newGunPrefab;
 	}

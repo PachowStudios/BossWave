@@ -18,7 +18,7 @@ public class LevelSelect : MonoBehaviour
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
 			TimeWarpEffect.Instance.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
-			CRTEffect.Instance.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
+			CRTEffect.Instance.EndCRT(fadeInTime, 0f, Screen.height, Ease.InOutSine);
 		}
 		else
 		{

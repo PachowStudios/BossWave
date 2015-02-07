@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 1
-  difficulty: 3
+  difficulty: 4
   immuneToInstantKill: 0
   maxHealth: 300
   damage: 15

@@ -49,7 +49,13 @@ public sealed class ShootAI : FollowAI
 			{
 				DOTween.Sequence()
 					.AppendInterval(delayBetweenShots * shotsPerBurst + attackBuffer)
-					.AppendCallback(() => anim.SetTrigger("End Attack"));
+					.AppendCallback(() => 
+					{
+						if (this != null)
+						{
+							anim.SetTrigger("End Attack");
+						}
+					});
 			}
 		}
 		else

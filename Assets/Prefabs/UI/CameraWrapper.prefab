@@ -1633,7 +1633,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 14.067358
+  orthographic size: 14.0607882
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4072,7 +4072,7 @@ MonoBehaviour:
   playerDescription: {fileID: 11400240}
   textTypeInterval: .0500000007
   defaultPlayerName: Nomad
-  defaultPlayerDescription: Just Some F*cking Guy
+  defaultPlayerDescription: Kicking Ass And Taking Names
 --- !u!114 &11400216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5065,7 +5065,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 28.134716}
+  m_SizeDelta: {x: 50, y: 28.1215763}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400012
 RectTransform:

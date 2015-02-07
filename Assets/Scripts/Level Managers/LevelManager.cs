@@ -87,12 +87,18 @@ public class LevelManager : MonoBehaviour
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
 
+		GameMenu.Instance.EnablePausing(false);
+		DOTween.Sequence()
+			.SetUpdate(true)
+			.AppendInterval(fadeInTime + 0.1f)
+			.AppendCallback(() => GameMenu.Instance.EnablePausing(true));
+
 		if (introCRT)
 		{
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
 			TimeWarpEffect.Instance.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
-			CRTEffect.Instance.EndCRT(fadeInTime, Screen.height, 0f, Ease.InOutSine);
+			CRTEffect.Instance.EndCRT(fadeInTime, 0f, Screen.height, Ease.InOutSine);
 		}
 		else
 		{

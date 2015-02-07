@@ -35,16 +35,14 @@ public class CRTEffect : MonoBehaviour
 		crtBorder.color = new Color(crtBorder.color.r, crtBorder.color.g, crtBorder.color.b, 1f);
 	}
 
-	public void StartCRT(float fadeTime, float scanlinesStart = -1f, float scanlinesEnd = -1f, Ease easeType = Ease.OutSine)
+	public void StartCRT(float fadeTime, Ease easeType = Ease.OutSine)
 	{
-		Vector2 scanlines = (scanlinesStart == -1 || scanlinesEnd == -1) ? defaultScanlines : new Vector2(scanlinesStart, scanlinesEnd);
-
 		EnableCRTShader();
 
 		DOTween.To(UpdateCRTBorder, borderBuffer, borderZeroed, fadeTime)
 			.SetEase(easeType)
 			.SetUpdate(true);
-		DOTween.To(UpdateCRTScanlines, scanlines.x, scanlines.y, fadeTime)
+		DOTween.To(UpdateCRTScanlines, defaultScanlines.x, defaultScanlines.y, fadeTime)
 			.SetEase(easeType)
 			.SetUpdate(true);
 		DOTween.To(UpdateCRTShader, 0f, distortionAmount, fadeTime)
@@ -54,13 +52,14 @@ public class CRTEffect : MonoBehaviour
 
 	public void EndCRT(float fadeTime, float scanlinesStart = -1f, float scanlinesEnd = -1f, Ease easeType = Ease.InSine)
 	{
-		Vector2 scanlines = (scanlinesStart == -1 || scanlinesEnd == -1) ? defaultScanlines : new Vector2(scanlinesStart, scanlinesEnd);
+		Vector2 scanlines = (scanlinesStart == -1 || scanlinesEnd == -1) ? defaultScanlines : new Vector2(scanlinesEnd, scanlinesStart);
 
 		if (!crtShader.enabled)
 		{
 			EnableCRTShader();
 		}
 
+		crtShader.TextureSize = scanlines.y;
 		DOTween.To(UpdateCRTBorder, borderZeroed, borderBuffer, fadeTime)
 			.SetEase(Ease.OutCirc)
 			.SetUpdate(true);
@@ -75,11 +74,7 @@ public class CRTEffect : MonoBehaviour
 
 	public void AnimateScanlines(float fadeTime, float scanlinesEnd, Ease easeType)
 	{
-		if (!crtShader.enabled)
-		{
-			StartCRT(fadeTime, defaultScanlines.x, scanlinesEnd, easeType);
-		}
-		else
+		if (crtShader.enabled)
 		{
 			DOTween.To(UpdateCRTScanlines, crtShader.TextureSize, scanlinesEnd, fadeTime)
 				.SetEase(easeType)

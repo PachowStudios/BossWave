@@ -13,8 +13,6 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
-Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween.dll (this message is harmless)
@@ -31,25 +29,21 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-NullReferenceException: Object reference not set to an instance of an object
-  at CameraFollow.Awake () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
-UnloadTime: 4.513176 ms
+UnloadTime: 4.640151 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2438.
-Total: 0.856935 ms (FindLiveObjects: 0.062024 ms CreateObjectMapping: 0.021357 ms MarkObjects: 0.435050 ms  DeleteObjects: 0.028086 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2429.
+Total: 0.870394 ms (FindLiveObjects: 0.069338 ms CreateObjectMapping: 0.020479 ms MarkObjects: 0.431832 ms  DeleteObjects: 0.028671 ms)
 
-UnloadTime: 3.686082 ms
-NullReferenceException: Object reference not set to an instance of an object
-  at CameraFollow.Awake () [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
+UnloadTime: 3.758347 ms
 Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 294 unused Assets to reduce memory usage. Loaded Objects now: 1441.
-Total: 2.919550 ms (FindLiveObjects: 0.030719 ms CreateObjectMapping: 0.017554 ms MarkObjects: 0.422762 ms  DeleteObjects: 2.147459 ms)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 2437.
+Total: 0.810417 ms (FindLiveObjects: 0.062902 ms CreateObjectMapping: 0.021357 ms MarkObjects: 0.436806 ms  DeleteObjects: 0.006436 ms)
+
+UnloadTime: 3.572565 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 2444.
+Total: 0.785841 ms (FindLiveObjects: 0.052955 ms CreateObjectMapping: 0.021650 ms MarkObjects: 0.436806 ms  DeleteObjects: 0.005558 ms)
 

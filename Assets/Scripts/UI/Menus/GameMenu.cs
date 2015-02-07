@@ -7,6 +7,8 @@ using DG.Tweening.Core;
 
 public class GameMenu : MonoBehaviour 
 {
+	private static GameMenu instance;
+
 	public EventSystem eventSystem;
 
 	public float fadeTime = 0.7f;
@@ -30,8 +32,15 @@ public class GameMenu : MonoBehaviour
 
 	private RectTransform rectTransform;
 
+	public static GameMenu Instance
+	{
+		get { return instance; }
+	}
+
 	private void Awake()
 	{
+		instance = this;
+
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
 		resolutionSelector = transform.FindSubChild("Resolution").GetComponent<ResolutionSelector>();
@@ -81,6 +90,11 @@ public class GameMenu : MonoBehaviour
 
 			StartCoroutine(GameOver());
 		}
+	}
+
+	public void EnablePausing(bool enabled)
+	{
+		canPause = enabled;
 	}
 
 	public void LoadLevel(string levelName)
@@ -163,11 +177,6 @@ public class GameMenu : MonoBehaviour
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true)
 			.OnComplete(() => EnablePausing(setPause));
-	}
-
-	private void EnablePausing(bool enabled)
-	{
-		canPause = enabled;
 	}
 
 	private void UpdatePauseAlpha(float newValue)
