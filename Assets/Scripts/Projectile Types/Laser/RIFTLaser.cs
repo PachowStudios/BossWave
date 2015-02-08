@@ -45,7 +45,7 @@ public class RIFTLaser : Projectile
 	private SpriteRenderer tip;
 	private SpriteRenderer charge;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 
@@ -72,7 +72,7 @@ public class RIFTLaser : Projectile
 		vectorLine.textureScale = 1f;
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		transform.position = firePoint;
 		transform.rotation = firePoint.LookAt2D(targetPoint);
@@ -127,7 +127,7 @@ public class RIFTLaser : Projectile
 		}
 	}
 
-	void OnDestroy()
+	private void OnDestroy()
 	{
 		VectorLine.Destroy(ref vectorLine);
 	}

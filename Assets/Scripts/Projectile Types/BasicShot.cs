@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BasicShot : Projectile
 {
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		InitialUpdate();
 

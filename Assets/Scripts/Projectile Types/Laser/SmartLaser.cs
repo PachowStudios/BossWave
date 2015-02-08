@@ -45,7 +45,7 @@ public class SmartLaser : Projectile
 	private PolygonCollider2D detectionCollider;
 	private SpriteRenderer tip;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		base.Awake();
 
@@ -77,7 +77,7 @@ public class SmartLaser : Projectile
 		detectionCollider.isTrigger = true;
 	}
 
-	void FixedUpdate()
+	private void FixedUpdate()
 	{
 		previousTipEnabled = tip.enabled;
 		previousTipPosition = tip.transform.position;
@@ -128,7 +128,7 @@ public class SmartLaser : Projectile
 		}
 	}
 
-	void OnDestroy()
+	private void OnDestroy()
 	{
 		VectorLine.Destroy(ref vectorLine);
 	}

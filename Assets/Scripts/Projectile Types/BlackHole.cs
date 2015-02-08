@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 
 public class BlackHole : Projectile
 {
@@ -12,6 +13,7 @@ public class BlackHole : Projectile
 	public float innerRotation = 1f;
 	[Range(0.1f, 1f)]
 	public float activationBuffer = 80f;
+	public float activationSpeed = 2f;
 	public Color color = Color.black;
 	public ParticleSystem particleSystemPrefab;
 	public string particlesSortingLayer = "Foreground";
@@ -33,10 +35,11 @@ public class BlackHole : Projectile
 	private CircleCollider2D outerRadius;
 	private CircleCollider2D innerRadius;
 
-	new void Awake()
+	protected override void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
 		spriteRenderer = transform.FindChild("sprite").GetComponent<SpriteRenderer>();
+		anim = spriteRenderer.GetComponent<Animator>();
 
 		outerRadius = transform.FindChild("outerRadius").GetComponent<CircleCollider2D>();
 		innerRadius = transform.FindChild("innerRadius").GetComponent<CircleCollider2D>();
@@ -50,7 +53,15 @@ public class BlackHole : Projectile
 		}
 	}
 
-	void FixedUpdate()
+	private void Update()
+	{
+		if (!activated && CrossPlatformInputManager.GetButtonDown("SecondaryShoot"))
+		{
+			activated = true;
+		}
+	}
+
+	private void FixedUpdate()
 	{
 		InitialUpdate();
 
@@ -59,8 +70,9 @@ public class BlackHole : Projectile
 		if (activated)
 		{
 			shotSpeed = Mathf.Lerp(shotSpeed, 0f, 0.1f);
+			anim.SetBool("Active", true);
 
-			if (!spawned && shotSpeed <= 2f)
+			if (!spawned && shotSpeed <= activationSpeed)
 			{
 				Spawn();
 			}
@@ -85,7 +97,7 @@ public class BlackHole : Projectile
 		}
 	}
 
-	new void OnTriggerEnter2D(Collider2D trigger)
+	protected override void OnTriggerEnter2D(Collider2D trigger)
 	{
 		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
 		{
@@ -128,16 +140,11 @@ public class BlackHole : Projectile
 		}
 	}
 
-	new void OnTriggerStay2D(Collider2D trigger)
-	{
-		OnTriggerEnter2D(trigger);
-	}
-
 	private void Spawn()
 	{
 		spawned = true;
 
-		spriteRenderer.gameObject.ColorTo(color, 0.2f, 0f);
+		spriteRenderer.DOColor(color, 0.2f);
 
 		particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
 		particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;

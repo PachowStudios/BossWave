@@ -78,7 +78,7 @@ MonoBehaviour:
   showSecondaryGUI: 1
   secondaryIcon: {fileID: 21300020, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   continuousFire: 0
-  shootCooldown: .5
+  shootCooldown: .100000001
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0

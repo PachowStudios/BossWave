@@ -240,7 +240,7 @@ MonoBehaviour:
   damage: .5
   knockback: {x: 0, y: 0}
   gravity: 0
-  shotSpeed: 15
+  shotSpeed: 25
   lifetime: 5
   autoDestroy: 1
   destroyOnEnemy: 0
