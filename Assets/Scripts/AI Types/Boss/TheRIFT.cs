@@ -24,13 +24,19 @@ public sealed class TheRIFT : Boss
 	[System.Serializable]
 	public struct Attack
 	{
-		public float time;
-		public float preAttackTime;
+		public AttackType type;
 		public float length;
 		public int modifier;
 		public AttackPattern pattern;
 		public AnimationCurve curve;
-		public List<AttackType> possibleAttacks;
+	}
+
+	[System.Serializable]
+	public struct AttackWave
+	{
+		public float time;
+		public float preAttackTime;
+		public List<Attack> possibleAttacks;
 	};
 
 	public string introName;
@@ -57,7 +63,7 @@ public sealed class TheRIFT : Boss
 	public RIFTLaser laserPrefab;
 	public Projectile cannonPrefab;
 	public string cannonFireEffect;
-	public List<Attack> attacks;
+	public List<AttackWave> attacks;
 
 	private float defaultGravity;
 	private float startingX;
@@ -117,6 +123,12 @@ public sealed class TheRIFT : Boss
 		if (!invincible)
 		{
 			anim.SetTrigger("Hit");
+
+			if (DOTween.IsTweening("RIFT Swoop"))
+			{
+				DOTween.Kill("RIFT Swoop");
+				StartCoroutine(Stun());
+			}
 		}
 
 		base.TakeDamage(enemy);
@@ -141,6 +153,8 @@ public sealed class TheRIFT : Boss
 					Destroy(silhouetteTubes.gameObject);
 					Destroy(silhouetteBody);
 					CameraShake.Instance.Shake(2f, new Vector3(0f, 2f, 0f));
+					LevelManager.Instance.KillAllEnemies();
+					AssemblyLine.StopAll();
 					StartCoroutine(PlayerControl.Instance.JumpToFloor());
 					PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, "", warningPopup, true);
 				})
@@ -240,12 +254,12 @@ public sealed class TheRIFT : Boss
 		}
 	}
 
-	private IEnumerator DoAttack(Attack attack)
+	private IEnumerator DoAttack(AttackWave attackWave)
 	{
-		int attackToUse = UnityEngine.Random.Range(0, attack.possibleAttacks.Count);
+		int attackToUse = UnityEngine.Random.Range(0, attackWave.possibleAttacks.Count);
 		Action<Attack> attackFunction = null;
 
-		switch (attack.possibleAttacks[attackToUse])
+		switch (attackWave.possibleAttacks[attackToUse].type)
 		{
 			case AttackType.Laser:
 				anim.SetTrigger("PreAttack Laser");
@@ -263,10 +277,10 @@ public sealed class TheRIFT : Boss
 
 		if (attackFunction != null)
 		{
-			yield return new WaitForSeconds(attack.preAttackTime);
+			yield return new WaitForSeconds(attackWave.preAttackTime);
 
 			preAttacking = false;
-			attackFunction.Invoke(attack);
+			attackFunction.Invoke(attackWave.possibleAttacks[attackToUse]);
 		}
 	}
 
@@ -379,6 +393,19 @@ public sealed class TheRIFT : Boss
 	private void FireCannon(Attack attack)
 	{
 		FireCannon(attack.length, attack.pattern, attack.curve, attack.modifier);
+	}
+
+	private IEnumerator Stun()
+	{
+		applyMovement = true;
+		ghostTrail.trailActive = false;
+
+		while (transform.position.x > startingX)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		attacking = false;
 	}
 
 	private void Float()

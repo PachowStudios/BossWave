@@ -333,7 +333,8 @@ MonoBehaviour:
   spawned: 0
   difficulty: 5
   immuneToInstantKill: 1
-  maxHealth: 5
+  immuneToKnockback: 1
+  maxHealth: 50
   damage: 5
   microchipChance: 100
   minMicrochips: 10
@@ -392,25 +393,26 @@ MonoBehaviour:
   attacks:
   - time: 4
     preAttackTime: 1
-    length: 2
-    modifier: 10
-    pattern: 0
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 10
-      - time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 10
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-    possibleAttacks: 02000000
+    possibleAttacks:
+    - type: 0
+      length: 1
+      modifier: 0
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: .0283022616
+          outSlope: .0283022616
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

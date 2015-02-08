@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour
 	public bool spawned = true;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;
+	public bool immuneToKnockback = false;
 	public float maxHealth = 10f;
 	public float damage = 5f;
 	[Range(0f, 100f)]
@@ -133,14 +134,17 @@ public abstract class Enemy : MonoBehaviour
 
 			if (Health > 0f)
 			{
-				knockback.x += Mathf.Sqrt(Mathf.Abs(Mathf.Pow(knockback.x, 2) * -gravity));
-				knockback.y += Mathf.Sqrt(Mathf.Abs(knockback.y * -gravity));
-				knockback.Scale(knockbackDirection);
-
-				if (knockback.x != 0 || knockback.y != 0)
+				if (!immuneToKnockback)
 				{
-					velocity += (Vector3)knockback;
-					controller.move(velocity * Time.deltaTime);
+					knockback.x += Mathf.Sqrt(Mathf.Abs(Mathf.Pow(knockback.x, 2) * -gravity));
+					knockback.y += Mathf.Sqrt(Mathf.Abs(knockback.y * -gravity));
+					knockback.Scale(knockbackDirection);
+
+					if (knockback.x != 0 || knockback.y != 0)
+					{
+						velocity += (Vector3)knockback;
+						controller.move(velocity * Time.deltaTime);
+					}
 				}
 
 				spriteRenderer.color = flashColor;
@@ -165,6 +169,12 @@ public abstract class Enemy : MonoBehaviour
 			health = 0f;
 			CheckDeath(false);
 		}
+	}
+
+	public void KillNoPoints()
+	{
+		ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
+		Destroy(gameObject);
 	}
 
 	public void Move(Vector3 velocity)

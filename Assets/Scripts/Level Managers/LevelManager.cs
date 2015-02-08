@@ -180,6 +180,14 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	public void KillAllEnemies()
+	{
+		foreach (StandardEnemy currentEnemy in GameObject.FindObjectsOfType<StandardEnemy>())
+		{
+			currentEnemy.KillNoPoints();
+		}
+	} 
+
 	private IEnumerator SpawnWave(int wave)
 	{
 		List<StandardEnemy> possibleEnemies = new List<StandardEnemy>();

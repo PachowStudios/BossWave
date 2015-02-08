@@ -89,13 +89,13 @@ TagManager:
     userID: 2
     uniqueID: 3423334565
     locked: 0
-  - name: Player
-    userID: 6
-    uniqueID: 4273737757
-    locked: 0
   - name: Boss
     userID: 11
     uniqueID: 1910810007
+    locked: 0
+  - name: Player
+    userID: 6
+    uniqueID: 4273737757
     locked: 0
   - name: Projectiles
     userID: 12
