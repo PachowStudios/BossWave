@@ -73,8 +73,8 @@ MonoBehaviour:
   minLifetime: 10
   maxLifetime: 15
   popupSprite: {fileID: 21300002, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
-  minHealth: 5
-  maxHealth: 50
+  minHealth: 25
+  maxHealth: 150
   healthCurve:
     serializedVersion: 2
     m_Curve:

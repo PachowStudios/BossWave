@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Void Cannon
-  rarity: 6
+  rarity: 5
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
   secondaryShot: 1
   secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
@@ -78,7 +78,7 @@ MonoBehaviour:
   showSecondaryGUI: 1
   secondaryIcon: {fileID: 21300020, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   continuousFire: 0
-  shootCooldown: .100000001
+  shootCooldown: .25
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0

@@ -7,10 +7,11 @@ using DG.Tweening;
 
 public class RIFTLaser : Projectile
 {
+	public const float CHARGE_LENGTH = 0.7f;
+
 	public List<Texture2D> textures;
 	public List<Color> colors;
 	public Material material;
-	public float chargeTime = 0.45f;
 	[Range(0.01f, 0.1f)]
 	public float animationTime = 0.01f;
 	[Range(2, 32)]

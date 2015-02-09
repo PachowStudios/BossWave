@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b74ffa10d4cb52478a81884c9d90444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
   knockback: {x: 2, y: 2}
   gravity: 0
   shotSpeed: 50
@@ -138,8 +138,9 @@ MonoBehaviour:
   destroyOnEnemy: 1
   destroyOnWorld: 1
   correctRotation: 1
-  disableMovement: 0
+  destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
+  disableMovement: 0
   accelTime: 1
   accelCurve:
     serializedVersion: 2

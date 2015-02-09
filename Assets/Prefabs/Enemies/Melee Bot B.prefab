@@ -244,6 +244,7 @@ MonoBehaviour:
   spawned: 1
   difficulty: 0
   immuneToInstantKill: 0
+  immuneToKnockback: 0
   maxHealth: 20
   damage: 5
   microchipChance: 25
@@ -251,11 +252,11 @@ MonoBehaviour:
   maxMicrochips: 2
   smallestMicrochip: 0
   biggestMicrochip: 0
-  knockback: {x: 3, y: 3}
+  knockback: {x: 1, y: .5}
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
-  moveSpeed: 7.5
+  moveSpeed: 9
   groundDamping: 10
   inAirDamping: 5
   timeWarpAtDeath: 0

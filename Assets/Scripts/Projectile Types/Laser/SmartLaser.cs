@@ -170,11 +170,11 @@ public class SmartLaser : Projectile
 		transform.position = origin;
 		targets.Add(origin);
 
-		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+		foreach (StandardEnemy enemy in GameObject.FindObjectsOfType<StandardEnemy>())
 		{
-			if (enemy.collider2D != null)
+			if (enemy.collider2D != null && enemy.spawned)
 			{
-				allEnemies.Add(enemy.GetComponent<Enemy>());
+				allEnemies.Add(enemy);
 			}
 		}
 
@@ -192,7 +192,7 @@ public class SmartLaser : Projectile
 				}
 			}
 
-			allEnemies.RemoveAll(directTargets.Contains);
+			allEnemies.RemoveAll(e => directTargets.Contains(e));
 
 			foreach (Enemy enemy in directTargets)
 			{

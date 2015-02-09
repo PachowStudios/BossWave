@@ -77,7 +77,7 @@ MonoBehaviour:
   showSecondaryGUI: 0
   secondaryIcon: {fileID: 0}
   continuousFire: 0
-  shootCooldown: 3
+  shootCooldown: 2
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0

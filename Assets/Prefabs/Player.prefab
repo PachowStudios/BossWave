@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f4e3accddf33b4c97916ec29ea931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   invincibilityPeriod: 1
   gravity: -45
   walkSpeed: 10
@@ -345,7 +345,7 @@ MonoBehaviour:
   maxScore: 99999999
   maxMicrochips: 99999
   startingGuns:
-  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 0}
   gunSwapCooldownTime: 1
   minAltIdleTime: 5

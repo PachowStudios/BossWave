@@ -369,7 +369,7 @@ MonoBehaviour:
   spawnPathTime: 8
   spawnLaserPathTime: 1
   doorOpenTime: .5
-  returnSpeed: 30
+  returnSpeed: 50
   minFloatHeight: 9
   maxFloatHeight: 11
   laserIntroCurve:
@@ -391,13 +391,13 @@ MonoBehaviour:
   cannonPrefab: {fileID: 11400002, guid: 374d5da20bfd76047be862557f941b97, type: 2}
   cannonFireEffect: Small Dust Explosion
   attacks:
-  - time: 4
+  - time: 3.29999995
     preAttackTime: 1
     possibleAttacks:
     - type: 0
       length: 1
       modifier: 0
-      pattern: 1
+      pattern: 2
       curve:
         serializedVersion: 2
         m_Curve:
@@ -408,6 +408,133 @@ MonoBehaviour:
           tangentMode: 0
         - time: 1
           value: 1
+          inSlope: .0283022616
+          outSlope: .0283022616
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 6
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 2
+      length: 2.70000005
+      modifier: 15
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
+        - time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 11.5500002
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 0
+      length: 1
+      modifier: 0
+      pattern: 2
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: .0283022616
+          outSlope: .0283022616
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+    - type: 1
+      length: 2
+      modifier: 0
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .261217892
+          value: .112247385
+          inSlope: 1.24890363
+          outSlope: 1.24890363
+          tangentMode: 0
+        - time: .497916609
+          value: .496874928
+          inSlope: .0161290895
+          outSlope: .0161290895
+          tangentMode: 0
+        - time: .754421949
+          value: .904368758
+          inSlope: 1.23292208
+          outSlope: 1.23292208
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 14.4499998
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 0
+      length: 1.5
+      modifier: 0
+      pattern: 3
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: .699999988
+          inSlope: .0283022616
+          outSlope: .600000024
+          tangentMode: 17
+        - time: 1.5
+          value: 1
+          inSlope: .600000024
+          outSlope: .600000024
+          tangentMode: 10
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 16.3999996
+    preAttackTime: 0
+    possibleAttacks:
+    - type: 1
+      length: 2.70000005
+      modifier: 0
+      pattern: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 0
           inSlope: .0283022616
           outSlope: .0283022616
           tangentMode: 0

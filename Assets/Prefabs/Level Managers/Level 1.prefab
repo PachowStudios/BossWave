@@ -622,7 +622,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 74b7f95718679d64a96ae7d2b7554128, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 641c77b1fbea2fd45bc5d13229c72f0b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -683,27 +683,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 0
+  introCRT: 1
   spawnEnemies: 0
   fadeInTime: 2
   mainMusic: {fileID: 8200000}
   waves:
   - startTime: 1
-    amount: 2
+    amount: 5
+    spawnDelay: 1
+    difficulty: 0
+  - startTime: 12
+    amount: 4
     spawnDelay: 1
     difficulty: 1
-  - startTime: 20
-    amount: 1
+  - startTime: 23
+    amount: 2
     spawnDelay: 1
-    difficulty: 4
-  - startTime: 40
+    difficulty: 2
+  - startTime: 30
+    amount: 5
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 28
     amount: 1
     spawnDelay: 1
     difficulty: 3
+  - startTime: 35
+    amount: 2
+    spawnDelay: .5
+    difficulty: 2
+  - startTime: 40
+    amount: 2
+    spawnDelay: 1.5
+    difficulty: 0
+  - startTime: 43
+    amount: 1
+    spawnDelay: 1
+    difficulty: 4
+  - startTime: 45
+    amount: 3
+    spawnDelay: 1
+    difficulty: 0
+  - startTime: 46
+    amount: 3
+    spawnDelay: .5
+    difficulty: 0
+  - startTime: 60
+    amount: 1
+    spawnDelay: 3
+    difficulty: 4
+  - startTime: 65
+    amount: 3
+    spawnDelay: 2
+    difficulty: 0
+  - startTime: 75
+    amount: 2
+    spawnDelay: 1
+    difficulty: 3
+  - startTime: 80
+    amount: 5
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 90
+    amount: 5
+    spawnDelay: 1
+    difficulty: 2
+  - startTime: 100
+    amount: 10
+    spawnDelay: 2
+    difficulty: 1
+  - startTime: 110
+    amount: 3
+    spawnDelay: 2
+    difficulty: 2
   bossWave:
     boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 1000
-    totalLength: 15
+    startTime: 122.300003
+    totalLength: 30
     cameraSpeed: 20
     fullCameraSpeed: 30
     speedUpTime: 5
@@ -733,7 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPowerups: 0
+  spawnPowerups: 1
   powerups:
   - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
   - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}

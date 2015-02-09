@@ -16,8 +16,10 @@ public sealed class TheRIFT : Boss
 
 	public enum AttackPattern
 	{
+		Sweep,
 		SweepAndBack,
 		SwoopPlayer,
+		SwoopPlayerFar,
 		PlayerProximity
 	};
 
@@ -264,6 +266,7 @@ public sealed class TheRIFT : Boss
 			case AttackType.Laser:
 				anim.SetTrigger("PreAttack Laser");
 				attackFunction = (x) => FireLaser(x);
+				attackWave.preAttackTime = Mathf.Max(0f, attackWave.preAttackTime - RIFTLaser.CHARGE_LENGTH);
 				break;
 			case AttackType.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
@@ -299,7 +302,7 @@ public sealed class TheRIFT : Boss
 
 		DOTween.Sequence()
 			.SetId("RIFT Attack")
-			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], laserInstance.chargeTime)
+			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], RIFTLaser.CHARGE_LENGTH)
 				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
 			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
 				.SetEase(curve)
@@ -432,7 +435,7 @@ public sealed class TheRIFT : Boss
 
 	private void ReturnPosition()
 	{
-		if (transform.position.x > startingX + 1f)
+		if (transform.position.x > startingX + 3f)
 		{
 			velocity.x = Mathf.Lerp(velocity.x, -returnSpeed, 0.25f);
 		}
@@ -483,6 +486,14 @@ public sealed class TheRIFT : Boss
 
 		switch (pattern)
 		{ 
+			case AttackPattern.Sweep:
+				path.Add(new Vector3(startingX,
+									 LevelManager.Instance.GroundLevel.y,
+									 transform.position.z));
+				path.Add(new Vector3(screenRight.x + 1f,
+									 LevelManager.Instance.GroundLevel.y,
+									 transform.position.z));
+				break;
 			case AttackPattern.SweepAndBack:
 				path.Add(new Vector3(startingX,
 									 LevelManager.Instance.GroundLevel.y,
@@ -499,11 +510,19 @@ public sealed class TheRIFT : Boss
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				break;
+			case AttackPattern.SwoopPlayerFar:
+				path.Add(transform.position);
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x,
+									 LevelManager.Instance.GroundLevel.y - 1f,
+									 transform.position.z));
+				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
+				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.7f, 0.5f, 10f)));
+				break;
 			case AttackPattern.PlayerProximity:
-				path.Add(new Vector3(PlayerControl.Instance.transform.position.x - 3f,
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x - 4f,
 									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
-				path.Add(new Vector3(PlayerControl.Instance.transform.position.x + 3f,
+				path.Add(new Vector3(PlayerControl.Instance.transform.position.x + 4f,
 									 LevelManager.Instance.GroundLevel.y,
 									 transform.position.z));
 				break;

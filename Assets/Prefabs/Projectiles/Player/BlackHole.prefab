@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a95450f76b07d4ea843308a7565a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: .5
+  damage: 1
   knockback: {x: 0, y: 0}
   gravity: 0
   shotSpeed: 25
@@ -245,7 +245,7 @@ MonoBehaviour:
   autoDestroy: 1
   destroyOnEnemy: 0
   destroyOnWorld: 1
-  correctRotation: 1
+  correctRotation: 0
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
   disableMovement: 0
@@ -255,6 +255,7 @@ MonoBehaviour:
   outerRotation: 1
   innerRotation: 1.5
   activationBuffer: .699999988
+  activationSpeed: 2
   color: {r: 0, g: 0, b: 0, a: 1}
   particleSystemPrefab: {fileID: 19800000, guid: b880edb78a26cd8438531bb595c21493,
     type: 2}

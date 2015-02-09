@@ -245,18 +245,19 @@ MonoBehaviour:
   spawned: 1
   difficulty: 3
   immuneToInstantKill: 0
-  maxHealth: 100
-  damage: 7.5
+  immuneToKnockback: 1
+  maxHealth: 200
+  damage: 10
   microchipChance: 25
   minMicrochips: 1
   maxMicrochips: 3
   smallestMicrochip: 0
   biggestMicrochip: 1
-  knockback: {x: 3, y: 3}
+  knockback: {x: 2, y: 1}
   flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
   flashLength: .100000001
   gravity: -35
-  moveSpeed: 3
+  moveSpeed: 4
   groundDamping: 10
   inAirDamping: 5
   timeWarpAtDeath: 0
@@ -280,8 +281,8 @@ MonoBehaviour:
   attackCooldownTime: 1.25
   minDashRange: 5
   maxDashRange: 30
-  swipeDamage: 5
-  stabDamage: 10
+  swipeDamage: 10
+  stabDamage: 20
   swipeKnockback: {x: 3, y: 5}
   stabKnockback: {x: 10, y: 1}
   dashCooldownTime: 4
