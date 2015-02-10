@@ -391,7 +391,7 @@ MonoBehaviour:
   cannonPrefab: {fileID: 11400002, guid: 374d5da20bfd76047be862557f941b97, type: 2}
   cannonFireEffect: Small Dust Explosion
   attacks:
-  - time: 3.29999995
+  - time: 136.600006
     preAttackTime: 1
     possibleAttacks:
     - type: 0
@@ -413,7 +413,7 @@ MonoBehaviour:
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-  - time: 6
+  - time: 139.300003
     preAttackTime: 1
     possibleAttacks:
     - type: 2
@@ -435,7 +435,7 @@ MonoBehaviour:
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
-  - time: 11.5500002
+  - time: 144.850006
     preAttackTime: 1
     possibleAttacks:
     - type: 0
@@ -491,7 +491,7 @@ MonoBehaviour:
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-  - time: 14.4499998
+  - time: 147.75
     preAttackTime: 1
     possibleAttacks:
     - type: 0
@@ -518,11 +518,11 @@ MonoBehaviour:
           tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
-  - time: 16.3999996
+  - time: 149.699997
     preAttackTime: 0
     possibleAttacks:
     - type: 1
-      length: 2.70000005
+      length: 2.79999995
       modifier: 0
       pattern: 0
       curve:
@@ -537,6 +537,284 @@ MonoBehaviour:
           value: 0
           inSlope: .0283022616
           outSlope: .0283022616
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 155.550003
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 2
+      length: 2.04999995
+      modifier: 6
+      pattern: 4
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 1.39999998
+          outSlope: 1.39999998
+          tangentMode: 10
+        - time: .25
+          value: .349999994
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
+        - time: .5
+          value: .5
+          inSlope: 1.17500019
+          outSlope: 1.17500019
+          tangentMode: 10
+        - time: .699999988
+          value: .850000024
+          inSlope: 2.79545641
+          outSlope: 1.63267696
+          tangentMode: 1
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 160.899994
+    preAttackTime: .200000003
+    possibleAttacks:
+    - type: 1
+      length: 2
+      modifier: 0
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .261217892
+          value: .112247385
+          inSlope: 1.24890363
+          outSlope: 1.24890363
+          tangentMode: 0
+        - time: .497916609
+          value: .496874928
+          inSlope: .0161290895
+          outSlope: .0161290895
+          tangentMode: 0
+        - time: .754421949
+          value: .904368758
+          inSlope: 1.23292208
+          outSlope: 1.23292208
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+    - type: 2
+      length: 2.04999995
+      modifier: 6
+      pattern: 4
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 1.39999998
+          outSlope: 1.39999998
+          tangentMode: 10
+        - time: .25
+          value: .349999994
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 10
+        - time: .5
+          value: .5
+          inSlope: 1.17500019
+          outSlope: 1.17500019
+          tangentMode: 10
+        - time: .699999988
+          value: .850000024
+          inSlope: 2.79545641
+          outSlope: 1.63267696
+          tangentMode: 1
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 165.649994
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 1
+      length: 1
+      modifier: 0
+      pattern: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 167.050003
+    preAttackTime: .349999994
+    possibleAttacks:
+    - type: 0
+      length: 3.70000005
+      modifier: 0
+      pattern: 2
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .25
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .725000024
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 0
+          inSlope: .0283022616
+          outSlope: .0283022616
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 171.949997
+    preAttackTime: .349999994
+    possibleAttacks:
+    - type: 2
+      length: 4.5999999
+      modifier: 18
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .25
+          value: .25
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .497916609
+          value: .496874928
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .75
+          value: .75
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 178.100006
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 1
+      length: 4.0999999
+      modifier: 0
+      pattern: 0
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .25
+          value: 1
+          inSlope: 1.50031984
+          outSlope: .00248410692
+          tangentMode: 1
+        - time: .324980527
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .550000012
+          value: 1
+          inSlope: 1.58220291
+          outSlope: -.00386453094
+          tangentMode: 1
+        - time: .625222325
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 1.78273833
+          outSlope: -0
+          tangentMode: 17
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+  - time: 183.300003
+    preAttackTime: 1
+    possibleAttacks:
+    - type: 2
+      length: 4.6500001
+      modifier: 18
+      pattern: 1
+      curve:
+        serializedVersion: 2
+        m_Curve:
+        - time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .25
+          value: .25
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .497916609
+          value: .496874928
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: .75
+          value: .75
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+        - time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2

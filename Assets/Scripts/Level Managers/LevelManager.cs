@@ -109,6 +109,18 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	private void Update()
+	{
+		if (CrossPlatformInputManager.GetButtonDown("Speedup"))
+		{
+			TimeWarpEffect.Instance.StartWarp(5f, 0.5f, new AudioSource[] { LevelManager.Instance.mainMusic });
+		}
+		else if (CrossPlatformInputManager.GetButtonDown("Slowdown"))
+		{
+			TimeWarpEffect.Instance.EndWarp(0.5f, new AudioSource[] { LevelManager.Instance.mainMusic });
+		}
+	}
+
 	private void FixedUpdate()
 	{
 		waveTimer = mainMusic.time;

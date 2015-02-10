@@ -57,7 +57,11 @@ public class TimeWarpEffect : MonoBehaviour
 	private void UpdateValues(float newValue)
 	{
 		Time.timeScale = newValue;
-		Time.fixedDeltaTime = defaultFixedTimestep * newValue;
+
+		if (newValue <= 1f)
+		{
+			Time.fixedDeltaTime = defaultFixedTimestep * newValue;
+		}
 
 		if (allSounds != null)
 		{
