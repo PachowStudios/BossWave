@@ -156,15 +156,17 @@ public class LevelManager : MonoBehaviour
 						.OnComplete(() =>
 						{
 							bossWave.scrollingEndcap.parent.GetComponent<Parallax>().AddEndcap(bossWave.scrollingEndcap);
-							bossWavePlayerMoved = false;
 							bossInstance.End();
-							DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, 0f, 1f)
-								.SetDelay(2.5f)
-								.SetEase(Ease.OutSine);
 						});
 
 					bossWaveIntroComplete = true;
 				}
+			}
+			else if (bossWavePlayerMoved && PlayerControl.Instance.Dead)
+			{
+				bossWavePlayerMoved = false;
+				DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, 0f, 2f)
+								.SetEase(Ease.OutSine);
 			}
 		}
 		else if (!PlayerControl.Instance.Dead)

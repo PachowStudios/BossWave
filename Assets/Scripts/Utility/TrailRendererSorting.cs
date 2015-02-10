@@ -8,7 +8,7 @@ public class TrailRendererSorting : MonoBehaviour
 
 	private TrailRenderer trailRenderer;
 
-	void Awake()
+	private void Awake()
 	{
 		trailRenderer = GetComponent<TrailRenderer>();
 		trailRenderer.sortingLayerName = sortingLayer;

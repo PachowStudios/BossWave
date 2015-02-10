@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SaveChildren : MonoBehaviour 
 {
-	void OnDestroy()
+	private void OnDestroy()
 	{
 		transform.DetachChildren();
 	}

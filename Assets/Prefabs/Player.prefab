@@ -336,7 +336,7 @@ MonoBehaviour:
   walkSpeed: 10
   runSpeed: 15
   continuouslyRunning: 0
-  continuousRunSpeed: 10
+  continuousRunSpeed: 20
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 7
