@@ -667,6 +667,7 @@ GameObject:
   - 114: {fileID: 11400112}
   - 114: {fileID: 11400098}
   - 114: {fileID: 11400100}
+  - 114: {fileID: 11400124}
   m_Layer: 5
   m_Name: Current Gun Name
   m_TagString: Untagged
@@ -3245,10 +3246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .988235295, g: .988235295, b: .988235295, a: 1}
+  m_Color: {r: .988235295, g: .988235295, b: .988235295, a: 0}
   m_FontData:
-    m_Font: {fileID: 12800000, guid: caa8835b713884643bda3a8ffd96f4b2, type: 2}
-    m_FontSize: 2
+    m_Font: {fileID: 12800000, guid: 3b9047ac416438747a1854eb58af724a, type: 2}
+    m_FontSize: 8
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -3271,7 +3272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
-  m_EffectDistance: {x: .100000001, y: .100000001}
+  m_EffectDistance: {x: 1, y: 0}
   m_UseGraphicAlpha: 1
 --- !u!114 &11400102
 MonoBehaviour:
@@ -3516,6 +3517,20 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: .75
   m_Text: Fullscreen
+--- !u!114 &11400124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: .0392156877, g: .0431372561, b: .0588235296, a: 1}
+  m_EffectDistance: {x: 0, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &11400126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5577,7 +5592,7 @@ RectTransform:
   m_GameObject: {fileID: 100074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
   m_Children: []
   m_Father: {fileID: 22400010}
   m_RootOrder: 3

@@ -24,14 +24,15 @@ public class CurrentGunName : MonoBehaviour
 		text = GetComponent<Text>();
 	}
 
-	public void Show(string gunName, float time = 0f)
+	public void Show(string gunName, Color gunColor, float time = 0f)
 	{
 		if (!showing)
 		{
 			time = (time == 0f) ? showTime : time;
-			text.text = gunName;
+			text.text = gunName.ToUpper();
+			text.color = new Color(gunColor.r, gunColor.g, gunColor.b, 0f);
 			text.DOFade(1f, time * 0.15f)
-				.SetEase(Ease.OutQuad);
+				.SetEase(Ease.InQuad);
 			text.DOFade(0f, time * 0.15f)
 				.SetDelay(time * 0.85f)
 				.SetEase(Ease.OutQuad)

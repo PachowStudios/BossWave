@@ -19,21 +19,21 @@ public class GunCrate : Powerup
 
 		if (possibleGuns[0].gunName != PlayerControl.Instance.Gun.gunName)
 		{
-			int newGun = Mathf.RoundToInt(Random.Range(0f, possibleGuns.Count - 1f));
+			Gun newGun = possibleGuns[Random.Range(0, possibleGuns.Count)];
 
 			if (PlayerControl.Instance.GunsFull)
 			{
 				PopupSwapGun.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint,
-												  possibleGuns[newGun]);
+												  newGun);
 			}
 			else
 			{
 				PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint,
 												  "",
-												  possibleGuns[newGun].SpriteRenderer.sprite,
+												  newGun.SpriteRenderer.sprite,
 												  true);
-				CurrentGunName.Instance.Show(possibleGuns[newGun].gunName);
-				PlayerControl.Instance.AddGun(possibleGuns[newGun]);
+				CurrentGunName.Instance.Show(newGun.gunName, newGun.Color);
+				PlayerControl.Instance.AddGun(newGun);
 			}
 		}
 

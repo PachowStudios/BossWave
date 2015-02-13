@@ -7,45 +7,26 @@ public class PowerupSpawner : MonoBehaviour
 {
 	private static PowerupSpawner instance;
 
+	[System.Serializable]
+	public struct Wave
+	{
+		public float startTime;
+		public List<Powerup> possiblePowerups;
+	}
+
 	public bool spawnPowerups;
-	public List<Powerup> powerups;
+	public List<Wave> waves;
 	public List<Microchip> microchips;
 	public List<Gun> guns;
 
-	public float minPowerupTime = 15f;
-	public float maxPowerupTime = 25f;
-
-	private float powerupTimer = 0f;
-	private float powerupTime;
+	private int currentWave = 0;
+	private float waveTimer = 0f;
 
 	private List<GameObject> spawners;
 
 	public static PowerupSpawner Instance
 	{
 		get { return instance; }
-	}
-
-	private float NewPowerupTime
-	{
-		get
-		{
-			return Random.Range(minPowerupTime, maxPowerupTime);
-		}
-	}
-
-	private Powerup RandomPowerup
-	{
-		get
-		{
-			if (powerups.Count > 0)
-			{
-				return powerups[Random.Range(0, powerups.Count)];
-			}
-			else
-			{
-				return null;
-			}
-		}
 	}
 
 	private Vector3 RandomSpawnPoint
@@ -74,23 +55,18 @@ public class PowerupSpawner : MonoBehaviour
 		instance = this;
 
 		spawners = GameObject.FindGameObjectsWithTag("PowerupSpawner").ToList();
-		powerupTime = NewPowerupTime;
 	}
 
 	private void FixedUpdate()
 	{
-		if (spawnPowerups && !PlayerControl.Instance.Dead && 
-			powerups.Count > 0 && spawners.Count > 0)
+		waveTimer = LevelManager.Instance.mainMusic.time;
+
+		if (spawnPowerups && !PlayerControl.Instance.Dead &&
+			currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
 		{
-			powerupTimer += Time.deltaTime;
-
-			if (powerupTimer >= powerupTime)
-			{
-				Instantiate(RandomPowerup, RandomSpawnPoint, Quaternion.identity);
-
-				powerupTimer = 0f;
-				powerupTime = NewPowerupTime;
-			}
+			int powerupToSpawn = Random.Range(0, waves[currentWave].possiblePowerups.Count);
+			Instantiate(waves[currentWave].possiblePowerups[powerupToSpawn], RandomSpawnPoint, Quaternion.identity);
+			currentWave++;
 		}
 	}
 

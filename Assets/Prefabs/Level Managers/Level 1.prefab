@@ -667,7 +667,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -830,12 +830,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPowerups: 1
-  powerups:
-  - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
-  - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
-  - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
-  - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
-  - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  waves:
+  - startTime: 35
+    possiblePowerups:
+    - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
+  - startTime: 40
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+    - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  - startTime: 45
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - startTime: 60
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+    - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  - startTime: 75
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+    - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  - startTime: 80
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 100
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 110
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   microchips:
   - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}
@@ -848,8 +871,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
   - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
   - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
-  minPowerupTime: 10
-  maxPowerupTime: 15
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -109,7 +109,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 		if (swap)
 		{
 			PlayerControl.Instance.AddGun(newGunPrefab);
-			CurrentGunName.Instance.Show(newGunPrefab.gunName);
+			CurrentGunName.Instance.Show(newGunPrefab.gunName, newGunPrefab.Color);
 		}
 
 		Disappear(swap);

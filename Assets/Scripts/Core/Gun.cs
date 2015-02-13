@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour 
 {
@@ -11,8 +12,7 @@ public class Gun : MonoBehaviour
 		VeryRare,
 		Legendary,
 		Godly,
-		Boss,
-		NUM_ITEMS
+		Boss
 	};
 
 	public string gunName;
@@ -58,6 +58,32 @@ public class Gun : MonoBehaviour
 	private bool useMouse = true;
 
 	private SpriteRenderer spriteRenderer;
+
+	public Color Color
+	{
+		get
+		{
+			switch (rarity)
+			{
+				case RarityLevel.Common:
+					return new Color(0.765f, 0.796f, 0.859f);
+				case RarityLevel.Uncommon:
+					return new Color(0.424f, 0.533f, 1f);
+				case RarityLevel.Rare:
+					return new Color(0.655f, 0.929f, 0f);
+				case RarityLevel.VeryRare:
+					return new Color(1f, 0.565f, 0f);
+				case RarityLevel.Legendary:
+					return new Color(1f, 0.133f, 0.271f);
+				case RarityLevel.Godly:
+					return new Color(1f, 0.133f, 0.662f);
+				case RarityLevel.Boss:
+					return new Color(0.38f, 0.075f, 0.506f);
+				default:
+					return Color.white;
+			}
+		}
+	}
 
 	public SpriteRenderer SpriteRenderer
 	{

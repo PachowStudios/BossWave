@@ -243,7 +243,7 @@ public sealed class PlayerControl : MonoBehaviour
 							PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[i].SpriteRenderer.sprite, true);
 						}
 
-						CurrentGunName.Instance.Show(guns[i].gunName, gunSwapCooldownTime);
+						CurrentGunName.Instance.Show(guns[i].gunName, guns[i].Color, gunSwapCooldownTime);
 						SelectGun(i);
 						gunSwapCooldownTimer = 0f;
 						break;
