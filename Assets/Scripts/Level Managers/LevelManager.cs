@@ -35,7 +35,6 @@ public class LevelManager : MonoBehaviour
 	public bool introCRT = true;
 	public bool spawnEnemies = true;
 	public float fadeInTime = 2f;
-	public AudioSource mainMusic;
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<StandardEnemy> enemies;
@@ -45,6 +44,8 @@ public class LevelManager : MonoBehaviour
 
 	[SerializeField]
 	private Transform groundLevel;
+	[SerializeField]
+	private AudioSource mainMusic;
 
 	[HideInInspector]
 	public bool bossWavePlayerMoved = false;
@@ -69,6 +70,11 @@ public class LevelManager : MonoBehaviour
 		get { return groundLevel.position; }
 	}
 
+	public float MusicTime
+	{
+		get { return mainMusic.time; }
+	}
+
 	private void Awake()
 	{
 		instance = this;
@@ -85,6 +91,7 @@ public class LevelManager : MonoBehaviour
 	{
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
+		mainMusic.time = 120f;
 		waveTimer = mainMusic.time;
 
 		GameMenu.Instance.EnablePausing(false);
@@ -176,6 +183,7 @@ public class LevelManager : MonoBehaviour
 			else if (bossWavePlayerMoved && PlayerControl.Instance.Dead)
 			{
 				bossWavePlayerMoved = false;
+				BossWaveTimer.Instance.Hide();
 				DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, 0f, 2f)
 								.SetEase(Ease.OutSine);
 			}

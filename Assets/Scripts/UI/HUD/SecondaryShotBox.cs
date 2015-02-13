@@ -16,7 +16,7 @@ public class SecondaryShotBox : MonoBehaviour
 	public float cooldownDamping = 0.5f;
 	public Gradient barGradient;
 
-	private bool showing = true;
+	private bool showing = false;
 	private bool overrideShowing = false;
 
 	private float cooldownPercent;

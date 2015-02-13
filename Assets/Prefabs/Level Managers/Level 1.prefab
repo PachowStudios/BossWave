@@ -723,10 +723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 0
-  spawnEnemies: 0
+  introCRT: 1
+  spawnEnemies: 1
   fadeInTime: 2
-  mainMusic: {fileID: 8200000}
   waves:
   - startTime: 1
     amount: 5
@@ -737,7 +736,7 @@ MonoBehaviour:
     spawnDelay: 1
     difficulty: 1
   - startTime: 23
-    amount: 2
+    amount: 4
     spawnDelay: 1
     difficulty: 2
   - startTime: 30
@@ -817,6 +816,7 @@ MonoBehaviour:
   worldBoundaries: {fileID: 100042}
   runningBoundaries: {fileID: 100012}
   groundLevel: {fileID: 400008}
+  mainMusic: {fileID: 8200000}
   bossWavePlayerMoved: 0
 --- !u!114 &11400002
 MonoBehaviour:

@@ -486,6 +486,7 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 
 		controller.platformMask = originalCollider;
+		DisableInput();
 	}
 
 	public void CancelGoTo()

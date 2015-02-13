@@ -59,7 +59,7 @@ public class PowerupSpawner : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		waveTimer = LevelManager.Instance.mainMusic.time;
+		waveTimer = LevelManager.Instance.MusicTime;
 
 		if (spawnPowerups && !PlayerControl.Instance.Dead &&
 			currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)

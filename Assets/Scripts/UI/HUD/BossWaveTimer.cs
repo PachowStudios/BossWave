@@ -56,8 +56,8 @@ public class BossWaveTimer : MonoBehaviour
 		if (showing)
 		{
 			time = (time == 0f) ? fadeTime : time;
-			canvasGroup.alpha = 0f;
-			text.rectTransform.DOAnchorPos(new Vector2(text.rectTransform.anchoredPosition.x, hideY), time);
+			text.rectTransform.DOAnchorPos(new Vector2(text.rectTransform.anchoredPosition.x, hideY), time)
+				.OnComplete(() => canvasGroup.alpha = 0f);
 
 			showing = false;
 		}

@@ -392,7 +392,7 @@ MonoBehaviour:
   cannonFireEffect: Small Dust Explosion
   attacks:
   - time: 136.600006
-    preAttackTime: 1
+    preAttackTime: .300000012
     possibleAttacks:
     - type: 0
       length: 1
@@ -414,7 +414,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 139.300003
-    preAttackTime: 1
+    preAttackTime: .5
     possibleAttacks:
     - type: 2
       length: 2.70000005
@@ -436,7 +436,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 144.850006
-    preAttackTime: 1
+    preAttackTime: .300000012
     possibleAttacks:
     - type: 0
       length: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 147.75
-    preAttackTime: 1
+    preAttackTime: .300000012
     possibleAttacks:
     - type: 0
       length: 1.5
@@ -541,7 +541,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 155.550003
-    preAttackTime: 1
+    preAttackTime: .5
     possibleAttacks:
     - type: 2
       length: 2.04999995
@@ -649,7 +649,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 165.649994
-    preAttackTime: 1
+    preAttackTime: .5
     possibleAttacks:
     - type: 1
       length: 1
@@ -740,7 +740,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 178.100006
-    preAttackTime: 1
+    preAttackTime: .5
     possibleAttacks:
     - type: 1
       length: 4.0999999
@@ -782,7 +782,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
   - time: 183.300003
-    preAttackTime: 1
+    preAttackTime: .5
     possibleAttacks:
     - type: 2
       length: 4.6500001

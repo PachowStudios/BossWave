@@ -74,7 +74,7 @@ MonoBehaviour:
   secondaryShot: 1
   secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
     type: 2}
-  secondaryCooldown: 10
+  secondaryCooldown: 20
   showSecondaryGUI: 1
   secondaryIcon: {fileID: 21300020, guid: 45704994fb76bf248a3a2b7e2c3eb5a3, type: 3}
   continuousFire: 0

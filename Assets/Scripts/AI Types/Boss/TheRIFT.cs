@@ -124,12 +124,6 @@ public sealed class TheRIFT : Boss
 		if (!invincible)
 		{
 			anim.SetTrigger("Hit");
-
-			if (DOTween.IsTweening("RIFT Swoop"))
-			{
-				DOTween.Kill("RIFT Swoop");
-				StartCoroutine(Stun());
-			}
 		}
 
 		base.TakeDamage(enemy);
@@ -223,7 +217,8 @@ public sealed class TheRIFT : Boss
 			anim.SetBool("Eye Shield", invincible);
 			anim.SetBool("Attacking", attacking);
 
-			if (currentAttack < attacks.Count && LevelManager.Instance.mainMusic.time >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime)
+			if (currentAttack < attacks.Count && LevelManager.Instance.MusicTime >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime &&
+				!PlayerControl.Instance.Dead)
 			{
 				if (!attacking && !preAttacking)
 				{
@@ -231,6 +226,10 @@ public sealed class TheRIFT : Boss
 					currentAttack++;
 					preAttacking = true;
 				}
+			}
+			else if (PlayerControl.Instance.Dead)
+			{
+				End();
 			}
 
 			if (applyMovement)
@@ -397,19 +396,6 @@ public sealed class TheRIFT : Boss
 		FireCannon(attack.length, attack.pattern, attack.curve, attack.modifier);
 	}
 
-	private IEnumerator Stun()
-	{
-		applyMovement = true;
-		ghostTrail.trailActive = false;
-
-		while (transform.position.x > startingX)
-		{
-			yield return new WaitForSeconds(0.1f);
-		}
-
-		attacking = false;
-	}
-
 	private void Float()
 	{
 		if (transform.position.y >= maxFloatHeight)
@@ -505,14 +491,14 @@ public sealed class TheRIFT : Boss
 			case AttackPattern.SwoopPlayer:
 				path.Add(transform.position);
 				path.Add(new Vector3(PlayerControl.Instance.transform.position.x,
-									 LevelManager.Instance.GroundLevel.y - 2f,
+									 LevelManager.Instance.GroundLevel.y - 3f,
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				break;
 			case AttackPattern.SwoopPlayerFar:
 				path.Add(transform.position);
 				path.Add(new Vector3(PlayerControl.Instance.transform.position.x,
-									 LevelManager.Instance.GroundLevel.y - 2f,
+									 LevelManager.Instance.GroundLevel.y - 3f,
 									 transform.position.z));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.2f, 0.5f, 10f)));
 				path.Add(Camera.main.ViewportToWorldPoint(new Vector3(1.7f, 0.5f, 10f)));

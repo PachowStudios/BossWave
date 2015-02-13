@@ -132,7 +132,7 @@ MonoBehaviour:
   damage: 10
   knockback: {x: 1, y: 0}
   gravity: 0
-  shotSpeed: 25
+  shotSpeed: 30
   lifetime: 3
   autoDestroy: 1
   destroyOnEnemy: 1
