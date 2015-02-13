@@ -91,7 +91,6 @@ public class LevelManager : MonoBehaviour
 	{
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
-		mainMusic.time = 120f;
 		waveTimer = mainMusic.time;
 
 		GameMenu.Instance.EnablePausing(false);

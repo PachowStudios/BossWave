@@ -5,7 +5,6 @@ using UnityEditor.AnimatedValues;
 [CustomEditor(typeof(ScaleWidthCamera))]
 public class ScaleWidthCameraEditor : Editor
 {
-	private AnimBool showEditorOverride;
 	private AnimBool showWorldSpaceUI;
 
 	private ScaleWidthCamera Target
