@@ -32,6 +32,7 @@ public class GunCrate : Powerup
 												  "",
 												  possibleGuns[newGun].SpriteRenderer.sprite,
 												  true);
+				CurrentGunName.Instance.Show(possibleGuns[newGun].gunName);
 				PlayerControl.Instance.AddGun(possibleGuns[newGun]);
 			}
 		}
