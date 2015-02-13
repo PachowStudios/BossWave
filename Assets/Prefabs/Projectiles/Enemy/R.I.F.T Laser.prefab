@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34145917d9405614499dba7e3a27231a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
-  knockback: {x: 2, y: 2}
+  damage: 30
+  knockback: {x: 0, y: 0}
   gravity: 0
   shotSpeed: 7.5
   lifetime: 0
@@ -210,8 +210,9 @@ MonoBehaviour:
   destroyOnEnemy: 0
   destroyOnWorld: 0
   correctRotation: 1
-  disableMovement: 0
+  destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
+  disableMovement: 0
   textures:
   - {fileID: 2800000, guid: e7d4cfb8786725747a50947cd1e54e51, type: 3}
   - {fileID: 2800000, guid: 73b86b185ab3edc40a46c41b46da62de, type: 3}
@@ -225,7 +226,6 @@ MonoBehaviour:
   - {r: .838235259, g: .221885815, b: .498180211, a: 1}
   - {r: .801470578, g: .200367644, b: .469827414, a: 1}
   material: {fileID: 2100000, guid: 0d66a237f16255248b3b209f3c6f67b1, type: 2}
-  chargeTime: .699999988
   animationTime: .00999999978
   subdivisions: 32
   width: 1.29999995
