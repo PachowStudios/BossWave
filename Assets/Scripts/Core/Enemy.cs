@@ -113,11 +113,6 @@ public abstract class Enemy : MonoBehaviour
 				TakeDamage(other.gameObject);
 			}
 		}
-
-		if (other.tag == "Killzone")
-		{
-			Kill();
-		}
 	}
 
 	public virtual void TakeDamage(GameObject enemy)

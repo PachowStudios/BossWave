@@ -299,11 +299,6 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			inPortal = true;
 		}
-
-		if (other.tag == "Killzone")
-		{
-			Health = 0f;
-		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
@@ -356,7 +351,7 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			Health -= damage;
 
-			if (Health > 0f)
+			if (Health > 0f && knockback != default(Vector2))
 			{
 				Sequence knockbackSequence = DOTween.Sequence();
 
