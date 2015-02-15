@@ -18,29 +18,30 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300018, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .0666666701
-      value: {fileID: 21300038, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .13333334
-      value: {fileID: 21300058, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .200000003
-      value: {fileID: 21300078, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .266666681
-      value: {fileID: 21300098, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .333333343
-      value: {fileID: 21300118, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .400000006
-      value: {fileID: 21300138, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .466666669
-      value: {fileID: 21300158, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .533333361
-      value: {fileID: 21300178, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .600000024
-      value: {fileID: 21300198, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - time: .666666687
-      value: {fileID: 21300198, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
+      value: {fileID: 21300036, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Gradient
+    classID: 114
+    script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300016, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    attribute: m_Sprite
+    path: Outline
+    classID: 114
+    script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300056, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    attribute: m_Sprite
+    path: Gradient/Gradient Images/Gradient Image 1
+    classID: 114
+    script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  - curve:
+    - time: 0
+      value: {fileID: 21300056, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    attribute: m_Sprite
+    path: Gradient/Gradient Images/Gradient Image 2
     classID: 114
     script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_SampleRate: 60
@@ -50,28 +51,39 @@ AnimationClip:
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
     genericBindings:
-    - path: 0
+    - path: 917740195
+      attribute: 2015549526
+      script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 2294442873
+      attribute: 2015549526
+      script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 2466209218
+      attribute: 2015549526
+      script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+      classID: 114
+      customType: 0
+      isPPtrCurve: 1
+    - path: 200674424
       attribute: 2015549526
       script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
       classID: 114
       customType: 0
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300018, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300038, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300058, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300078, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300098, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300118, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300138, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300158, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300178, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300198, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
-    - {fileID: 21300198, guid: f2c6dd707d518dd478bd0b9a89181618, type: 3}
+    - {fileID: 21300036, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    - {fileID: 21300016, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    - {fileID: 21300056, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
+    - {fileID: 21300056, guid: 84d5dce7bb5b63a40afddcba615f68da, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .683333337
+    m_StopTime: .0166666675
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

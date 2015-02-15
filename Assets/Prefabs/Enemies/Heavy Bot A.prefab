@@ -444,8 +444,8 @@ MonoBehaviour:
   maxHealth: 500
   damage: 10
   microchipChance: 75
-  minMicrochips: 2
-  maxMicrochips: 3
+  minMicrochips: 3
+  maxMicrochips: 4
   smallestMicrochip: 1
   biggestMicrochip: 2
   knockback: {x: 2, y: 1}
@@ -473,7 +473,7 @@ MonoBehaviour:
   followVertically: 0
   followRange: 7
   attackRange: 20
-  attackCooldownTime: 4
+  attackCooldownTime: 3
   maxRangeOffset: 1
   horizontalShot: 1
   useRandomGun: 1

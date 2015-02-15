@@ -170,7 +170,7 @@ public class SmartLaser : Projectile
 		transform.position = origin;
 		targets.Add(origin);
 
-		foreach (StandardEnemy enemy in GameObject.FindObjectsOfType<StandardEnemy>())
+		foreach (Enemy enemy in GameObject.FindObjectsOfType<Enemy>())
 		{
 			if (enemy.collider2D != null && enemy.spawned)
 			{

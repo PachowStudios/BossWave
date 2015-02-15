@@ -16,13 +16,24 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
-    m_Name: Base Layer
+    m_Name: Sprite
     m_StateMachine: {fileID: 110700000}
     m_Mask: {fileID: 0}
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_StateMachineMotionSetIndex: 0
     m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 3
+    m_Name: Scroll
+    m_StateMachine: {fileID: 110721743}
+    m_Mask: {fileID: 0}
+    m_BlendingMode: 1
+    m_SyncedLayerIndex: -1
+    m_StateMachineMotionSetIndex: 0
+    m_DefaultWeight: 1
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
@@ -416,6 +427,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110217240
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Scrolling
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: c25a7d17c95846746bc298913b729474, type: 2}
+  m_ParentStateMachine: {fileID: 110721743}
+  m_Position: {x: 36, y: 72, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110219277
 State:
   m_ObjectHideFlags: 3
@@ -542,7 +568,7 @@ StateMachine:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Sprite
   m_DefaultState: {fileID: 110200000}
   m_States:
   - {fileID: 110200000}
@@ -559,53 +585,69 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110276149}
+      first: {fileID: 110200000}
       second:
-      - {fileID: 110176694}
-    data:
-      first: {fileID: 110273550}
-      second:
-      - {fileID: 110192223}
-      - {fileID: 110166991}
-    data:
-      first: {fileID: 110233435}
-      second:
-      - {fileID: 110149866}
-      - {fileID: 110137721}
-    data:
-      first: {fileID: 110232762}
-      second:
-      - {fileID: 110126815}
-      - {fileID: 110194365}
-    data:
-      first: {fileID: 110213959}
-      second:
-      - {fileID: 110120574}
-      - {fileID: 110190409}
-    data:
-      first: {fileID: 110223323}
-      second:
-      - {fileID: 110134708}
-      - {fileID: 110170656}
-    data:
-      first: {fileID: 110219277}
-      second:
-      - {fileID: 110156225}
-      - {fileID: 110125148}
-    data:
-      first: {fileID: 110291784}
-      second:
-      - {fileID: 110114516}
-      - {fileID: 110161733}
+      - {fileID: 110100000}
     data:
       first: {fileID: 110277347}
       second:
       - {fileID: 110176775}
       - {fileID: 110100080}
     data:
-      first: {fileID: 110200000}
+      first: {fileID: 110291784}
       second:
-      - {fileID: 110100000}
+      - {fileID: 110114516}
+      - {fileID: 110161733}
+    data:
+      first: {fileID: 110219277}
+      second:
+      - {fileID: 110156225}
+      - {fileID: 110125148}
+    data:
+      first: {fileID: 110223323}
+      second:
+      - {fileID: 110134708}
+      - {fileID: 110170656}
+    data:
+      first: {fileID: 110213959}
+      second:
+      - {fileID: 110120574}
+      - {fileID: 110190409}
+    data:
+      first: {fileID: 110232762}
+      second:
+      - {fileID: 110126815}
+      - {fileID: 110194365}
+    data:
+      first: {fileID: 110233435}
+      second:
+      - {fileID: 110149866}
+      - {fileID: 110137721}
+    data:
+      first: {fileID: 110273550}
+      second:
+      - {fileID: 110192223}
+      - {fileID: 110166991}
+    data:
+      first: {fileID: 110276149}
+      second:
+      - {fileID: 110176694}
+  m_MotionSetCount: 1
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+--- !u!1107 &110721743
+StateMachine:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Scroll
+  m_DefaultState: {fileID: 110217240}
+  m_States:
+  - {fileID: 110217240}
+  m_ChildStateMachine: []
+  m_ChildStateMachinePosition: []
+  m_OrderedTransitions: {}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

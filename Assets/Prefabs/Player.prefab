@@ -340,8 +340,8 @@ MonoBehaviour:
   groundDamping: 6
   inAirDamping: 5
   jumpHeight: 7
-  comboStartKills: 3
-  comboDecreaseTime: 2
+  comboStartKills: 2
+  comboDecreaseTime: 4
   maxScore: 99999999
   maxMicrochips: 99999
   startingGuns:
