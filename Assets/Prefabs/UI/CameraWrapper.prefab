@@ -189,6 +189,7 @@ GameObject:
   - 114: {fileID: 11400200}
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400014}
+  - 114: {fileID: 11400004}
   m_Layer: 5
   m_Name: Game UI
   m_TagString: UI
@@ -1163,7 +1164,6 @@ GameObject:
   - 223: {fileID: 22300002}
   - 114: {fileID: 11400196}
   - 114: {fileID: 11400192}
-  - 114: {fileID: 11400004}
   m_Layer: 5
   m_Name: Menu UI
   m_TagString: UI
@@ -2010,7 +2010,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100158}
+  m_GameObject: {fileID: 100020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13f6a34aab77f31408a110ae7337ba45, type: 3}

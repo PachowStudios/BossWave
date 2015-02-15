@@ -29,14 +29,14 @@ public class PopupSwapGun : MonoBehaviour
 	{
 		ClearPopup();
 
-		newPosition.z = transform.position.z;
-
 		PopupSwapGunInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupSwapGunInstance;
 		currentPopup = popupInstance;
 		popupInstance.transform.SetParent(transform);
-		popupInstance.transform.SetAsFirstSibling();
-		popupInstance.transform.localScale = popupPrefab.transform.localScale;
+		popupInstance.transform.SetAsLastSibling();
+
 		popupInstance.newGunPrefab = newGunPrefab;
+		popupInstance.newImage.sprite = newGunPrefab.SpriteRenderer.sprite;
+		popupInstance.newImage.rectTransform.sizeDelta = newGunPrefab.SpriteRenderer.sprite.bounds.size;
 	}
 
 	public void ClearPopup()

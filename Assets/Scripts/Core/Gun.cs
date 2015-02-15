@@ -66,7 +66,7 @@ public class Gun : MonoBehaviour
 			switch (rarity)
 			{
 				case RarityLevel.Common:
-					return new Color(0.765f, 0.796f, 0.859f);
+					return new Color(0.533f, 0.549f, 0.471f);
 				case RarityLevel.Uncommon:
 					return new Color(0.424f, 0.533f, 1f);
 				case RarityLevel.Rare:

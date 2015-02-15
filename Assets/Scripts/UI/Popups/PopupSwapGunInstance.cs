@@ -12,13 +12,10 @@ public class PopupSwapGunInstance : MonoBehaviour
 	public float disappearTime = 0.5f;
 	public float disappearScale = 1.5f;
 	public float distance = 1f;
+	public float timerBuffer = 0.6f;
 
-	public CanvasGroup newCanvasGroup;
-	public CanvasGroup oldCanvasGroup;
-	public Image newGun;
-	public Image oldGun;
-	public Text newStats;
-	public Text oldStats;
+	public Image newImage;
+	public Image oldImage;
 	public Text timerText;
 
 	[HideInInspector]
@@ -39,11 +36,6 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	private void Start()
 	{
-		newGun.sprite = newGunPrefab.SpriteRenderer.sprite;
-		newStats.text = newGunPrefab.projectile.damage + "\n" +
-						newGunPrefab.FireRate + "\n" +
-						newGunPrefab.projectile.knockback.x;
-
 		Appear();
 	}
 
@@ -84,10 +76,10 @@ public class PopupSwapGunInstance : MonoBehaviour
 	{
 		if (!selectionMade)
 		{
-			oldGun.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
-			oldStats.text = PlayerControl.Instance.Gun.projectile.damage + "\n" +
-							PlayerControl.Instance.Gun.FireRate + "\n" +
-							PlayerControl.Instance.Gun.projectile.knockback.x;
+			oldImage.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
+			oldImage.rectTransform.sizeDelta = PlayerControl.Instance.Gun.SpriteRenderer.sprite.bounds.size;
+			timerText.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Max(oldImage.rectTransform.sizeDelta.y,
+																				 newImage.rectTransform.sizeDelta.y) + timerBuffer);
 		}
 	}
 
@@ -109,7 +101,13 @@ public class PopupSwapGunInstance : MonoBehaviour
 		if (swap)
 		{
 			PlayerControl.Instance.AddGun(newGunPrefab);
-			CurrentGunName.Instance.Show(newGunPrefab.gunName, newGunPrefab.Color);
+			CurrentGunName.Instance.Show(newGunPrefab.gunName, 
+										 newGunPrefab.Color);
+		}
+		else
+		{
+			CurrentGunName.Instance.Show(PlayerControl.Instance.Gun.gunName,
+										 PlayerControl.Instance.Gun.Color);
 		}
 
 		Disappear(swap);
@@ -128,12 +126,12 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	private void Disappear(bool swap)
 	{
-		Transform selectedTransform = swap ? newGun.transform : oldGun.transform;
+		Transform selectedTransform = swap ? newImage.transform : oldImage.transform;
 
-		newCanvasGroup.DOFade(0f, disappearTime * (swap ? 0.6f : 0.5f))
+		newImage.DOFade(0f, disappearTime * (swap ? 0.6f : 0.5f))
 			.SetEase(Ease.InQuad)
 			.SetDelay(disappearTime * (swap ? 0.4f : 0f));
-		oldCanvasGroup.DOFade(0f, disappearTime * (swap ? 0.5f : 0.6f))
+		oldImage.DOFade(0f, disappearTime * (swap ? 0.5f : 0.6f))
 			.SetEase(Ease.InQuad)
 			.SetDelay(disappearTime * (swap ? 0f : 0.4f));
 		selectedTransform.DOScale(new Vector3(disappearScale, disappearScale, 1f), disappearTime)
