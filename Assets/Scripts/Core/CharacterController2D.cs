@@ -248,6 +248,9 @@ public class CharacterController2D : MonoBehaviour
 	/// <param name="deltaMovement">Delta movement.</param>
 	public void move(Vector3 deltaMovement)
 	{
+		if (Time.deltaTime <= 0f || Time.timeScale <= 0.01f)
+			return;
+
 		// save off our current grounded state which we will use for wasGroundedLastFrame and becameGroundedThisFrame
 		collisionState.wasGroundedLastFrame = collisionState.below;
 

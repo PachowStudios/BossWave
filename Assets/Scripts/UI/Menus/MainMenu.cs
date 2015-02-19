@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 
-public class MainMenu : MonoBehaviour 
+public class MainMenu : MonoBehaviour
 {
+	#region Fields
 	public EventSystem eventSystem;
 
 	public float startDelay = 1f;
@@ -25,7 +26,9 @@ public class MainMenu : MonoBehaviour
 
 	private CanvasGroup menu;
 	private RectTransform rectTransform;
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		DOTween.Init();
@@ -51,45 +54,9 @@ public class MainMenu : MonoBehaviour
 
 		StartCoroutine(ShowMenu());
 	}
+	#endregion
 
-	public void GoToNode(string node)
-	{
-		rectTransform.DOAnchorPos(-transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition, nodeMoveSpeed)
-			.SetEase(Ease.OutQuint)
-			.SetUpdate(true);
-	}
-
-	public void SelectObject(GameObject gameObject)
-	{
-		eventSystem.SetSelectedGameObject(gameObject, new BaseEventData(eventSystem));
-	}
-
-	public void LoadLevel(string levelName)
-	{
-		if (!Application.isLoadingLevel)
-		{
-			StartCoroutine(HideMenu(levelName));
-		}
-	}
-
-	public void SetVolume(float newVolume)
-	{
-		AudioListener.volume = Mathf.Abs(newVolume);
-	}
-
-	public void ApplySettings()
-	{
-		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
-		resolutionSelector.SetResolution();
-		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
-		Screen.fullScreen = fullscreenToggle.isOn;
-	}
-
-	public void ResetPrefs()
-	{
-		PlayerPrefs.DeleteAll();
-	}
-
+	#region Internal Helper Methods
 	private void LoadPrefs()
 	{
 		if (PlayerPrefs.HasKey("Settings/Volume"))
@@ -145,4 +112,45 @@ public class MainMenu : MonoBehaviour
 		menu.interactable = newValue >= interactableThreshold;
 		menu.blocksRaycasts = newValue >= interactableThreshold;
 	}
+	#endregion
+
+	#region Public Methods
+	public void GoToNode(string node)
+	{
+		rectTransform.DOAnchorPos(-transform.FindSubChild(node).GetComponent<RectTransform>().anchoredPosition, nodeMoveSpeed)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true);
+	}
+
+	public void SelectObject(GameObject gameObject)
+	{
+		eventSystem.SetSelectedGameObject(gameObject, new BaseEventData(eventSystem));
+	}
+
+	public void LoadLevel(string levelName)
+	{
+		if (!Application.isLoadingLevel)
+		{
+			StartCoroutine(HideMenu(levelName));
+		}
+	}
+
+	public void SetVolume(float newVolume)
+	{
+		AudioListener.volume = Mathf.Abs(newVolume);
+	}
+
+	public void ApplySettings()
+	{
+		PlayerPrefs.SetFloat("Settings/Volume", volumeSlider.value);
+		resolutionSelector.SetResolution();
+		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
+		Screen.fullScreen = fullscreenToggle.isOn;
+	}
+
+	public void ResetPrefs()
+	{
+		PlayerPrefs.DeleteAll();
+	}
+	#endregion
 }

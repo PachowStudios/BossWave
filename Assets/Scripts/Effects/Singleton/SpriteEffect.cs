@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class SpriteEffect : MonoBehaviour 
+public class SpriteEffect : MonoBehaviour
 {
+	#region Fields
 	[System.Serializable]
 	public struct Effect
 	{
@@ -17,12 +18,16 @@ public class SpriteEffect : MonoBehaviour
 	public List<Effect> effectsLibrary;
 
 	private Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>();
+	#endregion
 
+	#region Public Properties
 	public static SpriteEffect Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -37,7 +42,9 @@ public class SpriteEffect : MonoBehaviour
 			effects.Add(effect.name.ToLower(), effect.prefab);
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null)
 	{
 		requestedName = requestedName.ToLower();
@@ -52,4 +59,5 @@ public class SpriteEffect : MonoBehaviour
 			Debug.Log("No effect with the name " + requestedName + " exists!");
 		}
 	}
+	#endregion
 }

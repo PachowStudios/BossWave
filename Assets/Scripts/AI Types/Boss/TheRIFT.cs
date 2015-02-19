@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public sealed class TheRIFT : Boss
 {
+	#region Fields
 	public enum AttackType
 	{
 		Swoop,
@@ -86,7 +87,9 @@ public sealed class TheRIFT : Boss
 	private GameObject silhouetteBody;
 	private SpriteRenderer wall;
 	private Transform door;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -111,107 +114,9 @@ public sealed class TheRIFT : Boss
 		}
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
-		if (spawned)
-		{
-			MainAI();
-		}
-	}
-
-	public override void TakeDamage(GameObject enemy)
-	{
-		if (!invincible)
-		{
-			anim.SetTrigger("Hit");
-		}
-
-		base.TakeDamage(enemy);
-	}
-
-	public override void Spawn()
-	{
-		if (!spawned)
-		{
-			Sequence spawnSequence = DOTween.Sequence();
-
-			foreach (SpriteRenderer sprite in spriteRenderers)
-			{
-				spawnSequence.Insert(0, sprite.DOColor(Color.white, spawnFadeTime)
-					.SetEase(Ease.InExpo));
-			}
-
-			spawnSequence
-				.AppendCallback(() =>
-				{
-					ExplodeEffect.Instance.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite);
-					Destroy(silhouetteTubes.gameObject);
-					Destroy(silhouetteBody);
-					CameraShake.Instance.Shake(2f, new Vector3(0f, 2f, 0f));
-					LevelManager.Instance.KillAllEnemies();
-					AssemblyLine.StopAll();
-					StartCoroutine(PlayerControl.Instance.JumpToFloor());
-					PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, "", warningPopup, true);
-				})
-				.AppendInterval(2f)
-				.AppendCallback(() =>
-				{
-					Cutscene.Instance.Show();
-					ScaleWidthCamera.Instance.AnimateFOV(fightFOV, 1f);
-					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
-					BossIntro.Instance.Show(introName, introDescription, introSprite);
-					PlayerControl.Instance.GoToPoint(LevelManager.Instance.bossWave.playerWaitPoint.position, false, false);
-				})
-				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
-					.SetEase(Ease.InQuart)
-					.OnComplete(() =>
-					{
-						door.DOLocalPath(VectorPath.GetPath(doorPathName), doorOpenTime, VectorPath.GetPathType(doorPathName), PathMode.Sidescroller2D)
-							.SetEase(Ease.InOutCubic);
-					}))
-				.AppendCallback(() =>
-				{
-					FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform);
-					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
-					spawned = true;
-					startingX = transform.position.x;
-					prevPosition = transform.position;
-				})
-				.AppendInterval(spawnLaserPathTime * 0.9f)
-				.AppendCallback(() => CameraShake.Instance.Shake(1.5f, new Vector3(0f, 3f, 0f)))
-				.AppendInterval((spawnLaserPathTime * 0.1f) + 0.25f)
-				.AppendCallback(() =>
-				{
-					ExplodeEffect.Instance.Explode(wall.transform, Vector3.zero, wall.sprite);
-					Destroy(wall.gameObject);
-				});
-		}
-	}
-
-	public override void End()
-	{
-		maxFloatHeight = 1000f;
-		minFloatHeight = 990f;
-	}
-
-	protected override void CheckDeath(bool showDrops = true)
-	{
-		if (Health <= 0f && !dead)
-		{
-			dead = true;
-
-			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-			DOTween.Complete("RIFT Attack");
-			DOTween.Kill("RIFT Swoop");
-			DOTween.Kill("Boss Wave Timer");
-		}
-	}
-
-	private void MainAI()
-	{
-		InitialUpdate();
-
-		if (!dead)
+		if (spawned && !dead)
 		{
 			invincible = !attacking;
 			anim.SetBool("Eye Shield", invincible);
@@ -231,29 +136,40 @@ public sealed class TheRIFT : Boss
 			{
 				End();
 			}
+		}
+	}
 
-			if (applyMovement)
+	private void LateUpdate()
+	{
+		if (spawned)
+		{
+			if (!dead)
 			{
-				if (floating)
+				if (applyMovement)
 				{
-					Float();
-				}
+					if (floating)
+					{
+						Float();
+					}
 
-				ReturnPosition();
+					ReturnPosition();
+
+					GetMovement();
+					ApplyMovement();
+				}
+			}
+			else
+			{
+				FallToGround();
 
 				GetMovement();
 				ApplyMovement();
 			}
 		}
-		else
-		{
-			FallToGround();
-
-			GetMovement();
-			ApplyMovement();
-		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	private IEnumerator DoAttack(AttackWave attackWave)
 	{
 		int attackToUse = UnityEngine.Random.Range(0, attackWave.possibleAttacks.Count);
@@ -264,7 +180,7 @@ public sealed class TheRIFT : Boss
 			case AttackType.Laser:
 				anim.SetTrigger("PreAttack Laser");
 				attackFunction = (x) => FireLaser(x);
-				attackWave.preAttackTime = Mathf.Max(0f, attackWave.preAttackTime - RIFTLaser.CHARGE_LENGTH);
+				attackWave.preAttackTime = Mathf.Max(0f, attackWave.preAttackTime - RIFTLaser.ChargeLength);
 				break;
 			case AttackType.Swoop:
 				anim.SetTrigger("PreAttack Swoop");
@@ -300,7 +216,7 @@ public sealed class TheRIFT : Boss
 
 		DOTween.Sequence()
 			.SetId("RIFT Attack")
-			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], RIFTLaser.CHARGE_LENGTH)
+			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], RIFTLaser.ChargeLength)
 				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
 			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
 				.SetEase(curve)
@@ -422,7 +338,7 @@ public sealed class TheRIFT : Boss
 	{
 		if (transform.position.x > startingX + 3f)
 		{
-			velocity.x = Mathf.Lerp(velocity.x, -returnSpeed, 0.25f);
+			velocity.x = Mathf.Lerp(velocity.x, -returnSpeed, 15f * Time.deltaTime);
 		}
 
 		if (transform.localScale.x > 0f && 
@@ -515,4 +431,95 @@ public sealed class TheRIFT : Boss
 
 		return path.ToArray();
 	}
+
+	protected override void CheckDeath(bool showDrops = true)
+	{
+		if (Health <= 0f && !dead)
+		{
+			dead = true;
+
+			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+			DOTween.Complete("RIFT Attack");
+			DOTween.Kill("RIFT Swoop");
+			DOTween.Kill("Boss Wave Timer");
+		}
+	}
+	#endregion
+
+	#region Public Methods
+	public override void TakeDamage(GameObject enemy)
+	{
+		if (!invincible)
+		{
+			anim.SetTrigger("Hit");
+		}
+
+		base.TakeDamage(enemy);
+	}
+
+	public override void Spawn()
+	{
+		if (!spawned)
+		{
+			Sequence spawnSequence = DOTween.Sequence();
+
+			foreach (SpriteRenderer sprite in spriteRenderers)
+			{
+				spawnSequence.Insert(0, sprite.DOColor(Color.white, spawnFadeTime)
+					.SetEase(Ease.InExpo));
+			}
+
+			spawnSequence
+				.AppendCallback(() =>
+				{
+					ExplodeEffect.Instance.Explode(silhouetteTubes.transform, Vector3.zero, silhouetteTubes.sprite);
+					Destroy(silhouetteTubes.gameObject);
+					Destroy(silhouetteBody);
+					CameraShake.Instance.Shake(2f, new Vector3(0f, 2f, 0f));
+					LevelManager.Instance.KillAllEnemies();
+					AssemblyLine.StopAll();
+					StartCoroutine(PlayerControl.Instance.JumpToFloor());
+					PopupMessage.Instance.CreatePopup(PlayerControl.Instance.PopupMessagePoint, "", warningPopup, true);
+				})
+				.AppendInterval(2f)
+				.AppendCallback(() =>
+				{
+					Cutscene.Instance.Show();
+					ScaleWidthCamera.Instance.AnimateFOV(fightFOV, 1f);
+					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
+					BossIntro.Instance.Show(introName, introDescription, introSprite);
+					PlayerControl.Instance.GoToPoint(LevelManager.Instance.bossWave.playerWaitPoint.position, false, false);
+				})
+				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
+					.SetEase(Ease.InQuart)
+					.OnComplete(() =>
+					{
+						door.DOLocalPath(VectorPath.GetPath(doorPathName), doorOpenTime, VectorPath.GetPathType(doorPathName), PathMode.Sidescroller2D)
+							.SetEase(Ease.InOutCubic);
+					}))
+				.AppendCallback(() =>
+				{
+					FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform);
+					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
+					spawned = true;
+					startingX = transform.position.x;
+					prevPosition = transform.position;
+				})
+				.AppendInterval(spawnLaserPathTime * 0.9f)
+				.AppendCallback(() => CameraShake.Instance.Shake(1.5f, new Vector3(0f, 3f, 0f)))
+				.AppendInterval((spawnLaserPathTime * 0.1f) + 0.25f)
+				.AppendCallback(() =>
+				{
+					ExplodeEffect.Instance.Explode(wall.transform, Vector3.zero, wall.sprite);
+					Destroy(wall.gameObject);
+				});
+		}
+	}
+
+	public override void End()
+	{
+		maxFloatHeight = 1000f;
+		minFloatHeight = 990f;
+	}
+#endregion
 }

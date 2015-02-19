@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public sealed class PlayerControl : MonoBehaviour
 {
-	#region Variables
+	#region Fields
 	private static PlayerControl instance;
 
 	public float maxHealth = 100f;
@@ -81,7 +81,7 @@ public sealed class PlayerControl : MonoBehaviour
 	private Transform popupMessagePoint;
 	#endregion
 
-	#region Properties
+	#region Public Properties
 	public static PlayerControl Instance
 	{
 		get { return instance; }
@@ -138,6 +138,11 @@ public sealed class PlayerControl : MonoBehaviour
 		get { return controller.isGrounded; }
 	}
 
+	public bool IsInputDisabled
+	{
+		get { return disableInput; }
+	}
+
 	public Vector3 Velocity
 	{
 		get { return velocity; }
@@ -151,11 +156,6 @@ public sealed class PlayerControl : MonoBehaviour
 	public Vector3 PopupMessagePoint
 	{
 		get { return popupMessagePoint.position; }
-	}
-
-	public float Height
-	{
-		get { return collider2D.bounds.size.y; }
 	}
 
 	public ReadOnlyCollection<SpriteRenderer> SpriteRenderers
@@ -177,14 +177,16 @@ public sealed class PlayerControl : MonoBehaviour
 	{
 		get { return guns.Count >= startingGuns.Capacity; }
 	}
+	#endregion
 
+	#region Internal Properties
 	private float NewAltIdleTime
 	{
 		get { return Random.Range(minAltIdleTime, maxAltIdleTime); }
 	}
 	#endregion
 
-	#region Monobehaviour
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -223,43 +225,9 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void Update()
 	{
-		if (!disableInput && !Dead)
+		if (!dead)
 		{
-			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
-			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
-			run = CrossPlatformInputManager.GetButton("Run") && Gun.NoInput;
-			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
-
-			gunSwapCooldownTimer += Time.deltaTime;
-
-			if (gunSwapCooldownTimer >= gunSwapCooldownTime)
-			{
-				for (int i = 0; i < guns.Count; i++)
-				{
-					if (CrossPlatformInputManager.GetButtonDown("Gun" + (i + 1).ToString()))
-					{
-						if (!PopupSwapGun.Instance.ShowingPopup)
-						{
-							PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[i].SpriteRenderer.sprite, true);
-						}
-
-						CurrentGunName.Instance.Show(guns[i].gunName, guns[i].Color, gunSwapCooldownTime);
-						SelectGun(i);
-						gunSwapCooldownTimer = 0f;
-						break;
-					}
-				}
-			}
-		}
-
-		run = (run && (right || left)) || continuouslyRunning;
-	}
-
-	private void FixedUpdate()
-	{
-		if (!Dead)
-		{
-			InitialUpdate();
+			GetInput();
 			ApplyAnimation();
 
 			if (useTargetPoint && disableInput)
@@ -276,10 +244,13 @@ public sealed class PlayerControl : MonoBehaviour
 			{
 				UpdateInvincibilityFlash();
 			}
-
-			GetMovement();
-			ApplyMovement();
 		}
+	}
+
+	private void LateUpdate()
+	{
+		GetMovement();
+		ApplyMovement();
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -315,210 +286,39 @@ public sealed class PlayerControl : MonoBehaviour
 	}
 	#endregion
 
-	#region Public Methods
-	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
+	#region Internal Update Methods
+	private void GetInput()
 	{
-		if (!canTakeDamage)
+		if (!disableInput)
 		{
-			return;
-		}
+			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
+			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
+			run = CrossPlatformInputManager.GetButton("Run") && Gun.NoInput;
+			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
 
-		float knockbackDirection = 1f;
+			gunSwapCooldownTimer += Time.deltaTime;
 
-		if (enemy.tag == "Enemy")
-		{
-			Enemy currentEnemy = enemy.GetComponent<Enemy>();
-
-			if (!currentEnemy.spawned)
+			if (gunSwapCooldownTimer >= gunSwapCooldownTime)
 			{
-				return;
-			}
-
-			damage = (damage == 0f) ? currentEnemy.damage : damage;
-			knockback = (knockback == default(Vector2)) ? currentEnemy.knockback : knockback;
-			knockbackDirection = Mathf.Sign(transform.position.x - enemy.transform.position.x);
-		}
-		else if (enemy.tag == "Projectile")
-		{
-			Projectile currentProjectile = enemy.GetComponent<Projectile>();
-			damage = currentProjectile.damage;
-			knockback = currentProjectile.knockback;
-			knockbackDirection = Mathf.Sign(currentProjectile.direction.x);
-			currentProjectile.CheckDestroyEnemy();
-		}
-
-		if (damage != 0f)
-		{
-			Health -= damage;
-
-			if (Health > 0f && knockback != default(Vector2))
-			{
-				Sequence knockbackSequence = DOTween.Sequence();
-
-				knockbackSequence
-					.AppendInterval(0.1f)
-					.AppendCallback(() =>
+				for (int i = 0; i < guns.Count; i++)
+				{
+					if (CrossPlatformInputManager.GetButtonDown("Gun" + (i + 1).ToString()))
 					{
-						velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity) * knockbackDirection;
-						velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+						if (!PopupSwapGun.Instance.ShowingPopup)
+						{
+							PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[i].SpriteRenderer.sprite, true);
+						}
 
-						controller.move(velocity * Time.deltaTime);
-						lastHitTime = Time.time;
-					});
+						CurrentGunName.Instance.Show(guns[i].gunName, guns[i].Color, gunSwapCooldownTime);
+						SelectGun(i);
+						gunSwapCooldownTimer = 0f;
+						break;
+					}
+				}
 			}
 		}
-	}
 
-	public void Move(Vector3 velocity)
-	{
-		controller.move(velocity * Time.deltaTime);
-	}
-
-	public int AddPoints(int points)
-	{
-		int newPoints = points * combo;
-		score = Mathf.Clamp(score + newPoints, 0, maxScore);
-
-		return newPoints;
-	}
-
-	public int AddPointsFromEnemy(float enemyHealth, float enemyDamage)
-	{
-		killChain++;
-		comboTimer = 0f;
-
-		if (killChain >= GetNextCombo())
-		{
-			combo++;
-			currentMaxCombo = combo;
-		}
-
-		int newPoints = Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
-		score = Mathf.Clamp(score + newPoints, 0, maxScore);
-
-		return newPoints;
-	}
-
-	public void AddMicrochips(int newMicrochips)
-	{
-		microchips = Mathf.Clamp(microchips + newMicrochips, 0, maxMicrochips);
-	}
-
-	public void AddGun(Gun newGun)
-	{
-		int gunIndex = GunsFull ? currentGunIndex : guns.Count;
-
-		if (guns.ElementAtOrDefault(gunIndex) != null)
-		{
-			Destroy(guns[gunIndex].gameObject);
-			guns.RemoveAt(gunIndex);
-		}
-
-		Gun gunInstance = Instantiate(newGun, gunPoint.position, gunPoint.rotation) as Gun;
-		gunInstance.name = newGun.name;
-		gunInstance.transform.parent = transform;
-		gunInstance.transform.localScale = gunPoint.localScale;
-		gunInstance.SpriteRenderer.color = Color.clear;
-		gunInstance.disableInput = true;
-		guns.Insert(gunIndex, gunInstance);
-
-		if (gunIndex == currentGunIndex)
-		{
-			SelectGun(gunIndex);
-		}
-	}
-
-	public void SelectGun(int gunIndex)
-	{
-		if (gunIndex == currentGunIndex)
-		{
-			guns[currentGunIndex].disableInput = false;
-		}
-		else
-		{
-			guns[currentGunIndex].disableInput = true;
-			guns[gunIndex].disableInput = false;
-			currentGunIndex = gunIndex;
-		}
-	}
-
-	public void SpeedBoost(float multiplier, float length)
-	{
-		speedMultiplier = multiplier;
-
-		Sequence speedSequence = DOTween.Sequence();
-		speedSequence
-			.AppendInterval(length)
-			.AppendCallback(() => speedMultiplier = 1f );
-	}
-
-	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
-	{
-		targetPoint = point;
-		useTargetPoint = true;
-		goToFaceRight = faceRight;
-		cancelGoTo = false;
-		reEnableAfterMove = autoEnableInput;
-		inertiaAfterMove = inertia;
-		DisableInput();
-	}
-
-	public IEnumerator JumpToFloor()
-	{
-		LayerMask originalCollider = controller.platformMask;
-
-		if (IsGrounded)
-		{
-			Jump(1f, false);
-			controller.move(velocity * Time.deltaTime);
-		}
-
-		controller.platformMask = bottomCollider;
-
-		while (!IsGrounded)
-		{
-			yield return new WaitForSeconds(0.1f);
-		}
-
-		controller.platformMask = originalCollider;
-		DisableInput();
-	}
-
-	public void CancelGoTo()
-	{
-		cancelGoTo = true;
-	}
-
-	public void DisableInput()
-	{
-		disableInput = true;
-		Gun.disableInput = true;
-		ResetInput();
-	}
-
-	public void EnableInput()
-	{
-		ResetInput();
-		disableInput = false;
-		Gun.disableInput = false;
-	}
-
-	public bool IsInputDisabled()
-	{
-		return disableInput;
-	}
-	#endregion
-
-	#region Private Update Methods
-	private void InitialUpdate()
-	{
-		velocity = controller.velocity;
-
-		if (IsGrounded)
-		{
-			velocity.y = 0f;
-			lastGroundedPosition = transform.position;
-		}
+		run = (run && (right || left)) || continuouslyRunning;
 	}
 
 	private void ApplyAnimation()
@@ -693,14 +493,20 @@ public sealed class PlayerControl : MonoBehaviour
 								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
 																										   : runSpeed)
 																 : walkSpeed) * speedMultiplier,
-								Time.fixedDeltaTime * smoothedMovementFactor);
-		velocity.y += gravity * Time.fixedDeltaTime;
+								Time.deltaTime * smoothedMovementFactor);
+		velocity.y += gravity * Time.deltaTime;
+		controller.move(velocity * Time.deltaTime);
+		velocity = controller.velocity;
 
-		controller.move(velocity * Time.fixedDeltaTime);
+		if (IsGrounded)
+		{
+			velocity.y = 0f;
+			lastGroundedPosition = transform.position;
+		}
 	}
 	#endregion
 
-	#region Private Helper Methods
+	#region Internal Helper Methods
 	private void Jump(float height, bool playAnimation = true)
 	{
 		if (height >= 0f)
@@ -785,6 +591,195 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 
 		return nextCombo;
+	}
+	#endregion
+
+	#region Public Methods
+	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
+	{
+		if (!canTakeDamage)
+		{
+			return;
+		}
+
+		float knockbackDirection = 1f;
+
+		if (enemy.tag == "Enemy")
+		{
+			Enemy currentEnemy = enemy.GetComponent<Enemy>();
+
+			if (!currentEnemy.spawned)
+			{
+				return;
+			}
+
+			damage = (damage == 0f) ? currentEnemy.damage : damage;
+			knockback = (knockback == default(Vector2)) ? currentEnemy.knockback : knockback;
+			knockbackDirection = Mathf.Sign(transform.position.x - enemy.transform.position.x);
+		}
+		else if (enemy.tag == "Projectile")
+		{
+			Projectile currentProjectile = enemy.GetComponent<Projectile>();
+			damage = currentProjectile.damage;
+			knockback = currentProjectile.knockback;
+			knockbackDirection = Mathf.Sign(currentProjectile.direction.x);
+			currentProjectile.CheckDestroyEnemy();
+		}
+
+		if (damage != 0f)
+		{
+			Health -= damage;
+
+			if (Health > 0f && knockback != default(Vector2))
+			{
+				Sequence knockbackSequence = DOTween.Sequence();
+
+				knockbackSequence
+					.AppendInterval(0.1f)
+					.AppendCallback(() =>
+					{
+						velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity) * knockbackDirection;
+						velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+
+						controller.move(velocity * Time.deltaTime);
+						lastHitTime = Time.time;
+					});
+			}
+		}
+	}
+
+	public void Move(Vector3 velocity)
+	{
+		controller.move(velocity * Time.deltaTime);
+	}
+
+	public int AddPoints(int points)
+	{
+		int newPoints = points * combo;
+		score = Mathf.Clamp(score + newPoints, 0, maxScore);
+
+		return newPoints;
+	}
+
+	public int AddPointsFromEnemy(float enemyHealth, float enemyDamage)
+	{
+		killChain++;
+		comboTimer = 0f;
+
+		if (killChain >= GetNextCombo())
+		{
+			combo++;
+			currentMaxCombo = combo;
+		}
+
+		int newPoints = Mathf.RoundToInt(enemyHealth * enemyDamage + (enemyHealth / maxHealth * 100)) * combo;
+		score = Mathf.Clamp(score + newPoints, 0, maxScore);
+
+		return newPoints;
+	}
+
+	public void AddMicrochips(int newMicrochips)
+	{
+		microchips = Mathf.Clamp(microchips + newMicrochips, 0, maxMicrochips);
+	}
+
+	public void AddGun(Gun newGun)
+	{
+		int gunIndex = GunsFull ? currentGunIndex : guns.Count;
+
+		if (guns.ElementAtOrDefault(gunIndex) != null)
+		{
+			Destroy(guns[gunIndex].gameObject);
+			guns.RemoveAt(gunIndex);
+		}
+
+		Gun gunInstance = Instantiate(newGun, gunPoint.position, gunPoint.rotation) as Gun;
+		gunInstance.name = newGun.name;
+		gunInstance.transform.parent = transform;
+		gunInstance.transform.localScale = gunPoint.localScale;
+		gunInstance.SpriteRenderer.color = Color.clear;
+		gunInstance.disableInput = true;
+		guns.Insert(gunIndex, gunInstance);
+
+		if (gunIndex == currentGunIndex)
+		{
+			SelectGun(gunIndex);
+		}
+	}
+
+	public void SelectGun(int gunIndex)
+	{
+		if (gunIndex == currentGunIndex)
+		{
+			guns[currentGunIndex].disableInput = false;
+		}
+		else
+		{
+			guns[currentGunIndex].disableInput = true;
+			guns[gunIndex].disableInput = false;
+			currentGunIndex = gunIndex;
+		}
+	}
+
+	public void SpeedBoost(float multiplier, float length)
+	{
+		speedMultiplier = multiplier;
+
+		Sequence speedSequence = DOTween.Sequence();
+		speedSequence
+			.AppendInterval(length)
+			.AppendCallback(() => speedMultiplier = 1f);
+	}
+
+	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
+	{
+		targetPoint = point;
+		useTargetPoint = true;
+		goToFaceRight = faceRight;
+		cancelGoTo = false;
+		reEnableAfterMove = autoEnableInput;
+		inertiaAfterMove = inertia;
+		DisableInput();
+	}
+
+	public IEnumerator JumpToFloor()
+	{
+		LayerMask originalCollider = controller.platformMask;
+
+		if (IsGrounded)
+		{
+			Jump(1f, false);
+			controller.move(velocity * Time.deltaTime);
+		}
+
+		controller.platformMask = bottomCollider;
+
+		while (!IsGrounded)
+		{
+			yield return new WaitForSeconds(0.1f);
+		}
+
+		controller.platformMask = originalCollider;
+		DisableInput();
+	}
+
+	public void CancelGoTo()
+	{
+		cancelGoTo = true;
+	}
+
+	public void DisableInput()
+	{
+		disableInput = true;
+		Gun.disableInput = true;
+		ResetInput();
+	}
+
+	public void EnableInput()
+	{
+		ResetInput();
+		disableInput = false;
+		Gun.disableInput = false;
 	}
 	#endregion
 }

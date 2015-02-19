@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-class NoiseAndGrain : PostEffectsBase 
+class NoiseAndGrain : PostEffectsBase
 {
+	#region Fields
 	public float intensityMultiplier = 0.25f;
 
 	public float generalIntensity = 0.5f;
@@ -29,30 +30,10 @@ class NoiseAndGrain : PostEffectsBase
 	private Material dx11NoiseMaterial = null;
 
 	private static float TILE_AMOUNT = 64.0f;
-	
-	protected override bool CheckResources()
-	{
-		CheckSupport(false);
-		
-		noiseMaterial = CheckShaderAndCreateMaterial (noiseShader, noiseMaterial);
+	#endregion
 
-		if (dx11Grain && supportDX11) 
-		{
-			#if UNITY_EDITOR
-			dx11NoiseShader = Shader.Find("Hidden/NoiseAndGrainDX11");
-			#endif
-			dx11NoiseMaterial = CheckShaderAndCreateMaterial (dx11NoiseShader, dx11NoiseMaterial);			
-		}
-		
-		if (!isSupported)
-		{
-			ReportAutoDisable();
-		}
-
-		return isSupported;
-	}
-
-	void OnRenderImage(RenderTexture source, RenderTexture destination)
+	#region MonoBehaviour
+	private void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{		
 		if (!CheckResources() || noiseTexture == null) 
 		{
@@ -68,8 +49,6 @@ class NoiseAndGrain : PostEffectsBase
 
 	   	if (dx11Grain && supportDX11) 
 		{
-	   		// We have a fancy, procedural noise pattern in this version, so no texture needed
-
 			dx11NoiseMaterial.SetFloat("_DX11NoiseTime", Time.frameCount);
 			dx11NoiseMaterial.SetTexture("_NoiseTex", noiseTexture);
 			dx11NoiseMaterial.SetVector("_NoisePerChannel", monochrome ? Vector3.one : intensities);
@@ -91,7 +70,6 @@ class NoiseAndGrain : PostEffectsBase
 	   	}
 	   	else 
 		{
-	   		// normal noise (DX9 style)
 		   	if (noiseTexture) 
 			{
 				noiseTexture.wrapMode = TextureWrapMode.Repeat;		   		
@@ -104,20 +82,46 @@ class NoiseAndGrain : PostEffectsBase
 			noiseMaterial.SetVector("_MidGrey", new Vector3(midGrey, 1.0f/(1.0f-midGrey), -1.0f/midGrey));
 			noiseMaterial.SetVector("_NoiseAmount", new Vector3(generalIntensity, blackIntensity, whiteIntensity) * intensityMultiplier);
 
-	   		if (softness > Mathf.Epsilon)
-	   		{
-	   			RenderTexture rt2 = RenderTexture.GetTemporary((int)(source.width * (1.0f-softness)), (int)(source.height * (1.0f-softness)));
-		   		DrawNoiseQuadGrid (source, rt2, noiseMaterial, noiseTexture, 2);
-		   		noiseMaterial.SetTexture("_NoiseTex", rt2);
-		   		Graphics.Blit(source, destination, noiseMaterial, 1);
-	   			RenderTexture.ReleaseTemporary(rt2);
-	   		}
-	   		else	   		
-				DrawNoiseQuadGrid (source, destination, noiseMaterial, noiseTexture, 0);
+			if (softness > Mathf.Epsilon)
+			{
+				RenderTexture rt2 = RenderTexture.GetTemporary((int)(source.width * (1.0f - softness)), (int)(source.height * (1.0f - softness)));
+				DrawNoiseQuadGrid(source, rt2, noiseMaterial, noiseTexture, 2);
+				noiseMaterial.SetTexture("_NoiseTex", rt2);
+				Graphics.Blit(source, destination, noiseMaterial, 1);
+				RenderTexture.ReleaseTemporary(rt2);
+			}
+			else
+			{
+				DrawNoiseQuadGrid(source, destination, noiseMaterial, noiseTexture, 0);
+			}
 		}
 	}
-		
-	static void DrawNoiseQuadGrid(RenderTexture source, RenderTexture dest, Material fxMaterial, Texture2D noise, int passNr)
+	#endregion
+
+	#region Internal Helper Methods
+	protected override bool CheckResources()
+	{
+		CheckSupport(false);
+
+		noiseMaterial = CheckShaderAndCreateMaterial(noiseShader, noiseMaterial);
+
+		if (dx11Grain && supportDX11)
+		{
+			#if UNITY_EDITOR
+			dx11NoiseShader = Shader.Find("Hidden/NoiseAndGrainDX11");
+			#endif
+			dx11NoiseMaterial = CheckShaderAndCreateMaterial(dx11NoiseShader, dx11NoiseMaterial);
+		}
+
+		if (!isSupported)
+		{
+			ReportAutoDisable();
+		}
+
+		return isSupported;
+	}
+
+	private static void DrawNoiseQuadGrid(RenderTexture source, RenderTexture dest, Material fxMaterial, Texture2D noise, int passNr)
 	{
 		RenderTexture.active = dest;
 		
@@ -175,4 +179,5 @@ class NoiseAndGrain : PostEffectsBase
 		GL.End();
 	    GL.PopMatrix();
 	}
+	#endregion
 }

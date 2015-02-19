@@ -4,7 +4,7 @@ using System.Collections;
 [ExecuteInEditMode]
 public class CRT : MonoBehaviour
 {
-	#region Variables
+	#region Fields
 	public Shader curShader;
 	public float Distortion = 0.1f;
 	public float InputGamma = 2.4f;
@@ -13,8 +13,8 @@ public class CRT : MonoBehaviour
 	private Material curMaterial;
 	#endregion
 
-	#region Properties
-	Material material
+	#region Internal Properties
+	private Material material
 	{
 		get
 		{
@@ -23,12 +23,14 @@ public class CRT : MonoBehaviour
 				curMaterial = new Material(curShader);
 				curMaterial.hideFlags = HideFlags.HideAndDontSave;
 			}
+
 			return curMaterial;
 		}
 	}
 	#endregion
-	// Use this for initialization
-	void Start()
+
+	#region MonoBehaviour
+	private void Start()
 	{
 		if (!SystemInfo.supportsImageEffects)
 		{
@@ -37,7 +39,7 @@ public class CRT : MonoBehaviour
 		}
 	}
 
-	void OnRenderImage(RenderTexture sourceTexture, RenderTexture destTexture)
+	private void OnRenderImage(RenderTexture sourceTexture, RenderTexture destTexture)
 	{
 		if (curShader != null)
 		{
@@ -51,24 +53,14 @@ public class CRT : MonoBehaviour
 		{
 			Graphics.Blit(sourceTexture, destTexture);
 		}
-
-
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
-
-	void OnDisable()
+	private void OnDisable()
 	{
 		if (curMaterial)
 		{
 			DestroyImmediate(curMaterial);
 		}
-
 	}
-
-
+	#endregion
 }

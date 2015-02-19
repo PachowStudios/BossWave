@@ -1,12 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-class PostEffectsBase : MonoBehaviour 
-{	
+class PostEffectsBase : MonoBehaviour
+{
+	#region Fields
 	protected bool supportHDRTextures = true;
 	protected bool supportDX11 = false;
 	protected bool isSupported = true;
-	
+	#endregion
+
+	#region MonoBehaviour
+	private void Start()
+	{
+		CheckResources();
+	}
+
+	private void OnEnable()
+	{
+		isSupported = true;
+	}
+	#endregion
+
+	#region Internal Helper Methods
 	protected Material CheckShaderAndCreateMaterial(Shader s, Material m2Create)
 	{
 		if (!s) 
@@ -43,7 +58,7 @@ class PostEffectsBase : MonoBehaviour
 		}
 	}
 
-	Material CreateMaterial(Shader s, Material m2Create)
+	private Material CreateMaterial(Shader s, Material m2Create)
 	{
 		if (!s) 
 		{ 
@@ -74,11 +89,6 @@ class PostEffectsBase : MonoBehaviour
 			}
 		}
 	}
-	
-	void  OnEnable()
-	{
-		isSupported = true;
-	}	
 
 	protected bool CheckSupport()
 	{
@@ -91,11 +101,6 @@ class PostEffectsBase : MonoBehaviour
 
 		return isSupported;
 	}
-	
-	void  Start ()
-	{
-		 CheckResources();
-	}	
 		
 	protected bool CheckSupport(bool needDepth)
 	{
@@ -124,7 +129,7 @@ class PostEffectsBase : MonoBehaviour
 		return true;
 	}
 
-	bool CheckSupport(bool needDepth, bool needHdr)
+	private bool CheckSupport(bool needDepth, bool needHdr)
 	{
 		if (!CheckSupport(needDepth))
 		{
@@ -141,7 +146,7 @@ class PostEffectsBase : MonoBehaviour
 		return true;
 	}	
 	
-	bool Dx11Support()
+	private bool Dx11Support()
 	{
 		return supportDX11;
 	}
@@ -150,9 +155,8 @@ class PostEffectsBase : MonoBehaviour
 	{
 		Debug.LogWarning ("The image effect " + this.ToString() + " has been disabled as it's not supported on the current platform.");
 	}
-			
-	// deprecated but needed for old effects to survive upgrading
-	bool CheckShader(Shader s)
+
+	private bool CheckShader(Shader s)
 	{
 		Debug.Log("The shader " + s.ToString () + " on effect "+ this.ToString () + " is not part of the Unity 3.2f+ effects suite anymore. For best performance and quality, please ensure you are using the latest Standard Assets Image Effects (Pro only) package.");		
 
@@ -168,14 +172,14 @@ class PostEffectsBase : MonoBehaviour
 		}
 	}
 	
-	void NotSupported()
+	private void NotSupported()
 	{
 		enabled = false;
 		isSupported = false;
 		return;
 	}
 	
-	void DrawBorder(RenderTexture dest, Material material)
+	private void DrawBorder(RenderTexture dest, Material material)
 	{
 		float x1;	
 		float x2;
@@ -253,4 +257,5 @@ class PostEffectsBase : MonoBehaviour
         
         GL.PopMatrix();
 	}
+	#endregion
 }

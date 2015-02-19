@@ -4,8 +4,9 @@ using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Core;
 
-public class PopupSwapGunInstance : MonoBehaviour 
+public class PopupSwapGunInstance : MonoBehaviour
 {
+	#region Fields
 	public float timeLimit = 5f;
 	public bool swapAfterTime = false;
 	public float appearTime = 0.25f;
@@ -26,7 +27,9 @@ public class PopupSwapGunInstance : MonoBehaviour
 	private bool selectionMade = false;
 
 	private CanvasGroup canvasGroup;
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		canvasGroup = GetComponent<CanvasGroup>();
@@ -56,7 +59,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+	private void LateUpdate()
 	{
 		transform.position = PlayerControl.Instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
 
@@ -82,20 +85,9 @@ public class PopupSwapGunInstance : MonoBehaviour
 																				 newImage.rectTransform.sizeDelta.y) + timerBuffer);
 		}
 	}
+	#endregion
 
-	public void DisappearNoSelection()
-	{
-		canvasGroup.alpha = 1f;
-		yOffset = 0f;
-
-		canvasGroup.DOFade(0f, appearTime * 0.6f)
-			.SetEase(Ease.InQuad)
-			.SetDelay(appearTime * 0.4f);
-		DOTween.To(() => yOffset, x => yOffset = x, distance * 2f, appearTime)
-			.SetEase(Ease.OutQuint)
-			.OnComplete(() => Destroy(gameObject));
-	}
-
+	#region Internal Helper Methods
 	private void SwapGuns(bool swap)
 	{
 		if (swap)
@@ -141,4 +133,20 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 		Destroy(gameObject, disappearTime);
 	}
+	#endregion
+
+	#region Public Methods
+	public void DisappearNoSelection()
+	{
+		canvasGroup.alpha = 1f;
+		yOffset = 0f;
+
+		canvasGroup.DOFade(0f, appearTime * 0.6f)
+			.SetEase(Ease.InQuad)
+			.SetDelay(appearTime * 0.4f);
+		DOTween.To(() => yOffset, x => yOffset = x, distance * 2f, appearTime)
+			.SetEase(Ease.OutQuint)
+			.OnComplete(() => Destroy(gameObject));
+	}
+	#endregion
 }

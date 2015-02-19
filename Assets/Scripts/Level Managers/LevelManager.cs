@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 
-public class LevelManager : MonoBehaviour 
+public class LevelManager : MonoBehaviour
 {
+	#region Fields
 	private static LevelManager instance;
 
 	[System.Serializable]
@@ -59,7 +60,9 @@ public class LevelManager : MonoBehaviour
 
 	private List<GameObject> scrollingElements;
 	private List<GameObject> spawners;
+	#endregion
 
+	#region Public Properties
 	public static LevelManager Instance
 	{
 		get { return instance; }
@@ -74,7 +77,9 @@ public class LevelManager : MonoBehaviour
 	{
 		get { return mainMusic.time; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -93,14 +98,14 @@ public class LevelManager : MonoBehaviour
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
 
-		GameMenu.Instance.EnablePausing(false);
-		DOTween.Sequence()
-			.SetUpdate(true)
-			.AppendInterval(fadeInTime + 0.1f)
-			.AppendCallback(() => GameMenu.Instance.EnablePausing(true));
-
 		if (introCRT)
 		{
+			GameMenu.Instance.EnablePausing(false);
+			DOTween.Sequence()
+				.SetUpdate(true)
+				.AppendInterval(fadeInTime + 0.1f)
+				.AppendCallback(() => GameMenu.Instance.EnablePausing(true));
+
 			Time.timeScale = 0f;
 			Time.fixedDeltaTime = 0f;
 			TimeWarpEffect.Instance.EndWarp(fadeInTime, new AudioSource[] { mainMusic }, Ease.InOutSine);
@@ -124,10 +129,7 @@ public class LevelManager : MonoBehaviour
 		{
 			TimeWarpEffect.Instance.EndWarp(0.5f, new AudioSource[] { LevelManager.Instance.mainMusic });
 		}
-	}
 
-	private void FixedUpdate()
-	{
 		waveTimer = mainMusic.time;
 
 		if (waveTimer >= bossWave.startTime && !bossWaveActive)
@@ -200,15 +202,9 @@ public class LevelManager : MonoBehaviour
 			StopAllCoroutines();
 		}
 	}
+	#endregion
 
-	public void KillAllEnemies()
-	{
-		foreach (StandardEnemy currentEnemy in GameObject.FindObjectsOfType<StandardEnemy>())
-		{
-			currentEnemy.KillNoPoints();
-		}
-	} 
-
+	#region Internal Helper Methods
 	private IEnumerator SpawnWave(int wave)
 	{
 		List<StandardEnemy> possibleEnemies = new List<StandardEnemy>();
@@ -235,4 +231,15 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 	}
+	#endregion
+
+	#region Public Methods
+	public void KillAllEnemies()
+	{
+		foreach (StandardEnemy currentEnemy in GameObject.FindObjectsOfType<StandardEnemy>())
+		{
+			currentEnemy.KillNoPoints();
+		}
+	}
+	#endregion
 }

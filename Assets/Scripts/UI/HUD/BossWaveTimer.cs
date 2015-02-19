@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 
-public class BossWaveTimer : MonoBehaviour 
+public class BossWaveTimer : MonoBehaviour
 {
+	#region Fields
 	private static BossWaveTimer instance;
 
 	public float fadeTime = 0.5f;
@@ -15,7 +16,9 @@ public class BossWaveTimer : MonoBehaviour
 
 	private Text text;
 	private CanvasGroup canvasGroup;
+	#endregion
 
+	#region Public Properties
 	public static BossWaveTimer Instance
 	{
 		get { return instance; }
@@ -23,7 +26,9 @@ public class BossWaveTimer : MonoBehaviour
 
 	public float Timer
 	{ get; set; }
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -38,7 +43,9 @@ public class BossWaveTimer : MonoBehaviour
 	{
 		text.text = Timer.ToString("F2");
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(float time = 0f)
 	{
 		if (!showing)
@@ -62,4 +69,5 @@ public class BossWaveTimer : MonoBehaviour
 			showing = false;
 		}
 	}
+	#endregion
 }

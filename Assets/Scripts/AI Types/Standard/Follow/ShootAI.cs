@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public sealed class ShootAI : FollowAI
 {
+	#region Fields
 	public float maxRangeOffset = 1f;
 	public bool horizontalShot = true;
 	public bool useRandomGun = false;
@@ -17,7 +18,9 @@ public sealed class ShootAI : FollowAI
 
 	private List<Transform> guns;
 	private int currentGun = 0;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -28,7 +31,9 @@ public sealed class ShootAI : FollowAI
 		followRange += rangeOffset;
 		attackRange += rangeOffset;
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	protected override void Attack()
 	{
 		base.Attack();
@@ -99,4 +104,5 @@ public sealed class ShootAI : FollowAI
 
 		yield return null;
 	}
+	#endregion
 }

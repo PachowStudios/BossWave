@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class Cutscene : MonoBehaviour
 {
+	#region Fields
 	private static Cutscene instance;
 
 	public float fadeTime = 0.5f;
@@ -17,17 +18,23 @@ public class Cutscene : MonoBehaviour
 	public RectTransform bottomBar;
 
 	private bool showing = false;
+	#endregion
 
+	#region Public Properties
 	public static Cutscene Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(bool disableInput = false)
 	{
 		if (!showing)
@@ -61,7 +68,7 @@ public class Cutscene : MonoBehaviour
 			ComboMeter.Instance.Show(fadeTime);
 			SecondaryShotBox.Instance.Show(fadeTime, true);
 
-			if (enableInput && PlayerControl.Instance.IsInputDisabled())
+			if (enableInput && PlayerControl.Instance.IsInputDisabled)
 			{
 				PlayerControl.Instance.EnableInput();
 			}
@@ -69,6 +76,5 @@ public class Cutscene : MonoBehaviour
 			showing = false;
 		}
 	}
-
-	
+	#endregion
 }

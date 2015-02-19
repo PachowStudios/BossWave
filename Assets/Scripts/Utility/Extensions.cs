@@ -6,20 +6,22 @@ using DG.Tweening;
 
 public static class Extensions
 {
-	// GameObject
+	#region GameObject
 	public static void HideInHiearchy(this GameObject parent, bool hide = true)
 	{
 		parent.hideFlags = parent.hideFlags ^ HideFlags.HideInHierarchy;
 	}
+	#endregion
 
-	// Renderer
+	#region Renderer
 	public static bool IsVisibleFrom(this Renderer parent, Camera camera)
 	{
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
 		return GeometryUtility.TestPlanesAABB(planes, parent.bounds);
 	}
+	#endregion
 
-	// Transform
+	#region Transform
 	public static Transform FindSubChild(this Transform parent, string name, bool confirmEnabled = true)
 	{
 		if (parent.name.Equals(name))
@@ -103,20 +105,23 @@ public static class Extensions
 			parent.rotation = newRotation;
 		}
 	}
+	#endregion
 
-	// Bounds
+	#region Bounds
 	public static Vector3 ScaleToSize(this Bounds parent, Vector3 targetSize)
 	{
 		return new Vector3(targetSize.x / parent.size.x, targetSize.y / parent.size.y, 1f);
 	}
+	#endregion
 
-	// Vector2
+	#region Vector2
 	public static Vector2 Sign(this Vector2 parent)
 	{
 		return ((Vector3)parent).Sign();
 	}
+	#endregion
 
-	// Vector3
+	#region Vector3
 	public static Quaternion LookAt2D(this Vector3 parent, Vector3 target)
 	{
 		Vector3 targetPosition = target - parent;
@@ -162,8 +167,9 @@ public static class Extensions
 	{
 		return new Vector3(Mathf.Sign(parent.x), Mathf.Sign(parent.y), Mathf.Sign(parent.z));
 	}
+	#endregion
 
-	// Rigidbody2D
+	#region Rigidbody2D
 	public static void AddExplosionForce(this Rigidbody2D parent, float explosionForce, Vector3 explosionPosition, float explosionRadius, float upliftModifier = 0f)
 	{
 		Vector3 dir = (parent.transform.position - explosionPosition);
@@ -178,8 +184,9 @@ public static class Extensions
 			parent.AddForce(upliftForce);
 		}
 	}
+	#endregion
 
-	// Generic List
+	#region Generic List
 	public static void Shuffle<T>(this List<T> parent)
 	{
 		for (int i = 0; i < parent.Count; i++)
@@ -190,16 +197,18 @@ public static class Extensions
 			parent[randomIndex] = temp;
 		}
 	}
+	#endregion
 
-	// AnimationCurve
+	#region AnimationCurve
 	public static float EvaluateInterval(this AnimationCurve parent, int currentInterval, int intervals)
 	{
 		float current = parent.Evaluate(1f - ((float)currentInterval / intervals));
 		float previous = parent.Evaluate(1f - ((float)(currentInterval - 1) / intervals));
 		return previous - current;
 	}
+	#endregion
 
-	// Text
+	#region Text
 	public static IEnumerator Animate(this Text parent, string text, float interval, bool reverse = false)
 	{
 		int currentLetter = 0;
@@ -221,8 +230,9 @@ public static class Extensions
 			yield return new WaitForSeconds(interval);
 		}
 	}
+	#endregion
 
-	// Utility
+	#region Utility
 	public static int RandomSign()
 	{
 		return (Random.value < 0.5) ? -1 : 1;
@@ -274,4 +284,5 @@ public static class Extensions
 						   Random.Range(min.y, max.y),
 						   Random.Range(min.z, max.z));
 	}
+	#endregion
 }

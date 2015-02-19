@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class HealthDisplay : MonoBehaviour
 {
+	#region Fields
 	private static HealthDisplay instance;
 
 	public Image face;
@@ -34,12 +35,16 @@ public class HealthDisplay : MonoBehaviour
 	private float microchipsVelocity = 0f;
 
 	private CanvasGroup canvasGroup;
+	#endregion
 
+	#region Public Properties
 	public static HealthDisplay Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -62,7 +67,9 @@ public class HealthDisplay : MonoBehaviour
 		score.text = Mathf.RoundToInt(scoreValue).ToString().PadLeft(scoreDigits, '0');
 		microchips.text = Mathf.RoundToInt(microchipsValue).ToString().PadLeft(microchipsDigits, '0');
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(float time = 0f)
 	{
 		if (!showing)
@@ -84,4 +91,5 @@ public class HealthDisplay : MonoBehaviour
 			showing = false;
 		}
 	}
+	#endregion
 }

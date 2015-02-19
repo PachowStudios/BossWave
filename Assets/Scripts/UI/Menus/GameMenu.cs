@@ -5,8 +5,9 @@ using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Core;
 
-public class GameMenu : MonoBehaviour 
+public class GameMenu : MonoBehaviour
 {
+	#region Fields
 	private static GameMenu instance;
 
 	public EventSystem eventSystem;
@@ -31,12 +32,16 @@ public class GameMenu : MonoBehaviour
 	private ResolutionSelector resolutionSelector;
 
 	private RectTransform rectTransform;
+	#endregion
 
+	#region Public Properties
 	public static GameMenu Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -67,6 +72,7 @@ public class GameMenu : MonoBehaviour
 			{
 				paused = true;
 				canPause = false;
+				PlayerControl.Instance.DisableInput();
 				SelectObject(pauseSelect);
 				TimeWarpEffect.Instance.StartWarp(0f, fadeTime, sounds);
 				CRTEffect.Instance.StartCRT(fadeTime);
@@ -76,6 +82,7 @@ public class GameMenu : MonoBehaviour
 			{
 				paused = false;
 				canPause = false;
+				PlayerControl.Instance.EnableInput();
 				GoToNode("Pause Menu");
 				TimeWarpEffect.Instance.EndWarp(fadeTime, sounds);
 				CRTEffect.Instance.EndCRT(fadeTime);
@@ -91,7 +98,57 @@ public class GameMenu : MonoBehaviour
 			StartCoroutine(GameOver());
 		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
+	private void LoadPrefs()
+	{
+		if (PlayerPrefs.HasKey("Settings/Volume"))
+		{
+			volumeSlider.value = PlayerPrefs.GetFloat("Settings/Volume");
+			AudioListener.volume = Mathf.Abs(volumeSlider.value);
+		}
+
+		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
+		{
+			fullscreenToggle.isOn = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
+			Screen.fullScreen = fullscreenToggle.isOn;
+		}
+	}
+
+	private IEnumerator GameOver()
+	{
+		yield return new WaitForSeconds(gameOverDelay);
+
+		SelectObject(gameOverSelect);
+		CRTEffect.Instance.StartCRT(fadeTime);
+		Fade(0f, 1f, UpdateGameOverAlpha, false);
+	}
+
+	private void Fade(float from, float to, DOSetter<float> updateMethod, bool setPause)
+	{
+		DOTween.To(updateMethod, from, to, fadeTime)
+			.SetEase(Ease.OutQuint)
+			.SetUpdate(true)
+			.OnComplete(() => EnablePausing(setPause));
+	}
+
+	private void UpdatePauseAlpha(float newValue)
+	{
+		pauseOverlay.alpha = newValue;
+		pauseOverlay.interactable = newValue >= interactableThreshold;
+		pauseOverlay.blocksRaycasts = newValue >= interactableThreshold;
+	}
+
+	private void UpdateGameOverAlpha(float newValue)
+	{
+		gameOverOverlay.alpha = newValue;
+		gameOverOverlay.interactable = newValue >= interactableThreshold;
+		gameOverOverlay.blocksRaycasts = newValue >= interactableThreshold;
+	}
+	#endregion
+
+	#region Public Methods
 	public void EnablePausing(bool enabled)
 	{
 		canPause = enabled;
@@ -146,50 +203,5 @@ public class GameMenu : MonoBehaviour
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
 	}
-
-	private void LoadPrefs()
-	{
-		if (PlayerPrefs.HasKey("Settings/Volume"))
-		{
-			volumeSlider.value = PlayerPrefs.GetFloat("Settings/Volume");
-			AudioListener.volume = Mathf.Abs(volumeSlider.value);
-		}
-
-		if (PlayerPrefs.HasKey("Settings/Fullscreen"))
-		{
-			fullscreenToggle.isOn = PlayerPrefs.GetInt("Settings/Fullscreen") == 1 ? true : false;
-			Screen.fullScreen = fullscreenToggle.isOn;
-		}
-	}
-
-	private IEnumerator GameOver()
-	{
-		yield return new WaitForSeconds(gameOverDelay);
-
-		SelectObject(gameOverSelect);
-		CRTEffect.Instance.StartCRT(fadeTime);
-		Fade(0f, 1f, UpdateGameOverAlpha, false);
-	}
-
-	private void Fade(float from, float to, DOSetter<float> updateMethod, bool setPause)
-	{
-		DOTween.To(updateMethod, from, to, fadeTime)
-			.SetEase(Ease.OutQuint)
-			.SetUpdate(true)
-			.OnComplete(() => EnablePausing(setPause));
-	}
-
-	private void UpdatePauseAlpha(float newValue)
-	{
-		pauseOverlay.alpha = newValue;
-		pauseOverlay.interactable = newValue >= interactableThreshold;
-		pauseOverlay.blocksRaycasts = newValue >= interactableThreshold;
-	}
-
-	private void UpdateGameOverAlpha(float newValue)
-	{
-		gameOverOverlay.alpha = newValue;
-		gameOverOverlay.interactable = newValue >= interactableThreshold;
-		gameOverOverlay.blocksRaycasts = newValue >= interactableThreshold;
-	}
+	#endregion
 }

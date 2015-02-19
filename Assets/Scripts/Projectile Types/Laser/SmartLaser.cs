@@ -6,6 +6,7 @@ using Vectrosity;
 
 public class SmartLaser : Projectile
 {
+	#region Fields
 	public List<Texture2D> laserTextures;
 	public List<Sprite> tipSprites;
 	public List<Color> colors;
@@ -44,7 +45,9 @@ public class SmartLaser : Projectile
 	private VectorLine vectorLine;
 	private PolygonCollider2D detectionCollider;
 	private SpriteRenderer tip;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -77,7 +80,7 @@ public class SmartLaser : Projectile
 		detectionCollider.isTrigger = true;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		previousTipEnabled = tip.enabled;
 		previousTipPosition = tip.transform.position;
@@ -88,10 +91,14 @@ public class SmartLaser : Projectile
 
 		previousPoints = new List<Vector3>(vectorLine.points3);
 		vectorLine.MakeSpline(targets.ToArray());
-		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
+		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 15f * Time.deltaTime).ToArray());
 
 		tip.transform.position = vectorLine.points3.Last();
-		tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+
+		if (Time.deltaTime > 0)
+		{
+			tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+		}
 
 		vectorLine.Draw();
 
@@ -132,7 +139,9 @@ public class SmartLaser : Projectile
 	{
 		VectorLine.Destroy(ref vectorLine);
 	}
+	#endregion
 
+	#region Internal Update Methods
 	private void UpdateMaterials()
 	{
 		animationTimer += Time.deltaTime;
@@ -247,7 +256,9 @@ public class SmartLaser : Projectile
 			enemy.TakeDamage(gameObject);
 		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float defaultLerpPoint)
 	{
 		float currentLerpPoint = defaultLerpPoint;
@@ -300,4 +311,5 @@ public class SmartLaser : Projectile
 
 		return closestEnemy;
 	}
+	#endregion
 }

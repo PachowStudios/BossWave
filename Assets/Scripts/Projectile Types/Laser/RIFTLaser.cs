@@ -7,7 +7,8 @@ using DG.Tweening;
 
 public class RIFTLaser : Projectile
 {
-	public const float CHARGE_LENGTH = 0.7f;
+	#region Fields
+	public const float ChargeLength = 0.7f;
 
 	public List<Texture2D> textures;
 	public List<Color> colors;
@@ -45,7 +46,9 @@ public class RIFTLaser : Projectile
 
 	private SpriteRenderer tip;
 	private SpriteRenderer charge;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -73,7 +76,7 @@ public class RIFTLaser : Projectile
 		vectorLine.textureScale = 1f;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		transform.position = firePoint;
 		transform.rotation = firePoint.LookAt2D(targetPoint);
@@ -97,11 +100,15 @@ public class RIFTLaser : Projectile
 
 			previousPoints = new List<Vector3>(vectorLine.points3);
 			vectorLine.MakeSpline(targets.ToArray());
-			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 0.25f).ToArray());
+			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 15f * Time.deltaTime).ToArray());
 
 			tip.transform.position = vectorLine.points3.Last();
 			tip.transform.rotation = vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last());
-			tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+
+			if (Time.deltaTime > 0f)
+			{
+				tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
+			}
 
 			vectorLine.Draw();
 
@@ -132,23 +139,9 @@ public class RIFTLaser : Projectile
 	{
 		VectorLine.Destroy(ref vectorLine);
 	}
+	#endregion
 
-	public void Fire()
-	{
-		targets.Add(firePoint);
-		targets.Add(firePoint);
-		vectorLine.MakeSpline(targets.ToArray());
-		tip.enabled = true;
-		charging = false;
-	}
-
-	public void Stop()
-	{
-		charge.enabled = false;
-		DOTween.To(() => firePoint, x => firePoint = x, vectorLine.points3.Last(), 0.1f);
-		Destroy(gameObject, 0.1f);
-	}
-
+	#region Internal Update Methods
 	private void UpdateMaterials()
 	{
 		animationTimer += Time.deltaTime;
@@ -167,7 +160,9 @@ public class RIFTLaser : Projectile
 			animationTimer = 0f;
 		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	private List<Vector3> LerpList(List<Vector3> oldList, List<Vector3> newList, float defaultLerpPoint)
 	{
 		float currentLerpPoint = defaultLerpPoint;
@@ -199,4 +194,23 @@ public class RIFTLaser : Projectile
 			return newList;
 		}
 	}
+	#endregion
+
+	#region Public Methods
+	public void Fire()
+	{
+		targets.Add(firePoint);
+		targets.Add(firePoint);
+		vectorLine.MakeSpline(targets.ToArray());
+		tip.enabled = true;
+		charging = false;
+	}
+
+	public void Stop()
+	{
+		charge.enabled = false;
+		DOTween.To(() => firePoint, x => firePoint = x, vectorLine.points3.Last(), 0.1f);
+		Destroy(gameObject, 0.1f);
+	}
+	#endregion
 }

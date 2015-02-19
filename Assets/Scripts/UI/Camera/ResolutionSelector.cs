@@ -4,13 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class ResolutionSelector : MonoBehaviour 
+public class ResolutionSelector : MonoBehaviour
 {
+	#region Fields
 	public Text buttonText;
 
 	private List<Resolution> resolutions;
 	private int selected = 0;
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		resolutions = Screen.resolutions.ToList<Resolution>();
@@ -43,7 +46,16 @@ public class ResolutionSelector : MonoBehaviour
 
 		SetText();
 	}
-	
+	#endregion
+
+	#region Internal Helper Methods
+	private void SetText()
+	{
+		buttonText.text = resolutions[selected].width + "x" + resolutions[selected].height;
+	}
+	#endregion
+
+	#region Public Methods
 	public void CycleResolutions()
 	{
 		if (selected == resolutions.Count - 1)
@@ -66,9 +78,5 @@ public class ResolutionSelector : MonoBehaviour
 		Screen.SetResolution(resolutions[selected].width, resolutions[selected].height, Screen.fullScreen);
 		CRTEffect.Instance.UpdateResolution(resolutions[selected].height);
 	}
-
-	private void SetText()
-	{
-		buttonText.text = resolutions[selected].width + "x" + resolutions[selected].height;
-	}
+	#endregion
 }

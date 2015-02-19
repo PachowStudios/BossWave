@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelPortal : MonoBehaviour 
+public class LevelPortal : MonoBehaviour
 {
+	#region Fields
 	public string LevelName;
 	public GameMenu gameMenu;
 
 	private bool portalSelected = false;
+	#endregion
 
-	void Update()
+	#region MonoBehaviour
+	private void Update()
 	{
 		if (PlayerControl.Instance.Jumped)
 		{
@@ -19,7 +22,7 @@ public class LevelPortal : MonoBehaviour
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Player")
 		{
@@ -27,11 +30,12 @@ public class LevelPortal : MonoBehaviour
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D other)
+	private void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.tag == "Player")
 		{
 			portalSelected = false;
 		}
 	}
+	#endregion
 }

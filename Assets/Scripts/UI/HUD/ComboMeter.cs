@@ -2,8 +2,9 @@
 using System.Collections;
 using DG.Tweening;
 
-public class ComboMeter : MonoBehaviour 
+public class ComboMeter : MonoBehaviour
 {
+	#region Fields
 	private static ComboMeter instance;
 
 	public float fadeTime = 0.5f;
@@ -12,12 +13,16 @@ public class ComboMeter : MonoBehaviour
 
 	private CanvasGroup canvasGroup;
 	private Animator anim;
+	#endregion
 
+	#region Public Properties
 	public static ComboMeter Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -30,7 +35,9 @@ public class ComboMeter : MonoBehaviour
 	{
 		anim.SetInteger("Combo", PlayerControl.Instance.Combo);
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(float time = 0f)
 	{
 		if (!showing)
@@ -52,4 +59,5 @@ public class ComboMeter : MonoBehaviour
 			showing = false;
 		}
 	}
+	#endregion
 }

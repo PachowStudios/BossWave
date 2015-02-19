@@ -4,12 +4,15 @@ using DG.Tweening;
 
 public class TimeWarpEffect : MonoBehaviour
 {
+	#region Fields
 	private static TimeWarpEffect instance;
 
 	public float defaultFixedTimestep = 0.0166667f;
 
 	private AudioSource[] allSounds;
+	#endregion
 
+	#region Public Properties
 	public static TimeWarpEffect Instance
 	{
 		get { return instance; }
@@ -19,13 +22,37 @@ public class TimeWarpEffect : MonoBehaviour
 	{
 		get { return defaultFixedTimestep; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 		allSounds = null;
 	}
+	#endregion
 
+	#region Internal Helper Methods
+	private void UpdateValues(float newValue)
+	{
+		Time.timeScale = newValue;
+
+		if (newValue <= 1f)
+		{
+			Time.fixedDeltaTime = defaultFixedTimestep * newValue;
+		}
+
+		if (allSounds != null)
+		{
+			foreach (AudioSource sound in allSounds)
+			{
+				sound.pitch = newValue;
+			}
+		}
+	}
+	#endregion
+
+	#region Public Methods
 	public void Warp(float timeScale, float length, float fadeTime, AudioSource[] sounds = null)
 	{
 		allSounds = sounds;
@@ -53,22 +80,5 @@ public class TimeWarpEffect : MonoBehaviour
 			.SetEase(easeType)
 			.SetUpdate(true);
 	}
-
-	private void UpdateValues(float newValue)
-	{
-		Time.timeScale = newValue;
-
-		if (newValue <= 1f)
-		{
-			Time.fixedDeltaTime = defaultFixedTimestep * newValue;
-		}
-
-		if (allSounds != null)
-		{
-			foreach (AudioSource sound in allSounds)
-			{
-				sound.pitch = newValue;
-			}
-		}
-	}
+	#endregion
 }

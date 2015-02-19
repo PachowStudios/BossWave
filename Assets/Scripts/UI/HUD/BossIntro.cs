@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class BossIntro : MonoBehaviour 
+public class BossIntro : MonoBehaviour
 {
+	#region Fields
 	private static BossIntro instance;
 
 	public Image bossImage;
@@ -19,19 +20,25 @@ public class BossIntro : MonoBehaviour
 	private string newBossDescription;
 
 	private Animator anim;
+	#endregion
 
+	#region Public Properties
 	public static BossIntro Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 
 		anim = GetComponent<Animator>();
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(string newBossName, string newBossDescription, Sprite newBossSprite)
 	{
 		bossName.text = newBossName;
@@ -50,4 +57,5 @@ public class BossIntro : MonoBehaviour
 		StartCoroutine(bossDescription.Animate(newBossDescription, textTypeInterval));
 		StartCoroutine(playerDescription.Animate(defaultPlayerDescription, textTypeInterval, true));
 	}
+	#endregion
 }

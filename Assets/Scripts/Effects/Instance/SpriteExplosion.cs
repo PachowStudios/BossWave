@@ -2,25 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpriteExplosion : MonoBehaviour 
+public class SpriteExplosion : MonoBehaviour
 {
+	#region Fields
 	public float pixelsPerUnit = 10f;
 	public float lifetime = 1f;
 	public float systemLifetime = 5f;
 	public string sortingLayer = "Foreground";
 	public int sortingOrder = 1;
 	public Material material;
+	#endregion
 
-	public void Explode(Vector3 velocity, Sprite sprite)
-	{
-		StartCoroutine(DoExplode(velocity, sprite));
-	}
-
-	public void ExplodePartial(Vector3 velocity, Sprite sprite, float percentage)
-	{
-		StartCoroutine(DoExplodePartial(velocity, sprite, percentage));
-	}
-
+	#region Private Helper Methods
 	private IEnumerator DoExplode(Vector3 velocity, Sprite sprite)
 	{
 		ParticleSystem partSystem = GetComponent<ParticleSystem>();
@@ -125,4 +118,17 @@ public class SpriteExplosion : MonoBehaviour
 
 		yield return null;
 	}
+	#endregion
+
+	#region Public Methods
+	public void Explode(Vector3 velocity, Sprite sprite)
+	{
+		StartCoroutine(DoExplode(velocity, sprite));
+	}
+
+	public void ExplodePartial(Vector3 velocity, Sprite sprite, float percentage)
+	{
+		StartCoroutine(DoExplodePartial(velocity, sprite, percentage));
+	}
+	#endregion
 }

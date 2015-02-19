@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AcceleratingShot : Projectile
 {
+	#region Fields
 	public float accelTime = 1f;
 	public AnimationCurve accelCurve;
 	public bool hasTrail = false;
@@ -11,7 +12,9 @@ public class AcceleratingShot : Projectile
 
 	private float originalShotSpeed;
 	private float accelTimer = 0f;
+	#endregion
 
+	#region Internal Properties
 	private float accelPercentage
 	{
 		get
@@ -19,7 +22,9 @@ public class AcceleratingShot : Projectile
 			return accelCurve.Evaluate(Mathf.Clamp(accelTimer / accelTime, 0f, 1f));
 		}
 	}
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -27,10 +32,8 @@ public class AcceleratingShot : Projectile
 		originalShotSpeed = shotSpeed;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
-		InitialUpdate();
-
 		if (accelPercentage < 1f)
 		{
 			accelTimer += Time.deltaTime;
@@ -42,7 +45,11 @@ public class AcceleratingShot : Projectile
 				anim.SetBool("Trail", true);
 			}
 		}
-
-		ApplyMovement();
 	}
+
+	private void LateUpdate()
+	{
+		DoMovement();
+	}
+	#endregion
 }

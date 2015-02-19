@@ -2,20 +2,23 @@
 using System.Collections;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class Magnet : MonoBehaviour 
+public class Magnet : MonoBehaviour
 {
+	#region Fields
 	public float magnetForce = 50f;
 	public float magnetUplift = 10f;
 	public float lookDamping = 3f;
 
 	private CircleCollider2D magnetCollider;
+	#endregion
 
-	void Awake()
+	#region MonoBehaviour
+	private void Awake()
 	{
 		magnetCollider = GetComponent<CircleCollider2D>();
 	}
 
-	void OnTriggerStay2D(Collider2D trigger)
+	private void OnTriggerStay2D(Collider2D trigger)
 	{
 		if (trigger.tag == "Player")
 		{
@@ -26,11 +29,12 @@ public class Magnet : MonoBehaviour
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D trigger)
+	private void OnTriggerExit2D(Collider2D trigger)
 	{
 		if (trigger.tag == "Player")
 		{
 			gameObject.RotateTo(new Vector3(0, 0, 0), lookDamping / 2f, 0f);
 		}
 	}
+	#endregion
 }

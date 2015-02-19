@@ -164,7 +164,7 @@ MonoBehaviour:
   autoDestroy: 0
   destroyOnEnemy: 0
   destroyOnWorld: 0
-  correctRotation: 1
+  correctRotation: 0
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
   disableMovement: 1

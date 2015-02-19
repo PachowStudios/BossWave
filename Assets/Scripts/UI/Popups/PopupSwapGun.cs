@@ -2,14 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PopupSwapGun : MonoBehaviour 
+public class PopupSwapGun : MonoBehaviour
 {
+	#region Fields
 	private static PopupSwapGun instance;
 
 	public PopupSwapGunInstance popupPrefab;
 
 	private PopupSwapGunInstance currentPopup = null;
+	#endregion
 
+	#region Public Properties
 	public static PopupSwapGun Instance
 	{
 		get { return instance; }
@@ -19,12 +22,16 @@ public class PopupSwapGun : MonoBehaviour
 	{
 		get { return currentPopup != null; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 	}
+	#endregion
 
+	#region Public Methods
 	public void CreatePopup(Vector3 newPosition, Gun newGunPrefab)
 	{
 		ClearPopup();
@@ -46,4 +53,5 @@ public class PopupSwapGun : MonoBehaviour
 			currentPopup.DisappearNoSelection();
 		}
 	}
+	#endregion
 }

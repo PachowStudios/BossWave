@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class Projectile : MonoBehaviour 
+public abstract class Projectile : MonoBehaviour
 {
+	#region Fields
 	public float damage = 5f;
 	public Vector2 knockback = new Vector2(2f, 2f);
 	public float gravity = 0f;
@@ -23,7 +24,9 @@ public abstract class Projectile : MonoBehaviour
 	protected CharacterController2D controller;
 	protected SpriteRenderer spriteRenderer;
 	protected Animator anim;
+	#endregion
 
+	#region Public Properties
 	public Sprite Sprite
 	{
 		get { return spriteRenderer.sprite; }
@@ -41,7 +44,9 @@ public abstract class Projectile : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region MonoBehaviour
 	protected virtual void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
@@ -72,18 +77,15 @@ public abstract class Projectile : MonoBehaviour
 	{
 		OnTriggerEnter2D(trigger);
 	}
+	#endregion
 
-	protected void InitialUpdate()
-	{
-		velocity = controller.velocity;
-	}
-
-	protected void ApplyMovement()
+	#region Internal Update Methods
+	protected void DoMovement()
 	{
 		if (!disableMovement)
 		{
 			velocity.x = direction.x * shotSpeed;
-			direction.y += (gravity * Time.fixedDeltaTime) / 10f;
+			direction.y += (gravity * Time.deltaTime) / 10f;
 			velocity.y = direction.y * shotSpeed;
 
 			if (correctRotation)
@@ -92,14 +94,26 @@ public abstract class Projectile : MonoBehaviour
 			}
 		}
 
-		controller.move(velocity * Time.fixedDeltaTime);
+		controller.move(velocity * Time.deltaTime);
+		velocity = controller.velocity;
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 	}
 
+	protected IEnumerator FailsafeDestroy()
+	{
+		yield return new WaitForSeconds(lifetime);
+
+		DoDestroy();
+	}
+	#endregion
+
+	#region Public Methods
 	public void Initialize(Vector3 newDirection)
 	{
 		if (direction == Vector3.zero && !disableMovement)
@@ -118,6 +132,7 @@ public abstract class Projectile : MonoBehaviour
 	public void Move(Vector3 velocity)
 	{
 		controller.move(velocity * Time.deltaTime);
+		velocity = controller.velocity;
 	}
 
 	public void CheckDestroyEnemy()
@@ -136,7 +151,7 @@ public abstract class Projectile : MonoBehaviour
 		}
 	}
 
-	public void DoDestroy()
+	public virtual void DoDestroy()
 	{
 		if (destroyEffect != "")
 		{
@@ -146,11 +161,5 @@ public abstract class Projectile : MonoBehaviour
 		ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);
 	}
-
-	protected IEnumerator FailsafeDestroy()
-	{
-		yield return new WaitForSeconds(lifetime);
-
-		DoDestroy();
-	}
+	#endregion
 }

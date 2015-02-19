@@ -5,14 +5,12 @@ using System.Linq;
 
 public class GunCrate : Powerup
 {
+	#region Fields
 	public Gun.RarityLevel minRarity;
 	public Gun.RarityLevel maxRarity;
+	#endregion
 
-	protected override void Awake()
-	{
-		base.Awake();
-	}
-
+	#region Internal Helper Methods
 	protected override void Pickup()
 	{
 		List<Gun> possibleGuns = GetPossibleGuns();
@@ -59,4 +57,5 @@ public class GunCrate : Powerup
 
 		return possibleGuns;
 	}
+	#endregion
 }

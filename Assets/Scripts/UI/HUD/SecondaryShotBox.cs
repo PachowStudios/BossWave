@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 
-public class SecondaryShotBox : MonoBehaviour 
+public class SecondaryShotBox : MonoBehaviour
 {
+	#region Fields
 	private static SecondaryShotBox instance;
 
 	public Image bar;
@@ -25,12 +26,16 @@ public class SecondaryShotBox : MonoBehaviour
 
 	private CanvasGroup canvasGroup;
 	private RectTransform rectTransform;
+	#endregion
 
+	#region Public Properties
 	public static SecondaryShotBox Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -67,7 +72,9 @@ public class SecondaryShotBox : MonoBehaviour
 		bar.rectTransform.sizeDelta = Vector2.SmoothDamp(bar.rectTransform.sizeDelta, new Vector2(originalCooldownWidth * cooldownPercent, bar.rectTransform.sizeDelta.y), ref cooldownVelocity, cooldownDamping);
 		bar.color = barGradient.Evaluate(cooldownPercent);
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(float time = 0f, bool fade = false)
 	{
 		if (!showing)
@@ -107,4 +114,5 @@ public class SecondaryShotBox : MonoBehaviour
 			overrideShowing = true;
 		}
 	}
+	#endregion
 }

@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Gun : MonoBehaviour 
+public class Gun : MonoBehaviour
 {
+	#region Fields
 	public enum RarityLevel
 	{
 		Common,
@@ -58,7 +59,9 @@ public class Gun : MonoBehaviour
 	private bool useMouse = true;
 
 	private SpriteRenderer spriteRenderer;
+	#endregion
 
+	#region Public Properties
 	public Color Color
 	{
 		get
@@ -118,7 +121,9 @@ public class Gun : MonoBehaviour
 	{
 		get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		firePoint = transform.FindChild("FirePoint");
@@ -129,6 +134,26 @@ public class Gun : MonoBehaviour
 	}
 
 	private void Update()
+	{
+		GetInput();
+	}
+
+	private void LateUpdate()
+	{
+		CheckShoot();
+	}
+
+	private void OnDisable()
+	{
+		if (continuousFire && projectileInstance != null)
+		{
+			Destroy(projectileInstance.gameObject);
+		}
+	}
+	#endregion
+
+	#region Private Update Methods
+	private void GetInput()
 	{
 		previousShoot = shoot;
 
@@ -157,14 +182,14 @@ public class Gun : MonoBehaviour
 		}
 
 		shoot = disableInput ? false : shoot;
-		secondaryShoot = disableInput ? false 
-			                          : secondaryShot ? secondaryShoot 
-									                  : false;
+		secondaryShoot = disableInput ? false
+									  : secondaryShot ? secondaryShoot
+													  : false;
 
 		shootStart = shootStart || (shoot && !previousShoot);
 	}
 
-	private void FixedUpdate()
+	private void CheckShoot()
 	{
 		Vector3 shotDirection = RotateTowardsMouse();
 
@@ -172,16 +197,11 @@ public class Gun : MonoBehaviour
 		{
 			if (continuousFire)
 			{
-				if (shootStart)
+				if (shootStart && projectileInstance == null)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
 					projectileInstance.Initialize(shotDirection);
 					shootStart = false;
-				}
-
-				if (projectileInstance != null && !shoot)
-				{
-					Destroy(projectileInstance.gameObject);
 				}
 			}
 			else
@@ -210,12 +230,11 @@ public class Gun : MonoBehaviour
 				}
 			}
 		}
-		else
+
+		if (continuousFire && projectileInstance != null &&
+			(disableInput || !shoot))
 		{
-			if (continuousFire && projectileInstance != null)
-			{
-				Destroy(projectileInstance.gameObject);
-			}
+			Destroy(projectileInstance.gameObject);
 		}
 
 		if (canOverheat)
@@ -255,15 +274,9 @@ public class Gun : MonoBehaviour
 			spriteRenderer.color = Color.white;
 		}
 	}
+	#endregion
 
-	private void OnDisable()
-	{
-		if (continuousFire && projectileInstance != null)
-		{
-			Destroy(projectileInstance.gameObject);
-		}
-	}
-
+	#region Private Helper Methods
 	private Vector3 RotateTowardsMouse()
 	{
 		Vector3 newEuler;
@@ -291,4 +304,5 @@ public class Gun : MonoBehaviour
 
 		return shotDirection;
 	}
+	#endregion
 }

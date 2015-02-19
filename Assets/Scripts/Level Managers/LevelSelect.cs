@@ -2,13 +2,16 @@
 using System.Collections;
 using DG.Tweening;
 
-public class LevelSelect : MonoBehaviour 
+public class LevelSelect : MonoBehaviour
 {
+	#region Fields
 	public bool introCRT = true;
 	public float fadeInTime = 2f;
 	public AudioSource mainMusic;
+	#endregion
 
-	void Start()
+	#region MonoBehaviour
+	private void Start()
 	{
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
@@ -27,4 +30,5 @@ public class LevelSelect : MonoBehaviour
 			mainMusic.pitch = 1f;
 		}
 	}
+	#endregion
 }

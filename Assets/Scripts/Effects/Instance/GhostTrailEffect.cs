@@ -5,8 +5,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using DG.Tweening;
 
-public class GhostTrailEffect : MonoBehaviour 
+public class GhostTrailEffect : MonoBehaviour
 {
+	#region Fields
 	public bool trailActive = false;
 	public float ghostSpawnTime = 0.075f;
 	public float ghostLifetime = 0.25f;
@@ -15,7 +16,9 @@ public class GhostTrailEffect : MonoBehaviour
 
 	private float ghostSpawnTimer = 0f;
 	private List<SpriteRenderer> spriteRenderers;
+	#endregion
 
+	#region Internal Properties
 	private ReadOnlyCollection<SpriteRenderer> SpriteRenderers
 	{
 		get
@@ -30,13 +33,15 @@ public class GhostTrailEffect : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList();
 	}
 
-	private void FixedUpdate()
+	private void LateUpdate()
 	{
 		if (trailActive)
 		{
@@ -85,4 +90,5 @@ public class GhostTrailEffect : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 }

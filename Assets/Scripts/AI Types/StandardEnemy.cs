@@ -2,8 +2,9 @@
 using System.Collections;
 using DG.Tweening;
 
-public abstract class StandardEnemy : Enemy 
+public abstract class StandardEnemy : Enemy
 {
+	#region Fields
 	public Transform simulateSpawner;
 	public LayerMask spawnPlatformMask;
 	public string spawnSortingLayer = "Spawn";
@@ -23,7 +24,9 @@ public abstract class StandardEnemy : Enemy
 	private Color defaultColor;
 	private Vector3 spawnPoint;
 	private Vector3 entryPoint;
+	#endregion
 
+	#region Public Properties
 	public Transform Spawner
 	{
 		set
@@ -34,7 +37,9 @@ public abstract class StandardEnemy : Enemy
 												 value.FindChild("Entry End").position);
 		}
 	}
+	#endregion
 
+	#region Internal Properties
 	protected int RelativePlayerLastGrounded
 	{
 		get { return (int)(lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y); }
@@ -44,13 +49,9 @@ public abstract class StandardEnemy : Enemy
 	{
 		get { return transform.position.y - PlayerControl.Instance.transform.position.y; }
 	}
+	#endregion
 
-	protected abstract void ApplyAnimation();
-
-	protected abstract void Walk();
-
-	protected abstract void CheckAttack();
-
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -84,9 +85,8 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	protected virtual void FixedUpdate()
+	protected virtual void Update()
 	{
-		InitialUpdate();
 		ApplyAnimation();
 
 		if (!spawned)
@@ -107,16 +107,22 @@ public abstract class StandardEnemy : Enemy
 
 			CheckAttack();
 		}
+	}
 
+	protected virtual void LateUpdate()
+	{
 		GetMovement();
 		ApplyMovement();
 	}
+	#endregion
 
-	public void EnableMovement(bool enable)
-	{
-		disableMovement = !enable;
-	}
+	#region Internal Update Methods
+	protected abstract void ApplyAnimation();
+	protected abstract void Walk();
+	protected abstract void CheckAttack();
+	#endregion
 
+	#region Internal Helper Methods
 	private void EnableMovementAnim(int enable)
 	{
 		EnableMovement(enable != 0);
@@ -218,4 +224,12 @@ public abstract class StandardEnemy : Enemy
 
 		return linecast.collider != null;
 	}
+	#endregion
+
+	#region Public Methods
+	public void EnableMovement(bool enable)
+	{
+		disableMovement = !enable;
+	}
+	#endregion
 }

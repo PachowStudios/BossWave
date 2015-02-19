@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraFollow : MonoBehaviour 
+public class CameraFollow : MonoBehaviour
 {
+	#region Fields
 	private static CameraFollow instance;
 
 	public float defaultYOffset = 10f;
@@ -17,7 +18,9 @@ public class CameraFollow : MonoBehaviour
 	private Vector3 targetPosition = new Vector3();
 	private Vector3 previousTargetPosition = new Vector3();
 	private Vector3 previousPosition;
+	#endregion
 
+	#region Public Properties
 	public static CameraFollow Instance
 	{
 		get { return instance; }
@@ -30,7 +33,9 @@ public class CameraFollow : MonoBehaviour
 			return transform.position - previousPosition;
 		}
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -41,38 +46,42 @@ public class CameraFollow : MonoBehaviour
 		previousPosition = transform.position;
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
-		previousPosition = transform.position;
-		previousTargetPosition = targetPosition;
-
-		if (!lockX)
+		if (Time.deltaTime > 0f)
 		{
-			targetPosition.x = followTarget.position.x;
-		}
+			previousPosition = transform.position;
+			targetPosition.z = transform.position.z;
+			previousTargetPosition = targetPosition;
 
-		targetPosition.z = transform.position.z;
-
-		if (usePlayerY || followTarget.tag == "Player")
-		{
-			currentYOffset = PlayerControl.Instance.transform.position.y - 1f > LevelManager.Instance.GroundLevel.y ? platformYOffset : defaultYOffset;
-
-			if (PlayerControl.Instance.IsGrounded ||
-				(PlayerControl.Instance.Velocity.y < 0f &&
-				 PlayerControl.Instance.transform.position.y + currentYOffset < targetPosition.y))
+			if (!lockX)
 			{
-				targetPosition.y = PlayerControl.Instance.transform.position.y + currentYOffset;
+				targetPosition.x = followTarget.position.x;
 			}
-		}
-		else
-		{
-			targetPosition.y = followTarget.position.y + currentYOffset;
-		}
 
-		targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
-		transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
+			if (usePlayerY || followTarget.tag == "Player")
+			{
+				currentYOffset = PlayerControl.Instance.transform.position.y - 1f > LevelManager.Instance.GroundLevel.y ? platformYOffset : defaultYOffset;
+
+				if (PlayerControl.Instance.IsGrounded ||
+					(PlayerControl.Instance.Velocity.y < 0f &&
+					 PlayerControl.Instance.transform.position.y + currentYOffset < targetPosition.y))
+				{
+					targetPosition.y = PlayerControl.Instance.transform.position.y + currentYOffset;
+				}
+			}
+			else
+			{
+				targetPosition.y = followTarget.position.y + currentYOffset;
+			}
+
+			targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
+			transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
+		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void FollowObject(Transform target, bool newUsePlayerY, float newYOffset = -1f, bool newLockX = false)
 	{
 		currentYOffset = newYOffset == -1f ? defaultYOffset : newYOffset;
@@ -81,4 +90,5 @@ public class CameraFollow : MonoBehaviour
 		followTarget = target;
 		targetPosition.x = followTarget.position.x;
 	}
+	#endregion
 }

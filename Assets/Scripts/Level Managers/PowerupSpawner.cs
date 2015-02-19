@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PowerupSpawner : MonoBehaviour 
+public class PowerupSpawner : MonoBehaviour
 {
+	#region Fields
 	private static PowerupSpawner instance;
 
 	[System.Serializable]
@@ -23,12 +24,16 @@ public class PowerupSpawner : MonoBehaviour
 	private float waveTimer = 0f;
 
 	private List<GameObject> spawners;
+	#endregion
 
+	#region Public Properties
 	public static PowerupSpawner Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region Internal Properties
 	private Vector3 RandomSpawnPoint
 	{
 		get
@@ -49,7 +54,9 @@ public class PowerupSpawner : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -57,7 +64,7 @@ public class PowerupSpawner : MonoBehaviour
 		spawners = GameObject.FindGameObjectsWithTag("PowerupSpawner").ToList();
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		waveTimer = LevelManager.Instance.MusicTime;
 
@@ -69,7 +76,9 @@ public class PowerupSpawner : MonoBehaviour
 			currentWave++;
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void SpawnMicrochip(Vector3 position, Microchip.Size size = Microchip.Size.Small, bool randomVelocity = true)
 	{
 		Microchip microchipToSpawn = microchips[(int)size];
@@ -81,4 +90,5 @@ public class PowerupSpawner : MonoBehaviour
 			microchipInstance.GetComponent<Scatter>().DoScatter();
 		}
 	}
+	#endregion
 }

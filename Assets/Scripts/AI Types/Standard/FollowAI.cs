@@ -3,13 +3,16 @@ using System.Collections;
 
 public abstract class FollowAI : StandardEnemy
 {
+	#region Fields
 	public bool followVertically = false;
 	public float followRange = 5f;
 	public float attackRange = 5f;
 	public float attackCooldownTime = 1f;
 
 	protected float attackCooldownTimer = 0f;
+	#endregion
 
+	#region Internal Update Methods
 	protected override void ApplyAnimation()
 	{
 		anim.SetBool("Walking", right || left);
@@ -63,6 +66,19 @@ public abstract class FollowAI : StandardEnemy
 		}
 	}
 
+	protected override void CheckAttack()
+	{
+		attackCooldownTimer += Time.deltaTime;
+
+		if (attackCooldownTimer >= attackCooldownTime && IsPlayerInRange(0f, attackRange))
+		{
+			Attack();
+			attackCooldownTimer = 0f;
+		}
+	}
+	#endregion
+
+	#region Internal Helper Methods
 	protected virtual void FollowPlayer()
 	{
 		if (transform.position.x + followRange < PlayerControl.Instance.transform.position.x)
@@ -82,19 +98,9 @@ public abstract class FollowAI : StandardEnemy
 		}
 	}
 
-	protected override void CheckAttack()
-	{
-		attackCooldownTimer += Time.deltaTime;
-
-		if (attackCooldownTimer >= attackCooldownTime && IsPlayerInRange(0f, attackRange))
-		{
-			Attack();
-			attackCooldownTimer = 0f;
-		}
-	}
-
 	protected virtual void Attack()
 	{
 		anim.SetTrigger("Attack");
 	}
+	#endregion
 }

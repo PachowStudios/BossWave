@@ -4,6 +4,7 @@ using DG.Tweening;
 
 public abstract class Enemy : MonoBehaviour
 {
+	#region Fields
 	public enum Difficulty
 	{
 		Easy,
@@ -55,7 +56,9 @@ public abstract class Enemy : MonoBehaviour
 	protected Transform popupMessagePoint;
 
 	private float health;
+	#endregion
 
+	#region Public Properties
 	public float Health
 	{
 		get { return health; }
@@ -86,14 +89,16 @@ public abstract class Enemy : MonoBehaviour
 	{
 		get { return controller.wasGroundedLastFrame; }
 	}
+	#endregion
 
+	#region Internal Properties
 	protected bool IsPlayerOnRightSide
 	{
 		get { return PlayerControl.Instance.transform.position.x > transform.position.x; }
 	}
+	#endregion
 
-	protected abstract void CheckDeath(bool showDrops = true);
-
+	#region MonoBehaviour
 	protected virtual void Awake()
 	{
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -114,7 +119,83 @@ public abstract class Enemy : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region Internal Update Methods
+	protected void GetMovement()
+	{
+		if (right)
+		{
+			normalizedHorizontalSpeed = 1;
+
+			if (transform.localScale.x > 0f)
+			{
+				Flip();
+			}
+		}
+		else if (left)
+		{
+			normalizedHorizontalSpeed = -1;
+
+			if (transform.localScale.x < 0f)
+			{
+				Flip();
+			}
+		}
+		else
+		{
+			normalizedHorizontalSpeed = 0;
+		}
+
+		normalizedHorizontalSpeed = disableMovement ? 0 : normalizedHorizontalSpeed;
+	}
+
+	protected void ApplyMovement()
+	{
+		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
+
+		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * moveSpeed, Time.deltaTime * smoothedMovementFactor);
+		velocity.y += gravity * Time.deltaTime;
+		controller.move(velocity * Time.deltaTime);
+		velocity = controller.velocity;
+
+		if (controller.isGrounded)
+		{
+			velocity.y = 0;
+			lastGroundedPosition = transform.position;
+		}
+	}
+	#endregion
+
+	#region Internal Helper Methods
+	protected abstract void CheckDeath(bool showDrops = true);
+
+	protected void Flip()
+	{
+		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
+	protected void FacePlayer()
+	{
+		if ((PlayerControl.Instance.transform.position.x < transform.position.x && FacingRight) ||
+			(PlayerControl.Instance.transform.position.x > transform.position.x && !FacingRight))
+		{
+			Flip();
+		}
+	}
+
+	protected void DeathTimeWarp()
+	{
+		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
+	}
+
+	protected void ResetColor()
+	{
+		spriteRenderer.color = Color.white;
+	}
+	#endregion
+
+	#region Public Methods
 	public virtual void TakeDamage(GameObject enemy)
 	{
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
@@ -176,77 +257,5 @@ public abstract class Enemy : MonoBehaviour
 	{
 		controller.move(velocity * Time.deltaTime);
 	}
-
-	protected void InitialUpdate()
-	{
-		velocity = controller.velocity;
-
-		if (controller.isGrounded)
-		{
-			velocity.y = 0;
-			lastGroundedPosition = transform.position;
-		}
-	}
-
-	protected void GetMovement()
-	{
-		if (right)
-		{
-			normalizedHorizontalSpeed = 1;
-
-			if (transform.localScale.x > 0f)
-			{
-				Flip();
-			}
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1;
-
-			if (transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0;
-		}
-
-		normalizedHorizontalSpeed = disableMovement ? 0 : normalizedHorizontalSpeed;
-	}
-
-	protected void ApplyMovement()
-	{
-		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
-
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * moveSpeed, Time.fixedDeltaTime * smoothedMovementFactor);
-		velocity.y += gravity * Time.fixedDeltaTime;
-
-		controller.move(velocity * Time.fixedDeltaTime);
-	}
-
-	protected void Flip()
-	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-	}
-
-	protected void FacePlayer()
-	{
-		if ((PlayerControl.Instance.transform.position.x < transform.position.x && FacingRight) ||
-			(PlayerControl.Instance.transform.position.x > transform.position.x && !FacingRight))
-		{
-			Flip();
-		}
-	}
-
-	protected void DeathTimeWarp()
-	{
-		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
-	}
-
-	protected void ResetColor()
-	{
-		spriteRenderer.color = Color.white;
-	}
+	#endregion
 }

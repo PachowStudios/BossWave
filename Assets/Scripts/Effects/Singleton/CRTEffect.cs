@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 
-public class CRTEffect : MonoBehaviour 
+public class CRTEffect : MonoBehaviour
 {
+	#region Fields
 	private static CRTEffect instance;
 
 	public float defaultFade = 0.7f;
@@ -18,12 +19,16 @@ public class CRTEffect : MonoBehaviour
 	private Vector2 defaultScanlines;
 	private CRT crtShader;
 	private NoiseAndGrain noiseShader;
+	#endregion
 
+	#region Public Properties
 	public static CRTEffect Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
@@ -34,7 +39,41 @@ public class CRTEffect : MonoBehaviour
 		noiseShader.intensityMultiplier = noiseIntensity;
 		crtBorder.color = new Color(crtBorder.color.r, crtBorder.color.g, crtBorder.color.b, 1f);
 	}
+	#endregion
 
+	#region Internal Update Methods
+	private void EnableCRTShader()
+	{
+		crtShader.enabled = true;
+		noiseShader.enabled = true;
+		crtBorder.fillCenter = true;
+	}
+
+	private void DisableCRTShader()
+	{
+		crtShader.enabled = false;
+		noiseShader.enabled = false;
+		crtBorder.fillCenter = false;
+	}
+
+	private void UpdateCRTBorder(float newValue)
+	{
+		crtBorder.rectTransform.offsetMin = new Vector2(newValue, newValue);
+		crtBorder.rectTransform.offsetMax = new Vector2(-newValue, -newValue);
+	}
+
+	private void UpdateCRTShader(float newValue)
+	{
+		crtShader.Distortion = newValue;
+	}
+
+	private void UpdateCRTScanlines(float newValue)
+	{
+		crtShader.TextureSize = newValue;
+	}
+	#endregion
+
+	#region Public Methods
 	public void StartCRT(float fadeTime, Ease easeType = Ease.OutSine)
 	{
 		EnableCRTShader();
@@ -87,34 +126,5 @@ public class CRTEffect : MonoBehaviour
 		defaultScanlines = new Vector2(height + scanlineOffset.x, height + scanlineOffset.y);
 		crtShader.TextureSize = defaultScanlines.y;
 	}
-
-	private void UpdateCRTBorder(float newValue)
-	{
-		crtBorder.rectTransform.offsetMin = new Vector2(newValue, newValue);
-		crtBorder.rectTransform.offsetMax = new Vector2(-newValue, -newValue);
-	}
-
-	private void UpdateCRTShader(float newValue)
-	{
-		crtShader.Distortion = newValue;
-	}
-
-	private void UpdateCRTScanlines(float newValue)
-	{
-		crtShader.TextureSize = newValue;
-	}
-
-	public void EnableCRTShader()
-	{
-		crtShader.enabled = true;
-		noiseShader.enabled = true;
-		crtBorder.fillCenter = true;
-	}
-
-	public void DisableCRTShader()
-	{
-		crtShader.enabled = false;
-		noiseShader.enabled = false;
-		crtBorder.fillCenter = false;
-	}
+	#endregion
 }

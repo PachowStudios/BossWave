@@ -3,27 +3,34 @@ using UnityEngine.UI;
 using System.Collections;
 using DG.Tweening;
 
-public class CurrentGunName : MonoBehaviour 
+public class CurrentGunName : MonoBehaviour
 {
+	#region Fields
 	private static CurrentGunName instance;
 
 	public float showTime = 1f;
 
 	private bool showing = false;
 	private Text text;
+	#endregion
 
+	#region Public Properties
 	public static CurrentGunName Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 
 		text = GetComponent<Text>();
 	}
+	#endregion
 
+	#region Public Methods
 	public void Show(string gunName, Color gunColor, float time = 0f)
 	{
 		if (showing)
@@ -43,4 +50,5 @@ public class CurrentGunName : MonoBehaviour
 
 		showing = true;
 	}
+	#endregion
 }

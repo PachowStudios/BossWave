@@ -5,6 +5,7 @@ using DG.Tweening;
 [RequireComponent(typeof(GhostTrailEffect))]
 public sealed class DashAI : FollowAI
 {
+	#region Fields
 	public float minDashRange = 5f;
 	public float maxDashRange = 10f;
 	public float swipeDamage = 5f;
@@ -21,7 +22,9 @@ public sealed class DashAI : FollowAI
 	private float dashTarget;
 
 	private GhostTrailEffect ghostTrail;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		base.Awake();
@@ -31,7 +34,9 @@ public sealed class DashAI : FollowAI
 
 		ghostTrail = GetComponent<GhostTrailEffect>();
 	}
+	#endregion
 
+	#region Internal Update Methods
 	protected override void ApplyAnimation()
 	{
 		base.ApplyAnimation();
@@ -81,7 +86,9 @@ public sealed class DashAI : FollowAI
 			}
 		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	protected override void Attack()
 	{
 		anim.SetTrigger("Swipe");
@@ -113,4 +120,5 @@ public sealed class DashAI : FollowAI
 			.AppendInterval(stabLegnth)
 			.AppendCallback(() => disableMovement = dashing = ghostTrail.trailActive = false);
 	}
+	#endregion
 }

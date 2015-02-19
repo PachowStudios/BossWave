@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class BlackHole : Projectile
 {
+	#region Fields
 	public float damageRate = 5f;
 	public float outerForce = 20f;
 	public float innerForce = 40f;
@@ -34,7 +35,9 @@ public class BlackHole : Projectile
 
 	private CircleCollider2D outerRadius;
 	private CircleCollider2D innerRadius;
+	#endregion
 
+	#region MonoBehaviour
 	protected override void Awake()
 	{
 		controller = GetComponent<CharacterController2D>();
@@ -55,17 +58,7 @@ public class BlackHole : Projectile
 
 	private void Update()
 	{
-		if (!activated && CrossPlatformInputManager.GetButtonDown("SecondaryShoot"))
-		{
-			activated = true;
-		}
-	}
-
-	private void FixedUpdate()
-	{
-		InitialUpdate();
-
-		ApplyMovement();
+		GetInput();
 
 		if (activated)
 		{
@@ -95,6 +88,11 @@ public class BlackHole : Projectile
 				}
 			}
 		}
+	}
+
+	private void LateUpdate()
+	{
+		DoMovement();
 	}
 
 	protected override void OnTriggerEnter2D(Collider2D trigger)
@@ -139,22 +137,14 @@ public class BlackHole : Projectile
 			}
 		}
 	}
+	#endregion
 
-	private void Spawn()
+	#region Internal Update Methods
+	private void GetInput()
 	{
-		spawned = true;
-
-		spriteRenderer.DOColor(color, 0.2f);
-
-		particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
-		particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;
-		particleSystemInstance.renderer.sortingOrder = particlesSortingOrder;
-		particleSystemInstance.startColor = color;
-		particleSystemInstance.startLifetime = generatedParticleLifetime;
-
-		if (autoDestroy)
+		if (!activated && CrossPlatformInputManager.GetButtonDown("SecondaryShoot"))
 		{
-			StartCoroutine(DestroyEmitter());
+			activated = true;
 		}
 	}
 
@@ -300,6 +290,26 @@ public class BlackHole : Projectile
 			}
 		}
 	}
+	#endregion
+
+	#region Internal Helper Methods
+	private void Spawn()
+	{
+		spawned = true;
+
+		spriteRenderer.DOColor(color, 0.2f);
+
+		particleSystemInstance = Instantiate(particleSystemPrefab, transform.position, Quaternion.identity) as ParticleSystem;
+		particleSystemInstance.renderer.sortingLayerName = particlesSortingLayer;
+		particleSystemInstance.renderer.sortingOrder = particlesSortingOrder;
+		particleSystemInstance.startColor = color;
+		particleSystemInstance.startLifetime = generatedParticleLifetime;
+
+		if (autoDestroy)
+		{
+			StartCoroutine(DestroyEmitter());
+		}
+	}
 
 	private IEnumerator DestroyEmitter()
 	{
@@ -310,15 +320,15 @@ public class BlackHole : Projectile
 		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
 		Destroy(gameObject);
 	}
+	#endregion
 
-	new IEnumerator FailsafeDestroy()
+	#region Public Methods
+	public override void DoDestroy()
 	{
-		yield return new WaitForSeconds(lifetime);
-
 		if (!activated)
 		{
-			ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
-			Destroy(gameObject);
+			base.DoDestroy();
 		}
 	}
+	#endregion
 }

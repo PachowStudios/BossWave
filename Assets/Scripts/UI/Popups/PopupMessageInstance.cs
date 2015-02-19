@@ -2,8 +2,9 @@
 using System.Collections;
 using DG.Tweening;
 
-public class PopupMessageInstance : MonoBehaviour 
+public class PopupMessageInstance : MonoBehaviour
 {
+	#region Fields
 	public float time = 1f;
 	public float distance = 1f;
 
@@ -14,7 +15,9 @@ public class PopupMessageInstance : MonoBehaviour
 	private float yOffset = 0f;
 
 	private CanvasGroup canvasGroup;
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		startingPosition = transform.position;
@@ -27,7 +30,7 @@ public class PopupMessageInstance : MonoBehaviour
 		Appear();
 	}
 
-	private void FixedUpdate()
+	private void LateUpdate()
 	{
 		if (followPlayer)
 		{
@@ -39,7 +42,9 @@ public class PopupMessageInstance : MonoBehaviour
 			transform.position = startingPosition + new Vector3(0f, yOffset, 0f);
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void Appear()
 	{
 		canvasGroup.alpha = 0f;
@@ -55,4 +60,5 @@ public class PopupMessageInstance : MonoBehaviour
 
 		Destroy(gameObject, time);
 	}
+	#endregion
 }

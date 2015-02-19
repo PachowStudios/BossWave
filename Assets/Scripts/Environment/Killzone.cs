@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Killzone : MonoBehaviour
 {
+	#region Fields
 	public float damage = 50f;
 
 	private Transform respawnPoint;
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		respawnPoint = transform.FindChild("Respawn Point");
@@ -33,4 +36,5 @@ public class Killzone : MonoBehaviour
 	{
 		OnTriggerEnter2D(other);
 	}
+	#endregion
 }

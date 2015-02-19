@@ -5,21 +5,28 @@ using System.Collections.Generic;
 
 public class PopupMessage : MonoBehaviour
 {
+	#region Fields
 	private static PopupMessage instance;
 
 	public PopupMessageInstance popupPrefab;
 	public float textBuffer = 0.4f;
+	#endregion
 
+	#region Public Properties
 	public static PopupMessage Instance
 	{
 		get { return instance; }
 	}
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
 	}
+	#endregion
 
+	#region Public Methods
 	public void CreatePopup(Vector3 newPosition, string newText = "", Sprite newImage = null, bool followPlayer = false)
 	{
 		PopupMessageInstance popupInstance = Instantiate(popupPrefab, newPosition, Quaternion.identity) as PopupMessageInstance;
@@ -61,4 +68,5 @@ public class PopupMessage : MonoBehaviour
 			instanceText.rectTransform.anchoredPosition = new Vector2(-textXOffset, textYOffset);
 		}
 	}
+	#endregion
 }

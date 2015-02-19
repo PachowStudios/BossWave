@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Parallax : MonoBehaviour 
+public class Parallax : MonoBehaviour
 {
+	#region Fields
 	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
@@ -13,7 +14,9 @@ public class Parallax : MonoBehaviour
 	public bool cameraParallax = false;
 
 	private List<Transform> layers = new List<Transform>();
+	#endregion
 
+	#region MonoBehaviour
 	private void Awake()
 	{
 		for (int i = 0; i < transform.childCount; i++)
@@ -29,7 +32,7 @@ public class Parallax : MonoBehaviour
 		}
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (scroll)
 		{
@@ -71,7 +74,9 @@ public class Parallax : MonoBehaviour
 			transform.Translate((1 - relativeSpeed) * CameraFollow.Instance.DeltaMovement);
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void AddEndcap(Transform endcap)
 	{
 		layers.RemoveAll(l => 
@@ -98,4 +103,5 @@ public class Parallax : MonoBehaviour
 		layers.Add(endcap);
 		loop = false;
 	}
+	#endregion
 }

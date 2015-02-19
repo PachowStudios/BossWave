@@ -3,10 +3,10 @@ using System.Collections;
 
 public class BasicShot : Projectile
 {
-	private void FixedUpdate()
+	#region MonoBehaviour
+	private void LateUpdate()
 	{
-		InitialUpdate();
-
-		ApplyMovement();
+		DoMovement();
 	}
+	#endregion
 }

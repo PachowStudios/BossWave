@@ -5,13 +5,16 @@ using DG.Tweening;
 
 public class VectorPath : MonoBehaviour
 {
+	#region Fields
 	public string pathName;
 	public Color pathColor = Color.cyan;
 	public PathType pathType = PathType.Linear;
 	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
 
 	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
+	#endregion
 
+	#region MonoBehaviour
 	private void OnEnable()
 	{
 		if (paths.ContainsKey(pathName.ToLower()))
@@ -41,7 +44,9 @@ public class VectorPath : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public static Vector3[] GetPath(string requestedName)
 	{
 		requestedName = requestedName.ToLower();
@@ -71,4 +76,5 @@ public class VectorPath : MonoBehaviour
 			return PathType.Linear;
 		}
 	}
+	#endregion
 }

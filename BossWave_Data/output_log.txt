@@ -21,7 +21,7 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\D
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll into Unity Child Domain
-- Completed reload, in  0.035 seconds
+- Completed reload, in  0.034 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
@@ -29,9 +29,9 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\S
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 5.591292 ms
+UnloadTime: 4.425112 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2354.
-Total: 0.927737 ms (FindLiveObjects: 0.078116 ms CreateObjectMapping: 0.023698 ms MarkObjects: 0.467233 ms  DeleteObjects: 0.033352 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2356.
+Total: 0.878000 ms (FindLiveObjects: 0.072557 ms CreateObjectMapping: 0.023405 ms MarkObjects: 0.450849 ms  DeleteObjects: 0.028964 ms)
 

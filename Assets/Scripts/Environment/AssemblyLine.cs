@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 
-public class AssemblyLine : MonoBehaviour 
+public class AssemblyLine : MonoBehaviour
 {
+	#region Fields
 	public GameObject prefab;
 	public string pathName;                                                    
 	public float speed = 10f;
@@ -14,7 +15,9 @@ public class AssemblyLine : MonoBehaviour
 	private Vector3[] path;
 
 	private static bool stop = false;
-	
+	#endregion
+
+	#region MonoBehaviour
 	private void Awake()
 	{
 		spawnTimer = spawnDelay;
@@ -25,7 +28,7 @@ public class AssemblyLine : MonoBehaviour
 		path = VectorPath.GetPath(pathName);
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		if (!stop)
 		{
@@ -38,7 +41,9 @@ public class AssemblyLine : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region Internal Helper Methods
 	private Tween Spawn()
 	{
 		GameObject currentObject = Instantiate(prefab, path[0] + transform.position, Quaternion.identity) as GameObject;
@@ -52,10 +57,13 @@ public class AssemblyLine : MonoBehaviour
 
 		return currentTween;
 	}
+	#endregion
 
+	#region Public Methods
 	public static void StopAll()
 	{
 		DOTween.Pause("Assembly Line");
 		stop = true;
 	}
+	#endregion
 }
