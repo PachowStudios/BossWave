@@ -57,6 +57,7 @@ public class GhostTrailEffect : MonoBehaviour
 				foreach (SpriteRenderer spriteRenderer in SpriteRenderers)
 				{
 					GameObject currentGhost = new GameObject();
+					currentGhost.HideInHiearchy();
 					spriteRenderer.transform.CopyTo(currentGhost.transform);
 					currentGhost.name = spriteRenderer.name + " Ghost";
 					currentGhost.transform.parent = currentParent.transform;

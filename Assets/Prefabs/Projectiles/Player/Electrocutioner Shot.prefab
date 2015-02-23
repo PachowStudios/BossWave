@@ -138,7 +138,9 @@ MonoBehaviour:
   destroyOnEnemy: 0
   destroyOnWorld: 1
   correctRotation: 1
-  destroyEffect: 
+  destroyShake: 1
+  shakeIntensity: {x: 0, y: .200000003, z: 0}
+  destroyEffect: Small Dust Explosion
   direction: {x: 0, y: 0, z: 0}
   disableMovement: 0
 --- !u!212 &21200000

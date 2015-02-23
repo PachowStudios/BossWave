@@ -25,7 +25,12 @@ public class CameraShake : MonoBehaviour
 	#region Public Methods
 	public void Shake(float duration, Vector3 strength)
 	{
-		transform.DOShakePosition(duration, strength);
+		if (DOTween.IsTweening(transform))
+		{
+			DOTween.Complete(transform);
+		}
+
+		transform.DOPunchPosition(strength, duration);
 	}
 	#endregion
 }

@@ -505,9 +505,7 @@ public sealed class TheRIFT : Boss
 					startingX = transform.position.x;
 					prevPosition = transform.position;
 				})
-				.AppendInterval(spawnLaserPathTime * 0.9f)
-				.AppendCallback(() => CameraShake.Instance.Shake(1.5f, new Vector3(0f, 3f, 0f)))
-				.AppendInterval((spawnLaserPathTime * 0.1f) + 0.25f)
+				.AppendInterval(spawnLaserPathTime + 0.25f)
 				.AppendCallback(() =>
 				{
 					ExplodeEffect.Instance.Explode(wall.transform, Vector3.zero, wall.sprite);

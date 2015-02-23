@@ -204,6 +204,10 @@ public class RIFTLaser : Projectile
 		vectorLine.MakeSpline(targets.ToArray());
 		tip.enabled = true;
 		charging = false;
+
+		DOTween.Sequence()
+			.AppendInterval(0.1f)
+			.AppendCallback(() => CameraShake.Instance.Shake(1.5f, new Vector3(0f, 3f, 0f)));
 	}
 
 	public void Stop()

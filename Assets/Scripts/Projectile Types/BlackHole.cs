@@ -321,6 +321,7 @@ public class BlackHole : Projectile
 	{
 		yield return new WaitForSeconds(lifetime);
 
+		CameraShake.Instance.Shake(0.5f, new Vector3(0f, 2f, 0f));
 		ExplodeEffect.Instance.Explode(transform, Vector3.zero, Sprite);
 		particleSystemInstance.enableEmission = false;
 		Destroy(particleSystemInstance.gameObject, particleDestroyDelay);
