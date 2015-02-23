@@ -190,7 +190,9 @@ public class BlackHole : Projectile
 					{
 						if (!currentEnemy.immuneToInstantKill)
 						{
-							currentEnemy.Move(Vector3.Lerp(currentEnemy.velocity, currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.5f));
+							currentEnemy.Move(Vector3.Lerp(currentEnemy.velocity, 
+														   currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
+														   30f * Time.deltaTime));
 						}
 
 						if (damageTimer >= damageTime)
@@ -221,7 +223,7 @@ public class BlackHole : Projectile
 					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
 					{
 						Vector3 force = currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation);
-						currentProjectile.direction = Vector3.Lerp(currentProjectile.direction, force.normalized, 0.05f);
+						currentProjectile.direction = Vector3.Lerp(currentProjectile.direction, force.normalized, 3f * Time.deltaTime);
 						currentProjectile.Move(force);
 					}
 				}
@@ -253,7 +255,9 @@ public class BlackHole : Projectile
 					}
 					else if (outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
 					{
-						currentPowerup.rigidbody2D.velocity = Vector3.Lerp(currentPowerup.rigidbody2D.velocity, currentPowerup.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.5f);
+						currentPowerup.rigidbody2D.velocity = Vector3.Lerp(currentPowerup.rigidbody2D.velocity, 
+																		   currentPowerup.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
+																		   30f * Time.deltaTime);
 					}
 				}
 			}
@@ -270,7 +274,9 @@ public class BlackHole : Projectile
 		}
 		else if (outerRadius.OverlapPoint(PlayerControl.Instance.collider2D.bounds.center))
 		{
-			PlayerControl.Instance.Move(Vector3.Lerp(PlayerControl.Instance.Velocity, PlayerControl.Instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 0.15f));
+			PlayerControl.Instance.Move(Vector3.Lerp(PlayerControl.Instance.Velocity, 
+													 PlayerControl.Instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
+													 5f * Time.deltaTime));
 
 			if (damageTimer >= damageTime)
 			{

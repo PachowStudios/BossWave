@@ -132,7 +132,7 @@ public abstract class Projectile : MonoBehaviour
 	public void Move(Vector3 velocity)
 	{
 		controller.move(velocity * Time.deltaTime);
-		velocity = controller.velocity;
+		this.velocity = controller.velocity;
 	}
 
 	public void CheckDestroyEnemy()

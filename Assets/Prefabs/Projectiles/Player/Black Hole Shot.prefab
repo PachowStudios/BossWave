@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a95450f76b07d4ea843308a7565a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   knockback: {x: 0, y: 0}
   gravity: 0
   shotSpeed: 25
@@ -250,12 +250,12 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   disableMovement: 0
   damageRate: 5
-  outerForce: 11
-  innerForce: 12.5
-  outerRotation: 1
-  innerRotation: 1.5
-  activationBuffer: .699999988
-  activationSpeed: 2
+  outerForce: 30
+  innerForce: 15
+  outerRotation: .25
+  innerRotation: 1.20000005
+  activationBuffer: .300000012
+  activationSpeed: 4
   color: {r: 0, g: 0, b: 0, a: 1}
   particleSystemPrefab: {fileID: 19800000, guid: b880edb78a26cd8438531bb595c21493,
     type: 2}
@@ -263,7 +263,7 @@ MonoBehaviour:
   particlesSortingOrder: 0
   particleDestroyDelay: 3
   generatedParticleLifetime: .5
-  affectedParticleLifetime: 1
+  affectedParticleLifetime: .699999988
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

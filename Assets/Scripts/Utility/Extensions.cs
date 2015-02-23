@@ -90,6 +90,7 @@ public static class Extensions
 		target.localPosition = parent.localPosition;
 		target.localRotation = parent.localRotation;
 		target.localScale = parent.localScale;
+		target.gameObject.HideInHiearchy();
 	}
 
 	public static void LookAt2D(this Transform parent, Vector3 target, bool local = false)

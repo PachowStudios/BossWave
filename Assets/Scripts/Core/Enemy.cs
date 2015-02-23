@@ -256,6 +256,7 @@ public abstract class Enemy : MonoBehaviour
 	public void Move(Vector3 velocity)
 	{
 		controller.move(velocity * Time.deltaTime);
+		this.velocity = controller.velocity;
 	}
 	#endregion
 }
