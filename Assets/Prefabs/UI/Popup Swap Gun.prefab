@@ -82,11 +82,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLimit: 5
-  swapAfterTime: 0
+  swapAfterTime: 1
   appearTime: .25
   disappearTime: .5
   disappearScale: 1.5
   distance: 1
+  timerBuffer: .600000024
   newImage: {fileID: 11400016}
   oldImage: {fileID: 11400002}
   timerText: {fileID: 11400022}

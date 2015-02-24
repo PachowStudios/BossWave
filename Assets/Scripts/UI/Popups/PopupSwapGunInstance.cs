@@ -57,27 +57,30 @@ public class PopupSwapGunInstance : MonoBehaviour
 				SwapGuns(false);
 			}
 
-			oldImage.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
-			oldImage.rectTransform.sizeDelta = PlayerControl.Instance.Gun.SpriteRenderer.sprite.bounds.size;
-			timerText.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Max(oldImage.rectTransform.sizeDelta.y,
-																				 newImage.rectTransform.sizeDelta.y) + timerBuffer);
+			if (timer > 0)
+			{
+				timer -= Time.deltaTime;
+				timerText.text = timer.ToString("F2");
+			}
+			else if (!selectionMade)
+			{
+				selectionMade = true;
+				SwapGuns(swapAfterTime);
+			}
+
+			if (!selectionMade)
+			{
+				oldImage.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
+				oldImage.rectTransform.sizeDelta = PlayerControl.Instance.Gun.SpriteRenderer.sprite.bounds.size;
+				timerText.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Max(oldImage.rectTransform.sizeDelta.y,
+																					 newImage.rectTransform.sizeDelta.y) + timerBuffer);
+			}
 		}
 	}
 
 	private void LateUpdate()
 	{
 		transform.position = PlayerControl.Instance.PopupMessagePoint + new Vector3(0f, yOffset, 0f);
-
-		if (timer > 0)
-		{
-			timer -= Time.fixedDeltaTime;
-			timerText.text = timer.ToString("F2");
-		}
-		else if (!selectionMade)
-		{
-			selectionMade = true;
-			SwapGuns(swapAfterTime);
-		}
 	}
 	#endregion
 

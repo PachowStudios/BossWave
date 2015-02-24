@@ -76,5 +76,13 @@ public class Cutscene : MonoBehaviour
 			showing = false;
 		}
 	}
+
+	public void HideUI(float newFadeTime)
+	{
+		HealthDisplay.Instance.Hide(newFadeTime);
+		ComboMeter.Instance.Hide(newFadeTime);
+		SecondaryShotBox.Instance.Hide(newFadeTime, true);
+		BossWaveTimer.Instance.Hide(newFadeTime);
+	}
 	#endregion
 }

@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .00571428565
+  relativeSpeed: .00499999989
   scroll: 1
   loop: 1
   cameraParallax: 1
@@ -517,10 +517,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .914285719
+  relativeSpeed: .920000017
   scroll: 1
   loop: 1
-  cameraParallax: 1
+  cameraParallax: 0
 --- !u!1 &143048471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .171428576
+  relativeSpeed: .200000003
   scroll: 1
   loop: 1
   cameraParallax: 1
@@ -1429,7 +1429,7 @@ Transform:
   m_PrefabInternal: {fileID: 2125636804}
   m_GameObject: {fileID: 435072010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2134256493}
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   relativeSpeed: 1
   scroll: 1
   loop: 1
-  cameraParallax: 1
+  cameraParallax: 0
 --- !u!1 &446647041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .857142866
+  relativeSpeed: .800000012
   scroll: 1
   loop: 1
   cameraParallax: 1
@@ -3320,6 +3320,10 @@ Prefab:
     - target: {fileID: 400000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
+      propertyPath: orthographic size
+      value: 14.0557938
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be83acc7a53e4604781c4f79e4f9be07, type: 2}
@@ -4856,7 +4860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .428571433
+  relativeSpeed: .400000006
   scroll: 1
   loop: 1
   cameraParallax: 1
@@ -5115,7 +5119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .114285715
+  relativeSpeed: .100000001
   scroll: 1
   loop: 1
   cameraParallax: 1
@@ -5449,7 +5453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .0142857144
+  relativeSpeed: .0149999997
   scroll: 1
   loop: 0
   cameraParallax: 1
@@ -5697,7 +5701,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 14.0607882
+  orthographic size: 14.0557938
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6299,7 +6303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpeed: 10
-  relativeSpeed: .00285714283
+  relativeSpeed: .00249999994
   scroll: 1
   loop: 1
   cameraParallax: 1

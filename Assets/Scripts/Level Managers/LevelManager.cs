@@ -36,6 +36,8 @@ public class LevelManager : MonoBehaviour
 	public bool introCRT = true;
 	public bool spawnEnemies = true;
 	public float fadeInTime = 2f;
+	public int killAllEnemiesBonus = 100000;
+	public int timeBonusMultiplier = 10;
 	public List<Wave> waves;
 	public BossWave bossWave;
 	public List<StandardEnemy> enemies;
@@ -234,11 +236,32 @@ public class LevelManager : MonoBehaviour
 	#endregion
 
 	#region Public Methods
+	public void CompleteLevel()
+	{
+		PlayerControl.Instance.DisableInput();
+		PlayerControl.Instance.AddPoints(Mathf.RoundToInt(BossWaveTimer.Instance.Timer * timeBonusMultiplier), true);
+		DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, 1f);
+		DOTween.To(() => LevelManager.Instance.bossWave.cameraSpeed, x => LevelManager.Instance.bossWave.cameraSpeed = x, 0f, 0.5f)
+					.SetEase(Ease.OutQuint)
+					.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
+
+		StartCoroutine(GameMenu.Instance.GameWin());
+	}
+
 	public void KillAllEnemies()
 	{
-		foreach (StandardEnemy currentEnemy in GameObject.FindObjectsOfType<StandardEnemy>())
+		StandardEnemy[] allEnemies = GameObject.FindObjectsOfType<StandardEnemy>();
+
+		if (allEnemies.Count() == 0)
 		{
-			currentEnemy.KillNoPoints();
+			PlayerControl.Instance.AddPoints(killAllEnemiesBonus, true);
+		}
+		else
+		{
+			foreach (StandardEnemy currentEnemy in allEnemies)
+			{
+				currentEnemy.KillNoPoints();
+			}
 		}
 	}
 	#endregion

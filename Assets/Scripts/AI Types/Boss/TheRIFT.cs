@@ -370,13 +370,12 @@ public sealed class TheRIFT : Boss
 				SpriteEffect.Instance.SpawnEffect("Big Dust Poof", transform.position);
 				CameraShake.Instance.Shake(1f, new Vector3(0f, 2f, 0f));
 				anim.SetBool("Dead", true);
-				DOTween.To(() => LevelManager.Instance.bossWave.cameraSpeed, x => LevelManager.Instance.bossWave.cameraSpeed = x, 0f, 0.5f)
-					.SetEase(Ease.OutQuint)
-					.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
+				LevelManager.Instance.CompleteLevel();
 			}
 
 			gravity = 0f;
 			velocity = Vector3.zero;
+			enabled = false;
 		}
 	}
 
@@ -437,6 +436,7 @@ public sealed class TheRIFT : Boss
 		if (Health <= 0f && !dead)
 		{
 			dead = true;
+			ghostTrail.trailActive = false;
 
 			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
 			DOTween.Complete("RIFT Attack");
@@ -519,5 +519,5 @@ public sealed class TheRIFT : Boss
 		maxFloatHeight = 1000f;
 		minFloatHeight = 990f;
 	}
-#endregion
+	#endregion
 }

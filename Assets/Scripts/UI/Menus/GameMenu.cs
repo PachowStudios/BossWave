@@ -14,13 +14,18 @@ public class GameMenu : MonoBehaviour
 
 	public float fadeTime = 0.7f;
 	public float loadTime = 2f;
-	public float gameOverDelay = 1f;
 	public float nodeMoveSpeed = 2f;
 	public float interactableThreshold = 0.75f;
+	public float scoreTallySpeed = 10000f;
+	public float gameOverDelay = 1f;
+	public float gameWinDelay = 1f;
 	public CanvasGroup pauseOverlay;
 	public CanvasGroup gameOverOverlay;
+	public CanvasGroup gameWinOverlay;
 	public Selectable pauseSelect;
 	public Selectable gameOverSelect;
+	public Selectable gameWinSelect;
+	public Text scoreText;
 
 	private bool paused = false;
 	private bool canPause = true;
@@ -66,36 +71,7 @@ public class GameMenu : MonoBehaviour
 	{
 		if (CrossPlatformInputManager.GetButtonDown("Pause") && canPause)
 		{
-			sounds = FindObjectsOfType<AudioSource>();
-
-			if (!paused)
-			{
-				paused = true;
-				canPause = false;
-				PlayerControl.Instance.DisableInput();
-				SelectObject(pauseSelect);
-				TimeWarpEffect.Instance.StartWarp(0f, fadeTime, sounds);
-				CRTEffect.Instance.StartCRT(fadeTime);
-				Fade(0f, 1f, UpdatePauseAlpha, true);
-			}
-			else
-			{
-				paused = false;
-				canPause = false;
-				PlayerControl.Instance.EnableInput();
-				GoToNode("Pause Menu");
-				TimeWarpEffect.Instance.EndWarp(fadeTime, sounds);
-				CRTEffect.Instance.EndCRT(fadeTime);
-				Fade(1f, 0f, UpdatePauseAlpha, true);
-			}
-		}
-
-		if (!gameOver && PlayerControl.Instance.Dead)
-		{
-			gameOver = true;
-			canPause = false;
-
-			StartCoroutine(GameOver());
+			Pause(!paused);
 		}
 	}
 	#endregion
@@ -116,39 +92,84 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 
-	private IEnumerator GameOver()
+	private void Pause(bool startPause)
 	{
-		yield return new WaitForSeconds(gameOverDelay);
+		paused = startPause;
+		canPause = false;
+		sounds = FindObjectsOfType<AudioSource>();
 
-		SelectObject(gameOverSelect);
-		CRTEffect.Instance.StartCRT(fadeTime);
-		Fade(0f, 1f, UpdateGameOverAlpha, false);
+		if (startPause)
+		{
+			PlayerControl.Instance.DisableInput();
+			SelectObject(pauseSelect);
+			TimeWarpEffect.Instance.StartWarp(0f, fadeTime, sounds);
+			CRTEffect.Instance.StartCRT(fadeTime);
+			Fade(0f, 1f, pauseOverlay, true);
+		}
+		else
+		{
+			PlayerControl.Instance.EnableInput();
+			GoToNode("Pause Menu");
+			TimeWarpEffect.Instance.EndWarp(fadeTime, sounds);
+			CRTEffect.Instance.EndCRT(fadeTime);
+			Fade(1f, 0f, pauseOverlay, true);
+		}
 	}
 
-	private void Fade(float from, float to, DOSetter<float> updateMethod, bool setPause)
+	private void Fade(float from, float to, CanvasGroup fadeGroup, bool setPause)
 	{
-		DOTween.To(updateMethod, from, to, fadeTime)
+		fadeGroup.alpha = from;
+		fadeGroup.DOFade(to, fadeTime)
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true)
+			.OnUpdate(() =>
+			{
+				fadeGroup.interactable = fadeGroup.alpha >= interactableThreshold;
+				fadeGroup.blocksRaycasts = fadeGroup.alpha >= interactableThreshold;
+			})
 			.OnComplete(() => EnablePausing(setPause));
-	}
-
-	private void UpdatePauseAlpha(float newValue)
-	{
-		pauseOverlay.alpha = newValue;
-		pauseOverlay.interactable = newValue >= interactableThreshold;
-		pauseOverlay.blocksRaycasts = newValue >= interactableThreshold;
-	}
-
-	private void UpdateGameOverAlpha(float newValue)
-	{
-		gameOverOverlay.alpha = newValue;
-		gameOverOverlay.interactable = newValue >= interactableThreshold;
-		gameOverOverlay.blocksRaycasts = newValue >= interactableThreshold;
 	}
 	#endregion
 
 	#region Public Methods
+	public IEnumerator GameWin()
+	{
+		if (!gameOver)
+		{
+			gameOver = true;
+			canPause = false;
+
+			yield return new WaitForSeconds(gameWinDelay);
+
+			SelectObject(gameWinSelect);
+			CRTEffect.Instance.StartCRT(fadeTime);
+			Cutscene.Instance.HideUI(fadeTime);
+			Fade(0f, 1f, gameWinOverlay, false);
+
+			yield return new WaitForSeconds(fadeTime);
+
+			DOTween.To(s => scoreText.text = "Score:   " + Mathf.RoundToInt(s).ToString().PadLeft(HealthDisplay.Instance.scoreDigits, '0'), 0f, PlayerControl.Instance.Score, scoreTallySpeed)
+				.SetSpeedBased(true)
+				.SetEase(Ease.InQuint);
+		}
+	}
+
+	public IEnumerator GameOver()
+	{
+		if (!gameOver)
+		{
+			gameOver = true;
+			canPause = false;
+
+			yield return new WaitForSeconds(gameOverDelay);
+
+			SelectObject(gameOverSelect);
+			CRTEffect.Instance.StartCRT(fadeTime);
+			Cutscene.Instance.HideUI(fadeTime);
+			Fade(0f, 1f, gameOverOverlay, false);
+		}
+	}
+
 	public void EnablePausing(bool enabled)
 	{
 		canPause = enabled;

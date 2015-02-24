@@ -531,6 +531,7 @@ public sealed class PlayerControl : MonoBehaviour
 		{
 			dead = true;
 
+			StartCoroutine(GameMenu.Instance.GameOver());
 			SetRenderersEnabled(false);
 			collider2D.enabled = false;
 			PopupSwapGun.Instance.ClearPopup();
@@ -654,9 +655,9 @@ public sealed class PlayerControl : MonoBehaviour
 		this.velocity = controller.velocity;
 	}
 
-	public int AddPoints(int points)
+	public int AddPoints(int points, bool ignoreCombo = false)
 	{
-		int newPoints = points * combo;
+		int newPoints = points * (ignoreCombo ? 1 : combo);
 		score = Mathf.Clamp(score + newPoints, 0, maxScore);
 
 		return newPoints;

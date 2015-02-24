@@ -50,14 +50,12 @@ public class GhostTrailEffect : MonoBehaviour
 			if (ghostSpawnTimer >= ghostSpawnTime)
 			{
 				GameObject currentParent = new GameObject();
-				currentParent.HideInHiearchy();
 				transform.CopyTo(currentParent.transform);
 				currentParent.name = gameObject.name + " Ghost";
 
 				foreach (SpriteRenderer spriteRenderer in SpriteRenderers)
 				{
 					GameObject currentGhost = new GameObject();
-					currentGhost.HideInHiearchy();
 					spriteRenderer.transform.CopyTo(currentGhost.transform);
 					currentGhost.name = spriteRenderer.name + " Ghost";
 					currentGhost.transform.parent = currentParent.transform;
