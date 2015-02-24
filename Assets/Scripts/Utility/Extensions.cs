@@ -234,6 +234,20 @@ public static class Extensions
 	#endregion
 
 	#region Utility
+	public static int ClampWrap(int value, int min, int max)
+	{
+		if (value > max)
+		{
+			value = min;
+		}
+		else if (value < min)
+		{
+			value = max;
+		}
+
+		return value;
+	}
+
 	public static int RandomSign()
 	{
 		return (Random.value < 0.5) ? -1 : 1;

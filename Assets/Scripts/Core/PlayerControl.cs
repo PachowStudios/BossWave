@@ -304,16 +304,16 @@ public sealed class PlayerControl : MonoBehaviour
 				{
 					if (CrossPlatformInputManager.GetButtonDown("Gun" + (i + 1).ToString()))
 					{
-						if (!PopupSwapGun.Instance.ShowingPopup)
-						{
-							PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[i].SpriteRenderer.sprite, true);
-						}
-
-						CurrentGunName.Instance.Show(guns[i].gunName, guns[i].Color, gunSwapCooldownTime);
-						SelectGun(i);
-						gunSwapCooldownTimer = 0f;
+						SelectGun(i, true);
 						break;
 					}
+				}
+
+				int scrollWheelInput = (int)CrossPlatformInputManager.GetAxisRaw("Mouse ScrollWheel");
+
+				if (scrollWheelInput != 0)
+				{
+					SelectGun(currentGunIndex + scrollWheelInput, true);
 				}
 			}
 		}
@@ -520,6 +520,34 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 	}
 
+	private void SelectGun(int gunIndex, bool showPopup = false)
+	{
+		gunIndex = Extensions.ClampWrap(gunIndex, 0, guns.Count - 1);
+
+		if (showPopup)
+		{
+			if (!PopupSwapGun.Instance.ShowingPopup)
+			{
+				PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[gunIndex].SpriteRenderer.sprite, true);
+			}
+
+			CurrentGunName.Instance.Show(guns[gunIndex].gunName, guns[gunIndex].Color, gunSwapCooldownTime);
+		}
+
+		if (gunIndex == currentGunIndex)
+		{
+			guns[currentGunIndex].disableInput = false;
+		}
+		else
+		{
+			guns[currentGunIndex].disableInput = true;
+			guns[gunIndex].disableInput = false;
+			currentGunIndex = gunIndex;
+		}
+
+		gunSwapCooldownTimer = 0f;
+	}
+
 	private void ResetInput()
 	{
 		left = right = run = jump = false;
@@ -711,20 +739,6 @@ public sealed class PlayerControl : MonoBehaviour
 		if (gunIndex == currentGunIndex)
 		{
 			SelectGun(gunIndex);
-		}
-	}
-
-	public void SelectGun(int gunIndex)
-	{
-		if (gunIndex == currentGunIndex)
-		{
-			guns[currentGunIndex].disableInput = false;
-		}
-		else
-		{
-			guns[currentGunIndex].disableInput = true;
-			guns[gunIndex].disableInput = false;
-			currentGunIndex = gunIndex;
 		}
 	}
 
