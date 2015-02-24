@@ -252,7 +252,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   disableMovement: 0
   damageRate: 5
-  outerForce: 30
+  outerForce: 25
   innerForce: 15
   outerRotation: .25
   innerRotation: 1.20000005

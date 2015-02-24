@@ -333,8 +333,8 @@ MonoBehaviour:
   maxHealth: 200
   invincibilityPeriod: 1
   gravity: -45
-  walkSpeed: 10
-  runSpeed: 15
+  walkSpeed: 12
+  runSpeed: 17
   continuouslyRunning: 0
   continuousRunSpeed: 20
   groundDamping: 6

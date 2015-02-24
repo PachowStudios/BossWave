@@ -193,6 +193,9 @@ public class Gun : MonoBehaviour
 	{
 		Vector3 shotDirection = RotateTowardsMouse();
 
+		shootTimer += Time.deltaTime;
+		secondaryTimer += Time.deltaTime;
+
 		if (!disableInput && !overheated)
 		{
 			if (continuousFire)
@@ -206,8 +209,6 @@ public class Gun : MonoBehaviour
 			}
 			else
 			{
-				shootTimer += Time.deltaTime;
-
 				if (shoot && shootTimer >= shootCooldown)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
@@ -218,8 +219,6 @@ public class Gun : MonoBehaviour
 
 				if (secondaryShot)
 				{
-					secondaryTimer += Time.deltaTime;
-
 					if (secondaryShoot && secondaryTimer >= secondaryCooldown)
 					{
 						secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;

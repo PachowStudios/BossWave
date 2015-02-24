@@ -19,11 +19,17 @@ public class Killzone : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
-			PlayerControl.Instance.TakeDamage(gameObject, damage);
-
 			if (PlayerControl.Instance.Health > 0f)
 			{
-				PlayerControl.Instance.transform.position = respawnPoint.position;
+				if (!LevelManager.Instance.bossWavePlayerMoved)
+				{
+					PlayerControl.Instance.TakeDamage(gameObject, damage);
+					PlayerControl.Instance.transform.position = respawnPoint.position;
+				}
+				else
+				{
+					PlayerControl.Instance.Health = 0f;
+				}
 			}
 		}
 		else if (other.tag == "Enemy")

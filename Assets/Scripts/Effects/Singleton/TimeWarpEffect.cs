@@ -47,6 +47,15 @@ public class TimeWarpEffect : MonoBehaviour
 			foreach (AudioSource sound in allSounds)
 			{
 				sound.pitch = newValue;
+
+				if (newValue == 0f && sound.isPlaying)
+				{
+					sound.Pause();
+				}
+				else if (!sound.isPlaying)
+				{
+					sound.Play();
+				}
 			}
 		}
 	}
