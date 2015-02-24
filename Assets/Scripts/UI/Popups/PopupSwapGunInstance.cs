@@ -17,6 +17,8 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 	public Image newImage;
 	public Image oldImage;
+	public Text newPrompt;
+	public Text oldPrompt;
 	public Text timerText;
 
 	[HideInInspector]
@@ -59,7 +61,7 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 			if (timer > 0)
 			{
-				timer -= Time.deltaTime;
+				timer = Mathf.Max(0f, timer - Time.deltaTime);
 				timerText.text = timer.ToString("F2");
 			}
 			else if (!selectionMade)
@@ -119,10 +121,12 @@ public class PopupSwapGunInstance : MonoBehaviour
 
 		newImage.DOFade(0f, disappearTime * (swap ? 0.6f : 0.5f))
 			.SetEase(Ease.InQuad)
-			.SetDelay(disappearTime * (swap ? 0.4f : 0f));
+			.SetDelay(disappearTime * (swap ? 0.4f : 0f))
+			.OnUpdate(() => newPrompt.SetAlpha(newImage.color.a));
 		oldImage.DOFade(0f, disappearTime * (swap ? 0.5f : 0.6f))
 			.SetEase(Ease.InQuad)
-			.SetDelay(disappearTime * (swap ? 0f : 0.4f));
+			.SetDelay(disappearTime * (swap ? 0f : 0.4f))
+			.OnUpdate(() => oldPrompt.SetAlpha(oldImage.color.a));
 		selectedTransform.DOScale(new Vector3(disappearScale, disappearScale, 1f), disappearTime)
 			.SetEase(Ease.InCubic);
 		timerText.DOFade(0f, disappearTime * 0.5f)

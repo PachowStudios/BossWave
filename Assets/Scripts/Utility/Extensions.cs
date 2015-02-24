@@ -210,6 +210,11 @@ public static class Extensions
 	#endregion
 
 	#region Text
+	public static void SetAlpha(this Text parent, float alpha)
+	{
+		parent.color = new Color(parent.color.r, parent.color.g, parent.color.b, alpha);
+	}
+
 	public static IEnumerator Animate(this Text parent, string text, float interval, bool reverse = false)
 	{
 		int currentLetter = 0;
