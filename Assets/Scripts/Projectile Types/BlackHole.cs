@@ -218,6 +218,7 @@ public class BlackHole : Projectile
 				{
 					if (innerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
 					{
+						currentProjectile.destroyShake = false;
 						currentProjectile.DoDestroy();
 					}
 					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))

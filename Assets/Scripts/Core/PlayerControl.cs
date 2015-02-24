@@ -640,9 +640,14 @@ public sealed class PlayerControl : MonoBehaviour
 					.AppendCallback(() =>
 					{
 						velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity) * knockbackDirection;
-						velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+
+						if (IsGrounded)
+						{
+							velocity.y = Mathf.Sqrt(knockback.y * -gravity);
+						}
 
 						controller.move(velocity * Time.deltaTime);
+						velocity = controller.velocity;
 						lastHitTime = Time.time;
 					});
 			}

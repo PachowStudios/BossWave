@@ -570,7 +570,7 @@ MonoBehaviour:
     spawnDelay: 1
     difficulty: 1
   - startTime: 23
-    amount: 4
+    amount: 8
     spawnDelay: 1
     difficulty: 2
   - startTime: 25
@@ -610,7 +610,7 @@ MonoBehaviour:
     spawnDelay: 2
     difficulty: 0
   - startTime: 75
-    amount: 2
+    amount: 1
     spawnDelay: 1
     difficulty: 3
   - startTime: 80

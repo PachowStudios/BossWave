@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoDestroy: 1
   minLifetime: 10
-  maxLifetime: 15
+  maxLifetime: 15.0000029
   popupSprite: {fileID: 21300004, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
   speedMultiplier: 1.5
   duration: 10

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Ultrasonic Executioner
-  rarity: 4
+  rarity: 3
   projectile: {fileID: 11400002, guid: 15be0f18eb63d29418bb56ce6a575f1a, type: 2}
   secondaryShot: 0
   secondaryProjectile: {fileID: 0}
@@ -77,7 +77,7 @@ MonoBehaviour:
   showSecondaryGUI: 0
   secondaryIcon: {fileID: 0}
   continuousFire: 0
-  shootCooldown: 2
+  shootCooldown: 1
   canOverheat: 0
   overheatTime: 5
   overheatDamage: 0

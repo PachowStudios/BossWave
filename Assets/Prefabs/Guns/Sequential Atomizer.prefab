@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunName: Sequential Atomizer
-  rarity: 5
+  rarity: 4
   projectile: {fileID: 11400002, guid: 7df364f30fb95ce4c825f39fe7e174e7, type: 2}
   secondaryShot: 0
   secondaryProjectile: {fileID: 0}

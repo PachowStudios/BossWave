@@ -13,6 +13,7 @@ public class RIFTLaser : Projectile
 	public List<Texture2D> textures;
 	public List<Color> colors;
 	public Material material;
+	public float destroyTime = 0.1f;
 	[Range(0.01f, 0.1f)]
 	public float animationTime = 0.01f;
 	[Range(2, 32)]
@@ -76,7 +77,7 @@ public class RIFTLaser : Projectile
 		vectorLine.textureScale = 1f;
 	}
 
-	private void Update()
+	private void LateUpdate()
 	{
 		transform.position = firePoint;
 		transform.rotation = firePoint.LookAt2D(targetPoint);
@@ -100,7 +101,7 @@ public class RIFTLaser : Projectile
 
 			previousPoints = new List<Vector3>(vectorLine.points3);
 			vectorLine.MakeSpline(targets.ToArray());
-			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 15f * Time.deltaTime).ToArray());
+			vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 45f * Time.deltaTime).ToArray());
 
 			tip.transform.position = vectorLine.points3.Last();
 			tip.transform.rotation = vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last());
@@ -213,8 +214,8 @@ public class RIFTLaser : Projectile
 	public void Stop()
 	{
 		charge.enabled = false;
-		DOTween.To(() => firePoint, x => firePoint = x, vectorLine.points3.Last(), 0.1f);
-		Destroy(gameObject, 0.1f);
+		DOTween.To(() => firePoint, x => firePoint = x, vectorLine.points3.Last(), destroyTime)
+			.OnComplete(() => Destroy(gameObject));
 	}
 	#endregion
 }

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 20
   knockback: {x: 1, y: 0}
   gravity: 0
   shotSpeed: 25

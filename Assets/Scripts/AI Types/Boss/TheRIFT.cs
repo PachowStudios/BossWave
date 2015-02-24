@@ -216,16 +216,20 @@ public sealed class TheRIFT : Boss
 
 		DOTween.Sequence()
 			.SetId("RIFT Attack")
-			.Append(DOTween.To(() => laserTarget.transform.position, x => laserTarget.transform.position = x, laserPath[0], RIFTLaser.ChargeLength)
-				.OnUpdate(() => laserInstance.firePoint = firePoint.position))
+			.Append(DOTween.To(x => { }, 0f, 0f, RIFTLaser.ChargeLength)
+				.OnUpdate(() =>
+				{
+					laserInstance.firePoint = firePoint.position;
+					laserTarget.localPosition = laserPath[0];
+				}))
 			.Append(laserTarget.DOLocalPath(laserPath, length, pathType, PathMode.Sidescroller2D)
 				.SetEase(curve)
 				.OnUpdate(() =>
 				{
 					laserInstance.firePoint = firePoint.position;
-					laserInstance.targetPoint = laserTarget.transform.position;
+					laserInstance.targetPoint = laserTarget.position;
 				})
-				.OnComplete(() =>
+				.OnKill(() =>
 				{
 					laserInstance.Stop();
 					laserInstance = null;
@@ -439,7 +443,7 @@ public sealed class TheRIFT : Boss
 			ghostTrail.trailActive = false;
 
 			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-			DOTween.Complete("RIFT Attack");
+			DOTween.Kill("RIFT Attack");
 			DOTween.Kill("RIFT Swoop");
 			DOTween.Kill("Boss Wave Timer");
 		}
@@ -516,6 +520,7 @@ public sealed class TheRIFT : Boss
 
 	public override void End()
 	{
+		DOTween.Kill("RIFT Attack");
 		maxFloatHeight = 1000f;
 		minFloatHeight = 990f;
 	}

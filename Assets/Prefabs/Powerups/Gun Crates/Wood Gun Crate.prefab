@@ -70,8 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoDestroy: 1
-  minLifetime: 10
-  maxLifetime: 15
+  minLifetime: 15.0970879
+  maxLifetime: 20.097086
   minRarity: 0
   maxRarity: 1
 --- !u!114 &11400004

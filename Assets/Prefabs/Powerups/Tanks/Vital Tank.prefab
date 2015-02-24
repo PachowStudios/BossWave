@@ -70,8 +70,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoDestroy: 1
-  minLifetime: 10
-  maxLifetime: 15
+  minLifetime: 15.3883495
+  maxLifetime: 20.38834
   popupSprite: {fileID: 21300002, guid: 5974aca0e73fc0f40af925f3fb771780, type: 3}
   minHealth: 50
   maxHealth: 100

@@ -334,7 +334,7 @@ MonoBehaviour:
   difficulty: 5
   immuneToInstantKill: 1
   immuneToKnockback: 1
-  maxHealth: 500
+  maxHealth: 600
   damage: 15
   microchipChance: 100
   minMicrochips: 10
@@ -377,13 +377,13 @@ MonoBehaviour:
     m_Curve:
     - time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: .0283022616
+      outSlope: .0283022616
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
