@@ -117,7 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetForce: 35
   magnetUplift: 11
-  lookDamping: 3
+  lookDamping: .5
+  playerPositionOffset: {x: 0, y: 2, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,9 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minScatter: {x: 3, y: 8}
   maxScatter: {x: 5, y: 12}
-  minShake: 25
-  maxShake: 100
-  shakeTime: 1.5
+  minShake: 10
+  maxShake: 50
+  shakeTime: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

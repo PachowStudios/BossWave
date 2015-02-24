@@ -54,7 +54,7 @@ public class HealthDisplay : MonoBehaviour
 		originalHealthWidth = barMask.rectTransform.sizeDelta.x;
 	}
 
-	private void OnGUI()
+	private void Update()
 	{
 		healthPercent = Mathf.Clamp(PlayerControl.Instance.Health / PlayerControl.Instance.maxHealth, 0f, 1f);
 

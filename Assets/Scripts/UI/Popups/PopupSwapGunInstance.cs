@@ -56,6 +56,11 @@ public class PopupSwapGunInstance : MonoBehaviour
 				selectionMade = true;
 				SwapGuns(false);
 			}
+
+			oldImage.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
+			oldImage.rectTransform.sizeDelta = PlayerControl.Instance.Gun.SpriteRenderer.sprite.bounds.size;
+			timerText.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Max(oldImage.rectTransform.sizeDelta.y,
+																				 newImage.rectTransform.sizeDelta.y) + timerBuffer);
 		}
 	}
 
@@ -72,17 +77,6 @@ public class PopupSwapGunInstance : MonoBehaviour
 		{
 			selectionMade = true;
 			SwapGuns(swapAfterTime);
-		}
-	}
-
-	private void OnGUI()
-	{
-		if (!selectionMade)
-		{
-			oldImage.sprite = PlayerControl.Instance.Gun.SpriteRenderer.sprite;
-			oldImage.rectTransform.sizeDelta = PlayerControl.Instance.Gun.SpriteRenderer.sprite.bounds.size;
-			timerText.rectTransform.anchoredPosition = new Vector2(0f, Mathf.Max(oldImage.rectTransform.sizeDelta.y,
-																				 newImage.rectTransform.sizeDelta.y) + timerBuffer);
 		}
 	}
 	#endregion

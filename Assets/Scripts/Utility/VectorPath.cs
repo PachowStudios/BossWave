@@ -29,18 +29,11 @@ public class VectorPath : MonoBehaviour
 	{
 		if (enabled && nodes.Length >= 2)
 		{
-			if (pathType == PathType.Linear)
-			{
-				Gizmos.color = pathColor;
+			Gizmos.color = pathColor;
 
-				for (int i = 1; i < nodes.Length; i++)
-				{
-					Gizmos.DrawLine(nodes[i - 1], nodes[i]);
-				}
-			}
-			else
+			for (int i = 1; i < nodes.Length; i++)
 			{
-				iTween.DrawPath(nodes, pathColor);
+				Gizmos.DrawLine(nodes[i - 1], nodes[i]);
 			}
 		}
 	}

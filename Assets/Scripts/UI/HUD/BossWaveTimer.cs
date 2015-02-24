@@ -39,7 +39,7 @@ public class BossWaveTimer : MonoBehaviour
 		Timer = 0f;
 	}
 
-	private void OnGUI()
+	private void Update()
 	{
 		text.text = Timer.ToString("F2");
 	}

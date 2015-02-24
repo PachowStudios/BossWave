@@ -246,7 +246,7 @@ MonoBehaviour:
   destroyOnEnemy: 0
   destroyOnWorld: 1
   correctRotation: 0
-  destroyShake: 1
+  destroyShake: 0
   shakeIntensity: {x: 0, y: .100000001, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}

@@ -46,7 +46,7 @@ public class SecondaryShotBox : MonoBehaviour
 		originalCooldownWidth = bar.rectTransform.sizeDelta.x;
 	}
 
-	private void OnGUI()
+	private void Update()
 	{
 		if (PlayerControl.Instance.Gun.secondaryShot && !overrideShowing)
 		{

@@ -31,7 +31,7 @@ public class ComboMeter : MonoBehaviour
 		anim = GetComponent<Animator>();
 	}
 
-	private void OnGUI()
+	private void Update()
 	{
 		anim.SetInteger("Combo", PlayerControl.Instance.Combo);
 	}
