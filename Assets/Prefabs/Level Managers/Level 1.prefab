@@ -499,7 +499,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -555,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 1
-  spawnEnemies: 1
+  introCRT: 0
+  spawnEnemies: 0
   fadeInTime: 2
   killAllEnemiesBonus: 100000
   timeBonusMultiplier: 10
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPowerups: 1
+  spawnPowerups: 0
   waves:
   - startTime: 35
     possiblePowerups:

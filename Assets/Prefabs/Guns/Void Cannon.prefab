@@ -71,7 +71,7 @@ MonoBehaviour:
   gunName: Void Cannon
   rarity: 5
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
-  secondaryShot: 1
+  hasSecondaryShot: 1
   secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
     type: 2}
   secondaryCooldown: 20

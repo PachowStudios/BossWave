@@ -91,7 +91,7 @@ public class SmartLaser : Projectile
 
 		previousPoints = new List<Vector3>(vectorLine.points3);
 		vectorLine.MakeSpline(targets.ToArray());
-		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 15f * Time.deltaTime).ToArray());
+		vectorLine.MakeSpline(LerpList(previousPoints, vectorLine.points3, 20f * Time.deltaTime).ToArray());
 
 		tip.transform.position = vectorLine.points3.Last();
 

@@ -48,7 +48,7 @@ public class SecondaryShotBox : MonoBehaviour
 
 	private void Update()
 	{
-		if (PlayerControl.Instance.Gun.secondaryShot && !overrideShowing)
+		if (PlayerControl.Instance.Gun.hasSecondaryShot && !overrideShowing)
 		{
 			if (!showing)
 			{

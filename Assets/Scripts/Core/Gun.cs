@@ -20,7 +20,7 @@ public class Gun : MonoBehaviour
 	public RarityLevel rarity = RarityLevel.Common;
 	public Projectile projectile;
 
-	public bool secondaryShot = false;
+	public bool hasSecondaryShot = false;
 	public Projectile secondaryProjectile;
 	public float secondaryCooldown = 5f;
 	public bool showSecondaryGUI = false;
@@ -167,9 +167,11 @@ public class Gun : MonoBehaviour
 			{
 				useMouse = false;
 			}
-
-			shoot = mouseInput;
-			secondaryShoot = secondaryMouseInput;
+			else
+			{
+				shoot = mouseInput;
+				secondaryShoot = secondaryMouseInput && hasSecondaryShot;
+			}
 		}
 		else
 		{
@@ -177,16 +179,16 @@ public class Gun : MonoBehaviour
 			{
 				useMouse = true;
 			}
-
-			shoot = xboxInput;
+			else
+			{
+				shoot = xboxInput;
+			}
 		}
 
-		shoot = disableInput ? false : shoot;
-		secondaryShoot = disableInput ? false
-									  : secondaryShot ? secondaryShoot
-													  : false;
+		shoot = (!disableInput && !secondaryShoot) ? shoot : false;
+		secondaryShoot = (!disableInput && !shoot) ? secondaryShoot : false;
 
-		shootStart = shootStart || (shoot && !previousShoot);
+		shootStart = shoot && !previousShoot;
 	}
 
 	private void CheckShoot()
@@ -216,24 +218,28 @@ public class Gun : MonoBehaviour
 
 					shootTimer = 0f;
 				}
+			}
 
-				if (secondaryShot)
-				{
-					if (secondaryShoot && secondaryTimer >= secondaryCooldown)
-					{
-						secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
-						secondaryProjectileInstance.Initialize(shotDirection);
+			if (hasSecondaryShot && secondaryShoot && secondaryTimer >= secondaryCooldown)
+			{
+				secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
+				secondaryProjectileInstance.Initialize(shotDirection);
 
-						secondaryTimer = 0f;
-					}
-				}
+				secondaryTimer = 0f;
 			}
 		}
 
-		if (continuousFire && projectileInstance != null &&
-			(disableInput || !shoot))
+		if (disableInput || NoInput)
 		{
-			Destroy(projectileInstance.gameObject);
+			spriteRenderer.color = Color.clear;
+		}
+		else if (!canOverheat)
+		{
+			spriteRenderer.color = Color.white;
+		}
+		else
+		{
+			spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
 		}
 
 		if (canOverheat)
@@ -255,22 +261,15 @@ public class Gun : MonoBehaviour
 				if (overheatTimer <= overheatTime * overheatThreshold)
 				{
 					overheated = false;
+					shoot = false;
 				}
 			}
-
-			if (!NoInput)
-			{
-				spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
-			}
 		}
 
-		if (disableInput || NoInput)
+		if (continuousFire && projectileInstance != null &&
+			(disableInput || overheated || !shoot))
 		{
-			spriteRenderer.color = Color.clear;
-		}
-		else if (!canOverheat)
-		{
-			spriteRenderer.color = Color.white;
+			Destroy(projectileInstance.gameObject);
 		}
 	}
 	#endregion

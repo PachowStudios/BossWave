@@ -19,7 +19,7 @@ public class GunEditor : Editor
 
 	void OnEnable()
 	{
-		showSecondaryShot = new AnimBool(Target.secondaryShot);
+		showSecondaryShot = new AnimBool(Target.hasSecondaryShot);
 		showSecondaryGUI = new AnimBool(Target.showSecondaryGUI);
 		showContinuousFire = new AnimBool(Target.continuousFire);
 		showCanOverheat = new AnimBool(Target.canOverheat);
@@ -58,8 +58,8 @@ public class GunEditor : Editor
 
 		EditorGUILayout.EndFadeGroup();
 
-		Target.secondaryShot = EditorGUILayout.Toggle("Secondary Shot", Target.secondaryShot);
-		showSecondaryShot.target = Target.secondaryShot;
+		Target.hasSecondaryShot = EditorGUILayout.Toggle("Secondary Shot", Target.hasSecondaryShot);
+		showSecondaryShot.target = Target.hasSecondaryShot;
 
 		if (EditorGUILayout.BeginFadeGroup(showSecondaryShot.faded))
 		{
