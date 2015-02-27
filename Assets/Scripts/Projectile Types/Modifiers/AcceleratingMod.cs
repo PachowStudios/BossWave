@@ -1,22 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AcceleratingShot : Projectile
+public sealed class AcceleratingMod : ProjectileMod
 {
 	#region Fields
 	public float accelTime = 1f;
 	public AnimationCurve accelCurve;
-	public bool homingDuringAccel = false;
-	[Range(0f, 1f)]
-	public float homingThreshold = 0.5f;
-	[Range(0f, 1f)]
-	public float homingSpeed = 0.5f;
 	public bool hasTrail = false;
 	[Range(0f, 1f)]
 	public float trailThreshold = 0f;
 
-	private float originalShotSpeed;
+	private float originalSpeed;
 	private float accelTimer = 0f;
+
+	private Animator anim;
 	#endregion
 
 	#region Internal Properties
@@ -34,33 +31,24 @@ public class AcceleratingShot : Projectile
 	{
 		base.Awake();
 
-		originalShotSpeed = shotSpeed;
+		anim = GetComponent<Animator>();
+		originalSpeed = thisProjectile.shotSpeed;
 	}
+	#endregion
 
-	private void Update()
+	#region PublicMethods
+	public override void ApplyModifier()
 	{
 		if (accelPercentage < 1f)
 		{
 			accelTimer += Time.deltaTime;
-
-			shotSpeed = originalShotSpeed * accelPercentage;
-
-			if (homingDuringAccel && accelPercentage >= homingThreshold)
-			{
-				Vector2 playerDirection = transform.position.LookAt2D(PlayerControl.Instance.collider2D.bounds.center) * Vector3.right;
-				direction = Vector3.Lerp(direction, playerDirection, homingSpeed * 60f * Time.deltaTime).normalized;
-			}
+			thisProjectile.shotSpeed = originalSpeed * accelPercentage;
 
 			if (hasTrail && accelPercentage >= trailThreshold)
 			{
 				anim.SetBool("Trail", true);
 			}
 		}
-	}
-
-	private void LateUpdate()
-	{
-		DoMovement();
 	}
 	#endregion
 }

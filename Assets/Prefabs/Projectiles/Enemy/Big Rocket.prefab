@@ -9,7 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   - 212: {fileID: 21200000}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
@@ -118,7 +119,7 @@ MonoBehaviour:
   totalHorizontalRays: 8
   totalVerticalRays: 4
   triggerHelperBoxColliderScale: .949999988
---- !u!114 &11400002
+--- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b74ffa10d4cb52478a81884c9d90444, type: 3}
+  m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
@@ -142,7 +143,19 @@ MonoBehaviour:
   shakeIntensity: {x: 0, y: .5, z: 0}
   destroyEffect: Small Dust Explosion
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
+  useModifiers: 1
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b73b4b131e7404589aaecf03414ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
   accelTime: .5
   accelCurve:
     serializedVersion: 2
@@ -174,9 +187,6 @@ MonoBehaviour:
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
-  homingDuringAccel: 0
-  homingThreshold: .5
-  homingAccuracy: .5
   hasTrail: 1
   trailThreshold: .800000012
 --- !u!212 &21200000

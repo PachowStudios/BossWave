@@ -72,8 +72,7 @@ MonoBehaviour:
   rarity: 0
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
   hasSecondaryShot: 0
-  secondaryProjectile: {fileID: 11400002, guid: 15f20c9274f0f5e4bb6e6b8fd8b4fb98,
-    type: 2}
+  secondaryProjectile: {fileID: 0}
   secondaryCooldown: .150000006
   showSecondaryGUI: 0
   secondaryIcon: {fileID: 0}

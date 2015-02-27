@@ -388,7 +388,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   laserPrefab: {fileID: 11400004, guid: 0a3f49c5f00d77145914ce1fc91c8945, type: 2}
-  cannonPrefab: {fileID: 11400002, guid: 374d5da20bfd76047be862557f941b97, type: 2}
+  cannonPrefab: {fileID: 11400004, guid: 374d5da20bfd76047be862557f941b97, type: 2}
   cannonFireEffect: Small Dust Explosion
   attacks:
   - time: 136.600006

@@ -19,8 +19,6 @@ public abstract class Projectile : MonoBehaviour
 
 	[HideInInspector]
 	public Vector3 direction;
-	[HideInInspector]
-	public bool disableMovement = false;
 
 	protected Vector3 velocity;
 	protected CharacterController2D controller;
@@ -84,16 +82,13 @@ public abstract class Projectile : MonoBehaviour
 	#region Internal Update Methods
 	protected void DoMovement()
 	{
-		if (!disableMovement)
-		{
-			velocity.x = direction.x * shotSpeed;
-			direction.y += (gravity * Time.deltaTime) / 10f;
-			velocity.y = direction.y * shotSpeed;
+		velocity.x = direction.x * shotSpeed;
+		direction.y += (gravity * Time.deltaTime) / 10f;
+		velocity.y = direction.y * shotSpeed;
 
-			if (correctRotation)
-			{
-				transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
-			}
+		if (correctRotation)
+		{
+			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
 		}
 
 		controller.move(velocity * Time.deltaTime);
@@ -118,7 +113,7 @@ public abstract class Projectile : MonoBehaviour
 	#region Public Methods
 	public void Initialize(Vector3 newDirection)
 	{
-		if (direction == Vector3.zero && !disableMovement)
+		if (direction == Vector3.zero)
 		{
 			direction = newDirection;
 

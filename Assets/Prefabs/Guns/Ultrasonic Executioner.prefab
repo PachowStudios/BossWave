@@ -71,7 +71,7 @@ MonoBehaviour:
   gunName: Ultrasonic Executioner
   rarity: 3
   projectile: {fileID: 11400002, guid: 15be0f18eb63d29418bb56ce6a575f1a, type: 2}
-  secondaryShot: 0
+  hasSecondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
   showSecondaryGUI: 0

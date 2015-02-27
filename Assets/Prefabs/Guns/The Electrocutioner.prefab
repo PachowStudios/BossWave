@@ -71,7 +71,7 @@ MonoBehaviour:
   gunName: The Electrocutioner
   rarity: 2
   projectile: {fileID: 11400002, guid: 097e7d02b21f540459e4f2b3773479a7, type: 2}
-  secondaryShot: 0
+  hasSecondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
   showSecondaryGUI: 0
