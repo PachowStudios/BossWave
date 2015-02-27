@@ -174,8 +174,11 @@ MonoBehaviour:
       tangentMode: 10
     m_PreInfinity: 2
     m_PostInfinity: 2
+  homingDuringAccel: 0
+  homingThreshold: .5
+  homingAccuracy: .5
   hasTrail: 1
-  trailPercentage: .800000012
+  trailThreshold: .800000012
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -332,13 +332,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   invincibilityPeriod: 1
-  gravity: -45
-  walkSpeed: 12
-  runSpeed: 17
+  gravity: -60
+  walkSpeed: 17
+  runSpeed: 23
   continuouslyRunning: 0
   continuousRunSpeed: 20
-  groundDamping: 6
-  inAirDamping: 5
+  groundDamping: 7
+  inAirDamping: 4
   jumpHeight: 7
   comboStartKills: 2
   comboDecreaseTime: 4

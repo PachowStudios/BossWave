@@ -6,9 +6,14 @@ public class AcceleratingShot : Projectile
 	#region Fields
 	public float accelTime = 1f;
 	public AnimationCurve accelCurve;
+	public bool homingDuringAccel = false;
+	[Range(0f, 1f)]
+	public float homingThreshold = 0.5f;
+	[Range(0f, 1f)]
+	public float homingSpeed = 0.5f;
 	public bool hasTrail = false;
 	[Range(0f, 1f)]
-	public float trailPercentage = 0f;
+	public float trailThreshold = 0f;
 
 	private float originalShotSpeed;
 	private float accelTimer = 0f;
@@ -40,7 +45,13 @@ public class AcceleratingShot : Projectile
 
 			shotSpeed = originalShotSpeed * accelPercentage;
 
-			if (accelPercentage >= trailPercentage)
+			if (homingDuringAccel && accelPercentage >= homingThreshold)
+			{
+				Vector2 playerDirection = transform.position.LookAt2D(PlayerControl.Instance.collider2D.bounds.center) * Vector3.right;
+				direction = Vector3.Lerp(direction, playerDirection, homingSpeed * 60f * Time.deltaTime).normalized;
+			}
+
+			if (hasTrail && accelPercentage >= trailThreshold)
 			{
 				anim.SetBool("Trail", true);
 			}
