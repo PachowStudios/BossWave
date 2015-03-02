@@ -40,9 +40,9 @@ public abstract class StandardEnemy : Enemy
 	#endregion
 
 	#region Internal Properties
-	protected int RelativePlayerLastGrounded
+	protected float RelativePlayerLastGrounded
 	{
-		get { return (int)(lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y); }
+		get { return (lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y).RoundToTenth(); }
 	}
 
 	protected float RelativePlayerHeight

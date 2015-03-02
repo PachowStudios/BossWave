@@ -4,12 +4,42 @@ using System.Collections;
 public abstract class FollowAI : StandardEnemy
 {
 	#region Fields
-	public bool followVertically = false;
 	public float followRange = 5f;
 	public float attackRange = 5f;
 	public float attackCooldownTime = 1f;
 
 	protected float attackCooldownTimer = 0f;
+	#endregion
+
+	#region MonoBehaviour
+	protected override void OnTriggerEnter2D(Collider2D other)
+	{
+		base.OnTriggerEnter2D(other);
+
+		if (other.tag == "JumpMarker")
+		{
+			if (IsGrounded)
+			{
+				JumpMarker jumpInfo = other.GetComponent<JumpMarker>();
+
+				if (RelativePlayerLastGrounded != 0f)
+				{
+					right = (jumpInfo.Direction > 0);
+					left = !right;
+
+					Jump((RelativePlayerLastGrounded < 0f) ? jumpInfo.JumpHeight : jumpInfo.FallHeight);
+				}
+			}
+		}
+	}
+
+	protected virtual void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.tag == "JumpMarker")
+		{
+			OnTriggerEnter2D(other);
+		}
+	}
 	#endregion
 
 	#region Internal Update Methods
@@ -22,7 +52,7 @@ public abstract class FollowAI : StandardEnemy
 	{
 		if (IsGrounded)
 		{
-			if (RelativePlayerLastGrounded != 0)
+			if (RelativePlayerLastGrounded != 0f)
 			{
 				if (!WasGroundedLastFrame && IsGrounded)
 				{
@@ -31,15 +61,10 @@ public abstract class FollowAI : StandardEnemy
 				}
 
 				CheckFrontCollision(true);
-
-				if (!followVertically)
-				{
-					CheckLedgeCollision(true);
-				}
 			}
 			else
 			{
-				if (CheckLedgeCollision() || followVertically)
+				if (CheckLedgeCollision())
 				{
 					if (RelativePlayerHeight < 0.5f)
 					{
@@ -57,11 +82,6 @@ public abstract class FollowAI : StandardEnemy
 						right = left = false;
 					}
 				}
-			}
-
-			if (followVertically && !CheckLedgeCollision())
-			{
-				Jump(Mathf.Max(0f, -RelativePlayerHeight) + 2f);
 			}
 		}
 	}

@@ -23,6 +23,8 @@ TagManager:
   - ParticleSystem
   - Killzone
   - Gun
+  - AStarNode
+  - JumpMarker
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -34,7 +36,7 @@ TagManager:
   Builtin Layer 7: 
   User Layer 8: Player
   User Layer 9: Collider
-  User Layer 10: Scenery
+  User Layer 10: Killzone
   User Layer 11: Enemies
   User Layer 12: ParticleCollider
   User Layer 13: Pickups

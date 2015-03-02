@@ -115,6 +115,13 @@ public static class Extensions
 	}
 	#endregion
 
+	#region Float
+	public static float RoundToTenth(this float parent)
+	{
+		return Mathf.RoundToInt(parent * 10f) / 10f;
+	}
+	#endregion
+
 	#region Vector2
 	public static Vector2 Sign(this Vector2 parent)
 	{
