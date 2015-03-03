@@ -20,14 +20,34 @@ public abstract class FollowAI : StandardEnemy
 		{
 			if (IsGrounded)
 			{
-				JumpMarker jumpInfo = other.GetComponent<JumpMarker>();
-
-				if (RelativePlayerLastGrounded != 0f)
+				JumpMarker jumpMarker = other.GetComponent<JumpMarker>();
+				
+				if (right == (jumpMarker.Direction == 1))
 				{
-					right = (jumpInfo.Direction > 0);
-					left = !right;
+					float jumpHeight = 0f;
 
-					Jump((RelativePlayerLastGrounded < 0f) ? jumpInfo.JumpHeight : jumpInfo.FallHeight);
+					if (RelativePlayerHeight < 0f)
+					{
+						jumpHeight = jumpMarker.CalculateJumpJumpHeight(moveSpeed, gravity);
+					}
+					else if (RelativePlayerHeight > 0f)
+					{
+						if (jumpMarker.HasFallPoint)
+						{
+							jumpHeight = jumpMarker.CalculateFallJumpHeight(moveSpeed, gravity);
+						}
+						else
+						{
+							right = !right;
+							left = !right;
+						}
+					}
+					else
+					{
+						jumpHeight = jumpMarker.CalculateGapJumpHeight(moveSpeed, gravity);
+					}
+
+					Jump(jumpHeight);
 				}
 			}
 		}
@@ -62,26 +82,9 @@ public abstract class FollowAI : StandardEnemy
 
 				CheckFrontCollision(true);
 			}
-			else
+			else if (RelativePlayerHeight < 0.5f)
 			{
-				if (CheckLedgeCollision())
-				{
-					if (RelativePlayerHeight < 0.5f)
-					{
-						FollowPlayer();
-					}
-				}
-				else
-				{
-					if (PlayerControl.Instance.IsGrounded)
-					{
-						CheckLedgeCollision(true);
-					}
-					else
-					{
-						right = left = false;
-					}
-				}
+				FollowPlayer();
 			}
 		}
 	}

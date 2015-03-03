@@ -365,7 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpEndPoint: {fileID: 0}
-  fallJumpHeight: 1
+  gapEndPoint: {fileID: 0}
+  fallEndPoint: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -100,7 +100,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.35999966, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -269,7 +269,6 @@ MonoBehaviour:
   spawnJumpHeight: 4
   spawnLength: .5
   maxJumpHeight: 7
-  followVertically: 1
   followRange: 1.79999995
   attackRange: 1.79999995
   attackCooldownTime: 1.5

@@ -178,8 +178,10 @@ public abstract class StandardEnemy : Enemy
 
 	protected virtual void Jump(float height)
 	{
-		height = Mathf.Clamp(height, 0f, maxJumpHeight);
-		velocity.y = Mathf.Sqrt(2f * height * -gravity);
+		if (height > 0f)
+		{
+			velocity.y = Mathf.Sqrt(2f * Mathf.Min(height, maxJumpHeight) * -gravity);
+		}
 	}
 
 	protected bool CheckFrontCollision(bool flip = false)

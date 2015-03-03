@@ -509,7 +509,7 @@ public sealed class PlayerControl : MonoBehaviour
 	#region Internal Helper Methods
 	private void Jump(float height, bool playAnimation = true)
 	{
-		if (height >= 0f)
+		if (height > 0f)
 		{
 			velocity.y = Mathf.Sqrt(2f * height * -gravity);
 
