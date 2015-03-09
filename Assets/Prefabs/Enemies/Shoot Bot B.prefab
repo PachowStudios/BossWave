@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
@@ -317,7 +318,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da8102142bb53c4d9f1da5e97c5cc18, type: 3}
+  m_Script: {fileID: 11500000, guid: f17502ec11b8f9146a385569eac16ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
+  range: 10
+  maxRangeOffset: 1
+  horizontalShot: 1
+  useRandomGun: 0
+  burstShot: 0
+  shotsPerBurst: 1
+  delayBetweenShots: .100000001
+  attackDelay: 0
+  cooldownTime: .75
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db536cab8d1db144a85adc29ad57be1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 1
@@ -332,7 +354,7 @@ MonoBehaviour:
   smallestMicrochip: 0
   biggestMicrochip: 0
   knockback: {x: 1, y: .5}
-  flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
+  flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: -35
   moveSpeed: 8
@@ -348,23 +370,12 @@ MonoBehaviour:
     m_Bits: 262144
   spawnSortingLayer: Spawn
   spawnSortingOrder: 0
-  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
+  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 1}
   spawnEntryRange: 1
   spawnJumpHeight: 4
   spawnLength: .5
   maxJumpHeight: 7
-  followVertically: 1
   followRange: 5
-  attackRange: 10
-  attackCooldownTime: .75
-  maxRangeOffset: 1
-  horizontalShot: 1
-  useRandomGun: 0
-  burstShot: 0
-  shotsPerBurst: 1
-  delayBetweenShots: .100000001
-  attackBuffer: 0
-  projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

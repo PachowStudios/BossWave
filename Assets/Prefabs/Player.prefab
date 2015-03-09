@@ -337,7 +337,7 @@ MonoBehaviour:
   runSpeed: 23
   continuouslyRunning: 0
   continuousRunSpeed: 20
-  groundDamping: 7
+  groundDamping: 6
   inAirDamping: 4
   jumpHeight: 7
   comboStartKills: 2

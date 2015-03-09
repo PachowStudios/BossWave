@@ -15,23 +15,31 @@ Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\A
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.ClipperLib.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.ClipperLib.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.JsonFx.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.JsonFx.dll into Unity Child Domain
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.Poly2Tri.dll (this message is harmless)
+Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\Pathfinding.Poly2Tri.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween43.dll into Unity Child Domain
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll (this message is harmless)
 Loading D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\DOTween46.dll into Unity Child Domain
-- Completed reload, in  0.036 seconds
+- Completed reload, in  0.040 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1920x1080 144Hz; virtual: 5760x1080 at -1920,0
 Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Pass '' shader state not supported
 WARNING: Shader Unsupported: 'Hidden/NoiseAndGrainDX11' - Setting to default shader.
-Platform assembly: D:\Documents\Coding Projects\BossWave\BossWave_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 6.952032 ms
+UnloadTime: 4.574615 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2422.
-Total: 0.935344 ms (FindLiveObjects: 0.081919 ms CreateObjectMapping: 0.024283 ms MarkObjects: 0.481276 ms  DeleteObjects: 0.032182 ms)
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2391.
+Total: 1.756001 ms (FindLiveObjects: 0.079871 ms CreateObjectMapping: 0.021650 ms MarkObjects: 1.300763 ms  DeleteObjects: 0.030719 ms)
 

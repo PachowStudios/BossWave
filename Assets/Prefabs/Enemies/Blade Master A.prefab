@@ -25,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400006}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 95: {fileID: 9500000}
@@ -234,55 +235,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd216d912ed91042b87c6a695a94ff0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6725fb12d0ddbee479e7ead5cb65a21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawned: 1
-  difficulty: 3
-  immuneToInstantKill: 0
-  immuneToKnockback: 1
-  maxHealth: 200
-  damage: 10
-  microchipChance: 25
-  minMicrochips: 1
-  maxMicrochips: 3
-  smallestMicrochip: 0
-  biggestMicrochip: 1
-  knockback: {x: 2, y: 1}
-  flashColor: {r: 1, g: .470588237, b: .470588237, a: 1}
-  flashLength: .100000001
-  gravity: -35
-  moveSpeed: 4
-  groundDamping: 10
-  inAirDamping: 5
-  timeWarpAtDeath: 0
-  velocity: {x: 0, y: 0, z: 0}
-  invincible: 0
-  ignoreProjectiles: 0
-  simulateSpawner: {fileID: 0}
-  spawnPlatformMask:
-    serializedVersion: 2
-    m_Bits: 262144
-  spawnSortingLayer: Spawn
-  spawnSortingOrder: 0
-  spawnColor: {r: .101999998, g: .109999999, b: .219999999, a: 1}
-  spawnEntryRange: 1
-  spawnJumpHeight: 4
-  spawnLength: .5
-  maxJumpHeight: 7
-  followVertically: 0
-  followRange: 2.5
-  attackRange: 2.5
-  attackCooldownTime: 1.25
+  swipeRange: 2.5
   minDashRange: 5
   maxDashRange: 30
   swipeDamage: 10
-  stabDamage: 20
+  dashDamage: 20
   swipeKnockback: {x: 3, y: 5}
-  stabKnockback: {x: 10, y: 1}
-  dashCooldownTime: 4
-  dashSpeed: 35
-  stabLegnth: .800000012
+  dashKnockback: {x: 10, y: 1}
+  swipeCooldownTime: 1.25
+  dashCooldownTime: 2
+  stabDuration: .800000012
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,6 +278,52 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   sortingLayer: Character
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd138ef08a2da994ba7a8fa14de612a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawned: 1
+  difficulty: 3
+  immuneToInstantKill: 0
+  immuneToKnockback: 1
+  maxHealth: 200
+  damage: 10
+  microchipChance: 50
+  minMicrochips: 2
+  maxMicrochips: 3
+  smallestMicrochip: 0
+  biggestMicrochip: 2
+  knockback: {x: 2, y: 1}
+  flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
+  flashLength: .100000001
+  gravity: -35
+  moveSpeed: 4
+  groundDamping: 10
+  inAirDamping: 5
+  timeWarpAtDeath: 0
+  velocity: {x: 0, y: 0, z: 0}
+  invincible: 0
+  ignoreProjectiles: 0
+  simulateSpawner: {fileID: 0}
+  spawnPlatformMask:
+    serializedVersion: 2
+    m_Bits: 262144
+  spawnSortingLayer: Spawn
+  spawnSortingOrder: 0
+  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 1}
+  spawnEntryRange: 1
+  spawnJumpHeight: 4
+  spawnLength: .5
+  maxJumpHeight: 7
+  followRange: 2.5
+  dashSpeed: 35
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

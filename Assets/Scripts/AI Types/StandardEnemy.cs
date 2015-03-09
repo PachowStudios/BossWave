@@ -15,8 +15,10 @@ public abstract class StandardEnemy : Enemy
 	public float spawnLength = 0.5f;
 	public float maxJumpHeight = 7f;
 
-	protected Transform frontCheck;
-	protected Transform ledgeCheck;
+	private AttackAI attackAI;
+
+	private Transform frontCheck;
+	private Transform ledgeCheck;
 
 	private LayerMask defaultPlatformMask;
 	private string defaultSortingLayer;
@@ -37,6 +39,9 @@ public abstract class StandardEnemy : Enemy
 												 value.FindChild("Entry End").position);
 		}
 	}
+
+	public bool MovementDisabled
+	{ get { return disableMovement; } }
 	#endregion
 
 	#region Internal Properties
@@ -55,6 +60,8 @@ public abstract class StandardEnemy : Enemy
 	protected override void Awake()
 	{
 		base.Awake();
+
+		attackAI = GetComponent<AttackAI>();
 
 		frontCheck = transform.FindChild("frontCheck");
 		ledgeCheck = transform.FindChild("ledgeCheck");
@@ -89,7 +96,16 @@ public abstract class StandardEnemy : Enemy
 	{
 		ApplyAnimation();
 
-		if (!spawned)
+		if (spawned)
+		{
+			if (!disableMovement)
+			{
+				Walk();
+			}
+
+			attackAI.CheckAttack();
+		}
+		else
 		{
 			CheckFrontCollision(true);
 
@@ -97,15 +113,6 @@ public abstract class StandardEnemy : Enemy
 			{
 				Spawn();
 			}
-		}
-		else
-		{
-			if (!disableMovement)
-			{
-				Walk();
-			}
-
-			CheckAttack();
 		}
 	}
 
@@ -119,7 +126,6 @@ public abstract class StandardEnemy : Enemy
 	#region Internal Update Methods
 	protected abstract void ApplyAnimation();
 	protected abstract void Walk();
-	protected abstract void CheckAttack();
 	#endregion
 
 	#region Internal Helper Methods
@@ -184,7 +190,7 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	protected bool CheckFrontCollision(bool flip = false)
+	protected bool CheckFrontCollision(bool flip)
 	{
 		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
 
@@ -197,7 +203,7 @@ public abstract class StandardEnemy : Enemy
 		return frontHit != null;
 	}
 
-	protected bool CheckLedgeCollision(bool flip = false)
+	protected bool CheckLedgeCollision(bool flip)
 	{
 		if (IsGrounded)
 		{
@@ -217,14 +223,23 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	protected bool IsPlayerInRange(float min, float max)
+	protected virtual void FollowPlayer(float range)
 	{
-		int direction = FacingRight ? 1 : -1;
-		Vector3 startPoint = new Vector3(transform.position.x + (min * direction), collider2D.bounds.center.y, 0f);
-		Vector3 endPoint = startPoint + new Vector3((max - min) * direction, 0f, 0f);
-		RaycastHit2D linecast = Physics2D.Linecast(startPoint, endPoint, LayerMask.GetMask("Player"));
-
-		return linecast.collider != null;
+		if (transform.position.x + range < PlayerControl.Instance.transform.position.x)
+		{
+			right = true;
+			left = !right;
+		}
+		else if (transform.position.x - range > PlayerControl.Instance.transform.position.x)
+		{
+			left = true;
+			right = !left;
+		}
+		else
+		{
+			right = left = false;
+			FacePlayer();
+		}
 	}
 	#endregion
 
@@ -232,6 +247,16 @@ public abstract class StandardEnemy : Enemy
 	public void EnableMovement(bool enable)
 	{
 		disableMovement = !enable;
+	}
+
+	public bool CheckFrontCollision()
+	{
+		return CheckFrontCollision(false);
+	}
+
+	public bool CheckLedgeCollision()
+	{
+		return CheckLedgeCollision(false);
 	}
 	#endregion
 }
