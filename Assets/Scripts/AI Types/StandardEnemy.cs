@@ -15,7 +15,7 @@ public abstract class StandardEnemy : Enemy
 	public float spawnLength = 0.5f;
 	public float maxJumpHeight = 7f;
 
-	private AttackAI attackAI;
+	protected AttackAI attackAI;
 
 	private Transform frontCheck;
 	private Transform ledgeCheck;

@@ -534,7 +534,6 @@ public class AstarPathEditor : Editor {
 					}
 					
 					editorAssets = path;
-					Debug.Log ("Located editor assets folder to '"+editorAssets+"'");
 					break;
 				}
 				System.IO.DirectoryInfo[] dirs = dir.GetDirectories ();

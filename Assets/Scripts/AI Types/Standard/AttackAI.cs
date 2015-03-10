@@ -21,8 +21,8 @@ public abstract class AttackAI : MonoBehaviour
 	public abstract void CheckAttack();
 	#endregion
 
-	#region Internal Helper Methods
-	protected bool IsPlayerInRange(float min, float max)
+	#region Public Methods
+	public bool IsPlayerInRange(float min, float max)
 	{
 		int direction = thisEnemy.FacingRight ? 1 : -1;
 		Vector3 startPoint = new Vector3(transform.position.x + (min * direction), collider2D.bounds.center.y, 0f);
@@ -32,7 +32,7 @@ public abstract class AttackAI : MonoBehaviour
 		return linecast.collider != null;
 	}
 
-	protected bool IsPlayerVisible(float range = Mathf.Infinity)
+	public bool IsPlayerVisible(float range = Mathf.Infinity)
 	{
 		RaycastHit2D linecast = Physics2D.Linecast(collider2D.bounds.center,
 												   PlayerControl.Instance.collider2D.bounds.center,
