@@ -70,6 +70,11 @@ public abstract class Enemy : MonoBehaviour
 		}
 	}
 
+	public float HealthPercentage
+	{ 
+		get { return health / maxHealth; } 
+	}
+
 	public Sprite Sprite
 	{
 		get { return spriteRenderer.sprite; }

@@ -17,7 +17,7 @@ public class SpriteEffect : MonoBehaviour
 
 	public List<Effect> effectsLibrary;
 
-	private Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>();
+	private Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>(StringComparer.OrdinalIgnoreCase);
 	#endregion
 
 	#region Public Properties
@@ -34,12 +34,7 @@ public class SpriteEffect : MonoBehaviour
 
 		foreach (Effect effect in effectsLibrary)
 		{
-			if (effects.ContainsKey(effect.name.ToLower()))
-			{
-				effects.Remove(effect.name.ToLower());
-			}
-
-			effects.Add(effect.name.ToLower(), effect.prefab);
+			effects[effect.name] = effect.prefab;
 		}
 	}
 	#endregion
