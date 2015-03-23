@@ -28,6 +28,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
@@ -103,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.26012993, y: .0690605193, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -337,8 +338,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 19800000, guid: 24b13a233f5fdd043958ca13da4c943b, type: 2}
-  spawnPosition: {x: 0, y: 3.5999999, z: 0}
-  activateHealth: .800000012
+  spawnPosition: {x: 0, y: 3.5, z: 0}
+  activateHealth: .25
+  sortingLayer: Character
+  sortingOrder: -1
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae38794bd60d45342ae5676b4fd08e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 19800000, guid: 4dc602d0507feb342a4ced9d0861aeca, type: 2}
+  spawnPosition: {x: 0, y: 3.5, z: 0}
+  activateHealth: .5
   sortingLayer: Character
   sortingOrder: -1
 --- !u!212 &21200000

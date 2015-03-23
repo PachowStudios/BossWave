@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20a95450f76b07d4ea843308a7565a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 5
   knockback: {x: 0, y: 0}
   gravity: 0
   shotSpeed: 25
@@ -250,7 +250,6 @@ MonoBehaviour:
   shakeIntensity: {x: 0, y: .100000001, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
   damageRate: 5
   outerForce: 25
   innerForce: 15

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 10
   knockback: {x: 1, y: 0}
   gravity: 0
   shotSpeed: 25
@@ -142,7 +142,7 @@ MonoBehaviour:
   shakeIntensity: {x: 0, y: .100000001, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
+  useModifiers: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -42,6 +42,16 @@ public class DamageParticleEffect : MonoBehaviour
 		}
 	}
 
+	private void OnDisable()
+	{
+		if (particleInstance != null)
+		{
+			particleInstance.transform.parent = null;
+			particleInstance.enableEmission = false;
+			Destroy(particleInstance.gameObject, particleInstance.startLifetime);
+		}
+	}
+
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.blue;
