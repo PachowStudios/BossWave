@@ -23,7 +23,7 @@ TagManager:
   - ParticleSystem
   - Killzone
   - Gun
-  - AStarNode
+  - PlayerSpecialProjectile
   - JumpMarker
   - 
   Builtin Layer 0: Default

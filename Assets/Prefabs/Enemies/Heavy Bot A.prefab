@@ -489,7 +489,7 @@ MonoBehaviour:
   shotsPerBurst: 6
   delayBetweenShots: .100000001
   attackDelay: .400000006
-  cooldownTime: 3
+  cooldownTime: 2.5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

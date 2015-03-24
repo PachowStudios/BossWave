@@ -345,7 +345,7 @@ MonoBehaviour:
   maxScore: 99999999
   maxMicrochips: 99999
   startingGuns:
-  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
+  - {fileID: 11400000, guid: 359b8185564968f429ae575d2967facb, type: 2}
   - {fileID: 0}
   gunSwapCooldownTime: 1
   minAltIdleTime: 5

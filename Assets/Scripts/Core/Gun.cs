@@ -121,6 +121,9 @@ public class Gun : MonoBehaviour
 	{
 		get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; }
 	}
+
+	public Vector3 ShotDirection
+	{ get; private set; }
 	#endregion
 
 	#region MonoBehaviour
@@ -131,6 +134,8 @@ public class Gun : MonoBehaviour
 
 		shootTimer = shootCooldown;
 		secondaryTimer = secondaryCooldown;
+
+		ShotDirection = new Vector3();
 	}
 
 	private void Update()
@@ -193,7 +198,7 @@ public class Gun : MonoBehaviour
 
 	private void CheckShoot()
 	{
-		Vector3 shotDirection = RotateTowardsMouse();
+		ShotDirection = RotateTowardsMouse();
 
 		shootTimer += Time.deltaTime;
 		secondaryTimer += Time.deltaTime;
@@ -205,7 +210,7 @@ public class Gun : MonoBehaviour
 				if (shootStart && projectileInstance == null)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-					projectileInstance.Initialize(shotDirection);
+					projectileInstance.Initialize(ShotDirection);
 					shootStart = false;
 				}
 			}
@@ -214,7 +219,7 @@ public class Gun : MonoBehaviour
 				if (shoot && shootTimer >= shootCooldown)
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
-					projectileInstance.Initialize(shotDirection);
+					projectileInstance.Initialize(ShotDirection);
 
 					shootTimer = 0f;
 				}
@@ -223,7 +228,7 @@ public class Gun : MonoBehaviour
 			if (hasSecondaryShot && secondaryShoot && secondaryTimer >= secondaryCooldown)
 			{
 				secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
-				secondaryProjectileInstance.Initialize(shotDirection);
+				secondaryProjectileInstance.Initialize(ShotDirection);
 
 				secondaryTimer = 0f;
 			}
