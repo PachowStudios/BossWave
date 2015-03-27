@@ -439,7 +439,7 @@ MonoBehaviour:
   difficulty: 4
   immuneToInstantKill: 0
   immuneToKnockback: 1
-  maxHealth: 350
+  maxHealth: 300
   damage: 10
   microchipChance: 75
   minMicrochips: 3
@@ -505,7 +505,7 @@ MonoBehaviour:
   spawnPosition: {x: 0, y: 1.79999995, z: 0}
   activateHealth: .5
   sortingLayer: Character
-  sortingOrder: -1
+  sortingOrder: -2
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,7 +6,7 @@ public class Flamethrower : Projectile
 {
 	#region Fields
 	public float range = 7f;
-	public float width = 2f;
+	public Vector2 width = new Vector2(0.5f, 2f);
 	public float damageDelay = 0.25f;
 	public float maxParticleLifetime = 1.75f;
 	public LayerMask collisionLayer;
@@ -30,6 +30,7 @@ public class Flamethrower : Projectile
 		partSystem = GetComponentInChildren<ParticleSystem>();
 		detectionCollider = gameObject.AddComponent<PolygonCollider2D>();
 		detectionCollider.isTrigger = true;
+		UpdateRotation();
 	}
 
 	private void Update()
@@ -62,10 +63,10 @@ public class Flamethrower : Projectile
 	#region Internal Update Methods
 	private void UpdateCollider()
 	{
-		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, width / 4f)),
-													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, -(width / 4f))),
-													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(range, -width)),
-													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(range, width)) } );
+		detectionCollider.SetPath(0, new Vector2[] { PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, width.x / 2f)),
+													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(0f, -(width.x / 2f))),
+													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(range, -(width.y / 2f))),
+													 PlayerControl.Instance.Gun.firePoint.TransformPointLocal(new Vector2(range, width.y / 2f)) } );
 	}
 
 	private void GetTargets()

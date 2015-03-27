@@ -111,7 +111,7 @@ public abstract class Projectile : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void Initialize(Vector3 newDirection)
+	public virtual void Initialize(Vector3 newDirection)
 	{
 		if (direction == Vector3.zero)
 		{
