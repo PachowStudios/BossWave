@@ -80,7 +80,7 @@ public class SmartLaser : Projectile
 		detectionCollider.isTrigger = true;
 	}
 
-	private void Update()
+	private void LateUpdate()
 	{
 		previousTipEnabled = tip.enabled;
 		previousTipPosition = tip.transform.position;
@@ -195,9 +195,12 @@ public class SmartLaser : Projectile
 
 			foreach (Enemy enemy in allEnemies)
 			{
-				if (detectionCollider.OverlapPoint(enemy.transform.position))
+				if (detectionCollider.OverlapPoint(enemy.collider2D.bounds.center))
 				{
-					directTargets.Add(enemy);
+					RaycastHit2D linecast = Physics2D.Linecast(origin, enemy.collider2D.bounds.center, collisionLayer);
+
+					if (linecast.collider == null)
+						directTargets.Add(enemy);
 				}
 			}
 
@@ -296,18 +299,20 @@ public class SmartLaser : Projectile
 		Enemy closestEnemy = null;
 		float closestDistance = jumpRange;
 
-		allEnemies.Remove(currentEnemy);
-
 		foreach (Enemy enemy in allEnemies)
 		{
 			float currentDistance = currentEnemy.collider2D.bounds.center.DistanceFrom(enemy.collider2D.bounds.center);
 
-			if (currentDistance <= closestDistance)
+			RaycastHit2D linecast = Physics2D.Linecast(currentEnemy.collider2D.bounds.center, enemy.collider2D.bounds.center, collisionLayer);
+
+			if (currentDistance <= closestDistance && linecast.collider == null)
 			{
 				closestEnemy = enemy;
 				closestDistance = currentDistance;
 			}
 		}
+
+		allEnemies.Remove(closestEnemy);
 
 		return closestEnemy;
 	}

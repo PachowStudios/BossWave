@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6100000}
   m_Layer: 14
   m_Name: Smart Laser Shot
-  m_TagString: PlayerProjectile
+  m_TagString: PlayerSpecialProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -156,10 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8083d1d6adb5dd4b964a978048443af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
+  damage: 5
   knockback: {x: 0, y: 0}
   gravity: 0
-  shotSpeed: 7.5
+  shotSpeed: 6
   lifetime: 0
   autoDestroy: 0
   destroyOnEnemy: 0

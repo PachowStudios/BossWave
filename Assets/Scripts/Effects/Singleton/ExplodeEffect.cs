@@ -27,6 +27,9 @@ public class ExplodeEffect : MonoBehaviour
 	#region Public Methods
 	public void Explode(Transform target, Vector3 velocity, Sprite sprite, Material material = null)
 	{
+		if (!sprite)
+			return;
+
 		SpriteExplosion explosionInstance = Instantiate(explosionPrefab, target.position, target.rotation) as SpriteExplosion;
 		explosionInstance.transform.parent = transform;
 		explosionInstance.transform.localScale = target.localScale;
@@ -37,6 +40,9 @@ public class ExplodeEffect : MonoBehaviour
 
 	public void ExplodePartial(Transform target, Vector3 velocity, Sprite sprite, float percentage, Material material = null)
 	{
+		if (!sprite)
+			return;
+
 		SpriteExplosion explosionInstance = Instantiate(explosionPrefab, target.position, target.rotation) as SpriteExplosion;
 		explosionInstance.transform.parent = transform;
 		explosionInstance.transform.localScale = target.localScale;

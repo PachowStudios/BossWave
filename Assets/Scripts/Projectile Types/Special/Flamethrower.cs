@@ -85,9 +85,7 @@ public class Flamethrower : Projectile
 					RaycastHit2D linecast = Physics2D.Linecast(origin, enemy.collider2D.bounds.center, collisionLayer);
 					
 					if (linecast.collider == null)
-					{
 						targetEnemies.Add(enemy);
-					}
 				}
 			}
 		}

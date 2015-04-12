@@ -29,7 +29,13 @@ public abstract class Projectile : MonoBehaviour
 	#region Public Properties
 	public Sprite Sprite
 	{
-		get { return spriteRenderer.sprite; }
+		get
+		{
+			if (spriteRenderer)
+				return spriteRenderer.sprite;
+			else
+				return null;
+		}
 	}
 
 	public Color SpriteColor
