@@ -24,7 +24,7 @@ public class ScaleWidthCameraEditor : Editor
 		EditorGUILayout.LabelField("Current FOV", Target.FOV.ToString());
 		EditorGUILayout.Space();
 
-		Target.defaultFOV = EditorGUILayout.IntField("Default FOV", Target.defaultFOV);
+		Target.FOV = Target.defaultFOV = EditorGUILayout.IntField("Default FOV", Target.defaultFOV);
 
 		showWorldSpaceUI.target = EditorGUILayout.Toggle("Use World Space UI", showWorldSpaceUI.target);
 		Target.useWorldSpaceUI = showWorldSpaceUI.value;

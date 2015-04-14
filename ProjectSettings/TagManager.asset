@@ -111,6 +111,10 @@ TagManager:
     userID: 10
     uniqueID: 3710787823
     locked: 0
+  - name: Front Foreground
+    userID: 14
+    uniqueID: 3414659729
+    locked: 0
   - name: UI
     userID: 4
     uniqueID: 3335956447

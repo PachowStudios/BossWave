@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 82: {fileID: 8200000}
+  m_Layer: 0
+  m_Name: Level 2
+  m_TagString: LevelManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400004}
+  m_Layer: 0
+  m_Name: Markers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100008
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400008}
+  m_Layer: 9
+  m_Name: Ground Level
+  m_TagString: GroundLevel
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400004}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &400004
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400008}
+  m_Father: {fileID: 400000}
+  m_RootOrder: 0
+--- !u!4 &400008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400004}
+  m_RootOrder: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 641c77b1fbea2fd45bc5d13229c72f0b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 1
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introCRT: 0
+  spawnEnemies: 0
+  fadeInTime: 2
+  killAllEnemiesBonus: 100000
+  timeBonusMultiplier: 10
+  waves:
+  - startTime: 1
+    amount: 6
+    spawnDelay: 1
+    difficulty: 0
+  - startTime: 12
+    amount: 6
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 23
+    amount: 8
+    spawnDelay: 1
+    difficulty: 2
+  - startTime: 25
+    amount: 1
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 28
+    amount: 1
+    spawnDelay: 1
+    difficulty: 3
+  - startTime: 35
+    amount: 2
+    spawnDelay: .5
+    difficulty: 2
+  - startTime: 40
+    amount: 2
+    spawnDelay: 1.5
+    difficulty: 0
+  - startTime: 43
+    amount: 1
+    spawnDelay: 1
+    difficulty: 4
+  - startTime: 45
+    amount: 2
+    spawnDelay: 1
+    difficulty: 0
+  - startTime: 46
+    amount: 2
+    spawnDelay: .5
+    difficulty: 0
+  - startTime: 60
+    amount: 1
+    spawnDelay: 3
+    difficulty: 4
+  - startTime: 65
+    amount: 2
+    spawnDelay: 2
+    difficulty: 0
+  - startTime: 75
+    amount: 1
+    spawnDelay: 1
+    difficulty: 3
+  - startTime: 80
+    amount: 3
+    spawnDelay: 1
+    difficulty: 1
+  - startTime: 90
+    amount: 2
+    spawnDelay: 1
+    difficulty: 2
+  - startTime: 100
+    amount: 4
+    spawnDelay: 2
+    difficulty: 1
+  - startTime: 110
+    amount: 3
+    spawnDelay: 2
+    difficulty: 2
+  bossWave:
+    boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
+    startTime: 122.300003
+    totalLength: 55.5999985
+    cameraSpeed: 20
+    fullCameraSpeed: 30
+    speedUpTime: 5
+    spawner: {fileID: 0}
+    playerWaitPoint: {fileID: 0}
+    scrollingEndcap: {fileID: 0}
+  enemies:
+  - {fileID: 11400002, guid: ee51739a689bcb84dacb00e32e7f9d39, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400002, guid: a89caa5c84b4afb4c98ab899dd518d26, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
+  - {fileID: 0}
+  foregroundLayer: {fileID: 0}
+  worldBoundaries: {fileID: 0}
+  runningBoundaries: {fileID: 0}
+  groundLevel: {fileID: 400008}
+  mainMusic: {fileID: 8200000}
+  bossWavePlayerMoved: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPowerups: 0
+  waves:
+  - startTime: 35
+    possiblePowerups:
+    - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
+  - startTime: 40
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+    - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
+  - startTime: 45
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - startTime: 60
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - startTime: 75
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+  - startTime: 80
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 100
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 110
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+  microchips:
+  - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
+  - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}
+  - {fileID: 11400000, guid: 3795d2f4c176e6543b4a7638d533e561, type: 2}
+  guns:
+  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
+  - {fileID: 11400000, guid: c406c033fd5440e48a34362e7be8a036, type: 2}
+  - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
+  - {fileID: 11400000, guid: b4639e7e0b3d0c54ba55eaefd352b812, type: 2}
+  - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
+  - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
+  - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1
