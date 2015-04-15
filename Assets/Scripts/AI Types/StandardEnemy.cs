@@ -15,6 +15,7 @@ public abstract class StandardEnemy : Enemy
 	public float spawnLength = 0.5f;
 	public float maxJumpHeight = 7f;
 
+	protected SpawnAI spawnAI;
 	protected AttackAI attackAI;
 
 	private Transform frontCheck;
@@ -61,7 +62,11 @@ public abstract class StandardEnemy : Enemy
 	{
 		base.Awake();
 
+		spawnAI = GetComponent<SpawnAI>();
+		spawnAI.Initialize(this, anim);
+
 		attackAI = GetComponent<AttackAI>();
+		attackAI.Initialize(this, anim);
 
 		frontCheck = transform.FindChild("frontCheck");
 		ledgeCheck = transform.FindChild("ledgeCheck");

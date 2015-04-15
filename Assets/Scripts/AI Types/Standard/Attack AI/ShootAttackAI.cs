@@ -21,13 +21,12 @@ public sealed class ShootAttackAI : AttackAI
 	private float cooldownTimer = 0f;
 	#endregion
 
-	#region MonoBehaviour
-	protected override void Awake()
+	#region Initialization Methods
+	public override void Initialize(StandardEnemy thisEnemy, Animator anim)
 	{
-		base.Awake();
+		base.Initialize(thisEnemy, anim);
 
 		guns = transform.FindChild("FirePoints").FindChildTransforms();
-
 		range += Random.Range(-maxRangeOffset, maxRangeOffset);
 	}
 	#endregion

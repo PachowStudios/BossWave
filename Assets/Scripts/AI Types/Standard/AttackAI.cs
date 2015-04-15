@@ -9,11 +9,11 @@ public abstract class AttackAI : MonoBehaviour
 	protected Animator anim;
 	#endregion
 
-	#region MonoBehaviour
-	protected virtual void Awake()
+	#region Initialization Methods
+	public virtual void Initialize(StandardEnemy thisEnemy, Animator anim)
 	{
-		thisEnemy = GetComponent<StandardEnemy>();
-		anim = GetComponent<Animator>();
+		this.thisEnemy = thisEnemy;
+		this.anim = anim;
 	}
 	#endregion
 

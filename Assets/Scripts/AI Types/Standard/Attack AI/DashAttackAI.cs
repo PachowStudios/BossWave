@@ -29,10 +29,10 @@ public sealed class DashAttackAI : AttackAI
 	public bool Stabbing { get; private set; }
 	#endregion
 
-	#region MonoBehaviour
-	protected override void Awake()
+	#region Initialization Methods
+	public override void Initialize(StandardEnemy thisEnemy, Animator anim)
 	{
-		base.Awake();
+		base.Initialize(thisEnemy, anim);
 
 		dashMovementAI = GetComponent<DashMovementAI>();
 		ghostTrail = GetComponent<GhostTrailEffect>();

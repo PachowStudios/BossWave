@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 
-public class LevelManager : MonoBehaviour
+public abstract class LevelManager : MonoBehaviour
 {
 	#region Types
 	[System.Serializable]
@@ -176,13 +176,8 @@ public class LevelManager : MonoBehaviour
 	#endregion
 
 	#region Boss Wave Methods
-	protected virtual void InitializeBossWave()
-	{ }
-
-	public virtual void StartBossWave()
-	{ }
-
-	public virtual void CompleteBossWave()
-	{ }
+	protected abstract void InitializeBossWave();
+	public abstract void StartBossWave();
+	public abstract void CompleteBossWave();
 	#endregion
 }
