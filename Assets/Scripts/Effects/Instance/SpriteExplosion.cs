@@ -51,7 +51,7 @@ public class SpriteExplosion : MonoBehaviour
 
 					if (LevelManager.Instance != null)
 					{
-						currentParticle.velocity = new Vector2((LevelManager.Instance.bossWavePlayerMoved ? -LevelManager.Instance.bossWave.cameraSpeed : velocity.x) + Random.Range(-10f, 10f),
+						currentParticle.velocity = new Vector2((LevelManager.Instance.BossWaveActive ? -Parallax.OverrideSpeed.Value : velocity.x) + Random.Range(-10f, 10f),
 															   velocity.y + Random.Range(-10f, 10f));
 					}
 					else

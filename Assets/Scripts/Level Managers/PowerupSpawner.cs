@@ -68,7 +68,7 @@ public class PowerupSpawner : MonoBehaviour
 	{
 		waveTimer = LevelManager.Instance.MusicTime;
 
-		if (spawnPowerups && !PlayerControl.Instance.Dead &&
+		if (spawnPowerups && !PlayerControl.Instance.IsDead &&
 			currentWave < waves.Count && waveTimer >= waves[currentWave].startTime)
 		{
 			int powerupToSpawn = Random.Range(0, waves[currentWave].possiblePowerups.Count);

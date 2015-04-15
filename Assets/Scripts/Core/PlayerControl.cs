@@ -103,7 +103,7 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 	}
 
-	public bool Dead
+	public bool IsDead
 	{
 		get { return dead; }
 	}
@@ -289,6 +289,17 @@ public sealed class PlayerControl : MonoBehaviour
 	#region Internal Update Methods
 	private void GetInput()
 	{
+		#if UNITY_EDITOR
+		if (CrossPlatformInputManager.GetButtonDown("Speedup"))
+		{
+			TimeWarpEffect.Instance.StartWarp(5f, 0.5f, GameObject.FindObjectsOfType<AudioSource>());
+		}
+		else if (CrossPlatformInputManager.GetButtonDown("Slowdown"))
+		{
+			TimeWarpEffect.Instance.EndWarp(0.5f, GameObject.FindObjectsOfType<AudioSource>());
+		}
+		#endif
+
 		if (!disableInput)
 		{
 			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;

@@ -6,6 +6,8 @@ using System.Linq;
 public class Parallax : MonoBehaviour
 {
 	#region Fields
+	public static float? OverrideSpeed = null;
+
 	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
@@ -36,7 +38,7 @@ public class Parallax : MonoBehaviour
 	{
 		if (scroll)
 		{
-			float speed = (LevelManager.Instance == null) ? defaultSpeed : LevelManager.Instance.bossWave.cameraSpeed;
+			float speed = OverrideSpeed ?? defaultSpeed;
 
 			transform.Translate(new Vector2(-(relativeSpeed * speed), 0) * Time.deltaTime);
 

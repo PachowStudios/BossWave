@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 82: {fileID: 8200000}
   m_Layer: 0
@@ -544,114 +544,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccc375b2bdf5c0345b9685a8a050c359, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  introCRT: 0
-  spawnEnemies: 0
-  fadeInTime: 2
-  killAllEnemiesBonus: 100000
-  timeBonusMultiplier: 10
-  waves:
-  - startTime: 1
-    amount: 6
-    spawnDelay: 1
-    difficulty: 0
-  - startTime: 12
-    amount: 6
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 23
-    amount: 8
-    spawnDelay: 1
-    difficulty: 2
-  - startTime: 25
-    amount: 1
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 28
-    amount: 1
-    spawnDelay: 1
-    difficulty: 3
-  - startTime: 35
-    amount: 2
-    spawnDelay: .5
-    difficulty: 2
-  - startTime: 40
-    amount: 2
-    spawnDelay: 1.5
-    difficulty: 0
-  - startTime: 43
-    amount: 1
-    spawnDelay: 1
-    difficulty: 4
-  - startTime: 45
-    amount: 2
-    spawnDelay: 1
-    difficulty: 0
-  - startTime: 46
-    amount: 2
-    spawnDelay: .5
-    difficulty: 0
-  - startTime: 60
-    amount: 1
-    spawnDelay: 3
-    difficulty: 4
-  - startTime: 65
-    amount: 2
-    spawnDelay: 2
-    difficulty: 0
-  - startTime: 75
-    amount: 1
-    spawnDelay: 1
-    difficulty: 3
-  - startTime: 80
-    amount: 3
-    spawnDelay: 1
-    difficulty: 1
-  - startTime: 90
-    amount: 2
-    spawnDelay: 1
-    difficulty: 2
-  - startTime: 100
-    amount: 4
-    spawnDelay: 2
-    difficulty: 1
-  - startTime: 110
-    amount: 3
-    spawnDelay: 2
-    difficulty: 2
-  bossWave:
-    boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
-    startTime: 122.300003
-    totalLength: 55.5999985
-    cameraSpeed: 20
-    fullCameraSpeed: 30
-    speedUpTime: 5
-    spawner: {fileID: 0}
-    playerWaitPoint: {fileID: 400006}
-    scrollingEndcap: {fileID: 0}
-  enemies:
-  - {fileID: 11400002, guid: ee51739a689bcb84dacb00e32e7f9d39, type: 2}
-  - {fileID: 11400002, guid: fdbf3a434753a3c4d839876750e0c3fb, type: 2}
-  - {fileID: 11400002, guid: a89caa5c84b4afb4c98ab899dd518d26, type: 2}
-  - {fileID: 11400002, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
-  - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
-  - {fileID: 11400002, guid: 670399add197745458d030505ccdd6f4, type: 2}
-  foregroundLayer: {fileID: 0}
-  worldBoundaries: {fileID: 100042}
-  runningBoundaries: {fileID: 100012}
-  groundLevel: {fileID: 400008}
-  mainMusic: {fileID: 8200000}
-  bossWavePlayerMoved: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,6 +595,130 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
   - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
   - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73005b078d8abb447a4f6641cf58432c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introCRT: 0
+  spawnEnemies: 0
+  fadeInTime: 2
+  killAllEnemiesBonus: 100000
+  timeBonusMultiplier: 10
+  waves:
+  - startTime: 1
+    amount: 6
+    spawnDelay: 1
+    difficulty: 0
+    spawners: []
+  - startTime: 12
+    amount: 6
+    spawnDelay: 1
+    difficulty: 1
+    spawners: []
+  - startTime: 23
+    amount: 8
+    spawnDelay: 1
+    difficulty: 2
+    spawners: []
+  - startTime: 25
+    amount: 1
+    spawnDelay: 1
+    difficulty: 1
+    spawners: []
+  - startTime: 28
+    amount: 1
+    spawnDelay: 1
+    difficulty: 3
+    spawners: []
+  - startTime: 35
+    amount: 2
+    spawnDelay: .5
+    difficulty: 2
+    spawners: []
+  - startTime: 40
+    amount: 2
+    spawnDelay: 1.5
+    difficulty: 0
+    spawners: []
+  - startTime: 43
+    amount: 1
+    spawnDelay: 1
+    difficulty: 4
+    spawners: []
+  - startTime: 45
+    amount: 2
+    spawnDelay: 1
+    difficulty: 0
+    spawners: []
+  - startTime: 46
+    amount: 2
+    spawnDelay: .5
+    difficulty: 0
+    spawners: []
+  - startTime: 60
+    amount: 1
+    spawnDelay: 3
+    difficulty: 4
+    spawners: []
+  - startTime: 65
+    amount: 2
+    spawnDelay: 2
+    difficulty: 0
+    spawners: []
+  - startTime: 75
+    amount: 1
+    spawnDelay: 1
+    difficulty: 3
+    spawners: []
+  - startTime: 80
+    amount: 3
+    spawnDelay: 1
+    difficulty: 1
+    spawners: []
+  - startTime: 90
+    amount: 2
+    spawnDelay: 1
+    difficulty: 2
+    spawners: []
+  - startTime: 100
+    amount: 2
+    spawnDelay: 1
+    difficulty: 1
+    spawners: []
+  - startTime: 110
+    amount: 3
+    spawnDelay: 2
+    difficulty: 2
+    spawners: []
+  enemies:
+  - {fileID: 11400002, guid: ee51739a689bcb84dacb00e32e7f9d39, type: 2}
+  - {fileID: 11400004, guid: fdbf3a434753a3c4d839876750e0c3fb, type: 2}
+  - {fileID: 11400002, guid: a89caa5c84b4afb4c98ab899dd518d26, type: 2}
+  - {fileID: 11400004, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
+  - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
+  - {fileID: 11400006, guid: 670399add197745458d030505ccdd6f4, type: 2}
+  foregroundLayer: {fileID: 0}
+  mainMusic: {fileID: 8200000}
+  groundLevel: {fileID: 400008}
+  bossWaveWaitPoint: {fileID: 400006}
+  bossWave:
+    boss: {fileID: 11400002, guid: a74f682102c14a14c91c2fa7cb7f2ffe, type: 2}
+    startTime: 122.300003
+    totalLength: 55.5999985
+    cameraSpeed: 20
+    fullCameraSpeed: 30
+    speedUpTime: 5
+    spawner: {fileID: 0}
+    scrollingEndcap: {fileID: 0}
+  worldBoundaries: {fileID: 100042}
+  runningBoundaries: {fileID: 100012}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

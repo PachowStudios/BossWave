@@ -123,7 +123,7 @@ public sealed class TheRIFT : Boss
 			anim.SetBool("Attacking", attacking);
 
 			if (currentAttack < attacks.Count && LevelManager.Instance.MusicTime >= attacks[currentAttack].time - attacks[currentAttack].preAttackTime &&
-				!PlayerControl.Instance.Dead)
+				!PlayerControl.Instance.IsDead)
 			{
 				if (!attacking && !preAttacking)
 				{
@@ -132,7 +132,7 @@ public sealed class TheRIFT : Boss
 					preAttacking = true;
 				}
 			}
-			else if (PlayerControl.Instance.Dead)
+			else if (PlayerControl.Instance.IsDead)
 			{
 				End();
 			}
@@ -374,7 +374,7 @@ public sealed class TheRIFT : Boss
 				SpriteEffect.Instance.SpawnEffect("Big Dust Poof", transform.position);
 				CameraShake.Instance.Shake(1f, new Vector3(0f, 2f, 0f));
 				anim.SetBool("Dead", true);
-				LevelManager.Instance.CompleteLevel();
+				LevelManager.Instance.CompleteBossWave();
 			}
 
 			gravity = 0f;
@@ -492,7 +492,7 @@ public sealed class TheRIFT : Boss
 					ScaleWidthCamera.Instance.AnimateFOV(fightFOV, 1f);
 					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
-					PlayerControl.Instance.GoToPoint(LevelManager.Instance.bossWave.playerWaitPoint.position, false, false);
+					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);
 				})
 				.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
 					.SetEase(Ease.InQuart)
@@ -506,6 +506,7 @@ public sealed class TheRIFT : Boss
 					FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform);
 					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
 					spawned = true;
+					LevelManager.Instance.StartBossWave();
 					startingX = transform.position.x;
 					prevPosition = transform.position;
 				})

@@ -21,7 +21,7 @@ public class Killzone : MonoBehaviour
 		{
 			if (PlayerControl.Instance.Health > 0f)
 			{
-				if (!LevelManager.Instance.bossWavePlayerMoved)
+				if (!LevelManager.Instance.BossWaveActive)
 				{
 					PlayerControl.Instance.TakeDamage(gameObject, damage);
 					PlayerControl.Instance.transform.position = respawnPoint.position;

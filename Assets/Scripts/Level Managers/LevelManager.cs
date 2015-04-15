@@ -7,9 +7,7 @@ using DG.Tweening;
 
 public class LevelManager : MonoBehaviour
 {
-	#region Fields
-	private static LevelManager instance;
-
+	#region Types
 	[System.Serializable]
 	public struct Wave
 	{
@@ -17,72 +15,55 @@ public class LevelManager : MonoBehaviour
 		public float amount;
 		public float spawnDelay;
 		public Enemy.Difficulty difficulty;
+		public List<GameObject> spawners;
 	}
+	#endregion
 
-	[System.Serializable]
-	public struct BossWave
-	{
-		public Boss boss;
-		public float startTime;
-		public float totalLength;
-		public float cameraSpeed;
-		public float fullCameraSpeed;
-		public float speedUpTime;
-		public Transform spawner;
-		public Transform playerWaitPoint;
-		public Transform scrollingEndcap;
-	}
+	#region Fields
+	private static LevelManager instance;	
 
 	public bool introCRT = true;
 	public bool spawnEnemies = true;
+	public float timeOverride = 0f;
 	public float fadeInTime = 2f;
 	public int killAllEnemiesBonus = 100000;
 	public int timeBonusMultiplier = 10;
 	public List<Wave> waves;
-	public BossWave bossWave;
 	public List<StandardEnemy> enemies;
 	public Transform foregroundLayer;
-	public GameObject worldBoundaries;
-	public GameObject runningBoundaries;
 
 	[SerializeField]
-	private Transform groundLevel;
+	protected AudioSource mainMusic;
 	[SerializeField]
-	private AudioSource mainMusic;
+	protected Transform groundLevel;
+	[SerializeField]
+	protected Transform bossWaveWaitPoint;
 
-	[HideInInspector]
-	public bool bossWavePlayerMoved = false;
+	protected int currentWave = 0;
+	protected float waveTimer;
 
-	private Boss bossInstance;
-	private bool bossWaveActive = false;
-	private bool bossWaveIntroComplete = false;
-	private bool bossWaveInitialized = false;
-	private int currentWave = 0;
-	private float waveTimer;
-
-	private List<GameObject> scrollingElements;
-	private List<GameObject> spawners;
+	protected List<GameObject> scrollingElements;
+	protected List<GameObject> spawners;
 	#endregion
 
 	#region Public Properties
 	public static LevelManager Instance
-	{
-		get { return instance; }
-	}
-
-	public Vector3 GroundLevel
-	{
-		get { return groundLevel.position; }
-	}
+	{ get { return instance; } }
 
 	public float MusicTime
-	{
-		get { return mainMusic.time; }
-	}
+	{ get { return mainMusic.time; } }
+
+	public Vector3 GroundLevel
+	{ get { return groundLevel.position; } }
+
+	public Vector3 BossWaveWaitPoint
+	{ get { return bossWaveWaitPoint.position; } }
+
+	public bool BossWaveActive { get; protected set; }
 	#endregion
 
 	#region MonoBehaviour
-	private void Awake()
+	protected virtual void Awake()
 	{
 		instance = this;
 
@@ -94,17 +75,20 @@ public class LevelManager : MonoBehaviour
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
 
-	private void Start()
+	protected virtual void Start()
 	{
+		if (timeOverride != 0f)
+			mainMusic.time = timeOverride;
+
 		mainMusic.pitch = 0f;
 		mainMusic.Play();
 		waveTimer = mainMusic.time;
 
 		if (introCRT)
 		{
-			GameMenu.Instance.EnablePausing(false);
 			DOTween.Sequence()
 				.SetUpdate(true)
+				.AppendCallback(() => GameMenu.Instance.EnablePausing(false))
 				.AppendInterval(fadeInTime + 0.1f)
 				.AppendCallback(() => GameMenu.Instance.EnablePausing(true));
 
@@ -121,77 +105,11 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
-		if (CrossPlatformInputManager.GetButtonDown("Speedup"))
-		{
-			TimeWarpEffect.Instance.StartWarp(5f, 0.5f, new AudioSource[] { LevelManager.Instance.mainMusic });
-		}
-		else if (CrossPlatformInputManager.GetButtonDown("Slowdown"))
-		{
-			TimeWarpEffect.Instance.EndWarp(0.5f, new AudioSource[] { LevelManager.Instance.mainMusic });
-		}
-
 		waveTimer = mainMusic.time;
 
-		if (waveTimer >= bossWave.startTime && !bossWaveActive)
-		{
-			bossWaveActive = true;
-			PowerupSpawner.Instance.spawnPowerups = false;
-		}
-
-		if (bossWaveActive)
-		{
-			if (!bossWaveIntroComplete)
-			{
-				if (!bossWaveInitialized)
-				{
-					bossInstance = Instantiate(bossWave.boss, bossWave.spawner.position, Quaternion.identity) as Boss;
-					bossInstance.Spawn();
-
-					bossWaveInitialized = true;
-				}
-
-				if (bossInstance != null && bossInstance.spawned)
-				{
-					worldBoundaries.SetActive(false);
-					runningBoundaries.SetActive(true);
-
-					PlayerControl.Instance.continuouslyRunning = true;
-					bossWavePlayerMoved = true;
-
-					Cutscene.Instance.Hide(true);
-
-					foreach (GameObject element in scrollingElements)
-					{
-						element.GetComponent<Parallax>().scroll = true;
-					}
-
-					DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, bossWave.fullCameraSpeed, bossWave.speedUpTime)
-						.SetEase(Ease.OutSine);
-					BossWaveTimer.Instance.Show();
-					BossWaveTimer.Instance.Timer = bossWave.totalLength;
-					DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, bossWave.totalLength)
-						.SetId("Boss Wave Timer")
-						.SetEase(Ease.Linear)
-						.OnComplete(() =>
-						{
-							bossWave.scrollingEndcap.parent.GetComponent<Parallax>().AddEndcap(bossWave.scrollingEndcap);
-							bossInstance.End();
-						});
-
-					bossWaveIntroComplete = true;
-				}
-			}
-			else if (bossWavePlayerMoved && PlayerControl.Instance.Dead)
-			{
-				bossWavePlayerMoved = false;
-				BossWaveTimer.Instance.Hide();
-				DOTween.To(() => bossWave.cameraSpeed, x => bossWave.cameraSpeed = x, 0f, 2f)
-								.SetEase(Ease.OutSine);
-			}
-		}
-		else if (!PlayerControl.Instance.Dead)
+		if (!BossWaveActive && !PlayerControl.Instance.IsDead)
 		{
 			if (currentWave < waves.Count && waveTimer >= waves[currentWave].startTime && spawnEnemies)
 			{
@@ -207,47 +125,38 @@ public class LevelManager : MonoBehaviour
 	#endregion
 
 	#region Internal Helper Methods
-	private IEnumerator SpawnWave(int wave)
+	protected virtual IEnumerator SpawnWave(int waveIndex)
 	{
+		Wave wave = waves[waveIndex];
 		List<StandardEnemy> possibleEnemies = new List<StandardEnemy>();
 
 		foreach (StandardEnemy enemy in enemies)
 		{
-			if (enemy.difficulty == waves[wave].difficulty)
+			if (enemy.difficulty == wave.difficulty)
 			{
 				possibleEnemies.Add(enemy);
 			}
 		}
 
-		if (possibleEnemies.Count > 0 && spawners.Count > 0)
+		List<GameObject> waveSpawners = wave.spawners.Count > 0 ? wave.spawners : spawners;
+
+		if (possibleEnemies.Count > 0 && waveSpawners.Count > 0)
 		{
-			for (int i = 0; i < waves[wave].amount; i++)
+			for (int i = 0; i < wave.amount; i++)
 			{
-				int enemyToSpawn = Mathf.RoundToInt(Random.Range(0f, possibleEnemies.Count - 1));
-				int spawnerToUse = Mathf.RoundToInt(Random.Range(0f, spawners.Count - 1));
+				StandardEnemy enemyToSpawn = possibleEnemies[Random.Range(0, possibleEnemies.Count)];
+				Transform spawnerToUse = waveSpawners[Random.Range(0, waveSpawners.Count)].transform;
 
-				StandardEnemy currentEnemy = Instantiate(possibleEnemies[enemyToSpawn], Vector3.zero, Quaternion.identity) as StandardEnemy;
-				currentEnemy.Spawner = spawners[spawnerToUse].transform;
+				StandardEnemy currentEnemy = Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity) as StandardEnemy;
+				currentEnemy.Spawner = spawnerToUse;
 
-				yield return new WaitForSeconds(waves[wave].spawnDelay);
+				yield return new WaitForSeconds(wave.spawnDelay);
 			}
 		}
 	}
 	#endregion
 
 	#region Public Methods
-	public void CompleteLevel()
-	{
-		PlayerControl.Instance.DisableInput();
-		PlayerControl.Instance.AddPoints(Mathf.RoundToInt(BossWaveTimer.Instance.Timer * timeBonusMultiplier), true);
-		DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, 1f);
-		DOTween.To(() => LevelManager.Instance.bossWave.cameraSpeed, x => LevelManager.Instance.bossWave.cameraSpeed = x, 0f, 0.5f)
-					.SetEase(Ease.OutQuint)
-					.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
-
-		StartCoroutine(GameMenu.Instance.GameWin());
-	}
-
 	public void KillAllEnemies()
 	{
 		StandardEnemy[] allEnemies = GameObject.FindObjectsOfType<StandardEnemy>();
@@ -264,5 +173,16 @@ public class LevelManager : MonoBehaviour
 			}
 		}
 	}
+	#endregion
+
+	#region Boss Wave Methods
+	protected virtual void InitializeBossWave()
+	{ }
+
+	public virtual void StartBossWave()
+	{ }
+
+	public virtual void CompleteBossWave()
+	{ }
 	#endregion
 }
