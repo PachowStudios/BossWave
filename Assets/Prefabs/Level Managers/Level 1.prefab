@@ -607,7 +607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introCRT: 0
-  spawnEnemies: 0
+  spawnEnemies: 1
+  timeOverride: 0
   fadeInTime: 2
   killAllEnemiesBonus: 100000
   timeBonusMultiplier: 10

@@ -42,9 +42,11 @@ public abstract class Enemy : MonoBehaviour
 	public bool invincible = false;
 	[HideInInspector]
 	public bool ignoreProjectiles = false;
+	[HideInInspector]
+	public bool right = false;
+	[HideInInspector]
+	public bool left = false;
 
-	protected bool right = false;
-	protected bool left = false;
 	protected bool disableMovement = false;
 	protected float normalizedHorizontalSpeed = 0;
 

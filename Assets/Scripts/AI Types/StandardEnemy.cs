@@ -5,41 +5,18 @@ using DG.Tweening;
 public abstract class StandardEnemy : Enemy
 {
 	#region Fields
-	public Transform simulateSpawner;
-	public LayerMask spawnPlatformMask;
-	public string spawnSortingLayer = "Spawn";
-	public int spawnSortingOrder = 0;
-	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 1f);
-	public float spawnEntryRange = 1f;
-	public float spawnJumpHeight = 4f;
-	public float spawnLength = 0.5f;
 	public float maxJumpHeight = 7f;
-
-	protected SpawnAI spawnAI;
-	protected AttackAI attackAI;
 
 	private Transform frontCheck;
 	private Transform ledgeCheck;
-
-	private LayerMask defaultPlatformMask;
-	private string defaultSortingLayer;
-	private int defaultSortingOrder;
-	private Color defaultColor;
-	private Vector3 spawnPoint;
-	private Vector3 entryPoint;
 	#endregion
 
 	#region Public Properties
-	public Transform Spawner
-	{
-		set
-		{
-			spawned = false;
-			spawnPoint = value.FindChild("Spawn").position;
-			entryPoint = Extensions.Vector3Range(value.FindChild("Entry Start").position,
-												 value.FindChild("Entry End").position);
-		}
-	}
+	public SpawnAI SpawnAI
+	{ get; private set; }
+
+	public AttackAI AttackAI
+	{ get; private set; }
 
 	public bool MovementDisabled
 	{ get { return disableMovement; } }
@@ -62,40 +39,18 @@ public abstract class StandardEnemy : Enemy
 	{
 		base.Awake();
 
-		spawnAI = GetComponent<SpawnAI>();
-		spawnAI.Initialize(this, anim);
+		SpawnAI = GetComponent<SpawnAI>();
+		SpawnAI.Initialize(this, anim, spriteRenderer, controller);
 
-		attackAI = GetComponent<AttackAI>();
-		attackAI.Initialize(this, anim);
+		AttackAI = GetComponent<AttackAI>();
+		AttackAI.Initialize(this, anim);
 
 		frontCheck = transform.FindChild("frontCheck");
 		ledgeCheck = transform.FindChild("ledgeCheck");
-
-		defaultPlatformMask = controller.platformMask;
-		defaultSortingLayer = spriteRenderer.sortingLayerName;
-		defaultSortingOrder = spriteRenderer.sortingOrder;
-		defaultColor = spriteRenderer.color;
-
-		if (simulateSpawner != null)
-		{
-			Spawner = simulateSpawner;
-		}
 	}
 
 	protected virtual void Start()
-	{
-		if (!spawned)
-		{
-			transform.position = spawnPoint;
-			controller.platformMask = spawnPlatformMask;
-			spriteRenderer.sortingLayerName = spawnSortingLayer;
-			spriteRenderer.sortingOrder = spawnSortingOrder;
-			spriteRenderer.color = spawnColor;
-			invincible = true;
-			ignoreProjectiles = true;
-			left = true;
-		}
-	}
+	{ }
 
 	protected virtual void Update()
 	{
@@ -108,16 +63,11 @@ public abstract class StandardEnemy : Enemy
 				Walk();
 			}
 
-			attackAI.CheckAttack();
+			AttackAI.CheckAttack();
 		}
 		else
 		{
-			CheckFrontCollision(true);
-
-			if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
-			{
-				Spawn();
-			}
+			SpawnAI.CheckSpawn();
 		}
 	}
 
@@ -137,22 +87,6 @@ public abstract class StandardEnemy : Enemy
 	private void EnableMovementAnim(int enable)
 	{
 		EnableMovement(enable != 0);
-	}
-
-	protected virtual void Spawn()
-	{
-		Jump(Mathf.Max(1f, entryPoint.y - transform.position.y + spawnJumpHeight));
-
-		controller.platformMask = defaultPlatformMask;
-		spriteRenderer.sortingLayerName = defaultSortingLayer;
-		spriteRenderer.sortingOrder = defaultSortingOrder;
-		invincible = false;
-		ignoreProjectiles = false;
-
-		spriteRenderer.DOColor(defaultColor, spawnLength)
-			.SetEase(Ease.InOutSine);
-
-		spawned = true;
 	}
 
 	protected override void CheckDeath(bool showDrops = true)
@@ -187,47 +121,6 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	protected virtual void Jump(float height)
-	{
-		if (height > 0f)
-		{
-			velocity.y = Mathf.Sqrt(2f * Mathf.Min(height, maxJumpHeight) * -gravity);
-		}
-	}
-
-	protected bool CheckFrontCollision(bool flip)
-	{
-		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
-
-		if (frontHit != null && flip)
-		{
-			right = !right;
-			left = !right;
-		}
-
-		return frontHit != null;
-	}
-
-	protected bool CheckLedgeCollision(bool flip)
-	{
-		if (IsGrounded)
-		{
-			Collider2D ledgeHit = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
-
-			if (ledgeHit == null && flip)
-			{
-				right = !right;
-				left = !right;
-			}
-
-			return ledgeHit != null;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
 	protected virtual void FollowPlayer(float range)
 	{
 		if (transform.position.x + range < PlayerControl.Instance.transform.position.x)
@@ -249,19 +142,50 @@ public abstract class StandardEnemy : Enemy
 	#endregion
 
 	#region Public Methods
+	public virtual void Jump(float height)
+	{
+		if (height > 0f)
+		{
+			velocity.y = Mathf.Sqrt(2f * Mathf.Min(height, maxJumpHeight) * -gravity);
+		}
+	}
+
+	public bool CheckFrontCollision(bool flip = false)
+	{
+		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
+
+		if (frontHit != null && flip)
+		{
+			right = !right;
+			left = !right;
+		}
+
+		return frontHit != null;
+	}
+
+	public bool CheckLedgeCollision(bool flip = false)
+	{
+		if (IsGrounded)
+		{
+			Collider2D ledgeHit = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
+
+			if (ledgeHit == null && flip)
+			{
+				right = !right;
+				left = !right;
+			}
+
+			return ledgeHit != null;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	public void EnableMovement(bool enable)
 	{
 		disableMovement = !enable;
-	}
-
-	public bool CheckFrontCollision()
-	{
-		return CheckFrontCollision(false);
-	}
-
-	public bool CheckLedgeCollision()
-	{
-		return CheckLedgeCollision(false);
 	}
 	#endregion
 }

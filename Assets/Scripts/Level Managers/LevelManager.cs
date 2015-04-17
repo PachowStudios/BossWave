@@ -148,7 +148,7 @@ public abstract class LevelManager : MonoBehaviour
 				Transform spawnerToUse = waveSpawners[Random.Range(0, waveSpawners.Count)].transform;
 
 				StandardEnemy currentEnemy = Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity) as StandardEnemy;
-				currentEnemy.Spawner = spawnerToUse;
+				currentEnemy.SpawnAI.Spawner = spawnerToUse;
 
 				yield return new WaitForSeconds(wave.spawnDelay);
 			}

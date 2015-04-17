@@ -63,8 +63,6 @@ public sealed class FlyingFollowMovementAI : StandardEnemy
 
 	protected override void Start()
 	{
-		base.Start();
-
 		DOTween.To(x => flyHeightOffset = x, -maxFlyHeightOffset, maxFlyHeightOffset, hoverSpeed)
 			.SetSpeedBased(true)
 			.SetLoops(-1, LoopType.Yoyo)
