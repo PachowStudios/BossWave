@@ -29,7 +29,7 @@ namespace Rotorz.ReorderableList {
 		/// <para>Non-zero value overrides property drawer height calculation
 		/// which is more efficient.</para>
 		/// </remarks>
-		public float fixedItemHeight;
+		public float FixedItemHeight;
 
 		/// <summary>
 		/// Gets element from list.
@@ -63,7 +63,7 @@ namespace Rotorz.ReorderableList {
 				throw new InvalidOperationException("Specified serialized propery is not an array.");
 
 			this._arrayProperty = arrayProperty;
-			this.fixedItemHeight = fixedItemHeight;
+			this.FixedItemHeight = fixedItemHeight;
 		}
 
 		/// <summary>
@@ -129,14 +129,18 @@ namespace Rotorz.ReorderableList {
 		}
 
 		/// <inheritdoc/>
+		public virtual void DrawItemBackground(Rect position, int index) {
+		}
+
+		/// <inheritdoc/>
 		public virtual void DrawItem(Rect position, int index) {
 			EditorGUI.PropertyField(position, this[index], GUIContent.none, false);
 		}
 
 		/// <inheritdoc/>
 		public virtual float GetItemHeight(int index) {
-			return fixedItemHeight != 0f
-				? fixedItemHeight
+			return FixedItemHeight != 0f
+				? FixedItemHeight
 				: EditorGUI.GetPropertyHeight(this[index], GUIContent.none, false)
 				;
 		}

@@ -5,32 +5,34 @@ using UnityEditor.AnimatedValues;
 [CustomEditor(typeof(Gun))]
 public class GunEditor : Editor
 {
+	#region Fields
 	private AnimBool showSecondaryShot;
 	private AnimBool showSecondaryGUI;
 	private AnimBool showContinuousFire;
 	private AnimBool showCanOverheat;
-	private SerializedObject serializedTarget;
+
 	private SerializedProperty overheatGradient;
+	#endregion
 
+	#region Internal Properties
 	private Gun Target
-	{
-		get { return (Gun)target; }
-	}
+	{ get { return (Gun)target; } }
+	#endregion
 
-	void OnEnable()
+	#region Editor Methods
+	private void OnEnable()
 	{
 		showSecondaryShot = new AnimBool(Target.hasSecondaryShot);
 		showSecondaryGUI = new AnimBool(Target.showSecondaryGUI);
 		showContinuousFire = new AnimBool(Target.continuousFire);
 		showCanOverheat = new AnimBool(Target.canOverheat);
 
-		serializedTarget = new SerializedObject(Target);
-		overheatGradient = serializedTarget.FindProperty("overheatGradient");
+		overheatGradient = serializedObject.FindProperty("overheatGradient");
 	}
 
 	public override void OnInspectorGUI()
 	{
-		serializedTarget.Update();
+		serializedObject.Update();
 
 		Target.gunName = EditorGUILayout.TextField("Gun Name", Target.gunName);
 		Target.rarity = (Gun.RarityLevel)EditorGUILayout.EnumPopup("Rarity", Target.rarity);
@@ -51,12 +53,12 @@ public class GunEditor : Editor
 			EditorGUI.indentLevel++;
 
 			Target.shootCooldown = EditorGUILayout.FloatField("Shot Cooldown", Target.shootCooldown);
-			EditorGUILayout.Space();
 
 			EditorGUI.indentLevel--;
 		}
 
 		EditorGUILayout.EndFadeGroup();
+		EditorGUILayout.Space();
 
 		Target.hasSecondaryShot = EditorGUILayout.Toggle("Secondary Shot", Target.hasSecondaryShot);
 		showSecondaryShot.target = Target.hasSecondaryShot;
@@ -91,7 +93,6 @@ public class GunEditor : Editor
 			}
 
 			EditorGUILayout.EndFadeGroup();
-
 			EditorGUILayout.Space();
 
 			EditorGUI.indentLevel--;
@@ -110,12 +111,7 @@ public class GunEditor : Editor
 			Target.overheatDamage = EditorGUILayout.FloatField("Damage", Target.overheatDamage);
 			Target.overheatThreshold = EditorGUILayout.Slider("Threshold", Target.overheatThreshold, 0f, 1f);
 
-			EditorGUI.BeginChangeCheck();
 			EditorGUILayout.PropertyField(overheatGradient, new GUIContent("Gradient"));
-			if (EditorGUI.EndChangeCheck())
-			{
-				serializedTarget.ApplyModifiedProperties();
-			}
 
 			EditorGUI.indentLevel--;
 		}
@@ -127,6 +123,8 @@ public class GunEditor : Editor
 			EditorUtility.SetDirty(Target);
 		}
 
+		serializedObject.ApplyModifiedProperties();
 		Repaint();
 	}
+	#endregion
 }

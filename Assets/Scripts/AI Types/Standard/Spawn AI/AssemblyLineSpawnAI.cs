@@ -37,7 +37,7 @@ public sealed class AssemblyLineSpawnAI : SpawnAI
 
 			thisEnemy.invincible = true;
 			thisEnemy.ignoreProjectiles = true;
-			thisEnemy.left = true;
+			thisEnemy.HorizontalMovement = -1f;
 		}
 	}
 	#endregion
@@ -60,7 +60,7 @@ public sealed class AssemblyLineSpawnAI : SpawnAI
 	#region SpawnMethods
 	public override void CheckSpawn()
 	{
-		thisEnemy.CheckFrontCollision(true);
+		thisEnemy.CheckAtWall(true);
 
 		if (Mathf.Abs(transform.position.x - entryPoint.x) <= spawnEntryRange)
 			Spawn();

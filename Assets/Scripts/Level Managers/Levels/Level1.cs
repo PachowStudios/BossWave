@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 
-public class Level1 : LevelManager
+public sealed class Level1 : LevelManager
 {
 	#region Types
 	[System.Serializable]
@@ -26,9 +28,17 @@ public class Level1 : LevelManager
 
 	private Boss bossInstance;
 	private bool bossWaveInitialized = false;
+	private List<GameObject> scrollingElements;
 	#endregion
 
 	#region MonoBehaviour
+	protected override void Awake()
+	{
+		base.Awake();
+
+		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList();
+	}
+
 	protected override void Update()
 	{
 		base.Update();

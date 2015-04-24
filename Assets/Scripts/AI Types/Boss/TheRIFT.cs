@@ -349,12 +349,12 @@ public sealed class TheRIFT : Boss
 			prevPosition.x > transform.position.x && 
 			transform.position.x > startingX)
 		{
-			Flip();
+			transform.Flip();
 		}
 		else if (transform.localScale.x < 0f && 
 				 transform.position.x <= startingX)
 		{
-			Flip();
+			transform.Flip();
 		}
 
 		prevPosition = transform.position;

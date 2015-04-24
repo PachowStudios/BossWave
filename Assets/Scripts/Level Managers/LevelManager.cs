@@ -20,16 +20,16 @@ public abstract class LevelManager : MonoBehaviour
 	#endregion
 
 	#region Fields
-	private static LevelManager instance;	
+	private static LevelManager instance;
 
+	public List<Wave> waves;
+	public List<StandardEnemy> enemies;
 	public bool introCRT = true;
 	public bool spawnEnemies = true;
 	public float timeOverride = 0f;
 	public float fadeInTime = 2f;
 	public int killAllEnemiesBonus = 100000;
 	public int timeBonusMultiplier = 10;
-	public List<Wave> waves;
-	public List<StandardEnemy> enemies;
 	public Transform foregroundLayer;
 
 	[SerializeField]
@@ -42,7 +42,6 @@ public abstract class LevelManager : MonoBehaviour
 	protected int currentWave = 0;
 	protected float waveTimer;
 
-	protected List<GameObject> scrollingElements;
 	protected List<GameObject> spawners;
 	#endregion
 
@@ -59,7 +58,8 @@ public abstract class LevelManager : MonoBehaviour
 	public Vector3 BossWaveWaitPoint
 	{ get { return bossWaveWaitPoint.position; } }
 
-	public bool BossWaveActive { get; protected set; }
+	public bool BossWaveActive 
+	{ get; protected set; }
 	#endregion
 
 	#region MonoBehaviour
@@ -69,7 +69,6 @@ public abstract class LevelManager : MonoBehaviour
 
 		DOTween.Init();
 
-		scrollingElements = GameObject.FindGameObjectsWithTag("Scrolling").ToList();
 		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList();
 
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;

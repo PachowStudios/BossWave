@@ -25,8 +25,11 @@ public sealed class DashAttackAI : AttackAI
 	#endregion
 
 	#region Public Properties
-	public bool Dashing { get; private set; }
-	public bool Stabbing { get; private set; }
+	public bool Dashing 
+	{ get; private set; }
+
+	public bool Stabbing 
+	{ get; private set; }
 	#endregion
 
 	#region Initialization Methods
@@ -66,7 +69,7 @@ public sealed class DashAttackAI : AttackAI
 		else if (!Stabbing)
 		{
 			if (IsPlayerInRange(0f, swipeRange) ||
-				!dashMovementAI.CheckLedgeCollision() || dashMovementAI.CheckFrontCollision() ||
+				dashMovementAI.CheckAtLedge() || dashMovementAI.CheckAtWall() ||
 				(!dashMovementAI.FacingRight && transform.position.x < dashTarget) ||
 				(dashMovementAI.FacingRight && transform.position.x > dashTarget))
 			{

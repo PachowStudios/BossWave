@@ -33,22 +33,20 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private float health;
 	private bool dead = false;
-	private bool right;
-	private bool left;
 	private bool jump;
 	private bool run;
 	private bool usingGun = false;
 	private bool disableInput = false;
 	private bool inPortal = false;
 
+	private Vector3 velocity;
+	private Vector3 lastGroundedPosition;
+	private float horizontalMovement = 0;
+	private float speedMultiplier = 1f;
+
 	private List<Gun> guns = new List<Gun>();
 	private int currentGunIndex = 0;
 	private float gunSwapCooldownTimer = 0f;
-
-	private Vector3 velocity;
-	private Vector3 lastGroundedPosition;
-	private float normalizedHorizontalSpeed = 0;
-	private float speedMultiplier = 1f;
 
 	private bool canTakeDamage = true;
 	private float lastHitTime;
@@ -83,9 +81,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 	#region Public Properties
 	public static PlayerControl Instance
-	{
-		get { return instance; }
-	}
+	{ get { return instance; } }
 
 	public float Health
 	{
@@ -94,9 +90,7 @@ public sealed class PlayerControl : MonoBehaviour
 		set
 		{
 			if (value < health)
-			{
 				lastHitTime = Time.time;
-			}
 
 			health = Mathf.Clamp(value, 0f, maxHealth);
 			CheckDeath();
@@ -104,86 +98,60 @@ public sealed class PlayerControl : MonoBehaviour
 	}
 
 	public bool IsDead
-	{
-		get { return dead; }
-	}
+	{ get { return dead; } }
 
 	public int Score
-	{
-		get { return score; }
-	}
+	{ get { return score; } }
 
 	public int Microchips
-	{
-		get { return microchips; }
-	}
+	{ get { return microchips; } }
 
 	public int Combo
-	{
-		get { return combo; }
-	}
-
-	public bool FacingRight
-	{
-		get { return transform.localScale.x > 0; }
-	}
+	{ get { return combo; } }
 
 	public bool Jumped
-	{
-		get { return jump; }
-	}
+	{ get { return jump; } }
 
 	public bool IsGrounded
-	{
-		get { return controller.isGrounded; }
-	}
+	{ get { return controller.isGrounded; } }
 
 	public bool IsInputDisabled
-	{
-		get { return disableInput; }
-	}
+	{ get { return disableInput; } }
 
 	public Vector3 Velocity
-	{
-		get { return velocity; }
-	}
+	{ get { return velocity; } }
 
 	public Vector3 LastGroundedPosition
-	{
-		get { return lastGroundedPosition; }
-	}
+	{ get { return lastGroundedPosition; } }
 
 	public Vector3 PopupMessagePoint
-	{
-		get { return popupMessagePoint.position; }
-	}
+	{ get { return popupMessagePoint.position; } }
 
 	public ReadOnlyCollection<SpriteRenderer> SpriteRenderers
-	{
-		get { return spriteRenderers.AsReadOnly(); }
-	}
+	{ get { return spriteRenderers.AsReadOnly(); } }
 
 	public ReadOnlyCollection<Gun> Guns
-	{
-		get { return guns.AsReadOnly(); }
-	}
+	{ get { return guns.AsReadOnly(); } }
 
 	public Gun Gun
-	{
-		get { return guns.ElementAtOrDefault(currentGunIndex); }
-	}
+	{ get { return guns.ElementAtOrDefault(currentGunIndex); } }
 
 	public bool GunsFull
-	{
-		get { return guns.Count >= startingGuns.Capacity; }
-	}
+	{ get { return guns.Count >= startingGuns.Capacity; } }
 	#endregion
 
 	#region Internal Properties
+	private bool Right
+	{ get { return horizontalMovement > 0f; } }
+
+	private bool Left
+	{ get { return horizontalMovement < 0f; } }
+
+	private bool FacingRight
+	{ get { return transform.localScale.x > 0; } }
+
 	private float NewAltIdleTime
-	{
-		get { return Random.Range(minAltIdleTime, maxAltIdleTime); }
-	}
+	{ get { return Random.Range(minAltIdleTime, maxAltIdleTime); } }
 	#endregion
 
 	#region MonoBehaviour
@@ -302,8 +270,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 		if (!disableInput)
 		{
-			right = CrossPlatformInputManager.GetAxis("Horizontal") > 0f;
-			left = CrossPlatformInputManager.GetAxis("Horizontal") < 0f;
+			horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
 			run = CrossPlatformInputManager.GetButton("Run") && Gun.NoInput;
 			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
 
@@ -329,12 +296,12 @@ public sealed class PlayerControl : MonoBehaviour
 			}
 		}
 
-		run = (run && (right || left)) || continuouslyRunning;
+		run = (run && horizontalMovement != 0f) || continuouslyRunning;
 	}
 
 	private void ApplyAnimation()
 	{
-		anim.SetBool("Walking", right || left || continuouslyRunning);
+		anim.SetBool("Walking", horizontalMovement != 0f || continuouslyRunning);
 		anim.SetBool("Running", run);
 		anim.SetBool("Grounded", IsGrounded);
 		anim.SetBool("Falling", velocity.y < 0f);
@@ -344,43 +311,29 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void UpdateGoTo()
 	{
-		if (transform.position.x < targetPoint.x && !left)
-		{
-			right = true;
-		}
-		else if (transform.position.x > targetPoint.x && !right)
-		{
-			left = true;
-		}
+		if (transform.position.x < targetPoint.x && !Left)
+			horizontalMovement = 1f;
+		else if (transform.position.x > targetPoint.x && !Right)
+			horizontalMovement = -1f;
 		else
-		{
 			cancelGoTo = true;
-		}
 
 		if (cancelGoTo)
 		{
-			if (goToFaceRight && transform.localScale.x < 0)
-			{
-				Flip();
-			}
-			if (!goToFaceRight && transform.localScale.x > 0)
-			{
-				Flip();
-			}
+			if (goToFaceRight && !FacingRight)
+				transform.Flip();
+			if (!goToFaceRight && FacingRight)
+				transform.Flip();
 
 			ResetInput();
 
 			useTargetPoint = false;
 
 			if (!inertiaAfterMove)
-			{
 				velocity.x = 0f;
-			}
 
 			if (reEnableAfterMove)
-			{
 				EnableInput();
-			}
 		}
 	}
 
@@ -420,28 +373,15 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void GetMovement()
 	{
-		if (right)
+		if (horizontalMovement == 0f && !jump && Gun.NoInput)
 		{
-			normalizedHorizontalSpeed = 1f;
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1f;
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0f;
+			altIdleTimer += Time.deltaTime;
 
-			if (!jump && Gun.NoInput)
+			if (altIdleTimer >= altIdleTime)
 			{
-				altIdleTimer += Time.deltaTime;
-
-				if (altIdleTimer >= altIdleTime)
-				{
-					anim.SetTrigger(altIdleAnimations[Random.Range(0, altIdleAnimations.Count)]);
-					altIdleTimer = 0f;
-					altIdleTime = NewAltIdleTime;
-				}
+				anim.SetTrigger(altIdleAnimations[Random.Range(0, altIdleAnimations.Count)]);
+				altIdleTimer = 0f;
+				altIdleTime = NewAltIdleTime;
 			}
 		}
 
@@ -453,19 +393,13 @@ public sealed class PlayerControl : MonoBehaviour
 				SetRenderersVisible(alternate: true);
 			}
 
-			if (continuouslyRunning && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
+			if (continuouslyRunning && !FacingRight)
+				transform.Flip();
 
-			if (right && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-			else if (left && !continuouslyRunning && transform.localScale.x > 0f)
-			{
-				Flip();
-			}
+			if (Right && !FacingRight)
+				transform.Flip();
+			else if (Left && FacingRight && !continuouslyRunning)
+				transform.Flip();
 		}
 		else
 		{
@@ -475,22 +409,16 @@ public sealed class PlayerControl : MonoBehaviour
 				SetRenderersVisible(alternate: true);
 			}
 
-			if (Gun.FacingRight && transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-			else if (!Gun.FacingRight && transform.localScale.x > 0f)
-			{
-				Flip();
-			}
+			if (Gun.FacingRight && !FacingRight)
+				transform.Flip();
+			else if (!Gun.FacingRight && FacingRight)
+				transform.Flip();
 		}
 
 		if (jump && IsGrounded)
 		{
 			if (!inPortal)
-			{
 				Jump(jumpHeight);
-			}
 
 			jump = false;
 		}
@@ -501,10 +429,10 @@ public sealed class PlayerControl : MonoBehaviour
 		float smoothedMovementFactor = IsGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x,
-								normalizedHorizontalSpeed * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
-																										   : runSpeed)
-																 : walkSpeed) * speedMultiplier,
-								Time.deltaTime * smoothedMovementFactor);
+								horizontalMovement * (run ? (continuouslyRunning && !useTargetPoint ? continuousRunSpeed
+																									: runSpeed)
+														  : walkSpeed) * speedMultiplier,
+								smoothedMovementFactor * Time.deltaTime);
 		velocity.y += gravity * Time.deltaTime;
 		controller.move(velocity * Time.deltaTime);
 		velocity = controller.velocity;
@@ -525,9 +453,7 @@ public sealed class PlayerControl : MonoBehaviour
 			velocity.y = Mathf.Sqrt(2f * height * -gravity);
 
 			if (playAnimation)
-			{
 				anim.SetTrigger("Jump");
-			}
 		}
 	}
 
@@ -538,9 +464,7 @@ public sealed class PlayerControl : MonoBehaviour
 		if (showPopup)
 		{
 			if (!PopupSwapGun.Instance.ShowingPopup)
-			{
 				PopupMessage.Instance.CreatePopup(PopupMessagePoint, "", guns[gunIndex].SpriteRenderer.sprite, true);
-			}
 
 			CurrentGunName.Instance.Show(guns[gunIndex].gunName, guns[gunIndex].Color, gunSwapCooldownTime);
 		}
@@ -561,7 +485,8 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void ResetInput()
 	{
-		left = right = run = jump = false;
+		horizontalMovement = 0f;
+		run = jump = false;
 	}
 
 	private bool CheckDeath()
@@ -586,23 +511,14 @@ public sealed class PlayerControl : MonoBehaviour
 		return dead;
 	}
 
-	private void Flip()
-	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-	}
-
 	private void SetRenderersEnabled(bool enabled = true, bool alternate = false)
 	{
 		foreach (SpriteRenderer sprite in spriteRenderers)
 		{
 			if (alternate)
-			{
 				sprite.enabled = !sprite.enabled;
-			}
 			else
-			{
 				sprite.enabled = enabled;
-			}
 		}
 	}
 
@@ -611,13 +527,9 @@ public sealed class PlayerControl : MonoBehaviour
 		foreach (SpriteRenderer sprite in spriteRenderers)
 		{
 			if (alternate)
-			{
 				sprite.color = sprite.color == Color.white ? Color.clear : Color.white;
-			}
 			else
-			{
 				sprite.color = enabled ? Color.white : Color.clear;
-			}
 		}
 	}
 
@@ -626,9 +538,7 @@ public sealed class PlayerControl : MonoBehaviour
 		float nextCombo = comboStartKills - 1f;
 
 		for (int i = 1; i <= combo; i++)
-		{
 			nextCombo += i;
-		}
 
 		return nextCombo;
 	}
@@ -638,9 +548,7 @@ public sealed class PlayerControl : MonoBehaviour
 	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
 	{
 		if (!canTakeDamage)
-		{
 			return;
-		}
 
 		float knockbackDirection = 1f;
 
@@ -649,9 +557,7 @@ public sealed class PlayerControl : MonoBehaviour
 			Enemy currentEnemy = enemy.GetComponent<Enemy>();
 
 			if (!currentEnemy.spawned)
-			{
 				return;
-			}
 
 			damage = (damage == 0f) ? currentEnemy.damage : damage;
 			knockback = (knockback == default(Vector2)) ? currentEnemy.knockback : knockback;
@@ -748,19 +654,33 @@ public sealed class PlayerControl : MonoBehaviour
 		guns.Insert(gunIndex, gunInstance);
 
 		if (gunIndex == currentGunIndex)
-		{
 			SelectGun(gunIndex);
-		}
 	}
 
-	public void SpeedBoost(float multiplier, float length)
+	public IEnumerator SpeedBoost(float multiplier, float length)
 	{
 		speedMultiplier = multiplier;
+		yield return new WaitForSeconds(length);
+		speedMultiplier = 1f;
+	}
 
-		Sequence speedSequence = DOTween.Sequence();
-		speedSequence
-			.AppendInterval(length)
-			.AppendCallback(() => speedMultiplier = 1f);
+	public IEnumerator JumpToFloor()
+	{
+		LayerMask originalCollider = controller.platformMask;
+
+		if (IsGrounded)
+		{
+			Jump(1f, false);
+			Move(velocity);
+		}
+
+		controller.platformMask = bottomCollider;
+
+		while (!IsGrounded)
+			yield return new WaitForSeconds(0.1f);
+
+		controller.platformMask = originalCollider;
+		DisableInput();
 	}
 
 	public void GoToPoint(Vector3 point, bool faceRight, bool autoEnableInput = true, bool inertia = false)
@@ -771,27 +691,6 @@ public sealed class PlayerControl : MonoBehaviour
 		cancelGoTo = false;
 		reEnableAfterMove = autoEnableInput;
 		inertiaAfterMove = inertia;
-		DisableInput();
-	}
-
-	public IEnumerator JumpToFloor()
-	{
-		LayerMask originalCollider = controller.platformMask;
-
-		if (IsGrounded)
-		{
-			Jump(1f, false);
-			controller.move(velocity * Time.deltaTime);
-		}
-
-		controller.platformMask = bottomCollider;
-
-		while (!IsGrounded)
-		{
-			yield return new WaitForSeconds(0.1f);
-		}
-
-		controller.platformMask = originalCollider;
 		DisableInput();
 	}
 

@@ -7,8 +7,8 @@ public abstract class StandardEnemy : Enemy
 	#region Fields
 	public float maxJumpHeight = 7f;
 
-	private Transform frontCheck;
-	private Transform ledgeCheck;
+	public Transform frontCheck;
+	public Transform ledgeCheck;
 	#endregion
 
 	#region Public Properties
@@ -17,21 +17,6 @@ public abstract class StandardEnemy : Enemy
 
 	public AttackAI AttackAI
 	{ get; private set; }
-
-	public bool MovementDisabled
-	{ get { return disableMovement; } }
-	#endregion
-
-	#region Internal Properties
-	protected float RelativePlayerLastGrounded
-	{
-		get { return (lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y).RoundToTenth(); }
-	}
-
-	protected float RelativePlayerHeight
-	{
-		get { return transform.position.y - PlayerControl.Instance.transform.position.y; }
-	}
 	#endregion
 
 	#region MonoBehaviour
@@ -44,9 +29,6 @@ public abstract class StandardEnemy : Enemy
 
 		AttackAI = GetComponent<AttackAI>();
 		AttackAI.Initialize(this, anim);
-
-		frontCheck = transform.FindChild("frontCheck");
-		ledgeCheck = transform.FindChild("ledgeCheck");
 	}
 
 	protected virtual void Start()
@@ -86,7 +68,7 @@ public abstract class StandardEnemy : Enemy
 	#region Internal Helper Methods
 	private void EnableMovementAnim(int enable)
 	{
-		EnableMovement(enable != 0);
+		EnableMovement(enable == 1);
 	}
 
 	protected override void CheckDeath(bool showDrops = true)
@@ -125,17 +107,15 @@ public abstract class StandardEnemy : Enemy
 	{
 		if (transform.position.x + range < PlayerControl.Instance.transform.position.x)
 		{
-			right = true;
-			left = !right;
+			horizontalMovement = 1f;
 		}
 		else if (transform.position.x - range > PlayerControl.Instance.transform.position.x)
 		{
-			left = true;
-			right = !left;
+			horizontalMovement = -1f;
 		}
 		else
 		{
-			right = left = false;
+			horizontalMovement = 0f;
 			FacePlayer();
 		}
 	}
@@ -150,37 +130,39 @@ public abstract class StandardEnemy : Enemy
 		}
 	}
 
-	public bool CheckFrontCollision(bool flip = false)
+	public bool CheckAtWall(bool flip = false)
 	{
-		Collider2D frontHit = Physics2D.OverlapPoint(frontCheck.position, controller.platformMask);
+		Collider2D collision = Physics2D.OverlapPoint(frontCheck.position, CollisionLayers);
+		bool atWall = collision != null;
 
-		if (frontHit != null && flip)
+		if (atWall && flip)
 		{
-			right = !right;
-			left = !right;
+			horizontalMovement *= -1f;
+
+			if (horizontalMovement == 0f)
+				horizontalMovement = 1f;
 		}
 
-		return frontHit != null;
+		return atWall;
 	}
 
-	public bool CheckLedgeCollision(bool flip = false)
+	public bool CheckAtLedge(bool flip = false)
 	{
-		if (IsGrounded)
-		{
-			Collider2D ledgeHit = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
-
-			if (ledgeHit == null && flip)
-			{
-				right = !right;
-				left = !right;
-			}
-
-			return ledgeHit != null;
-		}
-		else
-		{
+		if (!IsGrounded)
 			return false;
+
+		Collider2D collision = Physics2D.OverlapPoint(ledgeCheck.position, controller.platformMask);
+		bool atLedge = collision == null;
+
+		if (atLedge && flip)
+		{
+			horizontalMovement *= -1f;
+
+			if (horizontalMovement == 0f)
+				horizontalMovement = 1f;
 		}
+
+		return atLedge;
 	}
 
 	public void EnableMovement(bool enable)

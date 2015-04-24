@@ -272,21 +272,11 @@ MonoBehaviour:
   groundDamping: 10
   inAirDamping: 5
   timeWarpAtDeath: 0
-  velocity: {x: 0, y: 0, z: 0}
   invincible: 0
   ignoreProjectiles: 0
-  right: 0
-  left: 0
-  spawnPlatformMask:
-    serializedVersion: 2
-    m_Bits: 262144
-  spawnSortingLayer: Spawn
-  spawnSortingOrder: 0
-  spawnColor: {r: .133000001, g: .136999995, b: .152999997, a: 1}
-  spawnEntryRange: 1
-  spawnJumpHeight: 4
-  spawnLength: .5
   maxJumpHeight: 7
+  frontCheck: {fileID: 400004}
+  ledgeCheck: {fileID: 400008}
   followRange: 1.79999995
 --- !u!114 &11400006
 MonoBehaviour:

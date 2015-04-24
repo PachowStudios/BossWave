@@ -36,7 +36,7 @@ public abstract class AttackAI : MonoBehaviour
 	{
 		RaycastHit2D linecast = Physics2D.Linecast(collider2D.bounds.center,
 												   PlayerControl.Instance.collider2D.bounds.center,
-												   LayerMask.GetMask("Collider"));
+												   thisEnemy.CollisionLayers);
 
 		return linecast.collider == null && linecast.distance <= range;
 	}

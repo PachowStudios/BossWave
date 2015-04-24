@@ -606,12 +606,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73005b078d8abb447a4f6641cf58432c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introCRT: 0
-  spawnEnemies: 1
-  timeOverride: 0
-  fadeInTime: 2
-  killAllEnemiesBonus: 100000
-  timeBonusMultiplier: 10
   waves:
   - startTime: 1
     amount: 6
@@ -705,6 +699,12 @@ MonoBehaviour:
   - {fileID: 11400004, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
   - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
   - {fileID: 11400006, guid: 670399add197745458d030505ccdd6f4, type: 2}
+  introCRT: 0
+  spawnEnemies: 1
+  timeOverride: 0
+  fadeInTime: 2
+  killAllEnemiesBonus: 100000
+  timeBonusMultiplier: 10
   foregroundLayer: {fileID: 0}
   mainMusic: {fileID: 8200000}
   groundLevel: {fileID: 400008}

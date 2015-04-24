@@ -6,15 +6,18 @@ using Rotorz.ReorderableList;
 [CustomEditor(typeof(VectorPath))]
 public class VectorPathEditor : Editor
 {
+	#region Fields
 	private SerializedProperty nodes;
 	private GUIStyle style = new GUIStyle();
+	#endregion
 
+	#region Internal Properties
 	private VectorPath Target
-	{
-		get { return (VectorPath)target; }
-	}
+	{ get { return (VectorPath)target; } }
+	#endregion
 
-	void OnEnable()
+	#region Editor Methods
+	private void OnEnable()
 	{
 		nodes = serializedObject.FindProperty("nodes");
 
@@ -31,15 +34,13 @@ public class VectorPathEditor : Editor
 		ReorderableListGUI.ListField(nodes);
 
 		if (GUI.changed)
-		{
 			EditorUtility.SetDirty(Target);
-		}
 
 		serializedObject.ApplyModifiedProperties();
 		Repaint();
 	}
 
-	void OnSceneGUI()
+	private void OnSceneGUI()
 	{
 		if (Target.enabled && Target.nodes.Length> 0)
 		{
@@ -54,4 +55,5 @@ public class VectorPathEditor : Editor
 			}
 		}
 	}
+	#endregion
 }

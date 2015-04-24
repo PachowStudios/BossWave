@@ -22,6 +22,11 @@ public static class Extensions
 	#endregion
 
 	#region Transform
+	public static void Flip(this Transform parent)
+	{
+		parent.localScale = new Vector3(-parent.localScale.x, parent.localScale.y, parent.localScale.z);
+	}
+
 	public static Transform FindSubChild(this Transform parent, string name, bool confirmEnabled = true)
 	{
 		if (parent.name.Equals(name))

@@ -18,7 +18,7 @@ public class FollowMovementAI : StandardEnemy
 			{
 				JumpMarker jumpMarker = other.GetComponent<JumpMarker>();
 				
-				if (right == (jumpMarker.Direction == 1))
+				if (horizontalMovement == jumpMarker.Direction)
 				{
 					float jumpHeight = 0f;
 
@@ -34,8 +34,10 @@ public class FollowMovementAI : StandardEnemy
 						}
 						else
 						{
-							right = !right;
-							left = !right;
+							horizontalMovement *= -1f;
+
+							if (horizontalMovement == 0f)
+								horizontalMovement = 1f;
 						}
 					}
 					else
@@ -61,7 +63,7 @@ public class FollowMovementAI : StandardEnemy
 	#region Internal Update Methods
 	protected override void ApplyAnimation()
 	{
-		anim.SetBool("Walking", right || left);
+		anim.SetBool("Walking", horizontalMovement != 0f);
 	}
 
 	protected override void Walk()
@@ -71,12 +73,9 @@ public class FollowMovementAI : StandardEnemy
 			if (RelativePlayerLastGrounded != 0f)
 			{
 				if (!WasGroundedLastFrame)
-				{
-					right = Random.value < 0.5f;
-					left = !right;
-				}
+					horizontalMovement = Extensions.RandomSign();
 
-				CheckFrontCollision(true);
+				CheckAtWall(true);
 			}
 			else if (RelativePlayerHeight < 0.5f)
 			{

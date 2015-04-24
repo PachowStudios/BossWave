@@ -190,14 +190,14 @@ public class BlackHole : Projectile
 					{
 						if (!currentEnemy.immuneToInstantKill)
 						{
-							currentEnemy.Move(Vector3.Lerp(currentEnemy.velocity, 
+							currentEnemy.Move(Vector3.Lerp(currentEnemy.Velocity, 
 														   currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
 														   30f * Time.deltaTime));
 						}
 
 						if (damageTimer >= damageTime)
 						{
-							ExplodeEffect.Instance.ExplodePartial(currentEnemy.transform, currentEnemy.velocity, currentEnemy.Sprite, 0.05f);
+							ExplodeEffect.Instance.ExplodePartial(currentEnemy.transform, currentEnemy.Velocity, currentEnemy.Sprite, 0.05f);
 							currentEnemy.TakeDamage(gameObject);
 						}
 					}

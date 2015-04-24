@@ -27,7 +27,7 @@ public sealed class DashMovementAI : StandardEnemy
 	#region Internal Update Methods
 	protected override void ApplyAnimation()
 	{
-		anim.SetBool("Walking", right || left);
+		anim.SetBool("Walking", horizontalMovement != 0f);
 		anim.SetBool("Running", dashAttackAI.Dashing);
 	}
 
@@ -40,15 +40,12 @@ public sealed class DashMovementAI : StandardEnemy
 			if (RelativePlayerLastGrounded != 0f)
 			{
 				if (!WasGroundedLastFrame)
-				{
-					right = Random.value < 0.5f;
-					left = !right;
-				}
+					horizontalMovement = Extensions.RandomSign();
 
-				CheckFrontCollision(true);
-				CheckLedgeCollision(true);
+				CheckAtWall(true);
+				CheckAtLedge(true);
 			}
-			else if (CheckLedgeCollision())
+			else if (!CheckAtLedge())
 			{
 				if (RelativePlayerHeight < 0.5f)
 				{
@@ -57,11 +54,11 @@ public sealed class DashMovementAI : StandardEnemy
 			}
 			else if (PlayerControl.Instance.IsGrounded)
 			{
-				CheckLedgeCollision(true);
+				CheckAtLedge(true);
 			}
 			else
 			{
-				right = left = false;
+				horizontalMovement = 0f;
 			}
 		}
 		else if (dashAttackAI.Dashing)

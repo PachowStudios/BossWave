@@ -37,20 +37,14 @@ public abstract class Enemy : MonoBehaviour
 	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
-	public Vector3 velocity;
-	[HideInInspector]
 	public bool invincible = false;
 	[HideInInspector]
 	public bool ignoreProjectiles = false;
-	[HideInInspector]
-	public bool right = false;
-	[HideInInspector]
-	public bool left = false;
 
-	protected bool disableMovement = false;
-	protected float normalizedHorizontalSpeed = 0;
-
+	protected Vector3 velocity;
 	protected Vector3 lastGroundedPosition;
+	protected float horizontalMovement = 0;
+	protected bool disableMovement = false;
 
 	protected SpriteRenderer spriteRenderer;
 	protected CharacterController2D controller;
@@ -73,36 +67,49 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	public float HealthPercentage
-	{ 
-		get { return health / maxHealth; } 
-	}
+	{ get { return Mathf.Clamp01(health / maxHealth); } }
 
 	public Sprite Sprite
+	{ get { return spriteRenderer.sprite; } }
+
+	public bool Right
+	{ get { return horizontalMovement > 0f; } }
+
+	public bool Left
+	{ get { return horizontalMovement < 0f; } }
+
+	public float HorizontalMovement
 	{
-		get { return spriteRenderer.sprite; }
+		get { return horizontalMovement; }
+		set { horizontalMovement = value == 0f ? 0f : (value > 0f ? 1f : -1f); }
 	}
+
+	public Vector3 Velocity
+	{ get { return velocity; } }
+
+	public bool MovementDisabled
+	{ get { return disableMovement; } }
 
 	public bool FacingRight
-	{
-		get { return transform.localScale.x < 0; }
-	}
+	{ get { return transform.localScale.x < 0; } }
 
 	public bool IsGrounded
-	{
-		get { return controller.isGrounded; }
-	}
+	{ get { return controller.isGrounded; } }
 
 	public bool WasGroundedLastFrame
-	{
-		get { return controller.wasGroundedLastFrame; }
-	}
-	#endregion
+	{ get { return controller.wasGroundedLastFrame; }}
 
-	#region Internal Properties
-	protected bool IsPlayerOnRightSide
-	{
-		get { return PlayerControl.Instance.transform.position.x > transform.position.x; }
-	}
+	public LayerMask CollisionLayers
+	{ get { return controller.platformMask; } }
+
+	public bool PlayerIsOnRight
+	{ get { return PlayerControl.Instance.transform.position.x > transform.position.x; } }
+
+	public float RelativePlayerLastGrounded
+	{ get { return (lastGroundedPosition.y - PlayerControl.Instance.LastGroundedPosition.y).RoundToTenth(); } }
+
+	public float RelativePlayerHeight
+	{ get { return transform.position.y - PlayerControl.Instance.transform.position.y; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -131,37 +138,19 @@ public abstract class Enemy : MonoBehaviour
 	#region Internal Update Methods
 	protected void GetMovement()
 	{
-		if (right)
-		{
-			normalizedHorizontalSpeed = 1;
-
-			if (transform.localScale.x > 0f)
-			{
-				Flip();
-			}
-		}
-		else if (left)
-		{
-			normalizedHorizontalSpeed = -1;
-
-			if (transform.localScale.x < 0f)
-			{
-				Flip();
-			}
-		}
-		else
-		{
-			normalizedHorizontalSpeed = 0;
-		}
-
-		normalizedHorizontalSpeed = disableMovement ? 0 : normalizedHorizontalSpeed;
+		if (Right && !FacingRight)
+			transform.Flip();
+		else if (Left && FacingRight)
+			transform.Flip();
 	}
 
 	protected void ApplyMovement()
 	{
 		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
 
-		velocity.x = Mathf.Lerp(velocity.x, normalizedHorizontalSpeed * moveSpeed, Time.deltaTime * smoothedMovementFactor);
+		velocity.x = Mathf.Lerp(velocity.x, 
+								disableMovement ? 0f : (horizontalMovement * moveSpeed), 
+								smoothedMovementFactor * Time.deltaTime);
 		velocity.y += gravity * Time.deltaTime;
 		controller.move(velocity * Time.deltaTime);
 		velocity = controller.velocity;
@@ -177,18 +166,12 @@ public abstract class Enemy : MonoBehaviour
 	#region Internal Helper Methods
 	protected abstract void CheckDeath(bool showDrops = true);
 
-	protected void Flip()
-	{
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-	}
-
 	protected void FacePlayer()
 	{
-		if ((PlayerControl.Instance.transform.position.x < transform.position.x && FacingRight) ||
-			(PlayerControl.Instance.transform.position.x > transform.position.x && !FacingRight))
-		{
-			Flip();
-		}
+		if (PlayerIsOnRight && !FacingRight)
+			transform.Flip();
+		else if (PlayerIsOnRight && FacingRight)
+			transform.Flip();
 	}
 
 	protected void DeathTimeWarp()
