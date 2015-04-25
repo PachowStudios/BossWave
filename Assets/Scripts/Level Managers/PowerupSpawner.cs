@@ -16,6 +16,7 @@ public class PowerupSpawner : MonoBehaviour
 	}
 
 	public bool spawnPowerups;
+	public string spawnerTag = "PowerupSpawner";
 	public List<Wave> waves;
 	public List<Microchip> microchips;
 	public List<Gun> guns;
@@ -61,7 +62,7 @@ public class PowerupSpawner : MonoBehaviour
 	{
 		instance = this;
 
-		spawners = GameObject.FindGameObjectsWithTag("PowerupSpawner").ToList();
+		RefreshSpawners();
 	}
 
 	private void Update()
@@ -89,6 +90,11 @@ public class PowerupSpawner : MonoBehaviour
 		{
 			microchipInstance.GetComponent<Scatter>().DoScatter();
 		}
+	}
+
+	public void RefreshSpawners()
+	{
+		spawners = GameObject.FindGameObjectsWithTag(spawnerTag).ToList();
 	}
 	#endregion
 }

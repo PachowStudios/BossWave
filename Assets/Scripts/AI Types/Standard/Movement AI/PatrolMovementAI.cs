@@ -15,28 +15,31 @@ public sealed class PatrolMovementAI : StandardEnemy
 
 	protected override void Walk()
 	{
-		if (RelativePlayerLastGrounded != 0f)
+		if (IsGrounded)
 		{
-			if (!WasGroundedLastFrame)
-				horizontalMovement = Extensions.RandomSign();
-
-			CheckAtWall(true);
-			CheckAtLedge(true);
-		}
-		else if (!CheckAtLedge())
-		{
-			if (RelativePlayerHeight < 0.5f)
+			if (RelativePlayerLastGrounded != 0f)
 			{
-				FollowPlayer(followRange);
+				if (!WasGroundedLastFrame)
+					horizontalMovement = Extensions.RandomSign();
+
+				CheckAtWall(true);
+				CheckAtLedge(true);
 			}
-		}
-		else if (PlayerControl.Instance.IsGrounded)
-		{
-			CheckAtLedge(true);
-		}
-		else
-		{
-			horizontalMovement = 0f;
+			else if (!CheckAtLedge())
+			{
+				if (RelativePlayerHeight < 0.5f)
+				{
+					FollowPlayer(followRange);
+				}
+			}
+			else if (PlayerControl.Instance.IsGrounded)
+			{
+				CheckAtLedge(true);
+			}
+			else
+			{
+				horizontalMovement = 0f;
+			}
 		}
 	}
 	#endregion

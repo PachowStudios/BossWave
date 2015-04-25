@@ -170,7 +170,7 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (PlayerIsOnRight && !FacingRight)
 			transform.Flip();
-		else if (PlayerIsOnRight && FacingRight)
+		else if (!PlayerIsOnRight && FacingRight)
 			transform.Flip();
 	}
 

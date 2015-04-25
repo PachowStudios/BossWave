@@ -22,10 +22,12 @@ public abstract class LevelManager : MonoBehaviour
 	#region Fields
 	private static LevelManager instance;
 
+	public bool spawnEnemies = true;
+	public string spawnerTag = "Spawner";
 	public List<Wave> waves;
 	public List<StandardEnemy> enemies;
+
 	public bool introCRT = true;
-	public bool spawnEnemies = true;
 	public float timeOverride = 0f;
 	public float fadeInTime = 2f;
 	public int killAllEnemiesBonus = 100000;
@@ -68,10 +70,7 @@ public abstract class LevelManager : MonoBehaviour
 		instance = this;
 
 		DOTween.Init();
-
-		spawners = GameObject.FindGameObjectsWithTag("Spawner").ToList();
-
-		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+		RefreshSpawners();
 	}
 
 	protected virtual void Start()
@@ -171,6 +170,11 @@ public abstract class LevelManager : MonoBehaviour
 				currentEnemy.KillNoPoints();
 			}
 		}
+	}
+
+	public void RefreshSpawners()
+	{
+		spawners = GameObject.FindGameObjectsWithTag(spawnerTag).ToList();
 	}
 	#endregion
 

@@ -33,41 +33,44 @@ public sealed class DashMovementAI : StandardEnemy
 
 	protected override void Walk()
 	{
-		if (!dashAttackAI.Dashing && !dashAttackAI.Stabbing)
+		if (IsGrounded)
 		{
-			moveSpeed = defaultMoveSpeed;
-
-			if (RelativePlayerLastGrounded != 0f)
+			if (!dashAttackAI.Dashing && !dashAttackAI.Stabbing)
 			{
-				if (!WasGroundedLastFrame)
-					horizontalMovement = Extensions.RandomSign();
+				moveSpeed = defaultMoveSpeed;
 
-				CheckAtWall(true);
-				CheckAtLedge(true);
-			}
-			else if (!CheckAtLedge())
-			{
-				if (RelativePlayerHeight < 0.5f)
+				if (RelativePlayerLastGrounded != 0f)
 				{
-					FollowPlayer(followRange);
+					if (!WasGroundedLastFrame)
+						horizontalMovement = Extensions.RandomSign();
+
+					CheckAtWall(true);
+					CheckAtLedge(true);
+				}
+				else if (!CheckAtLedge())
+				{
+					if (RelativePlayerHeight < 0.5f)
+					{
+						FollowPlayer(followRange);
+					}
+				}
+				else if (PlayerControl.Instance.IsGrounded)
+				{
+					CheckAtLedge(true);
+				}
+				else
+				{
+					horizontalMovement = 0f;
 				}
 			}
-			else if (PlayerControl.Instance.IsGrounded)
+			else if (dashAttackAI.Dashing)
 			{
-				CheckAtLedge(true);
+				moveSpeed = dashSpeed;
 			}
 			else
 			{
-				horizontalMovement = 0f;
+				moveSpeed = 0f;
 			}
-		}
-		else if (dashAttackAI.Dashing)
-		{
-			moveSpeed = dashSpeed;
-		}
-		else
-		{
-			moveSpeed = 0f;
 		}
 	}
 	#endregion
