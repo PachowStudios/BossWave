@@ -43,14 +43,14 @@ public class CameraFollow : MonoBehaviour
 		currentYOffset = defaultYOffset;
 
 		targetPosition.y = followTarget.position.y + currentYOffset;
-		previousPosition = transform.position;
+		previousPosition = transform.localPosition;
 	}
 
 	private void Update()
 	{
 		if (Time.deltaTime > 0f)
 		{
-			previousPosition = transform.position;
+			previousPosition = transform.localPosition;
 			targetPosition.z = transform.position.z;
 			previousTargetPosition = targetPosition;
 

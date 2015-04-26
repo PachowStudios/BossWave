@@ -970,6 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
@@ -1070,6 +1071,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
@@ -1220,6 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .200000003
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1
@@ -2890,6 +2893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 0
@@ -5373,6 +5377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .400000006
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1
@@ -6080,6 +6085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
@@ -6699,6 +6705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
@@ -6865,6 +6872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .100000001
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1
@@ -7159,6 +7167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 0
@@ -10372,6 +10381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .800000012
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1
@@ -10879,6 +10889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .920000017
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 0
@@ -10927,6 +10938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .00999999978
+  scrollDirection: 0
   scroll: 1
   loop: 1
   cameraParallax: 0
@@ -11938,6 +11950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .0149999997
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 1
@@ -15344,6 +15357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .00249999994
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1
@@ -18011,6 +18025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .00499999989
+  scrollDirection: 0
   scroll: 0
   loop: 1
   cameraParallax: 1

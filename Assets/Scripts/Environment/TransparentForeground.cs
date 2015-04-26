@@ -6,6 +6,8 @@ using DG.Tweening;
 public sealed class TransparentForeground : MonoBehaviour
 {
 	#region Fields
+	public static bool allowHiding = true;
+
 	public float hiddenOpacity = 0f;
 	public float fadeTime = 0.5f;
 
@@ -23,6 +25,7 @@ public sealed class TransparentForeground : MonoBehaviour
 	private void Update()
 	{
 		bool overlapping = PlayerControl.Instance.collider2D.bounds.Intersects(collider2D.bounds);
+		overlapping = allowHiding && overlapping;
 
 		if (overlapping && !hidden)
 			Hide();

@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Sky
   m_TagString: Untagged
@@ -102,6 +103,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Clouds
   m_TagString: Untagged
@@ -149,6 +151,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400018}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Stars
   m_TagString: Untagged
@@ -459,6 +462,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400018}
   m_RootOrder: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeed: 17.5
+  relativeSpeed: .00249999994
+  scrollDirection: 1
+  scroll: 0
+  loop: 1
+  cameraParallax: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeed: 17.5
+  relativeSpeed: .00499999989
+  scrollDirection: 1
+  scroll: 0
+  loop: 1
+  cameraParallax: 1
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3166248ab70d1724bb27e6e4eaf84265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeed: 17.5
+  relativeSpeed: .100000001
+  scrollDirection: 1
+  scroll: 0
+  loop: 1
+  cameraParallax: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

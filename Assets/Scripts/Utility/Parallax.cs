@@ -5,12 +5,21 @@ using System.Linq;
 
 public class Parallax : MonoBehaviour
 {
+	#region Types
+	public enum ScrollDirection
+	{
+		Horizontal,
+		Vertical
+	};
+	#endregion
+
 	#region Fields
 	public static float? OverrideSpeed = null;
 
 	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
+	public ScrollDirection scrollDirection = ScrollDirection.Horizontal;
 	public bool scroll = false;
 	public bool loop = false;
 	public bool cameraParallax = false;
@@ -26,11 +35,12 @@ public class Parallax : MonoBehaviour
 			Transform child = transform.GetChild(i);
 			
 			if (child.renderer != null && child.gameObject.activeSelf)
-			{
 				layers.Add(child);
-			}
 
-			layers = layers.OrderBy(t => t.position.x).ToList();
+			if (scrollDirection == ScrollDirection.Horizontal)
+				layers = layers.OrderBy(t => t.position.x).ToList();
+			else
+				layers = layers.OrderBy(t => t.position.y).ToList();
 		}
 	}
 
@@ -39,14 +49,16 @@ public class Parallax : MonoBehaviour
 		if (scroll)
 		{
 			float speed = OverrideSpeed ?? defaultSpeed;
-
-			transform.Translate(new Vector2(-(relativeSpeed * speed), 0) * Time.deltaTime);
+			Vector2 scrollVector = scrollDirection == ScrollDirection.Horizontal ? new Vector2(-(relativeSpeed * speed), 0f)
+																				 : new Vector2(0f, -(relativeSpeed * speed));
+			transform.Translate(scrollVector * Time.deltaTime);
 
 			Transform firstChild = layers.FirstOrDefault();
 
 			if (firstChild != null)
 			{
-				if (firstChild.position.x < Camera.main.transform.position.x)
+				if ((scrollDirection == ScrollDirection.Horizontal && firstChild.position.x < Camera.main.transform.position.x) ||
+					(scrollDirection == ScrollDirection.Vertical   && firstChild.position.y < Camera.main.transform.position.y))
 				{
 					if (!firstChild.renderer.IsVisibleFrom(Camera.main))
 					{
@@ -55,9 +67,14 @@ public class Parallax : MonoBehaviour
 							Transform lastChild = layers.LastOrDefault();
 							Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
 
-							firstChild.position = new Vector3(lastChild.position.x + lastSize.x,
-															  firstChild.position.y,
-															  firstChild.position.z);
+							if (scrollDirection == ScrollDirection.Horizontal)
+								firstChild.position = new Vector3(lastChild.position.x + lastSize.x,
+																  firstChild.position.y,
+																  firstChild.position.z);
+							else
+								firstChild.position = new Vector3(lastChild.position.x,
+																  firstChild.position.y + lastSize.y,
+																  firstChild.position.z);
 
 							layers.Remove(firstChild);
 							layers.Add(firstChild);
