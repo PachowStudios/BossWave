@@ -72,8 +72,8 @@ public class Parallax : MonoBehaviour
 																  firstChild.position.y,
 																  firstChild.position.z);
 							else
-								firstChild.position = new Vector3(lastChild.position.x,
-																  firstChild.position.y + lastSize.y,
+								firstChild.position = new Vector3(firstChild.position.x,
+																  lastChild.position.y + lastSize.y,
 																  firstChild.position.z);
 
 							layers.Remove(firstChild);
