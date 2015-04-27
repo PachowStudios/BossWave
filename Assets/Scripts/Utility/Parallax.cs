@@ -27,6 +27,31 @@ public class Parallax : MonoBehaviour
 	private List<Transform> layers = new List<Transform>();
 	#endregion
 
+	#region Internal Properties
+	private Transform LastChild
+	{ get { return layers.LastOrDefault(); } }
+
+	private Vector3 LastSize
+	{ get { return LastChild.renderer.bounds.max - LastChild.renderer.bounds.min; } }
+
+	private Vector3 NewLayerPosition
+	{
+		get
+		{
+			Transform firstChild = layers.FirstOrDefault();
+
+			if (scrollDirection == ScrollDirection.Horizontal)
+				return new Vector3(LastChild.position.x + LastSize.x,
+								   firstChild.position.y,
+								   firstChild.position.z);
+			else
+				return new Vector3(firstChild.position.x,
+								   LastChild.position.y + LastSize.y,
+								   firstChild.position.z);
+		}
+	}
+	#endregion
+
 	#region MonoBehaviour
 	private void Awake()
 	{
@@ -51,7 +76,9 @@ public class Parallax : MonoBehaviour
 			float speed = OverrideSpeed ?? defaultSpeed;
 			Vector2 scrollVector = scrollDirection == ScrollDirection.Horizontal ? new Vector2(-(relativeSpeed * speed), 0f)
 																				 : new Vector2(0f, -(relativeSpeed * speed));
-			transform.Translate(scrollVector * Time.deltaTime);
+
+			foreach (Transform layer in layers)
+				layer.Translate(scrollVector * Time.deltaTime);
 
 			Transform firstChild = layers.FirstOrDefault();
 
@@ -64,20 +91,18 @@ public class Parallax : MonoBehaviour
 					{
 						if (loop)
 						{
-							Transform lastChild = layers.LastOrDefault();
-							Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
+							firstChild.position = NewLayerPosition;
 
-							if (scrollDirection == ScrollDirection.Horizontal)
-								firstChild.position = new Vector3(lastChild.position.x + lastSize.x,
-																  firstChild.position.y,
-																  firstChild.position.z);
+							if (firstChild.tag == "ScrollOnce")
+							{
+								layers.Remove(firstChild);
+								Destroy(firstChild.gameObject);
+							}
 							else
-								firstChild.position = new Vector3(firstChild.position.x,
-																  lastChild.position.y + lastSize.y,
-																  firstChild.position.z);
-
-							layers.Remove(firstChild);
-							layers.Add(firstChild);
+							{
+								layers.Remove(firstChild);
+								layers.Add(firstChild);
+							}
 						}
 						else
 						{
@@ -96,6 +121,25 @@ public class Parallax : MonoBehaviour
 	#endregion
 
 	#region Public Methods
+	public void AddLayers(List<Transform> newLayers, bool replace = true)
+	{
+		if (replace)
+			foreach (Transform layer in layers)
+				layer.tag = "ScrollOnce";
+
+		foreach (Transform layer in newLayers)
+			layer.position = NewLayerPosition;
+
+		layers.AddRange(newLayers);
+	}
+
+	public void AddLayerOnce(Transform newLayer)
+	{
+		newLayer.tag = "ScrollOnce";
+		newLayer.position = NewLayerPosition;
+		layers.Add(newLayer);
+	}
+
 	public void AddEndcap(Transform endcap)
 	{
 		layers.RemoveAll(l => 
@@ -111,12 +155,7 @@ public class Parallax : MonoBehaviour
 			}
 		});
 
-		Transform lastChild = layers.LastOrDefault();
-		Vector3 lastSize = lastChild.renderer.bounds.max - lastChild.renderer.bounds.min;
-
-		endcap.position = new Vector3(lastChild.position.x + lastSize.x,
-									  endcap.position.y,
-									  endcap.position.z);
+		endcap.position = NewLayerPosition;
 		endcap.gameObject.SetActive(true);
 
 		layers.Add(endcap);

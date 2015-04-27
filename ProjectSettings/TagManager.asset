@@ -25,6 +25,7 @@ TagManager:
   - Gun
   - PlayerSpecialProjectile
   - JumpMarker
+  - ScrollOnce
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -47,7 +48,7 @@ TagManager:
   User Layer 18: SpawnCollider
   User Layer 19: OneWayCollider
   User Layer 20: BottomCollider
-  User Layer 21: 
+  User Layer 21: ElevatorCollider
   User Layer 22: 
   User Layer 23: 
   User Layer 24: 

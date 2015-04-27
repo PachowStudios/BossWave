@@ -13,29 +13,25 @@ public class LevelPortal : MonoBehaviour
 	#region MonoBehaviour
 	private void Update()
 	{
-		if (PlayerControl.Instance.Jumped)
-		{
-			if (portalSelected)
-			{
+		if (portalSelected && PlayerControl.Instance.Jumped)
 				gameMenu.LoadLevel(LevelName);
-			}
-		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.tag == "Player")
-		{
 			portalSelected = true;
-		}
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		OnTriggerEnter2D(other);
 	}
 
 	private void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.tag == "Player")
-		{
 			portalSelected = false;
-		}
 	}
 	#endregion
 }

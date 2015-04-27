@@ -71,6 +71,10 @@ public sealed class PlayerControl : MonoBehaviour
 	private bool inertiaAfterMove = false;
 	private Vector3 targetPoint;
 
+	private LayerMask defaultCollisionLayers;
+	private string defaultFullSortingLayer;
+	private int defaultFullSortingOrder;
+
 	private CharacterController2D controller;
 	private Animator anim;
 	private GhostTrailEffect ghostTrail;
@@ -170,6 +174,8 @@ public sealed class PlayerControl : MonoBehaviour
 
 		lastHitTime = Time.time - invincibilityPeriod;
 		altIdleTime = NewAltIdleTime;
+
+		defaultCollisionLayers = controller.platformMask;
 	}
 
 	private void Start()
@@ -179,6 +185,11 @@ public sealed class PlayerControl : MonoBehaviour
 			if (spriteRenderer.name != "Full")
 			{
 				spriteRenderer.color = Color.clear;
+			}
+			else
+			{
+				defaultFullSortingLayer = spriteRenderer.sortingLayerName;
+				defaultFullSortingOrder = spriteRenderer.sortingOrder;
 			}
 		}
 
@@ -199,19 +210,13 @@ public sealed class PlayerControl : MonoBehaviour
 			ApplyAnimation();
 
 			if (useTargetPoint && disableInput)
-			{
 				UpdateGoTo();
-			}
 
 			if (combo > 1)
-			{
 				UpdateCombo();
-			}
 
 			if (Health > 0f)
-			{
 				UpdateInvincibilityFlash();
-			}
 		}
 	}
 
@@ -225,16 +230,10 @@ public sealed class PlayerControl : MonoBehaviour
 	{
 		if (other.tag == "Enemy" || other.tag == "Projectile")
 		{
-			if (canTakeDamage)
-			{
-				if (Health > 0f)
-				{
-					TakeDamage(other.gameObject);
-				}
-			}
+			if (canTakeDamage && Health > 0f)
+				TakeDamage(other.gameObject);
 		}
-
-		if (other.tag == "Portal")
+		else if (other.tag == "Portal")
 		{
 			inPortal = true;
 		}
@@ -711,6 +710,40 @@ public sealed class PlayerControl : MonoBehaviour
 		ResetInput();
 		disableInput = false;
 		Gun.disableInput = false;
+	}
+
+	public void SetFullSorting(string sortingLayer, int sortingOrder)
+	{
+		foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+		{
+			if (spriteRenderer.name == "Full")
+			{
+				spriteRenderer.sortingLayerName = sortingLayer;
+				spriteRenderer.sortingOrder = sortingOrder;
+			}
+		}
+	}
+
+	public void RestoreDefaultFullSorting()
+	{
+		foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+		{
+			if (spriteRenderer.name == "Full")
+			{
+				spriteRenderer.sortingLayerName = defaultFullSortingLayer;
+				spriteRenderer.sortingOrder = defaultFullSortingOrder;
+			}
+		}
+	}
+
+	public void SetCollisionLayers(LayerMask collisionLayers)
+	{
+		controller.platformMask = collisionLayers;
+	}
+
+	public void RestoreDefaultCollisionLayers()
+	{
+		controller.platformMask = defaultCollisionLayers;
 	}
 	#endregion
 }
