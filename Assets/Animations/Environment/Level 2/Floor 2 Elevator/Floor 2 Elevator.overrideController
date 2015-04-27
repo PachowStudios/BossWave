@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Floor 2 Elevator
+  m_Controller: {fileID: 9100000, guid: 044de75cd9b29bd4285f99f023834af6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3419f5225e7b67a4cb444ca1cbd99e56, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a7f6889a1d60fb548bfb88d667b022bc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6985455210801ca448258ed3c2f92876, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 791dd8ac4e41e354d80611ba05754a23, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: db0a3e4b714a6ee4c9e907be900fb05e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d83a5cb374580b1439017f4631633efa, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6413444501db3cc459175828a4eedbce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f12538b1c8cade549bfff6f6115a090c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1de8d61ffa6449043bc6810b8ef1b3d6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 41c0e8974a425ba42a9634ce32b87035, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 809ebe0f488ac594882fa8d95bb0c9c3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 296a4fe25241b5744b2a6dc393a73cf0, type: 2}

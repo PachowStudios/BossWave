@@ -36,6 +36,7 @@ public sealed class Level2 : LevelManager
 	public List<FloorWave> floorWaves;
 	public float elevatorSpeed = 100f;
 	public float elevatorTransitionTime = 2f;
+	public float elevatorOpenTime = 0.6f;
 	public Ease elevatorStartEase = Ease.InCubic;
 
 	FloorWave currentFloor;
@@ -81,7 +82,7 @@ public sealed class Level2 : LevelManager
 			if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
 			{
 				elevatorState = ElevatorState.Moving;
-				StartNextFloorWave();
+				StartCoroutine(StartNextFloorWave());
 			}
 		}
 		else if (elevatorState == ElevatorState.Moving)
@@ -89,44 +90,78 @@ public sealed class Level2 : LevelManager
 			if (!currentFloor.layersSwitched && ElevatorMovingPercentage >= currentFloor.switchPercentage)
 			{
 				currentFloor.layersSwitched = true;
-				floorScrolling.AddLayers(currentFloor.newScrolling);
+				floorScrolling.AddLayers(currentFloor.newScrolling, instantiate: true);
 			}
 
 			if (waveTimer >= currentFloor.elevatorArriveTime - elevatorTransitionTime)
 			{
 				elevatorState = ElevatorState.Arriving;
 				currentFloor.mainFloor = Instantiate(currentFloor.mainFloor, new Vector3(0f, 20f, 0f), Quaternion.identity) as BuildingFloor;
+				elevator.currentFloor = currentFloor.mainFloor;
 				floorScrolling.AddLayerOnce(currentFloor.mainFloor.transform);
 			}
 		}
 		else if (elevatorState == ElevatorState.Arriving)
 		{
+			float currentArrivalSpeed = CalculateArrivalSpeed();
 
+			if (0.1f >= currentArrivalSpeed && currentArrivalSpeed >= -0.1f)
+			{
+				elevatorState = ElevatorState.Closed;
+				currentArrivalSpeed = 0f;
+				StartCoroutine(StopElevator());
+			}
+
+			coverScrolling.defaultSpeed = currentArrivalSpeed;
+			floorScrolling.defaultSpeed = currentArrivalSpeed;
 		}
 	}
 	#endregion
 
 	#region Internal Helper Methods
-	private void StartNextFloorWave()
+	private IEnumerator StartNextFloorWave()
 	{
 		currentFloor.mainFloor.CloseElevator();
-		elevatorLeftTime = waveTimer;
-
 		currentFloorIndex++;
 		currentFloor = floorWaves[currentFloorIndex];
 
+		yield return new WaitForSeconds(elevatorOpenTime);
+
+		elevator.CenterPlayer();
+		elevatorLeftTime = waveTimer;
+
 		DOTween.To(s => coverScrolling.defaultSpeed = s, 0f, elevatorSpeed, elevatorTransitionTime)
+			.OnStart(() => coverScrolling.scroll = true)
 			.SetEase(elevatorStartEase);
 		DOTween.To(s => floorScrolling.defaultSpeed = s, 0f, elevatorSpeed, elevatorTransitionTime)
+			.OnStart(() => floorScrolling.scroll = true)
 			.SetEase(elevatorStartEase);
 
-		floorScrolling.AddLayers(currentFloor.oldScrolling);
+		floorScrolling.AddLayers(currentFloor.oldScrolling, instantiate: true);
+	}
+
+	private IEnumerator StopElevator()
+	{
+		coverScrolling.scroll = false;
+		floorScrolling.scroll = false;
+
+		currentFloor.mainFloor.OpenElevator();
+
+		yield return new WaitForSeconds(elevatorOpenTime);
+
+		elevator.ExitElevator();
+		currentFloor.mainFloor.CloseElevator();
 	}
 
 	private float CalculateArrivalSpeed()
 	{
-		float timeToArrival = (currentFloor.elevatorArriveTime - elevatorTransitionTime) - waveTimer;
-		return 0f;
+		float distanceToArrival = currentFloor.mainFloor.ElevatorPosition.y - elevator.transform.position.y;
+		float timeToArrival = Mathf.Max(currentFloor.elevatorArriveTime - waveTimer, 0f);
+
+		if (timeToArrival > 0f)
+			return distanceToArrival / timeToArrival;
+		else
+			return 0f;
 	}
 	#endregion
 

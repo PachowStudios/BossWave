@@ -121,21 +121,36 @@ public class Parallax : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void AddLayers(List<Transform> newLayers, bool replace = true)
+	public void AddLayers(List<Transform> newLayers, bool replace = true, bool instantiate = false)
 	{
 		if (replace)
 			foreach (Transform layer in layers)
 				layer.tag = "ScrollOnce";
 
 		foreach (Transform layer in newLayers)
-			layer.position = NewLayerPosition;
+		{
+			Transform newLayer;
 
-		layers.AddRange(newLayers);
+			if (instantiate)
+			{
+				newLayer = Instantiate(layer, NewLayerPosition, Quaternion.identity) as Transform;
+				newLayer.parent = transform;
+			}
+			else
+			{
+				newLayer = layer;
+				newLayer.parent = transform;
+				newLayer.position = NewLayerPosition;
+			}
+
+			layers.Add(newLayer);
+		}
 	}
 
 	public void AddLayerOnce(Transform newLayer)
 	{
 		newLayer.tag = "ScrollOnce";
+		newLayer.parent = transform;
 		newLayer.position = NewLayerPosition;
 		layers.Add(newLayer);
 	}

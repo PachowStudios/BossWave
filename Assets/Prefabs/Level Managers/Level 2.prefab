@@ -168,6 +168,40 @@ MonoBehaviour:
   mainMusic: {fileID: 8200000}
   groundLevel: {fileID: 400002}
   bossWaveWaitPoint: {fileID: 0}
+  elevator: {fileID: 0}
+  coverScrolling: {fileID: 0}
+  floorScrolling: {fileID: 0}
+  floorWaves:
+  - elevatorArriveTime: 0
+    elevatorOpenTime: 3
+    elevatorLeaveTime: 6
+    switchPercentage: .5
+    layersSwitched: 0
+    mainFloor: {fileID: 0}
+    oldScrolling: []
+    newScrolling: []
+  - elevatorArriveTime: 15
+    elevatorOpenTime: 1000
+    elevatorLeaveTime: 2000
+    switchPercentage: .5
+    layersSwitched: 0
+    mainFloor: {fileID: 11400000, guid: 085115306e821704e873c0700f8fda65, type: 2}
+    oldScrolling:
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    newScrolling:
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+  elevatorSpeed: 100
+  elevatorTransitionTime: 2
+  elevatorOpenTime: .600000024
+  elevatorStartEase: 8
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
