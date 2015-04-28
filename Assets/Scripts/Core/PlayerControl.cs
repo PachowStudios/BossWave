@@ -495,10 +495,10 @@ public sealed class PlayerControl : MonoBehaviour
 			dead = true;
 
 			StartCoroutine(GameMenu.Instance.GameOver());
+			DisableInput();
 			SetRenderersEnabled(false);
 			collider2D.enabled = false;
 			PopupSwapGun.Instance.ClearPopup();
-			DisableInput();
 
 			foreach (SpriteRenderer sprite in spriteRenderers)
 			{

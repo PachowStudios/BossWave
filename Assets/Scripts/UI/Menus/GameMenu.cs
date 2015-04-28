@@ -25,6 +25,7 @@ public class GameMenu : MonoBehaviour
 	public Selectable pauseSelect;
 	public Selectable gameOverSelect;
 	public Selectable gameWinSelect;
+	public Text gameOverReason;
 	public Text scoreText;
 
 	private bool paused = false;
@@ -154,7 +155,7 @@ public class GameMenu : MonoBehaviour
 		}
 	}
 
-	public IEnumerator GameOver()
+	public IEnumerator GameOver(string reason = "")
 	{
 		if (!gameOver)
 		{
@@ -163,7 +164,9 @@ public class GameMenu : MonoBehaviour
 
 			yield return new WaitForSeconds(gameOverDelay);
 
+			PlayerControl.Instance.DisableInput();
 			SelectObject(gameOverSelect);
+			gameOverReason.text = reason;
 			CRTEffect.Instance.StartCRT(fadeTime);
 			Cutscene.Instance.HideUI(fadeTime);
 			Fade(0f, 1f, gameOverOverlay, false);

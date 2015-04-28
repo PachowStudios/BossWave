@@ -36,7 +36,7 @@ public sealed class Level2 : LevelManager
 	public List<FloorWave> floorWaves;
 	public float elevatorSpeed = 100f;
 	public float elevatorTransitionTime = 2f;
-	public float elevatorOpenTime = 0.6f;
+	public float elevatorDoorTime = 0.6f;
 	public Ease elevatorStartEase = Ease.InCubic;
 
 	FloorWave currentFloor;
@@ -82,10 +82,17 @@ public sealed class Level2 : LevelManager
 		}
 		else if (elevatorState == ElevatorState.Open)
 		{
-			if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
+			if (waveTimer >= currentFloor.elevatorLeaveTime)
 			{
-				elevatorState = ElevatorState.Moving;
-				StartCoroutine(StartElevator());
+				if (elevator.IsPlayerInside)
+				{
+					elevatorState = ElevatorState.Moving;
+					StartCoroutine(StartElevator());
+				}
+				else
+				{
+					StartCoroutine(MissElevator());
+				}
 			}
 		}
 		else if (elevatorState == ElevatorState.Moving)
@@ -108,7 +115,7 @@ public sealed class Level2 : LevelManager
 		{
 			float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrolling.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
 			coverScrolling.defaultSpeed = Mathf.Max(coverScrolling.defaultSpeed - currentDeceleration, 0f);
-			floorScrolling.defaultSpeed = Mathf.Max(floorScrolling.defaultSpeed - currentDeceleration, 0f);
+			floorScrolling.defaultSpeed = coverScrolling.defaultSpeed;
 
 			if (coverScrolling.defaultSpeed == 0f)
 			{
@@ -126,7 +133,7 @@ public sealed class Level2 : LevelManager
 		currentFloorIndex++;
 		currentFloor = floorWaves[currentFloorIndex];
 
-		yield return new WaitForSeconds(elevatorOpenTime);
+		yield return new WaitForSeconds(elevatorDoorTime);
 
 		elevator.CenterPlayer();
 		elevatorLeftTime = waveTimer;
@@ -157,10 +164,19 @@ public sealed class Level2 : LevelManager
 
 		currentFloor.mainFloor.OpenElevator();
 
-		yield return new WaitForSeconds(elevatorOpenTime);
+		yield return new WaitForSeconds(elevatorDoorTime);
 
 		elevator.ExitElevator();
 		currentFloor.mainFloor.CloseElevator();
+	}
+
+	private IEnumerator MissElevator()
+	{
+		currentFloor.mainFloor.CloseElevator();
+
+		yield return new WaitForSeconds(elevatorDoorTime);
+
+		StartCoroutine(GameMenu.Instance.GameOver("YOU MISSED THE ELEVATOR"));
 	}
 	#endregion
 
