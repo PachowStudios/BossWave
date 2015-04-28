@@ -316,5 +316,10 @@ public static class Extensions
 						   Random.Range(min.y, max.y),
 						   Random.Range(min.z, max.z));
 	}
+
+	public static float CalculateDecelerationRate(float startSpeed, float endSpeed, float distance)
+	{
+		return (Mathf.Pow(startSpeed, 2f) - Mathf.Pow(endSpeed, 2f)) / (distance * 2f);
+	}
 	#endregion
 }

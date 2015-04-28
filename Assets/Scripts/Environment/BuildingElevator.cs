@@ -63,7 +63,7 @@ public sealed class BuildingElevator : MonoBehaviour
 	#region Public Methods
 	public void CenterPlayer()
 	{
-		PlayerControl.Instance.transform.position = waitPoint.position;
+		PlayerControl.Instance.GoToPoint(waitPoint.position, true, false, false);
 	}
 
 	public void ExitElevator()

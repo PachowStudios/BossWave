@@ -180,7 +180,7 @@ MonoBehaviour:
     mainFloor: {fileID: 0}
     oldScrolling: []
     newScrolling: []
-  - elevatorArriveTime: 15
+  - elevatorArriveTime: 12
     elevatorOpenTime: 1000
     elevatorLeaveTime: 2000
     switchPercentage: .5

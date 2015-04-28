@@ -176,5 +176,11 @@ public class Parallax : MonoBehaviour
 		layers.Add(endcap);
 		loop = false;
 	}
+
+	public void OffsetLayers(Vector3 offset)
+	{
+		foreach (Transform layer in layers)
+			layer.Translate(offset);
+	}
 	#endregion
 }

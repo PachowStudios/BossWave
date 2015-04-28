@@ -51,6 +51,9 @@ public sealed class Level2 : LevelManager
 
 	private float ElevatorMovingPercentage
 	{ get { return Extensions.ConvertRange(waveTimer, elevatorLeftTime, currentFloor.elevatorArriveTime, 0f, 1f); } }
+
+	private float ElevatorPositionOffset
+	{ get { return currentFloor.mainFloor.ElevatorPosition.y - elevator.transform.position.y; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -82,7 +85,7 @@ public sealed class Level2 : LevelManager
 			if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
 			{
 				elevatorState = ElevatorState.Moving;
-				StartCoroutine(StartNextFloorWave());
+				StartCoroutine(StartElevator());
 			}
 		}
 		else if (elevatorState == ElevatorState.Moving)
@@ -103,23 +106,21 @@ public sealed class Level2 : LevelManager
 		}
 		else if (elevatorState == ElevatorState.Arriving)
 		{
-			float currentArrivalSpeed = CalculateArrivalSpeed();
+			float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrolling.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
+			coverScrolling.defaultSpeed = Mathf.Max(coverScrolling.defaultSpeed - currentDeceleration, 0f);
+			floorScrolling.defaultSpeed = Mathf.Max(floorScrolling.defaultSpeed - currentDeceleration, 0f);
 
-			if (0.1f >= currentArrivalSpeed && currentArrivalSpeed >= -0.1f)
+			if (coverScrolling.defaultSpeed == 0f)
 			{
 				elevatorState = ElevatorState.Closed;
-				currentArrivalSpeed = 0f;
 				StartCoroutine(StopElevator());
 			}
-
-			coverScrolling.defaultSpeed = currentArrivalSpeed;
-			floorScrolling.defaultSpeed = currentArrivalSpeed;
 		}
 	}
 	#endregion
 
 	#region Internal Helper Methods
-	private IEnumerator StartNextFloorWave()
+	private IEnumerator StartElevator()
 	{
 		currentFloor.mainFloor.CloseElevator();
 		currentFloorIndex++;
@@ -145,23 +146,19 @@ public sealed class Level2 : LevelManager
 		coverScrolling.scroll = false;
 		floorScrolling.scroll = false;
 
+		if (ElevatorPositionOffset != 0f)
+		{
+			Vector3 elevatorPositionOffsetVector = new Vector3(0f, -ElevatorPositionOffset, 0f);
+			coverScrolling.OffsetLayers(elevatorPositionOffsetVector);
+			floorScrolling.OffsetLayers(elevatorPositionOffsetVector);
+		}
+
 		currentFloor.mainFloor.OpenElevator();
 
 		yield return new WaitForSeconds(elevatorOpenTime);
 
 		elevator.ExitElevator();
 		currentFloor.mainFloor.CloseElevator();
-	}
-
-	private float CalculateArrivalSpeed()
-	{
-		float distanceToArrival = currentFloor.mainFloor.ElevatorPosition.y - elevator.transform.position.y;
-		float timeToArrival = Mathf.Max(currentFloor.elevatorArriveTime - waveTimer, 0f);
-
-		if (timeToArrival > 0f)
-			return distanceToArrival / timeToArrival;
-		else
-			return 0f;
 	}
 	#endregion
 

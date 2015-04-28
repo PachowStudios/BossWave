@@ -183,7 +183,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2097152
   insideSortingLayer: Back Background
-  insideSortingOrder: 1
+  insideSortingOrder: 3
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
