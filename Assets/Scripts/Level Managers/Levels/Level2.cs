@@ -139,10 +139,12 @@ public sealed class Level2 : LevelManager
 			.SetEase(elevatorStartEase);
 
 		floorScrolling.AddLayers(currentFloor.oldScrolling, instantiate: true);
+		TransparentForeground.allowHiding = false;
 	}
 
 	private IEnumerator StopElevator()
 	{
+		TransparentForeground.allowHiding = true;
 		coverScrolling.scroll = false;
 		floorScrolling.scroll = false;
 
