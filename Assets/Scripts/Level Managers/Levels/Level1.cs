@@ -55,9 +55,10 @@ public sealed class Level1 : LevelManager
 
 		if (BossWaveActive && PlayerControl.Instance.IsDead)
 		{
-			BossWaveTimer.Instance.Hide();
+			Timer.Instance.StopTimer();
+			Timer.Instance.Hide();
 			DOTween.To(() => Parallax.OverrideSpeed.Value, x => Parallax.OverrideSpeed = x, 0f, 2f)
-							.SetEase(Ease.OutSine);
+				.SetEase(Ease.OutSine);
 		}
 	}
 	#endregion
@@ -88,12 +89,7 @@ public sealed class Level1 : LevelManager
 
 		DOTween.To(x => Parallax.OverrideSpeed = x, bossWave.cameraSpeed, bossWave.fullCameraSpeed, bossWave.speedUpTime)
 			.SetEase(Ease.OutSine);
-		BossWaveTimer.Instance.Show();
-		BossWaveTimer.Instance.Timer = bossWave.totalLength;
-		DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, bossWave.totalLength)
-			.SetId("Boss Wave Timer")
-			.SetEase(Ease.Linear)
-			.OnComplete(() =>
+		Timer.Instance.StartTimer(bossWave.totalLength, onCompleteCallback: () =>
 			{
 				bossWave.scrollingEndcap.parent.GetComponent<Parallax>().AddEndcap(bossWave.scrollingEndcap);
 				bossInstance.End();
@@ -105,11 +101,11 @@ public sealed class Level1 : LevelManager
 	public override void CompleteBossWave()
 	{
 		PlayerControl.Instance.DisableInput();
-		PlayerControl.Instance.AddPoints(Mathf.RoundToInt(BossWaveTimer.Instance.Timer * timeBonusMultiplier), true);
-		DOTween.To(() => BossWaveTimer.Instance.Timer, x => BossWaveTimer.Instance.Timer = x, 0f, 1f);
+		PlayerControl.Instance.AddPoints(Mathf.RoundToInt(Timer.Instance.Time * timeBonusMultiplier), true);
+		Timer.Instance.StartTimer(Timer.Instance.Time, duration: 1f, hideOnComplete: true);
 		DOTween.To(() => Parallax.OverrideSpeed.Value, x => Parallax.OverrideSpeed = x, 0f, 0.5f)
-					.SetEase(Ease.OutQuint)
-					.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
+			.SetEase(Ease.OutQuint)
+			.OnComplete(() => PlayerControl.Instance.continuouslyRunning = false);
 
 		StartCoroutine(GameMenu.Instance.GameWin());
 	}

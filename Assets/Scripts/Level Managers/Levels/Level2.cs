@@ -73,60 +73,86 @@ public sealed class Level2 : LevelManager
 	{
 		base.Update();
 
-		if (elevatorState == ElevatorState.Closed)
+		UpdateElevator();
+	}
+	#endregion
+
+	#region Internal Update Methods
+	private void UpdateElevator()
+	{
+		switch (elevatorState)
 		{
-			if (waveTimer >= currentFloor.elevatorOpenTime)
+			case ElevatorState.Closed:
+				UpdateElevatorClosed();
+				break;
+			case ElevatorState.Open:
+				UpdateElevatorOpen();
+				break;
+			case ElevatorState.Moving:
+				UpdateElevatorMoving();
+				break;
+			case ElevatorState.Arriving:
+				UpdateElevatorArriving();
+				break;
+		}
+	}
+
+	private void UpdateElevatorClosed()
+	{
+		if (waveTimer >= currentFloor.elevatorOpenTime)
+		{
+			elevatorState = ElevatorState.Open;
+			currentFloor.mainFloor.OpenElevator();
+		}
+		else
+		{
+			currentFloor.mainFloor.SetElevatorPercentage(ElevatorMeterPercentage);
+		}
+	}
+
+	private void UpdateElevatorOpen()
+	{
+		if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
+		{
+			if (elevator.IsPlayerInside)
 			{
-				elevatorState = ElevatorState.Open;
-				currentFloor.mainFloor.OpenElevator();
+				elevatorState = ElevatorState.Moving;
+				StartCoroutine(StartElevator());
 			}
 			else
 			{
-				currentFloor.mainFloor.SetElevatorPercentage(ElevatorMeterPercentage);
+				StartCoroutine(MissElevator());
 			}
 		}
-		else if (elevatorState == ElevatorState.Open)
-		{
-			if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
-			{
-				if (elevator.IsPlayerInside)
-				{
-					elevatorState = ElevatorState.Moving;
-					StartCoroutine(StartElevator());
-				}
-				else
-				{
-					StartCoroutine(MissElevator());
-				}
-			}
-		}
-		else if (elevatorState == ElevatorState.Moving)
-		{
-			if (!currentFloor.layersSwitched && ElevatorMovingPercentage >= currentFloor.switchPercentage)
-			{
-				currentFloor.layersSwitched = true;
-				floorScrolling.AddLayers(currentFloor.newScrolling, instantiate: true);
-			}
+	}
 
-			if (waveTimer >= currentFloor.elevatorArriveTime - elevatorTransitionTime)
-			{
-				elevatorState = ElevatorState.Arriving;
-				currentFloor.mainFloor = Instantiate(currentFloor.mainFloor, new Vector3(0f, 20f, 0f), Quaternion.identity) as BuildingFloor;
-				elevator.currentFloor = currentFloor.mainFloor;
-				floorScrolling.AddLayerOnce(currentFloor.mainFloor.transform);
-			}
-		}
-		else if (elevatorState == ElevatorState.Arriving)
+	private void UpdateElevatorMoving()
+	{
+		if (!currentFloor.layersSwitched && ElevatorMovingPercentage >= currentFloor.switchPercentage)
 		{
-			float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrolling.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
-			coverScrolling.defaultSpeed = Mathf.Max(coverScrolling.defaultSpeed - currentDeceleration, 0f);
-			floorScrolling.defaultSpeed = coverScrolling.defaultSpeed;
+			currentFloor.layersSwitched = true;
+			floorScrolling.AddLayers(currentFloor.newScrolling, instantiate: true);
+		}
 
-			if (coverScrolling.defaultSpeed == 0f)
-			{
-				elevatorState = ElevatorState.Closed;
-				StartCoroutine(StopElevator());
-			}
+		if (waveTimer >= currentFloor.elevatorArriveTime - elevatorTransitionTime)
+		{
+			elevatorState = ElevatorState.Arriving;
+			currentFloor.mainFloor = Instantiate(currentFloor.mainFloor, new Vector3(0f, 20f, 0f), Quaternion.identity) as BuildingFloor;
+			elevator.currentFloor = currentFloor.mainFloor;
+			floorScrolling.AddLayerOnce(currentFloor.mainFloor.transform);
+		}
+	}
+
+	private void UpdateElevatorArriving()
+	{
+		float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrolling.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
+		coverScrolling.defaultSpeed = Mathf.Max(coverScrolling.defaultSpeed - currentDeceleration, 0f);
+		floorScrolling.defaultSpeed = coverScrolling.defaultSpeed;
+
+		if (coverScrolling.defaultSpeed == 0f)
+		{
+			elevatorState = ElevatorState.Closed;
+			StartCoroutine(StopElevator());
 		}
 	}
 	#endregion

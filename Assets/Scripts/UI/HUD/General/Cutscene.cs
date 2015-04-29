@@ -82,7 +82,7 @@ public class Cutscene : MonoBehaviour
 		HealthDisplay.Instance.Hide(newFadeTime);
 		ComboMeter.Instance.Hide(newFadeTime);
 		SecondaryShotBox.Instance.Hide(newFadeTime, true);
-		BossWaveTimer.Instance.Hide(newFadeTime);
+		Timer.Instance.Hide(newFadeTime);
 	}
 	#endregion
 }

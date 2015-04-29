@@ -445,7 +445,7 @@ public sealed class TheRIFT : Boss
 			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
 			DOTween.Kill("RIFT Attack");
 			DOTween.Kill("RIFT Swoop");
-			DOTween.Kill("Boss Wave Timer");
+			Timer.Instance.StopTimer();
 		}
 	}
 	#endregion
