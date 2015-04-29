@@ -101,6 +101,9 @@ public sealed class PlayerControl : MonoBehaviour
 		}
 	}
 
+	public float HealthPercent
+	{ get { return Mathf.Clamp01(Health / maxHealth); } }
+
 	public bool IsDead
 	{ get { return dead; } }
 

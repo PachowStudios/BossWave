@@ -489,7 +489,7 @@ public sealed class TheRIFT : Boss
 				.AppendCallback(() =>
 				{
 					Cutscene.Instance.Show();
-					ScaleWidthCamera.Instance.AnimateFOV(fightFOV, 1f);
+					ScaleWidthCamera.Main.AnimateFOV(fightFOV, 1f);
 					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
 					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);

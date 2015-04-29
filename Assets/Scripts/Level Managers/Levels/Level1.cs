@@ -31,6 +31,11 @@ public sealed class Level1 : LevelManager
 	private List<GameObject> scrollingElements;
 	#endregion
 
+	#region Public Properties
+	public static new Level1 Instance
+	{ get { return (Level1)instance; } }
+	#endregion
+
 	#region MonoBehaviour
 	protected override void Awake()
 	{

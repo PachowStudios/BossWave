@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 
-public class HealthDisplay : MonoBehaviour
+public sealed class HealthDisplay : MonoBehaviour
 {
 	#region Fields
 	private static HealthDisplay instance;
@@ -24,7 +24,6 @@ public class HealthDisplay : MonoBehaviour
 
 	private bool showing = true;
 
-	private float healthPercent;
 	private float originalHealthWidth;
 	private Vector2 healthVelocity = Vector2.zero;
 
@@ -56,11 +55,14 @@ public class HealthDisplay : MonoBehaviour
 
 	private void Update()
 	{
-		healthPercent = Mathf.Clamp(PlayerControl.Instance.Health / PlayerControl.Instance.maxHealth, 0f, 1f);
+		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * PlayerControl.Instance.HealthPercent), 0, healthFaces.Count - 1)];
 
-		face.sprite = healthFaces[Mathf.Clamp((int)(healthFaces.Count * healthPercent), 0, healthFaces.Count - 1)];
+		barMask.rectTransform.sizeDelta = Vector2.SmoothDamp(barMask.rectTransform.sizeDelta, 
+															 new Vector2(originalHealthWidth * PlayerControl.Instance.HealthPercent, 
+																		 barMask.rectTransform.sizeDelta.y), 
+															 ref healthVelocity, 
+															 healthDamping);
 
-		barMask.rectTransform.sizeDelta = Vector2.SmoothDamp(barMask.rectTransform.sizeDelta, new Vector2(originalHealthWidth * healthPercent, barMask.rectTransform.sizeDelta.y), ref healthVelocity, healthDamping);
 		scoreValue = Mathf.SmoothDamp(scoreValue, PlayerControl.Instance.Score, ref scoreVelocity, textDamping);
 		microchipsValue = Mathf.SmoothDamp(microchipsValue, PlayerControl.Instance.Microchips, ref microchipsVelocity, textDamping);
 

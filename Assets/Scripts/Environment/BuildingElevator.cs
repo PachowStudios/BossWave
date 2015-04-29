@@ -4,25 +4,38 @@ using System.Collections;
 public sealed class BuildingElevator : MonoBehaviour
 {
 	#region Fields
+	public float maxHealth = 100f;
 	public BuildingFloor currentFloor;
-
-	[SerializeField]
-	private Transform waitPoint;
 
 	public LayerMask collisionLayers;
 	public string insideSortingLayer = "Back Background";
 	public int insideSortingOrder = 1;
 
+	[SerializeField]
+	private Transform waitPoint;
+
+	private float health;
 	private bool elevatorSelected = false;
 	private bool playerInside = false;
 	#endregion
 
 	#region Public Properties
+	public float Health
+	{ get { return health; } }
+
+	public float HealthPercent
+	{ get { return Mathf.Clamp01(Health / maxHealth); } }
+
 	public bool IsPlayerInside
 	{ get { return playerInside; } }
 	#endregion
 
 	#region MonoBehaviour
+	private void Awake()
+	{
+		health = maxHealth;
+	}
+
 	private void Update()
 	{
 		if (elevatorSelected && CrossPlatformInputManager.GetButtonDown("Interact"))

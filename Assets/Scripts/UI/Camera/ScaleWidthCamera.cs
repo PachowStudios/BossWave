@@ -6,8 +6,10 @@ using DG.Tweening;
 public class ScaleWidthCamera : MonoBehaviour
 {
 	#region Fields
-	private static ScaleWidthCamera instance;
+	private static ScaleWidthCamera main;
 
+	public bool isMain = false;
+	public bool syncWithMain = false;
 	public int defaultFOV = 500;
 	public bool useWorldSpaceUI = false;
 	public RectTransform worldSpaceUI;
@@ -16,22 +18,30 @@ public class ScaleWidthCamera : MonoBehaviour
 	#endregion
 
 	#region Public Properties
-	public static ScaleWidthCamera Instance
+	public static ScaleWidthCamera Main
 	{
-		get { return instance; }
+		get { return main; }
 	}
 	#endregion
 
 	#region MonoBehaviour
 	private void OnEnable()
 	{
-		instance = this;
+		if (isMain)
+			main = this;
 
 		FOV = defaultFOV;
 	}
 
-	private void OnPreRender()
+	private void Update()
 	{
+		if (syncWithMain && !isMain && Main != null)
+		{
+			defaultFOV = Main.defaultFOV;
+			FOV = Main.FOV;
+			transform.position = Main.transform.position;
+		}
+
 		camera.orthographicSize = FOV / 20f / camera.aspect;
 
 		if (useWorldSpaceUI && worldSpaceUI != null)

@@ -21,10 +21,30 @@ public class ScaleWidthCameraEditor : Editor
 	{
 		serializedObject.Update();
 
-		EditorGUILayout.LabelField("Current FOV", Target.FOV.ToString());
+		Target.isMain = EditorGUILayout.Toggle("Set As Main", Target.isMain);
 		EditorGUILayout.Space();
 
-		Target.FOV = Target.defaultFOV = EditorGUILayout.IntField("Default FOV", Target.defaultFOV);
+		if (Target.isMain)
+		{
+			GUI.enabled = false;
+			Target.syncWithMain = false;
+		}
+
+		Target.syncWithMain = EditorGUILayout.Toggle("Sync With Main", Target.syncWithMain);
+		{
+			EditorGUI.indentLevel++;
+
+			GUI.enabled = !Target.syncWithMain;
+
+			EditorGUILayout.LabelField("Current FOV", Target.FOV.ToString());
+			Target.FOV = Target.defaultFOV = EditorGUILayout.IntField("Default FOV", Target.defaultFOV);
+
+			GUI.enabled = true;
+
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.Space();
 
 		showWorldSpaceUI.target = EditorGUILayout.Toggle("Use World Space UI", showWorldSpaceUI.target);
 		Target.useWorldSpaceUI = showWorldSpaceUI.value;
@@ -36,9 +56,7 @@ public class ScaleWidthCameraEditor : Editor
 			Target.worldSpaceUI = (RectTransform)EditorGUILayout.ObjectField("World Space UI", Target.worldSpaceUI, typeof(RectTransform), true);
 
 			if (Target.worldSpaceUI == null)
-			{
 				EditorGUILayout.HelpBox("No world space UI selected!", MessageType.Error);
-			}
 
 			EditorGUI.indentLevel--;
 		}
@@ -46,9 +64,7 @@ public class ScaleWidthCameraEditor : Editor
 		EditorGUILayout.EndFadeGroup();
 
 		if (GUI.changed)
-		{
 			EditorUtility.SetDirty(Target);
-		}
 
 		serializedObject.ApplyModifiedProperties();
 		Repaint();

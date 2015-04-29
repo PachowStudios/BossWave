@@ -20,7 +20,7 @@ public abstract class LevelManager : MonoBehaviour
 	#endregion
 
 	#region Fields
-	private static LevelManager instance;
+	protected static LevelManager instance;
 
 	public bool spawnEnemies = true;
 	public string spawnerTag = "Spawner";

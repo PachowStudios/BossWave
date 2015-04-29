@@ -45,6 +45,11 @@ public sealed class Level2 : LevelManager
 	private float elevatorLeftTime = 0f;
 	#endregion
 
+	#region Public Properties
+	public static new Level2 Instance
+	{ get { return (Level2)instance; } }
+	#endregion
+
 	#region Internal Properties
 	private float ElevatorMeterPercentage
 	{ get { return Extensions.ConvertRange(waveTimer, currentFloor.elevatorArriveTime, currentFloor.elevatorOpenTime, 0f, 1f); } }
@@ -82,7 +87,7 @@ public sealed class Level2 : LevelManager
 		}
 		else if (elevatorState == ElevatorState.Open)
 		{
-			if (waveTimer >= currentFloor.elevatorLeaveTime)
+			if (elevator.IsPlayerInside || waveTimer >= currentFloor.elevatorLeaveTime)
 			{
 				if (elevator.IsPlayerInside)
 				{
