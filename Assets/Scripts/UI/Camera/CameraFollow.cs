@@ -11,10 +11,10 @@ public class CameraFollow : MonoBehaviour
 	public float smoothing = 1f;
 	public Transform followTarget;
 	public bool stayAboveGroundLevel = true;
+	public bool lockX = false;
 
 	private float currentYOffset;
 	private bool usePlayerY = false;
-	private bool lockX = false;
 	private Vector3 targetPosition = new Vector3();
 	private Vector3 previousTargetPosition = new Vector3();
 	private Vector3 previousPosition;
