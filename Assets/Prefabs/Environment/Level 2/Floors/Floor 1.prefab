@@ -870,7 +870,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100034}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!61 &6100032
@@ -881,7 +881,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100036}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!61 &6100034
@@ -892,7 +892,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100038}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!61 &6100036
@@ -903,7 +903,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100040}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!61 &6100038
@@ -914,7 +914,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100042}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!61 &6100040
@@ -925,7 +925,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 100044}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Size: {x: 2, y: 4.0999999}
   m_Center: {x: 0, y: 2.04999995}
 --- !u!65 &6500000
@@ -1249,7 +1249,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2651302749
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95517a884a9d67548a69437b9f9cdb2b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca40b4371e452414782a8ee7705715fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200004
 SpriteRenderer:
@@ -1425,7 +1425,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 2651302749
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 95517a884a9d67548a69437b9f9cdb2b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ca40b4371e452414782a8ee7705715fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

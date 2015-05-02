@@ -239,11 +239,11 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 19.9756489
+  orthographic size: 19.96632
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4194304
+    m_Bits: 0
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -346,11 +346,11 @@ MonoBehaviour:
     oldScrolling: []
     newScrolling: []
   - elevatorArriveTime: 12
-    elevatorOpenTime: 1000
-    elevatorLeaveTime: 2000
+    elevatorOpenTime: 16
+    elevatorLeaveTime: 19
     switchPercentage: .5
     layersSwitched: 0
-    mainFloor: {fileID: 11400000, guid: 085115306e821704e873c0700f8fda65, type: 2}
+    mainFloor: {fileID: 11400002, guid: 085115306e821704e873c0700f8fda65, type: 2}
     oldScrolling:
     - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
     - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
@@ -363,6 +363,24 @@ MonoBehaviour:
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+  - elevatorArriveTime: 25
+    elevatorOpenTime: 1000
+    elevatorLeaveTime: 2000
+    switchPercentage: .5
+    layersSwitched: 0
+    mainFloor: {fileID: 11400002, guid: 8aa43efaaeda62c4f9d9ace149990041, type: 2}
+    oldScrolling:
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    newScrolling:
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
   elevatorSpeed: 100
   elevatorTransitionTime: 2
   elevatorDoorTime: .600000024
@@ -623,7 +641,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 71, y: 39.9512978}
+  m_SizeDelta: {x: 71, y: 39.9326401}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400002
 RectTransform:
