@@ -38,6 +38,7 @@ public sealed class Level2 : LevelManager
 	public float elevatorSpeed = 100f;
 	public float elevatorTransitionTime = 2f;
 	public float elevatorDoorTime = 0.6f;
+	public float elevatorWarningTime = 3f;
 	public Ease elevatorStartEase = Ease.InCubic;
 
 	FloorWave currentFloor;
@@ -104,6 +105,7 @@ public sealed class Level2 : LevelManager
 		{
 			elevatorState = ElevatorState.Open;
 			currentFloor.mainFloor.OpenElevator();
+			Timer.Instance.StartTimer(currentFloor.elevatorLeaveTime - waveTimer, flashTime: elevatorWarningTime, onCompleteCallback: MissElevator);
 		}
 		else
 		{
@@ -118,11 +120,8 @@ public sealed class Level2 : LevelManager
 			if (elevator.IsPlayerInside)
 			{
 				elevatorState = ElevatorState.Moving;
+				Timer.Instance.StopTimer(true);
 				StartCoroutine(StartElevator());
-			}
-			else
-			{
-				StartCoroutine(MissElevator());
 			}
 		}
 	}
@@ -202,12 +201,9 @@ public sealed class Level2 : LevelManager
 		currentFloor.mainFloor.CloseElevator();
 	}
 
-	private IEnumerator MissElevator()
+	private void MissElevator()
 	{
 		currentFloor.mainFloor.CloseElevator();
-
-		yield return new WaitForSeconds(elevatorDoorTime);
-
 		StartCoroutine(GameMenu.Instance.GameOver("YOU MISSED THE ELEVATOR"));
 	}
 

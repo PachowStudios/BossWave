@@ -55,8 +55,7 @@ public sealed class Level1 : LevelManager
 
 		if (BossWaveActive && PlayerControl.Instance.IsDead)
 		{
-			Timer.Instance.StopTimer();
-			Timer.Instance.Hide();
+			Timer.Instance.StopTimer(true);
 			DOTween.To(() => Parallax.OverrideSpeed.Value, x => Parallax.OverrideSpeed = x, 0f, 2f)
 				.SetEase(Ease.OutSine);
 		}

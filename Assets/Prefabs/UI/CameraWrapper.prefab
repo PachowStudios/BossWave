@@ -1825,7 +1825,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 19.9756489
+  orthographic size: 19.96632
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3345,7 +3345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: .200000003, y: .200000003}
+  m_EffectDistance: {x: .100000001, y: .100000001}
   m_UseGraphicAlpha: 1
 --- !u!114 &11400096
 MonoBehaviour:
@@ -3361,6 +3361,8 @@ MonoBehaviour:
   fadeTime: .5
   showY: -1.5
   hideY: 3
+  flashColor: {r: .749019623, g: 0, b: 0, a: 1}
+  flashSpeed: .5
 --- !u!114 &11400098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3499,7 +3501,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 22400080}
   m_Direction: 2
   m_Value: 1
-  m_Size: .800000012
+  m_Size: .799999952
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5682,7 +5684,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 71, y: 39.9512978}
+  m_SizeDelta: {x: 71, y: 39.9326401}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400012
 RectTransform:

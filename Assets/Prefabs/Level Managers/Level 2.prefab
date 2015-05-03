@@ -344,7 +344,7 @@ MonoBehaviour:
   floorWaves:
   - elevatorArriveTime: 0
     elevatorOpenTime: 3
-    elevatorLeaveTime: 6
+    elevatorLeaveTime: 8
     switchPercentage: .5
     layersSwitched: 0
     mainFloor: {fileID: 0}
@@ -419,6 +419,7 @@ MonoBehaviour:
   elevatorSpeed: 100
   elevatorTransitionTime: 1.29999995
   elevatorDoorTime: .600000024
+  elevatorWarningTime: 3
   elevatorStartEase: 8
 --- !u!114 &11400002
 MonoBehaviour:

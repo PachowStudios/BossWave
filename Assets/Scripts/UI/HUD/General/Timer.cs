@@ -12,10 +12,13 @@ public class Timer : MonoBehaviour
 	public float fadeTime = 0.5f;
 	public float showY = -1.5f;
 	public float hideY = 3f;
+	public Color flashColor = Color.red;
+	public float flashSpeed = 0.5f;
 
 	private bool showing = false;
-	private Tween tween = null;
 	private float time = 0f;
+	private Tween timerTween = null;
+	private Tween flashTween = null;
 
 	private Text text;
 	private CanvasGroup canvasGroup;
@@ -40,39 +43,59 @@ public class Timer : MonoBehaviour
 
 	private void Update()
 	{
-		text.text = time.ToString("F2");
+		if (timerTween != null)
+			text.text = time.ToString("F2");
 	}
 	#endregion
 
 	#region Public Methods
-	public void StartTimer(float startTime, float? duration = null, bool hideOnComplete = false, Action onCompleteCallback = null)
+	public void StartTimer(float startTime, float? duration = null, float? flashTime = null, bool hideOnComplete = false, Action onCompleteCallback = null)
 	{
-		if (tween != null && tween.IsPlaying())
-			tween.Kill();
+		if (timerTween != null && timerTween.IsPlaying())
+			timerTween.Kill();
+
+		if (flashTween != null && flashTween.IsPlaying())
+			flashTween.Kill();
 
 		time = startTime;
+		duration = duration ?? startTime;
 
-		tween = DOTween.To(() => time, t => time = t, 0f, duration ?? startTime)
+		timerTween = DOTween.To(() => time, t => time = t, 0f, duration.Value)
 			.SetEase(Ease.Linear);
 
-		if (onCompleteCallback != null)
-			tween.OnComplete(() =>
-			{
+		if (flashTime.HasValue)
+			flashTween = text.DOColor(flashColor, flashSpeed)
+				.SetEase(Ease.InSine)
+				.SetDelay(duration.Value - flashTime.Value)
+				.SetLoops((int)(flashTime.Value / flashSpeed) - 1, LoopType.Yoyo)
+				.OnComplete(() =>
+					{
+						text.DOColor(flashColor, time)
+							.SetEase(Ease.InSine);
+					});
+
+		timerTween.OnComplete(() =>
+		{
+			if (onCompleteCallback != null)
 				onCompleteCallback();
 
-				if (hideOnComplete)
-					Hide();
-			});
+			if (hideOnComplete)
+				Hide();
+		});
 
 		Show();
 	}
 
-	public void StopTimer()
+	public void StopTimer(bool hide = false)
 	{
-		if (tween == null)
-			return;
+		if (timerTween != null && timerTween.IsPlaying())
+			timerTween.Kill();
 
-		tween.Kill();
+		if (flashTween != null && timerTween.IsPlaying())
+			flashTween.Kill();
+
+		if (hide)
+			Hide();
 	}
 
 	public void Show(float time = 0f)
@@ -82,6 +105,7 @@ public class Timer : MonoBehaviour
 
 		time = (time == 0f) ? fadeTime : time;
 		canvasGroup.alpha = 1f;
+		text.color = Color.white;
 		text.rectTransform.DOAnchorPos(new Vector2(text.rectTransform.anchoredPosition.x, showY), time);
 
 		showing = true;
@@ -94,7 +118,11 @@ public class Timer : MonoBehaviour
 
 		time = (time == 0f) ? fadeTime : time;
 		text.rectTransform.DOAnchorPos(new Vector2(text.rectTransform.anchoredPosition.x, hideY), time)
-			.OnComplete(() => canvasGroup.alpha = 0f);
+			.OnComplete(() =>
+				{
+					canvasGroup.alpha = 0f;
+					text.color = Color.white;
+				});
 
 		showing = false;
 	}
