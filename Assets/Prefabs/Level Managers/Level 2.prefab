@@ -334,8 +334,13 @@ MonoBehaviour:
   groundLevel: {fileID: 400002}
   bossWaveWaitPoint: {fileID: 0}
   elevator: {fileID: 0}
-  coverScrolling: {fileID: 0}
-  floorScrolling: {fileID: 0}
+  floorScrollingLayer: {fileID: 0}
+  coverScrollingLayer: {fileID: 0}
+  backgroundScrollingLayers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   floorWaves:
   - elevatorArriveTime: 0
     elevatorOpenTime: 3

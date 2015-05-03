@@ -31,8 +31,9 @@ public sealed class Level2 : LevelManager
 
 	#region Fields
 	public BuildingElevator elevator;
-	public Parallax coverScrolling;
-	public Parallax floorScrolling;
+	public Parallax floorScrollingLayer;
+	public Parallax coverScrollingLayer;
+	public List<Parallax> backgroundScrollingLayers;
 	public List<FloorWave> floorWaves;
 	public float elevatorSpeed = 100f;
 	public float elevatorTransitionTime = 2f;
@@ -131,7 +132,7 @@ public sealed class Level2 : LevelManager
 		if (!currentFloor.layersSwitched && ElevatorMovingPercentage >= currentFloor.switchPercentage)
 		{
 			currentFloor.layersSwitched = true;
-			floorScrolling.AddLayers(currentFloor.newScrolling, instantiate: true);
+			floorScrollingLayer.AddLayers(currentFloor.newScrolling, instantiate: true);
 		}
 
 		if (waveTimer >= currentFloor.elevatorArriveTime - elevatorTransitionTime)
@@ -139,17 +140,16 @@ public sealed class Level2 : LevelManager
 			elevatorState = ElevatorState.Arriving;
 			currentFloor.mainFloor = Instantiate(currentFloor.mainFloor, new Vector3(0f, 20f, 0f), Quaternion.identity) as BuildingFloor;
 			elevator.currentFloor = currentFloor.mainFloor;
-			floorScrolling.AddLayerOnce(currentFloor.mainFloor.transform);
+			floorScrollingLayer.AddLayerOnce(currentFloor.mainFloor.transform);
 		}
 	}
 
 	private void UpdateElevatorArriving()
 	{
-		float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrolling.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
-		coverScrolling.defaultSpeed = Mathf.Max(coverScrolling.defaultSpeed - currentDeceleration, 0f);
-		floorScrolling.defaultSpeed = coverScrolling.defaultSpeed;
+		float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrollingLayer.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
+		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.defaultSpeed - currentDeceleration, 0f));
 
-		if (coverScrolling.defaultSpeed == 0f)
+		if (floorScrollingLayer.defaultSpeed == 0f)
 		{
 			elevatorState = ElevatorState.Closed;
 			StartCoroutine(StopElevator());
@@ -163,34 +163,28 @@ public sealed class Level2 : LevelManager
 		currentFloor.mainFloor.CloseElevator();
 		currentFloorIndex++;
 		currentFloor = floorWaves[currentFloorIndex];
+		elevatorLeftTime = waveTimer;
 
 		yield return new WaitForSeconds(elevatorDoorTime);
 
 		elevator.CenterPlayer();
-		elevatorLeftTime = waveTimer;
-
-		DOTween.To(s => coverScrolling.defaultSpeed = s, 0f, elevatorSpeed, elevatorTransitionTime)
-			.OnStart(() => coverScrolling.scroll = true)
-			.SetEase(elevatorStartEase);
-		DOTween.To(s => floorScrolling.defaultSpeed = s, 0f, elevatorSpeed, elevatorTransitionTime)
-			.OnStart(() => floorScrolling.scroll = true)
-			.SetEase(elevatorStartEase);
-
-		floorScrolling.AddLayers(currentFloor.oldScrolling, instantiate: true);
+		floorScrollingLayer.AddLayers(currentFloor.oldScrolling, instantiate: true);
 		TransparentForeground.allowHiding = false;
+
+		DOTween.To(s => SetScrollingSpeed(s), 0f, elevatorSpeed, elevatorTransitionTime)
+			.OnStart(() => SetScrollingActive(true))
+			.SetEase(elevatorStartEase);
 	}
 
 	private IEnumerator StopElevator()
 	{
 		TransparentForeground.allowHiding = true;
-		coverScrolling.scroll = false;
-		floorScrolling.scroll = false;
+		SetScrollingActive(false);
 
 		if (ElevatorPositionOffset != 0f)
 		{
 			Vector3 elevatorPositionOffsetVector = new Vector3(0f, -ElevatorPositionOffset, 0f);
-			coverScrolling.OffsetLayers(elevatorPositionOffsetVector);
-			floorScrolling.OffsetLayers(elevatorPositionOffsetVector);
+			OffsetScrollingLayers(elevatorPositionOffsetVector);
 		}
 
 		currentFloor.mainFloor.OpenElevator();
@@ -208,6 +202,33 @@ public sealed class Level2 : LevelManager
 		yield return new WaitForSeconds(elevatorDoorTime);
 
 		StartCoroutine(GameMenu.Instance.GameOver("YOU MISSED THE ELEVATOR"));
+	}
+
+	private void SetScrollingSpeed(float speed)
+	{
+		floorScrollingLayer.defaultSpeed = speed;
+		coverScrollingLayer.defaultSpeed = speed;
+
+		foreach (Parallax layer in backgroundScrollingLayers)
+			layer.defaultSpeed = speed;
+	}
+
+	private void SetScrollingActive(bool active)
+	{
+		floorScrollingLayer.scroll = active;
+		coverScrollingLayer.scroll = active;
+
+		foreach (Parallax layer in backgroundScrollingLayers)
+			layer.scroll = active;
+	}
+
+	private void OffsetScrollingLayers(Vector3 offset)
+	{
+		floorScrollingLayer.OffsetLayers(offset);
+		coverScrollingLayer.OffsetLayers(offset);
+
+		foreach (Parallax layer in backgroundScrollingLayers)
+			layer.OffsetLayers(offset);
 	}
 	#endregion
 
