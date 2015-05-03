@@ -102,6 +102,7 @@ public class Parallax : MonoBehaviour
 							{
 								layers.Remove(firstChild);
 								layers.Add(firstChild);
+								firstChild.SendMessage("OnLooped", SendMessageOptions.DontRequireReceiver);
 							}
 						}
 						else

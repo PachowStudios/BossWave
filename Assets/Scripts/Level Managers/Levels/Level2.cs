@@ -169,7 +169,7 @@ public sealed class Level2 : LevelManager
 
 		elevator.CenterPlayer();
 		floorScrollingLayer.AddLayers(currentFloor.oldScrolling, instantiate: true);
-		TransparentForeground.allowHiding = false;
+		BuildingCover.allowHiding = false;
 
 		DOTween.To(s => SetScrollingSpeed(s), 0f, elevatorSpeed, elevatorTransitionTime)
 			.OnStart(() => SetScrollingActive(true))
@@ -178,7 +178,7 @@ public sealed class Level2 : LevelManager
 
 	private IEnumerator StopElevator()
 	{
-		TransparentForeground.allowHiding = true;
+		BuildingCover.allowHiding = true;
 		SetScrollingActive(false);
 
 		if (ElevatorPositionOffset != 0f)

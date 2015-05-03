@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
-public sealed class TransparentForeground : MonoBehaviour
+public sealed class BuildingCover : MonoBehaviour
 {
 	#region Fields
 	public static bool allowHiding = true;
@@ -11,15 +12,20 @@ public sealed class TransparentForeground : MonoBehaviour
 	public float hiddenOpacity = 0f;
 	public float fadeTime = 0.5f;
 
+	public SpriteRenderer leftGlass;
+	public SpriteRenderer rightGlass;
+
 	private bool hidden = false;
 
-	private SpriteRenderer spriteRenderer;
+	private List<SpriteRenderer> fadeSpriteRenderers = new List<SpriteRenderer>();
 	#endregion
 
 	#region MonoBehaviour
 	private void Awake()
 	{
-		spriteRenderer = GetComponent<SpriteRenderer>();
+		fadeSpriteRenderers.Add(GetComponent<SpriteRenderer>());
+		fadeSpriteRenderers.Add(leftGlass);
+		fadeSpriteRenderers.Add(rightGlass);
 	}
 
 	private void Update()
@@ -37,15 +43,29 @@ public sealed class TransparentForeground : MonoBehaviour
 	#region Internal Helper Methods
 	private void Show()
 	{
-		spriteRenderer.DOKill();
-		spriteRenderer.DOFade(1f, fadeTime);
+		foreach (SpriteRenderer spriteRenderer in fadeSpriteRenderers)
+		{
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.DOKill();
+				spriteRenderer.DOFade(1f, fadeTime);
+			}
+		}
+
 		hidden = false;
 	}
 
 	private void Hide()
 	{
-		spriteRenderer.DOKill();
-		spriteRenderer.DOFade(hiddenOpacity, fadeTime);
+		foreach (SpriteRenderer spriteRenderer in fadeSpriteRenderers)
+		{
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.DOKill();
+				spriteRenderer.DOFade(hiddenOpacity, fadeTime);
+			}
+		}
+
 		hidden = true;
 	}
 	#endregion

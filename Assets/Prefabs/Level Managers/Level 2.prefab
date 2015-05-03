@@ -387,7 +387,7 @@ MonoBehaviour:
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
   elevatorSpeed: 100
-  elevatorTransitionTime: 2
+  elevatorTransitionTime: 1.10000002
   elevatorDoorTime: .600000024
   elevatorStartEase: 8
 --- !u!114 &11400002
