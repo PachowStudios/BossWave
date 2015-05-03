@@ -1053,6 +1053,7 @@ MonoBehaviour:
   scroll: 0
   loop: 1
   cameraParallax: 0
+  destroyAfterScroll: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

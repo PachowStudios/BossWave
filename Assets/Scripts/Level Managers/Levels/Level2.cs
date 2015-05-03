@@ -132,7 +132,8 @@ public sealed class Level2 : LevelManager
 		if (!currentFloor.layersSwitched && ElevatorMovingPercentage >= currentFloor.switchPercentage)
 		{
 			currentFloor.layersSwitched = true;
-			floorScrollingLayer.AddLayers(currentFloor.newScrolling, instantiate: true);
+			floorScrollingLayer.RemoveLayers();
+			floorScrollingLayer.AddLayers(currentFloor.newScrolling, true);
 		}
 
 		if (waveTimer >= currentFloor.elevatorArriveTime - elevatorTransitionTime)
@@ -140,7 +141,11 @@ public sealed class Level2 : LevelManager
 			elevatorState = ElevatorState.Arriving;
 			currentFloor.mainFloor = Instantiate(currentFloor.mainFloor, new Vector3(0f, 20f, 0f), Quaternion.identity) as BuildingFloor;
 			elevator.currentFloor = currentFloor.mainFloor;
-			floorScrollingLayer.AddLayerOnce(currentFloor.mainFloor.transform);
+			floorScrollingLayer.RemoveLayers();
+			floorScrollingLayer.AddLayer(currentFloor.mainFloor.transform, true);
+
+			if (currentFloorIndex == floorWaves.Count - 1)
+				coverScrollingLayer.SetLooping(false, false);
 		}
 	}
 
@@ -149,7 +154,7 @@ public sealed class Level2 : LevelManager
 		float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrollingLayer.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
 		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.defaultSpeed - currentDeceleration, 0f));
 
-		if (floorScrollingLayer.defaultSpeed == 0f)
+		if (floorScrollingLayer.defaultSpeed == 0f || waveTimer >= currentFloor.elevatorArriveTime)
 		{
 			elevatorState = ElevatorState.Closed;
 			StartCoroutine(StopElevator());
@@ -168,7 +173,8 @@ public sealed class Level2 : LevelManager
 		yield return new WaitForSeconds(elevatorDoorTime);
 
 		elevator.CenterPlayer();
-		floorScrollingLayer.AddLayers(currentFloor.oldScrolling, instantiate: true);
+		floorScrollingLayer.RemoveLayers();
+		floorScrollingLayer.AddLayers(currentFloor.oldScrolling, true);
 		BuildingCover.allowHiding = false;
 
 		DOTween.To(s => SetScrollingSpeed(s), 0f, elevatorSpeed, elevatorTransitionTime)
@@ -180,6 +186,7 @@ public sealed class Level2 : LevelManager
 	{
 		BuildingCover.allowHiding = true;
 		SetScrollingActive(false);
+		SetScrollingSpeed(0f);
 
 		if (ElevatorPositionOffset != 0f)
 		{

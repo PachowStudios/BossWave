@@ -23,6 +23,7 @@ public class Parallax : MonoBehaviour
 	public bool scroll = false;
 	public bool loop = false;
 	public bool cameraParallax = false;
+	public bool destroyAfterScroll = true;
 
 	private List<Transform> layers = new List<Transform>();
 	#endregion
@@ -102,14 +103,16 @@ public class Parallax : MonoBehaviour
 							{
 								layers.Remove(firstChild);
 								layers.Add(firstChild);
-								firstChild.SendMessage("OnLooped", SendMessageOptions.DontRequireReceiver);
 							}
 						}
-						else
+						else if (destroyAfterScroll)
 						{
 							layers.Remove(firstChild);
 							Destroy(firstChild.gameObject);
 						}
+
+						if (firstChild != null)
+							firstChild.SendMessage("OnScrolled", SendMessageOptions.DontRequireReceiver);
 					}
 				}
 			}
@@ -122,12 +125,8 @@ public class Parallax : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void AddLayers(List<Transform> newLayers, bool replace = true, bool instantiate = false)
+	public void AddLayers(List<Transform> newLayers, bool instantiate = false)
 	{
-		if (replace)
-			foreach (Transform layer in layers)
-				layer.tag = "ScrollOnce";
-
 		foreach (Transform layer in newLayers)
 		{
 			Transform newLayer;
@@ -148,9 +147,11 @@ public class Parallax : MonoBehaviour
 		}
 	}
 
-	public void AddLayerOnce(Transform newLayer)
+	public void AddLayer(Transform newLayer, bool scrollOnce = false)
 	{
-		newLayer.tag = "ScrollOnce";
+		if (scrollOnce)
+			newLayer.tag = "ScrollOnce";
+
 		newLayer.parent = transform;
 		newLayer.position = NewLayerPosition;
 		layers.Add(newLayer);
@@ -176,6 +177,18 @@ public class Parallax : MonoBehaviour
 
 		layers.Add(endcap);
 		loop = false;
+	}
+
+	public void RemoveLayers()
+	{
+		foreach (Transform layer in layers)
+			layer.tag = "ScrollOnce";
+	}
+
+	public void SetLooping(bool loop, bool destroyAfterScroll = true)
+	{
+		this.loop = loop;
+		this.destroyAfterScroll = destroyAfterScroll;
 	}
 
 	public void OffsetLayers(Vector3 offset)

@@ -362,15 +362,19 @@ MonoBehaviour:
     - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
     - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
     - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
+    - {fileID: 400000, guid: 0e1cc6d6fa0c3384e9bdc5a51843de52, type: 2}
     newScrolling:
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
   - elevatorArriveTime: 25
-    elevatorOpenTime: 1000
-    elevatorLeaveTime: 2000
+    elevatorOpenTime: 29
+    elevatorLeaveTime: 32
     switchPercentage: .5
     layersSwitched: 0
     mainFloor: {fileID: 11400002, guid: 8aa43efaaeda62c4f9d9ace149990041, type: 2}
@@ -380,14 +384,40 @@ MonoBehaviour:
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
+    - {fileID: 400000, guid: 864fe14b9ba117046a4aa790c1348f0b, type: 2}
     newScrolling:
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+  - elevatorArriveTime: 37
+    elevatorOpenTime: 1000
+    elevatorLeaveTime: 2000
+    switchPercentage: .5
+    layersSwitched: 0
+    mainFloor: {fileID: 11400000, guid: 8766743381c6ebf43a5cad215567d864, type: 2}
+    oldScrolling:
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    newScrolling:
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
+    - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
   elevatorSpeed: 100
-  elevatorTransitionTime: 1.10000002
+  elevatorTransitionTime: 1.29999995
   elevatorDoorTime: .600000024
   elevatorStartEase: 8
 --- !u!114 &11400002
