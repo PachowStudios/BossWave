@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: fa5064b8186c0c0409be2ac888287542
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Attacking_0
+    21300002: Attacking_1
+    21300004: Attacking_2
+    21300006: Attacking_3
+    21300008: Attacking_4
+    21300010: Attacking_5
+    21300012: Attacking_6
+    21300014: Attacking_7
+    21300016: Attacking_8
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Attacking_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_2
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_3
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_5
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_6
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_7
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Attacking_8
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 0
+        width: 104
+        height: 51
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
