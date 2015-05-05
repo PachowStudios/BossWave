@@ -69,4 +69,19 @@ public sealed class BuildingCover : MonoBehaviour
 		hidden = true;
 	}
 	#endregion
+
+
+	#region Public Methods
+	public void SetSorting(string sortingLayer, int sortingOrder)
+	{
+		foreach (SpriteRenderer spriteRenderer in fadeSpriteRenderers)
+		{
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.sortingLayerName = sortingLayer;
+				spriteRenderer.sortingOrder = sortingOrder;
+			}
+		}
+	}
+	#endregion
 }

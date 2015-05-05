@@ -45,6 +45,9 @@ public sealed class Level2 : LevelManager
 	private int currentFloorIndex = 0;
 	private ElevatorState elevatorState = ElevatorState.Closed;
 	private float elevatorLeftTime = 0f;
+
+	private Boss bossInstance;
+	private bool bossWaveInitialized = false;
 	#endregion
 
 	#region Public Properties
@@ -238,7 +241,7 @@ public sealed class Level2 : LevelManager
 	#region Boss Wave Methods
 	protected override void InitializeBossWave()
 	{
-		
+		PowerupSpawner.Instance.spawnPowerups = false;
 	}
 
 	public override void StartBossWave()
