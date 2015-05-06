@@ -77,42 +77,34 @@ public class SecondaryShotBox : MonoBehaviour
 	#region Public Methods
 	public void Show(float time = 0f, bool fade = false)
 	{
-		if (!showing)
-		{
-			time = (time == 0f) ? fadeTime : time;
+		if (showing)
+			return;
 
-			if (fade)
-			{
-				canvasGroup.DOFade(1f, time);	
-			}
-			else
-			{
-				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, showY), time);
-			}
+		time = (time == 0f) ? fadeTime : time;
 
-			showing = true;
-			overrideShowing = false;
-		}
+		if (fade)
+			canvasGroup.DOFade(1f, time);
+		else
+			rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, showY), time);
+
+		showing = true;
+		overrideShowing = false;
 	}
 
 	public void Hide(float time = 0f, bool fade = false)
 	{
-		if (showing)
-		{
-			time = (time == 0f) ? fadeTime : time;
+		if (!showing)
+			return;
 
-			if (fade)
-			{
-				canvasGroup.DOFade(0f, time);
-			}
-			else
-			{
-				rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, hideY), time);
-			}
+		time = (time == 0f) ? fadeTime : time;
+
+		if (fade)
+			canvasGroup.DOFade(0f, time);
+		else
+			rectTransform.DOAnchorPos(new Vector2(rectTransform.anchoredPosition.x, hideY), time);
 			
-			showing = false;
-			overrideShowing = true;
-		}
+		showing = false;
+		overrideShowing = true;
 	}
 	#endregion
 }

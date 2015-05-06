@@ -35,7 +35,7 @@ public sealed class Scraffy : Boss
 			.AppendInterval(2f)
 			.AppendCallback(() =>
 				{
-					Cutscene.Instance.Show();
+					Cutscene.Instance.StartCutscene();
 					CameraFollow.Instance.FollowObject(transform, false, 0.5f, true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
 					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);

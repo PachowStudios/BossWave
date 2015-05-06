@@ -191,4 +191,9 @@ public abstract class LevelManager : MonoBehaviour
 	public abstract void StartBossWave();
 	public abstract void CompleteBossWave();
 	#endregion
+
+	#region Level UI Methods
+	public abstract void ShowUI(float fadeTime = 0f);
+	public abstract void HideUI(float fadeTime = 0f);
+	#endregion
 }

@@ -77,7 +77,7 @@ public sealed class Level1 : LevelManager
 
 		PlayerControl.Instance.continuouslyRunning = true;
 
-		Cutscene.Instance.Hide(true);
+		Cutscene.Instance.EndCutscene(true);
 
 		foreach (GameObject element in scrollingElements)
 		{
@@ -106,5 +106,13 @@ public sealed class Level1 : LevelManager
 
 		StartCoroutine(GameMenu.Instance.GameWin());
 	}
+	#endregion
+
+	#region Level UI Methods
+	public override void ShowUI(float fadeTime = 0f)
+	{ }
+
+	public override void HideUI(float fadeTime = 0f)
+	{ }
 	#endregion
 }

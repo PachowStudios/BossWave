@@ -35,7 +35,7 @@ public class Cutscene : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void Show(bool disableInput = false)
+	public void StartCutscene(bool disableInput = false)
 	{
 		if (showing)
 			return;
@@ -43,10 +43,7 @@ public class Cutscene : MonoBehaviour
 		canvasGroup.DOFade(1f, fadeTime);
 		topBar.DOAnchorPos(new Vector2(topBar.anchoredPosition.x, showY), fadeTime);
 		bottomBar.DOAnchorPos(new Vector2(bottomBar.anchoredPosition.x, -showY), fadeTime);
-
-		HealthDisplay.Instance.Hide(fadeTime);
-		ComboMeter.Instance.Hide(fadeTime);
-		SecondaryShotBox.Instance.Hide(fadeTime, true);
+		HideUI(fadeTime);
 
 		if (disableInput)
 			PlayerControl.Instance.DisableInput();
@@ -54,7 +51,7 @@ public class Cutscene : MonoBehaviour
 		showing = true;
 	}
 
-	public void Hide(bool enableInput = false)
+	public void EndCutscene(bool enableInput = false)
 	{
 		if (!showing)
 			return;
@@ -62,10 +59,7 @@ public class Cutscene : MonoBehaviour
 		canvasGroup.DOFade(0f, fadeTime);
 		topBar.DOAnchorPos(new Vector2(topBar.anchoredPosition.x, hideY), fadeTime);
 		bottomBar.DOAnchorPos(new Vector2(bottomBar.anchoredPosition.x, hideY), fadeTime);
-
-		HealthDisplay.Instance.Show(fadeTime);
-		ComboMeter.Instance.Show(fadeTime);
-		SecondaryShotBox.Instance.Show(fadeTime, true);
+		ShowUI(fadeTime);
 
 		if (enableInput && PlayerControl.Instance.IsInputDisabled)
 			PlayerControl.Instance.EnableInput();
@@ -73,12 +67,22 @@ public class Cutscene : MonoBehaviour
 		showing = false;
 	}
 
-	public void HideUI(float newFadeTime)
+	public void ShowUI(float fadeTime)
 	{
-		HealthDisplay.Instance.Hide(newFadeTime);
-		ComboMeter.Instance.Hide(newFadeTime);
-		SecondaryShotBox.Instance.Hide(newFadeTime, true);
-		Timer.Instance.Hide(newFadeTime);
+		HealthDisplay.Instance.Show(fadeTime);
+		ComboMeter.Instance.Show(fadeTime);
+		SecondaryShotBox.Instance.Show(fadeTime, true);
+		LevelManager.Instance.ShowUI(fadeTime);
+		//Timer.Instance.Show(fadeTime);
+	}
+
+	public void HideUI(float fadeTime)
+	{
+		HealthDisplay.Instance.Hide(fadeTime);
+		ComboMeter.Instance.Hide(fadeTime);
+		SecondaryShotBox.Instance.Hide(fadeTime, true);
+		LevelManager.Instance.HideUI(fadeTime);
+		//Timer.Instance.Hide(fadeTime);
 	}
 	#endregion
 }

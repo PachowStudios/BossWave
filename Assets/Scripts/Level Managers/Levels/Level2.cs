@@ -268,4 +268,16 @@ public sealed class Level2 : LevelManager
 		
 	}
 	#endregion
+
+	#region Level UI Methods
+	public override void ShowUI(float fadeTime = 0f)
+	{
+		ElevatorHealthMeter.Instance.Show(fadeTime);
+	}
+
+	public override void HideUI(float fadeTime = 0f)
+	{
+		ElevatorHealthMeter.Instance.Hide(fadeTime);
+	}
+	#endregion
 }

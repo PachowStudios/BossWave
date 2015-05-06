@@ -40,24 +40,24 @@ public class ComboMeter : MonoBehaviour
 	#region Public Methods
 	public void Show(float time = 0f)
 	{
-		if (!showing)
-		{
-			time = (time == 0f) ? fadeTime : time;
-			canvasGroup.DOFade(1f, time);
+		if (showing)
+			return;
 
-			showing = true;
-		}
+		time = (time == 0f) ? fadeTime : time;
+		canvasGroup.DOFade(1f, time);
+
+		showing = true;
 	}
 
 	public void Hide(float time = 0f)
 	{
-		if (showing)
-		{
-			time = (time == 0f) ? fadeTime : time;
-			canvasGroup.DOFade(0f, time);
+		if (!showing)
+			return;
 
-			showing = false;
-		}
+		time = (time == 0f) ? fadeTime : time;
+		canvasGroup.DOFade(0f, time);
+
+		showing = false;
 	}
 	#endregion
 }
