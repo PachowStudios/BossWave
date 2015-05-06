@@ -42,17 +42,20 @@ public class VectorPathEditor : Editor
 
 	private void OnSceneGUI()
 	{
-		if (Target.enabled && Target.nodes.Length> 0)
+		if (!Target.enabled)
+			return;
+
+		Vector3[] currentNodes = Target.Nodes;
+
+		if (currentNodes.Length > 0)
 		{
 			Undo.RecordObject(Target, "Adjust Vector Path");
 
-			Handles.Label(Target.nodes[0], "'" + Target.pathName + " Begin", style);
-			Handles.Label(Target.nodes[Target.nodes.Length - 1], "'" + Target.pathName + " End", style);
+			Handles.Label(currentNodes[0], "'" + Target.pathName + " Begin", style);
+			Handles.Label(currentNodes[currentNodes.Length - 1], "'" + Target.pathName + " End", style);
 
-			for (int i = 0; i < Target.nodes.Length; i++)
-			{
-				Target.nodes[i] = Handles.PositionHandle(Target.nodes[i], Quaternion.identity);
-			}
+			for (int i = 0; i < currentNodes.Length; i++)
+				Target.nodes[i] = Handles.PositionHandle(currentNodes[i], Quaternion.identity) - (Target.isLocal ? Target.transform.position : Vector3.zero);
 		}
 	}
 	#endregion

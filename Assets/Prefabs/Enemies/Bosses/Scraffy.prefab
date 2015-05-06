@@ -525,7 +525,10 @@ MonoBehaviour:
   ignoreProjectiles: 0
   introName: Scraffy
   introDescription: I hope you brought a parachute...
-  introSprite: {fileID: 21300000, guid: 8b56fab6f11112f4db115fe12063e514, type: 3}
+  introSprite: {fileID: 21300000, guid: 7aa5eec35c7ac4b47a81c3c6e54ead99, type: 3}
+  warningPopup: {fileID: 21300000, guid: 61f3730bdc492864e910ea44f8af4eb8, type: 3}
+  spawnPathName: Boss Intro
+  spawnPathTime: 3
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

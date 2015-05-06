@@ -49,9 +49,7 @@ public sealed class Level1 : LevelManager
 		base.Update();
 
 		if (waveTimer >= bossWave.startTime && !bossWaveInitialized)
-		{
 			InitializeBossWave();
-		}
 
 		if (BossWaveActive && PlayerControl.Instance.IsDead)
 		{

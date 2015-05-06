@@ -10,9 +10,7 @@ public class CameraShake : MonoBehaviour
 
 	#region Public Properties
 	public static CameraShake Instance
-	{
-		get { return instance; }
-	}
+	{ get { return instance; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -26,9 +24,7 @@ public class CameraShake : MonoBehaviour
 	public void Shake(float duration, Vector3 strength)
 	{
 		if (DOTween.IsTweening(transform))
-		{
 			DOTween.Complete(transform);
-		}
 
 		transform.DOPunchPosition(strength, duration);
 	}

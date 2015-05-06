@@ -58,8 +58,8 @@ GameObject:
   - 4: {fileID: 400006}
   m_Layer: 0
   m_Name: Boss Wave Wait
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: BossWaveWaitPoint
+  m_Icon: {fileID: 1319202362, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1085,9 +1085,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
+  destroyAfterScroll: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1280,6 +1282,7 @@ MonoBehaviour:
   pathName: Boss Laser Intro
   pathColor: {r: 1, g: 0, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: 30, y: 3.20000005, z: 0}
   - {x: 30, y: 30, z: 0}
@@ -1297,6 +1300,7 @@ MonoBehaviour:
   pathName: Boss Intro
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 1
+  isLocal: 0
   nodes:
   - {x: .0500000007, y: 25.3999996, z: 0}
   - {x: 14.3999996, y: 24.7999992, z: 0}

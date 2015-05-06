@@ -336,11 +336,11 @@ MonoBehaviour:
   elevator: {fileID: 0}
   floorScrollingLayer: {fileID: 0}
   coverScrollingLayer: {fileID: 0}
-  backgroundScrollingLayers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  elevatorSpeed: 100
+  elevatorTransitionTime: 1.29999995
+  elevatorDoorTime: .600000024
+  elevatorWarningTime: 3
+  elevatorStartEase: 8
   floorWaves:
   - elevatorArriveTime: 0
     elevatorOpenTime: 3
@@ -416,11 +416,13 @@ MonoBehaviour:
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
     - {fileID: 400000, guid: 0331ab8a34af91241a9119909e4a0e30, type: 2}
-  elevatorSpeed: 100
-  elevatorTransitionTime: 1.29999995
-  elevatorDoorTime: .600000024
-  elevatorWarningTime: 3
-  elevatorStartEase: 8
+  bossWave:
+    boss: {fileID: 11400000, guid: a0c861fb8ec760d499228ce78a96c01c, type: 2}
+    startTime: 40
+    totalLength: 0
+    cameraSpeed: 0
+    fullCameraSpeed: 0
+    speedUpTime: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

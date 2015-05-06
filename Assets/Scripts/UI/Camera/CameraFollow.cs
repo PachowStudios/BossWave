@@ -22,17 +22,10 @@ public class CameraFollow : MonoBehaviour
 
 	#region Public Properties
 	public static CameraFollow Instance
-	{
-		get { return instance; }
-	}
+	{ get { return instance; } }
 
 	public Vector3 DeltaMovement
-	{
-		get
-		{
-			return transform.position - previousPosition;
-		}
-	}
+	{ get { return transform.position - previousPosition; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -43,14 +36,14 @@ public class CameraFollow : MonoBehaviour
 		currentYOffset = defaultYOffset;
 
 		targetPosition.y = followTarget.position.y + currentYOffset;
-		previousPosition = transform.localPosition;
+		previousPosition = transform.position;
 	}
 
 	private void Update()
 	{
 		if (Time.deltaTime > 0f)
 		{
-			previousPosition = transform.localPosition;
+			previousPosition = transform.position;
 			targetPosition.z = transform.position.z;
 			previousTargetPosition = targetPosition;
 

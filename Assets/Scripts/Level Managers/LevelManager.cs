@@ -58,7 +58,15 @@ public abstract class LevelManager : MonoBehaviour
 	{ get { return groundLevel.position; } }
 
 	public Vector3 BossWaveWaitPoint
-	{ get { return bossWaveWaitPoint.position; } }
+	{ 
+		get 
+		{
+			if (bossWaveWaitPoint != null)
+				return bossWaveWaitPoint.position;
+			else
+				return GameObject.FindGameObjectWithTag("BossWaveWaitPoint").transform.position;
+		} 
+	}
 
 	public bool BossWaveActive 
 	{ get; protected set; }

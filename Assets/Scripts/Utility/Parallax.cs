@@ -15,6 +15,7 @@ public class Parallax : MonoBehaviour
 
 	#region Fields
 	public static float? OverrideSpeed = null;
+	public static bool? OverrideScroll = null;
 
 	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
@@ -26,6 +27,11 @@ public class Parallax : MonoBehaviour
 	public bool destroyAfterScroll = true;
 
 	private List<Transform> layers = new List<Transform>();
+	#endregion
+
+	#region Public Properties
+	public float CurrentSpeed
+	{ get { return OverrideSpeed ?? defaultSpeed; } }
 	#endregion
 
 	#region Internal Properties
@@ -72,11 +78,10 @@ public class Parallax : MonoBehaviour
 
 	private void Update()
 	{
-		if (scroll)
+		if (OverrideScroll ?? scroll)
 		{
-			float speed = OverrideSpeed ?? defaultSpeed;
-			Vector2 scrollVector = scrollDirection == ScrollDirection.Horizontal ? new Vector2(-(relativeSpeed * speed), 0f)
-																				 : new Vector2(0f, -(relativeSpeed * speed));
+			Vector2 scrollVector = scrollDirection == ScrollDirection.Horizontal ? new Vector2(-(relativeSpeed * CurrentSpeed), 0f)
+																				 : new Vector2(0f, -(relativeSpeed * CurrentSpeed));
 
 			foreach (Transform layer in layers)
 				layer.Translate(scrollVector * Time.deltaTime);

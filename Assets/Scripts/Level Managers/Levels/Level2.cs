@@ -20,6 +20,17 @@ public sealed class Level2 : LevelManager
 		public List<Transform> newScrolling;
 	}
 
+	[System.Serializable]
+	public struct BossWave
+	{
+		public Boss boss;
+		public float startTime;
+		public float totalLength;
+		public float cameraSpeed;
+		public float fullCameraSpeed;
+		public float speedUpTime;
+	}
+
 	public enum ElevatorState
 	{
 		Closed,
@@ -33,20 +44,22 @@ public sealed class Level2 : LevelManager
 	public BuildingElevator elevator;
 	public Parallax floorScrollingLayer;
 	public Parallax coverScrollingLayer;
-	public List<Parallax> backgroundScrollingLayers;
-	public List<FloorWave> floorWaves;
 	public float elevatorSpeed = 100f;
 	public float elevatorTransitionTime = 2f;
 	public float elevatorDoorTime = 0.6f;
 	public float elevatorWarningTime = 3f;
 	public Ease elevatorStartEase = Ease.InCubic;
+	public List<FloorWave> floorWaves;
+	public BossWave bossWave;
 
 	FloorWave currentFloor;
 	private int currentFloorIndex = 0;
 	private ElevatorState elevatorState = ElevatorState.Closed;
 	private float elevatorLeftTime = 0f;
+	private bool elevatorComplete = false;
 
 	private Boss bossInstance;
+	private Transform bossSpawner;
 	private bool bossWaveInitialized = false;
 	#endregion
 
@@ -78,7 +91,11 @@ public sealed class Level2 : LevelManager
 	{
 		base.Update();
 
-		UpdateElevator();
+		if (!elevatorComplete)
+			UpdateElevator();
+
+		if (waveTimer >= bossWave.startTime && !bossWaveInitialized)
+			InitializeBossWave();
 	}
 	#endregion
 
@@ -153,13 +170,16 @@ public sealed class Level2 : LevelManager
 
 	private void UpdateElevatorArriving()
 	{
-		float currentDeceleration = Extensions.CalculateDecelerationRate(coverScrollingLayer.defaultSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
-		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.defaultSpeed - currentDeceleration, 0f));
+		float currentDeceleration = Extensions.CalculateDecelerationRate(floorScrollingLayer.CurrentSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
+		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.CurrentSpeed - currentDeceleration, 0f));
 
-		if (floorScrollingLayer.defaultSpeed == 0f || waveTimer >= currentFloor.elevatorArriveTime)
+		if (floorScrollingLayer.CurrentSpeed == 0f || waveTimer >= currentFloor.elevatorArriveTime)
 		{
 			elevatorState = ElevatorState.Closed;
 			StartCoroutine(StopElevator());
+
+			if (currentFloorIndex == floorWaves.Count - 1)
+				elevatorComplete = true;
 		}
 	}
 	#endregion
@@ -212,29 +232,18 @@ public sealed class Level2 : LevelManager
 
 	private void SetScrollingSpeed(float speed)
 	{
-		floorScrollingLayer.defaultSpeed = speed;
-		coverScrollingLayer.defaultSpeed = speed;
-
-		foreach (Parallax layer in backgroundScrollingLayers)
-			layer.defaultSpeed = speed;
+		Parallax.OverrideSpeed = speed;
 	}
 
 	private void SetScrollingActive(bool active)
 	{
-		floorScrollingLayer.scroll = active;
-		coverScrollingLayer.scroll = active;
-
-		foreach (Parallax layer in backgroundScrollingLayers)
-			layer.scroll = active;
+		Parallax.OverrideScroll = active;
 	}
 
 	private void OffsetScrollingLayers(Vector3 offset)
 	{
 		floorScrollingLayer.OffsetLayers(offset);
 		coverScrollingLayer.OffsetLayers(offset);
-
-		foreach (Parallax layer in backgroundScrollingLayers)
-			layer.OffsetLayers(offset);
 	}
 	#endregion
 
@@ -242,6 +251,11 @@ public sealed class Level2 : LevelManager
 	protected override void InitializeBossWave()
 	{
 		PowerupSpawner.Instance.spawnPowerups = false;
+		bossSpawner = GameObject.FindGameObjectWithTag("BossSpawner").transform;
+		bossInstance = Instantiate(bossWave.boss, bossSpawner.position, Quaternion.identity) as Boss;
+		bossInstance.Spawn();
+
+		bossWaveInitialized = true;
 	}
 
 	public override void StartBossWave()

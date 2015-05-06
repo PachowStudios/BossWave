@@ -6,21 +6,25 @@ using DG.Tweening;
 public class VectorPath : MonoBehaviour
 {
 	#region Fields
+	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
+
 	public string pathName;
 	public Color pathColor = Color.cyan;
 	public PathType pathType = PathType.Linear;
+	public bool isLocal = false;
 	public Vector3[] nodes = new Vector3[] { Vector3.zero, Vector3.zero };
+	#endregion
 
-	private static Dictionary<string, VectorPath> paths = new Dictionary<string, VectorPath>();
+	#region Public Properties
+	public Vector3[] Nodes
+	{ get { return isLocal ? LocalizePath() : nodes; } }
 	#endregion
 
 	#region MonoBehaviour
 	private void OnEnable()
 	{
 		if (paths.ContainsKey(pathName.ToLower()))
-		{
 			paths.Remove(pathName.ToLower());
-		}
 
 		paths.Add(pathName.ToLower(), this);
 	}
@@ -31,11 +35,23 @@ public class VectorPath : MonoBehaviour
 		{
 			Gizmos.color = pathColor;
 
-			for (int i = 1; i < nodes.Length; i++)
-			{
-				Gizmos.DrawLine(nodes[i - 1], nodes[i]);
-			}
+			Vector3[] currentNodes = Nodes;
+
+			for (int i = 1; i < currentNodes.Length; i++)
+				Gizmos.DrawLine(currentNodes[i - 1], currentNodes[i]);
 		}
+	}
+	#endregion
+
+	#region Internal Helper Methods
+	private Vector3[] LocalizePath()
+	{
+		Vector3[] localPath = new Vector3[nodes.Length];
+
+		for (int i = 0; i < nodes.Length; i++)
+			localPath[i] = nodes[i] + transform.position;
+
+		return localPath;
 	}
 	#endregion
 
@@ -46,7 +62,7 @@ public class VectorPath : MonoBehaviour
 
 		if (paths.ContainsKey(requestedName))
 		{
-			return paths[requestedName].nodes;
+			return paths[requestedName].Nodes;
 		}
 		else
 		{

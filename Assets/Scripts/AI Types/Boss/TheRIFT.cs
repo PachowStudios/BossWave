@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public sealed class TheRIFT : Boss
 {
-	#region Fields
+	#region Types
 	public enum AttackType
 	{
 		Swoop,
@@ -41,7 +41,9 @@ public sealed class TheRIFT : Boss
 		public float preAttackTime;
 		public List<Attack> possibleAttacks;
 	};
+	#endregion
 
+	#region Fields
 	public Sprite warningPopup;
 	public int fightFOV = 630;
 	public Color spawnColor = new Color(0.133f, 0.137f, 0.153f, 0f);
