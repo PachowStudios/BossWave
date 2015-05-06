@@ -50,18 +50,18 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 10
-        height: 50
+        width: 2
+        height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Boss Intro_PlayerBackground
       rect:
         serializedVersion: 2
-        x: 15
+        x: 4
         y: 0
-        width: 10
-        height: 50
+        width: 2
+        height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

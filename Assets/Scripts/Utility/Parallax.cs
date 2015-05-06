@@ -24,6 +24,7 @@ public class Parallax : MonoBehaviour
 	public bool scroll = false;
 	public bool loop = false;
 	public bool cameraParallax = false;
+	public bool moveLayersSeparately = true;
 	public bool destroyAfterScroll = true;
 
 	private List<Transform> layers = new List<Transform>();
@@ -83,8 +84,16 @@ public class Parallax : MonoBehaviour
 			Vector2 scrollVector = scrollDirection == ScrollDirection.Horizontal ? new Vector2(-(relativeSpeed * CurrentSpeed), 0f)
 																				 : new Vector2(0f, -(relativeSpeed * CurrentSpeed));
 
-			foreach (Transform layer in layers)
-				layer.Translate(scrollVector * Time.deltaTime);
+			if (moveLayersSeparately)
+			{
+				foreach (Transform layer in layers)
+					if (layer != null)
+						layer.Translate(scrollVector * Time.deltaTime);
+			}
+			else
+			{
+				transform.Translate(scrollVector * Time.deltaTime);
+			}
 
 			Transform firstChild = layers.FirstOrDefault();
 

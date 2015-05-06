@@ -372,6 +372,7 @@ MonoBehaviour:
   pathName: Assembly Line 1
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -21, y: -.200000003, z: 0}
   - {x: 9, y: -.200000003, z: 0}
@@ -390,7 +391,6 @@ MonoBehaviour:
   pathName: Assembly Line 5
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,6 +405,7 @@ MonoBehaviour:
   pathName: Assembly Line 2
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: 9, y: -2.4000001, z: 0}
   - {x: 31, y: -2.4000001, z: 0}
@@ -423,7 +424,6 @@ MonoBehaviour:
   pathName: Assembly Line 1
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,7 +439,6 @@ MonoBehaviour:
   pathName: Assembly Line 2
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +453,7 @@ MonoBehaviour:
   pathName: Assembly Line 3
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -31, y: -2.4000001, z: 0}
   - {x: -21, y: -2.4000001, z: 0}
@@ -471,6 +471,7 @@ MonoBehaviour:
   pathName: Assembly Line 9
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -31, y: 33.25, z: 0}
   - {x: -15.8999996, y: 25.8999996, z: 0}
@@ -492,7 +493,6 @@ MonoBehaviour:
   pathName: Assembly Line 3
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -507,6 +507,7 @@ MonoBehaviour:
   pathName: Assembly Line 5
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -31, y: 12, z: 0}
   - {x: -21, y: 12, z: 0}
@@ -525,7 +526,6 @@ MonoBehaviour:
   pathName: Assembly Line 9
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,6 +540,7 @@ MonoBehaviour:
   pathName: Assembly Line 4
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -21, y: 7, z: 0}
   - {x: 0, y: 7, z: 0}
@@ -560,7 +561,6 @@ MonoBehaviour:
   pathName: Assembly Line 4
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,7 +576,6 @@ MonoBehaviour:
   pathName: Assembly Line 6
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -591,6 +590,7 @@ MonoBehaviour:
   pathName: Assembly Line 6
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -21, y: 18.8999996, z: 0}
   - {x: 12.3000002, y: 18.8999996, z: 0}
@@ -610,6 +610,7 @@ MonoBehaviour:
   pathName: Assembly Line 11
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -31, y: 40, z: 0}
   - {x: 31, y: 40, z: 0}
@@ -628,7 +629,6 @@ MonoBehaviour:
   pathName: Assembly Line 11
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,7 +644,6 @@ MonoBehaviour:
   pathName: Assembly Line 8
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +658,7 @@ MonoBehaviour:
   pathName: Assembly Line 8
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: -31, y: 28.7999992, z: 0}
   - {x: -29.2999992, y: 28.7999992, z: 0}
@@ -678,6 +678,7 @@ MonoBehaviour:
   pathName: Assembly Line 7
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: 21, y: 10.8000002, z: 0}
   - {x: 31, y: 10.8000002, z: 0}
@@ -696,7 +697,6 @@ MonoBehaviour:
   pathName: Assembly Line 7
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,7 +712,6 @@ MonoBehaviour:
   pathName: Assembly Line 10
   speed: 5
   spawnDelay: 1
-  preWarmTime: 30
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -727,6 +726,7 @@ MonoBehaviour:
   pathName: Assembly Line 10
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   pathType: 0
+  isLocal: 0
   nodes:
   - {x: 21, y: 25.7999992, z: 0}
   - {x: 31, y: 25.7999992, z: 0}
@@ -743,9 +743,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 0
   loop: 0
   cameraParallax: 0
+  moveLayersSeparately: 0
+  destroyAfterScroll: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
