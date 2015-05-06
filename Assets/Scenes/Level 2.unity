@@ -184,7 +184,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 19.96632
+  orthographic size: 19.9756489
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4428,7 +4428,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 71, y: 39.9326401}
+  m_SizeDelta: {x: 71, y: 39.9512978}
   m_Pivot: {x: .5, y: .5}
 --- !u!223 &795592377
 Canvas:
@@ -9022,7 +9022,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 559936176}
   m_Direction: 2
   m_Value: 1
-  m_Size: .799999952
+  m_Size: .800000012
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10482,11 +10482,11 @@ Prefab:
       objectReference: {fileID: 1965467958}
     - target: {fileID: 2000000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: orthographic size
-      value: 19.96632
+      value: 19.9756489
       objectReference: {fileID: 0}
     - target: {fileID: 22400010, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 39.9326401
+      value: 39.9512978
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
@@ -11144,6 +11144,14 @@ Prefab:
       propertyPath: floorWaves.Array.data[0].mainFloor
       value: 
       objectReference: {fileID: 1373367846}
+    - target: {fileID: 22400000, guid: 6c6e476e1db204c45bdb6effd0ef590a, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 39.9512978
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: 6c6e476e1db204c45bdb6effd0ef590a, type: 2}
+      propertyPath: orthographic size
+      value: 19.9756489
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c6e476e1db204c45bdb6effd0ef590a, type: 2}
   m_RootGameObject: {fileID: 148814320}
@@ -12393,7 +12401,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 71, y: 39.9326401}
+  m_SizeDelta: {x: 71, y: 39.9512978}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2029205804
 MonoBehaviour:
@@ -13083,7 +13091,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 19.96632
+  orthographic size: 19.9756489
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
