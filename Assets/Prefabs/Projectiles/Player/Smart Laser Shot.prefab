@@ -200,7 +200,7 @@ MonoBehaviour:
   sortingOrder: 0
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 66048
   tipExplosionsPerSec: 8
 --- !u!212 &21200000
 SpriteRenderer:

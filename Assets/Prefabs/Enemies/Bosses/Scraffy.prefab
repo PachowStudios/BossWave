@@ -28,6 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 212: {fileID: 21200000}
+  - 61: {fileID: 6100010}
   m_Layer: 11
   m_Name: Bar
   m_TagString: Untagged
@@ -44,6 +45,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400004}
   - 212: {fileID: 21200004}
+  - 61: {fileID: 6100002}
   m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
@@ -60,6 +62,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 212: {fileID: 21200002}
+  - 61: {fileID: 6100004}
   m_Layer: 11
   m_Name: Eye
   m_TagString: Untagged
@@ -188,6 +191,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400022}
   - 212: {fileID: 21200016}
+  - 61: {fileID: 6100006}
   m_Layer: 11
   m_Name: Left Gun
   m_TagString: Untagged
@@ -204,6 +208,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400024}
   - 212: {fileID: 21200018}
+  - 61: {fileID: 6100008}
   m_Layer: 11
   m_Name: Right Gun
   m_TagString: Untagged
@@ -486,11 +491,66 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Size: {x: 1, y: 1}
   m_Center: {x: 0, y: 0}
+--- !u!61 &6100002
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 10.3999996, y: 5.0999999}
+  m_Center: {x: 0, y: 2.54999995}
+--- !u!61 &6100004
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 1.39999998, y: 1.39999998}
+  m_Center: {x: 0, y: .699999988}
+--- !u!61 &6100006
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100022}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.29999995, y: 3}
+  m_Center: {x: 0, y: 0}
+--- !u!61 &6100008
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Size: {x: 3.29999995, y: 3}
+  m_Center: {x: 0, y: 0}
+--- !u!61 &6100010
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: 56, y: 1.39999998}
+  m_Center: {x: 0, y: .699999988}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,6 +574,7 @@ MonoBehaviour:
   smallestMicrochip: 1
   biggestMicrochip: 2
   knockback: {x: 3, y: 3}
+  flashOnHit: 0
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: 0
@@ -528,7 +589,16 @@ MonoBehaviour:
   introSprite: {fileID: 21300000, guid: 7aa5eec35c7ac4b47a81c3c6e54ead99, type: 3}
   warningPopup: {fileID: 21300000, guid: 61f3730bdc492864e910ea44f8af4eb8, type: 3}
   spawnPathName: Boss Intro
-  spawnPathTime: 3
+  spawnPathTime: 7
+  leftGunHealth: 200
+  rightGunHealth: 200
+  eyeMultiplier: 1.5
+  bodyCollider: {fileID: 6100002}
+  eyeCollider: {fileID: 6100004}
+  leftGunCollider: {fileID: 6100006}
+  rightGunCollider: {fileID: 6100008}
+  leftGunSprite: {fileID: 21200016}
+  rightGunSprite: {fileID: 21200018}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

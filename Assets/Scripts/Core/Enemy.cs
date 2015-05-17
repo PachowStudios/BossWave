@@ -28,6 +28,7 @@ public abstract class Enemy : MonoBehaviour
 	public Microchip.Size smallestMicrochip;
 	public Microchip.Size biggestMicrochip;
 	public Vector2 knockback = new Vector2(3f, 3f);
+	public bool flashOnHit = true;
 	public Color flashColor = new Color(1f, 0.47f, 0.47f, 1f);
 	public float flashLength = 0.1f;
 	public float gravity = -35f;
@@ -186,10 +187,10 @@ public abstract class Enemy : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public virtual void TakeDamage(GameObject enemy)
+	public virtual void TakeDamage(GameObject enemy, float multiplier = 1f)
 	{
 		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
-		float damage = enemyProjectile.damage;
+		float damage = enemyProjectile.damage * multiplier;
 		Vector2 knockback = enemyProjectile.knockback;
 		Vector2 knockbackDirection = enemyProjectile.direction.Sign();
 		enemyProjectile.CheckDestroyEnemy();
@@ -213,17 +214,20 @@ public abstract class Enemy : MonoBehaviour
 					}
 				}
 
-				spriteRenderer.color = flashColor;
+				if (flashOnHit)
+				{
+					spriteRenderer.color = flashColor;
 
-				DOTween.Sequence()
-					.AppendInterval(flashLength)
-					.AppendCallback(() =>
-					{
-						if (this != null)
+					DOTween.Sequence()
+						.AppendInterval(flashLength)
+						.AppendCallback(() =>
 						{
-							ResetColor();
-						}
-					});
+							if (this != null)
+							{
+								ResetColor();
+							}
+						});
+				}
 			}
 		}
 	}

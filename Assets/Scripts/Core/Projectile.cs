@@ -72,7 +72,7 @@ public abstract class Projectile : MonoBehaviour
 
 	protected virtual void OnTriggerEnter2D(Collider2D trigger)
 	{
-		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider") &&
+		if ((trigger.gameObject.layer == LayerMask.NameToLayer("Collider") || trigger.gameObject.layer == LayerMask.NameToLayer("RunningCollider")) &&
 			trigger.tag != "RunningBoundaries")
 		{
 			CheckDestroyWorld();

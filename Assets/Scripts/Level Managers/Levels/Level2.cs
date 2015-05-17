@@ -29,6 +29,9 @@ public sealed class Level2 : LevelManager
 		public float cameraSpeed;
 		public float fullCameraSpeed;
 		public float speedUpTime;
+		public string coverSortingLayer;
+		public LayerMask collisionLayers;
+		public GameObject fallingBoundaries;
 	}
 
 	public enum ElevatorState
@@ -170,10 +173,10 @@ public sealed class Level2 : LevelManager
 
 	private void UpdateElevatorArriving()
 	{
-		float currentDeceleration = Extensions.CalculateDecelerationRate(floorScrollingLayer.CurrentSpeed, 0f, ElevatorPositionOffset) * Time.deltaTime;
-		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.CurrentSpeed - currentDeceleration, 0f));
+		float currentDeceleration = Extensions.CalculateDecelerationRate(floorScrollingLayer.Speed, 0f, ElevatorPositionOffset) * Time.deltaTime;
+		SetScrollingSpeed(Mathf.Max(floorScrollingLayer.Speed - currentDeceleration, 0f));
 
-		if (floorScrollingLayer.CurrentSpeed == 0f || waveTimer >= currentFloor.elevatorArriveTime)
+		if (floorScrollingLayer.Speed == 0f || waveTimer >= currentFloor.elevatorArriveTime)
 		{
 			elevatorState = ElevatorState.Closed;
 			StartCoroutine(StopElevator());
@@ -245,6 +248,12 @@ public sealed class Level2 : LevelManager
 		floorScrollingLayer.OffsetLayers(offset);
 		coverScrollingLayer.OffsetLayers(offset);
 	}
+
+	private void SetCoverSortingLayer(string sortingLayer)
+	{
+		foreach (var spriteRenderer in coverScrollingLayer.GetComponentsInChildren<SpriteRenderer>())
+			spriteRenderer.sortingLayerName = sortingLayer;
+	}
 	#endregion
 
 	#region Boss Wave Methods
@@ -260,7 +269,20 @@ public sealed class Level2 : LevelManager
 
 	public override void StartBossWave()
 	{
-		
+		bossWave.fallingBoundaries.SetActive(true);
+		SetCoverSortingLayer(bossWave.coverSortingLayer);
+		BuildingCover.allowHiding = false;
+		PlayerControl.Instance.SetCollisionLayers(bossWave.collisionLayers);
+		Cutscene.Instance.EndCutscene(true);
+
+		Parallax.OverrideReverse = true;
+		floorScrollingLayer.AddLayers(currentFloor.newScrolling, true, true);
+		coverScrollingLayer.SetLooping(true);
+		DOTween.To(s => SetScrollingSpeed(s), bossWave.cameraSpeed, bossWave.fullCameraSpeed, bossWave.speedUpTime)
+			.SetEase(Ease.OutSine);
+		SetScrollingActive(true);
+
+		BossWaveActive = true;
 	}
 
 	public override void CompleteBossWave()
