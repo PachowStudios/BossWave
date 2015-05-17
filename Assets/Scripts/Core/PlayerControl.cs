@@ -17,6 +17,7 @@ public sealed class PlayerControl : MonoBehaviour
 	public float runSpeed = 17.5f;
 	public bool continuouslyRunning = false;
 	public float continuousRunSpeed = 10f;
+	public bool continuouslyFalling = false;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
 	public float jumpHeight = 5f;
@@ -41,7 +42,8 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private Vector3 velocity;
 	private Vector3 lastGroundedPosition;
-	private float horizontalMovement = 0;
+	private float horizontalMovement = 0f;
+	private float verticalMovement = 0f;
 	private float speedMultiplier = 1f;
 
 	private List<Gun> guns = new List<Gun>();
@@ -120,7 +122,7 @@ public sealed class PlayerControl : MonoBehaviour
 	{ get { return jump; } }
 
 	public bool IsGrounded
-	{ get { return controller.isGrounded; } }
+	{ get { return controller.isGrounded && !continuouslyFalling; } }
 
 	public bool IsInputDisabled
 	{ get { return disableInput; } }
@@ -273,6 +275,7 @@ public sealed class PlayerControl : MonoBehaviour
 		if (!disableInput)
 		{
 			horizontalMovement = CrossPlatformInputManager.GetAxis("Horizontal");
+			verticalMovement = CrossPlatformInputManager.GetAxis("Vertical");
 			run = CrossPlatformInputManager.GetButton("Run") && Gun.NoInput;
 			jump = jump || (CrossPlatformInputManager.GetButtonDown("Jump") && IsGrounded);
 
@@ -292,21 +295,19 @@ public sealed class PlayerControl : MonoBehaviour
 				int scrollWheelInput = (int)CrossPlatformInputManager.GetAxisRaw("Mouse ScrollWheel");
 
 				if (scrollWheelInput != 0)
-				{
 					SelectGun(currentGunIndex + scrollWheelInput, true);
-				}
 			}
 		}
 
-		run = (run && horizontalMovement != 0f) || continuouslyRunning;
+		run = ((run && horizontalMovement != 0f) || continuouslyRunning) && !continuouslyFalling;
 	}
 
 	private void ApplyAnimation()
 	{
-		anim.SetBool("Walking", horizontalMovement != 0f || continuouslyRunning);
+		anim.SetBool("Walking", (horizontalMovement != 0f || continuouslyRunning) && IsGrounded);
 		anim.SetBool("Running", run);
 		anim.SetBool("Grounded", IsGrounded);
-		anim.SetBool("Falling", velocity.y < 0f);
+		anim.SetBool("Falling", velocity.y < 0f || continuouslyFalling);
 		anim.SetFloat("Gun Angle", Gun.transform.rotation.eulerAngles.z);
 		ghostTrail.trailActive = speedMultiplier > 1f;
 	}
@@ -375,7 +376,7 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void GetMovement()
 	{
-		if (horizontalMovement == 0f && !jump && Gun.NoInput)
+		if (horizontalMovement == 0f && IsGrounded && Gun.NoInput)
 		{
 			altIdleTimer += Time.deltaTime;
 
@@ -435,7 +436,14 @@ public sealed class PlayerControl : MonoBehaviour
 																									: runSpeed)
 														  : walkSpeed) * speedMultiplier,
 								smoothedMovementFactor * Time.deltaTime);
-		velocity.y += gravity * Time.deltaTime;
+
+		if (continuouslyFalling)
+			velocity.y = Mathf.Lerp(velocity.y,
+									verticalMovement * walkSpeed,
+									smoothedMovementFactor * Time.deltaTime);
+		else
+			velocity.y += gravity * Time.deltaTime;
+
 		controller.move(velocity * Time.deltaTime);
 		velocity = controller.velocity;
 

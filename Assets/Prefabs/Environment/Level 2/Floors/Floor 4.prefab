@@ -316,7 +316,7 @@ MonoBehaviour:
   isLocal: 1
   nodes:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -30, z: 0}
+  - {x: 0, y: -27, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

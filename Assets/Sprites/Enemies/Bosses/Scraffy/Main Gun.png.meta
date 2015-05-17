@@ -1,11 +1,21 @@
 fileFormatVersion: 2
-guid: f1fa326bdea212648bc93e8fa048bdea
+guid: cdccff7689732b140b5d9c1085baeb4e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Left Gun_0
-    21300002: Left Gun_1
-    21300004: Left Gun_2
-    21300006: Left Gun_3
+    21300000: Bottom_0
+    21300002: Bottom_1
+    21300004: Bottom_2
+    21300006: Bottom_3
+    21300008: Bottom_4
+    21300010: Bottom_5
+    21300012: Bottom_6
+    21300014: Bottom_7
+    21300016: Bottom_8
+    21300018: Main Gun_0
+    21300020: Main Gun_1
+    21300022: Main Gun_2
+    21300024: Main Gun_3
+    21300026: Main Gun_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,44 +57,54 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Left Gun_0
+    - name: Main Gun_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 104
+        height: 35
+      alignment: 2
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Left Gun_1
+    - name: Main Gun_1
       rect:
         serializedVersion: 2
-        x: 35
+        x: 106
         y: 0
-        width: 33
-        height: 30
-      alignment: 0
+        width: 104
+        height: 35
+      alignment: 2
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Left Gun_2
+    - name: Main Gun_2
       rect:
         serializedVersion: 2
-        x: 70
+        x: 212
         y: 0
-        width: 33
-        height: 30
-      alignment: 0
+        width: 104
+        height: 35
+      alignment: 2
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Left Gun_3
+    - name: Main Gun_3
       rect:
         serializedVersion: 2
-        x: 105
+        x: 318
         y: 0
-        width: 33
-        height: 30
-      alignment: 0
+        width: 104
+        height: 35
+      alignment: 2
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Main Gun_4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 0
+        width: 104
+        height: 35
+      alignment: 2
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 

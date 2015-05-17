@@ -138,7 +138,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 11.8999996, z: 0}
+  m_LocalPosition: {x: -10, y: 1.20000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -337,6 +337,7 @@ MonoBehaviour:
   runSpeed: 23
   continuouslyRunning: 0
   continuousRunSpeed: 20
+  continuouslyFalling: 0
   groundDamping: 6
   inAirDamping: 4
   jumpHeight: 7
@@ -345,7 +346,7 @@ MonoBehaviour:
   maxScore: 99999999
   maxMicrochips: 99999
   startingGuns:
-  - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
+  - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 0}
   gunSwapCooldownTime: 1
   minAltIdleTime: 5

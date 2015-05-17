@@ -1,11 +1,15 @@
 fileFormatVersion: 2
-guid: 24c3c505936590e4199a145117715d54
+guid: 35e162ac9478b214abeadc403dbcf304
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Right Gun_0
-    21300002: Right Gun_1
-    21300004: Right Gun_2
-    21300006: Right Gun_3
+    21300000: Left Gun_0
+    21300002: Left Gun_1
+    21300004: Left Gun_2
+    21300006: Left Gun_3
+    21300008: Right Gun_0
+    21300010: Right Gun_1
+    21300012: Right Gun_2
+    21300014: Right Gun_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,6 +51,46 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
+    - name: Left Gun_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left Gun_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 32
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left Gun_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 32
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left Gun_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 32
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: Right Gun_0
       rect:
         serializedVersion: 2
@@ -55,7 +99,7 @@ TextureImporter:
         width: 33
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Right Gun_1
       rect:
@@ -65,7 +109,7 @@ TextureImporter:
         width: 33
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Right Gun_2
       rect:
@@ -75,7 +119,7 @@ TextureImporter:
         width: 33
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Right Gun_3
       rect:
@@ -85,7 +129,7 @@ TextureImporter:
         width: 33
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

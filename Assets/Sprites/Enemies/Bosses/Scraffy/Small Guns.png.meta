@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: cdccff7689732b140b5d9c1085baeb4e
+guid: 4f2e51f2ab6f2d644b9a471821334483
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bottom_0
-    21300002: Bottom_1
-    21300004: Bottom_2
-    21300006: Bottom_3
-    21300008: Bottom_4
-    21300010: Bottom_5
-    21300012: Bottom_6
-    21300014: Bottom_7
-    21300016: Bottom_8
+    21300000: Left Small Gun_0
+    21300002: Left Small Gun_1
+    21300004: Left Small Gun_2
+    21300006: Right Small Gun_0
+    21300008: Right Small Gun_1
+    21300010: Right Small Gun_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,95 +49,65 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Bottom_0
+    - name: Left Small Gun_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 8
+        height: 14
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left Small Gun_1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 8
+        height: 14
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Left Small Gun_2
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 16
+        width: 8
+        height: 14
+      alignment: 2
+      pivot: {x: .5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Right Small Gun_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 104
-        height: 35
+        width: 8
+        height: 14
       alignment: 2
       pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_1
+    - name: Right Small Gun_1
       rect:
         serializedVersion: 2
-        x: 106
+        x: 10
         y: 0
-        width: 104
-        height: 35
+        width: 8
+        height: 14
       alignment: 2
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_2
+    - name: Right Small Gun_2
       rect:
         serializedVersion: 2
-        x: 212
+        x: 20
         y: 0
-        width: 104
-        height: 35
+        width: 8
+        height: 14
       alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_3
-      rect:
-        serializedVersion: 2
-        x: 318
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_4
-      rect:
-        serializedVersion: 2
-        x: 424
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_5
-      rect:
-        serializedVersion: 2
-        x: 530
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_6
-      rect:
-        serializedVersion: 2
-        x: 636
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_7
-      rect:
-        serializedVersion: 2
-        x: 742
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Bottom_8
-      rect:
-        serializedVersion: 2
-        x: 848
-        y: 0
-        width: 104
-        height: 35
-      alignment: 2
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

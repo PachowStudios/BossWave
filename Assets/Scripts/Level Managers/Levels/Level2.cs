@@ -273,6 +273,7 @@ public sealed class Level2 : LevelManager
 		SetCoverSortingLayer(bossWave.coverSortingLayer);
 		BuildingCover.allowHiding = false;
 		PlayerControl.Instance.SetCollisionLayers(bossWave.collisionLayers);
+		PlayerControl.Instance.continuouslyFalling = true;
 		Cutscene.Instance.EndCutscene(true);
 
 		Parallax.OverrideReverse = true;
