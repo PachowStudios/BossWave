@@ -70,6 +70,9 @@ public abstract class LevelManager : MonoBehaviour
 
 	public bool BossWaveActive 
 	{ get; protected set; }
+
+	public abstract Vector3 LevelMovement
+	{ get; }
 	#endregion
 
 	#region MonoBehaviour

@@ -48,19 +48,14 @@ public class SpriteExplosion : MonoBehaviour
 					currentParticle.rotation = 0f;
 					currentParticle.color = particleColor;
 					currentParticle.startLifetime = currentParticle.lifetime = lifetime;
-
-					if (LevelManager.Instance != null)
-					{
-						currentParticle.velocity = new Vector2((LevelManager.Instance.BossWaveActive ? -Parallax.OverrideSpeed.Value : velocity.x) + Random.Range(-10f, 10f),
-															   velocity.y + Random.Range(-10f, 10f));
-					}
-					else
-					{
-						currentParticle.velocity = new Vector2(velocity.x + Random.Range(-10f, 10f),
-															   velocity.y + Random.Range(-10f, 10f));
-					}
+					
+					currentParticle.velocity = new Vector2(velocity.x + Random.Range(-10f, 10f),
+														   velocity.y + Random.Range(-10f, 10f));
 
 					currentParticle.velocity += randomTranslate;
+
+					if (LevelManager.Instance != null)
+						currentParticle.velocity += LevelManager.Instance.LevelMovement;
 
 					particles.Add(currentParticle);
 				}

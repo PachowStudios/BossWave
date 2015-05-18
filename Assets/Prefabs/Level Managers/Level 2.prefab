@@ -424,8 +424,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 44, z: 1}
-  m_Center: {x: -26.2000008, y: 11.1999998, z: 0}
+  m_Size: {x: 1.5, y: 44, z: 1}
+  m_Center: {x: -25.9500008, y: 11.1999998, z: 0}
 --- !u!65 &6500002
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -436,8 +436,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 44, z: 1}
-  m_Center: {x: 26.2000008, y: 11.1999998, z: 0}
+  m_Size: {x: 1.5, y: 44, z: 1}
+  m_Center: {x: 25.9500008, y: 11.1999998, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -607,8 +607,8 @@ MonoBehaviour:
     boss: {fileID: 11400000, guid: a0c861fb8ec760d499228ce78a96c01c, type: 2}
     startTime: 40
     totalLength: 40
-    cameraSpeed: 50
-    fullCameraSpeed: 100
+    cameraSpeed: 40
+    fullCameraSpeed: 70
     speedUpTime: 1
     coverSortingLayer: Front Background
     collisionLayers:

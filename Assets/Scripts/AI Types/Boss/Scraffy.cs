@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 
 public sealed class Scraffy : Boss
@@ -13,12 +14,28 @@ public sealed class Scraffy : Boss
 	public float rightGunHealth = 200f;
 	public float eyeMultiplier = 1.5f;
 
+	public float bodyGearRotationSpeed = 3f;
+	public float sideGearRotationSpeed = 5f;
+
+	public float sideFireStartTime;
+	public Vector3 sideFireShakeIntensity;
+
 	public BoxCollider2D bodyCollider;
 	public BoxCollider2D eyeCollider;
 	public BoxCollider2D leftGunCollider;
 	public BoxCollider2D rightGunCollider;
 	public SpriteRenderer leftGunSprite;
 	public SpriteRenderer rightGunSprite;
+	public List<Transform> bodyGears;
+	public List<Transform> leftGears;
+	public List<Transform> rightGears;
+	public List<ParticleSystem> sideFires;
+
+	private float bodyMovement = 0f;
+	private bool rotateBodyGears = false;
+	private bool rotateSideGears = true;
+
+	private bool sideFireStarted = false;
 	#endregion
 
 	#region Internal Properties
@@ -46,7 +63,8 @@ public sealed class Scraffy : Boss
 	#region MonoBehaviour
 	private void Update()
 	{
-
+		RotateGears();
+		CheckFireParticles();
 	}
 
 	protected override void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +84,38 @@ public sealed class Scraffy : Boss
 				else
 					other.GetComponent<Projectile>().CheckDestroyEnemy();
 			}
+		}
+	}
+	#endregion
+
+	#region Internal Update Methods
+	private void RotateGears()
+	{
+		if (rotateBodyGears)
+		{
+			foreach (var gear in bodyGears)
+				gear.Rotate(0f, 0f, -360f * bodyGearRotationSpeed * bodyMovement * Time.deltaTime);
+		}
+
+		if (rotateSideGears)
+		{
+			foreach (var gear in leftGears)
+				gear.Rotate(0f, 0f, 360f * sideGearRotationSpeed * Time.deltaTime);
+
+			foreach (var gear in rightGears)
+				gear.Rotate(0f, 0f, -360f * sideGearRotationSpeed * Time.deltaTime);
+		}
+	}
+
+	private void CheckFireParticles()
+	{
+		if (!sideFireStarted && LevelManager.Instance.MusicTime >= sideFireStartTime)
+		{
+			foreach (var fire in sideFires)
+				fire.Play();
+
+			CameraShake.Instance.Shake(0.5f, sideFireShakeIntensity);
+			sideFireStarted = true;
 		}
 	}
 	#endregion

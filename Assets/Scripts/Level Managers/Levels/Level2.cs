@@ -69,6 +69,15 @@ public sealed class Level2 : LevelManager
 	#region Public Properties
 	public static new Level2 Instance
 	{ get { return (Level2)instance; } }
+
+	public override Vector3 LevelMovement
+	{
+		get
+		{
+			return BossWaveActive ? new Vector2(0f, Parallax.OverrideSpeed.Value)
+								  : Vector2.zero;
+		}
+	}
 	#endregion
 
 	#region Internal Properties
