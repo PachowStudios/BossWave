@@ -179,11 +179,6 @@ public abstract class Enemy : MonoBehaviour
 	{
 		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
 	}
-
-	protected void ResetColor()
-	{
-		spriteRenderer.color = Color.white;
-	}
 	#endregion
 
 	#region Public Methods
@@ -215,19 +210,7 @@ public abstract class Enemy : MonoBehaviour
 				}
 
 				if (flashOnHit)
-				{
-					spriteRenderer.color = flashColor;
-
-					DOTween.Sequence()
-						.AppendInterval(flashLength)
-						.AppendCallback(() =>
-						{
-							if (this != null)
-							{
-								ResetColor();
-							}
-						});
-				}
+					spriteRenderer.FlashColor(flashColor, flashLength);
 			}
 		}
 	}

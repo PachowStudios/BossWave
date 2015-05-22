@@ -772,7 +772,7 @@ MonoBehaviour:
   smallestMicrochip: 1
   biggestMicrochip: 2
   knockback: {x: 3, y: 3}
-  flashOnHit: 0
+  flashOnHit: 1
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: 0

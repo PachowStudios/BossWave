@@ -26,12 +26,8 @@ public class BasicProjectile : Projectile
 	private void Update()
 	{
 		if (useModifiers)
-		{
 			foreach (ProjectileMod modifier in modifiers)
-			{
 				modifier.ApplyModifier();
-			}
-		}
 	}
 
 	private void LateUpdate()

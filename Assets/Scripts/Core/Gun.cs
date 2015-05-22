@@ -235,17 +235,11 @@ public class Gun : MonoBehaviour
 		}
 
 		if (disableInput || NoInput)
-		{
 			spriteRenderer.color = Color.clear;
-		}
 		else if (!canOverheat)
-		{
 			spriteRenderer.color = Color.white;
-		}
 		else
-		{
 			spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
-		}
 
 		if (canOverheat)
 		{
@@ -273,9 +267,7 @@ public class Gun : MonoBehaviour
 
 		if (continuousFire && projectileInstance != null &&
 			(disableInput || overheated || !shoot))
-		{
 			Destroy(projectileInstance.gameObject);
-		}
 	}
 	#endregion
 

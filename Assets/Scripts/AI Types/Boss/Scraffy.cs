@@ -36,7 +36,6 @@ public sealed class Scraffy : Boss
 
 	private float bodyMovement = 1f;
 	private float bodyVelocity = 0f;
-	private bool rotateBodyGears = false;
 	private bool rotateSideGears = false;
 
 	private bool sideFireStarted = false;
@@ -49,6 +48,10 @@ public sealed class Scraffy : Boss
 		set
 		{
 			leftGunHealth = Mathf.Max(value, 0f);
+
+			if (flashOnHit)
+				leftGunSprite.FlashColor(flashColor, flashLength);
+
 			CheckSideGunDeath(leftGunHealth, leftGunSprite);
 		}
 	}
@@ -59,6 +62,10 @@ public sealed class Scraffy : Boss
 		set
 		{
 			rightGunHealth = Mathf.Max(value, 0f);
+
+			if (flashOnHit)
+				rightGunSprite.FlashColor(flashColor, flashLength);
+
 			CheckSideGunDeath(rightGunHealth, rightGunSprite);
 		}
 	}
@@ -127,15 +134,16 @@ public sealed class Scraffy : Boss
 		body.position = new Vector3(Mathf.Clamp(body.position.x, -bodyMovementRange, bodyMovementRange),
 									body.position.y,
 									body.position.z);
+
+		if (Mathf.Abs(body.position.x) == bodyMovementRange)
+			bodyMovement = 0f;
 	}
 
 	private void ApplyGearRotation()
 	{
-		if (rotateBodyGears)
-		{
+		if (bodyMovement != 0f)
 			foreach (var gear in bodyGears)
 				gear.Rotate(0f, 0f, -360f * bodyGearRotationSpeed * bodyMovement * Time.deltaTime);
-		}
 
 		if (rotateSideGears)
 		{
@@ -163,7 +171,7 @@ public sealed class Scraffy : Boss
 		if (!invincible && damage != 0f)
 		{
 			if (leftSide)
-				leftGunHealth -= damage;
+				LeftGunHealth -= damage;
 			else
 				RightGunHealth -= damage;
 		}
@@ -216,9 +224,8 @@ public sealed class Scraffy : Boss
 					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, newUsePlayerY: false, newYOffset: 0f);
 					spawned = true;
 					LevelManager.Instance.StartBossWave();
-				})
-			.AppendInterval(0.25f)
-			.AppendCallback(() => rotateSideGears = true);
+					rotateSideGears = true;
+				});
 	}
 
 	public override void End()

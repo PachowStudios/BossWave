@@ -45,9 +45,7 @@ public abstract class Projectile : MonoBehaviour
 		set
 		{
 			if (spriteRenderer != null)
-			{
 				spriteRenderer.color = value;
-			}
 		}
 	}
 	#endregion
@@ -60,9 +58,7 @@ public abstract class Projectile : MonoBehaviour
 		anim = GetComponent<Animator>();
 
 		if (autoDestroy)
-		{
 			StartCoroutine(FailsafeDestroy());
-		}
 	}
 
 	protected virtual void OnEnable()
@@ -74,9 +70,7 @@ public abstract class Projectile : MonoBehaviour
 	{
 		if ((trigger.gameObject.layer == LayerMask.NameToLayer("Collider") || trigger.gameObject.layer == LayerMask.NameToLayer("RunningCollider")) &&
 			trigger.tag != "RunningBoundaries")
-		{
 			CheckDestroyWorld();
-		}
 	}
 
 	protected virtual void OnTriggerStay2D(Collider2D trigger)
@@ -93,10 +87,9 @@ public abstract class Projectile : MonoBehaviour
 		velocity.y = direction.y * shotSpeed;
 
 		if (correctRotation)
-		{
 			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
-		}
 
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		controller.move(velocity * Time.deltaTime);
 		velocity = controller.velocity;
 	}
@@ -124,9 +117,7 @@ public abstract class Projectile : MonoBehaviour
 			direction = newDirection;
 
 			if (correctRotation)
-			{
 				transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
-			}
 
 			SpriteColor = Color.white;
 		}
@@ -141,30 +132,22 @@ public abstract class Projectile : MonoBehaviour
 	public void CheckDestroyEnemy()
 	{
 		if (destroyOnEnemy)
-		{
 			DoDestroy();
-		}
 	}
 
 	public void CheckDestroyWorld()
 	{
 		if (destroyOnWorld)
-		{
 			DoDestroy();
-		}
 	}
 
 	public virtual void DoDestroy()
 	{
 		if (destroyShake)
-		{
 			CameraShake.Instance.Shake(0.5f, shakeIntensity);
-		}
 
 		if (destroyEffect != "")
-		{
 			SpriteEffect.Instance.SpawnEffect(destroyEffect, transform.position, LevelManager.Instance.foregroundLayer);
-		}
 
 		ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);

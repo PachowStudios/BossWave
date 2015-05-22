@@ -21,6 +21,21 @@ public static class Extensions
 	}
 	#endregion
 
+	#region SpriteRenderer
+	public static void FlashColor(this SpriteRenderer parent, Color color, float length)
+	{
+		parent.color = color;
+
+		DOTween.Sequence()
+			.AppendInterval(length)
+			.AppendCallback(() =>
+			{
+				if (parent != null)
+					parent.color = Color.white;
+			});
+	}
+	#endregion
+
 	#region Transform
 	public static void Flip(this Transform parent)
 	{
