@@ -74,7 +74,7 @@ public sealed class Level2 : LevelManager
 	{
 		get
 		{
-			return BossWaveActive ? new Vector2(0f, Parallax.OverrideSpeed.Value)
+			return BossWaveActive ? new Vector2(0f, Parallax.OverrideSpeed.Value * (Parallax.OverrideReverse.Value ? 1f : -1f))
 								  : Vector2.zero;
 		}
 	}

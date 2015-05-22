@@ -14,12 +14,15 @@ public sealed class Scraffy : Boss
 	public float rightGunHealth = 200f;
 	public float eyeMultiplier = 1.5f;
 
+	public float bodyMovementRange = 18.8f;
+
 	public float bodyGearRotationSpeed = 3f;
 	public float sideGearRotationSpeed = 5f;
 
 	public float sideFireStartTime;
 	public Vector3 sideFireShakeIntensity;
 
+	public Transform body;
 	public BoxCollider2D bodyCollider;
 	public BoxCollider2D eyeCollider;
 	public BoxCollider2D leftGunCollider;
@@ -31,9 +34,10 @@ public sealed class Scraffy : Boss
 	public List<Transform> rightGears;
 	public List<ParticleSystem> sideFires;
 
-	private float bodyMovement = 0f;
+	private float bodyMovement = 1f;
+	private float bodyVelocity = 0f;
 	private bool rotateBodyGears = false;
-	private bool rotateSideGears = true;
+	private bool rotateSideGears = false;
 
 	private bool sideFireStarted = false;
 	#endregion
@@ -63,8 +67,20 @@ public sealed class Scraffy : Boss
 	#region MonoBehaviour
 	private void Update()
 	{
-		RotateGears();
 		CheckFireParticles();
+
+		if (PlayerControl.Instance.transform.position.x > body.position.x + 1f)
+			bodyMovement = 1f;
+		else if (PlayerControl.Instance.transform.position.x < body.position.x - 1f)
+			bodyMovement = -1f;
+		else
+			bodyMovement = 0f;
+	}
+
+	private void LateUpdate()
+	{
+		ApplyBodyMovement();
+		ApplyGearRotation();
 	}
 
 	protected override void OnTriggerEnter2D(Collider2D other)
@@ -89,7 +105,31 @@ public sealed class Scraffy : Boss
 	#endregion
 
 	#region Internal Update Methods
-	private void RotateGears()
+	private void CheckFireParticles()
+	{
+		if (!sideFireStarted && LevelManager.Instance.MusicTime >= sideFireStartTime)
+		{
+			foreach (var fire in sideFires)
+				fire.Play();
+
+			CameraShake.Instance.Shake(0.5f, sideFireShakeIntensity);
+			sideFireStarted = true;
+		}
+	}
+
+	private void ApplyBodyMovement()
+	{
+		bodyVelocity = Mathf.Lerp(bodyVelocity,
+								  bodyMovement * moveSpeed,
+								  groundDamping * Time.deltaTime);
+
+		body.Translate(new Vector3(bodyVelocity * Time.deltaTime, 0f), Space.Self);
+		body.position = new Vector3(Mathf.Clamp(body.position.x, -bodyMovementRange, bodyMovementRange),
+									body.position.y,
+									body.position.z);
+	}
+
+	private void ApplyGearRotation()
 	{
 		if (rotateBodyGears)
 		{
@@ -104,18 +144,6 @@ public sealed class Scraffy : Boss
 
 			foreach (var gear in rightGears)
 				gear.Rotate(0f, 0f, -360f * sideGearRotationSpeed * Time.deltaTime);
-		}
-	}
-
-	private void CheckFireParticles()
-	{
-		if (!sideFireStarted && LevelManager.Instance.MusicTime >= sideFireStartTime)
-		{
-			foreach (var fire in sideFires)
-				fire.Play();
-
-			CameraShake.Instance.Shake(0.5f, sideFireShakeIntensity);
-			sideFireStarted = true;
 		}
 	}
 	#endregion
@@ -169,18 +197,28 @@ public sealed class Scraffy : Boss
 			.AppendCallback(() =>
 				{
 					Cutscene.Instance.StartCutscene();
-					CameraFollow.Instance.FollowObject(transform, false, 0.5f, true);
+					CameraFollow.Instance.FollowObject(transform, false, 0f, true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
 					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);
+
+					foreach (var gear in leftGears)
+						gear.DORotate(new Vector3(0f, 0f, 360f * 5f), spawnPathTime, RotateMode.LocalAxisAdd)
+							.SetEase(Ease.InExpo);
+
+					foreach (var gear in rightGears)
+						gear.DORotate(new Vector3(0f, 0f, -360f * 5f), spawnPathTime, RotateMode.LocalAxisAdd)
+							.SetEase(Ease.InExpo);
 				})
 			.Append(transform.DOPath(VectorPath.GetPath(spawnPathName), spawnPathTime, VectorPath.GetPathType(spawnPathName), PathMode.Sidescroller2D)
-				.SetEase(Ease.InOutSine))
+				.SetEase(Ease.InExpo))
 			.AppendCallback(() =>
 				{
 					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, false, newYOffset: 0f);
 					spawned = true;
 					LevelManager.Instance.StartBossWave();
-				});
+				})
+			.AppendInterval(0.25f)
+			.AppendCallback(() => rotateSideGears = true);
 	}
 
 	public override void End()

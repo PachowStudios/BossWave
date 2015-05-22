@@ -791,10 +791,12 @@ MonoBehaviour:
   leftGunHealth: 200
   rightGunHealth: 200
   eyeMultiplier: 1.5
+  bodyMovementRange: 18.7999992
   bodyGearRotationSpeed: 2
   sideGearRotationSpeed: 3
   sideFireStartTime: 50
   sideFireShakeIntensity: {x: 4, y: 4, z: 0}
+  body: {fileID: 400004}
   bodyCollider: {fileID: 6100002}
   eyeCollider: {fileID: 6100004}
   leftGunCollider: {fileID: 6100006}
@@ -951,7 +953,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 20
+      scalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -966,7 +968,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: .600000024
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1197,12 +1199,12 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 6
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0326087028
           inSlope: 1.89297652
           outSlope: 1.89297652
           tangentMode: 0
@@ -1212,7 +1214,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: 1
+          value: .0978260636
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1222,7 +1224,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0652173907
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1232,7 +1234,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: .836956501
+          value: 0
           inSlope: .0455716439
           outSlope: .0455716439
           tangentMode: 0
@@ -1988,7 +1990,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 20
+      scalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2003,7 +2005,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: .600000024
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2234,12 +2236,12 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 6
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0326087028
           inSlope: 1.89297652
           outSlope: 1.89297652
           tangentMode: 0
@@ -2249,7 +2251,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: 1
+          value: .0978260636
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2259,7 +2261,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0652173907
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -2269,7 +2271,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: .836956501
+          value: 0
           inSlope: .0455716439
           outSlope: .0455716439
           tangentMode: 0
@@ -3025,7 +3027,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 20
+      scalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3040,7 +3042,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: .600000024
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3271,12 +3273,12 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 6
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0326087028
           inSlope: 1.89297652
           outSlope: 1.89297652
           tangentMode: 0
@@ -3286,7 +3288,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: 1
+          value: .0978260636
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3296,7 +3298,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0652173907
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3306,7 +3308,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: .836956501
+          value: 0
           inSlope: .0455716439
           outSlope: .0455716439
           tangentMode: 0
@@ -4062,7 +4064,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 3
     startSpeed:
-      scalar: 20
+      scalar: 25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4077,7 +4079,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .5
+          value: .600000024
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4308,12 +4310,12 @@ ParticleSystem:
   SizeModule:
     enabled: 1
     curve:
-      scalar: 6
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0326087028
           inSlope: 1.89297652
           outSlope: 1.89297652
           tangentMode: 0
@@ -4323,7 +4325,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: 1
+          value: .0978260636
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4333,7 +4335,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .25
+          value: .0652173907
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -4343,7 +4345,7 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
         - time: 1
-          value: .836956501
+          value: 0
           inSlope: .0455716439
           outSlope: .0455716439
           tangentMode: 0
