@@ -490,7 +490,7 @@ public sealed class TheRIFT : Boss
 				{
 					Cutscene.Instance.StartCutscene();
 					ScaleWidthCamera.Main.AnimateFOV(fightFOV, 1f);
-					CameraFollow.Instance.FollowObject(transform, false, 3.9f, true);
+					CameraFollow.Instance.FollowObject(transform, newUsePlayerY: false, newYOffset: 3.9f, newLockX: true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
 					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);
 				})
@@ -504,7 +504,7 @@ public sealed class TheRIFT : Boss
 			.AppendCallback(() =>
 				{
 					FireLaser(spawnLaserPathTime, 0, laserIntroCurve, VectorPath.GetPath(spawnLaserPathName), VectorPath.GetPathType(spawnLaserPathName), GameObject.Find("Foregrounds").transform);
-					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, true);
+					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, newUsePlayerY: true);
 					spawned = true;
 					LevelManager.Instance.StartBossWave();
 					startingX = transform.position.x;

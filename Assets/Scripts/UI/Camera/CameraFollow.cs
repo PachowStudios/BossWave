@@ -8,12 +8,13 @@ public class CameraFollow : MonoBehaviour
 
 	public float defaultYOffset = 10f;
 	public float platformYOffset = 5f;
-	public float smoothing = 1f;
+	public float defaultSmoothing = 10f;
 	public Transform followTarget;
 	public bool stayAboveGroundLevel = true;
 	public bool lockX = false;
 
 	private float currentYOffset;
+	private float currentSmoothing;
 	private bool usePlayerY = false;
 	private Vector3 targetPosition = new Vector3();
 	private Vector3 previousTargetPosition = new Vector3();
@@ -34,6 +35,7 @@ public class CameraFollow : MonoBehaviour
 		instance = this;
 
 		currentYOffset = defaultYOffset;
+		currentSmoothing = defaultSmoothing;
 
 		targetPosition.y = followTarget.position.y + currentYOffset;
 		previousPosition = transform.position;
@@ -69,17 +71,18 @@ public class CameraFollow : MonoBehaviour
 			}
 
 			targetPosition.y = Mathf.Max(targetPosition.y, LevelManager.Instance.GroundLevel.y + defaultYOffset);
-			transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, smoothing);
+			transform.localPosition = Extensions.SuperSmoothLerp(transform.localPosition, previousTargetPosition, targetPosition, Time.deltaTime, currentSmoothing);
 		}
 	}
 	#endregion
 
 	#region Public Methods
-	public void FollowObject(Transform target, bool newUsePlayerY, float newYOffset = -1f, bool newLockX = false)
+	public void FollowObject(Transform target, bool newUsePlayerY, float? newYOffset = null, float? newSmoothing = null, bool? newLockX = null)
 	{
-		currentYOffset = newYOffset == -1f ? defaultYOffset : newYOffset;
 		usePlayerY = newUsePlayerY;
-		lockX = newLockX;
+		currentYOffset = newYOffset ?? defaultYOffset;
+		currentSmoothing = newSmoothing ?? defaultSmoothing;
+		lockX = newLockX ?? false;
 		followTarget = target;
 		targetPosition.x = followTarget.position.x;
 	}

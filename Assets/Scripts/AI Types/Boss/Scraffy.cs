@@ -197,7 +197,7 @@ public sealed class Scraffy : Boss
 			.AppendCallback(() =>
 				{
 					Cutscene.Instance.StartCutscene();
-					CameraFollow.Instance.FollowObject(transform, false, 0f, true);
+					CameraFollow.Instance.FollowObject(transform, newUsePlayerY: false, newYOffset: 0f, newSmoothing: 20f, newLockX: true);
 					BossIntro.Instance.Show(introName, introDescription, introSprite);
 					PlayerControl.Instance.GoToPoint(LevelManager.Instance.BossWaveWaitPoint, false, false);
 
@@ -213,7 +213,7 @@ public sealed class Scraffy : Boss
 				.SetEase(Ease.InExpo))
 			.AppendCallback(() =>
 				{
-					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, false, newYOffset: 0f);
+					CameraFollow.Instance.FollowObject(GameObject.FindGameObjectWithTag("CameraWrapper").transform, newUsePlayerY: false, newYOffset: 0f);
 					spawned = true;
 					LevelManager.Instance.StartBossWave();
 				})
