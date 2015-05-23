@@ -1088,7 +1088,9 @@ MonoBehaviour:
   scrollDirection: 0
   scroll: 0
   loop: 0
+  reverse: 0
   cameraParallax: 0
+  moveLayersSeparately: 1
   destroyAfterScroll: 1
 --- !u!114 &11400002
 MonoBehaviour:

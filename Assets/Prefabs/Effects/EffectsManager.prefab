@@ -90,6 +90,10 @@ MonoBehaviour:
     prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
   - name: Big Dust Poof
     prefab: {fileID: 21200000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+  - name: Small Fire Explosion
+    prefab: {fileID: 21200000, guid: cd1f5c95c2abb9d48914554dbf451365, type: 2}
+  - name: Medium Fire Explosion
+    prefab: {fileID: 21200000, guid: 0cfaa532a5219df498efe3abd86b5c8b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

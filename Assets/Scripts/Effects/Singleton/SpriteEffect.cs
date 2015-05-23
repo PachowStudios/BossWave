@@ -22,9 +22,7 @@ public class SpriteEffect : MonoBehaviour
 
 	#region Public Properties
 	public static SpriteEffect Instance
-	{
-		get { return instance; }
-	}
+	{ get { return instance; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -33,9 +31,7 @@ public class SpriteEffect : MonoBehaviour
 		instance = this;
 
 		foreach (Effect effect in effectsLibrary)
-		{
 			effects[effect.name] = effect.prefab;
-		}
 	}
 	#endregion
 
@@ -47,12 +43,10 @@ public class SpriteEffect : MonoBehaviour
 		if (effects.ContainsKey(requestedName))
 		{
 			SpriteRenderer currentEffect = Instantiate(effects[requestedName], targetPosition, Quaternion.identity) as SpriteRenderer;
-			currentEffect.transform.parent = (parent == null) ? transform : parent;
+			currentEffect.transform.parent = parent ?? transform;
 		}
 		else
-		{
 			Debug.Log("No effect with the name " + requestedName + " exists!");
-		}
 	}
 	#endregion
 }

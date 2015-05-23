@@ -195,6 +195,13 @@ public static class Extensions
 	{
 		return new Vector3(Mathf.Sign(parent.x), Mathf.Sign(parent.y), Mathf.Sign(parent.z));
 	}
+
+	public static Vector3 Dot(this Vector3 parent, Vector3 other)
+	{
+		return new Vector3(parent.x * other.x, 
+						   parent.y * other.y, 
+						   parent.z * other.z);
+	}
 	#endregion
 
 	#region Rigidbody2D
@@ -262,6 +269,13 @@ public static class Extensions
 
 			yield return new WaitForSeconds(interval);
 		}
+	}
+	#endregion
+
+	#region String
+	public static bool IsNullOrEmpty(this string parent)
+	{
+		return string.IsNullOrEmpty(parent);
 	}
 	#endregion
 

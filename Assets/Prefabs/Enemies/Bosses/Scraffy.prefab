@@ -194,7 +194,7 @@ GameObject:
   - 212: {fileID: 21200016}
   - 61: {fileID: 6100006}
   m_Layer: 11
-  m_Name: Gun
+  m_Name: Left Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ GameObject:
   - 212: {fileID: 21200018}
   - 61: {fileID: 6100008}
   m_Layer: 11
-  m_Name: Gun
+  m_Name: Right Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

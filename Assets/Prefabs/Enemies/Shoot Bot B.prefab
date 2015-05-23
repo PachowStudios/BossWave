@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400010}
+  - 114: {fileID: 11400012}
   m_Layer: 11
   m_Name: Right
   m_TagString: Untagged
@@ -108,6 +109,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
+  - 114: {fileID: 11400014}
   m_Layer: 11
   m_Name: Left
   m_TagString: Untagged
@@ -324,10 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17502ec11b8f9146a385569eac16ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
+  guns:
+  - {fileID: 11400014}
+  - {fileID: 11400012}
   range: 10
   maxRangeOffset: 1
-  horizontalShot: 1
+  useLineOfSight: 0
   useRandomGun: 0
   burstShot: 0
   shotsPerBurst: 1
@@ -357,6 +361,7 @@ MonoBehaviour:
   smallestMicrochip: 0
   biggestMicrochip: 0
   knockback: {x: 1, y: .5}
+  flashOnHit: 1
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: -35
@@ -423,6 +428,34 @@ MonoBehaviour:
   spawnEntryRange: 1
   spawnJumpHeight: 4
   spawnLength: .5
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ef64beed9a65141a75e426d855b501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
+  shotDirection: {x: -1, y: 0}
+  aimAtPlayer: 0
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ef64beed9a65141a75e426d855b501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
+  shotDirection: {x: -1, y: 0}
+  aimAtPlayer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

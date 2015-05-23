@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: BigDustPoof
+  m_Name: Medium Fire Explosion
   serializedVersion: 4
   m_AnimationType: 2
   m_Compressed: 0
@@ -18,21 +18,19 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300004, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300000, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .0500000007
-      value: {fileID: 21300006, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300002, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .100000001
-      value: {fileID: 21300000, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300004, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .150000006
-      value: {fileID: 21300008, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300006, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .200000003
-      value: {fileID: 21300010, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300008, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .25
-      value: {fileID: 21300012, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300010, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     - time: .300000012
-      value: {fileID: 21300002, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - time: .349999994
-      value: {fileID: 21300002, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+      value: {fileID: 21300010, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -51,18 +49,17 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300004, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300006, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300000, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300008, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300010, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300012, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300002, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
-    - {fileID: 21300002, guid: e3df62fd6c35f714d936600539fe2f29, type: 3}
+    - {fileID: 21300000, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300002, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300004, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300006, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300008, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300010, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
+    - {fileID: 21300010, guid: f8c93fbf1fddb4741919ca430e4d34ce, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .366666675
+    m_StopTime: .316666692
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -79,7 +76,7 @@ AnimationClip:
   m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events:
-  - time: .349999994
+  - time: .300000012
     functionName: DoDestroy
     data: 
     objectReferenceParameter: {fileID: 0}

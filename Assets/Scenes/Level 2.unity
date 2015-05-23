@@ -7513,6 +7513,14 @@ Prefab:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 1965467958}
+    - target: {fileID: 2000000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
+      propertyPath: orthographic size
+      value: 19.96632
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400010, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 39.9326401
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e54f6231ffb0ded41a11de9fac735204, type: 2}
   m_RootGameObject: {fileID: 1444881267}
