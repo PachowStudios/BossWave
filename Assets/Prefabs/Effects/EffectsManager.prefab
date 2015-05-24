@@ -101,6 +101,9 @@ MonoBehaviour:
   - name: Medium Blue Explosion
     prefab: {fileID: 9500000, guid: f0685eb484568674f8a2db3ed368d1f5, type: 2}
     variations: 4
+  - name: Small Blue Explosion
+    prefab: {fileID: 9500000, guid: df3c781d0dc001d4aa1e5ec34123bb75, type: 2}
+    variations: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Rocket 2
+  m_Controller: {fileID: 9100000, guid: 84d106d8e4dd8e1419a667ab1c3c17d9, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4f883c82f382d4f4abcea7c9eb1ea11d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4a9699dea4b5ee7439de63931fa2a7f5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c70be0164c7dd1c4abedd119b4b00077, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 16d47021f8cf92b4c96d5723927e21fe, type: 2}
