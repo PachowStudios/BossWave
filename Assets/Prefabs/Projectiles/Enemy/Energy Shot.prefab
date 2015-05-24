@@ -138,9 +138,11 @@ MonoBehaviour:
   destroyOnEnemy: 1
   destroyOnWorld: 1
   correctRotation: 1
-  destroyEffect: 
+  destroyShake: 0
+  shakeIntensity: {x: 0, y: 2, z: 0}
+  destroyEffect: Small Fire Explosion
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
+  useModifiers: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

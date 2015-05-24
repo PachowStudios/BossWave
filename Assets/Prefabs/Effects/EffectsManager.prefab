@@ -87,13 +87,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsLibrary:
   - name: Small Dust Explosion
-    prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
+    prefab: {fileID: 9500000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
+    variations: 0
   - name: Big Dust Poof
-    prefab: {fileID: 21200000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+    prefab: {fileID: 9500000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+    variations: 0
   - name: Small Fire Explosion
-    prefab: {fileID: 21200000, guid: cd1f5c95c2abb9d48914554dbf451365, type: 2}
+    prefab: {fileID: 9500000, guid: cd1f5c95c2abb9d48914554dbf451365, type: 2}
+    variations: 0
   - name: Medium Fire Explosion
-    prefab: {fileID: 21200000, guid: 0cfaa532a5219df498efe3abd86b5c8b, type: 2}
+    prefab: {fileID: 9500000, guid: 0cfaa532a5219df498efe3abd86b5c8b, type: 2}
+    variations: 0
+  - name: Medium Blue Explosion
+    prefab: {fileID: 9500000, guid: f0685eb484568674f8a2db3ed368d1f5, type: 2}
+    variations: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

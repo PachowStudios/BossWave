@@ -1,0 +1,102 @@
+fileFormatVersion: 2
+guid: a65916e02d959fe4fb4a6a26b063fe02
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Rocket 2_0
+    21300002: Rocket 2_1
+    21300004: Rocket 2_2
+    21300006: Rocket 2_3
+    21300008: Rocket 2_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 1
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 0
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 10
+  alphaIsTransparency: 1
+  textureType: 5
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Rocket 2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket 2_1
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 0
+        width: 18
+        height: 9
+      alignment: 9
+      pivot: {x: .666666687, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket 2_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0
+        width: 14
+        height: 9
+      alignment: 9
+      pivot: {x: .571428597, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket 2_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 14
+        height: 9
+      alignment: 9
+      pivot: {x: .571428597, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Rocket 2_4
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 14
+        height: 9
+      alignment: 9
+      pivot: {x: .571428597, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

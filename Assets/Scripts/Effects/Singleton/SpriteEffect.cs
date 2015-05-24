@@ -6,18 +6,19 @@ using System;
 public class SpriteEffect : MonoBehaviour
 {
 	#region Fields
-	[System.Serializable]
+	[Serializable]
 	public struct Effect
 	{
 		public string name;
-		public SpriteRenderer prefab;
+		public Animator prefab;
+		public int variations;
 	}
 
 	private static SpriteEffect instance;
 
 	public List<Effect> effectsLibrary;
 
-	private Dictionary<string, SpriteRenderer> effects = new Dictionary<string, SpriteRenderer>(StringComparer.OrdinalIgnoreCase);
+	private Dictionary<string, Effect> effects = new Dictionary<string, Effect>(StringComparer.OrdinalIgnoreCase);
 	#endregion
 
 	#region Public Properties
@@ -31,19 +32,22 @@ public class SpriteEffect : MonoBehaviour
 		instance = this;
 
 		foreach (Effect effect in effectsLibrary)
-			effects[effect.name] = effect.prefab;
+			effects[effect.name] = effect;
 	}
 	#endregion
 
 	#region Public Methods
 	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null)
 	{
-		requestedName = requestedName.ToLower();
+		Effect currentEffect;
 
-		if (effects.ContainsKey(requestedName))
+		if (effects.TryGetValue(requestedName, out currentEffect))
 		{
-			SpriteRenderer currentEffect = Instantiate(effects[requestedName], targetPosition, Quaternion.identity) as SpriteRenderer;
-			currentEffect.transform.parent = parent ?? transform;
+			var effectInstance = Instantiate(currentEffect.prefab, targetPosition, Quaternion.identity) as Animator;
+			effectInstance.transform.parent = parent ?? transform;
+
+			if (currentEffect.variations > 1)
+				effectInstance.SetTrigger(UnityEngine.Random.Range(1, currentEffect.variations + 1).ToString());
 		}
 		else
 			Debug.Log("No effect with the name " + requestedName + " exists!");
