@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   gunName: Caustic Magnum
   rarity: 1
   projectile: {fileID: 11400002, guid: 1b860a96f0cd0b8458cb139c9bfa6a5e, type: 2}
+  firePoint: {fileID: 400002}
   hasSecondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
@@ -125,9 +126,14 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  hasMuzzleFlash: 0
+  muzzleFlashRenderer: {fileID: 0}
+  muzzleFlashes: []
+  muzzleFlashDuration: .100000001
+  shakeOnFire: 0
+  shakeDuration: .5
+  shakeIntensity: {x: .300000012, y: .300000012, z: 0}
   disableInput: 0
-  firePoint: {fileID: 0}
-  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

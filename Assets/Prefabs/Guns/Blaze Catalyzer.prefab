@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   gunName: Blaze Catalyzer
   rarity: 3
   projectile: {fileID: 11400002, guid: 99a18692b2d79ab4ea33a50f2a59baf2, type: 2}
+  firePoint: {fileID: 400002}
   hasSecondaryShot: 0
   secondaryProjectile: {fileID: 0}
   secondaryCooldown: 5
@@ -125,9 +126,11 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  hasMuzzleFlash: 0
+  muzzleFlashRenderer: {fileID: 0}
+  muzzleFlashes: []
+  muzzleFlashDuration: .100000001
   disableInput: 0
-  firePoint: {fileID: 0}
-  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

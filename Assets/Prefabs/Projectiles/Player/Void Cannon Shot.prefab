@@ -13,7 +13,7 @@ GameObject:
   - 61: {fileID: 6100000}
   - 50: {fileID: 5000000}
   m_Layer: 14
-  m_Name: Black Hole Shot
+  m_Name: Void Cannon Shot
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   destroyOnWorld: 1
   correctRotation: 0
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: .100000001, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}

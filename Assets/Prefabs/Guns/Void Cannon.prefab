@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   m_Layer: 0
-  m_Name: FirePoint
+  m_Name: Fire Point
   m_TagString: Untagged
   m_Icon: {fileID: -215833656, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
   gunName: Void Cannon
   rarity: 5
   projectile: {fileID: 11400002, guid: dece77d196d8a654399857405f76fc49, type: 2}
+  firePoint: {fileID: 400002}
   hasSecondaryShot: 1
   secondaryProjectile: {fileID: 11400002, guid: 2cb86c5d266b99e46904312c6ee6552f,
     type: 2}
@@ -126,9 +127,11 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  hasMuzzleFlash: 0
+  muzzleFlashRenderer: {fileID: 0}
+  muzzleFlashes: []
+  muzzleFlashDuration: .100000001
   disableInput: 0
-  firePoint: {fileID: 0}
-  secondaryTimer: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

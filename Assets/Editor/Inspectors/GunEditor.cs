@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
+using Rotorz.ReorderableList;
 
 [CustomEditor(typeof(Gun))]
 public class GunEditor : Editor
@@ -10,8 +11,11 @@ public class GunEditor : Editor
 	private AnimBool showSecondaryGUI;
 	private AnimBool showContinuousFire;
 	private AnimBool showCanOverheat;
+	private AnimBool showMuzzleFlash;
+	private AnimBool showShakeOnFire;
 
 	private SerializedProperty overheatGradient;
+	private SerializedProperty muzzleFlashes;
 	#endregion
 
 	#region Internal Properties
@@ -26,8 +30,11 @@ public class GunEditor : Editor
 		showSecondaryGUI = new AnimBool(Target.showSecondaryGUI);
 		showContinuousFire = new AnimBool(Target.continuousFire);
 		showCanOverheat = new AnimBool(Target.canOverheat);
+		showMuzzleFlash = new AnimBool(Target.hasMuzzleFlash);
+		showShakeOnFire = new AnimBool(Target.shakeOnFire);
 
 		overheatGradient = serializedObject.FindProperty("overheatGradient");
+		muzzleFlashes = serializedObject.FindProperty("muzzleFlashes");
 	}
 
 	public override void OnInspectorGUI()
@@ -39,9 +46,12 @@ public class GunEditor : Editor
 		Target.projectile = (Projectile)EditorGUILayout.ObjectField("Projectile", Target.projectile, typeof(Projectile), false);
 
 		if (Target.projectile == null)
-		{
 			EditorGUILayout.HelpBox("No projectile selected!", MessageType.Error);
-		}
+
+		Target.firePoint = (Transform)EditorGUILayout.ObjectField("Fire Point", Target.firePoint, typeof(Transform), true);
+
+		if (Target.firePoint == null)
+			EditorGUILayout.HelpBox("No fire point selected!", MessageType.Error);
 
 		EditorGUILayout.Space();
 
@@ -70,9 +80,7 @@ public class GunEditor : Editor
 			Target.secondaryProjectile = (Projectile)EditorGUILayout.ObjectField("Projectile", Target.secondaryProjectile, typeof(Projectile), false);
 
 			if (Target.secondaryProjectile == null)
-			{
 				EditorGUILayout.HelpBox("No secondary projectile selected!", MessageType.Error);
-			}
 
 			Target.secondaryCooldown = EditorGUILayout.FloatField("Cooldown", Target.secondaryCooldown);
 			Target.showSecondaryGUI = EditorGUILayout.Toggle("Show GUI", Target.showSecondaryGUI);
@@ -85,20 +93,18 @@ public class GunEditor : Editor
 				Target.secondaryIcon = (Sprite)EditorGUILayout.ObjectField("Icon", Target.secondaryIcon, typeof(Sprite), false);
 
 				if (Target.secondaryIcon == null)
-				{
 					EditorGUILayout.HelpBox("No icon selected!", MessageType.Error);
-				}
 
 				EditorGUI.indentLevel--;
 			}
 
 			EditorGUILayout.EndFadeGroup();
-			EditorGUILayout.Space();
 
 			EditorGUI.indentLevel--;
 		}
 
 		EditorGUILayout.EndFadeGroup();
+		EditorGUILayout.Space();
 
 		Target.canOverheat = EditorGUILayout.Toggle("Overheat", Target.canOverheat);
 		showCanOverheat.target = Target.canOverheat;
@@ -117,11 +123,51 @@ public class GunEditor : Editor
 		}
 
 		EditorGUILayout.EndFadeGroup();
+		EditorGUILayout.Space();
+
+		Target.hasMuzzleFlash = EditorGUILayout.Toggle("Muzzle Flash", Target.hasMuzzleFlash);
+		showMuzzleFlash.target = Target.hasMuzzleFlash;
+
+		if (EditorGUILayout.BeginFadeGroup(showMuzzleFlash.faded))
+		{
+			EditorGUI.indentLevel++;
+
+			Target.muzzleFlashRenderer = (SpriteRenderer)EditorGUILayout.ObjectField("Renderer", Target.muzzleFlashRenderer, typeof(SpriteRenderer), true);
+
+			if (Target.muzzleFlashRenderer == null)
+				EditorGUILayout.HelpBox("No renderer selected!", MessageType.Error);
+
+			ReorderableListGUI.Title("Sprites");
+			ReorderableListGUI.ListField(muzzleFlashes);
+
+			if (Target.muzzleFlashes.Count <= 0 || Target.muzzleFlashes.HasNullElements())
+				EditorGUILayout.HelpBox("No sprites selected!", MessageType.Error);
+
+			Target.muzzleFlashDuration = EditorGUILayout.FloatField("Duration", Target.muzzleFlashDuration);
+
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.EndFadeGroup();
+		EditorGUILayout.Space();
+
+		Target.shakeOnFire = EditorGUILayout.Toggle("Shake On Fire", Target.shakeOnFire);
+		showShakeOnFire.target = Target.shakeOnFire;
+
+		if (EditorGUILayout.BeginFadeGroup(showShakeOnFire.faded))
+		{
+			EditorGUI.indentLevel++;
+
+			Target.shakeDuration = EditorGUILayout.FloatField("Duration", Target.shakeDuration);
+			Target.shakeIntensity = EditorGUILayout.Vector3Field("Intensity", Target.shakeIntensity);
+
+			EditorGUI.indentLevel--;
+		}
+
+		EditorGUILayout.EndFadeGroup();
 
 		if (GUI.changed)
-		{
 			EditorUtility.SetDirty(Target);
-		}
 
 		serializedObject.ApplyModifiedProperties();
 		Repaint();

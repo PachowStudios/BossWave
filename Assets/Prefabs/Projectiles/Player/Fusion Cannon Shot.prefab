@@ -139,8 +139,9 @@ MonoBehaviour:
   destroyOnWorld: 1
   correctRotation: 1
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: .100000001, z: 0}
-  destroyEffect: 
+  destroyEffect: Small Blue Explosion
   direction: {x: 0, y: 0, z: 0}
   useModifiers: 0
 --- !u!212 &21200000

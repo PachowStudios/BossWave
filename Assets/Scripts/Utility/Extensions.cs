@@ -29,10 +29,18 @@ public static class Extensions
 		DOTween.Sequence()
 			.AppendInterval(length)
 			.AppendCallback(() =>
-			{
-				if (parent != null)
-					parent.color = Color.white;
-			});
+				{
+					if (parent != null)
+						parent.color = Color.white;
+				});
+	}
+
+	public static void SetAlpha(this SpriteRenderer parent, float alpha)
+	{
+		parent.color = new Color(parent.color.r, 
+								 parent.color.g, 
+								 parent.color.b, 
+								 alpha);
 	}
 	#endregion
 
@@ -135,10 +143,22 @@ public static class Extensions
 	}
 	#endregion
 
+	#region Bool
+	public static int Sign(this bool parent)
+	{
+		return parent ? 1 : -1;
+	}
+	#endregion
+
 	#region Float
 	public static float RoundToTenth(this float parent)
 	{
 		return Mathf.RoundToInt(parent * 10f) / 10f;
+	}
+
+	public static float Abs(this float parent)
+	{
+		return Mathf.Abs(parent);
 	}
 	#endregion
 
@@ -238,6 +258,20 @@ public static class Extensions
 			parent[i] = parent[randomIndex];
 			parent[randomIndex] = temp;
 		}
+	}
+
+	public static T PickRandom<T>(this List<T> parent)
+	{
+		return parent[Random.Range(0, parent.Count)];
+	}
+
+	public static bool HasNullElements<T>(this List<T> parent)
+	{
+		foreach (T element in parent)
+			if (element == null)
+				return true;
+
+		return false;
 	}
 	#endregion
 

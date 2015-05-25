@@ -13,7 +13,7 @@ GameObject:
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
   m_Layer: 14
-  m_Name: Flamethrower Shot
+  m_Name: Blaze Catalyzer Shot
   m_TagString: PlayerSpecialProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   destroyOnWorld: 0
   correctRotation: 0
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: 0, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}

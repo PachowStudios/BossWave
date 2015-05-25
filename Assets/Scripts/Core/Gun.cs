@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
-public class Gun : MonoBehaviour
+public sealed class Gun : MonoBehaviour
 {
-	#region Fields
+	#region Types
 	public enum RarityLevel
 	{
 		Common,
@@ -15,10 +16,13 @@ public class Gun : MonoBehaviour
 		Godly,
 		Boss
 	};
+	#endregion
 
+	#region Fields
 	public string gunName;
 	public RarityLevel rarity = RarityLevel.Common;
 	public Projectile projectile;
+	public Transform firePoint;
 
 	public bool hasSecondaryShot = false;
 	public Projectile secondaryProjectile;
@@ -36,12 +40,17 @@ public class Gun : MonoBehaviour
 	public float overheatThreshold = 0.5f;
 	public Gradient overheatGradient;
 
+	public bool hasMuzzleFlash = false;
+	public SpriteRenderer muzzleFlashRenderer;
+	public List<Sprite> muzzleFlashes = new List<Sprite>();
+	public float muzzleFlashDuration = 0.1f;
+
+	public bool shakeOnFire = false;
+	public float shakeDuration = 0.1f;
+	public Vector3 shakeIntensity = new Vector3(0.1f, 0f, 0f);
+
 	[HideInInspector]
 	public bool disableInput = false;
-	[HideInInspector]
-	public Transform firePoint;
-	[HideInInspector]
-	public float secondaryTimer;
 
 	private bool shoot;
 	private bool previousShoot;
@@ -49,6 +58,7 @@ public class Gun : MonoBehaviour
 	private bool secondaryShoot;
 
 	private float shootTimer;
+	private float secondaryTimer;
 
 	private bool overheated = false;
 	private float overheatTimer = 0f;
@@ -89,24 +99,10 @@ public class Gun : MonoBehaviour
 	}
 
 	public SpriteRenderer SpriteRenderer
-	{
-		get 
-		{
-			if (spriteRenderer != null)
-			{
-				return spriteRenderer;
-			}
-			else
-			{
-				return GetComponent<SpriteRenderer>();
-			}
-		}
-	}
+	{ get { return spriteRenderer ?? GetComponent<SpriteRenderer>(); } }
 
 	public bool FacingRight
-	{
-		get { return transform.rotation.eulerAngles.y == 0f; }
-	}
+	{ get { return transform.rotation.eulerAngles.y == 0f; } }
 
 	public bool NoInput
 	{
@@ -118,19 +114,25 @@ public class Gun : MonoBehaviour
 	}
 
 	public float FireRate
-	{
-		get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; }
-	}
+	{ get { return Mathf.Round((1f / shootCooldown) * 10f) / 10f; } }
+
+	public float SecondaryCooldownPercent
+	{ get { return Mathf.Clamp01(secondaryTimer / secondaryCooldown); } }
 
 	public Vector3 ShotDirection
 	{ get; private set; }
 	#endregion
 
+	#region Internal Properties
+	private Color OverheatColor
+	{ get { return overheatGradient.Evaluate(overheatTimer / overheatTime); } }
+	#endregion
+
 	#region MonoBehaviour
 	private void Awake()
 	{
-		firePoint = transform.FindChild("FirePoint");
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		muzzleFlashRenderer.color = Color.clear;
 
 		shootTimer = shootCooldown;
 		secondaryTimer = secondaryCooldown;
@@ -146,14 +148,17 @@ public class Gun : MonoBehaviour
 	private void LateUpdate()
 	{
 		CheckShoot();
+
+		if (canOverheat)
+			UpdateOverheat();
+
+		CheckDisabled();
 	}
 
 	private void OnDisable()
 	{
 		if (continuousFire && projectileInstance != null)
-		{
 			Destroy(projectileInstance.gameObject);
-		}
 	}
 	#endregion
 
@@ -169,9 +174,7 @@ public class Gun : MonoBehaviour
 		if (useMouse)
 		{
 			if (xboxInput)
-			{
 				useMouse = false;
-			}
 			else
 			{
 				shoot = mouseInput;
@@ -181,13 +184,9 @@ public class Gun : MonoBehaviour
 		else
 		{
 			if (mouseInput || secondaryMouseInput)
-			{
 				useMouse = true;
-			}
 			else
-			{
 				shoot = xboxInput;
-			}
 		}
 
 		shoot = (!disableInput && !secondaryShoot) ? shoot : false;
@@ -211,6 +210,8 @@ public class Gun : MonoBehaviour
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
 					projectileInstance.Initialize(ShotDirection);
+					OnFire();
+
 					shootStart = false;
 				}
 			}
@@ -220,6 +221,7 @@ public class Gun : MonoBehaviour
 				{
 					projectileInstance = Instantiate(projectile, firePoint.position, Quaternion.identity) as Projectile;
 					projectileInstance.Initialize(ShotDirection);
+					OnFire();
 
 					shootTimer = 0f;
 				}
@@ -229,41 +231,45 @@ public class Gun : MonoBehaviour
 			{
 				secondaryProjectileInstance = Instantiate(secondaryProjectile, firePoint.position, Quaternion.identity) as Projectile;
 				secondaryProjectileInstance.Initialize(ShotDirection);
+				OnFire();
 
 				secondaryTimer = 0f;
 			}
 		}
+	}
 
+	private void UpdateOverheat()
+	{
+		if ((shoot || secondaryShoot) && !disableInput && !overheated)
+		{
+			overheatTimer = Mathf.Clamp(overheatTimer + Time.deltaTime, 0f, overheatTime);
+
+			if (overheatTimer >= overheatTime)
+			{
+				overheated = true;
+				PlayerControl.Instance.Health -= overheatDamage;
+			}
+		}
+		else
+		{
+			overheatTimer = Mathf.Clamp(overheatTimer - Time.deltaTime, 0f, overheatTime);
+
+			if (overheatTimer <= overheatTime * overheatThreshold)
+			{
+				overheated = false;
+				shoot = false;
+			}
+		}
+	}
+
+	private void CheckDisabled()
+	{
 		if (disableInput || NoInput)
-			spriteRenderer.color = Color.clear;
+			spriteRenderer.color = muzzleFlashRenderer.color = Color.clear;
 		else if (!canOverheat)
 			spriteRenderer.color = Color.white;
 		else
-			spriteRenderer.color = overheatGradient.Evaluate(overheatTimer / overheatTime);
-
-		if (canOverheat)
-		{
-			if ((shoot || secondaryShoot) && !disableInput && !overheated)
-			{
-				overheatTimer = Mathf.Clamp(overheatTimer + Time.deltaTime, 0f, overheatTime);
-
-				if (overheatTimer >= overheatTime)
-				{
-					overheated = true;
-					PlayerControl.Instance.Health -= overheatDamage;
-				}
-			}
-			else
-			{
-				overheatTimer = Mathf.Clamp(overheatTimer - Time.deltaTime, 0f, overheatTime);
-
-				if (overheatTimer <= overheatTime * overheatThreshold)
-				{
-					overheated = false;
-					shoot = false;
-				}
-			}
-		}
+			spriteRenderer.color = OverheatColor;
 
 		if (continuousFire && projectileInstance != null &&
 			(disableInput || overheated || !shoot))
@@ -285,19 +291,49 @@ public class Gun : MonoBehaviour
 				newEuler = transform.position.LookAt2D(Camera.main.ScreenToWorldPoint(mousePosition)).eulerAngles;
 			}
 			else
-			{
 				newEuler = Vector3.zero;
-			}
 		}
 		else
-		{
 			newEuler = Quaternion.Euler(0f, 0f, Mathf.Atan2(CrossPlatformInputManager.GetAxis("XboxGunY"), CrossPlatformInputManager.GetAxis("XboxGunX")) * Mathf.Rad2Deg).eulerAngles;
-		}
 
 		Vector3 shotDirection = Quaternion.Euler(newEuler) * Vector3.right;
 		transform.CorrectScaleForRotation(newEuler, true);
 
 		return shotDirection;
+	}
+
+	private void OnFire()
+	{
+		if (hasMuzzleFlash)
+			ShowMuzzleFlash();
+
+		if (shakeOnFire)
+			FireShake();
+	}
+
+	private void ShowMuzzleFlash()
+	{
+		muzzleFlashRenderer.color = Color.white;
+		muzzleFlashRenderer.sprite = muzzleFlashes.PickRandom();
+
+		DOTween.Sequence()
+			.AppendInterval(muzzleFlashDuration)
+			.AppendCallback(() =>
+				{
+					if (muzzleFlashRenderer != null)
+						muzzleFlashRenderer.color = Color.clear;
+				});
+	}
+
+	private void FireShake()
+	{
+		var currentShakeIntensity = new Vector3(shakeIntensity.x.Abs() * -FacingRight.Sign(),
+												shakeIntensity.y,
+												shakeIntensity.z); 
+
+		CameraShake.Instance.Shake(shakeDuration, 
+								   currentShakeIntensity,
+								   randomizeDirection: false);
 	}
 	#endregion
 }

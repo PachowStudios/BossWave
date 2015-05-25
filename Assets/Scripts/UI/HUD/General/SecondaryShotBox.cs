@@ -51,11 +51,9 @@ public class SecondaryShotBox : MonoBehaviour
 		if (PlayerControl.Instance.Gun.hasSecondaryShot && !overrideShowing)
 		{
 			if (!showing)
-			{
 				Show();
-			}
 
-			cooldownPercent = Mathf.Clamp(PlayerControl.Instance.Gun.secondaryTimer / PlayerControl.Instance.Gun.secondaryCooldown, 0f, 1f);
+			cooldownPercent = PlayerControl.Instance.Gun.SecondaryCooldownPercent;
 			icon.sprite = PlayerControl.Instance.Gun.secondaryIcon;
 		}
 		else

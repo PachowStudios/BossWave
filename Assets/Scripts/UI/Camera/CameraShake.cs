@@ -21,12 +21,14 @@ public class CameraShake : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void Shake(float duration, Vector3 strength)
+	public void Shake(float duration, Vector3 strength, bool randomizeDirection = true)
 	{
 		if (DOTween.IsTweening(transform))
 			DOTween.Complete(transform);
 
-		transform.DOPunchPosition(strength.RandomSign(), duration);
+		transform.DOPunchPosition(randomizeDirection ? strength.RandomSign() 
+													 : strength,
+								  duration);
 	}
 	#endregion
 }
