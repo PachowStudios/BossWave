@@ -196,6 +196,13 @@ public static class Extensions
 		return new Vector3(Mathf.Sign(parent.x), Mathf.Sign(parent.y), Mathf.Sign(parent.z));
 	}
 
+	public static Vector3 RandomSign(this Vector3 parent)
+	{
+		return new Vector3(parent.x * RandomSign(),
+						   parent.y * RandomSign(),
+						   parent.z * RandomSign());
+	}
+
 	public static Vector3 Dot(this Vector3 parent, Vector3 other)
 	{
 		return new Vector3(parent.x * other.x, 

@@ -24,15 +24,17 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
+  - 95: {fileID: 9500000}
+  - 50: {fileID: 5000000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  - 95: {fileID: 9500000}
-  - 50: {fileID: 5000000}
-  - 61: {fileID: 6100000}
+  - 114: {fileID: 11400016}
+  - 114: {fileID: 11400018}
   m_Layer: 11
   m_Name: Shoot Bot A
   m_TagString: Enemy
@@ -332,6 +334,7 @@ MonoBehaviour:
   immuneToKnockback: 0
   maxHealth: 50
   damage: 3
+  showDrops: 1
   microchipChance: 25
   minMicrochips: 1
   maxMicrochips: 3
@@ -345,7 +348,6 @@ MonoBehaviour:
   moveSpeed: 9
   groundDamping: 10
   inAirDamping: 5
-  timeWarpAtDeath: 0
   invincible: 0
   ignoreProjectiles: 0
   maxJumpHeight: 7
@@ -442,6 +444,7 @@ MonoBehaviour:
   projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
   shotDirection: {x: -1, y: 0}
   aimAtPlayer: 0
+  shootEffect: Small Fire Explosion
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -456,6 +459,34 @@ MonoBehaviour:
   projectile: {fileID: 11400002, guid: 0003e8e9d7f46fd4890245741bb6768d, type: 2}
   shotDirection: {x: -1, y: 0}
   aimAtPlayer: 0
+  shootEffect: Small Fire Explosion
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a69ae6780dd904e8530349150f9253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffects:
+  - deathEffect: Medium Blue Explosion
+    spawnPosition: {x: 0, y: 1, z: 0}
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46f801950bb1de4f9c1f32c62ea87a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: .5
+  intensity: {x: 0, y: .5, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

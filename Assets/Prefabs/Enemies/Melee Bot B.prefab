@@ -24,15 +24,17 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
+  - 95: {fileID: 9500000}
+  - 50: {fileID: 5000000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
-  - 95: {fileID: 9500000}
-  - 50: {fileID: 5000000}
-  - 61: {fileID: 6100000}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400012}
   m_Layer: 11
   m_Name: Melee Bot B
   m_TagString: Enemy
@@ -259,19 +261,20 @@ MonoBehaviour:
   immuneToKnockback: 0
   maxHealth: 30
   damage: 5
+  showDrops: 1
   microchipChance: 25
   minMicrochips: 1
   maxMicrochips: 2
   smallestMicrochip: 0
   biggestMicrochip: 0
   knockback: {x: 1, y: .5}
+  flashOnHit: 1
   flashColor: {r: 1, g: .469999999, b: .469999999, a: 1}
   flashLength: .100000001
   gravity: -35
   moveSpeed: 9
   groundDamping: 10
   inAirDamping: 5
-  timeWarpAtDeath: 0
   invincible: 0
   ignoreProjectiles: 0
   maxJumpHeight: 7
@@ -331,6 +334,33 @@ MonoBehaviour:
   spawnEntryRange: 1
   spawnJumpHeight: 4
   spawnLength: .5
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46f801950bb1de4f9c1f32c62ea87a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: .5
+  intensity: {x: 0, y: .300000012, z: 0}
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a69ae6780dd904e8530349150f9253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffects:
+  - deathEffect: Medium Blue Explosion
+    spawnPosition: {x: 0, y: .899999976, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

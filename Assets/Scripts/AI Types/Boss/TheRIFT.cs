@@ -75,7 +75,6 @@ public sealed class TheRIFT : Boss
 	private bool preAttacking = false;
 	private bool floating = true;
 	private bool applyMovement = true;
-	private bool dead = false;
 	private RIFTLaser laserInstance;
 
 	private List<SpriteRenderer> spriteRenderers;
@@ -115,7 +114,7 @@ public sealed class TheRIFT : Boss
 
 	private void Update()
 	{
-		if (spawned && !dead)
+		if (spawned && !Dead)
 		{
 			invincible = !attacking;
 			anim.SetBool("Eye Shield", invincible);
@@ -142,7 +141,7 @@ public sealed class TheRIFT : Boss
 	{
 		if (spawned)
 		{
-			if (!dead)
+			if (!Dead)
 			{
 				if (applyMovement)
 				{
@@ -434,18 +433,14 @@ public sealed class TheRIFT : Boss
 		return path.ToArray();
 	}
 
-	protected override void CheckDeath(bool showDrops = true)
+	protected override void HandleDeath()
 	{
-		if (Health <= 0f && !dead)
-		{
-			dead = true;
-			ghostTrail.trailActive = false;
+		ghostTrail.trailActive = false;
 
-			PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
-			DOTween.Kill("RIFT Attack");
-			DOTween.Kill("RIFT Swoop");
-			Timer.Instance.StopTimer();
-		}
+		PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+		DOTween.Kill("RIFT Attack");
+		DOTween.Kill("RIFT Swoop");
+		Timer.Instance.StopTimer();
 	}
 	#endregion
 

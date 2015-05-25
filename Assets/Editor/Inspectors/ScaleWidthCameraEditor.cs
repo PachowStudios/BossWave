@@ -5,14 +5,17 @@ using UnityEditor.AnimatedValues;
 [CustomEditor(typeof(ScaleWidthCamera))]
 public class ScaleWidthCameraEditor : Editor
 {
+	#region Fields
 	private AnimBool showWorldSpaceUI;
+	#endregion
 
+	#region Internal Properties
 	private ScaleWidthCamera Target
-	{
-		get { return (ScaleWidthCamera)target; }
-	}
+	{ get { return (ScaleWidthCamera)target; } }
+	#endregion
 
-	void OnEnable()
+	#region Editor Methods
+	private void OnEnable()
 	{
 		showWorldSpaceUI = new AnimBool(Target.useWorldSpaceUI);
 	}
@@ -69,4 +72,5 @@ public class ScaleWidthCameraEditor : Editor
 		serializedObject.ApplyModifiedProperties();
 		Repaint();
 	}
+	#endregion
 }

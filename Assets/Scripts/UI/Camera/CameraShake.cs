@@ -26,7 +26,7 @@ public class CameraShake : MonoBehaviour
 		if (DOTween.IsTweening(transform))
 			DOTween.Complete(transform);
 
-		transform.DOPunchPosition(strength, duration);
+		transform.DOPunchPosition(strength.RandomSign(), duration);
 	}
 	#endregion
 }

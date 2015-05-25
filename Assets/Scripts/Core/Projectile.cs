@@ -14,7 +14,8 @@ public abstract class Projectile : MonoBehaviour
 	public bool destroyOnWorld = true;
 	public bool correctRotation = true;
 	public bool destroyShake = false;
-	public Vector3 shakeIntensity = new Vector3(0f, 2f, 0f);
+	public float shakeDuration = 0.5f;
+	public Vector3 shakeIntensity = new Vector3(0f, 0.5f, 0f);
 	public string destroyEffect;
 
 	[HideInInspector]
@@ -144,7 +145,7 @@ public abstract class Projectile : MonoBehaviour
 	public virtual void DoDestroy()
 	{
 		if (destroyShake)
-			CameraShake.Instance.Shake(0.5f, shakeIntensity);
+			CameraShake.Instance.Shake(shakeDuration, shakeIntensity);
 
 		if (destroyEffect != "")
 			SpriteEffect.Instance.SpawnEffect(destroyEffect, transform.position, LevelManager.Instance.foregroundLayer);

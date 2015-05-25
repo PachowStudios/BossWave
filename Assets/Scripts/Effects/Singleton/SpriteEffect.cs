@@ -5,7 +5,7 @@ using System;
 
 public class SpriteEffect : MonoBehaviour
 {
-	#region Fields
+	#region Types
 	[Serializable]
 	public struct Effect
 	{
@@ -13,7 +13,9 @@ public class SpriteEffect : MonoBehaviour
 		public Animator prefab;
 		public int variations;
 	}
+	#endregion
 
+	#region Fields
 	private static SpriteEffect instance;
 
 	public List<Effect> effectsLibrary;
@@ -36,9 +38,11 @@ public class SpriteEffect : MonoBehaviour
 	}
 	#endregion
 
-	#region Public Methods
-	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null)
+	#region Internal Helper Methods
+	private IEnumerator DoSpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null, float? delay = null)
 	{
+		yield return new WaitForSeconds(delay ?? 0f);
+
 		Effect currentEffect;
 
 		if (effects.TryGetValue(requestedName, out currentEffect))
@@ -51,6 +55,13 @@ public class SpriteEffect : MonoBehaviour
 		}
 		else
 			Debug.Log("No effect with the name " + requestedName + " exists!");
+	}
+	#endregion
+
+	#region Public Methods
+	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null, float? delay = null)
+	{
+		StartCoroutine(DoSpawnEffect(requestedName, targetPosition, parent, delay));
 	}
 	#endregion
 }

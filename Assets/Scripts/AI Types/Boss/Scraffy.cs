@@ -157,9 +157,9 @@ public sealed class Scraffy : Boss
 	#endregion
 
 	#region Internal Helper Methods
-	protected override void CheckDeath(bool showDrops = true)
+	protected override void HandleDeath()
 	{
-		
+
 	}
 
 	private void DamageSideGun(GameObject enemy, bool leftSide)

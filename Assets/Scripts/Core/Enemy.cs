@@ -4,6 +4,11 @@ using DG.Tweening;
 
 public abstract class Enemy : MonoBehaviour
 {
+	#region Events
+	public delegate void OnDeathHandler();
+	public event OnDeathHandler OnDeath;
+	#endregion
+
 	#region Fields
 	public enum Difficulty
 	{
@@ -21,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
 	public bool immuneToKnockback = false;
 	public float maxHealth = 10f;
 	public float damage = 5f;
+	public bool showDrops = true;
 	[Range(0f, 100f)]
 	public float microchipChance = 25f;
 	public int minMicrochips = 1;
@@ -35,7 +41,6 @@ public abstract class Enemy : MonoBehaviour
 	public float moveSpeed = 5f;
 	public float groundDamping = 10f;
 	public float inAirDamping = 5f;
-	public bool timeWarpAtDeath = false;
 
 	[HideInInspector]
 	public bool invincible = false;
@@ -53,6 +58,7 @@ public abstract class Enemy : MonoBehaviour
 	protected Transform popupMessagePoint;
 
 	private float health;
+	private bool dead = false;
 	#endregion
 
 	#region Public Properties
@@ -66,6 +72,9 @@ public abstract class Enemy : MonoBehaviour
 			CheckDeath();
 		}
 	}
+
+	public bool Dead
+	{ get { return dead; } }
 
 	public float HealthPercentage
 	{ get { return Mathf.Clamp01(health / maxHealth); } }
@@ -165,7 +174,20 @@ public abstract class Enemy : MonoBehaviour
 	#endregion
 
 	#region Internal Helper Methods
-	protected abstract void CheckDeath(bool showDrops = true);
+	protected virtual void CheckDeath()
+	{
+		if (Health <= 0f && !dead)
+		{
+			dead = true;
+
+			if (OnDeath != null)
+				OnDeath();
+
+			HandleDeath();
+		}
+	}
+
+	protected abstract void HandleDeath();
 
 	protected void FacePlayer()
 	{
@@ -173,11 +195,6 @@ public abstract class Enemy : MonoBehaviour
 			transform.Flip();
 		else if (!PlayerIsOnRight && FacingRight)
 			transform.Flip();
-	}
-
-	protected void DeathTimeWarp()
-	{
-		TimeWarpEffect.Instance.Warp(0.15f, 0f, 0.5f);
 	}
 	#endregion
 
@@ -219,8 +236,8 @@ public abstract class Enemy : MonoBehaviour
 	{
 		if (!immuneToInstantKill)
 		{
-			health = 0f;
-			CheckDeath(false);
+			showDrops = false;
+			Health = 0f;
 		}
 	}
 

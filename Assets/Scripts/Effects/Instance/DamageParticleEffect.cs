@@ -37,19 +37,17 @@ public class DamageParticleEffect : MonoBehaviour
 	private void Update()
 	{
 		if (CanActivate)
-		{
 			SpawnParticles();
-		}
 	}
 
 	private void OnDisable()
 	{
-		if (particleInstance != null)
-		{
-			particleInstance.transform.parent = null;
-			particleInstance.enableEmission = false;
-			Destroy(particleInstance.gameObject, particleInstance.startLifetime);
-		}
+		if (particleInstance == null)
+			return;
+
+		particleInstance.transform.parent = null;
+		particleInstance.enableEmission = false;
+		Destroy(particleInstance.gameObject, particleInstance.startLifetime);
 	}
 
 	private void OnDrawGizmosSelected()

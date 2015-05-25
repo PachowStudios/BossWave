@@ -45,7 +45,7 @@ MonoBehaviour:
   lifetime: 1
   systemLifetime: 5
   sortingLayer: Effects
-  sortingOrder: 1
+  sortingOrder: 0
   material: {fileID: 0}
 --- !u!198 &19800000
 ParticleSystem:

@@ -24,15 +24,17 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
+  - 95: {fileID: 9500000}
+  - 50: {fileID: 5000000}
+  - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
-  - 95: {fileID: 9500000}
-  - 50: {fileID: 5000000}
-  - 61: {fileID: 6100000}
+  - 114: {fileID: 11400024}
+  - 114: {fileID: 11400026}
   m_Layer: 11
   m_Name: Heavy Bot A
   m_TagString: Enemy
@@ -215,7 +217,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -448,6 +450,7 @@ MonoBehaviour:
   immuneToKnockback: 1
   maxHealth: 300
   damage: 10
+  showDrops: 1
   microchipChance: 75
   minMicrochips: 3
   maxMicrochips: 4
@@ -461,7 +464,6 @@ MonoBehaviour:
   moveSpeed: 3
   groundDamping: 10
   inAirDamping: 5
-  timeWarpAtDeath: 0
   invincible: 0
   ignoreProjectiles: 0
   maxJumpHeight: 7
@@ -638,6 +640,40 @@ MonoBehaviour:
   shotDirection: {x: -1, y: 0}
   aimAtPlayer: 0
   shootEffect: Small Fire Explosion
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a69ae6780dd904e8530349150f9253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffects:
+  - deathEffect: Medium Fire Explosion
+    spawnPosition: {x: 0, y: 1.79999995, z: 0}
+    delay: 0
+  - deathEffect: Medium Blue Explosion
+    spawnPosition: {x: -.800000012, y: 2.5, z: 0}
+    delay: .100000001
+  - deathEffect: Medium Blue Explosion
+    spawnPosition: {x: .899999976, y: 1.29999995, z: 0}
+    delay: .200000003
+--- !u!114 &11400026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46f801950bb1de4f9c1f32c62ea87a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: .5
+  intensity: {x: 1.5, y: 1.5, z: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -19,9 +19,7 @@ public class ScaleWidthCamera : MonoBehaviour
 
 	#region Public Properties
 	public static ScaleWidthCamera Main
-	{
-		get { return main; }
-	}
+	{ get { return main; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -45,9 +43,7 @@ public class ScaleWidthCamera : MonoBehaviour
 		camera.orthographicSize = FOV / 20f / camera.aspect;
 
 		if (useWorldSpaceUI && worldSpaceUI != null)
-		{
 			worldSpaceUI.sizeDelta = new Vector2(FOV / 10f, FOV / 10f / camera.aspect);
-		}
 	}
 	#endregion
 

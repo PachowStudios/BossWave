@@ -41,16 +41,12 @@ public abstract class StandardEnemy : Enemy
 		if (spawned)
 		{
 			if (!disableMovement)
-			{
 				Walk();
-			}
 
 			AttackAI.CheckAttack();
 		}
 		else
-		{
 			SpawnAI.CheckSpawn();
-		}
 	}
 
 	protected virtual void LateUpdate()
@@ -71,48 +67,36 @@ public abstract class StandardEnemy : Enemy
 		EnableMovement(enable == 1);
 	}
 
-	protected override void CheckDeath(bool showDrops = true)
+	protected override void HandleDeath()
 	{
-		if (Health <= 0f)
+		ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
+		int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+
+		if (showDrops)
 		{
-			ExplodeEffect.Instance.Explode(transform, velocity, spriteRenderer.sprite);
-			int pointsAdded = PlayerControl.Instance.AddPointsFromEnemy(maxHealth, damage);
+			PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
 
-			if (showDrops)
+			if (Random.Range(0f, 100f) <= microchipChance)
 			{
-				PopupMessage.Instance.CreatePopup(popupMessagePoint.position, pointsAdded.ToString());
+				int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
 
-				if (Random.Range(0f, 100f) <= microchipChance)
+				for (int i = 0; i < microchipsToSpawn; i++)
 				{
-					int microchipsToSpawn = Random.Range(minMicrochips, maxMicrochips + 1);
-
-					for (int i = 0; i < microchipsToSpawn; i++)
-					{
-						Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
-						PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
-					}
+					Microchip.Size microchipSize = (Microchip.Size)Random.Range((int)smallestMicrochip, (int)biggestMicrochip + 1);
+					PowerupSpawner.Instance.SpawnMicrochip(transform.position, microchipSize);
 				}
 			}
-
-			if (timeWarpAtDeath)
-			{
-				DeathTimeWarp();
-			}
-
-			Destroy(gameObject);
 		}
+
+		Destroy(gameObject);
 	}
 
 	protected virtual void FollowPlayer(float range)
 	{
 		if (transform.position.x + range < PlayerControl.Instance.transform.position.x)
-		{
 			horizontalMovement = 1f;
-		}
 		else if (transform.position.x - range > PlayerControl.Instance.transform.position.x)
-		{
 			horizontalMovement = -1f;
-		}
 		else
 		{
 			horizontalMovement = 0f;
@@ -125,9 +109,7 @@ public abstract class StandardEnemy : Enemy
 	public virtual void Jump(float height)
 	{
 		if (height > 0f)
-		{
 			velocity.y = Mathf.Sqrt(2f * Mathf.Min(height, maxJumpHeight) * -gravity);
-		}
 	}
 
 	public bool CheckAtWall(bool flip = false)
