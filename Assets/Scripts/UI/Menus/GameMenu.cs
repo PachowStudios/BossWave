@@ -135,42 +135,45 @@ public class GameMenu : MonoBehaviour
 	#region Public Methods
 	public IEnumerator GameWin()
 	{
-		if (!gameOver)
-		{
-			gameOver = true;
-			canPause = false;
+		if (gameOver)
+			yield return null;
 
-			yield return new WaitForSeconds(gameWinDelay);
+		gameOver = true;
+		canPause = false;
 
-			SelectObject(gameWinSelect);
-			CRTEffect.Instance.StartCRT(fadeTime);
-			Cutscene.Instance.HideUI(fadeTime);
-			Fade(0f, 1f, gameWinOverlay, false);
+		yield return new WaitForSeconds(gameWinDelay);
 
-			yield return new WaitForSeconds(fadeTime);
+		SelectObject(gameWinSelect);
+		CRTEffect.Instance.StartCRT(fadeTime);
+		Cutscene.Instance.HideUI(fadeTime);
+		Fade(0f, 1f, gameWinOverlay, false);
 
-			DOTween.To(s => scoreText.text = "Score:   " + Mathf.RoundToInt(s).ToString().PadLeft(HealthDisplay.Instance.scoreDigits, '0'), 0f, PlayerControl.Instance.Score, scoreTallySpeed)
-				.SetSpeedBased(true)
-				.SetEase(Ease.InQuint);
-		}
+		yield return new WaitForSeconds(fadeTime);
+
+		DOTween.To(s => scoreText.text = "Score:   " + Mathf.RoundToInt(s).ToString().PadLeft(HealthDisplay.Instance.scoreDigits, '0'), 
+				   0f, 
+				   PlayerControl.Instance.Score, 
+				   scoreTallySpeed)
+			.SetSpeedBased(true)
+			.SetEase(Ease.InQuint);
 	}
 
 	public IEnumerator GameOver(string reason = "")
 	{
-		if (!gameOver)
-		{
-			gameOver = true;
-			canPause = false;
+		if (gameOver)
+			yield return null;
 
-			yield return new WaitForSeconds(gameOverDelay);
+		gameOver = true;
+		canPause = false;
 
-			PlayerControl.Instance.DisableInput();
-			SelectObject(gameOverSelect);
-			gameOverReason.text = reason;
-			CRTEffect.Instance.StartCRT(fadeTime);
-			Cutscene.Instance.HideUI(fadeTime);
-			Fade(0f, 1f, gameOverOverlay, false);
-		}
+		yield return new WaitForSeconds(gameOverDelay);
+
+		PlayerControl.Instance.DisableInput();
+		SelectObject(gameOverSelect);
+		gameOverReason.text = reason;
+		CRTEffect.Instance.StartCRT(fadeTime);
+		Cutscene.Instance.HideUI(fadeTime);
+		Fade(0f, 1f, gameOverOverlay, false);
 	}
 
 	public void EnablePausing(bool enabled)

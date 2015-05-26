@@ -375,9 +375,7 @@ public static class Extensions
 		float start = Time.realtimeSinceStartup;
 
 		while (Time.realtimeSinceStartup < start + time)
-		{
 			yield return null;
-		}
 	}
 
 	public static Vector3 Vector3Range(Vector3 min, Vector3 max)

@@ -336,6 +336,7 @@ MonoBehaviour:
   immuneToKnockback: 1
   maxHealth: 600
   damage: 15
+  showDrops: 1
   microchipChance: 100
   minMicrochips: 10
   maxMicrochips: 10
@@ -349,7 +350,6 @@ MonoBehaviour:
   moveSpeed: 8
   groundDamping: 10
   inAirDamping: 5
-  timeWarpAtDeath: 0
   invincible: 0
   ignoreProjectiles: 0
   introName: THE R.I.F.T

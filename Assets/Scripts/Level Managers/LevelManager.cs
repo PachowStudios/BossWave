@@ -126,10 +126,8 @@ public abstract class LevelManager : MonoBehaviour
 				currentWave++;
 			}
 		}
-		else
-		{
+		else if (PlayerControl.Instance.IsDead)
 			StopAllCoroutines();
-		}
 	}
 	#endregion
 

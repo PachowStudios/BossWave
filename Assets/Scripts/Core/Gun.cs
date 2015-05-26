@@ -99,7 +99,15 @@ public sealed class Gun : MonoBehaviour
 	}
 
 	public SpriteRenderer SpriteRenderer
-	{ get { return spriteRenderer ?? GetComponent<SpriteRenderer>(); } }
+	{
+		get
+		{
+			if (spriteRenderer != null)
+				return spriteRenderer;
+			else
+				return GetComponent<SpriteRenderer>();
+		}
+	}
 
 	public bool FacingRight
 	{ get { return transform.rotation.eulerAngles.y == 0f; } }

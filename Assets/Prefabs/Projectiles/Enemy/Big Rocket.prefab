@@ -140,6 +140,7 @@ MonoBehaviour:
   destroyOnWorld: 1
   correctRotation: 1
   destroyShake: 1
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: .5, z: 0}
   destroyEffect: Medium Fire Explosion
   direction: {x: 0, y: 0, z: 0}
@@ -156,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  accelTime: .5
+  accelTime: 0
+  accelLength: .5
   accelCurve:
     serializedVersion: 2
     m_Curve:
@@ -188,7 +190,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
   hasTrail: 1
-  trailThreshold: .800000012
+  trailTime: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
