@@ -130,6 +130,9 @@ MonoBehaviour:
   muzzleFlashRenderer: {fileID: 0}
   muzzleFlashes: []
   muzzleFlashDuration: .100000001
+  shakeOnFire: 0
+  shakeDuration: .100000001
+  shakeIntensity: {x: .100000001, y: 0, z: 0}
   disableInput: 0
 --- !u!212 &21200000
 SpriteRenderer:
@@ -151,7 +154,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 76840989
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300012, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 27bb443aeafa3e74cb121bf670bafb9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

@@ -132,7 +132,9 @@ public sealed class Gun : MonoBehaviour
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		muzzleFlashRenderer.color = Color.clear;
+
+		if (hasMuzzleFlash)
+			muzzleFlashRenderer.color = Color.clear;
 
 		shootTimer = shootCooldown;
 		secondaryTimer = secondaryCooldown;
@@ -265,7 +267,12 @@ public sealed class Gun : MonoBehaviour
 	private void CheckDisabled()
 	{
 		if (disableInput || NoInput)
-			spriteRenderer.color = muzzleFlashRenderer.color = Color.clear;
+		{
+			spriteRenderer.color = Color.clear;
+
+			if (hasMuzzleFlash)
+				muzzleFlashRenderer.color = Color.clear;
+		}
 		else if (!canOverheat)
 			spriteRenderer.color = Color.white;
 		else

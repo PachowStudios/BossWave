@@ -132,15 +132,16 @@ MonoBehaviour:
   damage: 3
   knockback: {x: 0, y: 0}
   gravity: 0
-  shotSpeed: 40
+  shotSpeed: 50
   lifetime: 3
   autoDestroy: 1
   destroyOnEnemy: 1
   destroyOnWorld: 1
   correctRotation: 1
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: 2, z: 0}
-  destroyEffect: 
+  destroyEffect: Medium Blue Explosion
   direction: {x: 0, y: 0, z: 0}
   useModifiers: 0
 --- !u!212 &21200000

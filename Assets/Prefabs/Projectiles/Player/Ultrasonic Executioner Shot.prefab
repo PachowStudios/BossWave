@@ -211,10 +211,11 @@ MonoBehaviour:
   destroyOnWorld: 1
   correctRotation: 1
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: .5, z: 0}
-  destroyEffect: 
+  destroyEffect: Small Dust Explosion
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
+  useModifiers: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

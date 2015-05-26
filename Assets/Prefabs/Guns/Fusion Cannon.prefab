@@ -158,9 +158,9 @@ MonoBehaviour:
   hasMuzzleFlash: 1
   muzzleFlashRenderer: {fileID: 21200002}
   muzzleFlashes:
-  - {fileID: 21300000, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
-  - {fileID: 21300002, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
-  - {fileID: 21300004, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
+  - {fileID: 21300006, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
+  - {fileID: 21300008, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
+  - {fileID: 21300010, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
   muzzleFlashDuration: .0500000007
   shakeOnFire: 1
   shakeDuration: .100000001
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 76840989
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f99d6ea24dddf214e86230d63d669811, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d515538c43f1f94990668f195e6b7bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 76840989
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: aa8fe1b37db96e147a7f6a7bc129b89c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

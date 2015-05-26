@@ -25,6 +25,8 @@ public sealed class PlayerControl : MonoBehaviour
 	public float comboDecreaseTime = 1f;
 	public int maxScore = 999999999;
 	public int maxMicrochips = 99999;
+	public Transform popupMessagePoint;
+	public Transform gunPoint;
 	public List<Gun> startingGuns;
 	public float gunSwapCooldownTime = 0.5f;
 	public float minAltIdleTime = 5f;
@@ -81,8 +83,6 @@ public sealed class PlayerControl : MonoBehaviour
 	private Animator anim;
 	private GhostTrailEffect ghostTrail;
 	private List<SpriteRenderer> spriteRenderers;
-	private Transform gunPoint;
-	private Transform popupMessagePoint;
 	#endregion
 
 	#region Public Properties
@@ -172,8 +172,6 @@ public sealed class PlayerControl : MonoBehaviour
 		anim = GetComponent<Animator>();
 		ghostTrail = GetComponent<GhostTrailEffect>();
 		spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList<SpriteRenderer>();
-		gunPoint = transform.FindChild("gunPoint");
-		popupMessagePoint = transform.FindChild("popupMessage");
 
 		health = maxHealth;
 
