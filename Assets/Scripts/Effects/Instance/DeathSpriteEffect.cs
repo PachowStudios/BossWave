@@ -18,6 +18,7 @@ public class DeathSpriteEffect : MonoBehaviour
 
 	#region Fields
 	public List<Effect> deathEffects = new List<Effect>();
+	public bool parentEffects = false;
 
 	private Enemy thisEnemy;
 	#endregion
@@ -54,7 +55,9 @@ public class DeathSpriteEffect : MonoBehaviour
 	{
 		foreach (var effect in deathEffects)
 			SpriteEffect.Instance.SpawnEffect(effect.deathEffect,
-											  transform.TransformPoint(effect.spawnPosition),
+											  (parentEffects ? effect.spawnPosition : transform.TransformPoint(effect.spawnPosition)),
+											  positionIsLocal: parentEffects,
+											  parent: (parentEffects ? transform : null),
 											  delay: effect.delay);
 	}
 	#endregion

@@ -39,9 +39,12 @@ public class SpriteEffect : MonoBehaviour
 	#endregion
 
 	#region Internal Helper Methods
-	private IEnumerator DoSpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null, float? delay = null)
+	private IEnumerator DoSpawnEffect(string requestedName, Vector3 targetPosition, bool positionIsLocal, Transform parent, float? delay)
 	{
 		yield return new WaitForSeconds(delay ?? 0f);
+
+		if (positionIsLocal && parent != null)
+			targetPosition = parent.TransformPoint(targetPosition);
 
 		Effect currentEffect;
 
@@ -59,9 +62,9 @@ public class SpriteEffect : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public void SpawnEffect(string requestedName, Vector3 targetPosition, Transform parent = null, float? delay = null)
+	public void SpawnEffect(string requestedName, Vector3 targetPosition, bool positionIsLocal = false, Transform parent = null, float? delay = null)
 	{
-		StartCoroutine(DoSpawnEffect(requestedName, targetPosition, parent, delay));
+		StartCoroutine(DoSpawnEffect(requestedName, targetPosition, positionIsLocal, parent, delay));
 	}
 	#endregion
 }

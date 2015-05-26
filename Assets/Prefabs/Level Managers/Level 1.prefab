@@ -1027,7 +1027,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1103,35 +1103,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a981f38b3277e4b836b047114ba8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPowerups: 1
+  spawnPowerups: 0
   spawnerTag: PowerupSpawner
   waves:
-  - startTime: 35
+  - startTime: 20
     possiblePowerups:
     - {fileID: 11400000, guid: 3e53890330ea3734da692ac231f0c937, type: 2}
-  - startTime: 40
+  - startTime: 30
     possiblePowerups:
     - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
     - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
-  - startTime: 45
+  - startTime: 35
     possiblePowerups:
     - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - startTime: 50
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+  - startTime: 55
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+  - startTime: 70
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 90
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
+    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
+  - startTime: 105
+    possiblePowerups:
+    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
   - startTime: 60
     possiblePowerups:
-    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
-  - startTime: 75
-    possiblePowerups:
-    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
-  - startTime: 80
-    possiblePowerups:
-    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
-  - startTime: 100
-    possiblePowerups:
-    - {fileID: 11400000, guid: 5a4010f9d2a65954fbb7e122e66ddab1, type: 2}
-    - {fileID: 11400000, guid: 5e2091e2197c4454f89a5a54f7afee55, type: 2}
-  - startTime: 110
-    possiblePowerups:
-    - {fileID: 11400000, guid: 5a544e45fe9f06547a67c9d951b43ec3, type: 2}
+    - {fileID: 11400000, guid: 49df1e50940055d4ca6556abd31d25fa, type: 2}
   microchips:
   - {fileID: 11400000, guid: c122dab8b82e7554aa728a7615e5d460, type: 2}
   - {fileID: 11400000, guid: bfe3f16fb909ff94e98e53b362173699, type: 2}
@@ -1155,7 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73005b078d8abb447a4f6641cf58432c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnEnemies: 1
+  spawnEnemies: 0
   spawnerTag: Spawner
   waves:
   - startTime: 1
@@ -1250,8 +1253,8 @@ MonoBehaviour:
   - {fileID: 11400004, guid: b5d5ad8008ad14c4aac1e2180456c4e9, type: 2}
   - {fileID: 11400002, guid: 03f9cff7952847e4da45ec6b36c8c712, type: 2}
   - {fileID: 11400006, guid: 670399add197745458d030505ccdd6f4, type: 2}
-  introCRT: 1
-  timeOverride: 0
+  introCRT: 0
+  timeOverride: 120
   fadeInTime: 2
   killAllEnemiesBonus: 100000
   timeBonusMultiplier: 10

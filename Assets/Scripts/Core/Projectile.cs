@@ -148,7 +148,7 @@ public abstract class Projectile : MonoBehaviour
 			CameraShake.Instance.Shake(shakeDuration, shakeIntensity);
 
 		if (destroyEffect != "")
-			SpriteEffect.Instance.SpawnEffect(destroyEffect, transform.position, LevelManager.Instance.foregroundLayer);
+			SpriteEffect.Instance.SpawnEffect(destroyEffect, transform.position, parent: LevelManager.Instance.foregroundLayer);
 
 		ExplodeEffect.Instance.Explode(transform, velocity, Sprite);
 		Destroy(gameObject);

@@ -156,16 +156,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8083d1d6adb5dd4b964a978048443af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 12
   knockback: {x: 0, y: 0}
   gravity: 0
-  shotSpeed: 6
+  shotSpeed: 7
   lifetime: 0
   autoDestroy: 0
   destroyOnEnemy: 0
   destroyOnWorld: 0
   correctRotation: 0
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: 2, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}

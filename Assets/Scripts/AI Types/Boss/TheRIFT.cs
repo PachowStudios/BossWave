@@ -292,7 +292,7 @@ public sealed class TheRIFT : Boss
 					{
 						Projectile currentProjectile = Instantiate(cannonPrefab, firePoint.position, Quaternion.identity) as Projectile;
 						currentProjectile.Initialize(firePoint.position.LookAt2D(cannonTarget.position) * Vector3.right);
-						SpriteEffect.Instance.SpawnEffect(cannonFireEffect, firePoint.position, firePoint);
+						SpriteEffect.Instance.SpawnEffect(cannonFireEffect, firePoint.position, parent: firePoint);
 						anim.SetTrigger("Cannon Fire");
 					}
 				});

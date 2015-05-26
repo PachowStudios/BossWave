@@ -26,7 +26,7 @@ public class EnemyGun : MonoBehaviour
 		}
 
 		if (!shootEffect.IsNullOrEmpty())
-			SpriteEffect.Instance.SpawnEffect(shootEffect, transform.position, transform);
+			SpriteEffect.Instance.SpawnEffect(shootEffect, transform.position, parent: transform);
 
 		Projectile projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity) as Projectile;
 		projectileInstance.Initialize(currentShotDirection);

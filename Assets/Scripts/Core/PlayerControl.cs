@@ -665,11 +665,13 @@ public sealed class PlayerControl : MonoBehaviour
 			SelectGun(gunIndex);
 	}
 
-	public IEnumerator SpeedBoost(float multiplier, float length)
+	public void SpeedBoost(float multiplier, float length)
 	{
 		speedMultiplier = multiplier;
-		yield return new WaitForSeconds(length);
-		speedMultiplier = 1f;
+
+		DOTween.Sequence()
+			.AppendInterval(length)
+			.AppendCallback(() => speedMultiplier = 1f);
 	}
 
 	public IEnumerator JumpToFloor()
