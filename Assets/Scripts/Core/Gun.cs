@@ -150,11 +150,10 @@ public sealed class Gun : MonoBehaviour
 	private void LateUpdate()
 	{
 		CheckShoot();
+		CheckDisabled();
 
 		if (canOverheat)
 			UpdateOverheat();
-
-		CheckDisabled();
 	}
 
 	private void OnDisable()
@@ -259,7 +258,7 @@ public sealed class Gun : MonoBehaviour
 			if (overheatTimer <= overheatTime * overheatThreshold)
 			{
 				overheated = false;
-				shoot = false;
+				shoot = secondaryShoot = false;
 			}
 		}
 	}
