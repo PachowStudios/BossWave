@@ -340,7 +340,7 @@ MonoBehaviour:
   continuouslyFalling: 0
   groundDamping: 6
   inAirDamping: 4
-  jumpHeight: 7
+  jumpHeight: 7.5
   comboStartKills: 2
   comboDecreaseTime: 4
   maxScore: 99999999

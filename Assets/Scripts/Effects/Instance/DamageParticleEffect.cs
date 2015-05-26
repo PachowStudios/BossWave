@@ -34,6 +34,12 @@ public class DamageParticleEffect : MonoBehaviour
 		thisEnemy = GetComponent<Enemy>();
 	}
 
+	private void OnEnable()
+	{
+		if (thisEnemy != null)
+			thisEnemy.OnDeath += UnparentParticles;
+	}
+
 	private void Update()
 	{
 		if (CanActivate)
@@ -42,12 +48,8 @@ public class DamageParticleEffect : MonoBehaviour
 
 	private void OnDisable()
 	{
-		if (particleInstance == null)
-			return;
-
-		particleInstance.transform.parent = null;
-		particleInstance.enableEmission = false;
-		Destroy(particleInstance.gameObject, particleInstance.startLifetime);
+		if (thisEnemy != null)
+			thisEnemy.OnDeath -= UnparentParticles;
 	}
 
 	private void OnDrawGizmosSelected()
@@ -65,6 +67,16 @@ public class DamageParticleEffect : MonoBehaviour
 		particleInstance.transform.localPosition = spawnPosition;
 		particleInstance.renderer.sortingLayerName = sortingLayer;
 		particleInstance.renderer.sortingOrder = sortingOrder;
+	}
+
+	private void UnparentParticles()
+	{
+		if (particleInstance == null)
+			return;
+
+		particleInstance.transform.parent = null;
+		particleInstance.enableEmission = false;
+		Destroy(particleInstance.gameObject, particleInstance.startLifetime);
 	}
 	#endregion
 }

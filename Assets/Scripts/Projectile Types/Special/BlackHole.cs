@@ -28,10 +28,10 @@ public class BlackHole : Projectile
 	private float damageTime;
 	private float damageTimer;
 	private ParticleSystem particleSystemInstance;
-	private List<ParticleSystem> targetParticleSystems;
+	private ParticleSystem[] targetParticleSystems;
 	private List<Enemy> targetEnemies = new List<Enemy>();
 	private List<Projectile> targetProjectiles = new List<Projectile>();
-	private List<Powerup> targetPowerups = new List<Powerup>();
+	private Powerup[] targetPowerups;
 
 	private CircleCollider2D outerRadius;
 	private CircleCollider2D innerRadius;
@@ -51,9 +51,7 @@ public class BlackHole : Projectile
 		damageTimer = damageTime;
 
 		if (autoDestroy)
-		{
 			StartCoroutine(FailsafeDestroy());
-		}
 	}
 
 	private void Update()
@@ -66,9 +64,7 @@ public class BlackHole : Projectile
 			anim.SetBool("Active", true);
 
 			if (!spawned && shotSpeed <= activationSpeed)
-			{
 				Spawn();
-			}
 
 			if (spawned)
 			{
@@ -83,9 +79,7 @@ public class BlackHole : Projectile
 				SimulatePlayer();
 
 				if (damageTimer >= damageTime)
-				{
 					damageTimer = 0f;
-				}
 			}
 		}
 	}
@@ -98,30 +92,18 @@ public class BlackHole : Projectile
 	protected override void OnTriggerEnter2D(Collider2D trigger)
 	{
 		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
-		{
 			CheckDestroyWorld();
-		}
 		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.OverlapPoint(trigger.bounds.center))
 		{
 			Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
 
 			if (!currentEnemy.ignoreProjectiles)
 			{
-				if (trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
-				{
-					if (!activated)
-					{
-						activated = true;
-					}
-				}
+				if (!activated && trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
+					activated = true;
 
-				if (activated)
-				{
-					if (!targetEnemies.Contains(currentEnemy))
-					{
-						targetEnemies.Add(currentEnemy);
-					}
-				}
+				if (activated && !targetEnemies.Contains(currentEnemy))
+					targetEnemies.Add(currentEnemy);
 			}
 		}
 		else if ((trigger.gameObject.layer == LayerMask.NameToLayer("Projectiles") || trigger.gameObject.layer == LayerMask.NameToLayer("EnemyProjectiles")) && outerRadius.OverlapPoint(trigger.bounds.center))
@@ -131,9 +113,7 @@ public class BlackHole : Projectile
 				Projectile currentProjectile = trigger.gameObject.GetComponent<Projectile>();
 
 				if (!targetProjectiles.Contains(currentProjectile))
-				{
 					targetProjectiles.Add(currentProjectile);
-				}
 			}
 		}
 	}
@@ -143,31 +123,36 @@ public class BlackHole : Projectile
 	private void GetInput()
 	{
 		if (!activated && CrossPlatformInputManager.GetButtonDown("SecondaryShoot"))
-		{
 			activated = true;
-		}
 	}
 
 	private void SimulateParticles()
 	{
-		targetParticleSystems = GameObject.FindObjectsOfType<ParticleSystem>().ToList<ParticleSystem>();
+		targetParticleSystems = GameObject.FindObjectsOfType<ParticleSystem>();
 
-		foreach (ParticleSystem particleSystem in targetParticleSystems)
+		if (targetParticleSystems.Length == 0)
+			return;
+
+		foreach (var particleSystem in targetParticleSystems)
 		{
-			ParticleSystem.Particle[] currentParticles = new ParticleSystem.Particle[particleSystem.particleCount];
+			var currentParticles = new ParticleSystem.Particle[particleSystem.particleCount];
 			particleSystem.GetParticles(currentParticles);
 
 			for (int i = 0; i < currentParticles.Length; i++)
 			{
 				if (innerRadius.OverlapPoint(currentParticles[i].position))
-				{
-					currentParticles[i].velocity = currentParticles[i].position.CalculateBlackHoleForce(innerForce, transform.position, outerRadius.radius, innerRotation);
-				}
+					currentParticles[i].velocity = currentParticles[i].position.CalculateBlackHoleForce(innerForce, 
+																										transform.position, 
+																										outerRadius.radius, 
+																										innerRotation);
 				else if (outerRadius.OverlapPoint(currentParticles[i].position))
-				{
-					currentParticles[i].velocity = Vector3.Lerp(currentParticles[i].velocity, currentParticles[i].position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation, 1.5f), 0.1f);
-					currentParticles[i].startLifetime = currentParticles[i].lifetime = affectedParticleLifetime;
-				}
+					currentParticles[i].velocity = Vector3.Lerp(currentParticles[i].velocity, 
+																currentParticles[i].position.CalculateBlackHoleForce(outerForce, 
+																													 transform.position, 
+																													 outerRadius.radius, 
+																													 outerRotation, 
+																													 1.5f), 
+																0.1f);
 			}
 
 			particleSystem.SetParticles(currentParticles, currentParticles.Length);
@@ -176,121 +161,127 @@ public class BlackHole : Projectile
 
 	private void SimulateEnemies()
 	{
-		if (targetEnemies.Count > 0)
-		{
-			foreach (Enemy currentEnemy in targetEnemies)
-			{
-				if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
-				{
-					if (innerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
-					{
-						currentEnemy.Kill();
-					}
-					else if (outerRadius.OverlapPoint(currentEnemy.collider2D.bounds.center))
-					{
-						if (!currentEnemy.immuneToInstantKill)
-						{
-							currentEnemy.Move(Vector3.Lerp(currentEnemy.Velocity, 
-														   currentEnemy.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
-														   30f * Time.deltaTime));
-						}
+		if (targetEnemies.Count == 0)
+			return;
 
-						if (damageTimer >= damageTime)
-						{
-							ExplodeEffect.Instance.ExplodePartial(currentEnemy.transform, currentEnemy.Velocity, currentEnemy.Sprite, 0.05f);
-							currentEnemy.TakeDamage(gameObject);
-						}
-					}
+		for (int i = 0; i < targetEnemies.Count; i++)
+		{
+			if (targetEnemies[i] == null || targetEnemies[i].ignoreProjectiles)
+				continue;
+
+			if (innerRadius.OverlapPoint(targetEnemies[i].collider2D.bounds.center))
+				targetEnemies[i].Kill();
+			else if (outerRadius.OverlapPoint(targetEnemies[i].collider2D.bounds.center))
+			{
+				if (!targetEnemies[i].immuneToInstantKill)
+				{
+					targetEnemies[i].Move(Vector3.Lerp(targetEnemies[i].Velocity,
+													   targetEnemies[i].transform.position.CalculateBlackHoleForce(outerForce, 
+																												   transform.position, 
+																												   outerRadius.radius, 
+																												   outerRotation), 
+													   30f * Time.deltaTime));
+				}
+
+				if (damageTimer >= damageTime)
+				{
+					ExplodeEffect.Instance.ExplodePartial(targetEnemies[i].transform, 
+														  targetEnemies[i].Velocity, 
+														  targetEnemies[i].Sprite, 
+														  0.05f);
+					targetEnemies[i].TakeDamage(gameObject);
 				}
 			}
-
-			targetEnemies.RemoveAll(e => e == null);
 		}
+
+		targetEnemies.RemoveAll(e => e == null);
 	}
 
 	private void SimulateProjectiles()
 	{
-		if (targetProjectiles.Count > 0)
-		{
-			foreach (Projectile currentProjectile in targetProjectiles)
-			{
-				if (currentProjectile != null)
-				{
-					if (innerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
-					{
-						currentProjectile.destroyShake = false;
-						currentProjectile.DoDestroy();
-					}
-					else if (outerRadius.OverlapPoint(currentProjectile.collider2D.bounds.center))
-					{
-						Vector3 force = currentProjectile.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation * 3f);
-						currentProjectile.direction = Vector3.Lerp(currentProjectile.direction, force.normalized, 1.5f * Time.deltaTime);
-						currentProjectile.Move(force);
-					}
-				}
-			}
+		if (targetProjectiles.Count == 0)
+			return;
 
-			targetProjectiles.RemoveAll(p => p == null);
+		for (int i = 0; i < targetProjectiles.Count; i++)
+		{
+			if (targetProjectiles[i] == null)
+				continue;
+
+			if (innerRadius.OverlapPoint(targetProjectiles[i].collider2D.bounds.center))
+			{
+				targetProjectiles[i].destroyShake = false;
+				targetProjectiles[i].DoDestroy();
+			}
+			else if (outerRadius.OverlapPoint(targetProjectiles[i].collider2D.bounds.center))
+			{
+				var force = targetProjectiles[i].transform.position.CalculateBlackHoleForce(outerForce, 
+																							transform.position, 
+																							outerRadius.radius, 
+																							outerRotation * 3f);
+				targetProjectiles[i].direction = Vector3.Lerp(targetProjectiles[i].direction, 
+															  force.normalized, 
+															  1.5f * Time.deltaTime);
+				targetProjectiles[i].Move(force);
+			}
 		}
+
+		targetProjectiles.RemoveAll(p => p == null);
 	}
 
 	private void SimulatePowerups()
 	{
-		foreach (Powerup currentPowerup in GameObject.FindObjectsOfType<Powerup>())
-		{
-			if (!targetPowerups.Contains(currentPowerup) && outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
-			{
-				targetPowerups.Add(currentPowerup);
-			}
-		}
+		targetPowerups = GameObject.FindObjectsOfType<Powerup>();
 
-		if (targetPowerups.Count > 0)
-		{
-			foreach (Powerup currentPowerup in targetPowerups)
-			{
-				if (currentPowerup != null)
-				{
-					if (innerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
-					{
-						currentPowerup.Destroy();
-					}
-					else if (outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
-					{
-						currentPowerup.rigidbody2D.velocity = Vector3.Lerp(currentPowerup.rigidbody2D.velocity, 
-																		   currentPowerup.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
-																		   30f * Time.deltaTime);
-					}
-				}
-			}
+		if (targetPowerups.Length == 0)
+			return;
 
-			targetPowerups.RemoveAll(p => p == null);
+		foreach (var currentPowerup in targetPowerups)
+		{
+			if (currentPowerup == null)
+				continue;
+
+			if (innerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
+				currentPowerup.Destroy();
+			else if (outerRadius.OverlapPoint(currentPowerup.collider2D.bounds.center))
+				currentPowerup.rigidbody2D.velocity = Vector3.Lerp(currentPowerup.rigidbody2D.velocity, 
+																	currentPowerup.transform.position.CalculateBlackHoleForce(outerForce, 
+																															  transform.position, 
+																															  outerRadius.radius, 
+																															  outerRotation), 
+																	30f * Time.deltaTime);
 		}
 	}
 
 	private void SimulatePlayer()
 	{
 		if (innerRadius.OverlapPoint(PlayerControl.Instance.collider2D.bounds.center))
-		{
 			PlayerControl.Instance.Health = 0f;
-		}
 		else if (outerRadius.OverlapPoint(PlayerControl.Instance.collider2D.bounds.center))
 		{
 			PlayerControl.Instance.Move(Vector3.Lerp(PlayerControl.Instance.Velocity, 
-													 PlayerControl.Instance.transform.position.CalculateBlackHoleForce(outerForce, transform.position, outerRadius.radius, outerRotation), 
+													 PlayerControl.Instance.transform.position.CalculateBlackHoleForce(outerForce, 
+																													   transform.position, 
+																													   outerRadius.radius, 
+																													   outerRotation), 
 													 5f * Time.deltaTime));
 
 			if (damageTimer >= damageTime)
 			{
-				foreach (SpriteRenderer sprite in PlayerControl.Instance.SpriteRenderers)
+				var playerSprites = PlayerControl.Instance.SpriteRenderers;
+
+				for (int i = 0; i < playerSprites.Count; i++)
 				{
-					if (sprite.color != Color.clear)
-					{
-						Transform tempTransform = new GameObject().transform;
-						sprite.transform.CopyTo(tempTransform);
-						tempTransform.localScale = PlayerControl.Instance.transform.localScale;
-						ExplodeEffect.Instance.ExplodePartial(tempTransform.transform, PlayerControl.Instance.Velocity, sprite.sprite, 0.1f / PlayerControl.Instance.SpriteRenderers.Count);
-						Destroy(tempTransform.gameObject);
-					}
+					if (playerSprites[i].color == Color.clear)
+						continue;
+
+					Transform tempTransform = new GameObject().transform;
+					playerSprites[i].transform.CopyTo(tempTransform);
+					tempTransform.localScale = PlayerControl.Instance.transform.localScale;
+					ExplodeEffect.Instance.ExplodePartial(tempTransform.transform,
+														  PlayerControl.Instance.Velocity,
+														  playerSprites[i].sprite,
+														  0.1f / playerSprites.Count);
+					Destroy(tempTransform.gameObject);
 				}
 
 				PlayerControl.Instance.Health -= damage;
@@ -313,9 +304,7 @@ public class BlackHole : Projectile
 		particleSystemInstance.startLifetime = generatedParticleLifetime;
 
 		if (autoDestroy)
-		{
 			StartCoroutine(DestroyEmitter());
-		}
 	}
 
 	private IEnumerator DestroyEmitter()
@@ -334,9 +323,7 @@ public class BlackHole : Projectile
 	public override void DoDestroy()
 	{
 		if (!activated)
-		{
 			base.DoDestroy();
-		}
 	}
 	#endregion
 }

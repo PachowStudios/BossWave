@@ -23,7 +23,7 @@ QualitySettings:
     vSyncCount: 0
     lodBias: 2
     maximumLODLevel: 0
-    particleRaycastBudget: 4096
+    particleRaycastBudget: 8192
     excludedTargetPlatforms:
     - iPhone
     - Android

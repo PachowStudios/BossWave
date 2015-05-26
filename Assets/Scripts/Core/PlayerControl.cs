@@ -595,9 +595,7 @@ public sealed class PlayerControl : MonoBehaviour
 						velocity.x = Mathf.Sqrt(Mathf.Pow(knockback.x, 2) * -gravity) * knockbackDirection;
 
 						if (IsGrounded)
-						{
 							velocity.y = Mathf.Sqrt(knockback.y * -gravity);
-						}
 
 						controller.move(velocity * Time.deltaTime);
 						velocity = controller.velocity;

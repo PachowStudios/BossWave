@@ -9,7 +9,7 @@ public abstract class Enemy : MonoBehaviour
 	public event OnDeathHandler OnDeath;
 	#endregion
 
-	#region Fields
+	#region Types
 	public enum Difficulty
 	{
 		Easy,
@@ -19,7 +19,9 @@ public abstract class Enemy : MonoBehaviour
 		Insane,
 		Boss
 	};
+	#endregion
 
+	#region Fields
 	public bool spawned = true;
 	public Difficulty difficulty = Difficulty.Easy;
 	public bool immuneToInstantKill = false;

@@ -335,7 +335,7 @@ MonoBehaviour:
   difficulty: 5
   immuneToInstantKill: 1
   immuneToKnockback: 1
-  maxHealth: 50
+  maxHealth: 800
   damage: 15
   showDrops: 1
   microchipChance: 100

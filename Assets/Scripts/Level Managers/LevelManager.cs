@@ -138,12 +138,8 @@ public abstract class LevelManager : MonoBehaviour
 		List<StandardEnemy> possibleEnemies = new List<StandardEnemy>();
 
 		foreach (StandardEnemy enemy in enemies)
-		{
 			if (enemy.difficulty == wave.difficulty)
-			{
 				possibleEnemies.Add(enemy);
-			}
-		}
 
 		List<GameObject> waveSpawners = wave.spawners.Count > 0 ? wave.spawners : spawners;
 
@@ -151,8 +147,8 @@ public abstract class LevelManager : MonoBehaviour
 		{
 			for (int i = 0; i < wave.amount; i++)
 			{
-				StandardEnemy enemyToSpawn = possibleEnemies[Random.Range(0, possibleEnemies.Count)];
-				Transform spawnerToUse = waveSpawners[Random.Range(0, waveSpawners.Count)].transform;
+				StandardEnemy enemyToSpawn = possibleEnemies.PickRandom();
+				Transform spawnerToUse = waveSpawners.PickRandom().transform;
 
 				StandardEnemy currentEnemy = Instantiate(enemyToSpawn, Vector3.zero, Quaternion.identity) as StandardEnemy;
 				currentEnemy.SpawnAI.Spawner = spawnerToUse;

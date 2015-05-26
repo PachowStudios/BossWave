@@ -448,7 +448,7 @@ MonoBehaviour:
   difficulty: 4
   immuneToInstantKill: 0
   immuneToKnockback: 1
-  maxHealth: 300
+  maxHealth: 350
   damage: 10
   showDrops: 1
   microchipChance: 75
@@ -661,6 +661,7 @@ MonoBehaviour:
   - deathEffect: Medium Blue Explosion
     spawnPosition: {x: .899999976, y: 1.29999995, z: 0}
     delay: .200000003
+  parentEffects: 0
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
