@@ -8,7 +8,7 @@ public class BasicProjectile : Projectile
 	#region Fields
 	public bool useModifiers = false;
 
-	private List<ProjectileMod> modifiers;
+	private ProjectileMod[] modifiers;
 	#endregion
 
 	#region MonoBehaviour
@@ -18,15 +18,15 @@ public class BasicProjectile : Projectile
 
 		if (useModifiers)
 		{
-			modifiers = GetComponents<ProjectileMod>().OrderBy(p => p.priority).ToList();
-			useModifiers = modifiers.Count > 0;
+			modifiers = GetComponents<ProjectileMod>().OrderBy(p => p.priority).ToArray();
+			useModifiers = modifiers.Length > 0;
 		}
 	}
 
 	private void Update()
 	{
 		if (useModifiers)
-			foreach (ProjectileMod modifier in modifiers)
+			foreach (var modifier in modifiers)
 				modifier.ApplyModifier();
 	}
 

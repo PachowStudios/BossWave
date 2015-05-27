@@ -95,9 +95,9 @@ public class BlackHole : Projectile
 			CheckDestroyWorld();
 		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.OverlapPoint(trigger.bounds.center))
 		{
-			Enemy currentEnemy = trigger.gameObject.GetComponent<Enemy>();
+			var currentEnemy = trigger.gameObject.GetComponent<Enemy>();
 
-			if (!currentEnemy.ignoreProjectiles)
+			if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
 			{
 				if (!activated && trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
 					activated = true;
@@ -110,10 +110,13 @@ public class BlackHole : Projectile
 		{
 			if (activated)
 			{
-				Projectile currentProjectile = trigger.gameObject.GetComponent<Projectile>();
+				var currentProjectile = trigger.gameObject.GetComponent<BasicProjectile>();
 
-				if (!targetProjectiles.Contains(currentProjectile))
+				if (currentProjectile != null && !targetProjectiles.Contains(currentProjectile))
+				{
+					currentProjectile.useModifiers = false;
 					targetProjectiles.Add(currentProjectile);
+				}
 			}
 		}
 	}
@@ -220,7 +223,7 @@ public class BlackHole : Projectile
 																							outerRotation * 3f);
 				targetProjectiles[i].direction = Vector3.Lerp(targetProjectiles[i].direction, 
 															  force.normalized, 
-															  1.5f * Time.deltaTime);
+															  3f * Time.deltaTime);
 				targetProjectiles[i].Move(force);
 			}
 		}

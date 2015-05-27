@@ -119,9 +119,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .00499999989
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &14024298
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,9 +522,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .920000017
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 0
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &143048471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,9 +1099,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .200000003
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &254615293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,9 +1463,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: 1
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 0
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &446647041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,9 +2580,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .800000012
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &888578490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4979,9 +4999,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 17.5
   relativeSpeed: .00999999978
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 0
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &1650106694
 GameObject:
   m_ObjectHideFlags: 0
@@ -5027,9 +5051,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .400000006
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &1650655387
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,9 +5234,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsLibrary:
   - name: Small Dust Explosion
-    prefab: {fileID: 21200000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
+    prefab: {fileID: 9500000, guid: 8099eca2c5ec43149820f22c3f88e1ab, type: 2}
+    variations: 0
   - name: Big Dust Poof
-    prefab: {fileID: 21200000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+    prefab: {fileID: 9500000, guid: 2d66cb557415e33468c37ec9287fc70f, type: 2}
+    variations: 0
+  - name: Small Fire Explosion
+    prefab: {fileID: 9500000, guid: cd1f5c95c2abb9d48914554dbf451365, type: 2}
+    variations: 0
+  - name: Medium Fire Explosion
+    prefab: {fileID: 9500000, guid: 0cfaa532a5219df498efe3abd86b5c8b, type: 2}
+    variations: 0
+  - name: Medium Blue Explosion
+    prefab: {fileID: 9500000, guid: f0685eb484568674f8a2db3ed368d1f5, type: 2}
+    variations: 4
+  - name: Small Blue Explosion
+    prefab: {fileID: 9500000, guid: df3c781d0dc001d4aa1e5ec34123bb75, type: 2}
+    variations: 0
 --- !u!1 &1671717562
 GameObject:
   m_ObjectHideFlags: 0
@@ -5286,9 +5328,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .100000001
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &1674542574
 GameObject:
   m_ObjectHideFlags: 0
@@ -5622,9 +5668,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .0149999997
+  scrollDirection: 0
   scroll: 1
   loop: 0
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &1801360647
 GameObject:
   m_ObjectHideFlags: 0
@@ -5893,6 +5943,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651259b46b2c94342931f7526a9a7c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMain: 0
+  syncWithMain: 0
   defaultFOV: 500
   useWorldSpaceUI: 0
   worldSpaceUI: {fileID: 0}
@@ -6472,9 +6524,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 10
   relativeSpeed: .00249999994
+  scrollDirection: 0
   scroll: 1
   loop: 1
+  reverse: 0
   cameraParallax: 1
+  moveLayersSeparately: 1
+  destroyAfterScroll: 1
 --- !u!1 &2075059145
 GameObject:
   m_ObjectHideFlags: 0

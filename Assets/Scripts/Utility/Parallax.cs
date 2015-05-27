@@ -13,11 +13,13 @@ public class Parallax : MonoBehaviour
 	};
 	#endregion
 
-	#region Fields
+	#region Static Fields
 	public static float? OverrideSpeed = null;
 	public static bool? OverrideScroll = null;
 	public static bool? OverrideReverse = null;
+	#endregion
 
+	#region Fields
 	public float defaultSpeed = 17.5f;
 	[Range(0f, 1f)]
 	public float relativeSpeed = 1f;
@@ -243,6 +245,15 @@ public class Parallax : MonoBehaviour
 	{
 		foreach (Transform layer in layers)
 			layer.Translate(offset);
+	}
+	#endregion
+
+	#region Public Static Methods
+	public static void ResetOverrides()
+	{
+		OverrideSpeed = null;
+		OverrideScroll = null;
+		OverrideReverse = null;
 	}
 	#endregion
 }

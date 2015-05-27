@@ -81,6 +81,7 @@ public abstract class LevelManager : MonoBehaviour
 		instance = this;
 
 		DOTween.Init();
+		Parallax.ResetOverrides();
 		RefreshSpawners();
 	}
 

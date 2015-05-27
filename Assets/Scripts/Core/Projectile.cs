@@ -29,15 +29,7 @@ public abstract class Projectile : MonoBehaviour
 
 	#region Public Properties
 	public Sprite Sprite
-	{
-		get
-		{
-			if (spriteRenderer)
-				return spriteRenderer.sprite;
-			else
-				return null;
-		}
-	}
+	{ get { return spriteRenderer == null ? null : spriteRenderer.sprite; } }
 
 	public Color SpriteColor
 	{
@@ -113,15 +105,15 @@ public abstract class Projectile : MonoBehaviour
 	#region Public Methods
 	public virtual void Initialize(Vector3 newDirection)
 	{
-		if (direction == Vector3.zero)
-		{
-			direction = newDirection;
+		if (direction != Vector3.zero)
+			return;
 
-			if (correctRotation)
-				transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+		direction = newDirection;
 
-			SpriteColor = Color.white;
-		}
+		if (correctRotation)
+			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
+
+		SpriteColor = Color.white;
 	}
 
 	public void Move(Vector3 velocity)

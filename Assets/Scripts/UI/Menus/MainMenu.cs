@@ -32,6 +32,7 @@ public class MainMenu : MonoBehaviour
 	private void Awake()
 	{
 		DOTween.Init();
+		Parallax.ResetOverrides();
 
 		volumeSlider = transform.FindSubChild("Volume").GetComponent<Slider>();
 		fullscreenToggle = transform.FindSubChild("Fullscreen").GetComponent<Toggle>();
