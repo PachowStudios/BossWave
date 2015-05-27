@@ -75,9 +75,8 @@ public class MainMenu : MonoBehaviour
 
 	private IEnumerator ShowMenu()
 	{
-		yield return new WaitForSeconds(startDelay);
-		
-		logo.SetTrigger("Start");
+		yield return StartCoroutine(Extensions.WaitForRealSeconds(startDelay));
+
 		CRTEffect.Instance.StartCRT(fadeTime);
 		DOTween.To(UpdateMenuAlpha, 0f, 1f, fadeTime)
 			.SetEase(Ease.OutQuint)
@@ -85,6 +84,10 @@ public class MainMenu : MonoBehaviour
 		blackOverlay.DOFade(overlayVisibility, fadeTime)
 			.SetEase(Ease.OutQuint)
 			.SetUpdate(true);
+
+		yield return StartCoroutine(Extensions.WaitForRealSeconds(fadeTime / 2f));
+
+		logo.SetTrigger("Start");
 	}
 
 	private IEnumerator HideMenu(string levelName = "none")
@@ -147,6 +150,7 @@ public class MainMenu : MonoBehaviour
 		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
+		PlayerPrefs.Save();
 	}
 
 	public void ResetPrefs()

@@ -229,6 +229,7 @@ public class GameMenu : MonoBehaviour
 		resolutionSelector.SetResolution();
 		PlayerPrefs.SetInt("Settings/Fullscreen", fullscreenToggle.isOn ? 1 : 0);
 		Screen.fullScreen = fullscreenToggle.isOn;
+		PlayerPrefs.Save();
 	}
 	#endregion
 }
