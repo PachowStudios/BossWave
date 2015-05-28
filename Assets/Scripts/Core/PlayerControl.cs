@@ -122,7 +122,7 @@ public sealed class PlayerControl : MonoBehaviour
 	{ get { return jump; } }
 
 	public bool IsGrounded
-	{ get { return controller.isGrounded && !continuouslyFalling; } }
+	{ get { return controller.IsGrounded && !continuouslyFalling; } }
 
 	public bool IsInputDisabled
 	{ get { return disableInput; } }
@@ -442,8 +442,8 @@ public sealed class PlayerControl : MonoBehaviour
 		else
 			velocity.y += gravity * Time.deltaTime;
 
-		controller.move(velocity * Time.deltaTime);
-		velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		velocity = controller.Velocity;
 
 		if (IsGrounded)
 		{
@@ -597,8 +597,8 @@ public sealed class PlayerControl : MonoBehaviour
 						if (IsGrounded)
 							velocity.y = Mathf.Sqrt(knockback.y * -gravity);
 
-						controller.move(velocity * Time.deltaTime);
-						velocity = controller.velocity;
+						controller.Move(velocity * Time.deltaTime);
+						velocity = controller.Velocity;
 						lastHitTime = Time.time;
 					});
 			}
@@ -607,8 +607,8 @@ public sealed class PlayerControl : MonoBehaviour
 
 	public void Move(Vector3 velocity)
 	{
-		controller.move(velocity * Time.deltaTime);
-		this.velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		this.velocity = controller.Velocity;
 	}
 
 	public int AddPoints(int points, bool ignoreCombo = false)

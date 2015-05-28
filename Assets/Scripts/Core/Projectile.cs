@@ -83,8 +83,8 @@ public abstract class Projectile : MonoBehaviour
 			transform.CorrectScaleForRotation(direction.DirectionToRotation2D());
 
 		transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-		controller.move(velocity * Time.deltaTime);
-		velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		velocity = controller.Velocity;
 	}
 	#endregion
 
@@ -118,8 +118,8 @@ public abstract class Projectile : MonoBehaviour
 
 	public void Move(Vector3 velocity)
 	{
-		controller.move(velocity * Time.deltaTime);
-		this.velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		this.velocity = controller.Velocity;
 	}
 
 	public void CheckDestroyEnemy()

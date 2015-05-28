@@ -4,11 +4,6 @@ using DG.Tweening;
 
 public abstract class Enemy : MonoBehaviour
 {
-	#region Events
-	public delegate void OnDeathHandler();
-	public event OnDeathHandler OnDeath;
-	#endregion
-
 	#region Types
 	public enum Difficulty
 	{
@@ -19,6 +14,11 @@ public abstract class Enemy : MonoBehaviour
 		Insane,
 		Boss
 	};
+	#endregion
+
+	#region Events
+	public delegate void OnDeathHandler();
+	public event OnDeathHandler OnDeath;
 	#endregion
 
 	#region Fields
@@ -106,10 +106,10 @@ public abstract class Enemy : MonoBehaviour
 	{ get { return transform.localScale.x < 0; } }
 
 	public bool IsGrounded
-	{ get { return controller.isGrounded; } }
+	{ get { return controller.IsGrounded; } }
 
 	public bool WasGroundedLastFrame
-	{ get { return controller.wasGroundedLastFrame; }}
+	{ get { return controller.WasGroundedLastFrame; }}
 
 	public LayerMask CollisionLayers
 	{ get { return controller.platformMask; } }
@@ -158,16 +158,16 @@ public abstract class Enemy : MonoBehaviour
 
 	protected void ApplyMovement()
 	{
-		float smoothedMovementFactor = controller.isGrounded ? groundDamping : inAirDamping;
+		float smoothedMovementFactor = controller.IsGrounded ? groundDamping : inAirDamping;
 
 		velocity.x = Mathf.Lerp(velocity.x, 
 								disableMovement ? 0f : (horizontalMovement * moveSpeed), 
 								smoothedMovementFactor * Time.deltaTime);
 		velocity.y += gravity * Time.deltaTime;
-		controller.move(velocity * Time.deltaTime);
-		velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		velocity = controller.Velocity;
 
-		if (controller.isGrounded)
+		if (controller.IsGrounded)
 		{
 			velocity.y = 0;
 			lastGroundedPosition = transform.position;
@@ -224,7 +224,7 @@ public abstract class Enemy : MonoBehaviour
 					if (knockback.x != 0 || knockback.y != 0)
 					{
 						velocity += (Vector3)knockback;
-						controller.move(velocity * Time.deltaTime);
+						controller.Move(velocity * Time.deltaTime);
 					}
 				}
 
@@ -251,8 +251,8 @@ public abstract class Enemy : MonoBehaviour
 
 	public void Move(Vector3 velocity)
 	{
-		controller.move(velocity * Time.deltaTime);
-		this.velocity = controller.velocity;
+		controller.Move(velocity * Time.deltaTime);
+		this.velocity = controller.Velocity;
 	}
 	#endregion
 }
