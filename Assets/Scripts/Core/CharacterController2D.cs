@@ -43,12 +43,15 @@ public sealed class CharacterController2D : MonoBehaviour
 	#endregion
 
 	#region Events
-	public event Action<RaycastHit2D> OnControllerCollidedEvent;
+	public delegate void OnRaycastCollisionHandler(RaycastHit2D raycastInfo);
+	public event OnRaycastCollisionHandler OnRaycastCollision;
+	public event OnRaycastCollisionHandler OnRaycastTrigger;
 	#endregion
 
 	#region Public Fields
 	public LayerMask platformMask = 0;
 	public LayerMask oneWayPlatformMask = 0;
+	public LayerMask triggerLayers = 0;
 	public float jumpingThreshold = 0.07f;
 	[Range(2, 20)]
 	public int totalHorizontalRays = 8;
@@ -68,6 +71,7 @@ public sealed class CharacterController2D : MonoBehaviour
 	private CharacterRaycastOrigins raycastOrigins;
 	private RaycastHit2D raycastHit;
 	private List<RaycastHit2D> raycastHitsThisFrame = new List<RaycastHit2D>(2);
+	private List<RaycastHit2D> raycastTriggersThisFrame = new List<RaycastHit2D>(2);
 	private float verticalDistanceBetweenRays;
 	private float horizontalDistanceBetweenRays;
 	private bool isGoingUpSlope = false;
@@ -75,7 +79,7 @@ public sealed class CharacterController2D : MonoBehaviour
 	private new Transform transform;
 	private BoxCollider2D boxCollider;
 
-	private const float kSkinWidthFloatFudgeFactor = 0.001f;
+	private const float SkinWidthFudgeFactor = 0.001f;
 	private const float SlopeLimitTangent = 3.732051f;
 	#endregion
 
@@ -114,6 +118,7 @@ public sealed class CharacterController2D : MonoBehaviour
 		// clear our state
 		collisionState.Reset();
 		raycastHitsThisFrame.Clear();
+		raycastTriggersThisFrame.Clear();
 		isGoingUpSlope = false;
 
 		var desiredPosition = transform.position + deltaMovement;
@@ -147,9 +152,13 @@ public sealed class CharacterController2D : MonoBehaviour
 			velocity.y = 0;
 
 		// send off the collision events if we have a listener
-		if (OnControllerCollidedEvent != null)
-			for (var i = 0; i < raycastHitsThisFrame.Count; i++)
-				OnControllerCollidedEvent(raycastHitsThisFrame[i]);
+		for (int i = 0; i < raycastHitsThisFrame.Count; i++)
+			if (OnRaycastCollision != null)
+				OnRaycastCollision(raycastHitsThisFrame[i]);
+
+		for (int i = 0; i < raycastTriggersThisFrame.Count; i++)
+			if (OnRaycastTrigger != null)
+				OnRaycastTrigger(raycastTriggersThisFrame[i]);
 	}
 
 	public void WarpToGrounded()
@@ -205,6 +214,9 @@ public sealed class CharacterController2D : MonoBehaviour
 			else
 				raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask);
 
+			if (triggerLayers != 0)
+				raycastTriggersThisFrame.AddRange(Physics2D.RaycastAll(ray, rayDirection, rayDistance, triggerLayers));
+
 			if (raycastHit)
 			{
 				// the bottom ray can hit slopes but no other ray can so we have special handling for those cases
@@ -234,7 +246,7 @@ public sealed class CharacterController2D : MonoBehaviour
 
 				// we add a small fudge factor for the float operations here. if our rayDistance is smaller
 				// than the width + fudge bail out because we have a direct impact
-				if (rayDistance < skinWidth + kSkinWidthFloatFudgeFactor)
+				if (rayDistance < skinWidth + SkinWidthFudgeFactor)
 					break;
 			}
 		}
@@ -255,9 +267,9 @@ public sealed class CharacterController2D : MonoBehaviour
 			{
 				// apply the slopeModifier to slow our movement up the slope
 				var slopeModifier = slopeSpeedMultiplier.Evaluate(angle);
-				deltaMovement.x *= slopeModifier;
 
 				// we dont set collisions on the sides for this since a slope is not technically a side collision
+				deltaMovement.x *= slopeModifier;
 
 				// smooth y movement when we climb. we make the y movement equivalent to the actual y location that corresponds
 				// to our new x location using our good friend Pythagoras
@@ -294,6 +306,10 @@ public sealed class CharacterController2D : MonoBehaviour
 
 			DrawRay(ray, rayDirection * rayDistance, Color.red);
 			raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, mask);
+
+			if (triggerLayers != 0)
+				raycastTriggersThisFrame.AddRange(Physics2D.RaycastAll(ray, rayDirection, rayDistance, triggerLayers));
+
 			if (raycastHit)
 			{
 				// set our new deltaMovement and recalculate the rayDistance taking it into account
@@ -321,7 +337,7 @@ public sealed class CharacterController2D : MonoBehaviour
 
 				// we add a small fudge factor for the float operations here. if our rayDistance is smaller
 				// than the width + fudge bail out because we have a direct impact
-				if (rayDistance < skinWidth + kSkinWidthFloatFudgeFactor)
+				if (rayDistance < skinWidth + SkinWidthFudgeFactor)
 					return;
 			}
 		}

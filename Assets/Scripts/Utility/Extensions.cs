@@ -156,6 +156,11 @@ public static class Extensions
 		return Mathf.RoundToInt(parent * 10f) / 10f;
 	}
 
+	public static float Sign(this float parent)
+	{
+		return Mathf.Sign(parent);
+	}
+
 	public static float Abs(this float parent)
 	{
 		return Mathf.Abs(parent);
@@ -228,6 +233,18 @@ public static class Extensions
 		return new Vector3(parent.x * other.x, 
 						   parent.y * other.y, 
 						   parent.z * other.z);
+	}
+	#endregion
+
+	#region LayerMask
+	public static bool ContainsLayer(this LayerMask parent, int layer)
+	{
+		return ((parent.value & (1 << layer)) > 0);
+	}
+
+	public static bool ContainsLayer(this LayerMask parent, GameObject obj)
+	{
+		return parent.ContainsLayer(obj.layer);
 	}
 	#endregion
 

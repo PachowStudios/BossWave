@@ -88,38 +88,6 @@ public class BlackHole : Projectile
 	{
 		DoMovement();
 	}
-
-	protected override void OnTriggerEnter2D(Collider2D trigger)
-	{
-		if (trigger.gameObject.layer == LayerMask.NameToLayer("Collider"))
-			CheckDestroyWorld();
-		else if (trigger.gameObject.layer == LayerMask.NameToLayer("Enemies") && outerRadius.OverlapPoint(trigger.bounds.center))
-		{
-			var currentEnemy = trigger.gameObject.GetComponent<Enemy>();
-
-			if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
-			{
-				if (!activated && trigger.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
-					activated = true;
-
-				if (activated && !targetEnemies.Contains(currentEnemy))
-					targetEnemies.Add(currentEnemy);
-			}
-		}
-		else if ((trigger.gameObject.layer == LayerMask.NameToLayer("Projectiles") || trigger.gameObject.layer == LayerMask.NameToLayer("EnemyProjectiles")) && outerRadius.OverlapPoint(trigger.bounds.center))
-		{
-			if (activated)
-			{
-				var currentProjectile = trigger.gameObject.GetComponent<BasicProjectile>();
-
-				if (currentProjectile != null && !targetProjectiles.Contains(currentProjectile))
-				{
-					currentProjectile.useModifiers = false;
-					targetProjectiles.Add(currentProjectile);
-				}
-			}
-		}
-	}
 	#endregion
 
 	#region Internal Update Methods
@@ -192,7 +160,7 @@ public class BlackHole : Projectile
 														  targetEnemies[i].Velocity, 
 														  targetEnemies[i].Sprite, 
 														  0.05f);
-					targetEnemies[i].TakeDamage(gameObject);
+					targetEnemies[i].TakeDamage(this);
 				}
 			}
 		}
@@ -294,6 +262,40 @@ public class BlackHole : Projectile
 	#endregion
 
 	#region Internal Helper Methods
+	protected override void HandleTrigger(Collider2D other)
+	{
+		base.HandleTrigger(other);
+
+		if (other.gameObject.layer == LayerMask.NameToLayer("Enemies") && 
+			outerRadius.OverlapPoint(other.bounds.center))
+		{
+			var currentEnemy = other.gameObject.GetComponent<Enemy>();
+
+			if (currentEnemy != null && !currentEnemy.ignoreProjectiles)
+			{
+				if (!activated && other.bounds.center.DistanceFrom(transform.position) <= outerRadius.radius * activationBuffer)
+					activated = true;
+
+				if (activated && !targetEnemies.Contains(currentEnemy))
+					targetEnemies.Add(currentEnemy);
+			}
+		}
+		else if (other.gameObject.layer == LayerMask.NameToLayer("Projectiles") && 
+				 outerRadius.OverlapPoint(other.bounds.center))
+		{
+			if (activated)
+			{
+				var currentProjectile = other.gameObject.GetComponent<BasicProjectile>();
+
+				if (currentProjectile != null && !targetProjectiles.Contains(currentProjectile))
+				{
+					currentProjectile.useModifiers = false;
+					targetProjectiles.Add(currentProjectile);
+				}
+			}
+		}
+	}
+
 	private void Spawn()
 	{
 		spawned = true;

@@ -4,7 +4,7 @@ using System.Collections;
 public class SaveChildren : MonoBehaviour
 {
 	#region MonoBehaviour
-	private void OnDestroy()
+	private void OnDisable()
 	{
 		transform.DetachChildren();
 	}

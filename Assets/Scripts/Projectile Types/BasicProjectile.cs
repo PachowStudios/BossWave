@@ -35,4 +35,16 @@ public class BasicProjectile : Projectile
 		DoMovement();
 	}
 	#endregion
+
+	#region Internal Helper Methods
+	protected override void HandleTrigger(Collider2D other)
+	{
+		base.HandleTrigger(other);
+
+		if (enemyProjectile && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+			PlayerControl.Instance.HandleProjectileCollision(this);
+		else if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+			other.GetComponent<Enemy>().HandleProjectileCollision(this);
+	}
+	#endregion
 }

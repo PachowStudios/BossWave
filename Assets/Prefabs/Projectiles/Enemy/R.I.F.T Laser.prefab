@@ -157,16 +157,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359a4aa8eb6465043ba90102b0062772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePhysicsForMovement: 0
-  _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
     m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  slopeLimit: 30
+  triggerLayers:
+    serializedVersion: 2
+    m_Bits: 0
   jumpingThreshold: .0700000003
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
+  skinWidth: .0199999996
+  slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -187,9 +191,6 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  totalHorizontalRays: 8
-  totalVerticalRays: 4
-  triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34145917d9405614499dba7e3a27231a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyProjectile: 1
   damage: 30
   knockback: {x: 0, y: 0}
   gravity: 0
@@ -211,10 +213,10 @@ MonoBehaviour:
   destroyOnWorld: 0
   correctRotation: 1
   destroyShake: 0
+  shakeDuration: .5
   shakeIntensity: {x: 0, y: 2, z: 0}
   destroyEffect: 
   direction: {x: 0, y: 0, z: 0}
-  disableMovement: 0
   textures:
   - {fileID: 2800000, guid: e7d4cfb8786725747a50947cd1e54e51, type: 3}
   - {fileID: 2800000, guid: 73b86b185ab3edc40a46c41b46da62de, type: 3}

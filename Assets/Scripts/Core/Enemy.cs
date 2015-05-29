@@ -136,15 +136,7 @@ public abstract class Enemy : MonoBehaviour
 	}
 
 	protected virtual void OnTriggerEnter2D(Collider2D other)
-	{
-		if (!ignoreProjectiles && other.tag == "PlayerProjectile")
-		{
-			if (Health > 0f)
-			{
-				TakeDamage(other.gameObject);
-			}
-		}
-	}
+	{ }
 	#endregion
 
 	#region Internal Update Methods
@@ -201,9 +193,14 @@ public abstract class Enemy : MonoBehaviour
 	#endregion
 
 	#region Public Methods
-	public virtual void TakeDamage(GameObject enemy, float multiplier = 1f)
+	public virtual void HandleProjectileCollision(Projectile projectile)
 	{
-		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
+		if (!ignoreProjectiles && Health > 0f)
+			TakeDamage(projectile);
+	}
+
+	public virtual void TakeDamage(Projectile enemyProjectile, float multiplier = 1f)
+	{
 		float damage = enemyProjectile.damage * multiplier;
 		Vector2 knockback = enemyProjectile.knockback;
 		Vector2 knockbackDirection = enemyProjectile.direction.Sign();

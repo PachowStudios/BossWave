@@ -14,7 +14,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 50: {fileID: 5000000}
   - 61: {fileID: 6100000}
-  m_Layer: 17
+  m_Layer: 15
   m_Name: Energy Shot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -85,16 +85,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359a4aa8eb6465043ba90102b0062772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePhysicsForMovement: 0
-  _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 66048
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  slopeLimit: 30
+  triggerLayers:
+    serializedVersion: 2
+    m_Bits: 256
   jumpingThreshold: .0700000003
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
+  skinWidth: .0199999996
+  slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -115,9 +119,6 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  totalHorizontalRays: 8
-  totalVerticalRays: 4
-  triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8908cd4d54b386d4a8191fd9f8fc545d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyProjectile: 1
   damage: 5
   knockback: {x: 1, y: 1}
   gravity: 0

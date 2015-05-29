@@ -231,15 +231,13 @@ public sealed class PlayerControl : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "Enemy" || other.tag == "Projectile")
+		if (other.tag == "Enemy")
 		{
 			if (canTakeDamage && Health > 0f)
 				TakeDamage(other.gameObject);
 		}
 		else if (other.tag == "Portal")
-		{
 			inPortal = true;
-		}
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
@@ -250,9 +248,7 @@ public sealed class PlayerControl : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D other)
 	{
 		if (other.tag == "Portal")
-		{
 			inPortal = false;
-		}
 	}
 	#endregion
 
@@ -553,6 +549,12 @@ public sealed class PlayerControl : MonoBehaviour
 	#endregion
 
 	#region Public Methods
+	public void HandleProjectileCollision(Projectile projectile)
+	{
+		if (canTakeDamage && Health > 0f)
+			TakeDamage(projectile.gameObject);
+	}
+
 	public void TakeDamage(GameObject enemy, float damage = 0f, Vector2 knockback = default(Vector2))
 	{
 		if (!canTakeDamage)
@@ -756,5 +758,3 @@ public sealed class PlayerControl : MonoBehaviour
 	}
 	#endregion
 }
-
-

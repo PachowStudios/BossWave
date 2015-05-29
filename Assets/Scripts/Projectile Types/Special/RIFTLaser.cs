@@ -92,9 +92,7 @@ public class RIFTLaser : Projectile
 			RaycastHit2D worldRaycast = Physics2D.Linecast(firePoint, targetPoint, worldCollisionLayer);
 
 			if (worldRaycast.collider != null)
-			{
 				targetPoint = worldRaycast.point;
-			}
 
 			targets[0] = firePoint;
 			targets[1] = transform.TransformPoint(new Vector3(firePoint.DistanceFrom(targetPoint) + lengthOffset, 0f, 0f));
@@ -107,9 +105,7 @@ public class RIFTLaser : Projectile
 			tip.transform.rotation = vectorLine.points3[vectorLine.points3.Count - 2].LookAt2D(vectorLine.points3.Last());
 
 			if (Time.deltaTime > 0f)
-			{
 				tipVelocity = (tip.transform.position - previousTipPosition) / Time.deltaTime / 10f;
-			}
 
 			vectorLine.Draw();
 
@@ -175,13 +171,9 @@ public class RIFTLaser : Projectile
 			for (int i = 0; i < newList.Count; i++)
 			{
 				if (newList[i].DistanceFrom(targets[0]) < targets[1].DistanceFrom(targets[0]))
-				{
 					currentLerpPoint = Extensions.ConvertRange(1f - newList[i].DistanceFrom(targets[0]) / targets[1].DistanceFrom(targets[0]), 0f, 1f, defaultLerpPoint, 1f);
-				}
 				else
-				{
 					currentLerpPoint = defaultLerpPoint;
-				}
 
 				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, currentLerpPoint),
 									   Mathf.Lerp(oldList[i].y, newList[i].y, currentLerpPoint),
@@ -191,9 +183,7 @@ public class RIFTLaser : Projectile
 			return result;
 		}
 		else
-		{
 			return newList;
-		}
 	}
 	#endregion
 

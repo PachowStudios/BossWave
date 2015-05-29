@@ -286,16 +286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359a4aa8eb6465043ba90102b0062772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePhysicsForMovement: 0
-  _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
     m_Bits: 4608
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 524288
-  slopeLimit: 30
+  triggerLayers:
+    serializedVersion: 2
+    m_Bits: 0
   jumpingThreshold: .0700000003
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
+  skinWidth: .0199999996
+  slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -316,9 +320,6 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  totalHorizontalRays: 8
-  totalVerticalRays: 4
-  triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

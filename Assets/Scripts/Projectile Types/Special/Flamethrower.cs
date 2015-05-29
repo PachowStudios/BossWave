@@ -52,8 +52,10 @@ public class Flamethrower : Projectile
 		UpdateRotation();
 	}
 
-	private void OnDisable()
+	protected override void OnDisable()
 	{
+		base.OnDisable();
+
 		partSystem.transform.parent = null;
 		partSystem.enableEmission = false;
 		Destroy(partSystem.gameObject, maxParticleLifetime);
@@ -94,9 +96,7 @@ public class Flamethrower : Projectile
 	private void DamageTargets()
 	{
 		foreach (Enemy enemy in targetEnemies)
-		{
-			enemy.TakeDamage(gameObject);
-		}
+			enemy.HandleProjectileCollision(this);
 	}
 
 	private void UpdateRotation()

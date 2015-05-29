@@ -4,6 +4,7 @@ using System.Collections;
 public abstract class Projectile : MonoBehaviour
 {
 	#region Fields
+	public bool enemyProjectile = false;
 	public float damage = 5f;
 	public Vector2 knockback = new Vector2(2f, 2f);
 	public float gravity = 0f;
@@ -41,6 +42,17 @@ public abstract class Projectile : MonoBehaviour
 				spriteRenderer.color = value;
 		}
 	}
+
+	public Bounds Bounds
+	{ get { return collider2D.bounds; } }
+	#endregion
+
+	#region Internal Properties
+	protected LayerMask TriggerLayers
+	{ get { return controller.triggerLayers; } }
+
+	private bool UseRaycastTriggers
+	{ get { return TriggerLayers != 0; } }
 	#endregion
 
 	#region MonoBehaviour
@@ -57,18 +69,47 @@ public abstract class Projectile : MonoBehaviour
 	protected virtual void OnEnable()
 	{
 		SpriteColor = Color.clear;
+
+		if (controller != null)
+		{
+			if (UseRaycastTriggers)
+				controller.OnRaycastTrigger += OnRaycastTrigger;
+
+			controller.OnRaycastCollision += OnRaycastCollision;
+		}
 	}
 
-	protected virtual void OnTriggerEnter2D(Collider2D trigger)
+	protected virtual void OnDisable()
 	{
-		if ((trigger.gameObject.layer == LayerMask.NameToLayer("Collider") || trigger.gameObject.layer == LayerMask.NameToLayer("RunningCollider")) &&
-			trigger.tag != "RunningBoundaries")
-			CheckDestroyWorld();
+		if (controller != null)
+		{
+			if (UseRaycastTriggers)
+				controller.OnRaycastTrigger -= OnRaycastTrigger;
+
+			controller.OnRaycastCollision -= OnRaycastCollision;
+		}
 	}
 
-	protected virtual void OnTriggerStay2D(Collider2D trigger)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
-		OnTriggerEnter2D(trigger);
+		if (!UseRaycastTriggers)
+			HandleTrigger(other);
+	}
+
+	private void OnTriggerStay2D(Collider2D other)
+	{
+		OnTriggerEnter2D(other);
+	}
+
+	private void OnRaycastCollision(RaycastHit2D raycastInfo)
+	{
+		HandleCollision(raycastInfo.collider);
+	}
+
+	private void OnRaycastTrigger(RaycastHit2D raycastInfo)
+	{
+		if (UseRaycastTriggers)
+			HandleTrigger(raycastInfo.collider);
 	}
 	#endregion
 
@@ -89,6 +130,15 @@ public abstract class Projectile : MonoBehaviour
 	#endregion
 
 	#region Internal Helper Methods
+	protected virtual void HandleCollision(Collider2D other)
+	{
+		if (other.tag != "RunningBoundaries")
+			CheckDestroyWorld();
+	}
+
+	protected virtual void HandleTrigger(Collider2D other)
+	{ }
+
 	protected void Flip()
 	{
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);

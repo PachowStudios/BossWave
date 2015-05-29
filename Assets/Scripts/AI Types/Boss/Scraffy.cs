@@ -89,26 +89,6 @@ public sealed class Scraffy : Boss
 		ApplyBodyMovement();
 		ApplyGearRotation();
 	}
-
-	protected override void OnTriggerEnter2D(Collider2D other)
-	{
-		if (!ignoreProjectiles && other.tag == "PlayerProjectile")
-		{
-			if (Health > 0f)
-			{
-				if (other.bounds.Intersects(bodyCollider.bounds))
-					TakeDamage(other.gameObject);
-				else if (other.bounds.Intersects(eyeCollider.bounds))
-					TakeDamage(other.gameObject, eyeMultiplier);
-				else if (LeftGunHealth > 0f && other.bounds.Intersects(leftGunCollider.bounds))
-					DamageSideGun(other.gameObject, true);
-				else if (RightGunHealth > 0f && other.bounds.Intersects(rightGunCollider.bounds))
-					DamageSideGun(other.gameObject, false);
-				else
-					other.GetComponent<Projectile>().CheckDestroyEnemy();
-			}
-		}
-	}
 	#endregion
 
 	#region Internal Update Methods
@@ -162,9 +142,8 @@ public sealed class Scraffy : Boss
 
 	}
 
-	private void DamageSideGun(GameObject enemy, bool leftSide)
+	private void DamageSideGun(Projectile enemyProjectile, bool leftSide)
 	{
-		Projectile enemyProjectile = enemy.GetComponent<Projectile>();
 		float damage = enemyProjectile.damage;
 		enemyProjectile.CheckDestroyEnemy();
 
@@ -187,6 +166,23 @@ public sealed class Scraffy : Boss
 	#endregion
 
 	#region Public Methods
+	public override void HandleProjectileCollision(Projectile projectile)
+	{
+		if (!ignoreProjectiles && Health > 0f)
+		{
+			if (projectile.Bounds.Intersects(bodyCollider.bounds))
+				TakeDamage(projectile);
+			else if (projectile.Bounds.Intersects(eyeCollider.bounds))
+				TakeDamage(projectile, eyeMultiplier);
+			else if (LeftGunHealth > 0f && projectile.Bounds.Intersects(leftGunCollider.bounds))
+				DamageSideGun(projectile, true);
+			else if (RightGunHealth > 0f && projectile.Bounds.Intersects(rightGunCollider.bounds))
+				DamageSideGun(projectile, false);
+			else
+				projectile.CheckDestroyEnemy();
+		}
+	}
+
 	public override void Spawn()
 	{
 		if (spawned)

@@ -445,14 +445,12 @@ public sealed class TheRIFT : Boss
 	#endregion
 
 	#region Public Methods
-	public override void TakeDamage(GameObject enemy, float multiplier = 1f)
+	public override void TakeDamage(Projectile projectile, float multiplier = 1f)
 	{
 		if (!invincible)
-		{
 			anim.SetTrigger("Hit");
-		}
 
-		base.TakeDamage(enemy, multiplier);
+		base.TakeDamage(projectile, multiplier);
 	}
 
 	public override void Spawn()

@@ -113,23 +113,15 @@ public class SmartLaser : Projectile
 		tipExplosionTimer += Time.deltaTime;
 
 		if (!previousTipEnabled && tip.enabled)
-		{
 			tipExplosionTimer = tipExplosionTime;
-		}
 
 		if (tipExplosionTimer >= tipExplosionTime && tip.enabled)
 		{
 			if (targetEnemies.Count > 0)
-			{
 				foreach (Enemy enemy in targetEnemies)
-				{
 					ExplodeEffect.Instance.Explode(enemy.transform, Vector3.zero, tip.sprite, tip.material);
-				}
-			}
 			else
-			{
 				ExplodeEffect.Instance.Explode(tip.transform, tipVelocity, tip.sprite, tip.material);
-			}
 
 			tipExplosionTimer = 0f;
 		}
@@ -180,12 +172,8 @@ public class SmartLaser : Projectile
 		targets.Add(origin);
 
 		foreach (Enemy enemy in GameObject.FindObjectsOfType<Enemy>())
-		{
 			if (enemy.collider2D != null && enemy.spawned)
-			{
 				allEnemies.Add(enemy);
-			}
-		}
 
 		if (allEnemies.Count > 0)
 		{
@@ -240,24 +228,18 @@ public class SmartLaser : Projectile
 				tip.enabled = true;
 			}
 			else
-			{
 				tip.enabled = false;
-			}
 
 			targets.Add(endPoint.OffsetPosition(wiggle));
 		}
 		else
-		{
 			tip.enabled = true;
-		}
 	}
 
 	private void DamageTargets()
 	{
 		foreach (Enemy enemy in targetEnemies)
-		{
-			enemy.TakeDamage(gameObject);
-		}
+			enemy.TakeDamage(this);
 	}
 	#endregion
 
@@ -273,13 +255,9 @@ public class SmartLaser : Projectile
 			for (int i = 0; i < newList.Count; i++)
 			{
 				if (newList[i].DistanceFrom(targets[0]) < targets[1].DistanceFrom(targets[0]))
-				{
 					currentLerpPoint = Extensions.ConvertRange(1f - newList[i].DistanceFrom(targets[0]) / targets[1].DistanceFrom(targets[0]), 0f, 1f, defaultLerpPoint, 1f);
-				}
 				else
-				{
 					currentLerpPoint = defaultLerpPoint;
-				}
 
 				result.Add(new Vector3(Mathf.Lerp(oldList[i].x, newList[i].x, currentLerpPoint),
 									   Mathf.Lerp(oldList[i].y, newList[i].y, currentLerpPoint),
@@ -289,9 +267,7 @@ public class SmartLaser : Projectile
 			return result;
 		}
 		else
-		{
 			return newList;
-		}
 	}
 
 	private Enemy GetClosestEnemy(Enemy currentEnemy)

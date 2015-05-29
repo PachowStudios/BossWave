@@ -23,15 +23,11 @@ public class FollowMovementAI : StandardEnemy
 					float jumpHeight = 0f;
 
 					if (RelativePlayerHeight < 0f)
-					{
 						jumpHeight = jumpMarker.CalculateJumpJumpHeight(moveSpeed, gravity);
-					}
 					else if (RelativePlayerHeight > 0f)
 					{
 						if (jumpMarker.HasFallPoint)
-						{
 							jumpHeight = jumpMarker.CalculateFallJumpHeight(moveSpeed, gravity);
-						}
 						else
 						{
 							horizontalMovement *= -1f;
@@ -41,9 +37,7 @@ public class FollowMovementAI : StandardEnemy
 						}
 					}
 					else
-					{
 						jumpHeight = jumpMarker.CalculateGapJumpHeight(moveSpeed, gravity);
-					}
 
 					Jump(jumpHeight);
 				}
@@ -54,9 +48,7 @@ public class FollowMovementAI : StandardEnemy
 	protected virtual void OnTriggerStay2D(Collider2D other)
 	{
 		if (other.tag == "JumpMarker")
-		{
 			OnTriggerEnter2D(other);
-		}
 	}
 	#endregion
 

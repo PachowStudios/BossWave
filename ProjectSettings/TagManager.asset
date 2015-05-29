@@ -5,8 +5,8 @@ TagManager:
   tags:
   - Enemy
   - Obstacle
+  - 
   - Projectile
-  - PlayerProjectile
   - LevelManager
   - Spawner
   - PowerupSpawner
@@ -23,7 +23,7 @@ TagManager:
   - ParticleSystem
   - Killzone
   - Gun
-  - PlayerSpecialProjectile
+  - 
   - JumpMarker
   - ScrollOnce
   - BossWaveWaitPoint
@@ -45,7 +45,7 @@ TagManager:
   User Layer 14: SpecialProjectiles
   User Layer 15: Projectiles
   User Layer 16: RunningCollider
-  User Layer 17: EnemyProjectiles
+  User Layer 17: 
   User Layer 18: SpawnCollider
   User Layer 19: OneWayCollider
   User Layer 20: BottomCollider
