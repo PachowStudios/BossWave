@@ -44,7 +44,7 @@ public class BasicProjectile : Projectile
 		if (enemyProjectile && other.gameObject.layer == LayerMask.NameToLayer("Player"))
 			PlayerControl.Instance.HandleProjectileCollision(this);
 		else if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
-			other.GetComponent<Enemy>().HandleProjectileCollision(this);
+			other.GetComponentInParent<Enemy>().HandleProjectileCollision(this);
 	}
 	#endregion
 }

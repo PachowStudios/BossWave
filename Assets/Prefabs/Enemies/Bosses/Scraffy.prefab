@@ -8,11 +8,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
-  - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 61: {fileID: 6100000}
   - 50: {fileID: 5000000}
   - 95: {fileID: 9500000}
+  - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 11
   m_Name: Scraffy
   m_TagString: Enemy
@@ -766,6 +766,7 @@ MonoBehaviour:
   immuneToKnockback: 1
   maxHealth: 500
   damage: 20
+  showDrops: 1
   microchipChance: 100
   minMicrochips: 12
   maxMicrochips: 15
@@ -779,7 +780,6 @@ MonoBehaviour:
   moveSpeed: 10
   groundDamping: 10
   inAirDamping: 5
-  timeWarpAtDeath: 0
   invincible: 0
   ignoreProjectiles: 0
   introName: SCRAFFY
@@ -828,16 +828,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359a4aa8eb6465043ba90102b0062772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePhysicsForMovement: 0
-  _skinWidth: .0199999996
   platformMask:
     serializedVersion: 2
     m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
-  slopeLimit: 30
+  triggerLayers:
+    serializedVersion: 2
+    m_Bits: 0
   jumpingThreshold: .0700000003
+  totalHorizontalRays: 8
+  totalVerticalRays: 4
+  skinWidth: .0199999996
+  slopeLimit: 30
   slopeSpeedMultiplier:
     serializedVersion: 2
     m_Curve:
@@ -858,9 +862,6 @@ MonoBehaviour:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  totalHorizontalRays: 8
-  totalVerticalRays: 4
-  triggerHelperBoxColliderScale: .949999988
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

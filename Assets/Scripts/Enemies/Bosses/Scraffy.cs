@@ -139,7 +139,7 @@ public sealed class Scraffy : Boss
 	#region Internal Helper Methods
 	protected override void HandleDeath()
 	{
-
+		
 	}
 
 	private void DamageSideGun(Projectile enemyProjectile, bool leftSide)
@@ -160,7 +160,8 @@ public sealed class Scraffy : Boss
 	{
 		if (sideGunHealth <= 0f)
 		{
-
+			ExplodeEffect.Instance.Explode(sideGunSprite.transform, Vector3.zero, sideGunSprite.sprite);
+			sideGunSprite.enabled = false;
 		}
 	}
 	#endregion
