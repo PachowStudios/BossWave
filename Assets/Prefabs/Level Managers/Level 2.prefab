@@ -358,7 +358,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 19.96632
+  orthographic size: 19.6851044
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -663,7 +663,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41655ba48af49b449a779fa6449d5fb7, type: 2}
   - {fileID: 11400000, guid: c406c033fd5440e48a34362e7be8a036, type: 2}
   - {fileID: 11400000, guid: f5abca0b331f13744b7819edb892c707, type: 2}
-  - {fileID: 11400000, guid: b4639e7e0b3d0c54ba55eaefd352b812, type: 2}
+  - {fileID: 11400000, guid: 359b8185564968f429ae575d2967facb, type: 2}
   - {fileID: 11400000, guid: 777ff88369d69584b819714eeb589317, type: 2}
   - {fileID: 11400000, guid: a414f366b5156614eb9542c8d399b970, type: 2}
   - {fileID: 11400000, guid: 0101e76cdb225be459905ecd1e7d8b82, type: 2}
@@ -680,10 +680,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMain: 0
   syncWithMain: 1
-  defaultFOV: 710
+  defaultFOV: 700
   useWorldSpaceUI: 1
   worldSpaceUI: {fileID: 22400000}
-  FOV: 710
+  FOV: 700
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,7 +872,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 71, y: 39.9326401}
+  m_SizeDelta: {x: 70, y: 39.3702087}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22400002
 RectTransform:

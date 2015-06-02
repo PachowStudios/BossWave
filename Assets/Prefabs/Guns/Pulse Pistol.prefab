@@ -162,7 +162,7 @@ MonoBehaviour:
   - {fileID: 21300002, guid: 596dada58b599fa44ba9d021d16f8a06, type: 3}
   - {fileID: 21300004, guid: 596dada58b599fa44ba9d021d16f8a06, type: 3}
   muzzleFlashDuration: .0500000007
-  shakeOnFire: 1
+  shakeOnFire: 0
   shakeDuration: .100000001
   shakeIntensity: {x: .100000001, y: 0, z: 0}
   disableInput: 0
